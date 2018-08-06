@@ -1,0 +1,16 @@
+{
+  "name": "tba-types",
+  "version": "0.0.1",
+  "description": "Type definitions for Toon Boom Animation QtScript.",
+  "license": "MIT",
+  "keywords": [
+    "toonboom",
+    "harmony",
+    "tba",
+    "qtscript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bryab/tba-types.git"
+  }
+}
