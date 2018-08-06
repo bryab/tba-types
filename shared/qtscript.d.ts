@@ -33,6 +33,7 @@ declare type TUScriptInterfaceImpl = any;
 declare type QDateTime = any;
 declare type QDate = any;
 declare type DD_DragObject = any;
+declare type QDir = any;
 
 /**
  * WTF are these?  They are the arguments for MessageBox functions.
