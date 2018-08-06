@@ -1,8 +1,6 @@
-This repository contains type defintion files for Toon Boom Harmony.
+This repository contains type definition files for Toon Boom Harmony.
 
-I have tried to preserve the defintions as they are described in the API documentation, including types that do not exist in Javascript.
-
-Some modifications were made where reality differed from documentation.
+These definitions were parsed from the official API documentation, but have been modified where the documentation was lacking.
 
 To use these types, you must specify a reference type in your Typescript document.
 
