@@ -21,6 +21,8 @@ declare type NodeType = string;
 
 declare type ColumnType = "DRAWING" | "SOUND" | "3DPATH" | "BEZIER" | "EASE" | "EXPR" | "TIMING" | "QUATERNION" | "ANNOTATION";
 
+declare type AttrValueType = "STRING" | "BOOL" | "GENERIC_ENUM" | "DOUBLE" | "INT" | "ALIAS" | "POSITION_3D" | "SCALE_3D" | "ROTATION_3D" | "DRAWING";
+
 /**
 * The specialFolders JavaScript global object. Provide the path to application specific paths 
 */
@@ -2741,7 +2743,7 @@ declare class Attribute extends QObject {
   /**
   * Attribute typeName.
   */
-  public typeName(): string;
+  public typeName(): AttrValueType;
 
   /**
   * Fetch boolean value from Attribute at current frame.
