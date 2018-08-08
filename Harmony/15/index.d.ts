@@ -15,14 +15,18 @@ declare type AttrStringValue = string;
 
 /**
  * A node's type, e.g. "READ".
- * This could be a list of all possible node types, but that wouldn't account for third-party plugins.
  */
-declare type NodeType = string;
+declare type NodeType = "AnimatedMatteGenerator" | "ArticulationModule" | "AutoFoldModule" | "AutoMuscleModule" | "AutoPatchModule" | "BLEND_MODE_MODULE" | "BLUR_DIRECTIONAL" | "BLUR_RADIAL" | "BLUR_VARIABLE" | "BOXBLUR-PLUGIN" | "BRIGHTNESS_CONTRAST" | "BendyBoneModule" | "BezierMesh" | "Bloom" | "BoneModule" | "BurnIn" | "CAMERA" | "CHANNEL_SWAP" | "CHROMA_KEYING" | "COLOR2BW" | "COLOR_ART" | "COLOR_CARD" | "COLOR_MASK" | "COLOR_OVERRIDE_TVG" | "COLOR_SCALE" | "COMPOSITE" | "COMPOSITE_GENERIC" | "CONTRAST" | "CROP" | "CUTTER" | "ComputeNormals" | "CurveModule" | "DEPTHBLUR" | "DISPLAY" | "DITHER" | "DeformationCompositeModule" | "DeformationRootModule" | "DeformationScaleModule" | "DeformationSwitchModule" | "DeformationUniformScaleModule" | "DeformationWaveModule" | "DynamicSpring" | "EXTERNAL" | "FADE" | "FIELD_CHART" | "FLATTEN" | "FLICKER_BLUR" | "FOCUS_APPLY" | "FOCUS_SET" | "FilterBanding" | "FoldModule" | "GAUSSIANBLUR-PLUGIN" | "GLCacheLock" | "GLOW" | "GLUE" | "GRADIENT-PLUGIN" | "GRAIN" | "GROUP" | "GameBoneModule" | "Grid" | "HIGHLIGHT" | "HUE_SATURATION" | "ImageSwitch" | "KinematicOutputModule" | "LAYER_SELECTOR" | "LINE_ART" | "LensFlare" | "LightPosition" | "LightShader" | "LuminanceThreshold" | "MATTE_BLUR" | "MATTE_COMPOSITE" | "MATTE_RESIZE" | "MOTION_BLUR" | "MULTIPORT_IN" | "MULTIPORT_OUT" | "MasterController" | "MedianFilter" | "MultiLayerWrite" | "NEGATE" | "NOTE" | "NormalFloat" | "OGLBYPASS" | "ORTHOLOCK" | "OVERLAY" | "ObjectDefinition" | "OffsetModule" | "OpenGLPreview" | "PEG" | "PEG_APPLY3" | "PEG_APPLY3_V2" | "PIXELATE" | "PLUGIN" | "Particle3dRegion" | "ParticleBaker" | "ParticleBkerComposite" | "ParticleBounce" | "ParticleExplosion" | "ParticleGravity" | "ParticleKill" | "ParticleMove" | "ParticlePlanarRegion" | "ParticleRotationVelocity" | "ParticleSink" | "ParticleSize" | "ParticleSprite" | "ParticleSystemComposite" | "ParticleVelocity" | "ParticleVisualizer" | "ParticleVortex" | "ParticleWindFriction" | "PointConstraint2" | "PointConstraint3" | "PointConstraintMulti" | "QUADMAP" | "Quake" | "RADIALBLUR-PLUGIN" | "READ" | "REFRACT" | "REMOVE_TRANSPARENCY" | "SCALE" | "SCRIPT_MODULE" | "SHADOW" | "StaticConstraint" | "SubNodeAnimation" | "SubNodeAnimationFilter" | "Switch" | "TONE" | "TbdColorSelector" | "ToneShader" | "TransformGate" | "TransformLimit" | "TransformationSwitch" | "Turbulence" | "TurbulentNoise" | "UNDERLAY" | "VISIBILITY" | "WRITE";
 
+/**
+ * Column Type as returned by column.type()
+ */
 declare type ColumnType = "DRAWING" | "SOUND" | "3DPATH" | "BEZIER" | "EASE" | "EXPR" | "TIMING" | "QUATERNION" | "ANNOTATION";
 
-declare type AttrValueType = "STRING" | "BOOL" | "GENERIC_ENUM" | "DOUBLE" | "INT" | "ALIAS" | "POSITION_3D" | "SCALE_3D" | "ROTATION_3D" | "DRAWING";
-
+/**
+ * Type name as returned by Attribute.typeName()
+ */
+declare type AttrValueType = "ALIAS" | "ARRAY_POSITION_2D" | "ARRAY_STRING" | "BOOL" | "COLOR" | "COMPATIBILITY" | "CUSTOM_NAME" | "DOUBLE" | "DOUBLEVB" | "DRAWING" | "ELEMENT" | "ENABLE" | "FILE_EDITOR" | "FILE_LIBRARY" | "GENERIC_ENUM" | "HSL" | "HUE_RANGE" | "INT" | "LOCKED" | "PATH_3D" | "POINT_2D" | "POSITION_2D" | "POSITION_3D" | "PUSH_BUTTON" | "QUATERNION_PATH" | "ROTATION_3D" | "SCALE_3D" | "SIMPLE_BEZIER" | "STRING" | "TIMING"
 /**
 * The specialFolders JavaScript global object. Provide the path to application specific paths 
 */
@@ -2196,7 +2200,7 @@ declare module selection {
   /**
   * return an Array of all selected nodes.
   */
-  function selectedNodes(): QScriptValue;
+  function selectedNodes(): NodePath[];
 
   /**
   * sub selection - obtains the ID of all the sub selection for the provided node.
@@ -2815,18 +2819,13 @@ declare class Attribute extends QObject {
   */
   public pos3dValueAt(frame: double): Point3d;
 
-  public setValue(v: QObject): void;
-
-  public setValue(v: int): void;
-
-  public setValue(v: double): void;
-
-  public setValue(v: boolean): void;
-
-  public setValue(v: string): void;
+  /**
+   * Set attribute value.
+   * Note: Does not work for all attributes in my experience (such as CurveModule's offset)
+   */
+  public setValue(v: string | number | boolean | Point2d | Point3d | ColorRGBA): void;
 
   public hasSubAttributes(): boolean;
-
 }
 
 
@@ -4039,12 +4038,7 @@ declare class Point2d extends QObject {
   /**
   * Substracts current Point2d with specified Point2d.
   */
-  public minus(p2: Point2d): Vector2d;
-
-  /**
-  * Substracts current Point2d with specified Vector2d.
-  */
-  public minus(v: Vector2d): Point2d;
+  public minus(p2: Point2d | Vector2d): Point2d;
 
   /**
   * Add specified Vector2d to current Point2d.
