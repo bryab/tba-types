@@ -59,10 +59,7 @@ declare class SCR_AbstractInterface {}
  * Other stuff that is not in the API Documentation
  */
 
- /**
-  * Include contents of a Javascript file.
-  */
-declare function include(jsPath: string);
+
 
 declare class QTableWidgetItem extends QObject {
     constructor(...args:any[])
