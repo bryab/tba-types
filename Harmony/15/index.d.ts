@@ -1424,7 +1424,7 @@ declare module node {
   /**
   * returns the model matrix of a node.
   */
-  function getMatrix(node: string, frame: int): QObject;
+  function getMatrix(node: string, frame: int): Matrix4x4;
 
   /**
   * returns the pivot of the node
@@ -2070,12 +2070,44 @@ declare module scene {
   /**
   * converts a field coordinate into an OGL coordinate
   */
-  function toOGL(pointOrVector: QObject): QObject;
+  function toOGL(pointOrVector: Point2d): Point2d;
 
   /**
   * converts an OGL coordinate into a field coordinate.
   */
-  function fromOGL(pointOrVector: QObject): QObject;
+  function fromOGL(pointOrVector: Point2d): Point2d;
+
+  /**
+    * converts a field coordinate into an OGL coordinate
+    */
+  function toOGL(pointOrVector: Point3d): Point3d;
+
+  /**
+  * converts an OGL coordinate into a field coordinate.
+  */
+  function fromOGL(pointOrVector: Point3d): Point3d;
+
+  /**
+    * converts a field coordinate into an OGL coordinate
+    */
+  function toOGL(pointOrVector: Vector2d): Vector2d;
+
+  /**
+  * converts an OGL coordinate into a field coordinate.
+  */
+  function fromOGL(pointOrVector: Vector2d): Vector2d;
+  /**
+  * retrieves default display set in current scene.
+  */
+  /**
+   * converts a field coordinate into an OGL coordinate
+   */
+  function toOGL(pointOrVector: Vector3d): Vector3d;
+
+  /**
+  * converts an OGL coordinate into a field coordinate.
+  */
+  function fromOGL(pointOrVector: Vector3d): Vector3d;
 
   /**
   * retrieves default display set in current scene.
@@ -3002,11 +3034,12 @@ declare class ColorOverride extends QObject {
 
 }
 
-
 /**
 * The ColorRGBA JavaScript class. Represent an 8 bits per channel Red Green Blue Alpha colour 
 */
 declare class ColorRGBA extends QObject {
+
+
   /**
   * Create a new default ColorRGBA (ie. opaque white).
   */
@@ -3015,7 +3048,7 @@ declare class ColorRGBA extends QObject {
   /**
   * Create a new ColorRGBA.
   */
-  constructor(r: double, g: double, b: double, a: double);
+  constructor(r: double, g: double, b: double, a?: double);
 
   /**
   * red value [ 0, 255 ]
@@ -3112,6 +3145,16 @@ declare class Constants extends QObject {
 
 }
 
+/**
+ * The function below is referenced in Toon Boom's script "curveOverEnvelope.js"
+ * @param nodePath 
+ * @param frame 
+ */
+declare function createVertexTransform(nodePath: NodePath, frame: number): VertexTransform;
+
+declare interface VertexTransform {
+  applyVertexTransform(p: Point2d): Point2d
+}
 
 /**
 * The Controller JavaScript object. This object is available in Master Controller callback functions 
