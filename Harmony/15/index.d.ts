@@ -1121,7 +1121,7 @@ declare module node {
   /**
   * return an array of sub nodes.
   */
-  function subNodes(parentGroup: string): QScriptValue;
+  function subNodes(parentGroup: string): NodePath[];
 
   /**
   * returns the path of a node in a group. Nodes are counted starting with zero
