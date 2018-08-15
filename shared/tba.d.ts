@@ -1,4 +1,12 @@
 /**
+ * Undocumented File access modes for `File.open()`
+ */
+declare const enum FileAccessMode {
+  READ = 1,
+  WRITE = 2
+}
+
+/**
  * Include contents of a Javascript file.
  */
 declare function include(jsPath: string);
@@ -11,7 +19,7 @@ declare class File {
   /**
   * Open the file with specific access mode.
   */
-  open(accessMode: int): void;
+  open(accessMode: FileAccessMode): void;
 
   /**
   * Close the file.
@@ -573,17 +581,17 @@ declare module FileDialog {
   /**
   * function that returns an existing file selected by the user
   */
-  function getOpenFileName(filter?: string, title?: string, parent?: QWidget): QVariant;
+  function getOpenFileName(filter?: string, title?: string, parent?: QWidget): string;
 
   /**
   * function that will return a file name selected by the user
   */
-  function getSaveFileName(filter?: string, title?: string, parent?: QWidget): QVariant;
+  function getSaveFileName(filter?: string, title?: string, parent?: QWidget): string;
 
   /**
   * function that will return an existing directory selected by the user
   */
-  function getExistingDirectory(dir?: string, title?: string, parent?: QWidget): QVariant;
+  function getExistingDirectory(dir?: string, title?: string, parent?: QWidget): string;
 
   /**
   * function that will return one or more existing files selected by the user
