@@ -1311,7 +1311,7 @@ declare module node {
   /**
   * changes the value of an attribute in a node.
   */
-  function setTextAttr(node: NodePath, attrName: AttrKeyword, atFrame: int, attrValue: AttrStringValue): boolean;
+  function setTextAttr(node: NodePath, attrName: AttrKeyword, atFrame: int, attrValue: any): boolean;
 
   /**
   * links an attribute to a function column in the Xsheet View.
@@ -2670,7 +2670,7 @@ declare class Point2dWidget extends MO_SignalEmitter {
   /**
   * Signal notifying the user that the 2d point value was modified by the Transform Tool.
   */
-  public valueChanged(point2d: QScriptValue): void;
+  public valueChanged: QSignal<(point2d: Point2d) => void>;
 
 }
 
@@ -2682,7 +2682,7 @@ declare class Rotation3dWidget extends MO_SignalEmitter {
   /**
   * valueChanged signal called when the Rotation 3D attribute value has changed
   */
-  public valueChanged(rotation: QScriptValue): void;
+ public valueChanged: QSignal<(point2d: QScriptValue) => void>;
 
 }
 
@@ -2691,7 +2691,7 @@ declare class Rotation3dWidget extends MO_SignalEmitter {
 * The RotationXWidget JavaScript class. A rotatable circle widget around the x axis 
 */
 declare class RotationXWidget extends MO_SignalEmitter {
-  public valueChanged(x: float): void;
+  public valueChanged: QSignal<(x: float) => void>;
 
 }
 
@@ -2700,8 +2700,7 @@ declare class RotationXWidget extends MO_SignalEmitter {
 * The RotationYWidget JavaScript class. A rotatable circle widget around the y axis 
 */
 declare class RotationYWidget extends MO_SignalEmitter {
-  public valueChanged(y: float): void;
-
+  public valueChanged: QSignal<(y: float) => void>;
 }
 
 
@@ -2709,7 +2708,7 @@ declare class RotationYWidget extends MO_SignalEmitter {
 * The RotationZWidget JavaScript class. A rotatable circle widget around the z axis 
 */
 declare class RotationZWidget extends MO_SignalEmitter {
-  public valueChanged(z: float): void;
+  public valueChanged: QSignal<(z: float) => void>;
 
 }
 
