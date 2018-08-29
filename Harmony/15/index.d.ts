@@ -16,7 +16,8 @@ declare type AttrStringValue = string;
 /**
  * A node's type, e.g. "READ".
  */
-declare type NodeType = "AnimatedMatteGenerator" | "ArticulationModule" | "AutoFoldModule" | "AutoMuscleModule" | "AutoPatchModule" | "BLEND_MODE_MODULE" | "BLUR_DIRECTIONAL" | "BLUR_RADIAL" | "BLUR_VARIABLE" | "BOXBLUR-PLUGIN" | "BRIGHTNESS_CONTRAST" | "BendyBoneModule" | "BezierMesh" | "Bloom" | "BoneModule" | "BurnIn" | "CAMERA" | "CHANNEL_SWAP" | "CHROMA_KEYING" | "COLOR2BW" | "COLOR_ART" | "COLOR_CARD" | "COLOR_MASK" | "COLOR_OVERRIDE_TVG" | "COLOR_SCALE" | "COMPOSITE" | "COMPOSITE_GENERIC" | "CONTRAST" | "CROP" | "CUTTER" | "ComputeNormals" | "CurveModule" | "DEPTHBLUR" | "DISPLAY" | "DITHER" | "DeformationCompositeModule" | "DeformationRootModule" | "DeformationScaleModule" | "DeformationSwitchModule" | "DeformationUniformScaleModule" | "DeformationWaveModule" | "DynamicSpring" | "EXTERNAL" | "FADE" | "FIELD_CHART" | "FLATTEN" | "FLICKER_BLUR" | "FOCUS_APPLY" | "FOCUS_SET" | "FilterBanding" | "FoldModule" | "GAUSSIANBLUR-PLUGIN" | "GLCacheLock" | "GLOW" | "GLUE" | "GRADIENT-PLUGIN" | "GRAIN" | "GROUP" | "GameBoneModule" | "Grid" | "HIGHLIGHT" | "HUE_SATURATION" | "ImageSwitch" | "KinematicOutputModule" | "LAYER_SELECTOR" | "LINE_ART" | "LensFlare" | "LightPosition" | "LightShader" | "LuminanceThreshold" | "MATTE_BLUR" | "MATTE_COMPOSITE" | "MATTE_RESIZE" | "MOTION_BLUR" | "MULTIPORT_IN" | "MULTIPORT_OUT" | "MasterController" | "MedianFilter" | "MultiLayerWrite" | "NEGATE" | "NOTE" | "NormalFloat" | "OGLBYPASS" | "ORTHOLOCK" | "OVERLAY" | "ObjectDefinition" | "OffsetModule" | "OpenGLPreview" | "PEG" | "PEG_APPLY3" | "PEG_APPLY3_V2" | "PIXELATE" | "PLUGIN" | "Particle3dRegion" | "ParticleBaker" | "ParticleBkerComposite" | "ParticleBounce" | "ParticleExplosion" | "ParticleGravity" | "ParticleKill" | "ParticleMove" | "ParticlePlanarRegion" | "ParticleRotationVelocity" | "ParticleSink" | "ParticleSize" | "ParticleSprite" | "ParticleSystemComposite" | "ParticleVelocity" | "ParticleVisualizer" | "ParticleVortex" | "ParticleWindFriction" | "PointConstraint2" | "PointConstraint3" | "PointConstraintMulti" | "QUADMAP" | "Quake" | "RADIALBLUR-PLUGIN" | "READ" | "REFRACT" | "REMOVE_TRANSPARENCY" | "SCALE" | "SCRIPT_MODULE" | "SHADOW" | "StaticConstraint" | "SubNodeAnimation" | "SubNodeAnimationFilter" | "Switch" | "TONE" | "TbdColorSelector" | "ToneShader" | "TransformGate" | "TransformLimit" | "TransformationSwitch" | "Turbulence" | "TurbulentNoise" | "UNDERLAY" | "VISIBILITY" | "WRITE";
+// declare type NodeType = "AnimatedMatteGenerator" | "ArticulationModule" | "AutoFoldModule" | "AutoMuscleModule" | "AutoPatchModule" | "BLEND_MODE_MODULE" | "BLUR_DIRECTIONAL" | "BLUR_RADIAL" | "BLUR_VARIABLE" | "BOXBLUR-PLUGIN" | "BRIGHTNESS_CONTRAST" | "BendyBoneModule" | "BezierMesh" | "Bloom" | "BoneModule" | "BurnIn" | "CAMERA" | "CHANNEL_SWAP" | "CHROMA_KEYING" | "COLOR2BW" | "COLOR_ART" | "COLOR_CARD" | "COLOR_MASK" | "COLOR_OVERRIDE_TVG" | "COLOR_SCALE" | "COMPOSITE" | "COMPOSITE_GENERIC" | "CONTRAST" | "CROP" | "CUTTER" | "ComputeNormals" | "CurveModule" | "DEPTHBLUR" | "DISPLAY" | "DITHER" | "DeformationCompositeModule" | "DeformationRootModule" | "DeformationScaleModule" | "DeformationSwitchModule" | "DeformationUniformScaleModule" | "DeformationWaveModule" | "DynamicSpring" | "EXTERNAL" | "FADE" | "FIELD_CHART" | "FLATTEN" | "FLICKER_BLUR" | "FOCUS_APPLY" | "FOCUS_SET" | "FilterBanding" | "FoldModule" | "GAUSSIANBLUR-PLUGIN" | "GLCacheLock" | "GLOW" | "GLUE" | "GRADIENT-PLUGIN" | "GRAIN" | "GROUP" | "GameBoneModule" | "Grid" | "HIGHLIGHT" | "HUE_SATURATION" | "ImageSwitch" | "KinematicOutputModule" | "LAYER_SELECTOR" | "LINE_ART" | "LensFlare" | "LightPosition" | "LightShader" | "LuminanceThreshold" | "MATTE_BLUR" | "MATTE_COMPOSITE" | "MATTE_RESIZE" | "MOTION_BLUR" | "MULTIPORT_IN" | "MULTIPORT_OUT" | "MasterController" | "MedianFilter" | "MultiLayerWrite" | "NEGATE" | "NOTE" | "NormalFloat" | "OGLBYPASS" | "ORTHOLOCK" | "OVERLAY" | "ObjectDefinition" | "OffsetModule" | "OpenGLPreview" | "PEG" | "PEG_APPLY3" | "PEG_APPLY3_V2" | "PIXELATE" | "PLUGIN" | "Particle3dRegion" | "ParticleBaker" | "ParticleBkerComposite" | "ParticleBounce" | "ParticleExplosion" | "ParticleGravity" | "ParticleKill" | "ParticleMove" | "ParticlePlanarRegion" | "ParticleRotationVelocity" | "ParticleSink" | "ParticleSize" | "ParticleSprite" | "ParticleSystemComposite" | "ParticleVelocity" | "ParticleVisualizer" | "ParticleVortex" | "ParticleWindFriction" | "PointConstraint2" | "PointConstraint3" | "PointConstraintMulti" | "QUADMAP" | "Quake" | "RADIALBLUR-PLUGIN" | "READ" | "REFRACT" | "REMOVE_TRANSPARENCY" | "SCALE" | "SCRIPT_MODULE" | "SHADOW" | "StaticConstraint" | "SubNodeAnimation" | "SubNodeAnimationFilter" | "Switch" | "TONE" | "TbdColorSelector" | "ToneShader" | "TransformGate" | "TransformLimit" | "TransformationSwitch" | "Turbulence" | "TurbulentNoise" | "UNDERLAY" | "VISIBILITY" | "WRITE";
+declare type NodeType = string;
 
 /**
  * Column Type as returned by column.type()
@@ -510,6 +511,22 @@ declare module Drawing {
 
 }
 
+declare const enum DrawingLayer {
+  underlayArt = 0,
+  colourArt = 1,
+  lineArt = 2,
+  overlayArt = 3
+}
+
+/** Config for DrawingTools.clearArt
+ * drawing : Drawing Key 
+ * art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay 
+ */
+
+declare interface ClearArtConfig {
+  drawing: string,
+  art?: DrawingLayer
+}
 
 /**
 * The DrawingTools JavaScript global object. Get information about the currently selected drawing 
@@ -518,7 +535,7 @@ declare module DrawingTools {
   /**
   * sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt
   */
-  function setCurrentArt(unknown_0: int): void;
+  function setCurrentArt(layer: DrawingLayer): void;
 
   /**
   * sets the current drawing to be from column columnName at frame frame
@@ -540,6 +557,13 @@ declare module DrawingTools {
   */
   function extractCenterline(srcArt?: int, dstArt?: int, params?: DrawingToolParams): void;
 
+
+  /**
+   * Clears an art of a drawing.
+     Takes an object that can contain: drawing : Drawing Key art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
+     Added in 15.0.5
+   */
+  function clearArt(config: ClearArtConfig) : void;
   /**
   * computes the breaking triangles of the current layer using params.
   */
@@ -2033,6 +2057,15 @@ declare module scene {
   function saveAsNewVersion(name: string, markAsDefault: boolean): boolean;
 
   /**
+   * Save the current project to the specified folder.
+    Save the current project to the specified folder. Folder must not exists. The current project is updated to use that folder. Any error or message is reported using the standard error logger (so, in non batch mode, user will see message popup).
+    This API only works in standalone as you cannot 'Save As' in database.
+    Returns true if successfully saved the project.
+    Added 15.0.5
+   */
+  function saveAs(pathname: string): boolean;
+
+  /**
   * sets the aspect ratio of the scene. The scene's final aspect ratio will be: X * numberOfUnitsX()/Y * numberOfUnitsY()
   */
   function setUnitsAspectRatio(x: double, y: double): boolean;
@@ -2629,25 +2662,35 @@ declare class WidgetBase extends MO_SignalEmitter {
   /**
   * signal called on mouse down when picking this widget with the Transform tool
   */
-  public dragStarted(dragContext: QScriptValue): void;
+  public dragStarted: QSignal<(dragContext: DragContext) => void>;
 
   /**
   * signal called when this widget is dragged with the Transform tool
   */
-  public drag(dragContext: QScriptValue): void;
+  public drag: QSignal<(dragContext: DragContext) => void>;
 
   /**
   * signal called on mouse up after having manipulated this widget with the Transform tool
   */
-  public dragEnded(): void;
+  public dragEnded: QSignal<(dragContext: DragContext) => void>;
 
 }
 
+declare interface CustomWidgetConfig {
+  data: string,
+  attribute: string,
+  drag_manipulator: string,
+  painter: string,
+  picker: string,
+  local_transformation?: string
+  [key: string]: any
+}
 
 /**
 * The CustomWidget JavaScript class. A widget for which the attribute, drag_manipulator, painter, picker and local_transformation components are specified at the widget creation 
 */
-declare class CustomWidget extends MO_SignalEmitter {
+declare class CustomWidget extends WidgetBase {
+  constructor(config: CustomWidgetConfig)
   /**
   * valueChanged signal called when value of the attribute of the widget has changed
   */
@@ -2659,14 +2702,14 @@ declare class CustomWidget extends MO_SignalEmitter {
 /**
 * The Line2dDisplayWidget JavaScript class. A 2 dimensional line linking 2 points 
 */
-declare class Line2dDisplayWidget extends MO_SignalEmitter {
+declare class Line2dDisplayWidget extends WidgetBase {
 }
 
 
 /**
 * The Point2dWidget JavaScript class. A 2 dimensional point widget of various shape 
 */
-declare class Point2dWidget extends MO_SignalEmitter {
+declare class Point2dWidget extends WidgetBase {
   /**
   * Signal notifying the user that the 2d point value was modified by the Transform Tool.
   */
@@ -2678,11 +2721,11 @@ declare class Point2dWidget extends MO_SignalEmitter {
 /**
 * The Rotation3dWidget JavaScript class. A rotatable spherical widget 
 */
-declare class Rotation3dWidget extends MO_SignalEmitter {
+declare class Rotation3dWidget extends WidgetBase {
   /**
   * valueChanged signal called when the Rotation 3D attribute value has changed
   */
- public valueChanged: QSignal<(point2d: QScriptValue) => void>;
+  public valueChanged: QSignal<(point2d: QScriptValue) => void>;
 
 }
 
@@ -2690,7 +2733,7 @@ declare class Rotation3dWidget extends MO_SignalEmitter {
 /**
 * The RotationXWidget JavaScript class. A rotatable circle widget around the x axis 
 */
-declare class RotationXWidget extends MO_SignalEmitter {
+declare class RotationXWidget extends WidgetBase {
   public valueChanged: QSignal<(x: float) => void>;
 
 }
@@ -2699,7 +2742,7 @@ declare class RotationXWidget extends MO_SignalEmitter {
 /**
 * The RotationYWidget JavaScript class. A rotatable circle widget around the y axis 
 */
-declare class RotationYWidget extends MO_SignalEmitter {
+declare class RotationYWidget extends WidgetBase {
   public valueChanged: QSignal<(y: float) => void>;
 }
 
@@ -2707,7 +2750,7 @@ declare class RotationYWidget extends MO_SignalEmitter {
 /**
 * The RotationZWidget JavaScript class. A rotatable circle widget around the z axis 
 */
-declare class RotationZWidget extends MO_SignalEmitter {
+declare class RotationZWidget extends WidgetBase {
   public valueChanged: QSignal<(z: float) => void>;
 
 }
@@ -2716,11 +2759,11 @@ declare class RotationZWidget extends MO_SignalEmitter {
 /**
 * The SliderWidget JavaScript class. A vertical or horizontal slider 
 */
-declare class SliderWidget extends MO_SignalEmitter {
+declare class SliderWidget extends WidgetBase {
   /**
   * Signal notifying the user that the slider value was modified by the Transform Tool.
   */
-  public valueChanged(newSliderValue: float): void;
+  public valueChanged: QSignal<(newSliderValue: float) => void>;
 
 }
 
@@ -2728,7 +2771,7 @@ declare class SliderWidget extends MO_SignalEmitter {
 /**
 * The TranslationXWidget JavaScript class. A translatable arrow in the x axis 
 */
-declare class TranslationXWidget extends MO_SignalEmitter {
+declare class TranslationXWidget extends WidgetBase {
   /**
   * valueChanged signal called when the x translation value has been modified by the Transform tool.
   */
@@ -2740,7 +2783,7 @@ declare class TranslationXWidget extends MO_SignalEmitter {
 /**
 * The TranslationYWidget JavaScript class. A translatable arrow in the y axis 
 */
-declare class TranslationYWidget extends MO_SignalEmitter {
+declare class TranslationYWidget extends WidgetBase {
   /**
   * valueChanged signal called when the y translation value has been modified by the Transform tool.
   */
@@ -2752,7 +2795,7 @@ declare class TranslationYWidget extends MO_SignalEmitter {
 /**
 * The TranslationZWidget JavaScript class. A translatable arrow in the z axis 
 */
-declare class TranslationZWidget extends MO_SignalEmitter {
+declare class TranslationZWidget extends WidgetBase {
   /**
   * valueChanged signal called when the z translation value has been modified by the Transform tool.
   */
@@ -4182,7 +4225,7 @@ declare class Point3d extends QObject {
   /**
   * Substracts current Point3d with specified Point3d.
   */
-  public minus(p2: Point3d): Vector3d;
+  public minus(p2: Point3d): Point3d;
 
   /**
   * Add specified Vector3d to current Point3d.
