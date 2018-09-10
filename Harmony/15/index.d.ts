@@ -1335,7 +1335,7 @@ declare module node {
   /**
   * changes the value of an attribute in a node.
   */
-  function setTextAttr(node: NodePath, attrName: AttrKeyword, atFrame: int, attrValue: string | number | boolean): boolean;
+  function setTextAttr(node: NodePath, attrName: AttrKeyword, atFrame: int, attrValue: string | number): boolean;
 
   /**
   * links an attribute to a function column in the Xsheet View.
