@@ -868,22 +868,22 @@ declare module Input {
   /**
   * Function to get a string from the user.
   */
-  function getText(label?: string, text?: string, title?: string, parent?: QWidget): QVariant;
+  function getText(label?: string, text?: string, title?: string, parent?: QWidget): string;
 
   /**
   * Function to get a number from the user.
   */
-  function getNumber(label?: string, value?: double, decimals?: int, minValue?: double, maxValue?: double, title?: string, parent?: QWidget): QVariant;
+  function getNumber(label?: string, value?: double, decimals?: int, minValue?: double, maxValue?: double, title?: string, parent?: QWidget): number;
 
   /**
   * Function to get an item from the user.
   */
-  function getItem(label: string, itemList: StringList, currentItem?: string, editable?: boolean, title?: string, parent?: QWidget): QVariant;
+  function getItem(label: string, itemList: StringList, currentItem?: string, editable?: boolean, title?: string, parent?: QWidget): string;
 
   /**
   * Function to get an item from the user.
   */
-  function getItem(itemList: StringList, currentItem?: string, editable?: boolean, parent?: QWidget): QVariant;
+  function getItem(itemList: StringList, currentItem?: string, editable?: boolean, parent?: QWidget): string;
 
 }
 
