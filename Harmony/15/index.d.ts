@@ -788,7 +788,7 @@ declare module frame {
 
 }
 
-
+declare type ContinuityValue = "STRAIGHT" | "SMOOTH" | "CORNER"
 /**
 * The func JavaScript global object. Retrieve and modify values of function curves 
 */
@@ -831,7 +831,7 @@ declare module func {
   /**
   * returns the continuity of the curve that follows the point. One of the following values will be returned, in upper-case: SMOOTH, CORNER or STRAIGHT
   */
-  function pointContinuity(columnName: string, point: int): string;
+  function pointContinuity(columnName: string, point: int): ContinuityValue;
 
   /**
   * returns the X value of the left handle of a point on a curve
@@ -901,7 +901,7 @@ declare module func {
   /**
   * returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
   */
-  function pointContinuityPath3d(columnName: string, point: int): double;
+  function pointContinuityPath3d(columnName: string, point: int): ContinuityValue;
 
   /**
   * returns the bias value for the specified point on the 3D Path
@@ -931,12 +931,12 @@ declare module func {
   /**
   * sets the values of a point on a Bezier function curve
   */
-  function setBezierPoint(columnName: string, frame: int, y: double, handleLeftX: double, handleLeftY: double, handleRightX: double, handleRightY: double, constSeg: boolean, continuity: string): boolean;
+  function setBezierPoint(columnName: string, frame: int, y: double, handleLeftX: double, handleLeftY: double, handleRightX: double, handleRightY: double, constSeg: boolean, continuity: ContinuityValue): boolean;
 
   /**
   * sets the values of a point on an Ease function curve
   */
-  function setEasePoint(columnName: string, frame: int, y: double, easeIn: double, angleEaseIn: double, easeOut: double, angleEaseOut: double, constSeg: boolean, continuity: string): boolean;
+  function setEasePoint(columnName: string, frame: int, y: double, easeIn: double, angleEaseIn: double, easeOut: double, angleEaseOut: double, constSeg: boolean, continuity: ContinuityValue): boolean;
 
   /**
   * sets the values of a point on a Velocity-Based function curve
@@ -946,12 +946,12 @@ declare module func {
   /**
   * adds a keyframe to a 3D Path and sets the X, Y and Z value, as well as the tension, continuity and bias.
   */
-  function addKeyFramePath3d(columnName: string, frame: int, x: double, y: double, z: double, tension: double, continuity: double, bias: double): boolean;
+  function addKeyFramePath3d(columnName: string, frame: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
 
   /**
   * adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension, continuity and bias
   */
-  function addCtrlPointAfterPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: double, bias: double): boolean;
+  function addCtrlPointAfterPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
 
   /**
   * removePointPath3d may be used to remove either a key frame, or a control point
@@ -961,7 +961,7 @@ declare module func {
   /**
   * setPointPath3d may be used to set values in either a key frame, or a control point, but cannot change a key frame into a control point or a control point into a key frame. To change a key frame into a control point or a control point into a key frame, you must remove the point and add a new point.
   */
-  function setPointPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: double, bias: double): boolean;
+  function setPointPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
 
   /**
   * sets the constant segment flag of point i of path p to b.
@@ -2098,7 +2098,7 @@ declare module scene {
   /**
   * returns the model matrix for the default camera.
   */
-  function getCameraMatrix(frame: int): QObject;
+  function getCameraMatrix(frame: int): Matrix4x4;
 
   /**
   * converts a field coordinate into an OGL coordinate
@@ -4463,12 +4463,12 @@ declare class Vector2d extends QObject {
   /**
   * Rotate Vector2d counter-clockwise of 90 degrees.
   */
-  public rotate90(): Vector2d;
+  public rotate90(): void;
 
   /**
   * Rotate Vector2d counter-clockwise of 270 degrees.
   */
-  public rotate270(): Vector2d;
+  public rotate270(): void;
 
   /**
   * Project current Vector2d onto specified Vector2d.
