@@ -924,3 +924,643 @@ declare class TextEdit extends SCRIPT_QSWidget {
   text: string;
 
 }
+
+
+/**
+* The Vector2d JavaScript class. Defines a two dimensional vector 
+*/
+declare class Vector2d extends QObject {
+  /**
+  * Test if Vector2d is zero.
+  */
+  public isZero(): boolean;
+
+  /**
+  * Test if the two vectors are equals.
+  */
+  public isEqual(v2: Vector2d): boolean;
+
+  /**
+  * Test if the two vectors are not equals.
+  */
+  public isNotEqual(v2: Vector2d): boolean;
+
+  /**
+  * Retrieve length of Vector2d.
+  */
+  public length(): double;
+
+  /**
+  * Retrieve square length of Vector2d.
+  */
+  public lengthSq(): double;
+
+  /**
+  * Retrieve radian angle defined by Vector2d.
+  */
+  public radianAngle(): double;
+
+  /**
+  * Retrieve degree angle defined by Vector2d.
+  */
+  public degreeAngle(): double;
+
+  /**
+  * Calculate dot product between current Vector2d and specified Vector2d.
+  */
+  public dot(v2: Vector2d): double;
+
+  /**
+  * Rotate Vector2d counter-clockwise of specified radian angle.
+  */
+  public rotate(rad: double): Vector2d;
+
+  /**
+  * Rotate Vector2d counter-clockwise of 90 degrees.
+  */
+  public rotate90(): void;
+
+  /**
+  * Rotate Vector2d counter-clockwise of 270 degrees.
+  */
+  public rotate270(): void;
+
+  /**
+  * Project current Vector2d onto specified Vector2d.
+  */
+  public project(v2: Vector2d): Vector2d;
+
+  /**
+  * Project current Vector2d onto specified Vector2d.
+  */
+  public getProjection(v2: Vector2d): Vector2d;
+
+  /**
+  * Normalize current Vector2d.
+  */
+  public normalize(): Vector2d;
+
+  /**
+  * Normalize current Vector2d.
+  */
+  public getNormalized(): Vector2d;
+
+  /**
+  * Negate current Vector2d.
+  */
+  public negate(): Vector2d;
+
+  /**
+  * Create a new empty Vector2d.
+  */
+  constructor();
+
+  /**
+  * Create a new Vector2d.
+  */
+  constructor(x: double, y: double);
+
+  /**
+  * x value
+  */
+  x: double;
+
+  /**
+  * y value
+  */
+  y: double;
+
+}
+
+/**
+* The Point2d JavaScript class. Defines a two dimensional point 
+*/
+declare class Point2d extends QObject {
+  /**
+  * Set the value of x, y coordinate.
+  */
+  public setXY(unknown_0: double, unknown_1: double): void;
+
+  /**
+  * round x and y to floor with a resolution of 1.0/64.0
+  */
+  public round(): Point2d;
+
+  /**
+  * round x and y to floor with a resolution given
+  */
+  public round(quantum: double): Point2d;
+
+  /**
+  * Rounds this point in the direction of the given vector and using the resolution of 1.0/64.0.
+  */
+  public round(v: Vector2d): Point2d;
+
+  /**
+  * Rounds this point in the direction of the given vector and using the given resolution.
+  */
+  public round(v: Vector2d, quantum: double): Point2d;
+
+  /**
+  * Copy Point2d into a Vector2d container.
+  */
+  public toVector2d(): Vector2d;
+
+  /**
+  * Calculate distance between two points.
+  */
+  public distance(p2: Point2d): double;
+
+  /**
+  * Calculate square distance between two points.
+  */
+  public distanceSq(p2: Point2d): double;
+
+  /**
+  * Substracts current Point2d with specified Point2d.
+  */
+  public minus(p2: Point2d | Vector2d): Point2d;
+
+  /**
+  * Add specified Vector2d to current Point2d.
+  */
+  public add(v: Vector2d): Point2d;
+
+  /**
+  * Add specified Vector2d to current Point2d.
+  */
+  public addEq(v: Vector2d): Point2d;
+
+  /**
+  * Substract current Point2d with specified Vector2d.
+  */
+  public minusEq(v: Vector2d): Point2d;
+
+  /**
+  * Calculate Point2d as interpolation between two points.
+  */
+  public interpolate(t: double, p1: Point2d, p2: Point2d): Point2d;
+
+  /**
+  * Create a new empty Point2d.
+  */
+  constructor();
+
+  /**
+  * Create a new Point2d.
+  */
+  constructor(x: double, y: double);
+
+  /**
+  * x value
+  */
+  x: double;
+
+  /**
+  * y value
+  */
+  y: double;
+
+}
+
+
+/**
+* The Point3d JavaScript class. Defines a three dimensional point 
+*/
+declare class Point3d extends QObject {
+  /**
+  * Set the x, y, z coordinate to the given.
+  */
+  public setXYZ(x: double, y: double, z: double): void;
+
+  /**
+  * Test if Point3d is at origin.
+  */
+  public isOrigin(): boolean;
+
+  /**
+  * Test if current Point3d is equal to specified Point3d.
+  */
+  public isEqual(p2: Point3d): boolean;
+
+  /**
+  * Test if current Point3d is not equal to specified Point3d.
+  */
+  public isNotEqual(p2: Point3d): boolean;
+
+  /**
+  * Calculate distance between current Point3d and specified Point3d.
+  */
+  public distance(p2: Point3d): double;
+
+  /**
+  * Calculate square distance between current Point3d and specified Point3d.
+  */
+  public distanceSq(p2: Point3d): double;
+
+  /**
+  * Round x, y coordinate to floor with the given resolution.
+  */
+  public round(quantum: double): Point3d;
+
+  /**
+  * Calculate Point3d as interpolation between two points.
+  */
+  public interpolate(t: double, p1: Point3d, p2: Point3d): Point3d;
+
+  /**
+  * Add specified Vector3d to current Point3d.
+  */
+  public add(v: Vector3d): Point3d;
+
+  /**
+  * Substracts current Point3d with specified Vector3d.
+  */
+  public minus(v: Vector3d): Point3d;
+
+  /**
+  * Substracts current Point3d with specified Point3d.
+  */
+  public minus(p2: Point3d): Point3d;
+
+  /**
+  * Add specified Vector3d to current Point3d.
+  */
+  public addEq(v: Vector3d): Point3d;
+
+  /**
+  * Substract current Point3d with specified Vector3d.
+  */
+  public minusEq(v: Vector3d): Point3d;
+
+  /**
+  * Convert current Point3d to bi-dimensional Point2d.
+  */
+  public toPoint2d(): Point2d;
+
+  /**
+  * Create a new empty Point3d.
+  */
+  constructor();
+
+  /**
+  * Create a new Point3d.
+  */
+  constructor(x: double, y: double, z: double);
+
+  x: double;
+
+  y: double;
+
+  z: double;
+
+}
+
+/**
+* The Vector3d JavaScript class. Defines a three dimensional vector 
+*/
+declare class Vector3d extends QObject {
+  /**
+  * Set the x, y, z coordinate to the given.
+  */
+  public setXYZ(x: double, y: double, z: double): void;
+
+  /**
+  * Test if Vector3d is zero.
+  */
+  public isZero(): boolean;
+
+  /**
+  * Test if the two vectors are equals.
+  */
+  public isEqual(v2: Vector3d): boolean;
+
+  /**
+  * Test if the two vectors are not equals.
+  */
+  public isNotEqual(v2: Vector3d): boolean;
+
+  /**
+  * Retrieve length of Vector3d.
+  */
+  public length(): double;
+
+  /**
+  * Retrieve square length of Vector3d.
+  */
+  public lengthSq(): double;
+
+  /**
+  * Calculate cosine angle between current Vector3d and specified Vector3d.
+  */
+  public getCos(v2: Vector3d): double;
+
+  /**
+  * Calculate sine angle between current Vector3d and specified Vector3d.
+  */
+  public getSin(v2: Vector3d): double;
+
+  /**
+  * Calculate dot product between current Vector3d and specified Vector3d.
+  */
+  public dot(v2: Vector3d): double;
+
+  /**
+  * Calculate cross product between current Vector3d and specified Vector3d.
+  */
+  public cross(v2: Vector3d): Vector3d;
+
+  /**
+  * Project current Vector3d onto specified Vector3d.
+  */
+  public project(v2: Vector3d): Vector3d;
+
+  /**
+  * Project current Vector3d onto specified Vector3d.
+  */
+  public getProjection(v2: Vector3d): Vector3d;
+
+  /**
+  * Get ratio from projection of current Vector3d onto specified Vector3d.
+  */
+  public getProjectionRatio(v2: Vector3d): double;
+
+  /**
+  * Normalize current Vector3d.
+  */
+  public normalize(): Vector3d;
+
+  /**
+  * Normalize current Vector3d.
+  */
+  public getNormalized(): Vector3d;
+
+  /**
+  * Negate current Vector3d.
+  */
+  public negate(): Vector3d;
+
+  /**
+  * Create a new empty Vector3d.
+  */
+  constructor();
+
+  /**
+  * Create a new Vector3d.
+  */
+  constructor(x: double, y: double, z: double);
+
+  /**
+  * x value
+  */
+  x: double;
+
+  /**
+  * y value
+  */
+  y: double;
+
+  /**
+  * z value
+  */
+  z: double;
+
+}
+
+/**
+* The Matrix4x4 JavaScript class. Defines a four by four matrix container 
+*/
+declare class Matrix4x4 extends QObject {
+  /**
+  * Retrieve single value from Matrix4x4.
+  */
+  public value(row: int, column: int): double;
+
+  /**
+  * Set matrix rotation from Euler angles.
+  */
+  public setFromEulerAngles(rx: double, ry: double, rz: double): Matrix4x4;
+
+  /**
+  * Retrieve axis from Matrix4x4.
+  */
+  public axis(idx: int): Vector3d;
+
+  /**
+  * Retrieve Matrix4x4 origin.
+  */
+  public origin(): Point3d;
+
+  /**
+  * Test if Matrix4x4 is empty.
+  */
+  public isEmpty(): boolean;
+
+  /**
+  * Clear current Matrix4x4.
+  */
+  public clear(): Matrix4x4;
+
+  /**
+  * Normalize current Matrix4x4.
+  */
+  public normalize(): Matrix4x4;
+
+  /**
+  * Multiply current Matrix4x4 with specified Matrix4x4.
+  */
+  public multiplyEq(m2: Matrix4x4): Matrix4x4;
+
+  /**
+  * Multiply current Matrix4x4 with specified Matrix4x4.
+  */
+  public multiply(m2: Matrix4x4): QObject;
+
+  /**
+  * Multiply specified Point3d with current Matrix4x4.
+  */
+  public multiply(p: Point3d): Point3d;
+
+  /**
+  * Multiply specified Vector3d with current Matrix4x4.
+  */
+  public multiply(v: Vector3d): QObject;
+
+  /**
+  * Translate current Matrix4x4 with specified Vector3d.
+  */
+  public translate(v: Vector3d): Matrix4x4;
+
+  /**
+  * Translate current Matrix4x4.
+  */
+  public translate(dx: double, dy: double, dz?: double): Matrix4x4;
+
+  /**
+  * Scale current Matrix4x4.
+  */
+  public scale(sx: double, sy: double, sz?: double): Matrix4x4;
+
+  /**
+  * Rotate current Matrix4x4.
+  */
+  public rotatePlane(v: Vector3d, p: Point3d): Matrix4x4;
+
+  /**
+  * Rotate current Matrix4x4.
+  */
+  public rotateRadians(rad: double, v: Vector3d): Matrix4x4;
+
+  /**
+  * Rotate current Matrix4x4.
+  */
+  public rotateDegrees(deg: double, v: Vector3d): Matrix4x4;
+
+  /**
+  * Shear current Matrix4x4.
+  */
+  public skew(sk: double): Matrix4x4;
+
+  /**
+  * Calculate an orthogonal projection Matrix4x4.
+  */
+  public orthogonalProject(left: double, right: double, bottom: double, top: double, zNear: double, zFar: double): Matrix4x4;
+
+  /**
+  * Calculate a perspective projection Matrix4x4.
+  */
+  public perspectiveProject(left: double, right: double, bottom: double, top: double, zNear: double, zFar: double): Matrix4x4;
+
+  /**
+  * Calculate a perspective projection Matrix4x4.
+  */
+  public perspectiveProject(fovy: double, ratio: double, zNear: double, zFar: double): Matrix4x4;
+
+  /**
+  * Invert current Matrix4x4.
+  */
+  public inverse(): Matrix4x4;
+
+  /**
+  * Invert current Matrix4x4.
+  */
+  public getInverse(): Matrix4x4;
+
+  /**
+  * Transpose current Matrix4x4.
+  */
+  public transpose(): Matrix4x4;
+
+  /**
+  * Transpose current Matrix4x4.
+  */
+  public getTranspose(): Matrix4x4;
+
+  /**
+  * Extract position from matrix.
+  */
+  public extractPosition(pivot?: Point3d, force3d?: boolean): Point3d;
+
+  /**
+  * Extract scale from matrix.
+  */
+  public extractScale(pivot?: Point3d, force3d?: boolean): Point3d;
+
+  /**
+  * Extract rotation from matrix.
+  */
+  public extractRotation(pivot?: Point3d, force3d?: boolean): Point3d;
+
+  /**
+  * Extract skew from matrix.
+  */
+  public extractSkew(pivot?: Point3d): double;
+
+  public print(label: string): void;
+
+  /**
+  * Create a new empty Matrix4x4.
+  */
+  constructor();
+
+  /**
+  * 1st row and 1st column value
+  */
+  m00: double;
+
+  /**
+  * 1st row and 2nd column value
+  */
+  m01: double;
+
+  /**
+  * 1st row and 3rd column value
+  */
+  m02: double;
+
+  /**
+  * 1st row and 4th column value
+  */
+  m03: double;
+
+  /**
+  * 2nd row and 1st column value
+  */
+  m10: double;
+
+  /**
+  * 2nd row and 2nd column value
+  */
+  m11: double;
+
+  /**
+  * 2nd row and 3rd column value
+  */
+  m12: double;
+
+  /**
+  * 2nd row and 4th column value
+  */
+  m13: double;
+
+  /**
+  * 3rd row and 1st column value
+  */
+  m20: double;
+
+  /**
+  * 3rd row and 2nd column value
+  */
+  m21: double;
+
+  /**
+  * 3rd row and 3rd column value
+  */
+  m22: double;
+
+  /**
+  * 3rd row and 4th column value
+  */
+  m23: double;
+
+  /**
+  * 4th row and 1st column value
+  */
+  m30: double;
+
+  /**
+  * 4th row and 2nd column value
+  */
+  m31: double;
+
+  /**
+  * 4th row and 3rd column value
+  */
+  m32: double;
+
+  /**
+  * 4th row and 4th column value
+  */
+  m33: double;
+
+}

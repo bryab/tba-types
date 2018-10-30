@@ -1453,7 +1453,7 @@ declare module node {
   /**
   * returns the pivot of the node
   */
-  function getPivot(node: string, frame: int): QObject;
+  function getPivot(node: string, frame: int): Point3d;
 
   /**
   * returns the ColorOverride object for the colour override node

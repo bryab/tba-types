@@ -482,7 +482,7 @@ declare class QPushButton extends QAbstractButton {
 }
 
 declare class QRadioButton extends QAbstractButton {
-
+    checked: boolean;
 }
 
 declare class QToolButton extends QAbstractButton {

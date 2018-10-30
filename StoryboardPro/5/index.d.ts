@@ -915,12 +915,9 @@ declare class MotionManager extends QObject {
     /**
     * returns the model matrix for the given node.
     */
-    public getNodeMatrix(idString: string, nodeName: string, atFrame: double): QObject;
+    public getNodeMatrix(idString: string, nodeName: string, atFrame: double): Matrix4x4;
 
 }
-
-
-
 
 
 /**
@@ -1531,7 +1528,7 @@ declare module scene {
     /**
     * returns the model matrix for the default camera.
     */
-    function getCameraMatrix(frame: int): QObject;
+    function getCameraMatrix(frame: int): Matrix4x4;
 
     /**
     * converts a field coordinate into an OGL coordinate
