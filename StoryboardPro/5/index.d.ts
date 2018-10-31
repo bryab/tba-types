@@ -275,6 +275,9 @@ declare namespace DrawingTools {
   var allArts: int;
 }
 
+declare type MovieFormat = "jpg" | "mov" | "tga";
+declare type BitmapFormat = "jpg" | "psd" | "tga";
+
 /**
  * This interface is used to export the storyboard project
  */
@@ -282,17 +285,17 @@ declare class ExportManager extends QObject {
   /**
    * Export storyboard to bitmap file.
    */
-  public exportToBitmap(exportDir: string, filePattern: string, bitmapFormat: string, resX: int, resY: int): boolean;
+  public exportToBitmap(exportDir: string, filePattern: string, bitmapFormat: BitmapFormat, resX: int, resY: int): boolean;
 
   /**
    * Export storyboard to movie file.
    */
-  public exportToMovie(exportDir: string, filePattern: string, movieFormat: string, resX: int, resY: int): boolean;
+  public exportToMovie(exportDir: string, filePattern: string, movieFormat: MovieFormat, resX: int, resY: int): boolean;
 
   /**
    * Export storyboard panels, taking into consideration the scene camera (layout )
    */
-  public exportLayout(exportDir: string, filePattern: string, movieFormat: string, resX: int, resY: int): boolean;
+  public exportLayout(exportDir: string, filePattern: string, movieFormat: MovieFormat, resX: int, resY: int): boolean;
 
   /**
    * Export storyboard to pdf file.
@@ -302,7 +305,7 @@ declare class ExportManager extends QObject {
   /**
    * Export storyboard to Final Cut Pro XML format.
    */
-  public exportToFCPXML(exportFilePath: string, filePattern: string, movieFormat: string): boolean;
+  public exportToFCPXML(exportFilePath: string, filePattern: string, movieFormat: MovieFormat): boolean;
 
   /**
    * Sets a selection of scenes to be exported.
@@ -411,6 +414,8 @@ declare class ExportManager extends QObject {
 
   /**
    * Set the audio/video export settings ( for Quicktime export )
+   * 
+   * This is provided as a work-around to specify explicit QuickTime settings. The easiest way to access a given QuickTime settings string to to save the given setting in the exportMovie dialog, and consult the EXPORT_DLG_MOVIE_VIDEO_CONFIG preference in your user preferences.
    */
   public setMovieConfig(config: string): void;
 
