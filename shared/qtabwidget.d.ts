@@ -40,6 +40,11 @@ declare class QTabWidget extends QWidget {
   public addTab(widget: QWidget, unknown_2: QString): int;
 
   /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.Adds a tab with the given page, icon, and label to the tab widget, and returns the index of the tab in the tab bar.
+   */
+  public addTab(widget: QWidget, icon: QIcon, label: QString): int;
+
+  /**
    * Removes all the pages, but does not delete them.
    */
   public clear(): void;
@@ -49,25 +54,10 @@ declare class QTabWidget extends QWidget {
    */
   public cornerWidget(corner: Qt.Corner): QWidget;
 
-  public count(): int;
-
-  public currentIndex(): int;
-
   /**
    * Returns a pointer to the page currently being displayed by the tab dialog.
    */
   public currentWidget(): QWidget;
-
-  public documentMode(): boolean;
-
-  public elideMode(): Qt.TextElideMode;
-
-  /**
-   * Reimplemented Function
-   */
-  public heightForWidth(width: int): int;
-
-  public iconSize(): QSize;
 
   /**
    * Returns the index position of the page occupied by the widget w, or -1 if the widget cannot be found.
@@ -79,17 +69,17 @@ declare class QTabWidget extends QWidget {
    */
   public insertTab(index: int, widget: QWidget, unknown_3: QString): int;
 
+  /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.Inserts a tab with the given label, page, and icon into the tab widget at the specified index, and returns the index of the inserted tab in the tab bar.
+   */
+  public insertTab(index: int, widget: QWidget, icon: QIcon, label: QString): int;
+
   public isMovable(): boolean;
 
   /**
    * Returns true if the page at position index is enabled; otherwise returns false.
    */
   public isTabEnabled(index: int): boolean;
-
-  /**
-   * Returns a suitable minimum size for the tab widget.
-   */
-  public minimumSizeHint(): QSize;
 
   /**
    * Constructs a tabbed widget with parent parent.
@@ -124,11 +114,11 @@ declare class QTabWidget extends QWidget {
    */
   public setTabIcon(index: int, icon: QIcon): void;
 
-  public setTabPosition(unknown_1: TabPosition): void;
+  public setTabPosition(unknown_1: QTabWidget.TabPosition): void;
 
   public setTabsClosable(closeable: boolean): void;
 
-  public setTabShape(s: TabShape): void;
+  public setTabShape(s: QTabWidget.TabShape): void;
 
   /**
    * Defines a new label for the page at position index's tab.
@@ -148,20 +138,9 @@ declare class QTabWidget extends QWidget {
   public setUsesScrollButtons(useButtons: boolean): void;
 
   /**
-   * Reimplemented Function
-   */
-  public sizeHint(): QSize;
-
-  /**
    * Returns the icon for the tab on the page at position index.
    */
   public tabIcon(index: int): QIcon;
-
-  public tabPosition(): TabPosition;
-
-  public tabsClosable(): boolean;
-
-  public tabShape(): TabShape;
 
   /**
    * Returns the label text for the tab on the page at position index.
@@ -178,15 +157,58 @@ declare class QTabWidget extends QWidget {
    */
   public tabWhatsThis(index: int): QString;
 
-  public usesScrollButtons(): boolean;
-
   /**
    * Returns the tab page at index position index or 0 if the index is out of range.
    */
   public widget(index: int): QWidget;
 
   /**
+   * the number of tabs in the tab bar
+   */
+  count: int;
+
+  /**
+   * the index position of the current tab page
+   */
+  currentIndex: int;
+
+  /**
+   * Whether or not the tab widget is rendered in a mode suitable for document pages.
+   */
+  documentMode: boolean;
+
+  /**
+   * how to elide text in the tab bar
+   */
+  elideMode: Qt.TextElideMode;
+
+  /**
+   * The size for icons in the tab bar.
+   */
+  iconSize: QSize;
+
+  /**
    * This property holds whether the user can move the tabs within the tabbar area.
    */
   movable: boolean;
+
+  /**
+   * the position of the tabs in this tab widget
+   */
+  tabPosition: TabPosition;
+
+  /**
+   * whether close buttons are automatically added to each tab.
+   */
+  tabsClosable: boolean;
+
+  /**
+   * the shape of the tabs in this tab widget
+   */
+  tabShape: TabShape;
+
+  /**
+   * Whether or not a tab bar should use buttons to scroll tabs when it has many tabs.
+   */
+  usesScrollButtons: boolean;
 }

@@ -99,12 +99,6 @@ declare class QWidget extends QPaintDevice {
    */
   customContextMenuRequested: QSignal<(pos: QPoint) => void>;
 
-  public acceptDrops(): boolean;
-
-  public accessibleDescription(): QString;
-
-  public accessibleName(): QString;
-
   /**
    * Returns the (possibly empty) list of this widget's actions.
    */
@@ -130,14 +124,10 @@ declare class QWidget extends QPaintDevice {
    */
   public adjustSize(): void;
 
-  public autoFillBackground(): boolean;
-
   /**
    * Returns the background role of the widget.
    */
-  public backgroundRole(): any;
-
-  public baseSize(): QSize;
+  public backgroundRole(): QPalette.ColorRole;
 
   /**
    * Returns the visible child widget at the position ({x}, {y}) in the widget's coordinate system.
@@ -148,10 +138,6 @@ declare class QWidget extends QPaintDevice {
    * Returns the visible child widget at point p in the widget's own coordinate system.
    */
   public childAt(p: QPoint): QWidget;
-
-  public childrenRect(): QRect;
-
-  public childrenRegion(): QRegion;
 
   /**
    * Takes keyboard input focus from the widget.
@@ -173,11 +159,7 @@ declare class QWidget extends QPaintDevice {
    */
   public contentsRect(): QRect;
 
-  public contextMenuPolicy(): Qt.ContextMenuPolicy;
-
   public createWinId(): void;
-
-  public cursor(): QCursor;
 
   public devType(): int;
 
@@ -191,8 +173,6 @@ declare class QWidget extends QPaintDevice {
    */
   public ensurePolished(): void;
 
-  public focusPolicy(): Qt.FocusPolicy;
-
   /**
    * Returns the focus proxy, or 0 if there is no focus proxy.
    */
@@ -202,8 +182,6 @@ declare class QWidget extends QPaintDevice {
    * Returns the last child of this widget that setFocus had been called on.
    */
   public focusWidget(): QWidget;
-
-  public font(): QFont;
 
   /**
    * Returns the font info for the widget's current font.
@@ -218,13 +196,7 @@ declare class QWidget extends QPaintDevice {
   /**
    * Returns the foreground role.
    */
-  public foregroundRole(): any;
-
-  public frameGeometry(): QRect;
-
-  public frameSize(): QSize;
-
-  public geometry(): QRect;
+  public foregroundRole(): QPalette.ColorRole;
 
   /**
    * Returns the widget's contents margins for left, top, right, and bottom.
@@ -272,8 +244,6 @@ declare class QWidget extends QPaintDevice {
 
   public hasMouseTracking(): boolean;
 
-  public height: int;
-
   /**
    * Returns the preferred height for this widget, given the width w.
    */
@@ -283,8 +253,6 @@ declare class QWidget extends QPaintDevice {
    * This function returns the QInputContext for this widget.
    */
   public inputContext(): QInputContext;
-
-  public inputMethodHints(): any;
 
   /**
    * This method is only relevant for input widgets.
@@ -305,8 +273,6 @@ declare class QWidget extends QPaintDevice {
    * Returns the window system identifier of the widget, or 0 if the widget is not created yet.
    */
   public internalWinId(): WId;
-
-  public isActiveWindow(): boolean;
 
   /**
    * Returns true if this widget is a parent, (or grandparent and so on to any level), of the given child, and both widgets are within the same window; otherwise returns false.
@@ -366,19 +332,15 @@ declare class QWidget extends QPaintDevice {
    */
   public layout(): QLayout;
 
-  public layoutDirection(): Qt.LayoutDirection;
-
-  public locale(): QLocale;
-
   /**
    * Returns the CoreGraphics handle of the widget.
    */
-  public macCGHandle(): any;
+  public macCGHandle(): Qt.HANDLE;
 
   /**
    * Returns the QuickDraw handle of the widget.
    */
-  public macQDHandle(): any;
+  public macQDHandle(): Qt.HANDLE;
 
   /**
    * Translates the widget coordinate pos from the coordinate system of parent to this widget's coordinate system.
@@ -415,20 +377,6 @@ declare class QWidget extends QPaintDevice {
    */
   public mask(): QRegion;
 
-  public maximumHeight(): int;
-
-  public maximumSize(): QSize;
-
-  public maximumWidth(): int;
-
-  public minimumHeight(): int;
-
-  public minimumSize(): QSize;
-
-  public minimumSizeHint(): QSize;
-
-  public minimumWidth(): int;
-
   /**
    * This corresponds to move(QPoint(x, y)).
    */
@@ -446,28 +394,22 @@ declare class QWidget extends QPaintDevice {
    */
   public nextInFocusChain(): QWidget;
 
-  public normalGeometry(): QRect;
-
   /**
    * Sets the window flags for the widget to flags, without telling the window system.
    */
   public overrideWindowFlags(type: Qt.WindowFlags): void;
 
-  public overrideWindowState(state: any): void;
+  public overrideWindowState(state: Qt.WindowStates): void;
 
   /**
    * Returns the widget's paint engine.
    */
   public paintEngine(): QPaintEngine;
 
-  public palette(): QPalette;
-
   /**
    * Returns the parent of this widget, or 0 if it does not have any parent widget.
    */
   public parentWidget(): QWidget;
-
-  public pos(): QPoint;
 
   /**
    * The previousInFocusChain function returns the previous widget in this widget's focus chain.
@@ -478,8 +420,6 @@ declare class QWidget extends QPaintDevice {
    * Constructs a widget which is a child of parent, with widget flags set to f.
    */
   constructor(parent?: QWidget, f?: Qt.WindowFlags);
-
-  public rect(): QRect;
 
   /**
    * Releases the HDC hdc acquired by a previous call to getDC().
@@ -574,7 +514,7 @@ declare class QWidget extends QPaintDevice {
   /**
    * Sets the background role of the widget to role.
    */
-  public setBackgroundRole(unknown_1: any): void;
+  public setBackgroundRole(unknown_1: QPalette.ColorRole): void;
 
   public setBaseSize(unknown_1: QSize): void;
 
@@ -637,7 +577,7 @@ declare class QWidget extends QPaintDevice {
   /**
    * Sets the foreground role of the widget to role.
    */
-  public setForegroundRole(unknown_1: any): void;
+  public setForegroundRole(unknown_1: QPalette.ColorRole): void;
 
   /**
    * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.This corresponds to setGeometry(QRect(x, y, w, h)).
@@ -656,7 +596,7 @@ declare class QWidget extends QPaintDevice {
    */
   public setInputContext(unknown: QInputContext): void;
 
-  public setInputMethodHints(hints: any): void;
+  public setInputMethodHints(hints: Qt.InputMethodHints): void;
 
   /**
    * Sets the layout manager for this widget to layout.
@@ -738,7 +678,7 @@ declare class QWidget extends QPaintDevice {
   /**
    * Sets the size policy of the widget to horizontal and vertical, with standard stretch and no height-for-width.
    */
-  public setSizePolicy(horizontal: any, vertical: any): void;
+  public setSizePolicy(horizontal: QSizePolicy.Policy, vertical: QSizePolicy.Policy): void;
 
   public setStatusTip(unknown_1: QString): void;
 
@@ -778,38 +718,24 @@ declare class QWidget extends QPaintDevice {
   /**
    * Sets the window state to windowState.
    */
-  public setWindowState(state: any): void;
+  public setWindowState(state: Qt.WindowStates): void;
 
   /**
    * Sets the window surface to be the surface specified.
    */
   public setWindowSurface(surface: QWindowSurface): void;
 
-  public size(): QSize;
-
-  public sizeHint(): QSize;
-
-  public sizeIncrement(): QSize;
-
-  public sizePolicy(): QSizePolicy;
-
   /**
    * Places the widget under w in the parent widget's stack.
    */
   public stackUnder(unknown: QWidget): void;
 
-  public statusTip(): QString;
-
   public style(): QStyle;
-
-  public styleSheet(): QString;
 
   /**
    * Returns true if attribute attribute is set on this widget; otherwise returns false.
    */
   public testAttribute(unknown_1: Qt.WidgetAttribute): boolean;
-
-  public toolTip(): QString;
 
   public topLevelWidget(): QWidget;
 
@@ -849,36 +775,20 @@ declare class QWidget extends QPaintDevice {
    */
   public updateGeometry(): void;
 
-  public updatesEnabled(): boolean;
-
   /**
    * Returns the unobscured region where paint events can occur.
    */
   public visibleRegion(): QRegion;
-
-  public whatsThis(): QString;
-
-  public width: int;
 
   /**
    * Returns the window for this widget, i.e.
    */
   public window(): QWidget;
 
-  public windowFilePath(): QString;
-
   /**
    * Window flags are a combination of a type (e.
    */
   public windowFlags(): Qt.WindowFlags;
-
-  public windowIcon(): QIcon;
-
-  public windowIconText(): QString;
-
-  public windowModality(): Qt.WindowModality;
-
-  public windowOpacity(): qreal;
 
   /**
    * Returns the window's role, or an empty string.
@@ -888,14 +798,12 @@ declare class QWidget extends QPaintDevice {
   /**
    * Returns the current window state.
    */
-  public windowState(): any;
+  public windowState(): Qt.WindowStates;
 
   /**
    * Returns the QWindowSurface this widget will be drawn into.
    */
   public windowSurface(): QWindowSurface;
-
-  public windowTitle(): QString;
 
   /**
    * Returns the window type of this widget.
@@ -907,8 +815,6 @@ declare class QWidget extends QPaintDevice {
    */
   public winId(): WId;
 
-  public x(): int;
-
   /**
    * Returns information about the configuration of the X display used to display the widget.
    */
@@ -917,7 +823,292 @@ declare class QWidget extends QPaintDevice {
   /**
    * Returns the X11 Picture handle of the widget for XRender support.
    */
-  public x11PictureHandle(): any;
+  public x11PictureHandle(): Qt.HANDLE;
 
-  public y(): int;
+  /**
+   * whether drop events are enabled for this widget
+   */
+  acceptDrops: boolean;
+
+  /**
+   * the widget's description as seen by assistive technologies
+   */
+  accessibleDescription: QString;
+
+  /**
+   * the widget's name as seen by assistive technologies
+   */
+  accessibleName: QString;
+
+  /**
+   * whether the widget background is filled automatically
+   */
+  autoFillBackground: boolean;
+
+  /**
+   * the base size of the widget
+   */
+  baseSize: QSize;
+
+  /**
+   * the bounding rectangle of the widget's children
+   */
+  childrenRect: QRect;
+
+  /**
+   * the combined region occupied by the widget's children
+   */
+  childrenRegion: QRegion;
+
+  /**
+   * how the widget shows a context menu
+   */
+  contextMenuPolicy: Qt.ContextMenuPolicy;
+
+  /**
+   * the cursor shape for this widget
+   */
+  cursor: QCursor;
+
+  //data: QWidgetData;
+
+  /**
+   * whether the widget is enabled
+   */
+  enabled: boolean;
+
+  /**
+   * whether this widget (or its focus proxy) has the keyboard input focus
+   */
+  focus: boolean;
+
+  /**
+   * the way the widget accepts keyboard focus
+   */
+  focusPolicy: Qt.FocusPolicy;
+
+  /**
+   * the font currently set for the widget
+   */
+  font: QFont;
+
+  /**
+   * geometry of the widget relative to its parent including any window frame
+   */
+  frameGeometry: QRect;
+
+  /**
+   * the size of the widget including any window frame
+   */
+  frameSize: QSize;
+
+  /**
+   * whether the widget is shown in full screen mode
+   */
+  fullScreen: boolean;
+
+  /**
+   * the geometry of the widget relative to its parent and excluding the window frame
+   */
+  geometry: QRect;
+
+  /**
+   * the height of the widget excluding any window frame
+   */
+  height: int;
+
+  /**
+   * What input method specific hints the widget has.
+   */
+  inputMethodHints: Qt.InputMethodHints;
+
+  /**
+   * whether this widget's window is the active window
+   */
+  isActiveWindow: boolean;
+
+  /**
+   * the layout direction for this widget
+   */
+  layoutDirection: Qt.LayoutDirection;
+
+  /**
+   * the widget's locale
+   */
+  locale: QLocale;
+
+  /**
+   * whether this widget is maximized
+   */
+  maximized: boolean;
+
+  /**
+   * the widget's maximum height in pixels
+   */
+  maximumHeight: int;
+
+  /**
+   * the widget's maximum size in pixels
+   */
+  maximumSize: QSize;
+
+  /**
+   * the widget's maximum width in pixels
+   */
+  maximumWidth: int;
+
+  /**
+   * whether this widget is minimized (iconified)
+   */
+  minimized: boolean;
+
+  /**
+   * the widget's minimum height in pixels
+   */
+  minimumHeight: int;
+
+  /**
+   * the widget's minimum size
+   */
+  minimumSize: QSize;
+
+  /**
+   * the recommended minimum size for the widget
+   */
+  minimumSizeHint: QSize;
+
+  /**
+   * the widget's minimum width in pixels
+   */
+  minimumWidth: int;
+
+  /**
+   * whether the widget is a modal widget
+   */
+  modal: boolean;
+
+  /**
+   * whether mouse tracking is enabled for the widget
+   */
+  mouseTracking: boolean;
+
+  /**
+   * the geometry of the widget as it will appear when shown as a normal (not maximized or full screen) top-level widget
+   */
+  normalGeometry: QRect;
+
+  /**
+   * the widget's palette
+   */
+  palette: QPalette;
+
+  /**
+   * the position of the widget within its parent widget
+   */
+  pos: QPoint;
+
+  /**
+   * the internal geometry of the widget excluding any window frame
+   */
+  rect: QRect;
+
+  /**
+   * the size of the widget excluding any window frame
+   */
+  size: QSize;
+
+  /**
+   * the recommended size for the widget
+   */
+  sizeHint: QSize;
+
+  /**
+   * the size increment of the widget
+   */
+  sizeIncrement: QSize;
+
+  /**
+   * the default layout behavior of the widget
+   */
+  sizePolicy: QSizePolicy;
+
+  /**
+   * the widget's status tip
+   */
+  statusTip: QString;
+
+  /**
+   * the widget's style sheet
+   */
+  styleSheet: QString;
+
+  /**
+   * the widget's tooltip
+   */
+  toolTip: QString;
+
+  /**
+   * whether updates are enabled
+   */
+  updatesEnabled: boolean;
+
+  /**
+   * whether the widget is visible
+   */
+  visible: boolean;
+
+  /**
+   * the widget's What's This help text.
+   */
+  whatsThis: QString;
+
+  /**
+   * the width of the widget excluding any window frame
+   */
+  width: int;
+
+  /**
+   * the file path associated with a widget
+   */
+  windowFilePath: QString;
+
+  /**
+   * the widget's icon
+   */
+  windowIcon: QIcon;
+
+  /**
+   * the widget's icon text
+   */
+  windowIconText: QString;
+
+  /**
+   * which windows are blocked by the modal widget
+   */
+  windowModality: Qt.WindowModality;
+
+  /**
+   * whether the document shown in the window has unsaved changes
+   */
+  windowModified: boolean;
+
+  /**
+   * The level of opacity for the window.
+   */
+  windowOpacity: double;
+
+  /**
+   * the window title (caption)
+   */
+  windowTitle: QString;
+
+  /**
+   * the x coordinate of the widget relative to its parent including any window frame
+   */
+  x: int;
+
+  /**
+   * the y coordinate of the widget relative to its parent and including any window frame
+   */
+  y: int;
 }

@@ -272,7 +272,7 @@ declare class QTextEdit extends QFrame {
 
   public lineWrapColumnOrWidth(): int;
 
-  public lineWrapMode(): LineWrapMode;
+  public lineWrapMode(): QTextEdit.LineWrapMode;
 
   /**
    * Loads the resource specified by the given type and name.
@@ -326,7 +326,7 @@ declare class QTextEdit extends QFrame {
 
   public setLineWrapColumnOrWidth(w: int): void;
 
-  public setLineWrapMode(mode: LineWrapMode): void;
+  public setLineWrapMode(mode: QTextEdit.LineWrapMode): void;
 
   public setOverwriteMode(overwrite: boolean): void;
 

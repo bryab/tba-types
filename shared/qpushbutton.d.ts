@@ -4,8 +4,6 @@ declare class QPushButton extends QAbstractButton {
    */
   public showMenu(): void;
 
-  public autoDefault(): boolean;
-
   public isDefault(): boolean;
 
   public isFlat(): boolean;
@@ -14,11 +12,6 @@ declare class QPushButton extends QAbstractButton {
    * Returns the button's associated popup menu or 0 if no popup menu has been set.
    */
   public menu(): QMenu;
-
-  /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
 
   /**
    * Constructs a push button with no text and a parent.
@@ -47,7 +40,17 @@ declare class QPushButton extends QAbstractButton {
   public setMenu(menu: QMenu): void;
 
   /**
-   * Reimplemented Function
+   * whether the push button is an auto default button
    */
-  public sizeHint(): QSize;
+  autoDefault: boolean;
+
+  /**
+   * whether the push button is the default button
+   */
+  default: boolean;
+
+  /**
+   * whether the button border is raised
+   */
+  flat: boolean;
 }

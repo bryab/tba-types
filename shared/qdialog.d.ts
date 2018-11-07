@@ -61,11 +61,6 @@ declare class QDialog extends QWidget {
   public isSizeGripEnabled(): boolean;
 
   /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
-
-  /**
    * Returns the dialog's extension orientation.
    */
   public orientation(): Qt.Orientation;
@@ -73,7 +68,7 @@ declare class QDialog extends QWidget {
   /**
    * Constructs a dialog with parent parent.
    */
-  constructor(parent?: QWidget, f?: Qt.WindowFlags);
+  constructor(parent: QWidget, f: Qt.WindowFlags);
 
   /**
    * In general returns the modal dialog's result code, Accepted or Rejected.
@@ -100,12 +95,12 @@ declare class QDialog extends QWidget {
   public setSizeGripEnabled(unknown_1: boolean): void;
 
   /**
-   * Reimplemented Function
+   * whether show() should pop up the dialog as modal or modeless
    */
-  public setVisible(visible: boolean): void;
+  modal: boolean;
 
   /**
-   * Reimplemented Function
+   * whether the size grip is enabled
    */
-  public sizeHint(): QSize;
+  sizeGripEnabled: boolean;
 }

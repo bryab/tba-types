@@ -80,8 +80,6 @@ declare class QObject {
    */
   public moveToThread(thread: QThread): void;
 
-  public objectName(): QString;
-
   /**
    * Returns a pointer to the parent object.
    */
@@ -132,4 +130,9 @@ declare class QObject {
   public thread(): QThread;
 
   public userData(id: uint): QObjectUserData;
+
+  /**
+   * the name of this object
+   */
+  objectName: QString;
 }

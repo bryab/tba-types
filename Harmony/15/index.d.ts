@@ -2580,6 +2580,7 @@ declare namespace view {
  */
 declare class WidgetBase extends MO_SignalEmitter {
   constructor(config: object);
+
   public data(index?: int): Attribute;
 
   /**

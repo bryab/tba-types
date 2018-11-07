@@ -68,6 +68,8 @@ declare class QVariant {
 
   public data(): void;
 
+  public data(): void;
+
   public data_ptr(): DataPtr;
 
   public detach(): void;
@@ -93,6 +95,193 @@ declare class QVariant {
    * Constructs an invalid variant.
    */
   constructor();
+
+  /**
+   * Constructs a null variant of type type.
+   */
+  constructor(type: QVariant.Type);
+
+  /**
+   * Constructs variant of type typeOrUserType, and initializes with copy if copy is not 0.
+   */
+  constructor(typeOrUserType: int, copy: void);
+
+  constructor(typeOrUserType: int, copy: void, flags: uint);
+
+  /**
+   * Constructs a copy of the variant, p, passed as the argument to this constructor.
+   */
+  constructor(other: QVariant);
+
+  /**
+   * Reads the variant from the data stream, s.
+   */
+  constructor(s: QDataStream);
+
+  /**
+   * Constructs a new variant with an integer value, val.
+   */
+  constructor(i: int);
+
+  /**
+   * Constructs a new variant with an unsigned integer value, val.
+   */
+  constructor(ui: uint);
+
+  /**
+   * Constructs a new variant with a long long integer value, val.
+   */
+  constructor(ll: qlonglong);
+
+  /**
+   * Constructs a new variant with an unsigned long long integer value, val.
+   */
+  constructor(ull: qulonglong);
+
+  /**
+   * Constructs a new variant with a boolean value, val.
+   */
+  constructor(b: boolean);
+
+  /**
+   * Constructs a new variant with a floating point value, val.
+   */
+  constructor(d: double);
+
+  /**
+   * Constructs a new variant with a floating point value, val.
+   */
+  constructor(f: float);
+
+  /**
+   * Constructs a new variant with a string value of val.
+   */
+  constructor(str: char);
+
+  /**
+   * Constructs a new variant with a bytearray value, val.
+   */
+  constructor(bytearray: QByteArray);
+
+  /**
+   * Constructs a new variant with a bitarray value, val.
+   */
+  constructor(bitarray: QBitArray);
+
+  /**
+   * Constructs a new variant with a string value, val.
+   */
+  constructor(string: QString);
+
+  /**
+   * Constructs a new variant with a string value, val.
+   */
+  constructor(string: QLatin1String);
+
+  /**
+   * Constructs a new variant with a string list value, val.
+   */
+  constructor(stringlist: QStringList);
+
+  /**
+   * Constructs a new variant with a char value, c.
+   */
+  constructor(qchar: QChar);
+
+  /**
+   * Constructs a new variant with a date value, val.
+   */
+  constructor(date: QDate);
+
+  /**
+   * Constructs a new variant with a time value, val.
+   */
+  constructor(time: QTime);
+
+  /**
+   * Constructs a new variant with a date/time value, val.
+   */
+  constructor(datetime: QDateTime);
+
+  /**
+   * Constructs a new variant with a list value, val.
+   */
+  constructor(list: QList<QVariant>);
+
+  /**
+   * Constructs a new variant with a map of QVariants, val.
+   */
+  constructor(map: QMap<QString, QVariant>);
+
+  /**
+   * Constructs a new variant with a hash of QVariants, val.
+   */
+  constructor(hash: QHash<QString, QVariant>);
+
+  /**
+   * Constructs a new variant with a size value of val.
+   */
+  constructor(size: QSize);
+
+  /**
+   * Constructs a new variant with a size value of val.
+   */
+  constructor(size: QSizeF);
+
+  /**
+   * Constructs a new variant with a point value of val.
+   */
+  constructor(pt: QPoint);
+
+  /**
+   * Constructs a new variant with a point value of val.
+   */
+  constructor(pt: QPointF);
+
+  /**
+   * Constructs a new variant with a line value of val.
+   */
+  constructor(line: QLine);
+
+  /**
+   * Constructs a new variant with a line value of val.
+   */
+  constructor(line: QLineF);
+
+  /**
+   * Constructs a new variant with a rect value of val.
+   */
+  constructor(rect: QRect);
+
+  /**
+   * Constructs a new variant with a rect value of val.
+   */
+  constructor(rect: QRectF);
+
+  /**
+   * Constructs a new variant with a url value of val.
+   */
+  constructor(url: QUrl);
+
+  /**
+   * Constructs a new variant with a locale value, l.
+   */
+  constructor(locale: QLocale);
+
+  /**
+   * Constructs a new variant with the regexp value regExp.
+   */
+  constructor(regExp: QRegExp);
+
+  /**
+   * Constructs a new variant with an easing curve value, val.
+   */
+  constructor(easing: QEasingCurve);
+
+  /**
+   * Constructs a new variant of type QVariant::Color and initializes it with color.
+   */
+  constructor(color: Qt.GlobalColor);
 
   /**
    * Internal function for saving a variant to the stream s.
@@ -273,4 +462,6 @@ declare class QVariant {
    * Returns the storage type of the value stored in the variant.
    */
   public userType(): int;
+
+  DataPtr: Private;
 }

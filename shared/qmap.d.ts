@@ -5,6 +5,11 @@ declare class QMap<Key, T> {
   public begin(): iterator;
 
   /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+   */
+  public begin(): _iterator;
+
+  /**
    * Removes all items from the map.
    */
   public clear(): void;
@@ -35,6 +40,11 @@ declare class QMap<Key, T> {
   public count(key: Key): int;
 
   /**
+   * Same as size().
+   */
+  public count(): int;
+
+  /**
    * Detaches this map from any other maps with which it may share data.
    */
   public detach(): void;
@@ -50,6 +60,11 @@ declare class QMap<Key, T> {
   public end(): iterator;
 
   /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+   */
+  public end(): _iterator;
+
+  /**
    * Removes the (key, value) pair pointed to by the iterator pos from the map, and returns an iterator to the next item in the map.
    */
   public erase(it: iterator): iterator;
@@ -58,6 +73,11 @@ declare class QMap<Key, T> {
    * Returns an iterator pointing to the item with key key in the map.
    */
   public find(key: Key): iterator;
+
+  /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+   */
+  public find(key: Key): _iterator;
 
   /**
    * Inserts a new item with the key key and a value of value.
@@ -87,9 +107,19 @@ declare class QMap<Key, T> {
   public key(value: T): Key;
 
   /**
+   * Returns the first key with value value, or defaultKey if the map contains no item with value value.
+   */
+  public key(value: T, defaultKey: Key): Key;
+
+  /**
    * Returns a list containing all the keys in the map in ascending order.
    */
   public keys(): QList<Key>;
+
+  /**
+   * Returns a list containing all the keys associated with value value in ascending order.
+   */
+  public keys(value: T): QList<Key>;
 
   /**
    * Returns an iterator pointing to the first item with key key in the map.
@@ -97,9 +127,19 @@ declare class QMap<Key, T> {
   public lowerBound(key: Key): iterator;
 
   /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+   */
+  public lowerBound(key: Key): _iterator;
+
+  /**
    * Constructs an empty map.
    */
   constructor();
+
+  /**
+   * Constructs a copy of other.
+   */
+  constructor(other: QMap<Key, T>);
 
   /**
    * Removes all the items that have the key key from the map.
@@ -146,14 +186,29 @@ declare class QMap<Key, T> {
   public upperBound(key: Key): iterator;
 
   /**
+   * This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+   */
+  public upperBound(key: Key): _iterator;
+
+  /**
    * Returns the value associated with the key key.
    */
   public value(key: Key): T;
 
   /**
+   * If the map contains no item with key key, the function returns defaultValue.
+   */
+  public value(key: Key, defaultValue: T): T;
+
+  /**
    * Returns a list containing all the values in the map, in ascending order of their keys.
    */
   public values(): QList<T>;
+
+  /**
+   * Returns a list containing all the values associated with key key, from the most recently inserted to the least recently inserted one.
+   */
+  public values(key: Key): QList<T>;
 
   /**
    * Qt-style synonym for QMap::const_iterator.

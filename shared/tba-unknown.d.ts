@@ -8,3 +8,5 @@ declare class MO_SignalEmitter extends QWidget {}
 declare class DD_DragObject {}
 declare class SCR_AbstractInterface {}
 declare class UI_DialogController {}
+declare type QWidgetItemData = any;
+declare type QAbstractUndoItem = any;

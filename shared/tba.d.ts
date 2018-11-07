@@ -143,6 +143,22 @@ declare class File {
   size: int;
 }
 
+declare namespace Dir {
+  const enum FilterSpec {
+    NONE = 0,
+    DIRS = 1,
+    FILES = 2,
+    ALL = 3
+  }
+
+  const enum SortSpec {
+    ALPHA = 0,
+    NATURAL = 1,
+    UNKNOWN2 = 2,
+    UNKNOWN3 = 3
+  }
+}
+
 /**
  * The Dir JavaScript class. Interface to operating system Dir operations, e.g. mkdir, rmdir, rename, etc
  */
@@ -170,7 +186,7 @@ declare class Dir extends QObject {
   /**
    * Returns a list of the names of all the files and directories in the directory, ordered according to the name and attribute filters.
    */
-  public entryList(filter: string, filterSpec?: int, sortSpec?: int): StringList;
+  public entryList(filter: string, filterSpec?: Dir.FilterSpec, sortSpec?: Dir.SortSpec): StringList;
 
   /**
    * Create a directory with given name.

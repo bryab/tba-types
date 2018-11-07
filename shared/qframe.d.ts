@@ -27,36 +27,19 @@ declare namespace QFrame {
 }
 
 declare class QFrame extends QWidget {
-  public frameRect(): QRect;
-
-  public frameShadow(): Shadow;
-
-  public frameShape(): Shape;
-
   /**
    * Returns the frame style.
    */
   public frameStyle(): int;
-
-  public frameWidth(): int;
-
-  public lineWidth(): int;
-
-  public midLineWidth(): int;
 
   /**
    * Constructs a frame widget with frame style NoFrame and a 1-pixel frame width.
    */
   constructor(parent: QWidget, f: Qt.WindowFlags);
 
-  /**
-   * em>Reimplemented Function
-   */
-  public setFrameRect(unknown_1: QRect): void;
+  public setFrameShadow(unknown_1: QFrame.Shadow): void;
 
-  public setFrameShadow(unknown_1: Shadow): void;
-
-  public setFrameShape(unknown_1: Shape): void;
+  public setFrameShape(unknown_1: QFrame.Shape): void;
 
   /**
    * Sets the frame style to style.
@@ -68,7 +51,32 @@ declare class QFrame extends QWidget {
   public setMidLineWidth(unknown_1: int): void;
 
   /**
-   * em>Reimplemented Function
+   * the frame's rectangle
    */
-  public sizeHint(): QSize;
+  frameRect: QRect;
+
+  /**
+   * the frame shadow value from the frame style
+   */
+  frameShadow: Shadow;
+
+  /**
+   * the frame shape value from the frame style
+   */
+  frameShape: Shape;
+
+  /**
+   * the width of the frame that is drawn.
+   */
+  frameWidth: int;
+
+  /**
+   * the line width
+   */
+  lineWidth: int;
+
+  /**
+   * the width of the mid-line
+   */
+  midLineWidth: int;
 }

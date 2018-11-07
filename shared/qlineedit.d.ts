@@ -77,8 +77,6 @@ declare class QLineEdit extends QWidget {
    */
   textEdited: QSignal<(unknown_1: QString) => void>;
 
-  public alignment(): Qt.Alignment;
-
   /**
    * If no text is selected, deletes the character to the left of the text cursor and moves the cursor one position to the left.
    */
@@ -103,10 +101,6 @@ declare class QLineEdit extends QWidget {
    * Moves the cursor forward steps characters.
    */
   public cursorForward(mark: boolean, steps: int): void;
-
-  public cursorMoveStyle(): Qt.CursorMoveStyle;
-
-  public cursorPosition(): int;
 
   /**
    * Returns the cursor position under the point pos.
@@ -133,21 +127,10 @@ declare class QLineEdit extends QWidget {
    */
   public deselect(): void;
 
-  public displayText(): QString;
-
-  public dragEnabled(): boolean;
-
-  public echoMode(): EchoMode;
-
   /**
    * Moves the text cursor to the end of the line unless it is already there.
    */
   public end(mark: boolean): void;
-
-  /**
-   * Reimplemented Function
-   */
-  public event(unknown: QEvent): boolean;
 
   /**
    * Returns the widget's text margins for left, top, right, and bottom.
@@ -158,19 +141,10 @@ declare class QLineEdit extends QWidget {
 
   public hasFrame(): boolean;
 
-  public hasSelectedText(): boolean;
-
   /**
    * Moves the text cursor to the beginning of the line unless it is already there.
    */
   public home(mark: boolean): void;
-
-  public inputMask(): QString;
-
-  /**
-   * em>Reimplemented Function
-   */
-  public inputMethodQuery(unknown_1: Qt.InputMethodQuery): QVariant;
 
   /**
    * Deletes any selected text, inserts newText, and validates the result.
@@ -185,15 +159,6 @@ declare class QLineEdit extends QWidget {
 
   public isUndoAvailable(): boolean;
 
-  public maxLength(): int;
-
-  /**
-   * Returns a minimum size for the line edit.
-   */
-  public minimumSizeHint(): QSize;
-
-  public placeholderText(): QString;
-
   /**
    * Constructs a line edit with no text.
    */
@@ -203,8 +168,6 @@ declare class QLineEdit extends QWidget {
    * Constructs a line edit containing the text contents.
    */
   constructor(unknown_1: QString, parent: QWidget);
-
-  public selectedText(): QString;
 
   /**
    * selectionStart() returns the index of the first selected character in the line edit or -1 if no text is selected.
@@ -227,7 +190,7 @@ declare class QLineEdit extends QWidget {
 
   public setDragEnabled(b: boolean): void;
 
-  public setEchoMode(unknown_1: EchoMode): void;
+  public setEchoMode(unknown_1: QLineEdit.EchoMode): void;
 
   public setFrame(unknown_1: boolean): void;
 
@@ -262,13 +225,6 @@ declare class QLineEdit extends QWidget {
   public setValidator(unknown: QValidator): void;
 
   /**
-   * Returns a recommended size for the widget.
-   */
-  public sizeHint(): QSize;
-
-  public text: QString;
-
-  /**
    * Returns the widget's text margins.
    */
   public textMargins(): QMargins;
@@ -277,4 +233,94 @@ declare class QLineEdit extends QWidget {
    * Returns a pointer to the current input validator, or 0 if no validator has been set.
    */
   public validator(): QValidator;
+
+  /**
+   * whether the input satisfies the inputMask and the validator.
+   */
+  acceptableInput: boolean;
+
+  /**
+   * the alignment of the line edit
+   */
+  alignment: Qt.Alignment;
+
+  /**
+   * the movement style of cursor in this line edit
+   */
+  cursorMoveStyle: Qt.CursorMoveStyle;
+
+  /**
+   * the current cursor position for this line edit
+   */
+  cursorPosition: int;
+
+  /**
+   * the displayed text
+   */
+  displayText: QString;
+
+  /**
+   * whether the lineedit starts a drag if the user presses and moves the mouse on some selected text
+   */
+  dragEnabled: boolean;
+
+  /**
+   * the line edit's echo mode
+   */
+  echoMode: EchoMode;
+
+  /**
+   * whether the line edit draws itself with a frame
+   */
+  frame: boolean;
+
+  /**
+   * whether there is any text selected
+   */
+  hasSelectedText: boolean;
+
+  /**
+   * The validation input mask.
+   */
+  inputMask: QString;
+
+  /**
+   * the maximum permitted length of the text
+   */
+  maxLength: int;
+
+  /**
+   * whether the line edit's contents has been modified by the user
+   */
+  modified: boolean;
+
+  /**
+   * the line edit's placeholder text
+   */
+  placeholderText: QString;
+
+  /**
+   * whether the line edit is read only.
+   */
+  readOnly: boolean;
+
+  /**
+   * whether redo is available
+   */
+  redoAvailable: boolean;
+
+  /**
+   * the selected text
+   */
+  selectedText: QString;
+
+  /**
+   * the line edit's text
+   */
+  text: QString;
+
+  /**
+   * whether undo is available
+   */
+  undoAvailable: boolean;
 }

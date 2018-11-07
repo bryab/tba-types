@@ -38,22 +38,10 @@ declare class QAbstractButton extends QWidget {
    */
   toggled: QSignal<(checked: boolean) => void>;
 
-  public autoExclusive(): boolean;
-
-  public autoRepeat(): boolean;
-
-  public autoRepeatDelay(): int;
-
-  public autoRepeatInterval(): int;
-
   /**
    * Returns the group that this button belongs to.
    */
   public group(): QButtonGroup;
-
-  public icon(): QIcon;
-
-  public iconSize(): QSize;
 
   public isCheckable(): boolean;
 
@@ -84,9 +72,25 @@ declare class QAbstractButton extends QWidget {
 
   public setText(text: QString): void;
 
-  public shortcut(): QKeySequence;
+  /**
+   * whether auto-exclusivity is enabled
+   */
+  autoExclusive: boolean;
 
-  public text(): QString;
+  /**
+   * whether autoRepeat is enabled
+   */
+  autoRepeat: boolean;
+
+  /**
+   * the initial delay of auto-repetition
+   */
+  autoRepeatDelay: int;
+
+  /**
+   * the interval of auto-repetition
+   */
+  autoRepeatInterval: int;
 
   /**
    * whether the button is checkable
@@ -102,4 +106,24 @@ declare class QAbstractButton extends QWidget {
    * whether the button is pressed down
    */
   down: boolean;
+
+  /**
+   * the icon shown on the button
+   */
+  icon: QIcon;
+
+  /**
+   * the icon size used for this button.
+   */
+  iconSize: QSize;
+
+  /**
+   * the mnemonic associated with the button
+   */
+  shortcut: QKeySequence;
+
+  /**
+   * the text shown on the button
+   */
+  text: QString;
 }

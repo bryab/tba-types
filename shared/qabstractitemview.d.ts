@@ -125,10 +125,6 @@ declare class QAbstractItemView extends QFrame {
    */
   viewportEntered: QSignal<() => void>;
 
-  public alternatingRowColors(): boolean;
-
-  public autoScrollMargin(): int;
-
   /**
    * Closes the persistent editor for the item at the given index.
    */
@@ -139,21 +135,7 @@ declare class QAbstractItemView extends QFrame {
    */
   public currentIndex(): QModelIndex;
 
-  public defaultDropAction(): Qt.DropAction;
-
-  public dragDropMode(): QAbstractItemView.DragDropMode;
-
-  public dragDropOverwriteMode(): boolean;
-
-  public dragEnabled(): boolean;
-
-  public editTriggers(): QAbstractItemView.EditTrigger;
-
   public hasAutoScroll(): boolean;
-
-  public horizontalScrollMode(): QAbstractItemView.ScrollMode;
-
-  public iconSize(): QSize;
 
   /**
    * Returns the model index of the item at the viewport coordinates point.
@@ -164,11 +146,6 @@ declare class QAbstractItemView extends QFrame {
    * Returns the widget for the item at the given index.
    */
   public indexWidget(index: QModelIndex): QWidget;
-
-  /**
-   * Reimplemented Function
-   */
-  public inputMethodQuery(query: Qt.InputMethodQuery): QVariant;
 
   /**
    * Returns the item delegate used by this view and model.
@@ -220,10 +197,6 @@ declare class QAbstractItemView extends QFrame {
    */
   public scrollTo(index: QModelIndex, hint: QAbstractItemView.ScrollHint): void;
 
-  public selectionBehavior(): QAbstractItemView.SelectionBehavior;
-
-  public selectionMode(): QAbstractItemView.SelectionMode;
-
   /**
    * Returns the current selection model.
    */
@@ -245,7 +218,7 @@ declare class QAbstractItemView extends QFrame {
 
   public setDropIndicatorShown(enable: boolean): void;
 
-  public setEditTriggers(triggers: QAbstractItemView.EditTrigger): void;
+  public setEditTriggers(triggers: EditTriggers): void;
 
   public setHorizontalScrollMode(mode: QAbstractItemView.ScrollMode): void;
 
@@ -291,8 +264,6 @@ declare class QAbstractItemView extends QFrame {
 
   public setVerticalScrollMode(mode: QAbstractItemView.ScrollMode): void;
 
-  public showDropIndicator(): boolean;
-
   /**
    * Returns the width size hint for the specified column or -1 if there is no model.
    */
@@ -308,14 +279,88 @@ declare class QAbstractItemView extends QFrame {
    */
   public sizeHintForRow(row: int): int;
 
-  public tabKeyNavigation(): boolean;
-
-  public textElideMode(): Qt.TextElideMode;
-
-  public verticalScrollMode(): QAbstractItemView.ScrollMode;
-
   /**
    * Returns the rectangle on the viewport occupied by the item at index.
    */
   public visualRect(index: QModelIndex): QRect;
+
+  /**
+   * whether to draw the background using alternating colors
+   */
+  alternatingRowColors: boolean;
+
+  /**
+   * whether autoscrolling in drag move events is enabled
+   */
+  autoScroll: boolean;
+
+  /**
+   * the size of the area when auto scrolling is triggered
+   */
+  autoScrollMargin: int;
+
+  /**
+   * the drop action that will be used by default in QAbstractItemView::drag()
+   */
+  defaultDropAction: Qt.DropAction;
+
+  /**
+   * the drag and drop event the view will act upon
+   */
+  dragDropMode: DragDropMode;
+
+  /**
+   * the view's drag and drop behavior
+   */
+  dragDropOverwriteMode: boolean;
+
+  /**
+   * whether the view supports dragging of its own items
+   */
+  dragEnabled: boolean;
+
+  /**
+   * which actions will initiate item editing
+   */
+  editTriggers: EditTriggers;
+
+  /**
+   * how the view scrolls its contents in the horizontal direction
+   */
+  horizontalScrollMode: ScrollMode;
+
+  /**
+   * the size of items' icons
+   */
+  iconSize: QSize;
+
+  /**
+   * which selection behavior the view uses
+   */
+  selectionBehavior: SelectionBehavior;
+
+  /**
+   * which selection mode the view operates in
+   */
+  selectionMode: SelectionMode;
+
+  /**
+   * whether the drop indicator is shown when dragging items and dropping.
+   */
+  showDropIndicator: boolean;
+
+  /**
+   * whether item navigation with tab and backtab is enabled.
+   */
+  tabKeyNavigation: boolean;
+
+  /**
+   * the position of the "..." in elided text.
+   */
+  textElideMode: Qt.TextElideMode;
+
+  /**
+   * how the view scrolls its contents in the vertical direction
+   */
+  verticalScrollMode: ScrollMode;
 }

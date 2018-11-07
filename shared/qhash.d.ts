@@ -1,4 +1,4 @@
-declare class QHash<Key, T = Key> {
+declare class QHash<Key, T> {
   /**
    * Returns an STL-style iterator pointing to the first item in the hash.
    */
@@ -197,4 +197,34 @@ declare class QHash<Key, T = Key> {
    * Returns a list of all the values associated with the key, from the most recently inserted to the least recently inserted.
    */
   public values(key: Key): QList<T>;
+
+  /**
+   * Qt-style synonym for QHash::const_iterator.
+   */
+  ConstIterator: _iterator;
+
+  /**
+   * Typedef for ptrdiff_t.
+   */
+  difference_type: qptrdiff;
+
+  /**
+   * Qt-style synonym for QHash::iterator.
+   */
+  Iterator: iterator;
+
+  /**
+   * Typedef for Key.
+   */
+  key_type: Key;
+
+  /**
+   * Typedef for T.
+   */
+  mapped_type: T;
+
+  /**
+   * Typedef for int.
+   */
+  size_type: int;
 }

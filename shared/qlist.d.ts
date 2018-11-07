@@ -163,6 +163,7 @@ declare class QList<T> {
   /**
    * This function is identical to count().
    */
+  //public length(): int;
   public length: int;
 
   /**
@@ -306,4 +307,49 @@ declare class QList<T> {
    * If the index i is out of bounds, the function returns defaultValue.
    */
   public value(i: int, defaultValue: T): T;
+
+  /**
+   * Typedef for const T *.
+   */
+  const_pointer: value_type;
+
+  /**
+   * Typedef for const T &.
+   */
+  const_reference: value_type;
+
+  /**
+   * Qt-style synonym for QList::const_iterator.
+   */
+  ConstIterator: _iterator;
+
+  /**
+   * Typedef for ptrdiff_t.
+   */
+  difference_type: qptrdiff;
+
+  /**
+   * Qt-style synonym for QList::iterator.
+   */
+  Iterator: iterator;
+
+  /**
+   * Typedef for T *.
+   */
+  pointer: value_type;
+
+  /**
+   * Typedef for T &.
+   */
+  reference: value_type;
+
+  /**
+   * Typedef for int.
+   */
+  size_type: int;
+
+  /**
+   * Typedef for T.
+   */
+  value_type: T;
 }

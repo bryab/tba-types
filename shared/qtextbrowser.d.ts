@@ -42,6 +42,11 @@ declare class QTextBrowser extends QTextEdit {
   highlighted: QSignal<(unknown_1: QUrl) => void>;
 
   /**
+   * Convenience signal that allows connecting to a slot that takes just a QString, like for example QStatusBar's message().
+   */
+  //highlighted: QSignal<(unknown_1: QString) => void>;
+
+  /**
    * This signal is emitted when the history changes.
    */
   historyChanged: QSignal<() => void>;
@@ -91,16 +96,10 @@ declare class QTextBrowser extends QTextEdit {
    */
   public loadResource(type: int, name: QUrl): QVariant;
 
-  public openExternalLinks(): boolean;
-
-  public openLinks(): boolean;
-
   /**
    * Constructs an empty QTextBrowser with parent parent.
    */
   constructor(parent: QWidget);
-
-  public searchPaths(): QStringList;
 
   public setOpenExternalLinks(open: boolean): void;
 
@@ -108,5 +107,23 @@ declare class QTextBrowser extends QTextEdit {
 
   public setSearchPaths(paths: QStringList): void;
 
-  public source(): QUrl;
+  /**
+   * Specifies whether QTextBrowser should automatically open links to external sources using QDesktopServices::openUrl() instead of emitting the anchorClicked signal.
+   */
+  openExternalLinks: boolean;
+
+  /**
+   * This property specifies whether QTextBrowser should automatically open links the user tries to activate by mouse or keyboard.
+   */
+  openLinks: boolean;
+
+  /**
+   * the search paths used by the text browser to find supporting content
+   */
+  searchPaths: QStringList;
+
+  /**
+   * the name of the displayed document.
+   */
+  source: QUrl;
 }

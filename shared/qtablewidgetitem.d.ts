@@ -86,7 +86,7 @@ declare class QTableWidgetItem {
   /**
    * Reads the item from stream in.
    */
-  public read(in_: QDataStream): void;
+  public read(_in: QDataStream): void;
 
   /**
    * Returns the row of the item in the table.
@@ -222,4 +222,14 @@ declare class QTableWidgetItem {
    * Writes the item to stream out.
    */
   public write(out: QDataStream): void;
+
+  d: QTableWidgetItemPrivate;
+
+  itemFlags: Qt.ItemFlags;
+
+  rtti: int;
+
+  values: QVector<QWidgetItemData>;
+
+  view: QTableWidget;
 }

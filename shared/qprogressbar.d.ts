@@ -43,11 +43,6 @@ declare class QProgressBar extends QWidget {
 
   public minimum(): int;
 
-  /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
-
   public orientation(): Qt.Orientation;
 
   /**
@@ -64,11 +59,6 @@ declare class QProgressBar extends QWidget {
   public setTextDirection(textDirection: QProgressBar.Direction): void;
 
   public setTextVisible(visible: boolean): void;
-
-  /**
-   * Reimplemented Function
-   */
-  public sizeHint(): QSize;
 
   public text(): QString;
 

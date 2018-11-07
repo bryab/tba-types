@@ -11,18 +11,11 @@ declare class QGroupBox extends QWidget {
    */
   toggled: QSignal<(unknown_1: boolean) => void>;
 
-  public alignment(): Qt.Alignment;
-
   public isCheckable(): boolean;
 
   public isChecked(): boolean;
 
   public isFlat(): boolean;
-
-  /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
 
   /**
    * Constructs a group box widget with the given parent but with no title.
@@ -42,5 +35,28 @@ declare class QGroupBox extends QWidget {
 
   public setTitle(title: QString): void;
 
-  public title(): QString;
+  /**
+   * the alignment of the group box title.
+   */
+  alignment: Qt.Alignment;
+
+  /**
+   * whether the group box has a checkbox in its title
+   */
+  checkable: boolean;
+
+  /**
+   * whether the group box is checked
+   */
+  checked: boolean;
+
+  /**
+   * whether the group box is painted flat or has a frame
+   */
+  flat: boolean;
+
+  /**
+   * the group box title text
+   */
+  title: QString;
 }

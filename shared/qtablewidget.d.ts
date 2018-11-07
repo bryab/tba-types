@@ -32,7 +32,7 @@ declare class QTableWidget extends QAbstractItemView {
   /**
    * Scrolls the view if necessary to ensure that the item is visible.
    */
-  public scrollToItem(item: QTableWidgetItem, hint: any): void;
+  public scrollToItem(item: QTableWidgetItem, hint: QAbstractItemView.ScrollHint): void;
 
   cellActivated: QSignal<(row: int, column: int) => void>;
 
@@ -121,8 +121,6 @@ declare class QTableWidget extends QAbstractItemView {
    */
   public column(item: QTableWidgetItem): int;
 
-  public columnCount(): int;
-
   /**
    * Returns the column of the current item.
    */
@@ -205,8 +203,6 @@ declare class QTableWidget extends QAbstractItemView {
    */
   public row(item: QTableWidgetItem): int;
 
-  public rowCount(): int;
-
   /**
    * Returns a list of all selected items.
    */
@@ -235,7 +231,7 @@ declare class QTableWidget extends QAbstractItemView {
   /**
    * Sets the current cell to be the cell at position (row, column), using the given command.
    */
-  public setCurrentCell(row: int, column: int, command: any): void;
+  public setCurrentCell(row: int, column: int, command: QItemSelectionModel.SelectionFlags): void;
 
   /**
    * Sets the current item to item.
@@ -245,7 +241,7 @@ declare class QTableWidget extends QAbstractItemView {
   /**
    * Sets the current item to be item, using the given command.
    */
-  public setCurrentItem(item: QTableWidgetItem, command: any): void;
+  public setCurrentItem(item: QTableWidgetItem, command: QItemSelectionModel.SelectionFlags): void;
 
   /**
    * Sets the horizontal header item for column column to item.
@@ -333,4 +329,14 @@ declare class QTableWidget extends QAbstractItemView {
    * Returns the visual row of the given logicalRow.
    */
   public visualRow(logicalRow: int): int;
+
+  /**
+   * the number of columns in the table
+   */
+  columnCount: int;
+
+  /**
+   * the number of rows in the table
+   */
+  rowCount: int;
 }

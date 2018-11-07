@@ -38,8 +38,6 @@ declare class QLabel extends QFrame {
    */
   linkHovered: QSignal<(link: QString) => void>;
 
-  public alignment(): Qt.Alignment;
-
   /**
    * Returns this label's buddy, or 0 if no buddy is currently set.
    */
@@ -47,35 +45,15 @@ declare class QLabel extends QFrame {
 
   public hasScaledContents(): boolean;
 
-  public hasSelectedText(): boolean;
-
-  /**
-   * Reimplemented Function
-   */
-  public heightForWidth(unknown_1: int): int;
-
-  public indent(): int;
-
-  public margin(): int;
-
-  /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
-
   /**
    * Returns a pointer to the label's movie, or 0 if no movie has been set.
    */
   public movie(): QMovie;
 
-  public openExternalLinks(): boolean;
-
   /**
    * Returns the label's picture or 0 if the label doesn't have a picture.
    */
   public picture(): QPicture;
-
-  public pixmap(): QPixmap;
 
   /**
    * Constructs an empty label.
@@ -86,8 +64,6 @@ declare class QLabel extends QFrame {
    * Constructs a label that displays the text, text.
    */
   constructor(text: QString, parent: QWidget, f: Qt.WindowFlags);
-
-  public selectedText(): QString;
 
   /**
    * selectionStart() returns the index of the first selected character in the label or -1 if no text is selected.
@@ -124,15 +100,62 @@ declare class QLabel extends QFrame {
   public setWordWrap(on: boolean): void;
 
   /**
-   * em>Reimplemented Function
+   * the alignment of the label's contents
    */
-  public sizeHint(): QSize;
+  alignment: Qt.Alignment;
 
-  public text(): QString;
+  /**
+   * whether there is any text selected
+   */
+  hasSelectedText: boolean;
 
-  public textFormat(): Qt.TextFormat;
+  /**
+   * the label's text indent in pixels
+   */
+  indent: int;
 
-  public textInteractionFlags(): Qt.TextInteractionFlags;
+  /**
+   * the width of the margin
+   */
+  margin: int;
 
-  public wordWrap(): boolean;
+  /**
+   * Specifies whether QLabel should automatically open links using QDesktopServices::openUrl() instead of emitting the linkActivated() signal.
+   */
+  openExternalLinks: boolean;
+
+  /**
+   * the label's pixmap
+   */
+  pixmap: QPixmap;
+
+  /**
+   * whether the label will scale its contents to fill all available space.
+   */
+  scaledContents: boolean;
+
+  /**
+   * the selected text
+   */
+  selectedText: QString;
+
+  /**
+   * the label's text
+   */
+  text: QString;
+
+  /**
+   * the label's text format
+   */
+  textFormat: Qt.TextFormat;
+
+  /**
+   * Specifies how the label should interact with user input if it displays text.
+   */
+  textInteractionFlags: Qt.TextInteractionFlags;
+
+  /**
+   * the label's word-wrapping policy
+   */
+  wordWrap: boolean;
 }

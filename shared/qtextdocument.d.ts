@@ -124,8 +124,6 @@ declare class QTextDocument {
    */
   public begin(): QTextBlock;
 
-  public blockCount(): int;
-
   /**
    * Returns the character at position pos, or a null character if the position is out of range.
    */
@@ -156,10 +154,6 @@ declare class QTextDocument {
    */
   public defaultCursorMoveStyle(): Qt.CursorMoveStyle;
 
-  public defaultFont(): QFont;
-
-  public defaultStyleSheet(): QString;
-
   /**
    * the default text option will be set on all QTextLayout in the document.
    */
@@ -175,8 +169,6 @@ declare class QTextDocument {
    */
   public documentLayout(): QAbstractTextDocumentLayout;
 
-  public documentMargin(): qreal;
-
   /**
    * Draws the content of the document with painter p, clipped to rect.
    */
@@ -190,7 +182,22 @@ declare class QTextDocument {
   /**
    * Finds the next occurrence of the string, subString, in the document.
    */
-  public find(subString: QString, from: int, options: QTextDocument.FindFlags): QTextCursor;
+  public find(subString: QString, from: int, options: FindFlags): QTextCursor;
+
+  /**
+   * Finds the next occurrence of the string, subString, in the document.
+   */
+  public find(subString: QString, from: QTextCursor, options: FindFlags): QTextCursor;
+
+  /**
+   * Finds the next occurrence, matching the regular expression, expr, in the document.
+   */
+  public find(expr: QRegExp, from: int, options: FindFlags): QTextCursor;
+
+  /**
+   * Finds the next occurrence, matching the regular expression, expr, in the document.
+   */
+  public find(expr: QRegExp, from: QTextCursor, options: FindFlags): QTextCursor;
 
   /**
    * Returns the text block that contains the {pos}-th character.
@@ -221,8 +228,6 @@ declare class QTextDocument {
    * Returns the ideal width of the text document.
    */
   public idealWidth(): qreal;
-
-  public indentWidth(): qreal;
 
   /**
    * Returns true if the document is empty; otherwise returns false.
@@ -258,12 +263,10 @@ declare class QTextDocument {
    */
   public markContentsDirty(from: int, length: int): void;
 
-  public maximumBlockCount(): int;
-
   /**
    * Returns meta information about the document of the type specified by info.
    */
-  public metaInformation(info: MetaInformation): QString;
+  public metaInformation(info: QTextDocument.MetaInformation): QString;
 
   /**
    * Returns the text object associated with the given objectIndex.
@@ -280,8 +283,6 @@ declare class QTextDocument {
    */
   public pageCount(): int;
 
-  public pageSize(): QSizeF;
-
   /**
    * Prints the document to the given printer.
    */
@@ -291,6 +292,16 @@ declare class QTextDocument {
    * Constructs an empty QTextDocument with the given parent.
    */
   constructor(parent: QObject);
+
+  /**
+   * Constructs a QTextDocument containing the plain (unformatted) text specified, and with the given parent.
+   */
+  constructor(text: QString, parent: QObject);
+
+  /**
+   * Redoes the last editing operation on the document if redo is available.
+   */
+  public redo(cursor: QTextCursor): void;
 
   /**
    * Returns data of the specified type from the resource with the given name.
@@ -346,7 +357,7 @@ declare class QTextDocument {
   /**
    * Sets the document's meta information of the type specified by info to the given string.
    */
-  public setMetaInformation(info: MetaInformation, unknown_2: QString): void;
+  public setMetaInformation(info: QTextDocument.MetaInformation, unknown_2: QString): void;
 
   public setPageSize(size: QSizeF): void;
 
@@ -361,10 +372,6 @@ declare class QTextDocument {
 
   public setUseDesignMetrics(b: boolean): void;
 
-  public size(): QSizeF;
-
-  public textWidth(): qreal;
-
   /**
    * Returns a string containing an HTML representation of the document.
    */
@@ -375,7 +382,40 @@ declare class QTextDocument {
    */
   public toPlainText(): QString;
 
-  public useDesignMetrics(): boolean;
+  /**
+   * Undoes the last editing operation on the document if undo is available.
+   */
+  public undo(cursor: QTextCursor): void;
+
+  /**
+   * Returns the number of text blocks in the document.
+   */
+  blockCount: int;
+
+  /**
+   * the default font used to display the document's text
+   */
+  defaultFont: QFont;
+
+  /**
+   * The default style sheet is applied to all newly HTML formatted text that is inserted into the document, for example using setHtml() or QTextCursor::insertHtml().
+   */
+  defaultStyleSheet: QString;
+
+  /**
+   * The margin around the document.
+   */
+  documentMargin: qreal;
+
+  /**
+   * Returns the width used for text list and text block indenting.
+   */
+  indentWidth: qreal;
+
+  /**
+   * Specifies the limit for blocks in the document.
+   */
+  maximumBlockCount: int;
 
   /**
    * whether the document has been modified by the user
@@ -383,7 +423,27 @@ declare class QTextDocument {
   modified: boolean;
 
   /**
+   * the page size that should be used for laying out the document
+   */
+  pageSize: QSizeF;
+
+  /**
+   * Returns the actual size of the document.
+   */
+  size: QSizeF;
+
+  /**
+   * The text width specifies the preferred width for text in the document.
+   */
+  textWidth: qreal;
+
+  /**
    * whether undo/redo are enabled for this document
    */
   undoRedoEnabled: boolean;
+
+  /**
+   * whether the document uses design metrics of fonts to improve the accuracy of text layout
+   */
+  useDesignMetrics: boolean;
 }

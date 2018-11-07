@@ -12,11 +12,6 @@ declare class QCheckBox extends QAbstractButton {
   public isTristate(): boolean;
 
   /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
-
-  /**
    * Constructs a checkbox with the given parent, but with no text.
    */
   constructor(parent: QWidget);
@@ -34,7 +29,7 @@ declare class QCheckBox extends QAbstractButton {
   public setTristate(y: boolean): void;
 
   /**
-   * Reimplemented Function
+   * whether the checkbox is a tri-state checkbox
    */
-  public sizeHint(): QSize;
+  tristate: boolean;
 }

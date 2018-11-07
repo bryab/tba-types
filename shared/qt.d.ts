@@ -1,6 +1,7 @@
 declare namespace Qt {
   const Checked;
   const UnChecked;
+  type HANDLE = any;
 
   enum AlignmentFlag {
     AlignLeading,
@@ -277,6 +278,8 @@ declare namespace Qt {
     ImhUrlCharactersOnly,
     ImhExclusiveInputMask
   }
+
+  type InputMethodHints = InputMethodHint;
 
   enum InputMethodQuery {
     ImFont,
@@ -940,6 +943,8 @@ declare namespace Qt {
     WindowMaximized,
     WindowFullScreen
   }
+
+  type WindowStates = WindowState;
 
   enum WindowType {
     Window,

@@ -56,7 +56,7 @@ declare class QComboBox extends QWidget {
   /**
    * This signal is sent whenever the currentIndex in the combobox changes either through user interaction or programmatically.
    */
-  //currentIndexChanged: QSignal<(unknown_1: QString) => void>;
+  c; //urrentIndexChanged: QSignal<(unknown_1: QString) => void>;
 
   /**
    * This signal is emitted when the text in the combobox's line edit widget is changed.
@@ -81,34 +81,17 @@ declare class QComboBox extends QWidget {
   /**
    * Adds an item to the combobox with the given icon and text, and containing the specified userData (stored in the Qt::UserRole).
    */
-  public addItem(icon: QIcon, text: QString, userData: QVariant): void;
+  public addItem(icon: QIcon, text: QString, userData?: QVariant): void;
 
   /**
    * Adds each of the strings in the given texts to the combobox.
    */
   public addItems(texts: QStringList): void;
 
-  public autoCompletion(): boolean;
-
-  public autoCompletionCaseSensitivity(): Qt.CaseSensitivity;
-
   /**
    * Returns the completer that is used to auto complete text input for the combobox.
    */
   public completer(): QCompleter;
-
-  public count(): int;
-
-  public currentIndex(): int;
-
-  public currentText(): QString;
-
-  public duplicatesEnabled(): boolean;
-
-  /**
-   * Reimplemented Function
-   */
-  public event(event: QEvent): boolean;
 
   /**
    * Returns the index of the item containing the given data for the given role; otherwise returns -1.
@@ -127,8 +110,6 @@ declare class QComboBox extends QWidget {
    */
   public hidePopup(): void;
 
-  public iconSize(): QSize;
-
   /**
    * Inserts the text and userData (stored in the Qt::UserRole) into the combobox at the given index.
    */
@@ -143,8 +124,6 @@ declare class QComboBox extends QWidget {
    * Inserts the strings from the list into the combobox as separate items, starting at the index specified.
    */
   public insertItems(index: int, texts: QStringList): void;
-
-  public insertPolicy(): InsertPolicy;
 
   /**
    * Inserts a separator item into the combobox at the given index.
@@ -178,23 +157,10 @@ declare class QComboBox extends QWidget {
    */
   public lineEdit(): QLineEdit;
 
-  public maxCount(): int;
-
-  public maxVisibleItems(): int;
-
-  public minimumContentsLength(): int;
-
-  /**
-   * Reimplemented Function
-   */
-  public minimumSizeHint(): QSize;
-
   /**
    * Returns the model used by the combobox.
    */
   public model(): QAbstractItemModel;
-
-  public modelColumn(): int;
 
   /**
    * Constructs a combobox with the given parent, using the default model QStandardItemModel.
@@ -231,7 +197,7 @@ declare class QComboBox extends QWidget {
 
   public setIconSize(size: QSize): void;
 
-  public setInsertPolicy(policy: InsertPolicy): void;
+  public setInsertPolicy(policy: QComboBox.InsertPolicy): void;
 
   /**
    * Sets the data role for the item on the given index in the combobox to the specified value.
@@ -276,7 +242,7 @@ declare class QComboBox extends QWidget {
    */
   public setRootModelIndex(index: QModelIndex): void;
 
-  public setSizeAdjustPolicy(policy: SizeAdjustPolicy): void;
+  public setSizeAdjustPolicy(policy: QComboBox.SizeAdjustPolicy): void;
 
   /**
    * Sets the validator to use instead of the current validator.
@@ -293,12 +259,10 @@ declare class QComboBox extends QWidget {
    */
   public showPopup(): void;
 
-  public sizeAdjustPolicy(): SizeAdjustPolicy;
-
   /**
    * This implementation caches the size hint to avoid resizing when the contents change dynamically.
    */
-  public sizeHint(): QSize;
+  //public sizeHint(): QSize;
 
   /**
    * Returns the validator that is used to constrain text input for the combobox.
@@ -309,4 +273,79 @@ declare class QComboBox extends QWidget {
    * Returns the list view used for the combobox popup.
    */
   public view(): QAbstractItemView;
+
+  /**
+   * whether the combobox provides auto-completion for editable items
+   */
+  autoCompletion: boolean;
+
+  /**
+   * whether string comparisons are case-sensitive or case-insensitive for auto-completion
+   */
+  autoCompletionCaseSensitivity: Qt.CaseSensitivity;
+
+  /**
+   * the number of items in the combobox
+   */
+  count: int;
+
+  /**
+   * the index of the current item in the combobox.
+   */
+  currentIndex: int;
+
+  /**
+   * the current text
+   */
+  currentText: QString;
+
+  /**
+   * whether the user can enter duplicate items into the combobox
+   */
+  duplicatesEnabled: boolean;
+
+  /**
+   * whether the combo box can be edited by the user
+   */
+  editable: boolean;
+
+  /**
+   * whether the combo box draws itself with a frame
+   */
+  frame: boolean;
+
+  /**
+   * the size of the icons shown in the combobox.
+   */
+  iconSize: QSize;
+
+  /**
+   * the policy used to determine where user-inserted items should appear in the combobox
+   */
+  insertPolicy: InsertPolicy;
+
+  /**
+   * the maximum number of items allowed in the combobox
+   */
+  maxCount: int;
+
+  /**
+   * the maximum allowed size on screen of the combo box, measured in items
+   */
+  maxVisibleItems: int;
+
+  /**
+   * the minimum number of characters that should fit into the combobox.
+   */
+  minimumContentsLength: int;
+
+  /**
+   * the column in the model that is visible.
+   */
+  modelColumn: int;
+
+  /**
+   * the policy describing how the size of the combobox changes when the content changes
+   */
+  sizeAdjustPolicy: SizeAdjustPolicy;
 }
