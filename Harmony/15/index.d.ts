@@ -27,37 +27,7 @@ declare type ColumnType = "DRAWING" | "SOUND" | "3DPATH" | "BEZIER" | "EASE" | "
 /**
  * Type name as returned by Attribute.typeName()
  */
-declare type AttrValueType =
-  | "ALIAS"
-  | "ARRAY_POSITION_2D"
-  | "ARRAY_STRING"
-  | "BOOL"
-  | "COLOR"
-  | "COMPATIBILITY"
-  | "CUSTOM_NAME"
-  | "DOUBLE"
-  | "DOUBLEVB"
-  | "DRAWING"
-  | "ELEMENT"
-  | "ENABLE"
-  | "FILE_EDITOR"
-  | "FILE_LIBRARY"
-  | "GENERIC_ENUM"
-  | "HSL"
-  | "HUE_RANGE"
-  | "INT"
-  | "LOCKED"
-  | "PATH_3D"
-  | "POINT_2D"
-  | "POSITION_2D"
-  | "POSITION_3D"
-  | "PUSH_BUTTON"
-  | "QUATERNION_PATH"
-  | "ROTATION_3D"
-  | "SCALE_3D"
-  | "SIMPLE_BEZIER"
-  | "STRING"
-  | "TIMING";
+declare type AttrValueType = "ALIAS" | "ARRAY_POSITION_2D" | "ARRAY_STRING" | "BOOL" | "COLOR" | "COMPATIBILITY" | "CUSTOM_NAME" | "DOUBLE" | "DOUBLEVB" | "DRAWING" | "ELEMENT" | "ENABLE" | "FILE_EDITOR" | "FILE_LIBRARY" | "GENERIC_ENUM" | "HSL" | "HUE_RANGE" | "INT" | "LOCKED" | "PATH_3D" | "POINT_2D" | "POSITION_2D" | "POSITION_3D" | "PUSH_BUTTON" | "QUATERNION_PATH" | "ROTATION_3D" | "SCALE_3D" | "SIMPLE_BEZIER" | "STRING" | "TIMING";
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths
  */
@@ -453,19 +423,7 @@ declare namespace copyPaste {
 
   function setPasteSpecialDrawingAutomaticExtendExposure(extendExposure: boolean, keyFrameMode: boolean): void;
 
-  function setPasteSpecialColorPaletteOption(
-    mode:
-      | "DO_NOTHING"
-      | "REUSE_PALETTES"
-      | "COPY_AND_OVERWRITE_EXISTING_PALETTES"
-      | "COPY_AND_CREATE_NEW_PALETTES"
-      | "COPY_AND_CREATE_NEW_PALETTES_IN_ELEMENT_FOLDER"
-      | "COPY_PALETTE_AND_MERGE_COLOURS"
-      | "COPY_PALETTE_AND_UPDATE_COLOURS"
-      | "LINK_TO_ORIGINAL"
-      | "COPY_SCENE_PALETTE_AND_MERGE_COLOURS"
-      | "COPY_SCENE_PALETTE_AND_UPDATE_COLOURS"
-  ): void;
+  function setPasteSpecialColorPaletteOption(mode: "DO_NOTHING" | "REUSE_PALETTES" | "COPY_AND_OVERWRITE_EXISTING_PALETTES" | "COPY_AND_CREATE_NEW_PALETTES" | "COPY_AND_CREATE_NEW_PALETTES_IN_ELEMENT_FOLDER" | "COPY_PALETTE_AND_MERGE_COLOURS" | "COPY_PALETTE_AND_UPDATE_COLOURS" | "LINK_TO_ORIGINAL" | "COPY_SCENE_PALETTE_AND_MERGE_COLOURS" | "COPY_SCENE_PALETTE_AND_UPDATE_COLOURS"): void;
 
   function copyPaste(parent: QObject, name: char): void;
 
@@ -2333,19 +2291,6 @@ declare namespace sound {
 }
 
 /**
- * The System JavaScript global object. Call system specific command directly
- */
-declare namespace System {
-  function println(arg: string): void;
-
-  function getenv(str: string): string;
-
-  function processOneEvent(): void;
-
-  var globalObject: any;
-}
-
-/**
  * The Timeline JavaScript global object. Get informations about layers and frames from the Timeline view
  */
 declare namespace Timeline {
@@ -2634,6 +2579,7 @@ declare namespace view {
  * Base class of the script widget classes
  */
 declare class WidgetBase extends MO_SignalEmitter {
+  constructor(config: object);
   public data(index?: int): Attribute;
 
   /**
@@ -3862,14 +3808,14 @@ declare class Process extends QObject {
 
   public exitStatus(): int;
 
-  objectName: string;
+  //objectName: string;
 }
 
 /**
  * The RemoteCmd JavaScript class. Send one sided commands to a remote host
  */
 declare class RemoteCmd extends QObject {
-  public connect(machine: string, port: int): boolean;
+  //public connect(machine: string, port: int): boolean;
 
   public connectTimeout(machine: string, port: int, timeout: int): boolean;
 
@@ -3881,7 +3827,7 @@ declare class RemoteCmd extends QObject {
 
   public receiveMsg(timeout: int): boolean;
 
-  public disconnect(): void;
+  //public disconnect(): void;
 
   public connected(): boolean;
 
@@ -3971,7 +3917,7 @@ declare class Dialog extends SCRIPT_QSWidget {
   /**
    * it is the width of the dialog
    */
-  width: int;
+  //width: int;
 
   /**
    * it is the name of the ok button

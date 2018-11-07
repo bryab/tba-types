@@ -1,3 +1,4 @@
+/// <reference path="./tba-unknown.d.ts" />
 /**
  * Undocumented File access modes for `File.open()`
  */
@@ -1522,4 +1523,17 @@ declare class Matrix4x4 extends QObject {
    * 4th row and 4th column value
    */
   m33: double;
+}
+
+/**
+ * The System JavaScript global object. Call system specific command directly
+ */
+declare namespace System {
+  function println(arg: string): void;
+
+  function getenv(str: string): string;
+
+  function processOneEvent(): void;
+
+  var globalObject: any;
 }
