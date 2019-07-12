@@ -1568,3 +1568,23 @@ declare module column {
    */
   function getImageBlock(columnName: string, startFrame: int, nbFrames: int): QImage;
 }
+
+/**
+ * The Backdrop JavaScript global object. Get, set and add backdrops
+ */
+declare module Backdrop {
+  /**
+   * Returns the backdrops of a group.
+   */
+  function backdrops(group: string): QScriptValue;
+
+  /**
+   * Sets the backdrops for the specified group.
+   */
+  function setBackdrops(group: string, backdrops: QScriptValue): boolean;
+
+  /**
+   * Adds a single backdrop. The new backdrop is displayed on top of all the others.
+   */
+  function addBackdrop(group: string, backdrop: QScriptValue): boolean;
+}
