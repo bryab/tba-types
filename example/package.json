@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "tba-types": "git+https://github.com/bryab/tba-types.git",
+    "typescript": "*"
+  }
+}
