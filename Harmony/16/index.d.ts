@@ -997,12 +997,12 @@ declare class Model3d extends QObject {
   /**
    * Returns an array of all of a subnode's children.
    */
-  public children(subnodeName: string): QScriptValue;
+  //public children(subnodeName: string): QScriptValue;
 
   /**
    * Returns the name of a subnode's parent subnode.
    */
-  public parent(subnodeName: string): string;
+  //public parent(subnodeName: string): string;
 
   /**
    * Returns an array of objects representing the tree structure of the 3d Model.
