@@ -567,12 +567,12 @@ declare module scene {
   /**
    * Returns the model matrix for the default camera.
    */
-  function getCameraMatrix(frame: int): QObject;
+  function getCameraMatrix(frame: int): Matrix4x4;
 
   /**
    * Converts a field coordinate into an OGL coordinate.
    */
-  function toOGL(pointOrVector: QObject): QObject;
+  function toOGL<T extends Point2d | Point3d | Vector2d | Vector3d>(pointOrVector: T): T;
 
   /**
    * Converts the X-value of a field coordinate to the X-value of an OpenGL coordinate.
@@ -592,7 +592,7 @@ declare module scene {
   /**
    * Converts an OGL coordinate into a field coordinate.
    */
-  function fromOGL(pointOrVector: QObject): QObject;
+  function fromOGL<T extends Point2d | Point3d | Vector2d | Vector3d>(pointOrVector: T): T;
 
   /**
    * Converts the X-value of an OpenGL coordinate to the X-value of a field coordinate.
@@ -672,7 +672,7 @@ declare class Attribute extends QObject {
   /**
    * The typeName value associated with the Attribute type.
    */
-  public typeName(): string;
+  public typeName(): AttrValueType;
 
   /**
    * Fetches the boolean value from the Attribute at the current frame.
