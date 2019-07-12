@@ -1,9 +1,11 @@
+/// <reference path="./tba-unknown.d.ts" />
 /**
  * Undocumented File access modes for `File.open()`
  */
 declare const enum FileAccessMode {
   READ = 1,
-  WRITE = 2
+  WRITE = 2,
+  APPEND = 4
 }
 
 /**
@@ -142,6 +144,22 @@ declare class File {
   size: int;
 }
 
+declare namespace Dir {
+  const enum FilterSpec {
+    NONE = 0,
+    DIRS = 1,
+    FILES = 2,
+    ALL = 3
+  }
+
+  const enum SortSpec {
+    ALPHA = 0,
+    NATURAL = 1,
+    UNKNOWN2 = 2,
+    UNKNOWN3 = 3
+  }
+}
+
 /**
  * The Dir JavaScript class. Interface to operating system Dir operations, e.g. mkdir, rmdir, rename, etc
  */
@@ -169,7 +187,11 @@ declare class Dir extends QObject {
   /**
    * Returns a list of the names of all the files and directories in the directory, ordered according to the name and attribute filters.
    */
-  public entryList(filter: string, filterSpec?: int, sortSpec?: int): StringList;
+  public entryList(
+    filter: string,
+    filterSpec?: Dir.FilterSpec,
+    sortSpec?: Dir.SortSpec
+  ): StringList;
 
   /**
    * Create a directory with given name.
@@ -270,12 +292,18 @@ declare namespace UiLoader {
    */
   function exec(context: QScriptContext, engine?: QScriptEngine): QScriptValue;
 
-  function setSvgIcon(context: QScriptContext, engine?: QScriptEngine): QScriptValue;
+  function setSvgIcon(
+    context: QScriptContext,
+    engine?: QScriptEngine
+  ): QScriptValue;
 
   /**
    * Takes a DPI-independent pixel dimension (100% DPI scaling on an HD screen) and scales it to the current DPI setting.
    */
-  function dpiScale(context: QScriptContext, engine?: QScriptEngine): QScriptValue;
+  function dpiScale(
+    context: QScriptContext,
+    engine?: QScriptEngine
+  ): QScriptValue;
 }
 
 /**
@@ -572,22 +600,39 @@ declare namespace FileDialog {
   /**
    * function that returns an existing file selected by the user
    */
-  function getOpenFileName(filter?: string, title?: string, parent?: QWidget): string;
+  function getOpenFileName(
+    filter?: string,
+    title?: string,
+    parent?: QWidget
+  ): string;
 
   /**
    * function that will return a file name selected by the user
    */
-  function getSaveFileName(filter?: string, title?: string, parent?: QWidget): string;
+  function getSaveFileName(
+    filter?: string,
+    title?: string,
+    parent?: QWidget
+  ): string;
 
   /**
    * function that will return an existing directory selected by the user
    */
-  function getExistingDirectory(dir?: string, title?: string, parent?: QWidget): string;
+  function getExistingDirectory(
+    dir?: string,
+    title?: string,
+    parent?: QWidget
+  ): string;
 
   /**
    * function that will return one or more existing files selected by the user
    */
-  function getOpenFileNames(dir?: string, filter?: string, title?: string, parent?: QWidget): StringList;
+  function getOpenFileNames(
+    dir?: string,
+    filter?: string,
+    title?: string,
+    parent?: QWidget
+  ): StringList;
 }
 
 /**
@@ -689,6 +734,8 @@ declare class SpinBox extends Labeled {
    * the maximum value that the spinBox will ascend to
    */
   maximum: int;
+
+  label: string;
 }
 
 /**
@@ -838,22 +885,47 @@ declare namespace Input {
   /**
    * Function to get a string from the user.
    */
-  function getText(label?: string, text?: string, title?: string, parent?: QWidget): string;
+  function getText(
+    label?: string,
+    text?: string,
+    title?: string,
+    parent?: QWidget
+  ): string;
 
   /**
    * Function to get a number from the user.
    */
-  function getNumber(label?: string, value?: double, decimals?: int, minValue?: double, maxValue?: double, title?: string, parent?: QWidget): number;
+  function getNumber(
+    label?: string,
+    value?: double,
+    decimals?: int,
+    minValue?: double,
+    maxValue?: double,
+    title?: string,
+    parent?: QWidget
+  ): number;
 
   /**
    * Function to get an item from the user.
    */
-  function getItem(label: string, itemList: StringList, currentItem?: string, editable?: boolean, title?: string, parent?: QWidget): string;
+  function getItem(
+    label: string,
+    itemList: StringList,
+    currentItem?: string,
+    editable?: boolean,
+    title?: string,
+    parent?: QWidget
+  ): string;
 
   /**
    * Function to get an item from the user.
    */
-  function getItem(itemList: StringList, currentItem?: string, editable?: boolean, parent?: QWidget): string;
+  function getItem(
+    itemList: StringList,
+    currentItem?: string,
+    editable?: boolean,
+    parent?: QWidget
+  ): string;
 }
 
 /**
@@ -1384,17 +1456,36 @@ declare class Matrix4x4 extends QObject {
   /**
    * Calculate an orthogonal projection Matrix4x4.
    */
-  public orthogonalProject(left: double, right: double, bottom: double, top: double, zNear: double, zFar: double): Matrix4x4;
+  public orthogonalProject(
+    left: double,
+    right: double,
+    bottom: double,
+    top: double,
+    zNear: double,
+    zFar: double
+  ): Matrix4x4;
 
   /**
    * Calculate a perspective projection Matrix4x4.
    */
-  public perspectiveProject(left: double, right: double, bottom: double, top: double, zNear: double, zFar: double): Matrix4x4;
+  public perspectiveProject(
+    left: double,
+    right: double,
+    bottom: double,
+    top: double,
+    zNear: double,
+    zFar: double
+  ): Matrix4x4;
 
   /**
    * Calculate a perspective projection Matrix4x4.
    */
-  public perspectiveProject(fovy: double, ratio: double, zNear: double, zFar: double): Matrix4x4;
+  public perspectiveProject(
+    fovy: double,
+    ratio: double,
+    zNear: double,
+    zFar: double
+  ): Matrix4x4;
 
   /**
    * Invert current Matrix4x4.
@@ -1522,4 +1613,17 @@ declare class Matrix4x4 extends QObject {
    * 4th row and 4th column value
    */
   m33: double;
+}
+
+/**
+ * The System JavaScript global object. Call system specific command directly
+ */
+declare namespace System {
+  function println(arg: string): void;
+
+  function getenv(str: string): string;
+
+  function processOneEvent(): void;
+
+  var globalObject: any;
 }

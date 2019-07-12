@@ -295,7 +295,7 @@ declare class ExportManager extends QObject {
   /**
    * Export storyboard panels, taking into consideration the scene camera (layout )
    */
-  public exportLayout(exportDir: string, filePattern: string, movieFormat: MovieFormat, resX: int, resY: int): boolean;
+  public exportLayout(exportDir: string, filePattern: string, movieFormat: BitmapFormat, resX: int, resY: int): boolean;
 
   /**
    * Export storyboard to pdf file.
@@ -410,11 +410,11 @@ declare class ExportManager extends QObject {
   /**
    * Specify the granularity of movie clip generation.
    */
-  public setOneMovieClipPer(perWhat: string): boolean;
+  public setOneMovieClipPer(perWhat: "project" | "sequence" | "scene" | "shot"): boolean;
 
   /**
    * Set the audio/video export settings ( for Quicktime export )
-   * 
+   *
    * This is provided as a work-around to specify explicit QuickTime settings. The easiest way to access a given QuickTime settings string to to save the given setting in the exportMovie dialog, and consult the EXPORT_DLG_MOVIE_VIDEO_CONFIG preference in your user preferences.
    */
   public setMovieConfig(config: string): void;

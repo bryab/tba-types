@@ -22,7 +22,17 @@ declare type NodeType = string;
 /**
  * Column Type as returned by column.type()
  */
-declare type ColumnType = "DRAWING" | "SOUND" | "3DPATH" | "BEZIER" | "EASE" | "EXPR" | "TIMING" | "QUATERNION" | "ANNOTATION";
+declare type ColumnType =
+  | "DRAWING"
+  | "SOUND"
+  | "3DPATH"
+  | "BEZIER"
+  | "EASE"
+  | "EXPR"
+  | "TIMING"
+  | "QUATERNION"
+  | "QUATERNIONPATH"
+  | "ANNOTATION";
 
 /**
  * Type name as returned by Attribute.typeName()
@@ -229,12 +239,20 @@ declare namespace column {
   /**
    * returns the value of a cell in a column.
    */
-  function getEntry(columnName: string, subColumn: int, atFrame: double): string;
+  function getEntry(
+    columnName: string,
+    subColumn: int,
+    atFrame: double
+  ): string;
 
   /**
    * returns true or false indicating if a cell in a column is a keyframe.
    */
-  function isKeyFrame(columnName: string, subColumn: int, atFrame: double): boolean;
+  function isKeyFrame(
+    columnName: string,
+    subColumn: int,
+    atFrame: double
+  ): boolean;
 
   /**
    * Returns the element id associated with a drawing column.
@@ -249,7 +267,11 @@ declare namespace column {
   /**
    * adds a column with the specified name and type
    */
-  function add(columnName: string, columnType: ColumnType, position?: string): boolean;
+  function add(
+    columnName: string,
+    columnType: ColumnType,
+    position?: string
+  ): boolean;
 
   /**
    * removes the sound column called name from the scene
@@ -269,7 +291,12 @@ declare namespace column {
   /**
    * sets the value of a cell in a column
    */
-  function setEntry(columnName: string, subColumn: int, atFrame: double, value: string): boolean;
+  function setEntry(
+    columnName: string,
+    subColumn: int,
+    atFrame: double,
+    value: string
+  ): boolean;
 
   /**
    * makes a cell in a column a keyframe
@@ -294,7 +321,11 @@ declare namespace column {
   /**
    * sts the Drawing type at frame f from column col to be newType. K = key drawings, I = inbetween, B = breakdown
    */
-  function setDrawingType(columnName: string, atFrame: double, drawingType: string): void;
+  function setDrawingType(
+    columnName: string,
+    atFrame: double,
+    drawingType: string
+  ): void;
 
   /**
    * Retrieves the list of names of drawing timing columns.
@@ -319,12 +350,19 @@ declare namespace column {
   /**
    * Retrieves the current version of a timing.
    */
-  function getCurrentVersionForDrawing(columnName: string, timingName: string): int;
+  function getCurrentVersionForDrawing(
+    columnName: string,
+    timingName: string
+  ): int;
 
   /**
    * Import a sound file in the specified column at the specified frame. This function returns a Boolean indicating the.
    */
-  function importSound(columnName: string, atFrame: int, soundFilePath: string): boolean;
+  function importSound(
+    columnName: string,
+    atFrame: int,
+    soundFilePath: string
+  ): boolean;
 
   /**
    * sets the value in the Expression column to the specified text.
@@ -336,7 +374,11 @@ declare namespace column {
    */
   function getDrawingName(columnName: string, frame: int): string;
 
-  function generateTiming(columnName: string, forFrame: double, fileExists: boolean): string;
+  function generateTiming(
+    columnName: string,
+    forFrame: double,
+    fileExists: boolean
+  ): string;
 
   /**
    * creates an empty drawing in the specified column
@@ -346,12 +388,20 @@ declare namespace column {
   /**
    * renames the specified drawing to the new name,in the specified column
    */
-  function renameDrawing(columnName: string, oldTiming: string, newTiming: string): boolean;
+  function renameDrawing(
+    columnName: string,
+    oldTiming: string,
+    newTiming: string
+  ): boolean;
 
   /**
    * prepends the prefix to the drawing name in the specified column
    */
-  function renameDrawingWithPrefix(columnName: string, oldTiming: string, prefix: string): boolean;
+  function renameDrawingWithPrefix(
+    columnName: string,
+    oldTiming: string,
+    prefix: string
+  ): boolean;
 
   /**
    * deletes the drawing at the specified frame in the specified column
@@ -376,17 +426,30 @@ declare namespace column {
   /**
    * remove duplicate key drawing exposure at the specified frame in the specified column.
    */
-  function removeDuplicateKeyDrawingExposureAt(columnName: string, frameNumber: int): boolean;
+  function removeDuplicateKeyDrawingExposureAt(
+    columnName: string,
+    frameNumber: int
+  ): boolean;
 
   /**
    * fill with previous exposed drawings for the given range of frame.
    */
-  function fillEmptyCels(columnName: string, startFrame: int, endFrame: int): boolean;
+  function fillEmptyCels(
+    columnName: string,
+    startFrame: int,
+    endFrame: int
+  ): boolean;
 
   /**
    * fills the drawings from frame fromFrame to frame toFrame with drawing duplicates named with prefix prefix in column col.
    */
-  function lineTestFill(columnName: string, startFrame: int, nbFrames: int, prefix: string, keyFramesOnly: boolean): boolean;
+  function lineTestFill(
+    columnName: string,
+    startFrame: int,
+    nbFrames: int,
+    prefix: string,
+    keyFramesOnly: boolean
+  ): boolean;
 
   /**
    * return a SoundColumnInterface object that contains a reference to that sound column. The SoundColumnInterface object contains a useful interface to introspecting the sound and its sound sequences.
@@ -415,13 +478,30 @@ declare namespace compositionOrder {
 declare namespace copyPaste {
   function createTemplateFromSelection(name: string, path: string): string;
 
-  function useCreateTemplateSpecial(flag: boolean, addModellingDir?: boolean, addScanFiles?: boolean, includeDefaultCameraName?: boolean): void;
+  function useCreateTemplateSpecial(
+    flag: boolean,
+    addModellingDir?: boolean,
+    addScanFiles?: boolean,
+    includeDefaultCameraName?: boolean
+  ): void;
 
-  function pasteTemplateIntoScene(templateSrcPath: string, insertColumnName: string, insertFrame: int): boolean;
+  function pasteTemplateIntoScene(
+    templateSrcPath: string,
+    insertColumnName: string,
+    insertFrame: int
+  ): boolean;
 
-  function pasteTemplateIntoGroup(srcPath: string, groupName: string, insertFrame: int): boolean;
+  function pasteTemplateIntoGroup(
+    srcPath: string,
+    groupName: string,
+    insertFrame: int
+  ): boolean;
 
-  function pasteActionTemplateIntoNode(srcPath: string, nodeName: string, insertFrame: int): boolean;
+  function pasteActionTemplateIntoNode(
+    srcPath: string,
+    nodeName: string,
+    insertFrame: int
+  ): boolean;
 
   function usePasteSpecial(flag: boolean): void;
 
@@ -429,7 +509,12 @@ declare namespace copyPaste {
 
   function setPasteSpecialCreateNewColumn(flag: boolean): void;
 
-  function setPasteSpecialElementTimingColumnMode(mode: "ELEMENT_AS_ELEMENT_AND_TIMING_AS_TIMING" | "ALL_DRWGS_AS_ELEMENTS" | "ALL_DRWGS_LINKED_THRU_TIMING_COLS"): void;
+  function setPasteSpecialElementTimingColumnMode(
+    mode:
+      | "ELEMENT_AS_ELEMENT_AND_TIMING_AS_TIMING"
+      | "ALL_DRWGS_AS_ELEMENTS"
+      | "ALL_DRWGS_LINKED_THRU_TIMING_COLS"
+  ): void;
 
   function setPasteSpecialAddRemoveMotionKeyFrame(flag: boolean): void;
 
@@ -447,11 +532,22 @@ declare namespace copyPaste {
 
   function setPasteSpecialReplaceExpressionColumns(flag: boolean): void;
 
-  function setPasteSpecialDrawingAction(mode: "DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"): void;
+  function setPasteSpecialDrawingAction(
+    mode: "DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"
+  ): void;
 
-  function setPasteSpecialDrawingFileMode(mode: "NEVER_CREATE" | "ONLY_CREATE_IF_DOES_NOT_EXIST" | "ALWAYS_CREATE" | "ALWAYS_CREATE_AND_VERSION_IF_NECESSARY"): void;
+  function setPasteSpecialDrawingFileMode(
+    mode:
+      | "NEVER_CREATE"
+      | "ONLY_CREATE_IF_DOES_NOT_EXIST"
+      | "ALWAYS_CREATE"
+      | "ALWAYS_CREATE_AND_VERSION_IF_NECESSARY"
+  ): void;
 
-  function setPasteSpecialDrawingAutomaticExtendExposure(extendExposure: boolean, keyFrameMode: boolean): void;
+  function setPasteSpecialDrawingAutomaticExtendExposure(
+    extendExposure: boolean,
+    keyFrameMode: boolean
+  ): void;
 
   function setPasteSpecialColorPaletteOption(
     mode:
@@ -494,16 +590,36 @@ declare namespace copyPaste {
   /**
    * Create an object that represent a 'copy' of a selection of nodes and a range of frames.
    */
-  function copy(selectionOfNodes: StringList, startFrame: int, numFrames: int, createOption: CopyOptions): DragObject;
+  function copy(
+    selectionOfNodes: StringList,
+    startFrame: int,
+    numFrames: int,
+    createOption: CopyOptions
+  ): DragObject;
 
   /**
    * paste drag object as an action template. Must past over a selection of nodes. No new modules created by this action.
    */
-  function paste(dragObject: DragObject, selectionOfNodes: StringList, startFrame: int, numFrames: int, pasteOptions: PasteOptions): boolean;
+  function paste(
+    dragObject: DragObject,
+    selectionOfNodes: StringList,
+    startFrame: int,
+    numFrames: int,
+    pasteOptions: PasteOptions
+  ): boolean;
 
-  function pasteNewNodes(dragObject: DragObject, groupWhereToDrop: string, pasteOptions: PasteOptions): boolean;
+  function pasteNewNodes(
+    dragObject: DragObject,
+    groupWhereToDrop: string,
+    pasteOptions: PasteOptions
+  ): boolean;
 
-  function copyFromTemplate(filename: string, startFrame: int, numFrames: int, createOption: CopyOptions): DragObject;
+  function copyFromTemplate(
+    filename: string,
+    startFrame: int,
+    numFrames: int,
+    createOption: CopyOptions
+  ): DragObject;
 }
 
 /**
@@ -528,7 +644,12 @@ declare namespace Drawing {
   /**
    * create a drawing.
    */
-  function create(elementId: int, timing: string, fileExists: boolean, storeInProjectFolder?: boolean): boolean;
+  function create(
+    elementId: int,
+    timing: string,
+    fileExists: boolean,
+    storeInProjectFolder?: boolean
+  ): boolean;
 
   /**
    * return the 'load' filename of this drawing. This filename may be in the temp folder or project folder. Before the project is actually saved, this is where the drawing must reside to be found by the application.
@@ -565,12 +686,18 @@ declare namespace DrawingTools {
   /**
    * sets the current drawing to be from column columnName at frame frame
    */
-  function setCurrentDrawingFromColumnName(columnName: string, frame?: int): boolean;
+  function setCurrentDrawingFromColumnName(
+    columnName: string,
+    frame?: int
+  ): boolean;
 
   /**
    * sets the current drawing to be from node nodeName at frame frame
    */
-  function setCurrentDrawingFromNodeName(nodeName: string, frame?: int): boolean;
+  function setCurrentDrawingFromNodeName(
+    nodeName: string,
+    frame?: int
+  ): boolean;
 
   /**
    * converts the selected pencil lines in layer of the current drawing using params
@@ -580,7 +707,11 @@ declare namespace DrawingTools {
   /**
    * extracts the centerline from srcLayer and puts the extracted line in dstLayer using params.
    */
-  function extractCenterline(srcArt?: int, dstArt?: int, params?: DrawingToolParams): void;
+  function extractCenterline(
+    srcArt?: int,
+    dstArt?: int,
+    params?: DrawingToolParams
+  ): void;
 
   /**
    * Clears an art of a drawing.
@@ -694,12 +825,24 @@ declare namespace element {
   /**
    * changes the attributes of the folder of element elem
    */
-  function modify(id: int, scanType: string, fieldChart: double, pixmapFormat: string, vectorType: int): boolean;
+  function modify(
+    id: int,
+    scanType: string,
+    fieldChart: double,
+    pixmapFormat: string,
+    vectorType: int
+  ): boolean;
 
   /**
    * create a new element. returns the element id of the newly added element if successful, otherwise it returns -1
    */
-  function add(name: string, scanType: string, fieldChart: double, fileFormat: string, vectorize: string): int;
+  function add(
+    name: string,
+    scanType: string,
+    fieldChart: double,
+    fileFormat: string,
+    vectorize: string
+  ): int;
 
   /**
    * remove given element. Also optionally delete the disk files. This function returns true when successful.
@@ -729,12 +872,30 @@ declare namespace exporter {
   /**
    * returns true if a scene was exported to a QuickTime in the specified directory
    */
-  function exportToQuicktime(displayName: string, startFrame: int, lastFrame: int, withSound: boolean, resX: int, resY: int, dstPath: string, displayModule: string, generateThumbnail: boolean, thumbnailFrame: int): boolean;
+  function exportToQuicktime(
+    displayName: string,
+    startFrame: int,
+    lastFrame: int,
+    withSound: boolean,
+    resX: int,
+    resY: int,
+    dstPath: string,
+    displayModule: string,
+    generateThumbnail: boolean,
+    thumbnailFrame: int
+  ): boolean;
 
   /**
    * export OGL frames to a QuickTime movie. Without QuickTime it will try to fallback to other supported formats.
    */
-  function exportOGLToQuicktime(fileName: string, dstPath: string, startFrame?: int, lastFrame?: int, resX?: int, resY?: int): void;
+  function exportOGLToQuicktime(
+    fileName: string,
+    dstPath: string,
+    startFrame?: int,
+    lastFrame?: int,
+    resX?: int,
+    resY?: int
+  ): void;
 }
 
 /**
@@ -917,7 +1078,10 @@ declare namespace func {
   /**
    * returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
    */
-  function pointContinuityPath3d(columnName: string, point: int): ContinuityValue;
+  function pointContinuityPath3d(
+    columnName: string,
+    point: int
+  ): ContinuityValue;
 
   /**
    * returns the bias value for the specified point on the 3D Path
@@ -947,27 +1111,69 @@ declare namespace func {
   /**
    * sets the values of a point on a Bezier function curve
    */
-  function setBezierPoint(columnName: string, frame: int, y: double, handleLeftX: double, handleLeftY: double, handleRightX: double, handleRightY: double, constSeg: boolean, continuity: ContinuityValue): boolean;
+  function setBezierPoint(
+    columnName: string,
+    frame: int,
+    y: double,
+    handleLeftX: double,
+    handleLeftY: double,
+    handleRightX: double,
+    handleRightY: double,
+    constSeg: boolean,
+    continuity: ContinuityValue
+  ): boolean;
 
   /**
    * sets the values of a point on an Ease function curve
    */
-  function setEasePoint(columnName: string, frame: int, y: double, easeIn: double, angleEaseIn: double, easeOut: double, angleEaseOut: double, constSeg: boolean, continuity: ContinuityValue): boolean;
+  function setEasePoint(
+    columnName: string,
+    frame: int,
+    y: double,
+    easeIn: double,
+    angleEaseIn: double,
+    easeOut: double,
+    angleEaseOut: double,
+    constSeg: boolean,
+    continuity: ContinuityValue
+  ): boolean;
 
   /**
    * sets the values of a point on a Velocity-Based function curve
    */
-  function setVeloBasedPoint(columnName: string, frame: int, y: double): boolean;
+  function setVeloBasedPoint(
+    columnName: string,
+    frame: int,
+    y: double
+  ): boolean;
 
   /**
    * adds a keyframe to a 3D Path and sets the X, Y and Z value, as well as the tension, continuity and bias.
    */
-  function addKeyFramePath3d(columnName: string, frame: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
+  function addKeyFramePath3d(
+    columnName: string,
+    frame: int,
+    x: double,
+    y: double,
+    z: double,
+    tension: double,
+    continuity: ContinuityValue,
+    bias: double
+  ): boolean;
 
   /**
    * adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension, continuity and bias
    */
-  function addCtrlPointAfterPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
+  function addCtrlPointAfterPath3d(
+    columnName: string,
+    point: int,
+    x: double,
+    y: double,
+    z: double,
+    tension: double,
+    continuity: ContinuityValue,
+    bias: double
+  ): boolean;
 
   /**
    * removePointPath3d may be used to remove either a key frame, or a control point
@@ -977,17 +1183,34 @@ declare namespace func {
   /**
    * setPointPath3d may be used to set values in either a key frame, or a control point, but cannot change a key frame into a control point or a control point into a key frame. To change a key frame into a control point or a control point into a key frame, you must remove the point and add a new point.
    */
-  function setPointPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
+  function setPointPath3d(
+    columnName: string,
+    point: int,
+    x: double,
+    y: double,
+    z: double,
+    tension: double,
+    continuity: ContinuityValue,
+    bias: double
+  ): boolean;
 
   /**
    * sets the constant segment flag of point i of path p to b.
    */
-  function setPath3dPointConstantSegment(columnName: string, point: int, constant: boolean): boolean;
+  function setPath3dPointConstantSegment(
+    columnName: string,
+    point: int,
+    constant: boolean
+  ): boolean;
 
   /**
    * sets the constant segment flag of point found at frame f of path p to b.
    */
-  function setPath3dPointConstantSegmentForFrame(columnName: string, point: double, constant: boolean): boolean;
+  function setPath3dPointConstantSegmentForFrame(
+    columnName: string,
+    point: double,
+    constant: boolean
+  ): boolean;
 }
 
 /**
@@ -1007,12 +1230,26 @@ declare namespace library {
   /**
    * generates the thumbnails for selected templates
    */
-  function getThumbnailForSelectedTpl(idx: int, res: int, dstPath: string): boolean;
+  function getThumbnailForSelectedTpl(
+    idx: int,
+    res: int,
+    dstPath: string
+  ): boolean;
 
   /**
    * generates the movies for selected templates
    */
-  function getQuicktimeMovieForSelectedTpl(idx: int, start: int, end: int, xRes: int, yRes: int, userName: string, displayModule: string, dstPath: string, withSound: boolean): boolean;
+  function getQuicktimeMovieForSelectedTpl(
+    idx: int,
+    start: int,
+    end: int,
+    xRes: int,
+    yRes: int,
+    userName: string,
+    displayModule: string,
+    dstPath: string,
+    withSound: boolean
+  ): boolean;
 }
 
 /**
@@ -1022,17 +1259,26 @@ declare namespace MessageBox {
   /**
    * information box. One button, OK.
    */
-  function information(message: QScriptContext, unknown?: QScriptEngine): QScriptValue;
+  function information(
+    message: QScriptContext,
+    unknown?: QScriptEngine
+  ): QScriptValue;
 
   /**
    * warning box. Two buttons are Abort and Retry.
    */
-  function warning(message: QScriptContext, unknown?: QScriptEngine): 524288 | 262144;
+  function warning(
+    message: QScriptContext,
+    unknown?: QScriptEngine
+  ): 524288 | 262144;
 
   /**
    * critical box. One button, Retry.
    */
-  function critical(message: QScriptContext, unknown?: QScriptEngine): QScriptValue;
+  function critical(
+    message: QScriptContext,
+    unknown?: QScriptEngine
+  ): QScriptValue;
 }
 
 /**
@@ -1192,7 +1438,11 @@ declare namespace node {
   /**
    * returns a list of Attribute objects in specified node or node complex attribute.
    */
-  function getAttrList(node: string, atFrame: double, attrName?: string): QList<Attribute>;
+  function getAttrList(
+    node: string,
+    atFrame: double,
+    attrName?: string
+  ): QList<Attribute>;
 
   /**
    * returns the name of the column that an attribute is linked to. If the attribute is not linked to a column, the function returns the null string.
@@ -1277,7 +1527,11 @@ declare namespace node {
   /**
    * returns the path and addition information of the destination node linked to the source node.
    */
-  function dstNodeInfo(sourceNode: string, iPort: int, iLink: int): QScriptValue;
+  function dstNodeInfo(
+    sourceNode: string,
+    iPort: int,
+    iLink: int
+  ): QScriptValue;
 
   /**
    * returns true if the peg's groupAtNetworkBuilding attribute is true.
@@ -1292,22 +1546,45 @@ declare namespace node {
   /**
    * adds a node to the network.
    */
-  function add(parentGroup: string, name: string, type: string, x: int, y: int, z: int): string;
+  function add(
+    parentGroup: string,
+    name: string,
+    type: string,
+    x: int,
+    y: int,
+    z: int
+  ): string;
 
   /**
    * Return existing or add a group multi port in node.
    */
-  function getGroupInputModule(parentGroup: string, name: string, x: int, y: int, z: int): string;
+  function getGroupInputModule(
+    parentGroup: string,
+    name: string,
+    x: int,
+    y: int,
+    z: int
+  ): string;
 
   /**
    * Return existing or add a group multi port out node.
    */
-  function getGroupOutputModule(parentGroup: string, name: string, x: int, y: int, z: int): string;
+  function getGroupOutputModule(
+    parentGroup: string,
+    name: string,
+    x: int,
+    y: int,
+    z: int
+  ): string;
 
   /**
    * Delete a single node. Optionally, delete all columns and element associated to that node. The column and element would only be removed when no other nodes refer to them. This function returns true when successful.
    */
-  function deleteNode(nodePath: string, deleteTimedValues?: boolean, deleteElements?: boolean): boolean;
+  function deleteNode(
+    nodePath: string,
+    deleteTimedValues?: boolean,
+    deleteElements?: boolean
+  ): boolean;
 
   /**
    * Create a group from the selection of nodes. The list of nodes is a string where the nodes are separated by commas. The actual name of each node in the list of nodes must include the full path of that node. The function returns the full path of the created group, or an empty string if the creation of the node failed.
@@ -1332,7 +1609,13 @@ declare namespace node {
   /**
    * Create a new attribute for the given node.
    */
-  function createDynamicAttr(node: string, type: string, attrName: string, displayName: string, linkable: boolean): boolean;
+  function createDynamicAttr(
+    node: string,
+    type: string,
+    attrName: string,
+    displayName: string,
+    linkable: boolean
+  ): boolean;
 
   /**
    * Remove a dynamic attribute for the given node.
@@ -1342,12 +1625,21 @@ declare namespace node {
   /**
    * changes the value of an attribute in a node.
    */
-  function setTextAttr(node: NodePath, attrName: AttrKeyword, atFrame: int, attrValue: string | number): boolean;
+  function setTextAttr(
+    node: NodePath,
+    attrName: AttrKeyword,
+    atFrame: int,
+    attrValue: string | number
+  ): boolean;
 
   /**
    * links an attribute to a function column in the Xsheet View.
    */
-  function linkAttr(node: string, attrName: string, columnName: string): boolean;
+  function linkAttr(
+    node: string,
+    attrName: string,
+    columnName: string
+  ): boolean;
 
   /**
    * unlinks an attribute from a function column.
@@ -1357,12 +1649,24 @@ declare namespace node {
   /**
    * links a port on a node to a port on another node.
    */
-  function link(srcNode: string, srcPort: int, dstNode: string, dstPort: int): boolean;
+  function link(
+    srcNode: string,
+    srcPort: int,
+    dstNode: string,
+    dstPort: int
+  ): boolean;
 
   /**
    * links a port on a node to a port on another node. Fancy version that allow easier connecting to a group node, or setup the proper connection order.
    */
-  function link(srcNode: string, srcPort: int, dstNode: string, dstPort: int, mayAddOutputPort: boolean, mayAddInputPort: boolean): boolean;
+  function link(
+    srcNode: string,
+    srcPort: int,
+    dstNode: string,
+    dstPort: int,
+    mayAddOutputPort: boolean,
+    mayAddInputPort: boolean
+  ): boolean;
 
   /**
    * unlinks a port on one node from the port on another node.
@@ -1472,7 +1776,12 @@ declare namespace node {
   /**
    * This function creates a group for each exposure of the element where there is a symbol and will put the content of the symbol in that group. If disable element is TRUE, will disable the element afterwards. If clearExposure is TRUE, will clear the exposures where there were symbols afterwards. Will use prefix as the prefix for the generated group names.
    */
-  function explodeElementSymbolsInGroups(element: string, disableElement: boolean, clearExposure: boolean, prefix?: string): void;
+  function explodeElementSymbolsInGroups(
+    element: string,
+    disableElement: boolean,
+    clearExposure: boolean,
+    prefix?: string
+  ): void;
 
   /**
    * sets the show/hide timeline thumbnails on drawing layers
@@ -2155,12 +2464,20 @@ declare namespace scene {
   /**
    * closes the current scene and open the scene specified by env, job, scene and version
    */
-  function closeSceneAndOpen(envName: string, jobName: string, sceneName: string, versionName: string): boolean;
+  function closeSceneAndOpen(
+    envName: string,
+    jobName: string,
+    sceneName: string,
+    versionName: string
+  ): boolean;
 
   /**
    * returns all palettes that were either unrecovered or recovered but not yet saved, depending on the arguments of the function.
    */
-  function getMissingPalettes(unrecovered: boolean, recoveredNotYetSaved: boolean): StringList;
+  function getMissingPalettes(
+    unrecovered: boolean,
+    recoveredNotYetSaved: boolean
+  ): StringList;
 
   function metadatas(): QScriptValue;
 
@@ -2268,7 +2585,10 @@ declare namespace selection {
   /**
    * sub selection - select a set of ID from the sub selection
    */
-  function addSubSelectionForNode(node: string, subSelection: QScriptValue): boolean;
+  function addSubSelectionForNode(
+    node: string,
+    subSelection: QScriptValue
+  ): boolean;
 
   /**
    * clear all subselection on a given node.
@@ -2330,19 +2650,6 @@ declare namespace sound {
   function sound(parent: QObject, name: char): void;
 
   function attach(impl: TUScriptInterfaceImpl): void;
-}
-
-/**
- * The System JavaScript global object. Call system specific command directly
- */
-declare namespace System {
-  function println(arg: string): void;
-
-  function getenv(str: string): string;
-
-  function processOneEvent(): void;
-
-  var globalObject: any;
 }
 
 /**
@@ -2412,17 +2719,17 @@ declare namespace Timeline {
   /**
    * return the number of layer selected.
    */
-  function numLayerSel(): int;
+  var numLayerSel: int;
 
   /**
    * return the first frame selected.
    */
-  function firstFrameSel(): int;
+  var firstFrameSel: int;
 
   /**
    * return the number of the selected frame, if only one frame is selected. It will return zero (0) if no frames are selected.
    */
-  function numFrameSel(): int;
+  var numFrameSel: int;
 
   /**
    * return the number of layers in the timeline.
@@ -2634,6 +2941,8 @@ declare namespace view {
  * Base class of the script widget classes
  */
 declare class WidgetBase extends MO_SignalEmitter {
+  constructor(config: object);
+
   public data(index?: int): Attribute;
 
   /**
@@ -2852,7 +3161,9 @@ declare class Attribute extends QObject {
    * Set attribute value.
    * Note: Does not work for all attributes in my experience (such as CurveModule's offset)
    */
-  public setValue(v: string | number | boolean | Point2d | Point3d | ColorRGBA): void;
+  public setValue(
+    v: string | number | boolean | Point2d | Point3d | ColorRGBA
+  ): void;
 
   public hasSubAttributes(): boolean;
 }
@@ -3130,7 +3441,10 @@ declare class Constants extends QObject {
  * @param nodePath
  * @param frame
  */
-declare function createVertexTransform(nodePath: NodePath, frame: number): VertexTransform;
+declare function createVertexTransform(
+  nodePath: NodePath,
+  frame: number
+): VertexTransform;
 
 declare interface VertexTransform {
   applyVertexTransform(p: Point2d): Point2d;
@@ -3402,7 +3716,11 @@ declare class Palette extends QObject {
   /**
    * Create a new colour of a given type.
    */
-  public createNewColor(colorType: int, name: string, colorData: QVariant): Color;
+  public createNewColor(
+    colorType: int,
+    name: string,
+    colorData: QVariant
+  ): Color;
 
   /**
    * Create a new solid colour.
@@ -3422,12 +3740,20 @@ declare class Palette extends QObject {
   /**
    * Create a new texture colour object.
    */
-  public createNewTexture(name: string, filename: string, tiled: boolean): Texture;
+  public createNewTexture(
+    name: string,
+    filename: string,
+    tiled: boolean
+  ): Texture;
 
   /**
    * Create a new texture from a QImage object (may not be done from the script).
    */
-  public createNewTexture(name: string, bitmap: QImage, tiled: boolean): Texture;
+  public createNewTexture(
+    name: string,
+    bitmap: QImage,
+    tiled: boolean
+  ): Texture;
 
   /**
    * Create a duplicate of a colour object - this colourID is unique.
@@ -3523,9 +3849,18 @@ declare class PaletteList extends QObject {
 
   public createPalette(path: string, index: int): Palette;
 
-  public createPaletteAtLocation(location: int, elementId: int, diskName: string): Palette;
+  public createPaletteAtLocation(
+    location: int,
+    elementId: int,
+    diskName: string
+  ): Palette;
 
-  public createPaletteAtLocation(location: int, elementId: int, diskName: string, index: int): Palette;
+  public createPaletteAtLocation(
+    location: int,
+    elementId: int,
+    diskName: string,
+    index: int
+  ): Palette;
 
   /**
    * Adds a palette to the end of this palette list, returning a Palette object.
@@ -3540,12 +3875,21 @@ declare class PaletteList extends QObject {
   /**
    * Adds a palette to the end of this palette list, returning a Palette object.
    */
-  public addPaletteAtLocation(location: int, elementId: int, name: string): Palette;
+  public addPaletteAtLocation(
+    location: int,
+    elementId: int,
+    name: string
+  ): Palette;
 
   /**
    * Adds a palette to this palette list at the position specified by 'index', returning a Palette object.
    */
-  public insertPaletteAtLocation(location: int, elementId: int, name: string, index: int): Palette;
+  public insertPaletteAtLocation(
+    location: int,
+    elementId: int,
+    name: string,
+    index: int
+  ): Palette;
 
   /**
    * Remove the palette at the position specified by 'index'.
@@ -3670,16 +4014,33 @@ declare class PaletteLocator extends QObject {
   /**
    * Will return the filename of the palette including the .plt extension for a given palette and location.
    */
-  public palettePathForLocation(location: int, elementId: int, paletteName: string): string;
+  public palettePathForLocation(
+    location: int,
+    elementId: int,
+    paletteName: string
+  ): string;
 
   /**
    * Will return the texture folder of the palette for a given palette and location.
    */
-  public textureFolderForLocation(location: int, elementId: int, paletteName: string): string;
+  public textureFolderForLocation(
+    location: int,
+    elementId: int,
+    paletteName: string
+  ): string;
 
-  public palettesAtLocation(location: int, elementId: int, fullFileName: boolean): StringList;
+  public palettesAtLocation(
+    location: int,
+    elementId: int,
+    fullFileName: boolean
+  ): StringList;
 
-  public importPaletteAtLocation(palettePath: string, location: int, elementId: int, paletteName: string): boolean;
+  public importPaletteAtLocation(
+    palettePath: string,
+    location: int,
+    elementId: int,
+    paletteName: string
+  ): boolean;
 }
 
 /**
@@ -3745,6 +4106,7 @@ declare class PasteOptions extends QObject {
   deleteMode: string;
 }
 
+declare class Process2 extends Process {}
 /**
  * The Process JavaScript class. Launch an external process
  */
@@ -3850,6 +4212,8 @@ declare class Process extends QObject {
 
   constructor(args?: StringList);
 
+  constructor(...args: string[]);
+
   public arguments(): StringList;
 
   public setArguments(arguments: StringList): void;
@@ -3862,14 +4226,14 @@ declare class Process extends QObject {
 
   public exitStatus(): int;
 
-  objectName: string;
+  //objectName: string;
 }
 
 /**
  * The RemoteCmd JavaScript class. Send one sided commands to a remote host
  */
 declare class RemoteCmd extends QObject {
-  public connect(machine: string, port: int): boolean;
+  //public connect(machine: string, port: int): boolean;
 
   public connectTimeout(machine: string, port: int, timeout: int): boolean;
 
@@ -3881,7 +4245,7 @@ declare class RemoteCmd extends QObject {
 
   public receiveMsg(timeout: int): boolean;
 
-  public disconnect(): void;
+  //public disconnect(): void;
 
   public connected(): boolean;
 
@@ -3909,9 +4273,21 @@ declare class deformation extends SCR_AbstractInterface {
 declare class ExportOH264 extends SCR_AbstractInterface {
   public exportMovieFromWriteModules(fromFrame?: int, toFrame?: int): void;
 
-  public exportMovieFromWriteModule(moduleName: string, firstFrame?: int, lastFrame?: int, withSound?: boolean, movieFile?: string): void;
+  public exportMovieFromWriteModule(
+    moduleName: string,
+    firstFrame?: int,
+    lastFrame?: int,
+    withSound?: boolean,
+    movieFile?: string
+  ): void;
 
-  public exportMovieFromFiles(movieFilename: string, framesFilenames: StringList, firstFrame?: int, lastFrame?: int, withSound?: boolean): void;
+  public exportMovieFromFiles(
+    movieFilename: string,
+    framesFilenames: StringList,
+    firstFrame?: int,
+    lastFrame?: int,
+    withSound?: boolean
+  ): void;
 }
 
 /**
@@ -3971,7 +4347,7 @@ declare class Dialog extends SCRIPT_QSWidget {
   /**
    * it is the width of the dialog
    */
-  width: int;
+  //width: int;
 
   /**
    * it is the name of the ok button
