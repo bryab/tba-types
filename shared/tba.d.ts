@@ -187,11 +187,7 @@ declare class Dir extends QObject {
   /**
    * Returns a list of the names of all the files and directories in the directory, ordered according to the name and attribute filters.
    */
-  public entryList(
-    filter: string,
-    filterSpec?: Dir.FilterSpec,
-    sortSpec?: Dir.SortSpec
-  ): StringList;
+  public entryList(filter: string, filterSpec?: Dir.FilterSpec, sortSpec?: Dir.SortSpec): StringList;
 
   /**
    * Create a directory with given name.
@@ -292,305 +288,12 @@ declare namespace UiLoader {
    */
   function exec(context: QScriptContext, engine?: QScriptEngine): QScriptValue;
 
-  function setSvgIcon(
-    context: QScriptContext,
-    engine?: QScriptEngine
-  ): QScriptValue;
+  function setSvgIcon(context: QScriptContext, engine?: QScriptEngine): QScriptValue;
 
   /**
    * Takes a DPI-independent pixel dimension (100% DPI scaling on an HD screen) and scales it to the current DPI setting.
    */
-  function dpiScale(
-    context: QScriptContext,
-    engine?: QScriptEngine
-  ): QScriptValue;
-}
-
-/**
- * Returns information about the current application running the script and its environment. You can use it in both Script Editor and scriptModule
- */
-declare namespace about {
-  /**
-   * Query if current platform is Windows.
-   */
-  function isWindowsArch(): boolean;
-
-  /**
-   * Query if current platform is Linux.
-   */
-  function isLinuxArch(): boolean;
-
-  /**
-   * Query if current platform is Mac.
-   */
-  function isMacArch(): boolean;
-
-  /**
-   * Query if current platform is Mac Intel.
-   */
-  function isMacIntelArch(): boolean;
-
-  /**
-   * Query if current platform is Mac Power PC.
-   */
-  function isMacPpcArch(): boolean;
-
-  /**
-   * Query current application folder.
-   */
-  function getApplicationPath(): string;
-
-  /**
-   * Query common binary folder.
-   */
-  function getBinaryPath(): string;
-
-  /**
-   * Query common resources folder.
-   */
-  function getResourcesPath(): string;
-
-  /**
-   * returns a string that represents the flavour of the application, e.g. Harmony,
-   */
-  function getFlavorString(): string;
-
-  /**
-   * returns the version info string.
-   */
-  function getVersionInfoStr(): string;
-
-  /**
-   * returns a string that is the name of application.
-   */
-  function productName(): string;
-
-  /**
-   * returns true whenever this application is a Commercial/Full variant.
-   */
-  function isFullVersion(): boolean;
-
-  /**
-   * returns true whenever this application is a Demo variant.
-   */
-  function isDemoVersion(): boolean;
-
-  /**
-   * returns true whenever this application is an Educational variant.
-   */
-  function isEducVersion(): boolean;
-
-  /**
-   * true when connected to a database or when compiled with Harmony.
-   */
-  function isHarmony(): boolean;
-
-  /**
-   * only true when running as Stage Essentials.
-   */
-  function isStageEssentials(): boolean;
-
-  /**
-   * only true when running as Stage Advanced
-   */
-  function isStageAdvanced(): boolean;
-
-  /**
-   * only true when running as Stage.
-   */
-  function isStage(): boolean;
-
-  /**
-   * only true when running as Storyboard.
-   */
-  function isStoryboard(): boolean;
-
-  /**
-   * returns true when running on Windows.
-   */
-  function isWindowsArch(): boolean;
-
-  /**
-   * returns true when running on linux.
-   */
-  function isLinuxArch(): boolean;
-
-  /**
-   * returns true when running on MacOS.
-   */
-  function isMacArch(): boolean;
-
-  /**
-   * returns true when running on an Apple OS X operating system and on a Mac Intel.
-   */
-  function isMacIntelArch(): boolean;
-
-  /**
-   * returns true when running on an Apple OS X operating system and on a Mac PowerPC.
-   */
-  function isMacPpcArch(): boolean;
-
-  /**
-   * returns true whenever this application is interactive. All application capable of running scripts are interactive.
-   */
-  function isInteractiveApp(): boolean;
-
-  /**
-   * true when this application is Scan.
-   */
-  function isScanApp(): boolean;
-
-  /**
-   * returns true when this application is Stage, or Storyboard, and not a peripheral application.
-   */
-  function isMainApp(): boolean;
-
-  /**
-   * returns true whenever this application running application is ControlCenter
-   */
-  function isControlCenterApp(): boolean;
-
-  /**
-   * returns true when this application is in Paint mode.
-   */
-  function isPaintMode(): boolean;
-
-  /**
-   * returns true when this application is in Xsheet mode.
-   */
-  function isXsheetMode(): boolean;
-
-  /**
-   * returns the application. Identical to property "applicationPath".
-   */
-  function getApplicationPath(): string;
-
-  /**
-   * returns the folder where the binaries can be found.
-   */
-  function getBinaryPath(): string;
-
-  /**
-   * returns the folder where the resources can be found.
-   */
-  function getResourcesPath(): string;
-
-  /**
-   * Return the user name.
-   */
-  function getUserName(): string;
-
-  /**
-   * Current platform is Windows.
-   */
-  var windowsArch: boolean;
-
-  /**
-   * Current platform is Linux.
-   */
-  var linuxArch: boolean;
-
-  /**
-   * Current platform is Mac.
-   */
-  var macArch: boolean;
-
-  /**
-   * Current platform is Mac Intel.
-   */
-  var macIntelArch: boolean;
-
-  /**
-   * Current platform is Mac Power PC.
-   */
-  var macPpcArch: boolean;
-
-  /**
-   * Application with GUI folder (different than binFolder on Mac. Same for all other platforms ).
-   */
-  var applicationPath: string;
-
-  /**
-   * Common binary folder.
-   */
-  var binaryPath: string;
-
-  /**
-   * Common resources folder.
-   */
-  var resourcesPath: string;
-
-  /**
-   * See isFullVersion.
-   */
-  var fullVersion: boolean;
-
-  /**
-   * See isDemoVersion.
-   */
-  var demoVersion: boolean;
-
-  /**
-   * See isEducVersion.
-   */
-  var educVersion: boolean;
-
-  /**
-   * See isHarmony.
-   */
-  var harmony: boolean;
-
-  /**
-   * See isStageEssentials.
-   */
-  var essentials: boolean;
-
-  /**
-   * See isStageAdvanced.
-   */
-  var advanced: boolean;
-
-  /**
-   * See isStage.
-   */
-  var state: boolean;
-
-  /**
-   * See isStoryboard.
-   */
-  var storyboard: boolean;
-
-  /**
-   * See isMainApp.
-   */
-  var mainApp: boolean;
-
-  /**
-   * See isInteractiveApp.
-   */
-  var interactiveApp: boolean;
-
-  /**
-   * See isScanApp.
-   */
-  var scanApp: boolean;
-
-  /**
-   * See isControlCenterApp.
-   */
-  var controlCenterApp: boolean;
-
-  /**
-   * See isPaintMode.
-   */
-  var paintMode: boolean;
-
-  /**
-   * See isXsheetMode.
-   */
-  var xsheetMode: boolean;
-
-  var userName: string;
+  function dpiScale(context: QScriptContext, engine?: QScriptEngine): QScriptValue;
 }
 
 /**
@@ -600,39 +303,22 @@ declare namespace FileDialog {
   /**
    * function that returns an existing file selected by the user
    */
-  function getOpenFileName(
-    filter?: string,
-    title?: string,
-    parent?: QWidget
-  ): string;
+  function getOpenFileName(filter?: string, title?: string, parent?: QWidget): string;
 
   /**
    * function that will return a file name selected by the user
    */
-  function getSaveFileName(
-    filter?: string,
-    title?: string,
-    parent?: QWidget
-  ): string;
+  function getSaveFileName(filter?: string, title?: string, parent?: QWidget): string;
 
   /**
    * function that will return an existing directory selected by the user
    */
-  function getExistingDirectory(
-    dir?: string,
-    title?: string,
-    parent?: QWidget
-  ): string;
+  function getExistingDirectory(dir?: string, title?: string, parent?: QWidget): string;
 
   /**
    * function that will return one or more existing files selected by the user
    */
-  function getOpenFileNames(
-    dir?: string,
-    filter?: string,
-    title?: string,
-    parent?: QWidget
-  ): StringList;
+  function getOpenFileNames(dir?: string, filter?: string, title?: string, parent?: QWidget): StringList;
 }
 
 /**
@@ -885,47 +571,22 @@ declare namespace Input {
   /**
    * Function to get a string from the user.
    */
-  function getText(
-    label?: string,
-    text?: string,
-    title?: string,
-    parent?: QWidget
-  ): string;
+  function getText(label?: string, text?: string, title?: string, parent?: QWidget): string;
 
   /**
    * Function to get a number from the user.
    */
-  function getNumber(
-    label?: string,
-    value?: double,
-    decimals?: int,
-    minValue?: double,
-    maxValue?: double,
-    title?: string,
-    parent?: QWidget
-  ): number;
+  function getNumber(label?: string, value?: double, decimals?: int, minValue?: double, maxValue?: double, title?: string, parent?: QWidget): number;
 
   /**
    * Function to get an item from the user.
    */
-  function getItem(
-    label: string,
-    itemList: StringList,
-    currentItem?: string,
-    editable?: boolean,
-    title?: string,
-    parent?: QWidget
-  ): string;
+  function getItem(label: string, itemList: StringList, currentItem?: string, editable?: boolean, title?: string, parent?: QWidget): string;
 
   /**
    * Function to get an item from the user.
    */
-  function getItem(
-    itemList: StringList,
-    currentItem?: string,
-    editable?: boolean,
-    parent?: QWidget
-  ): string;
+  function getItem(itemList: StringList, currentItem?: string, editable?: boolean, parent?: QWidget): string;
 }
 
 /**
@@ -1456,36 +1117,17 @@ declare class Matrix4x4 extends QObject {
   /**
    * Calculate an orthogonal projection Matrix4x4.
    */
-  public orthogonalProject(
-    left: double,
-    right: double,
-    bottom: double,
-    top: double,
-    zNear: double,
-    zFar: double
-  ): Matrix4x4;
+  public orthogonalProject(left: double, right: double, bottom: double, top: double, zNear: double, zFar: double): Matrix4x4;
 
   /**
    * Calculate a perspective projection Matrix4x4.
    */
-  public perspectiveProject(
-    left: double,
-    right: double,
-    bottom: double,
-    top: double,
-    zNear: double,
-    zFar: double
-  ): Matrix4x4;
+  public perspectiveProject(left: double, right: double, bottom: double, top: double, zNear: double, zFar: double): Matrix4x4;
 
   /**
    * Calculate a perspective projection Matrix4x4.
    */
-  public perspectiveProject(
-    fovy: double,
-    ratio: double,
-    zNear: double,
-    zFar: double
-  ): Matrix4x4;
+  public perspectiveProject(fovy: double, ratio: double, zNear: double, zFar: double): Matrix4x4;
 
   /**
    * Invert current Matrix4x4.

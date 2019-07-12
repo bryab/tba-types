@@ -1,5 +1,6 @@
 /// <reference path="../../shared/qtscript.d.ts" />
 /// <reference path="../../shared/tba.d.ts" />
+/// <reference path="../../shared/15/index.d.ts" />
 
 /**
  * Action interface is used to perform menu or tool bar functions
