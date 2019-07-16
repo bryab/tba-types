@@ -2184,6 +2184,8 @@ declare class Point2dWidget extends WidgetBase {
   public valueChanged: QSignal<(point2d: Point2d) => void>;
 }
 
+declare class MCUIPoint2D extends Point2dWidget {}
+
 /**
  * The Rotation3dWidget JavaScript class. A rotatable spherical widget
  */
