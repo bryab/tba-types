@@ -1,4 +1,4 @@
-declare class QSignal<T extends Slot> {
+declare class QSignal<T extends (...any) => void> {
   connect(method: T): any;
   connect(receiver: any, method: T): any;
   disconnect(receiver: any, method: T): any;
