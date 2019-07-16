@@ -1,4 +1,5 @@
-declare class QSignal<T> {
+declare class QSignal<T extends Slot> {
+  connect(method: T): any;
   connect(receiver: any, method: T): any;
   disconnect(receiver: any, method: T): any;
 }
