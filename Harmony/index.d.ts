@@ -322,100 +322,6 @@ declare const enum DrawingLayer {
   overlayArt = 3
 }
 
-/** Config for DrawingTools.clearArt
- * drawing : Drawing Key
- * art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
- */
-
-declare interface ClearArtConfig {
-  drawing: string;
-  art?: DrawingLayer;
-}
-
-/**
- * The DrawingTools JavaScript global object. Get information about the currently selected drawing
- */
-declare namespace DrawingTools {
-  /**
-   * sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt
-   */
-  function setCurrentArt(layer: DrawingLayer): void;
-
-  /**
-   * sets the current drawing to be from column columnName at frame frame
-   */
-  function setCurrentDrawingFromColumnName(columnName: string, frame?: int): boolean;
-
-  /**
-   * sets the current drawing to be from node nodeName at frame frame
-   */
-  function setCurrentDrawingFromNodeName(nodeName: string, frame?: int): boolean;
-
-  /**
-   * converts the selected pencil lines in layer of the current drawing using params
-   */
-  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
-
-  /**
-   * extracts the centerline from srcLayer and puts the extracted line in dstLayer using params.
-   */
-  function extractCenterline(srcArt?: int, dstArt?: int, params?: DrawingToolParams): void;
-
-  /**
-   * Clears an art of a drawing.
-     Takes an object that can contain: drawing : Drawing Key art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
-     Added in 15.0.5
-   */
-  function clearArt(config: ClearArtConfig): void;
-  /**
-   * computes the breaking triangles of the current layer using params.
-   */
-  function computeBreakingTriangles(params?: DrawingToolParams): void;
-
-  function recolorDrawing(): void;
-
-  function getDrawingUsedColors(): QScriptValue;
-
-  function getDrawingUsedColorsWithSource(): QScriptValue;
-
-  function getMultipleDrawingsUsedColors(): QScriptValue;
-
-  /**
-   * Performs the same operation as Drawing->Optimize->Optimize menu item.
-   */
-  function optimize(config: QVariant): boolean;
-
-  /**
-   * Performs the same operation as Drawing->Optimize->Flatten menu item.
-   */
-  function flatten(config: QVariant): boolean;
-
-  /**
-   * readonly property - returns underlayArt mask
-   */
-  var underlayArt: int;
-
-  /**
-   * readonly property - returns colourArt mask
-   */
-  var colourArt: int;
-
-  /**
-   * readonly property - returns lineArt mask
-   */
-  var lineArt: int;
-
-  /**
-   * readonly property - returns overlayArt mask
-   */
-  var overlayArt: int;
-
-  /**
-   * readonly property - returns mask for all 4 art layers
-   */
-  var allArts: int;
-}
-
 /**
  * The element JavaScript global object. Add, remove, modify or get information about element nodes in the scene
  */
@@ -2113,10 +2019,30 @@ declare class CustomWidget extends WidgetBase {
   public valueChanged(newValue: string): void;
 }
 
+declare interface Line2dDisplayWidgetConfig {
+  /**
+  An array of existing 2D point attribute.
+  Default: - 
+  */
+  data: Attribute[];
+  /**
+  The thickness of the line.
+  Default: 0.01 
+  */
+  size: float;
+  /**
+  The colour of the sphere manipulator.
+  Default: 255, 0, 0 
+  */
+  color: ColorRGBA;
+}
+
 /**
  * The Line2dDisplayWidget JavaScript class. A 2 dimensional line linking 2 points
  */
-declare class Line2dDisplayWidget extends WidgetBase {}
+declare class Line2dDisplayWidget extends WidgetBase {
+  constructor(config: Line2dDisplayWidgetConfig);
+}
 
 declare interface Point2dWidgetConfig extends WidgetConfig {
   /**
@@ -2186,34 +2112,144 @@ declare class Point2dWidget extends WidgetBase {
 
 declare class MCUIPoint2D extends Point2dWidget {}
 
+declare interface Rotation3dWidgetConfig {
+  /**
+  The name of the automatically generated 3D rotation attribute (if none is provided)
+  Default: -
+  */
+  data: string | Attribute;
+  /**
+  The radius of the 3D sphere in field.
+  Default: 1
+  */
+  radius: float;
+  /**
+  The colour of the sphere manipulator.
+  Default: 255, 0, 0, 120
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the sphere manipulator when selected.
+  Default: 255, 0, 0, 180
+  */
+  selection_color: ColorRGBA;
+}
+
 /**
  * The Rotation3dWidget JavaScript class. A rotatable spherical widget
  */
 declare class Rotation3dWidget extends WidgetBase {
+  constructor(config: Rotation3dWidgetConfig);
   /**
    * valueChanged signal called when the Rotation 3D attribute value has changed
    */
   public valueChanged: QSignal<(point2d: QScriptValue) => void>;
 }
 
+declare interface RotationXWidgetConfig {
+  /**
+  The name of the automatically generated double floating point attribute (if none is provided)
+  Default: -
+  */
+  data: String | Attribute;
+  /**
+  The radius of the circle in fields.
+  Default: 1
+  */
+  radius: float;
+  /**
+  The width between the external and internal circles (band) in fields.
+  Default: 0.03
+  */
+  width: float;
+  /**
+  The colour of the circle manipulator.
+  Default: 255, 0, 0, 120
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the circle manipulator when selected.
+  Default: light red
+  */
+  selection_color: ColorRGBA;
+}
+
 /**
  * The RotationXWidget JavaScript class. A rotatable circle widget around the x axis
  */
 declare class RotationXWidget extends WidgetBase {
+  constructor(config: RotationXWidgetConfig);
   public valueChanged: QSignal<(x: float) => void>;
 }
 
+declare interface RotationYWidgetConfig {
+  /**
+  The name of the automatically generated double floating point attribute (if none is provided)
+  Default: -
+  */
+  data: String | Attribute;
+  /**
+  The radius of the circle in fields.
+  Default: 1
+  */
+  radius: float;
+  /**
+  The width between the external and internal circles (band) in fields.
+  Default: 0.03
+  */
+  width: float;
+  /**
+  The colour of the circle manipulator.
+  Default: 0, 255, 0, 120
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the circle manipulator when selected.
+  Default: light green
+  */
+  selection_color: ColorRGBA;
+}
 /**
  * The RotationYWidget JavaScript class. A rotatable circle widget around the y axis
  */
 declare class RotationYWidget extends WidgetBase {
+  constructor(config: RotationYWidgetConfig);
   public valueChanged: QSignal<(y: float) => void>;
+}
+
+declare interface RotationZWidgetConfig {
+  /**
+  The name of the automatically generated double floating point attribute (if none is provided)
+  Default: -
+  */
+  data: String | Attribute;
+  /**
+  The radius of the circle in fields.
+  Default: 1
+  */
+  radius: float;
+  /**
+  The width between the external and internal circles (band) in fields.
+  Default: 0.03
+  */
+  width: float;
+  /**
+  The colour of the circle manipulator.
+  Default: 0, 0, 255, 120
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the circle manipulator when selected.
+  Default: light blue
+  */
+  selection_color: ColorRGBA;
 }
 
 /**
  * The RotationZWidget JavaScript class. A rotatable circle widget around the z axis
  */
 declare class RotationZWidget extends WidgetBase {
+  constructor(config: RotationZWidgetConfig);
   public valueChanged: QSignal<(z: float) => void>;
 }
 
@@ -2301,30 +2337,117 @@ declare class SliderWidget extends WidgetBase {
   public valueChanged: QSignal<(newSliderValue: float) => void>;
 }
 
+declare interface TranslationXWidgetConfig {
+  /**
+  The name of the automatically generated double floating point attribute (if none is provided)
+  Default: -
+  */
+  data: String | Attribute;
+  /**
+  The radius of the base of the arrow manipulator in field.
+  Default: 0.15
+  */
+  radius: float;
+  /**
+  The lenght of the stick of the arrow manipulator in field.
+  Default: 1.0
+  */
+  length: float;
+  /**
+  The colour of the arrow manipulator.
+  Default: red
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the arrow manipulator when selected.
+  Default: light red
+  */
+  selection_color: ColorRGBA;
+}
+
 /**
  * The TranslationXWidget JavaScript class. A translatable arrow in the x axis
  */
 declare class TranslationXWidget extends WidgetBase {
+  constructor(config: TranslationXWidgetConfig);
   /**
    * valueChanged signal called when the x translation value has been modified by the Transform tool.
    */
   public valueChanged(x: float): void;
 }
 
+declare interface TranslationYWidgetConfig {
+  /**
+  The name of the automatically generated double floating point attribute (if none is provided)
+  Default: -
+  */
+  data: String | Attribute;
+  /**
+  The radius of the base of the arrow manipulator in field.
+  Default: 0.15
+  */
+  radius: float;
+  /**
+  The lenght of the stick of the arrow manipulator in field.
+  Default: 1.0
+  */
+  length: float;
+  /**
+  The colour of the arrow manipulator.
+  Default: green
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the arrow manipulator when selected.
+  Default: light green
+  */
+  selection_color: ColorRGBA;
+}
+
 /**
  * The TranslationYWidget JavaScript class. A translatable arrow in the y axis
  */
 declare class TranslationYWidget extends WidgetBase {
+  constructor(config: TranslationYWidgetConfig);
   /**
    * valueChanged signal called when the y translation value has been modified by the Transform tool.
    */
   public valueChanged(y: float): void;
 }
 
+declare interface TranslationZWidgetConfig {
+  /**
+  The name of the automatically generated double floating point attribute (if none is provided)
+  Default: -
+  */
+  data: String | Attribute;
+  /**
+  The radius of the base of the arrow manipulator in field.
+  Default: 0.15
+  */
+  radius: float;
+  /**
+  The lenght of the stick of the arrow manipulator in field.
+  Default: 1.0
+  */
+  length: float;
+  /**
+  The colour of the arrow manipulator.
+  Default: blue
+  */
+  color: ColorRGBA;
+  /**
+  The colour of the arrow manipulator when selected.
+  Default: light blue
+  */
+  selection_color: ColorRGBA;
+}
+
 /**
  * The TranslationZWidget JavaScript class. A translatable arrow in the z axis
  */
 declare class TranslationZWidget extends WidgetBase {
+  constructor(config: TranslationZWidgetConfig);
   /**
    * valueChanged signal called when the z translation value has been modified by the Transform tool.
    */

@@ -657,3 +657,97 @@ declare namespace column {
    */
   function soundColumn(columnName: string): QObject;
 }
+
+/** Config for DrawingTools.clearArt
+ * drawing : Drawing Key
+ * art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
+ */
+
+declare interface ClearArtConfig {
+  drawing: string;
+  art?: DrawingLayer;
+}
+
+/**
+ * The DrawingTools JavaScript global object. Get information about the currently selected drawing
+ */
+declare namespace DrawingTools {
+  /**
+   * sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt
+   */
+  function setCurrentArt(layer: DrawingLayer): void;
+
+  /**
+   * sets the current drawing to be from column columnName at frame frame
+   */
+  function setCurrentDrawingFromColumnName(columnName: string, frame?: int): boolean;
+
+  /**
+   * sets the current drawing to be from node nodeName at frame frame
+   */
+  function setCurrentDrawingFromNodeName(nodeName: string, frame?: int): boolean;
+
+  /**
+   * converts the selected pencil lines in layer of the current drawing using params
+   */
+  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
+
+  /**
+   * extracts the centerline from srcLayer and puts the extracted line in dstLayer using params.
+   */
+  function extractCenterline(srcArt?: int, dstArt?: int, params?: DrawingToolParams): void;
+
+  /**
+   * Clears an art of a drawing.
+     Takes an object that can contain: drawing : Drawing Key art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
+     Added in 15.0.5
+   */
+  function clearArt(config: ClearArtConfig): void;
+  /**
+   * computes the breaking triangles of the current layer using params.
+   */
+  function computeBreakingTriangles(params?: DrawingToolParams): void;
+
+  function recolorDrawing(): void;
+
+  function getDrawingUsedColors(): QScriptValue;
+
+  function getDrawingUsedColorsWithSource(): QScriptValue;
+
+  function getMultipleDrawingsUsedColors(): QScriptValue;
+
+  /**
+   * Performs the same operation as Drawing->Optimize->Optimize menu item.
+   */
+  function optimize(config: QVariant): boolean;
+
+  /**
+   * Performs the same operation as Drawing->Optimize->Flatten menu item.
+   */
+  function flatten(config: QVariant): boolean;
+
+  /**
+   * readonly property - returns underlayArt mask
+   */
+  var underlayArt: int;
+
+  /**
+   * readonly property - returns colourArt mask
+   */
+  var colourArt: int;
+
+  /**
+   * readonly property - returns lineArt mask
+   */
+  var lineArt: int;
+
+  /**
+   * readonly property - returns overlayArt mask
+   */
+  var overlayArt: int;
+
+  /**
+   * readonly property - returns mask for all 4 art layers
+   */
+  var allArts: int;
+}

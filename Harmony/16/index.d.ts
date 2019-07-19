@@ -1588,3 +1588,122 @@ declare module Backdrop {
    */
   function addBackdrop(group: string, backdrop: QScriptValue): boolean;
 }
+
+/**
+ * The DrawingTools JavaScript global object. Get information about the currently selected drawing
+ */
+declare module DrawingTools {
+  /**
+   * Sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt.
+   */
+  function setCurrentArt(currentArt: int): void;
+
+  function setCurrentDrawingFromColumnName(columnName: string, frame?: int): boolean;
+
+  /**
+   * Sets the current drawing to be from node nodeName at frame frame.
+   */
+  function setCurrentDrawingFromNodeName(nodeName: string, frame?: int): boolean;
+
+  /**
+   * Converts the selected pencil lines in layer of the current drawing using params.
+   */
+  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
+
+  /**
+   * Extracts the centerline from srcArt and puts the extracted line in dstArt using params.
+   */
+  function extractCenterline(srcArt?: int, dstArt?: int, params?: DrawingToolParams): void;
+
+  /**
+   * Computes the breaking triangles of the current layer using params.
+   */
+  function computeBreakingTriangles(params?: DrawingToolParams): void;
+
+  /**
+   * Recolours the drawing identified by a DrawingKey.
+   */
+  function recolorDrawing(): void;
+
+  /**
+   * Changes the vector layer resolution of a given drawing.
+   */
+  function changeDrawingVectorLayerResolution(
+    drawingKey: QScriptValue,
+    pixelPerModelUnit: double,
+    options?: {
+      /**
+    Will only apply the resolution to new strokes if set to false.
+    Default: true
+    */
+      applyToExistingStrokes: bool;
+      /**
+    Controls which art layers are targeted by the function call (0=underlay, 1=line art, 2=color art, 3=overlay)
+    Default: [0,1,2,3]
+    */
+      art: number[];
+    }
+  ): void;
+
+  /**
+   * Changes the bitmap layer resolution of a given drawing.
+   */
+  function changeDrawingBitmapLayerResolution(drawingKey: QScriptValue, pixelPerModelUnit: double, options?: QScriptValue): void;
+
+  /**
+   * Returns an array containing the set of colour ids used by the drawing.
+   */
+  function getDrawingUsedColors(): QScriptValue;
+
+  /**
+   * Returns an array of objects describing the set of colour ids used by the drawing along with the source of the colour.
+   */
+  function getDrawingUsedColorsWithSource(): QScriptValue;
+
+  /**
+   * Return an array containing the set of colour ids used by all drawings in the array.
+   */
+  function getMultipleDrawingsUsedColors(): QScriptValue;
+
+  function vectorize(unknown_0: any): QVariant;
+
+  /**
+   * Performs the same operation as Drawing->Optimize->Optimize menu item.
+   */
+  function optimize(config: QVariant): boolean;
+
+  /**
+   * Performs the same operation as Drawing->Optimize->Flatten menu item.
+   */
+  function flatten(config: QVariant): boolean;
+
+  /**
+   * Clears an art of a drawing.
+   */
+  function clearArt(config: { drawing: string; art?: DrawingLayer }): boolean;
+
+  /**
+   * Returns the underlayArt mask.
+   */
+  var underlayArt: int;
+
+  /**
+   * Returns the colourArt mask.
+   */
+  var colourArt: int;
+
+  /**
+   * Returns the lineArt mask.
+   */
+  var lineArt: int;
+
+  /**
+   * Returns the overlayArt mask.
+   */
+  var overlayArt: int;
+
+  /**
+   * Returns the mask for all 4 art layers.
+   */
+  var allArts: int;
+}
