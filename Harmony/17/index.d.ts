@@ -13,82 +13,82 @@ declare interface ButtonWidgetConfig {
     The size (half-extent) of the box.
     Default: 1.00
     */
-  size: float;
+  size?: float;
   /**
     When set to true, the button position becomes relative to the screen rather than the scene.
     Default: false
     */
-  screen_space: bool;
+  screen_space?: bool;
   /**
     Position of the box center in the scene, specified in fields.
     Default: Point2d(0,0)
     */
-  position: Point2d;
+  position?: Point2d;
   /**
     The outer colour of the box.
     Default: 0, 0, 0,255
     */
-  outer_color: ColorRGBA;
+  outer_color?: ColorRGBA;
   /**
     The inner colour of the box, when pressed.
     Default: 0,255, 0,128
     */
-  on_color: ColorRGBA;
+  on_color?: ColorRGBA;
   /**
     The outer colour of the box, when released.
     Default: 255, 0, 0,128
     */
-  off_color: ColorRGBA;
+  off_color?: ColorRGBA;
   /**
     When set to true, the button will stay in pressed state until pressed again.
     Default: false
     */
-  toggle: bool;
+  toggle?: bool;
   /**
     Label text
     Default: "text"
     */
-  label: String;
+  label?: String;
   /**
     Label foreground (text) color.
     Default: 255,255,255,255
     */
-  label_color: ColorRGBA;
+  label_color?: ColorRGBA;
   /**
     Label background color. Accepts transparency values.
     Default: 0, 0, 0,128
     */
-  label_bg_color: ColorRGBA;
+  label_bg_color?: ColorRGBA;
   /**
     Label font name.
     Default: "Arial"
     */
-  label_font: String;
+  label_font?: String;
   /**
     Label font size, in points.
     Default: 10.0
     */
-  label_size: float;
+  label_size?: float;
   /**
     Label position, in fields.
     Default: Point2d(0,0)
     */
-  label_pos: Point2d;
+  label_pos?: Point2d;
   /**
     Horizontal label text alignment ("Left"/"Center").
     Default: "Left"
     */
-  label_justify: String;
+  label_justify?: String;
   /**
     Forces the label size to remain constant relative to screen.
     Default: true
     */
-  label_screenspace: bool;
+  label_screenspace?: bool;
   /**
     Label position offset, in screen space.
     Default: Point2d(0,0)
     */
-  label_screenspace_offset: Point2d;
+  label_screenspace_offset?: Point2d;
 }
 
 /**
@@ -114,77 +114,77 @@ declare interface CheckboxWidgetConfig {
   The size (half-extent) of the box.
   Default: 1.00
   */
-  size: float;
+  size?: float;
   /**
   When set to true, the checkbox position becomes relative to the screen rather than the scene.
   Default: false
   */
-  screen_space: bool;
+  screen_space?: bool;
   /**
   Position of the box center in the scene, specified in fields.
   Default: Point2d(0,0)
   */
-  position: Point2d;
+  position?: Point2d;
   /**
   The outer colour of the box.
   Default: 0, 0, 0,255
   */
-  outer_color: ColorRGBA;
+  outer_color?: ColorRGBA;
   /**
   The inner colour of the box, when checked.
   Default: 0,255, 0,128
   */
-  on_color: ColorRGBA;
+  on_color?: ColorRGBA;
   /**
   The outer colour of the box, when unchecked.
   Default: 255, 0, 0,128
   */
-  off_color: ColorRGBA;
+  off_color?: ColorRGBA;
   /**
   Label text
   Default: "text"
   */
-  label: String;
+  label?: String;
   /**
   Label foreground (text) color.
   Default: 255,255,255,255
   */
-  label_color: ColorRGBA;
+  label_color?: ColorRGBA;
   /**
   Label background color. Accepts transparency values.
   Default: 0, 0, 0,128
   */
-  label_bg_color: ColorRGBA;
+  label_bg_color?: ColorRGBA;
   /**
   Label font name.
   Default: "Arial"
   */
-  label_font: String;
+  label_font?: String;
   /**
   Label font size, in points.
   Default: 10.0
   */
-  label_size: float;
+  label_size?: float;
   /**
   Label position, in fields.
   Default: Point2d(0,0)
   */
-  label_pos: Point2d;
+  label_pos?: Point2d;
   /**
   Horizontal label text alignment ("Left"/"Center").
   Default: "Left"
   */
-  label_justify: String;
+  label_justify?: String;
   /**
   Forces the label size to remain constant relative to screen.
   Default: true
   */
-  label_screenspace: bool;
+  label_screenspace?: bool;
   /**
   Label position offset, in screen space.
   Default: Point2d(0,0)
   */
-  label_screenspace_offset: Point2d;
+  label_screenspace_offset?: Point2d;
 }
 
 /**
@@ -210,122 +210,122 @@ declare interface SliderWidgetConfig {
   The length of the slider in fields.
   Default: 0.5
   */
-  length: float;
+  length?: float;
   /**
   The radius of the slider handle in fields.
   Default: 0.03
   */
-  radius: float;
+  radius?: float;
   /**
   When set to false, this option prevents interpolation between steps
   Default: true
   */
-  continuous: bool;
+  continuous?: bool;
   /**
   Paint a shadow under the slider.
   Default: false
   */
-  drop_shadow: bool;
+  drop_shadow?: bool;
   /**
   Make the slider appears horizontal. Vertical if false.
   Default: false
   */
-  horizontal: bool;
+  horizontal?: bool;
   /**
   Minimum value of the slider.
   Default: 0
   */
-  min: float;
+  min?: float;
   /**
   Maximum value of the slider.
   Default: 100
   */
-  max: float;
+  max?: float;
   /**
   The colour of the handle of the slider.
   Default: white
   */
-  slider_color: ColorRGBA;
+  slider_color?: ColorRGBA;
   /**
   The colour of the circle highlighting the handle of the slider.
   Default: dark gray
   */
-  contour_color: ColorRGBA;
+  contour_color?: ColorRGBA;
   /**
   The colour of the handle of the slider when selected.
   Default: 125,125,255
   */
-  slider_selection_color: ColorRGBA;
+  slider_selection_color?: ColorRGBA;
   /**
   The colour of the frame of the slider.
   Default: 200,200,200
   */
-  frame_color: ColorRGBA;
+  frame_color?: ColorRGBA;
   /**
   The colour of the frame of the slider when selected.
   Default: 125,125,255
   */
-  frame_selection_color: ColorRGBA;
+  frame_selection_color?: ColorRGBA;
   /**
   Default position of the slider frame bottom left corner. In fields.
   Default: 0.,0.
   */
-  position: Point2d;
+  position?: Point2d;
   /**
   When set to true, the slider position becomes relative to the screen rather than the scene.
   Default: false
   */
-  screen_space: bool;
+  screen_space?: bool;
   /**
   [optional] Automatically generated attribute, which can be changed during slider usage.
   Default: -
   */
-  dynamic_label_data: String;
+  dynamic_label_data?: String;
   /**
   Label text
   Default: "text"
   */
-  label: String;
+  label?: String;
   /**
   Label foreground (text) color.
   Default: 255, 255, 255
   */
-  label_color: ColorRGBA;
+  label_color?: ColorRGBA;
   /**
   Label background color. Accepts transparency values.
   Default: 0, 0, 0, 128
   */
-  label_bg_color: ColorRGBA;
+  label_bg_color?: ColorRGBA;
   /**
   Label font name.
   Default: "Arial"
   */
-  label_font: String;
+  label_font?: String;
   /**
   Label font size, in points.
   Default: 10.0
   */
-  label_size: float;
+  label_size?: float;
   /**
   Label position, in fields.
   Default: Point2d(0,0)
   */
-  label_pos: Point2d;
+  label_pos?: Point2d;
   /**
   Horizontal label text alignment ("Left"/"Center").
   Default: "Left"
   */
-  label_justify: String;
+  label_justify?: String;
   /**
   Forces the label size to remain constant relative to screen.
   Default: true
   */
-  label_screenspace: bool;
+  label_screenspace?: bool;
   /**
   Label position offset, in screen space.
   Default: Point2d(0,0)
   */
-  label_screenspace_offset: Point2d;
+  label_screenspace_offset?: Point2d;
 }
 
 /**
@@ -349,47 +349,47 @@ declare interface LabelWidgetConfig {
   Label text
   Default: "text"
   */
-  label: String;
+  label?: String;
   /**
   Label foreground (text) color.
   Default: 255,255,255,255
   */
-  label_color: ColorRGBA;
+  label_color?: ColorRGBA;
   /**
   Label background color. Accepts transparency values.
   Default: 0, 0, 0,128
   */
-  label_bg_color: ColorRGBA;
+  label_bg_color?: ColorRGBA;
   /**
   Label font name.
   Default: "Arial"
   */
-  label_font: String;
+  label_font?: String;
   /**
   Label font size, in points.
   Default: 10.0
   */
-  label_size: float;
+  label_size?: float;
   /**
   Label position, in fields.
   Default: Point2d(0,0)
   */
-  label_pos: Point2d;
+  label_pos?: Point2d;
   /**
   Horizontal label text alignment ("Left"/"Center").
   Default: "Left"
   */
-  label_justify: String;
+  label_justify?: String;
   /**
   Forces the label size to remain constant relative to screen.
   Default: true
   */
-  label_screenspace: bool;
+  label_screenspace?: bool;
   /**
   Label position offset, in screen space.
   Default: Point2d(0,0)
   */
-  label_screenspace_offset: Point2d;
+  label_screenspace_offset?: Point2d;
 }
 
 /**
@@ -409,107 +409,107 @@ declare interface Point2dWidgetConfig {
   The size (diameter) of the point manipulator in percentage of 350 pixels.
   Default: 0.01
   */
-  size: float;
+  size?: float;
   /**
   The colour of the point manipulator.
   Default: 255, 0, 0
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the inner point manipulator (override the color property if both are found).
   Default: color value
   */
-  inner_color: ColorRGBA;
+  inner_color?: ColorRGBA;
   /**
   The colour of the outer point manipulator (override the color property if both are found).
   Default: color value
   */
-  outer_color: ColorRGBA;
+  outer_color?: ColorRGBA;
   /**
   The colour of the point manipulator when selected.
   Default: light blue
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
   /**
   The left boundary of the point bounding box in fields.
   Default: -float max
   */
-  xmin: float;
+  xmin?: float;
   /**
   The right boundary of the point bounding box in fields.
   Default: float max
   */
-  xmax: float;
+  xmax?: float;
   /**
   The bottom boundary of the point bounding box in fields.
   Default: -float max
   */
-  ymin: float;
+  ymin?: float;
   /**
   The top boundary of the point bounding box in fields.
   Default: float max
   */
-  ymax: float;
+  ymax?: float;
   /**
   Draw the bounding box
   Default: false
   */
-  show_limits: bool;
+  show_limits?: bool;
   /**
   Bounding box color
   Default: 0, 0, 0
   */
-  box_color: ColorRGBA;
+  box_color?: ColorRGBA;
   /**
   Point Style ("Circle","Square","Triangle", "Diamond")
   Default: "Circle"
   */
-  point_style: String;
+  point_style?: String;
   /**
   Label text
   Default: "text"
   */
-  label: String;
+  label?: String;
   /**
   Label foreground (text) color.
   Default: 255, 255, 255
   */
-  label_color: ColorRGBA;
+  label_color?: ColorRGBA;
   /**
   Label background color. Accepts transparency values.
   Default: 0, 0, 0, 128
   */
-  label_bg_color: ColorRGBA;
+  label_bg_color?: ColorRGBA;
   /**
   Label font name.
   Default: "Arial"
   */
-  label_font: String;
+  label_font?: String;
   /**
   Label font size, in points.
   Default: 10.0
   */
-  label_size: float;
+  label_size?: float;
   /**
   Label position, in fields.
   Default: Point2d(0,0)
   */
-  label_pos: Point2d;
+  label_pos?: Point2d;
   /**
   Horizontal label text alignment ("Left"/"Center").
   Default: "Left"
   */
-  label_justify: String;
+  label_justify?: String;
   /**
   Forces the label size to remain constant relative to screen.
   Default: true
   */
-  label_screenspace: bool;
+  label_screenspace?: bool;
   /**
   Label position offset, in screen space.
   Default: Point2d(0,0)
   */
-  label_screenspace_offset: Point2d;
+  label_screenspace_offset?: Point2d;
 }
 
 /**

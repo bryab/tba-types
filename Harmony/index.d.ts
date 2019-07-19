@@ -2034,12 +2034,12 @@ declare interface Line2dDisplayWidgetConfig {
   The thickness of the line.
   Default: 0.01 
   */
-  size: float;
+  size?: float;
   /**
   The colour of the sphere manipulator.
   Default: 255, 0, 0 
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
 }
 
 /**
@@ -2059,17 +2059,17 @@ declare interface Rotation3dWidgetConfig {
   The radius of the 3D sphere in field.
   Default: 1
   */
-  radius: float;
+  radius?: float;
   /**
   The colour of the sphere manipulator.
   Default: 255, 0, 0, 120
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the sphere manipulator when selected.
   Default: 255, 0, 0, 180
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 
 /**
@@ -2093,22 +2093,22 @@ declare interface RotationXWidgetConfig {
   The radius of the circle in fields.
   Default: 1
   */
-  radius: float;
+  radius?: float;
   /**
   The width between the external and internal circles (band) in fields.
   Default: 0.03
   */
-  width: float;
+  width?: float;
   /**
   The colour of the circle manipulator.
   Default: 255, 0, 0, 120
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the circle manipulator when selected.
   Default: light red
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 
 /**
@@ -2129,22 +2129,22 @@ declare interface RotationYWidgetConfig {
   The radius of the circle in fields.
   Default: 1
   */
-  radius: float;
+  radius?: float;
   /**
   The width between the external and internal circles (band) in fields.
   Default: 0.03
   */
-  width: float;
+  width?: float;
   /**
   The colour of the circle manipulator.
   Default: 0, 255, 0, 120
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the circle manipulator when selected.
   Default: light green
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 /**
  * The RotationYWidget JavaScript class. A rotatable circle widget around the y axis
@@ -2164,22 +2164,22 @@ declare interface RotationZWidgetConfig {
   The radius of the circle in fields.
   Default: 1
   */
-  radius: float;
+  radius?: float;
   /**
   The width between the external and internal circles (band) in fields.
   Default: 0.03
   */
-  width: float;
+  width?: float;
   /**
   The colour of the circle manipulator.
   Default: 0, 0, 255, 120
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the circle manipulator when selected.
   Default: light blue
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 
 /**
@@ -2200,22 +2200,22 @@ declare interface TranslationXWidgetConfig {
   The radius of the base of the arrow manipulator in field.
   Default: 0.15
   */
-  radius: float;
+  radius?: float;
   /**
   The lenght of the stick of the arrow manipulator in field.
   Default: 1.0
   */
-  length: float;
+  length?: float;
   /**
   The colour of the arrow manipulator.
   Default: red
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the arrow manipulator when selected.
   Default: light red
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 
 /**
@@ -2239,22 +2239,22 @@ declare interface TranslationYWidgetConfig {
   The radius of the base of the arrow manipulator in field.
   Default: 0.15
   */
-  radius: float;
+  radius?: float;
   /**
   The lenght of the stick of the arrow manipulator in field.
   Default: 1.0
   */
-  length: float;
+  length?: float;
   /**
   The colour of the arrow manipulator.
   Default: green
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the arrow manipulator when selected.
   Default: light green
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 
 /**
@@ -2278,22 +2278,22 @@ declare interface TranslationZWidgetConfig {
   The radius of the base of the arrow manipulator in field.
   Default: 0.15
   */
-  radius: float;
+  radius?: float;
   /**
   The lenght of the stick of the arrow manipulator in field.
   Default: 1.0
   */
-  length: float;
+  length?: float;
   /**
   The colour of the arrow manipulator.
   Default: blue
   */
-  color: ColorRGBA;
+  color?: ColorRGBA;
   /**
   The colour of the arrow manipulator when selected.
   Default: light blue
   */
-  selection_color: ColorRGBA;
+  selection_color?: ColorRGBA;
 }
 
 /**
