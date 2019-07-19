@@ -326,6 +326,18 @@ declare interface SliderWidgetConfig {
   Default: Point2d(0,0)
   */
   label_screenspace_offset?: Point2d;
+  /**
+   * Deprecated: Use 'position' attribute
+   * Default translation in the x axis for the bottom left corner of the slider frame. In fields.
+   * Default: -0.05
+   */
+  xmin?: number;
+  /**
+   * Deprecated: Use 'position' attribute
+   * Default translation in the y axis for the bottom left corner of the slider frame. In fields.
+   * Default: -0.1
+   */
+  ymin?: number;
 }
 
 /**

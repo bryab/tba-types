@@ -813,17 +813,17 @@ declare interface SliderWidgetConfig extends WidgetConfig {
    * Default: 125,125,255
    */
   frame_selection_color?: ColorRGBA;
-  /**
-   * Default position of the slider frame bottom left corner. In fields.
-   * Default: 0,0
-   */
-  position?: Point2d;
 
   /**
-   * When set to true, the slider position becomes relative to the screen rather than the scene.
-   * Default: false
+   * Default translation in the x axis for the bottom left corner of the slider frame. In fields.
+   * Default: -0.05
    */
-  screen_space?: boolean;
+  xmin?: number;
+  /**
+   * Default translation in the y axis for the bottom left corner of the slider frame. In fields.
+   * Default: -0.1
+   */
+  ymin?: number;
 }
 /**
  * The SliderWidget JavaScript class. A vertical or horizontal slider
@@ -881,14 +881,6 @@ declare interface Point2dWidgetConfig extends WidgetConfig {
    * The top boundary of the point bounding box in fields.
    */
   ymax?: float;
-  /**
-   * Draw the bounding box
-   */
-  show_limits?: boolean;
-  /**
-   * Bounding box color
-   */
-  box_color?: ColorRGBA;
 }
 
 /**

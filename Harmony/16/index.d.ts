@@ -144,6 +144,19 @@ declare interface SliderWidgetConfig extends WidgetConfig {
    * Default: false
    */
   screen_space?: boolean;
+
+  /**
+   * Deprecated: Use 'position' attribute
+   * Default translation in the x axis for the bottom left corner of the slider frame. In fields.
+   * Default: -0.05
+   */
+  xmin?: number;
+  /**
+   * Deprecated: Use 'position' attribute
+   * Default translation in the y axis for the bottom left corner of the slider frame. In fields.
+   * Default: -0.1
+   */
+  ymin?: number;
 }
 /**
  * The SliderWidget JavaScript class. A vertical or horizontal slider
