@@ -476,7 +476,7 @@ declare interface Point2dWidgetConfig {
   Point Style ("Circle","Square","Triangle", "Diamond")
   Default: "Circle"
   */
-  point_style?: String;
+  point_style?: "Circle" | "Square" | "Triangle" | "Diamond";
   /**
   Label text
   Default: "text"
