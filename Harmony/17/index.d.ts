@@ -190,7 +190,7 @@ declare interface CheckboxWidgetConfig {
 /**
  * The CheckboxWidget JavaScript class. A checkbox widget
  */
-declare class CheckboxWidget extends MO_SignalEmitter {
+declare class CheckboxWidget extends WidgetBase {
   constructor(config: CheckboxWidgetConfig);
   /**
    * Signal notifying the user that the value was modified by the Transform Tool.
@@ -331,7 +331,7 @@ declare interface SliderWidgetConfig {
 /**
  * The SliderWidget JavaScript class. A vertical or horizontal slider
  */
-declare class SliderWidget extends MO_SignalEmitter {
+declare class SliderWidget extends WidgetBase {
   constructor(config: SliderWidgetConfig);
   /**
    * Signal notifying the user that the slider value was modified by the Transform Tool.
