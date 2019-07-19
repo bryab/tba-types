@@ -1,6 +1,7 @@
 /// <reference path="../index.d.ts" />
 /// <reference path="../../shared/15/index.d.ts" />
 /// <reference path="../harmony16.d.ts" />
+/// <reference path="../ui.d.ts" />
 /**
  * Harmony 16 added many new API features
  */

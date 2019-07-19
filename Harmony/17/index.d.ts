@@ -1,4 +1,5 @@
 /// <reference path="../harmony16.d.ts" />
+/// <reference path="../ui.d.ts" />
 /**
  * Harmony 17 added more widgets and more parameters to some old widgets.
  */
