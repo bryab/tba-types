@@ -93,7 +93,7 @@ declare class QObject {
   /**
    * Constructs an object with parent object parent.
    */
-  constructor(parent: QObject);
+  constructor(parent?: QObject);
 
   /**
    * Removes an event filter object obj from this object.
