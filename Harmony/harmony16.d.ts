@@ -1106,32 +1106,32 @@ declare class SceneChangeNotifier extends QObject {
   /**
    * Signal emitted upon change of the current frame in the scene.
    */
-  public currentFrameChanged(): void;
+  public currentFrameChanged(): QSignal<() => void>;
 
   /**
    * Signal emitted upon change of the node network links.
    */
-  public networkChanged(list: StringList): void;
+  public networkChanged(list: StringList): QSignal<() => void>;
 
   /**
    * Signal emitted upon change of the node property or attribute value.
    */
-  public nodeChanged(list: StringList): void;
+  public nodeChanged(list: StringList): QSignal<() => void>;
 
   /**
    * Signal emitted upon change of the scene.
    */
-  public sceneChanged(): void;
+  public sceneChanged: QSignal<() => void>;
 
   /**
    * Signal emitted upon change of the current selection.
    */
-  public selectionChanged(): void;
+  public selectionChanged: QSignal<() => void>;
 
   /**
    * Signal emitted upon change of the column / timed Values.
    */
-  public columnValuesChanged(columnNames: StringList): void;
+  public columnValuesChanged(columnNames: StringList): QSignal<() => void>;
 
   /**
    * Create a new SceneChangeNotifier.
