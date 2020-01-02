@@ -1020,7 +1020,7 @@ declare namespace column {
   /**
    * return a SoundColumnInterface object that contains a reference to that sound column. The SoundColumnInterface object contains a useful interface to introspecting the sound and its sound sequences.
    */
-  function soundColumn(columnName: string): QObject;
+  function soundColumn(columnName: string): SoundColumnInterface;
 }
 
 /** Config for DrawingTools.clearArt
@@ -1260,3 +1260,17 @@ declare class Point2dWidget extends WidgetBase {
 }
 
 declare class MCUIPoint2D extends Point2dWidget {}
+
+
+declare class SoundColumnInterface extends QObject {
+
+  public sequences(): SCR_SoundSequenceInterface[];
+}
+
+declare class SCR_SoundSequenceInterface extends QObject {
+  startFrame: number;
+  stopFrame: number;
+  startTime: number;
+  name: string;
+  filename: string;
+}

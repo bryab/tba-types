@@ -1555,7 +1555,7 @@ declare module column {
   /**
    * Returns a column object that contains a reference to that sound column. The column object contains a useful interface to introspecting the sound and its sound sequences.
    */
-  function soundColumn(columnName: string): QObject;
+  function soundColumn(columnName: string): SoundColumnInterface;
 
   /**
    * Returns the column marker interface for the given column.
@@ -1710,4 +1710,17 @@ declare module DrawingTools {
    * Returns the mask for all 4 art layers.
    */
   var allArts: int;
+}
+
+declare class SoundColumnInterface extends QObject {
+
+  public sequences(): SCR_SoundSequenceInterface[];
+}
+
+declare class SCR_SoundSequenceInterface extends QObject {
+  startFrame: number;
+  stopFrame: number;
+  startTime: number;
+  name: string;
+  filename: string;
 }
