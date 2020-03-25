@@ -201,6 +201,7 @@ declare class Dir extends QObject {
 
   /**
    * Create directory recursively if a path of directory not created is given.
+   * NOTE: Does not appear to work on Windows paths.
    */
   public mkdirs(dirName?: string): void;
 

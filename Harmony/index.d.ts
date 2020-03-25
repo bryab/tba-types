@@ -3246,3 +3246,9 @@ declare class ExportVideoDlg extends UI_DialogController {
    */
   prefPrefix: string;
 }
+
+
+declare namespace QFile {
+
+  function copy(sourceFile: string, destFile: string);
+}
