@@ -166,7 +166,11 @@ declare module node {
   /**
    * Returns the source node path, the output port number and the link ID for this source node that this destination node is connected to.
    */
-  function srcNodeInfo(node: string, iPort: int): QScriptValue;
+  function srcNodeInfo(node: string, iPort: int): {
+    node: NodePath,
+    port: number,
+    link: number
+  }
 
   /**
    * The number of output ports on a node.
@@ -186,7 +190,10 @@ declare module node {
   /**
    * Returns the path and addition information of the destination node linked to the source node.
    */
-  function dstNodeInfo(sourceNode: string, iPort: int, iLink: int): QScriptValue;
+  function dstNodeInfo(sourceNode: string, iPort: int, iLink: int): {
+    node: NodePath,
+    port: number
+  }
 
   /**
    * Deprecated: Please use node.getAttr("MyPeg", 1.0, "GROUP_AT_NETWORK_BUILDING").boolValue());
@@ -377,11 +384,13 @@ declare module node {
 
   /**
    * Returns the name of the default camera.
+   * Note: This returns the "name" of the camera, not its full path.
    */
   function getDefaultCamera(): string;
 
   /**
    * Returns a list of all cameras within the scene.
+   * Note: This returns the "name" of the camera, not its full path.
    */
   function getCameras(): StringList;
 
