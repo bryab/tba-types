@@ -32,6 +32,7 @@
 /// <reference path="./qradiobutton.d.ts" />
 /// <reference path="./qstring.d.ts" />
 /// <reference path="./qt.d.ts" />
+/// <reference path="./qlistwidget.d.ts" />
 /// <reference path="./qtablewidget.d.ts" />
 /// <reference path="./qtablewidgetitem.d.ts" />
 /// <reference path="./qtabwidget.d.ts" />
