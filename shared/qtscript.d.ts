@@ -5,6 +5,7 @@
 /// <reference path="./qcheckbox.d.ts" />
 /// <reference path="./qcombobox.d.ts" />
 /// <reference path="./qdialog.d.ts" />
+/// <reference path="./qlayout.d.ts" />
 /// <reference path="./qeventloop.d.ts" />
 /// <reference path="./qframe.d.ts" />
 /// <reference path="./qgroupbox.d.ts" />

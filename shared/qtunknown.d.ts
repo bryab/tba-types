@@ -53,7 +53,6 @@ declare type HDC = any;
 declare type QGraphicsEffect = any;
 declare type QGraphicsProxyWidget = any;
 declare type QInputContext = any;
-declare type QLayout = any;
 declare type QLocale = any;
 declare type QPaintEngine = any;
 declare type RenderFlags = any;
