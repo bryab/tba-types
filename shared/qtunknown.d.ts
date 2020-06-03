@@ -37,7 +37,6 @@ declare type SelectionBehavior = any;
 declare type SelectionMode = any;
 declare type QMovie = any;
 declare type QPicture = any;
-declare type QPixmap = any;
 declare type QAction = any;
 declare namespace QPalette {
   type ColorRole = any;
@@ -110,7 +109,6 @@ declare namespace QSizePolicy {
   type Policy = any;
 }
 declare class QSizePolicy {}
-declare type QImage = any;
 declare type QGenericReturnArgument = any;
 declare type QGenericArgument = any;
 declare type quint16 = any;

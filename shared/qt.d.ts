@@ -1,6 +1,7 @@
 declare namespace Qt {
   const Checked;
   const UnChecked;
+  const DecorationRole;
   type HANDLE = any;
 
   enum AlignmentFlag {

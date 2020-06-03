@@ -45,3 +45,5 @@
 /// <reference path="./qurl.d.ts" />
 /// <reference path="./qvariant.d.ts" />
 /// <reference path="./qwidget.d.ts" />
+/// <reference path="./qpixmap.d.ts" />
+/// <reference path="./qimage.d.ts" />
