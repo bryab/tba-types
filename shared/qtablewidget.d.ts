@@ -339,4 +339,7 @@ declare class QTableWidget extends QAbstractItemView {
    * the number of rows in the table
    */
   rowCount: int;
+
+
+  public resizeRowsToContents(): void;
 }
