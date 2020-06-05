@@ -988,3 +988,356 @@ declare class Point2dWidget extends WidgetBase {
 }
 
 declare class MCUIPoint2D extends Point2dWidget {}
+
+/**
+ * The func JavaScript global object. Retrieve and modify values of function curves
+ */
+declare namespace func {
+  /**
+   * returns the Start value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors.
+   */
+  function holdStartFrame(columnName: string): int;
+
+  /**
+   * returns the Stop value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
+   */
+  function holdStopFrame(columnName: string): int;
+
+  /**
+   * returns the Step value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
+   */
+  function holdStep(columnName: string): int;
+
+  /**
+   * returns the number of keyframes and control points on a curve
+   */
+  function numberOfPoints(columnName: string): int;
+
+  /**
+   * returns the X value (frame number) of a point on a function curve
+   */
+  function pointX(columnName: string, point: int): double;
+
+  /**
+   * returns the Y value of a point on a function curve
+   */
+  function pointY(columnName: string, point: int): double;
+
+  /**
+   * returns a 1 (one) to indicate that the point is on a constant segment, or a 0 (zero) to indicate that the point is not on a constant segment
+   */
+  function pointConstSeg(columnName: string, point: int): boolean;
+
+  /**
+   * returns the continuity of the curve that follows the point. One of the following values will be returned, in upper-case: SMOOTH, CORNER or STRAIGHT
+   */
+  function pointContinuity(columnName: string, point: int): ContinuityValue;
+
+  /**
+   * returns the X value of the left handle of a point on a curve
+   */
+  function pointHandleLeftX(columnName: string, point: int): double;
+
+  /**
+   * returns the Y value of the left handle of a point on a curve.
+   */
+  function pointHandleLeftY(columnName: string, point: int): double;
+
+  /**
+   * returns the X value of the right handle of a point on a curve.
+   */
+  function pointHandleRightX(columnName: string, point: int): double;
+
+  /**
+   * returns the Y value of the right handle of a point on a curve
+   */
+  function pointHandleRightY(columnName: string, point: int): double;
+
+  /**
+   * returns the number of frames in the ease-in
+   */
+  function pointEaseIn(columnName: string, point: int): double;
+
+  /**
+   * returns the angle of the ease-in handle
+   */
+  function angleEaseIn(columnName: string, point: int): double;
+
+  /**
+   * returns the number of frames in the ease-out
+   */
+  function pointEaseOut(columnName: string, point: int): double;
+
+  /**
+   * returns the angle of the ease-out handle
+   */
+  function angleEaseOut(columnName: string, point: int): double;
+
+  /**
+   * returns the number of keyframes and control points on the 3D Path
+   */
+  function numberOfPointsPath3d(columnName: string): int;
+
+  /**
+   * returns the value of the specified point on the X path
+   */
+  function pointXPath3d(columnName: string, point: int): double;
+
+  /**
+   * returns the value of the specified point on the Y path
+   */
+  function pointYPath3d(columnName: string, point: int): double;
+
+  /**
+   * returns the value of the specified point on the Z path
+   */
+  function pointZPath3d(columnName: string, point: int): double;
+
+  /**
+   * returns the tension value for the specified point on the 3D Path
+   */
+  function pointTensionPath3d(columnName: string, point: int): double;
+
+  /**
+   * returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
+   */
+  function pointContinuityPath3d(columnName: string, point: int): ContinuityValue;
+
+  /**
+   * returns the bias value for the specified point on the 3D Path
+   */
+  function pointBiasPath3d(columnName: string, point: int): double;
+
+  /**
+   * returns the frame at which it's locked, or returns 0 if the point is not locked.
+   */
+  function pointLockedAtFrame(columnName: string, point: int): double;
+
+  /**
+   * Converts a 3D Path to a Separate, tuple of three beziers, and select it.
+   * New in 17.0.1
+   */
+  function convertToSeparate(columnName: string, conversionAlgo: string) : QScriptValue;
+
+  /**
+   * sets the Start value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
+   */
+  function setHoldStartFrame(columnName: string, start: int): boolean;
+
+  /**
+   * sets the Stop value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
+   */
+  function setHoldStopFrame(columnName: string, stop: int): boolean;
+
+  /**
+   * sets the Hold value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors.
+   */
+  function setHoldStep(columnName: string, step: int): boolean;
+
+  /**
+   * sets the values of a point on a Bezier function curve
+   */
+  function setBezierPoint(columnName: string, frame: int, y: double, handleLeftX: double, handleLeftY: double, handleRightX: double, handleRightY: double, constSeg: boolean, continuity: ContinuityValue): boolean;
+
+  /**
+   * sets the values of a point on an Ease function curve
+   */
+  function setEasePoint(columnName: string, frame: int, y: double, easeIn: double, angleEaseIn: double, easeOut: double, angleEaseOut: double, constSeg: boolean, continuity: ContinuityValue): boolean;
+
+  /**
+   * sets the values of a point on a Velocity-Based function curve
+   */
+  function setVeloBasedPoint(columnName: string, frame: int, y: double): boolean;
+
+  /**
+   * Returns the tension of the ease column.
+   * New in 17.0.1
+   */
+  function tensionEase(columnName: string) : number;
+
+  /**
+   * adds a keyframe to a 3D Path and sets the X, Y and Z value, as well as the tension, continuity and bias.
+   */
+  function addKeyFramePath3d(columnName: string, frame: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
+
+  /**
+   * adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension, continuity and bias
+   */
+  function addCtrlPointAfterPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
+
+  /**
+   * removePointPath3d may be used to remove either a key frame, or a control point
+   */
+  function removePointPath3d(columnName: string, point: int): boolean;
+
+  /**
+   * setPointPath3d may be used to set values in either a key frame, or a control point, but cannot change a key frame into a control point or a control point into a key frame. To change a key frame into a control point or a control point into a key frame, you must remove the point and add a new point.
+   */
+  function setPointPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
+
+  /**
+   * sets the constant segment flag of point i of path p to b.
+   */
+  function setPath3dPointConstantSegment(columnName: string, point: int, constant: boolean): boolean;
+
+  /**
+   * sets the constant segment flag of point found at frame f of path p to b.
+   */
+  function setPath3dPointConstantSegmentForFrame(columnName: string, point: double, constant: boolean): boolean;
+}
+
+/**
+ * The JavaScript class providing informations about a specific palette
+ */
+declare class Palette extends QObject {
+  /**
+   * Returns the folder in which this palette is located.
+   */
+  public getPath(): string;
+
+  /**
+   * Returns the name of this palette. The extension (".plt") is not included.
+   */
+  public getName(): string;
+
+  /**
+   * Returns whether the palette object is valid.
+   */
+  public isValid(): boolean;
+
+  /**
+   * Was the palette successfully loaded from disk (true or false)?
+   */
+  public isLoaded(): boolean;
+
+  /**
+   * Was the palette found at the location specified by the path and name (true or false)?
+   */
+  public isNotFound(): boolean;
+
+  /**
+   * Iterate over the colours. Return an invalid colour if the index is out of bound or otherwise invalid.
+   */
+  public getColorByIndex(index: int): BaseColor;
+
+  /**
+   * Retrieve a colour by id. If the colour is not found, the isValid property will be false.
+   */
+  public getColorById(uniqueId: string): BaseColor;
+
+  /**
+   * Try to obtain the database lock. Return true on success, and false on failure. The lock will be held until it is released in script or the ui. Safe to call multiple time to get the lock state.
+   */
+  public getLock(): boolean;
+
+  /**
+   * Release access to the palette. Other users will be able to obtain the access rights to the palette.
+   */
+  public releaseLock(): boolean;
+
+  /**
+   * The following methods test the type of the wrapped palette.
+   */
+  public isColorPalette(): boolean;
+
+  /**
+   * Returns whether the palette is a texture palette.
+   */
+  public isTexturePalette(): boolean;
+
+  /**
+   * sets the type of the palette to be a color palette
+   */
+  public setToColorPalette(): void;
+
+  /**
+   * sets the type of the palette to be a texture palette
+   */
+  public setToTexturePalette(): void;
+
+  /**
+   * Create a new colour of a given type.
+   */
+  public createNewColor(colorType: int, name: string, colorData: QVariant): Color;
+
+  /**
+   * Create a new solid colour.
+   */
+  public createNewSolidColor(name: string, colorData: QVariant): Color;
+
+  /**
+   * Create a new linear gradient colour.
+   */
+  public createNewLinearGradientColor(name: string, colorData: QVariant): Color;
+
+  /**
+   * Create a new radial gradient colour.
+   */
+  public createNewRadialGradientColor(name: string, colorData: QVariant): Color;
+
+  /**
+   * Create a new texture colour object.
+   */
+  public createNewTexture(name: string, filename: string, tiled: boolean): Texture;
+
+  /**
+   * Create a new texture from a QImage object (may not be done from the script).
+   */
+  public createNewTexture(name: string, bitmap: QImage, tiled: boolean): Texture;
+
+  /**
+   * Create a duplicate of a colour object - this colourID is unique.
+   */
+  public duplicateColor(source: BaseColor): BaseColor;
+
+  /**
+   * Create a clone of a colour object - this colourID is identical to original colour.
+   */
+  public cloneColor(source: BaseColor): BaseColor;
+
+  /**
+   * Create a clone of a colour object - resolve the potential ID conflict by either cloning or duplicating the colour.
+   */
+  public cloneColor(source: BaseColor, replaceOnIDConflict: boolean): BaseColor;
+
+  /**
+   * Delete a colour from the palette.
+   */
+  public removeColor(uniqueId: string): boolean;
+
+  /**
+   * Move a colour at the specified index.
+   */
+  public moveColor(index: int, beforeIndex: int): boolean;
+
+  /**
+   * Move a colour to this palette.
+   */
+  public acquire(color: BaseColor): boolean;
+
+  /**
+   * Returns true if this palette contains a colour used in a drawing in the scene
+   * New in 17.0.1
+   */
+  public containsUsedColors(colors: QScriptValue) : boolean;
+
+  /**
+   * Number of colours in this palette.
+   */
+  nColors: int;
+
+  /**
+   * The palette ID of this palette.
+   */
+  id: string;
+
+  /**
+   * Returns one of the PaletteLocation constants or -1 if the palette is invalid.
+   */
+  location: int;
+
+  /**
+   * Returns the element id in which the palette is stored if location is PaletteLocation ELEMENT. Returns -1 if the palette is not stored in an element.
+   */
+  elementId: int;
+}
