@@ -703,6 +703,9 @@ declare namespace PaletteManager {
  * The PaletteObjectManager JavaScript global object. Provides access to palette list (PaletteList) and palette (Palette) objects
  */
 declare namespace PaletteObjectManager {
+
+  const Constants: Constants;
+  
   /**
    * Load the element palette list specified by the element ID 'id' and return the corresponding PaletteList object.
    */
@@ -2382,7 +2385,7 @@ declare class PaletteListType extends QObject {
 /**
  * The JavaScript class for defining the standard palette locations. Obtain it from Constants
  */
-declare class PaletteLocation extends QObject {
+declare class PaletteLocation {
   /**
    * Represent the Environment location of the project. A palette created with this location would be stored in the environment folder.
    */
