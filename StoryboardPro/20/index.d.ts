@@ -992,9 +992,9 @@ declare class FunctionManager extends QObject {
 }
 
 /**
-* The LayerManager JavaScript class. Access the layers of a given panel. 
-var lm = new LayerManager();var sb = new StoryboardManager();// get the first panel in the project.var panelId = sb.panelInProject(0);// Add 2 blank vector layers and 1 blank bitmap layer. Set the last one to invisiblelm.addVectorLayer( panelId, 0, false, "V-A");lm.addVectorLayer( panelId, 1, false, "V-B");lm.addBitmapLayer( panelId, 2, false, "B-A");lm.setLayerVisible( panelId, 2, false);// prepend a new layer by importing an image.lm.importImageAsLayer(panelId, "/fullPath/Image.tga");
-*/
+  * The LayerManager JavaScript class. Access the layers of a given panel. 
+  var lm = new LayerManager();var sb = new StoryboardManager();// get the first panel in the project.var panelId = sb.panelInProject(0);// Add 2 blank vector layers and 1 blank bitmap layer. Set the last one to invisiblelm.addVectorLayer( panelId, 0, false, "V-A");lm.addVectorLayer( panelId, 1, false, "V-B");lm.addBitmapLayer( panelId, 2, false, "B-A");lm.setLayerVisible( panelId, 2, false);// prepend a new layer by importing an image.lm.importImageAsLayer(panelId, "/fullPath/Image.tga");
+  */
 declare class LayerManager extends QObject {
   /**
    * Return the number of layers in a panel.
@@ -1663,9 +1663,9 @@ declare class PropertiesManager extends QObject {
 }
 
 /**
-* The scene JavaScript global object. Retrieve and set global scene attributes, like the aspect ratio of the cells in the scene grid. 
-function setScene(){ // Sets the beginning of the undo/redo command wrapper scene.beginUndoRedoAccum("Set Scene"); // Sets the aspect ratio of the scene to 4, 3 scene.setUnitsAspectRatio(4, 3); // Sets the number of units in the scene scene.setNumberOfUnits(1200, 900, 12); // Sets the value of the center coordinate scene.setCoordAtCenter(5000, 5000); // Terminates the undo/redo command wrapper scene.endUndoRedoAccum();}
-*/
+  * The scene JavaScript global object. Retrieve and set global scene attributes, like the aspect ratio of the cells in the scene grid. 
+  function setScene(){ // Sets the beginning of the undo/redo command wrapper scene.beginUndoRedoAccum("Set Scene"); // Sets the aspect ratio of the scene to 4, 3 scene.setUnitsAspectRatio(4, 3); // Sets the number of units in the scene scene.setNumberOfUnits(1200, 900, 12); // Sets the value of the center coordinate scene.setCoordAtCenter(5000, 5000); // Terminates the undo/redo command wrapper scene.endUndoRedoAccum();}
+  */
 declare module scene {
   /**
    * Returns the ID of the current version.
@@ -2309,12 +2309,12 @@ declare namespace specialFolders {
 }
 
 /**
-* The StoryboardManager JavaScript class. Access the main storyboard project and its components. 
-It can be used to query the sequences, scenes, panels and transitions of the project. As well, it can be used to create, delete or rename project objects.
-Scenes, Panels and Transitions are identified by a unique id. For the sake of clarity, a transition is considered to belong to the shot to it's right. Or, the shot owns the transition to it's left.
-The following examples are provided:
-function projectQuery(){  var storyboard = new StoryboardManager(); // Iterate through all sequences  var nbSeqs = storyboard.numberOfSequencesInProject(); for ( var i =0; i < nbSeqs; ++i )  {    var id =  storyboard.sequenceInProject( i ); System.println( "Sequence  is " + id + "  : "  + storyboard.nameOfSequence( id ) ) ;    var nbScenes = storyboard.numberOfScenesInSequence( id ); for ( var j = 0; j < nbScenes; ++ j )    {      var sceneId = storyboard.sceneInSequence( id,  j ); System.println( "     scene  is " + sceneId + "  : "  + storyboard.nameOfScene( sceneId ) ) ;    }  } // Alternatively, iterate through all scenes.  var nbShots = storyboard.numberOfScenesInProject(); for ( var i =0; i < nbShots; ++i )  {    var sceneId = storyboard.sceneInProject(i);    var seqId = storyboard.sequenceIdOfScene( sceneId ); System.println( "Scene  is " + sceneId + ": "  + storyboard.nameOfScene( sceneId ) + " sequence is " + storyboard.nameOfSequence( seqId)) ;  }}function transitionQuery(){  var sb = new StoryboardManager();  var sceneList = sb.scenesWithTrx(); for ( var i = 0; i < sceneList.length; ++i )  {    var trxId = sb.trxIdOfScene( sceneList[i] ); System.println(sb.nameOfScene(  sceneList[i]  )                  + " has a transition of type "                  + sb.trxType( trxId )                  + " and of length "                  + sb.trxLength( trxId ));   }}
-*/
+  * The StoryboardManager JavaScript class. Access the main storyboard project and its components. 
+  It can be used to query the sequences, scenes, panels and transitions of the project. As well, it can be used to create, delete or rename project objects.
+  Scenes, Panels and Transitions are identified by a unique id. For the sake of clarity, a transition is considered to belong to the shot to it's right. Or, the shot owns the transition to it's left.
+  The following examples are provided:
+  function projectQuery(){  var storyboard = new StoryboardManager(); // Iterate through all sequences  var nbSeqs = storyboard.numberOfSequencesInProject(); for ( var i =0; i < nbSeqs; ++i )  {    var id =  storyboard.sequenceInProject( i ); System.println( "Sequence  is " + id + "  : "  + storyboard.nameOfSequence( id ) ) ;    var nbScenes = storyboard.numberOfScenesInSequence( id ); for ( var j = 0; j < nbScenes; ++ j )    {      var sceneId = storyboard.sceneInSequence( id,  j ); System.println( "     scene  is " + sceneId + "  : "  + storyboard.nameOfScene( sceneId ) ) ;    }  } // Alternatively, iterate through all scenes.  var nbShots = storyboard.numberOfScenesInProject(); for ( var i =0; i < nbShots; ++i )  {    var sceneId = storyboard.sceneInProject(i);    var seqId = storyboard.sequenceIdOfScene( sceneId ); System.println( "Scene  is " + sceneId + ": "  + storyboard.nameOfScene( sceneId ) + " sequence is " + storyboard.nameOfSequence( seqId)) ;  }}function transitionQuery(){  var sb = new StoryboardManager();  var sceneList = sb.scenesWithTrx(); for ( var i = 0; i < sceneList.length; ++i )  {    var trxId = sb.trxIdOfScene( sceneList[i] ); System.println(sb.nameOfScene(  sceneList[i]  )                  + " has a transition of type "                  + sb.trxType( trxId )                  + " and of length "                  + sb.trxLength( trxId ));   }}
+  */
 declare class StoryboardManager extends QObject {
   /**
    * Return the number of sequences in the project.
@@ -2567,9 +2567,10 @@ declare class TemporaryFile extends QObject {
 }
 
 /**
- * The View functions provide information about the contents of selected View windows
- */
-declare namespace view {
+* The View functions provide information about the contents of selected View windows. 
+function viewScript(){  var myView = view.currentView(); System.println(view.type(myView));}
+*/
+declare module view {
   /**
    * returns a unique identifier for the current, active View.
    */
@@ -2586,7 +2587,17 @@ declare namespace view {
   function refreshViews(): void;
 
   /**
-   * returns the drawing tool manager.
+   * Returns the drawing tool manager.
    */
-  function currentToolManager(): QObject;
+  function currentToolManager(viewName?: string): QObject;
+
+  /**
+   * Returns the position of the top left corner of the given view.
+   */
+  function viewPosition(viewName: string): QPoint;
+
+  /**
+   * Returns a list of available views of the given type.
+   */
+  function viewList(viewType?: string): StringList;
 }
