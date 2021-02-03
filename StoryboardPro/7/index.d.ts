@@ -312,8 +312,8 @@ declare type BitmapFormat = "jpg" | "psd" | "tga";
 declare type ImageFormat = "jpg" | "png" | "psd" | "tga";
 
 /**
-* This interface is used to export the storyboard project. 
-*/
+ * This interface is used to export the storyboard project.
+ */
 declare class ExportManager extends QObject {
   /**
    * Export storyboard to bitmap file.
@@ -992,71 +992,82 @@ declare class FunctionManager extends QObject {
 }
 
 /**
- * This interface is used to access the layers within a given panel
- */
+* The LayerManager JavaScript class. Access the layers of a given panel. 
+var lm = new LayerManager();var sb = new StoryboardManager();// get the first panel in the project.var panelId = sb.panelInProject(0);// Add 2 blank vector layers and 1 blank bitmap layer. Set the last one to invisiblelm.addVectorLayer( panelId, 0, false, "V-A");lm.addVectorLayer( panelId, 1, false, "V-B");lm.addBitmapLayer( panelId, 2, false, "B-A");lm.setLayerVisible( panelId, 2, false);// prepend a new layer by importing an image.lm.importImageAsLayer(panelId, "/fullPath/Image.tga");
+*/
 declare class LayerManager extends QObject {
   /**
-   * returns number of layers in a panel
+   * Return the number of layers in a panel.
    */
   public numberOfLayers(panelId: string): int;
 
   /**
-   * Adds a vector Layer.
+   * Add a vector layer.
    */
   public addVectorLayer(panelId: string, targetLayerIdx: int, before: boolean, suggestedName: string): boolean;
 
   /**
-   * Adds a bitmap Layer.
+   * Add a bitmap layer.
    */
   public addBitmapLayer(panelId: string, targetLayerIdx: int, before: boolean, suggestedName: string): boolean;
 
   /**
-   * Returns if layer is Vector.
+   * Return true if a layer is a vector layer.
    */
   public isVectorLayer(panelId: string, index: int): boolean;
 
   /**
-   * Returns if layer is 3D.
+   * Return true if a layer is a 3D layer.
    */
   public is3DLayer(panelId: string, index: int): boolean;
 
   /**
-   * Returns if layer is Bitmap.
+   * Return true if a layer is a bitmap.
    */
   public isBitmapLayer(panelId: string, index: int): boolean;
 
   /**
-   * Deletes a given layer.
+   * Delete a given layer.
    */
   public deleteLayer(panelId: string, index: int): boolean;
 
   /**
-   * Renames a given layer.
+   * Rename a given layer.
    */
   public renameLayer(panelId: string, index: int, suggestedName: string): boolean;
 
   /**
-   * Returns name of layer.
+   * Return the name of a layer.
    */
   public layerName(panelId: string, index: int): string;
 
   /**
-   * Imports image and creates a new layer at index 0, returns if successful.
+   * Import image and creates a new layer at index 0, returns if successful.
    */
   public importImageAsLayer(panelId: string, fullPathAndFileName: string): boolean;
 
   /**
-   * Set layers visiblility flag.
+   * Set the visibility flag of the layers of a panel.
    */
   public setLayerVisible(panelId: string, index: int, visible: boolean): boolean;
 
   /**
-   * Get layers visiblility flag.
+   * Get the visibility flag of the layers of a panel.
    */
   public layerVisibility(panelId: string, index: int): boolean;
 
   /**
-   * Set layers opacity value.
+   * Set the lock flag of the layers of a panel.
+   */
+  public setLayerLock(panelId: string, index: int, lock: boolean): boolean;
+
+  /**
+   * Get the lock flag of the layers of a panel.
+   */
+  public getLayerLock(panelId: string, index: int): boolean;
+
+  /**
+   * Set a layer's opacity.
    */
   public setLayerOpacity(panelId: string, index: int, opacity: double): boolean;
 
@@ -1066,12 +1077,12 @@ declare class LayerManager extends QObject {
   public layerOpacity(panelId: string, index: int): double;
 
   /**
-   * Set layers alignment value.
+   * Set a layer's alignment value.
    */
   public setLayerAlignment(panelId: string, index: int, alignment: string): boolean;
 
   /**
-   * Get layers Alignment value.
+   * Get a layer's alignment value.
    */
   public layerAlignment(panelId: string, index: int): string;
 
@@ -1081,9 +1092,63 @@ declare class LayerManager extends QObject {
   public getLayerDrawingName(panelId: string, index: int, fullPath: boolean): string;
 
   /**
-   * Return the elementId of the layer. Useful for the element/Drawing interface.
+   * Return the element id of the layer. May be useful when using the element and Drawing global objects.
    */
   public getLayerElementId(panelId: string, index: int): int;
+
+  /**
+   * Generate a new drawing layer making a matte from the given layer. The matte will be of the current selected color.
+   */
+  public generateMatteLayer(panelId: string, index: int, radius: double, copyStrokes: boolean, replaceLayer: boolean): boolean;
+
+  /**
+   * Generate a new drawing layer making a matte from the given layer. The matte will be of the given color.
+   */
+  public generateMatteLayer(
+    panelId: string,
+    index: int,
+    radius: double,
+    copyStrokes: boolean,
+    replaceLayer: boolean,
+    red: int,
+    green: int,
+    blue: int
+  ): boolean;
+
+  /**
+   * Generate matte from a given layer to a new drawing layer or directly on the source layer.
+   */
+  public generateMatte(panelId: string, index: int, options: QScriptValue): boolean;
+
+  /**
+   * Look at the the given Layer and return if it is shared.
+   */
+  public isShared(layer: QScriptValue): boolean;
+
+  /**
+   * Merge the given Layers into a single panel.
+   */
+  public mergeLayers(layers: QScriptValue, newLayerName: string): QScriptValue;
+
+  /**
+   * Look at the given layer and return if it is empty or not. A layer is empty if it has no drawing.
+   */
+  public isEmpty(layer: QScriptValue): boolean;
+
+  /**
+   * Apply a blur effect to the given bitmap layer.
+   */
+  public applyBlurToBitmap(panelId: string, index: int, skipDialog?: boolean): void;
+
+  /**
+   * Apply a radial zoom blur effect to the given bitmap layer.
+   */
+  public applyRadialZoomBlurToBitmap(panelId: string, index: int, skipDialog?: boolean): void;
+
+  /**
+   * Apply a directional blur effect to the given bitmap layer.
+   */
+  public applyDirectionalBlurToBitmap(panelId: string, index: int, skipDialog?: boolean): void;
 }
 
 /**
@@ -2219,106 +2284,115 @@ declare namespace specialFolders {
 }
 
 /**
- * This interface is used to access the main storyboard project. It can be used to query the sequences, scenes, panels and transitions of the project. As well, it can be used to create, delete or rename project objects
- */
+* The StoryboardManager JavaScript class. Access the main storyboard project and its components. 
+It can be used to query the sequences, scenes, panels and transitions of the project. As well, it can be used to create, delete or rename project objects.
+Scenes, Panels and Transitions are identified by a unique id. For the sake of clarity, a transition is considered to belong to the shot to it's right. Or, the shot owns the transition to it's left.
+The following examples are provided:
+function projectQuery(){  var storyboard = new StoryboardManager(); // Iterate through all sequences  var nbSeqs = storyboard.numberOfSequencesInProject(); for ( var i =0; i < nbSeqs; ++i )  {    var id =  storyboard.sequenceInProject( i ); System.println( "Sequence  is " + id + "  : "  + storyboard.nameOfSequence( id ) ) ;    var nbScenes = storyboard.numberOfScenesInSequence( id ); for ( var j = 0; j < nbScenes; ++ j )    {      var sceneId = storyboard.sceneInSequence( id,  j ); System.println( "     scene  is " + sceneId + "  : "  + storyboard.nameOfScene( sceneId ) ) ;    }  } // Alternatively, iterate through all scenes.  var nbShots = storyboard.numberOfScenesInProject(); for ( var i =0; i < nbShots; ++i )  {    var sceneId = storyboard.sceneInProject(i);    var seqId = storyboard.sequenceIdOfScene( sceneId ); System.println( "Scene  is " + sceneId + ": "  + storyboard.nameOfScene( sceneId ) + " sequence is " + storyboard.nameOfSequence( seqId)) ;  }}function transitionQuery(){  var sb = new StoryboardManager();  var sceneList = sb.scenesWithTrx(); for ( var i = 0; i < sceneList.length; ++i )  {    var trxId = sb.trxIdOfScene( sceneList[i] ); System.println(sb.nameOfScene(  sceneList[i]  )                  + " has a transition of type "                  + sb.trxType( trxId )                  + " and of length "                  + sb.trxLength( trxId ));   }}
+*/
 declare class StoryboardManager extends QObject {
   /**
-   * Returns the number of sequences in the project.
+   * Return the number of sequences in the project.
    */
   public numberOfSequencesInProject(): int;
 
   /**
-   * Returns the sequenceId of the ith sequence in project.
+   * Return the sequenceId of the ith sequence in project.
    */
   public sequenceInProject(i: int): string;
 
   /**
-   * Returns sequenceId of the sequence of the given scene.
+   * Return sequenceId of the sequence of the given scene.
    */
   public sequenceIdOfScene(sceneId: string): string;
 
   /**
-   * returns the number of scenes in a sequence
+   * Return the number of scenes in a sequence.
    */
   public numberOfScenesInSequence(sequenceId: string): int;
 
   /**
-   * Returns sceneId of the ith scene in sequence.
+   * Return sceneId of the ith scene in sequence.
    */
   public sceneInSequence(sequenceId: string, i: int): string;
 
   /**
-   * returns the number of scenes in project
+   * Return the number of scenes in project.
    */
   public numberOfScenesInProject(): int;
 
   /**
-   * Returns sceneId of the ith scene in project.
+   * Return the sceneId of the ith scene in project.
    */
   public sceneInProject(i: int): string;
 
   /**
-   * Returns sceneId of the panel.
+   * Return the sceneId of the panel.
    */
   public sceneIdOfPanel(panelId: string): string;
 
   /**
-   * Returns the number of panels in a scene.
+   * Return the number of panels in a scene.
    */
   public numberOfPanelsInScene(sceneId: string): int;
 
   /**
-   * Returns the panelId of the ith panel in the scene.
+   * Return the panelId of the ith panel in the scene.
    */
   public panelInScene(sceneId: string, index: int): string;
 
   /**
-   * returns the number of panels in project
+   * Return the number of panels in project.
    */
   public numberOfPanelsInProject(): int;
 
   /**
-   * Returns panelId of the ith panel in project.
+   * Return panelId of the ith panel in the project.
    */
   public panelInProject(i: int): string;
 
   /**
-   * Returns the name of the sequence.
+   * Return the name of the sequence.
    */
   public nameOfSequence(sequenceId: string): string;
 
   /**
-   * Returns the name of the scene.
+   * Return the name of the scene.
    */
   public nameOfScene(sceneId: string): string;
 
   /**
-   * Returns the name of the panel.
+   * Return the name of the panel.
    */
   public nameOfPanel(panelId: string): string;
 
   /**
-   * Returns the unique id of the sequence.
+   * Return the unique id of the sequence.
    */
   public sequenceId(sequenceName: string): string;
 
   /**
-   * Returns the unique id of the scene.
+   * Return the unique id of the scene.
    */
   public sceneId(sequenceName: string, sceneName: string): string;
 
   /**
-   * Returns the unique id of the panel.
+   * Return the unique id of the panel.
    */
   public panelId(sequenceName: string, sceneName: string, panelName: string): string;
 
   /**
-   * Creates a new sequence.
+   * Return the name of the act.
+   */
+  public actNameOfScene(shotId: string): string;
+
+  /**
+   * Create a new sequence.
    */
   public createSequence(firstShotId: string, lastShotId: string): string;
 
   /**
-   * Inserts a new scene.
+   * Insert a new scene.
    */
   public insertScene(after: boolean, shotId: string, name: string): string;
 
@@ -2328,7 +2402,7 @@ declare class StoryboardManager extends QObject {
   public appendScene(name: string): string;
 
   /**
-   * Inserts a new panel.
+   * Insert a new panel.
    */
   public insertPanel(after: boolean, panelId: string, name: string): string;
 
@@ -2343,12 +2417,12 @@ declare class StoryboardManager extends QObject {
   public splitPanel(panelId: string, atFrame: int): boolean;
 
   /**
-   * Deletes a sequence.
+   * Delete a sequence.
    */
   public deleteSequence(seqId: string): boolean;
 
   /**
-   * Deletes a scene.
+   * Delete a scene.
    */
   public deleteScene(sceneId: string): boolean;
 
@@ -2358,67 +2432,71 @@ declare class StoryboardManager extends QObject {
   public deletePanel(panelId: string): boolean;
 
   /**
-   * Renames a sequence.
+   * Rename a sequence.
    */
   public renameSequence(seqId: string, newName: string): boolean;
 
   /**
-   * Renames a scene.
+   * Rename a scene.
    */
   public renameScene(sceneId: string, newName: string): boolean;
 
   /**
-   * Renames a panel.
+   * Rename a panel.
    */
   public renamePanel(panelId: string, newName: string): boolean;
 
   /**
-   * gets the panel Duration
+   * Get the panel Duration.
    */
   public getPanelDuration(panelId: string): int;
 
   /**
-   * sets the panel duration
+   * Set the panel duration.
    */
   public setPanelDuration(panelId: string, frames: int): boolean;
 
+  public setPanelColor(panelId: string, color: QScriptValue): void;
+
+  public getPanelColor(panelId: string): string;
+
   /**
-   * returns the start frame of a scene
+   * Return the start frame of a scene.
    */
   public sceneStartFrame(shotId: string): int;
 
   /**
-   * returns the last frame of a scene
+   * Return the last frame of a scene.
    */
   public sceneEndFrame(shotId: string): int;
 
   /**
-   * returns a list of the sceneIds of scenes that have leading transitions
+   * Return a list of the sceneIds of scenes that have leading transitions.
    */
   public scenesWithTrx(): StringList;
 
   /**
-   * returns the sceneId of the shot to the right of the transition
+   * Return the sceneId of the shot to the right of the transition.
    */
   public sceneIdOfTrx(trxId: string): string;
 
   /**
-   * returns the transition ID of the transition to the left of the shot
+   * Return the transition ID of the transition to the left of the shot.
    */
   public trxIdOfScene(shotId: string): string;
 
   /**
-   * returns whether a scene has a leading transition
+   * Return whether a scene has a leading transition.
    */
   public sceneHasTrx(shotId: string): boolean;
 
   /**
-   * returns a string identifying the transition type
+   * Return a string identifying the transition type.
    */
   public trxType(trxId: string): string;
 
   /**
-   * returns the length of the transition
+   * Return the length of the transition.
    */
   public trxLength(trxId: string): int;
 
@@ -2428,17 +2506,17 @@ declare class StoryboardManager extends QObject {
   public createTrx(shotId: string, length: int, stringType: string, angle?: int, reverse?: boolean): string;
 
   /**
-   * modify the transition
+   * Modify the transition.
    */
-  public modifyTrx(trxId: string, stringType: string, angle?: int, revers?: boolean): boolean;
+  public modifyTrx(trxId: string, stringType: string, angle?: int, reverse?: boolean): boolean;
 
   /**
-   * resize a transition
+   * Resize a transition.
    */
   public resizeTrx(trxId: string, length: int): boolean;
 
   /**
-   * delete a transition
+   * Delete a transition.
    */
   public deleteTrx(trxId: string): boolean;
 }
