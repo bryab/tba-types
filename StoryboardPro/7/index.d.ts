@@ -1196,80 +1196,89 @@ declare namespace MessageLog {
   function isDebug(): boolean;
 }
 
+
 /**
- * This interface is used to access the shot cameras or the panel layers, and add or remove motion to them
- */
+* This interface is used to access the shot cameras or the panel layers, and add or remove motion to them. 
+*/
 declare class MotionManager extends QObject {
   /**
-   * adds a Keyframe to the camera
-   */
-  public addCameraKeyFrame(shotId: string, offset: int): boolean;
-
+  * adds a Keyframe to the camera
+  */
+  public addCameraKeyFrame (shotId: string,offset: int): boolean;
+  
   /**
-   * remove Keyframe from the camera
-   */
-  public removeCameraKeyFrame(shotId: string, offset: int): boolean;
-
+  * remove Keyframe from the camera
+  */
+  public removeCameraKeyFrame (shotId: string,offset: int): boolean;
+  
   /**
-   * clears all Motion from the camera
-   */
-  public clearCameraMotion(shotId: string): boolean;
-
+  * clears all Motion from the camera
+  */
+  public clearCameraMotion (shotId: string): boolean;
+  
   /**
-   * retrieves a specific function from the camera, which may be manipulated using the FunctionManager attributes for camera pegs are position.attr3dpath, scale.x, scale.y, scale.z, rotation.anglez, skew
-   */
-  public linkedCameraFunction(shotId: string, attrName: string): string;
-
+  * retrieves a specific function from the camera, which may be manipulated using the FunctionManager attributes for camera pegs are position.attr3dpath, scale.x, scale.y, scale.z, rotation.anglez, skew
+  */
+  public linkedCameraFunction (shotId: string,attrName: string): string;
+  
   /**
-   * adds a Keyframe to the layer
-   */
-  public addLayerKeyFrame(panelId: string, layerIndex: int, offset: int): boolean;
-
+  * adds a Keyframe to the layer
+  */
+  public addLayerKeyFrame (panelId: string,layerIndex: int,offset: int): boolean;
+  
   /**
-   * remove Keyframe from the layer
-   */
-  public removeLayerKeyFrame(panelId: string, layerIndex: int, offset: int): boolean;
-
+  * remove Keyframe from the layer
+  */
+  public removeLayerKeyFrame (panelId: string,layerIndex: int,offset: int): boolean;
+  
   /**
-   * clears all Motion from the layer
-   */
-  public clearLayerMotion(panelId: string, layerIndex: int): boolean;
-
+  * clears all Motion from the layer
+  */
+  public clearLayerMotion (panelId: string,layerIndex: int): boolean;
+  
   /**
-   * retrieves a specific function from the layer, which may be manipulated using the FunctionManager attributes for layers are offset.attr3dpath, scale.x, scale.y, scale.z, rotation.anglez, skew
-   */
-  public linkedLayerFunction(panelId: string, layerIndex: int, attrName: string): string;
-
+  * retrieves a specific function from the layer, which may be manipulated using the FunctionManager attributes for layers are offset.attr3dpath, scale.x, scale.y, scale.z, rotation.anglez, skew
+  */
+  public linkedLayerFunction (panelId: string,layerIndex: int,attrName: string): string;
+  
   /**
-   * returns the linked function name for the given node and attribute, which may be manipulated using the FunctionManager
-   */
-  public getLinkedFunction(idString: string, nodeName: string, attrName: string): string;
-
+  * returns the linked function name for the given node and attribute, which may be manipulated using the FunctionManager
+  */
+  public getLinkedFunction (idString: string,nodeName: string,attrName: string): string;
+  
   /**
-   * sets the linked function for the given node and attribute
-   */
-  public setLinkedFunction(idString: string, nodeName: string, attrName: string, functionName: string): boolean;
-
+  * sets the linked function for the given node and attribute
+  */
+  public setLinkedFunction (idString: string,nodeName: string,attrName: string,functionName: string): boolean;
+  
   /**
-   * creates a new function of the given type within the project or shot or panel
-   */
-  public addFunction(idString: string, name: string, type: string): boolean;
-
+  * creates a new function of the given type within the project or shot or panel
+  */
+  public addFunction (idString: string,name: string,type: string): boolean;
+  
   /**
-   * Changes the attributes of a module.
-   */
-  public setTextAttr(idString: string, nodeName: string, attrName: string, atFrame: double, attrValue: string): boolean;
-
+  * Changes the attributes of a module.
+  */
+  public setTextAttr (idString: string,nodeName: string,attrName: string,atFrame: double,attrValue: string): boolean;
+  
   /**
-   * Gets the value of a attribute in a module.
-   */
-  public getTextAttr(idString: string, nodeName: string, attrName: string, atFrame: double): string;
-
+  * Gets the value of a attribute in a module.
+  */
+  public getTextAttr (idString: string,nodeName: string,attrName: string,atFrame: double): string;
+  
   /**
-   * returns the model matrix for the given node.
-   */
-  public getNodeMatrix(idString: string, nodeName: string, atFrame: double): Matrix4x4;
-}
+  * returns the model matrix for the given node.
+  */
+  public getNodeMatrix (idString: string,nodeName: string,atFrame: double): QObject;
+  
+  /**
+  * Enable or disable animation on the given layer.
+  */
+  public setLayerAnimated (panelId: string,layerIndex: int,animated: boolean): void;
+  
+  }
+  
+  
 
 /**
  * This set of functions is used to query/modify the current penstyle and list of penstyles. The list of penstyles includes the brush, pencil and texture styles
@@ -2079,53 +2088,73 @@ declare namespace SCR_SystemInterfaceImpl {
 }
 
 /**
- * This interface is used to access the GUI storyboard selection. In batch mode, this interface is a no-op
+ * The SelectionManager JavaScript class. Access and select the Storyboard visual panel, scene, sequence or layers.
  */
 declare class SelectionManager extends QObject {
   /**
-   * returns list of selected sequences
+   * Return a list of selected sequences.
    */
   public getSequenceSelection(): StringList;
 
   /**
-   * returns list of selected scenes
+   * Return a list of selected scenes.
    */
   public getSceneSelection(): StringList;
 
   /**
-   * returns list of selected panels
+   * Return a list of selected panels.
    */
   public getPanelSelection(): StringList;
 
   /**
-   * Clear selection.
+   * Get all the selected Layer and return the indexes in order.
+   */
+  public getLayerSelection(): QScriptValue;
+
+  /**
+   * Clear the selection.
    */
   public clearSelection(): boolean;
 
   /**
-   * Select All.
+   * Select every panels.
    */
   public selectAll(): boolean;
 
   /**
-   * set Selected Panels
+   * Set Selected Panels.
    */
-  public setPanelSelection(l: StringList): boolean;
+  public setPanelSelection(panelIds: StringList): boolean;
 
   /**
-   * set Selected Scenes
+   * Set Selected Scenes.
    */
-  public setSceneSelection(l: StringList): boolean;
+  public setSceneSelection(sceneIds: StringList): boolean;
 
   /**
-   * set Selected Sequences
+   * Set Selected Sequences.
    */
-  public setSequenceSelection(l: StringList): boolean;
+  public setSequenceSelection(sequenceIds: StringList): boolean;
 
   /**
-   * sets the current panel and moves the playhead
+   * Set the current panel and moves the play head.
    */
   public setCurrentPanel(panelId: string): boolean;
+
+  /**
+   * Select layer(s) on the currently selected Panel.
+   */
+  public setLayerSelection(selection: QScriptValue): boolean;
+
+  /**
+   * Check if the requested Layers are selected.
+   */
+  public isSelected(layer: QScriptValue): boolean;
+
+  /**
+   * Set the currently selected video track.
+   */
+  public setVideoTrackSelection(trackName: string): boolean;
 }
 
 /**
