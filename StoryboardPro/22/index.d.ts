@@ -11,7 +11,7 @@ declare class SCR_BaseInterface {}
  * (directories) used by the application. All of the functions are read-only. They return strings that
  * represent folders in use by the various applications. Depending on the application (e.g. Toon Boom
  * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classspecialFolders.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classspecialFolders.html}
  * @example
  * var scriptFolder = specialFolders.resource + "/scripts";
  */
@@ -140,7 +140,7 @@ declare class specialFolders extends BAPP_SpecialFolders {
 
 /**
  * The ComboBox JavaScript class. A simplified version of the ComboBox Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classComboBox.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classComboBox.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "ComboBox Example";
@@ -184,7 +184,7 @@ declare class ComboBox extends Labeled {
 
 /**
  * The DateEdit JavaScript class. A simplified version of the DateEdit Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDateEdit.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDateEdit.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "DateEdit Example";
@@ -244,7 +244,7 @@ declare class DateEdit extends Labeled {
 
 /**
  * The LineEdit JavaScript class. A simplified version of the LineEdit Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classLineEdit.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classLineEdit.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "LineEdit Example";
@@ -268,7 +268,7 @@ declare class LineEdit extends Labeled {
 
 /**
  * The NumberEdit JavaScript class. A simplified version of the NumberEdit Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classNumberEdit.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classNumberEdit.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "NumberEdit Example";
@@ -313,7 +313,7 @@ declare class NumberEdit extends Labeled {
 
 /**
  * The Slider JavaScript class. A simplified version of the Slider Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classSlider.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classSlider.html}
  * @example
  * var mySlider;
  *
@@ -387,7 +387,7 @@ declare class Slider extends Labeled {
 
 /**
  * The SpinBox JavaScript class. A simplified version of the SpinBox Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classSpinBox.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classSpinBox.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "SpinBox Example";
@@ -425,7 +425,7 @@ declare class SpinBox extends Labeled {
 
 /**
  * The TimeEdit JavaScript class. A simplified version of the TimeEdit Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classTimeEdit.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classTimeEdit.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "TimeEdit Example";
@@ -485,7 +485,7 @@ declare class TimeEdit extends Labeled {
 
 /**
  *
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classQDoubleValidator.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classQDoubleValidator.html}
  */
 declare class QDoubleValidator {}
 
@@ -494,7 +494,7 @@ declare class QDoubleValidator {}
  * on which the script is running.
  * The about class allows querying of platform and application specific ants.
  * The about class allows querying of platform and application specific ants.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classabout.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classabout.html}
  * @example
  * function printAbout() {
  *     // Application: full, demo or educational
@@ -937,7 +937,7 @@ declare class about extends QObject {
 
 /**
  * The CaptionManager JavaScript class. Access the caption properties of a panel.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classCaptionManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classCaptionManager.html}
  * @example
  *  var cm = new CaptionManager();
  *  var sb = new StoryboardManager();
@@ -1101,7 +1101,7 @@ declare class CaptionManager extends QObject {
  * The ColorRGBA JavaScript class. Represent an 8 bits per channel Red Green Blue Alpha colour.
  * The ColorRGBA class defines a four-dimensional container for colors. ColorRGBA objects can be
  * instantiated in the scripting environment.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classColorRGBA.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classColorRGBA.html}
  */
 declare class ColorRGBA extends QObject {
   /**
@@ -1148,7 +1148,7 @@ declare class ColorRGBA extends QObject {
 /**
  * The DateEditEnum JavaScript global object. Specifies the type of display order of day, month, year.
  * Use with DateEdit.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDateEditEnum.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDateEditEnum.html}
  * @example
  * widget.order = DateEditEnum.YDM;
  */
@@ -1157,7 +1157,7 @@ declare class DateEditEnum extends QObject {}
 /**
  * The Dir JavaScript class. Interface to operating system Dir operations, e.g. mkdir, rmdir, rename,
  * etc.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDir.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDir.html}
  * @example
  * var dir = new Dir;
  * dir.path = this._exportDir;
@@ -1173,7 +1173,7 @@ declare class Dir extends QObject {
 
   /**
    * Get absolute file path for filename given in parameter.
-   * @param {string} [file=String::null] The filename to get the absolute path of.
+   * @param {string} [file=""] The filename to get the absolute path of.
    * @returns {string}
    */
   public absFilePath(file?: string): string;
@@ -1194,15 +1194,19 @@ declare class Dir extends QObject {
   /**
    * Returns a list of the names of all the files and directories in the directory, ordered according to
    * the name and attribute filters.
-   * @param {string} filter The filter to apply to the directories and files.
-   * @param {int} [filterSpec=-1] The filter flags.
-   * @param {int} [sortSpec=-1] The sort flags.
+   * @param {string} filter The filter to apply to the directories and files. Ex: "*.js" or "*" for all the content.
+   * @param {int} [filterType=-1] (optional) The QDir (see Qt's QDir::Filters documentation) filter type. -1 by default
+   * @param {int} [sortFlags=-1] (optional) The QDir (see Qt's QDir::SortFlags documentation) sort flags. -1 by default
    * @returns {StringList}
+   * @example
+   * var dir = new Dir;
+   * dir.path = "c:/myscriptpath/";
+   * var scriptsFiles = dir.entryList("*.js"); // retrieve every files with a ".js" extension from the directory c:/myscriptpath
    */
   public entryList(
     filter: string,
-    filterSpec?: int,
-    sortSpec?: int
+    filterType?: int,
+    sortFlags?: int
   ): StringList;
 
   /**
@@ -1214,21 +1218,21 @@ declare class Dir extends QObject {
 
   /**
    * Get file path for the current directory from the file parameter.
-   * @param {string} [file=String::null] The filename to get the path of.
+   * @param {string} [file=""] The filename to get the path of.
    * @returns {string}
    */
   public filePath(file?: string): string;
 
   /**
    * Create a directory with given name.
-   * @param {string} [dirName=String::null] The name of the directory to be created.
+   * @param {string} [dirName=""] The name of the directory to be created.
    * @returns {void}
    */
   public mkdir(dirName?: string): void;
 
   /**
    * Create directory recursively if a path of a directory not yet created is given.
-   * @param {string} [dirName=String::null] The name of the directory to be created.
+   * @param {string} [dirName=""] The name of the directory to be created.
    * @returns {void}
    * Note: Does not appear to work on Windows paths.
    */
@@ -1251,14 +1255,14 @@ declare class Dir extends QObject {
 
   /**
    * Remove a directory with given name.
-   * @param {string} [dirName=String::null] The name of the directory to be removed.
+   * @param {string} [dirName=""] The name of the directory to be removed.
    * @returns {void}
    */
   public rmdir(dirName?: string): void;
 
   /**
    * Remove directory recursively if a path of directory is given.
-   * @param {string} [dirName=String::null] The name of the directory to be removed.
+   * @param {string} [dirName=""] The name of the directory to be removed.
    * @returns {void}
    */
   public rmdirs(dirName?: string): void;
@@ -1308,7 +1312,7 @@ declare class Dir extends QObject {
 
 /**
  * The DirSpec JavaScript global object. Enum for directory operations.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDirSpec.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDirSpec.html}
  * @example
  * var myDirectorySpec = DirSpec.Dirs;
  */
@@ -1317,7 +1321,7 @@ declare class DirSpec extends QObject {}
 /**
  * The DrawingToolParams JavaScript class. Set or unset the "apply on all drawings" setting of the
  * DrawingTools methods.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDrawingToolParams.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDrawingToolParams.html}
  * @example
  * var params = new DrawingToolParams;
  * params.applyAllDrawings = true;
@@ -1409,7 +1413,7 @@ declare class DrawingToolParams extends QObject {
  * by 100 tall, with a 50% zoom factor.
  * Exports scenes 1 through 4 to QuickTime, with a resolution of 400 wide by 300 tall. One movie will
  * be produced for each scene.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classExportManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classExportManager.html}
  * @example
  * var exp = new ExportManager;
  * exp.setPDFProfile("Overview 4x3");
@@ -1421,7 +1425,7 @@ declare class ExportManager extends QObject {
    * Supported bitmap formats are jpg, psd or tga.
    * @param {string} exportDir target directory for export
    * @param {string} filePattern name used for export file
-   * @param {string} bitmapFormat allowable format strings are "jpg", "psd" and "tga"
+   * @param {string} bitmapFormat allowable format strings are "jpg", "png", "psd" and "tga"
    * @returns {boolean}
    */
   public exportLayout(
@@ -1467,7 +1471,7 @@ declare class ExportManager extends QObject {
    * Supported bitmap formats are jpg, psd or tga.
    * @param {string} exportDir target directory for export
    * @param {string} filePattern name used for export file
-   * @param {string} bitmapFormat allowable format strings are "jpg", "psd" and "tga"
+   * @param {string} bitmapFormat allowable format strings are "jpg", "png", "psd" and "tga"
    * @returns {boolean}
    */
   public exportToBitmap(
@@ -1521,7 +1525,7 @@ declare class ExportManager extends QObject {
    * Supported movie formats are jpg, mov, swf or tga.
    * @param {string} exportDir target directory for export
    * @param {string} filePattern name used for export file
-   * @param {string} movieFormat allowable format strings are "jpg", "mov" and "tga"
+   * @param {string} movieFormat allowable format strings are "jpg", "png", "mov", "openH264" and "tga"
    * @returns {boolean}
    */
   public exportToMovie(
@@ -1752,6 +1756,14 @@ declare class ExportManager extends QObject {
   public setCaptionOverlayTextColour(color: ColorRGBA): void;
 
   /**
+   * Sets export colour space.
+   * Specify the export colour space.
+   * @param {string} colorSpace Color space name to be set.
+   * @returns {void}
+   */
+  public setColorSpace(colorSpace: string): void;
+
+  /**
    * Set whether or not to use custom parameters for the write node.
    * By default, this is false
    * @param {boolean} flag true or false
@@ -1799,14 +1811,6 @@ declare class ExportManager extends QObject {
   public setExportCaptions(flag: boolean): void;
 
   /**
-   * Export markers at scene beginning.
-   * By default, this is false.
-   * @param {boolean} flag true or false
-   * @returns {void}
-   */
-  public setExportMarkers(flag: boolean): void;
-
-  /**
    * Export one image for each layer.
    * By default, this is false.
    * @param {boolean} flag true or false
@@ -1824,12 +1828,28 @@ declare class ExportManager extends QObject {
   public setExportResolution(resX: int, resY: int): void;
 
   /**
+   * Export markers at scene beginning.
+   * By default, this is false.
+   * @param {boolean} flag true or false
+   * @returns {void}
+   */
+  public setExportSceneMarkers(flag: boolean): void;
+
+  /**
    * Export scenes reference track.
    * By default, this is false.
    * @param {boolean} flag true or false
    * @returns {void}
    */
   public setExportScenesReferenceTrack(flag: boolean): void;
+
+  /**
+   * Export video tracks.
+   * By default, this is false.
+   * @param {boolean} flag true or false
+   * @returns {void}
+   */
+  public setExportVideoTracks(flag: boolean): void;
 
   /**
    * Set the default destination folder for FBX exports By default, this is the movies folder.
@@ -1844,6 +1864,14 @@ declare class ExportManager extends QObject {
    * @returns {void}
    */
   public setFBXExportNamingPattern(pattern: string): void;
+
+  /**
+   * Set clip's handles length in frames.
+   * The default value is 240 frames.
+   * @param {int} length length in frame
+   * @returns {void}
+   */
+  public setHandlesLength(length: int): void;
 
   /**
    * Specify the Harmony format.
@@ -2051,7 +2079,7 @@ declare class ExportManager extends QObject {
 
   /**
    * Set the repeat cycle for additional duration overlay.
-   * @param {int} mode The repeat cycle to use.
+   * @param {int} mode The duration display system for the time count.
    * @returns {void}
    */
   public setSplitTimeCountMode(mode: int): void;
@@ -2064,8 +2092,8 @@ declare class ExportManager extends QObject {
   public setSplitTimeCountSplit(split: int): void;
 
   /**
-   * Sets a transparent background. This is only useful when exporting to Photoshop ( psd files ).
-   * By default, this is true.
+   * Sets a transparent background.
+   * By default, this is false.
    * @param {boolean} flag true or false
    * @returns {void}
    */
@@ -2159,7 +2187,7 @@ declare class ExportManager extends QObject {
 
 /**
  * The File JavaScript class. Open, close, read, write, get information about files.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classFile.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classFile.html}
  * @example
  * var file = new File(filePath);
  * if (file.exists) {
@@ -2342,7 +2370,7 @@ declare class File extends QObject {
 
 /**
  * The FileAccess JavaScript global object. Enum to define file operation.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classFileAccess.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classFileAccess.html}
  * @example
  * var file = new File(filePath);
  * f.open(FileAccess.ReadOnly);
@@ -2353,7 +2381,7 @@ declare class FileAccess extends QObject {}
  * With the Function Manager, you can manipulate the camera functions and the layer functions. Note
  * that for all methods you must give the unique id. For the camera, this is the sceneId. For a layer
  * functions, this is the panelId.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classFunctionManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classFunctionManager.html}
  * @example
  * function cameraManip() {
  *     var cm = new MotionManager();
@@ -3024,7 +3052,7 @@ declare class FunctionManager extends QObject {
 
 /**
  * The LayerManager JavaScript class. Access the layers of a given panel.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classLayerManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classLayerManager.html}
  * @example
  * var lm = new LayerManager();
  * var sb = new StoryboardManager();
@@ -3234,11 +3262,13 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    * Import image and creates a new layer at index 0, returns if successful.
    * @param {string} panelId - unique id of the panel
    * @param {string} fullPathAndFileName - absolute path to image file
+   * @param {string} [multiLayerOption="UseDefault"] - how to handle multi layer image one of these 4 values: "UseDefault" - Use value from preferences "AskUser" - Ask user "Composite" - Import as one image "Separate" - Import an image for each layer
    * @returns {boolean}
    */
   public importImageAsLayer(
     panelId: string,
-    fullPathAndFileName: string
+    fullPathAndFileName: string,
+    multiLayerOption?: string
   ): boolean;
 
   /**
@@ -3388,7 +3418,7 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
  * This interface is used to access the shot cameras or the panel layers, and add or remove motion to
  * them.
  * The following examples are provided:
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classMotionManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classMotionManager.html}
  * @example
  *  function AddingLayerMotion() {
  *      var mm = new MotionManager();
@@ -3528,6 +3558,13 @@ declare class MotionManager extends QObject {
   ): string;
 
   /**
+   * (BETA FEATURE) Reframe static camera and center all no animated drawings.
+   * @param {string} shotId - unique Id of the scene
+   * @returns {boolean}
+   */
+  public reframeStaticCamera(shotId: string): boolean;
+
+  /**
    * remove Keyframe from the camera
    * @param {string} shotId - unique Id of the scene
    * @param {int} offset - offset ( in frames ) into the scene
@@ -3600,7 +3637,7 @@ declare class MotionManager extends QObject {
  * For scene insertion, the source scene must be loaded using loadSourceProject. Once loaded, the
  * sceneIds of the source may be retrieved. Using this information, the insertScene command can be
  * created.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classPrjMgtManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classPrjMgtManager.html}
  * @example
  * var pM = new PrjMgtManager();
  * if (pM.loadSourceProject("/pathToProject/something.sboard")) {
@@ -3622,8 +3659,8 @@ declare class PrjMgtManager extends QObject {
    * Extracts the specified range of scenes, and creates a new project with them.
    * @param {string} newProjectPath - path to the directory where the new project is to be saved.
    * @param {string} newProjectName - name of the new project
-   * @param {string} fromShotId - used to determine the start of the extraction range ( first frame of the shot is used )
-   * @param {string} toShotId - used to determine the end of the extraction range ( last frame of the shot is used )
+   * @param {string} fromSceneId - used to determine the start of the extraction range ( first frame of the scene is used )
+   * @param {string} toSceneId - used to determine the end of the extraction range ( last frame of the scene is used )
    * @param {boolean} removeScenes - whether the extracted range is to be removed from the original project
    * @param {boolean} [linkExtracted=false] - if true, add a link between extracted and the original project. Default is false.
    * @returns {boolean}
@@ -3631,8 +3668,8 @@ declare class PrjMgtManager extends QObject {
   public extractRange(
     newProjectPath: string,
     newProjectName: string,
-    fromShotId: string,
-    toShotId: string,
+    fromSceneId: string,
+    toSceneId: string,
     removeScenes: boolean,
     linkExtracted?: boolean
   ): boolean;
@@ -3653,10 +3690,29 @@ declare class PrjMgtManager extends QObject {
   ): string;
 
   /**
+   * Insert the loaded source project into the current project before scene designated by beforeSceneId.
+   * Will insert at the end if beforeSceneId is invalid or empty.
+   * @param {string} beforeSceneId
+   * @returns {boolean}
+   * @example
+   * var pM = new PrjMgtManager();
+   * var storyboard = new StoryboardManager();
+   *
+   * if (pM.loadSourceProject("/pathToProject/something.sboard")) {
+   *
+   *     pM.setCreateNewAudioTrack(true);
+   *
+   *     var res = pM.insertProject(storyboard.sceneInProject(0));
+   *     MessageLog.trace("Insert result : " + res);
+   * }
+   */
+  public insertProject(beforeSceneId: string): boolean;
+
+  /**
    * Inserts the specified source scene Id into the project.
-   * @param {string} srcSceneId - uniqueId of the source shot
-   * @param {string} dstSceneId - uniqueId of the destination shot
-   * @param {boolean} overwrite - if true, overwrites the destination shot, if false, inserts next to it
+   * @param {string} srcSceneId - uniqueId of the source scene
+   * @param {string} dstSceneId - uniqueId of the destination scene
+   * @param {boolean} overwrite - if true, overwrites the destination scene, if false, inserts next to it
    * @param {boolean} before - used when inserting to specify before the target or after
    * @returns {string}
    */
@@ -3707,6 +3763,13 @@ declare class PrjMgtManager extends QObject {
    * @returns {void}
    */
   public setCaptionRemapByName(flag: boolean): void;
+
+  /**
+   * Create new audio tracks for inserted projects. True by default.
+   * @param {boolean} flag - boolean
+   * @returns {void}
+   */
+  public setCreateNewAudioTrack(flag: boolean): void;
 
   /**
    * Set the flag to keep the original scenes ( when overwriting ) and move them to the end of the
@@ -3782,6 +3845,20 @@ declare class PrjMgtManager extends QObject {
   public setUpdateProjectLink(flag: boolean): void;
 
   /**
+   * Use source project name as prefix for inserted scenes. False by default.
+   * @param {boolean} flag - boolean
+   * @returns {void}
+   */
+  public setUseProjectNameAsScenePrefix(flag: boolean): void;
+
+  /**
+   * Use source project name as prefix for inserted sequences. False by default.
+   * @param {boolean} flag - boolean
+   * @returns {void}
+   */
+  public setUseProjectNameAsSequencePrefix(flag: boolean): void;
+
+  /**
    * Returns a list of captions from the loaded storyboard project.
    * @returns {StringList}
    */
@@ -3816,12 +3893,12 @@ declare class PrjMgtManager extends QObject {
 }
 
 /**
- * The Process JavaScript class. Used to launch an external process.
+ * The Process2 JavaScript class. Used to launch an external process.
  * Processes can be instantiated in the scripting environment.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classProcess.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classProcess.html}
  * @example
- * p1 = new Process("rndr -t file.rib"); // create process from single string
- * p2 = new Process("rndr", "-t", "file.rib"); // create process using separate arguments
+ * p1 = new Process2("rndr -t file.rib"); // create process from single string
+ * p2 = new Process2("rndr", "-t", "file.rib"); // create process using separate arguments
  *
  * // Both commands execute same process
  * p1.launch();
@@ -3829,11 +3906,11 @@ declare class PrjMgtManager extends QObject {
  *
  * // Launch a new process and detach it from application.
  * // Application will not be monitored by script module.
- * p3 = new Process("rndr -t file.rib");
+ * p3 = new Process2("rndr -t file.rib");
  * p3.launchAndDetach();
  *
  * // Create a process from a specified PID.
- * p4 = new Process(1234);
+ * p4 = new Process2(1234);
  *
  * // Verify if process is still alive and terminate it
  * if (p4.isAlive()) {
@@ -3932,12 +4009,6 @@ declare class Process extends QObject {
    * @returns {int}
    */
   public exitStatus(): int;
-
-  /**
-   * Returns the most recent error code.
-   * @returns {int}
-   */
-  public getLastErrorCode(): int;
 
   /**
    * Verify if process is still alive.
@@ -4112,7 +4183,7 @@ declare class Process extends QObject {
 /**
  * This interface is used to access the properties of the storyboard project.
  * The following examples are provided:
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classPropertiesManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classPropertiesManager.html}
  * @example
  * var props = new PropertiesManager;
  *
@@ -4211,7 +4282,7 @@ declare class PropertiesManager extends QObject {
  * sequence or layers.
  * The following example shows how to print the sequence, scene and panel information.
  * The following example shows how to use the Layer Selection to get the selected layer's index.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classSelectionManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classSelectionManager.html}
  * @example
  *  var selection = new SelectionManager();
  *  var storybd = new StoryboardManager();
@@ -4345,7 +4416,7 @@ declare class SelectionManager extends QObject {
  * columnName );
  * It includes methods to iterate over the sound column content. At this moment, it cannot do any
  * modification to the sound column.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classsoundColumnInterface.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classsoundColumnInterface.html}
  */
 declare class soundColumnInterface extends QObject {
   /**
@@ -4359,6 +4430,42 @@ declare class soundColumnInterface extends QObject {
   public sequences(): soundSequenceInterface[];
 
   /**
+   * Returns an array containing data for printing the sound column's waveform over the given frames. The
+   * returned array has 15 entries per frame, and the value is the intensity of the sound.
+   * The args parameter should include the following properties (however none are required)
+   * @param {QScriptValue} args
+   * @returns {QScriptValue}
+   * @example
+   * var colObj = column.soundColumn("My_Sound_Col");
+   * var waveformArr = colObj.waveformInfo({
+   *     startFrame: 1,
+   *     endFrame: 72,
+   *     frameRate: 24.0
+   * });
+   *
+   * var pix = new QPixmap(150, 72 * 15);
+   * pix.fill() //Fills with white background
+   * var painter = new QPainter();
+   * painter.begin(pix);
+   *
+   * for (var frameCounter = 1; frameCounter <= 72; frameCounter++) {
+   *     //Draw some gray lines to show frame delineations
+   *     painter.fillRect(0, k * 15, 150, 1, new QColor(Qt.gray));
+   * }
+   *
+   * for (var pixelCounter = 0; pixelCounter < waveformArr.length; pixelCounter++) {
+   *     var intensity = waveformArr[pixelCounter];
+   *     var newX = 75 - (intensity / 2); //center the intensity in the pixmap
+   *     //Draw the waveform intensity
+   *     painter.fillRect(newX, pixelCounter, intensity, 1, new QColor(Qt.black));
+   * }
+   * painter.end();
+   *
+   * pix.save("My/Desktop/waveform.png");
+   */
+  public waveformInfo(args: QScriptValue): QScriptValue;
+
+  /**
    * @returns {string}
    */
   // /* Invalid - Duplicate property name */ column: string;
@@ -4366,7 +4473,7 @@ declare class soundColumnInterface extends QObject {
 
 /**
  *
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classsoundSequenceInterface.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classsoundSequenceInterface.html}
  */
 declare class soundSequenceInterface extends QObject {
   /**
@@ -4458,7 +4565,7 @@ declare class soundSequenceInterface extends QObject {
 
 /**
  * This interface is used to access the audio tracks of a storyboard project.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classSoundTrackManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classSoundTrackManager.html}
  * @example
  * var stb = new SoundTrackManager();
  * var num = stb.numberOfSoundTracks();
@@ -4557,7 +4664,7 @@ declare class SoundTrackManager extends QObject {
  * Scenes, Panels and Transitions are identified by a unique id. For the sake of clarity, a transition
  * is considered to belong to the shot to it's right. Or, the shot owns the transition to it's left.
  * The following examples are provided:
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classStoryboardManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classStoryboardManager.html}
  * @example
  * function projectQuery() {
  *     var storyboard = new StoryboardManager();
@@ -4698,6 +4805,91 @@ declare class StoryboardManager extends QObject {
   public getPanelDuration(panelId: string): int;
 
   /**
+   * Return the panel metadata object corresponding to the given name and type.
+   * Here is an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {string} panelId
+   * @param {string} name The name of the metadata object.
+   * @param {string} [type=QNTR("string")] The metadata type.
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Storyboard Pro",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public getPanelMetadata(
+    panelId: string,
+    name: string,
+    type?: string
+  ): QScriptValue;
+
+  /**
+   * Return the list of metadatas for the specified panel.
+   * This method returns an array of javascript objects where each object represent a single metadata
+   * object. Here is an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {string} panelId
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Storyboard Pro",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public getPanelMetadatas(panelId: string): QScriptValue;
+
+  /**
+   * Return the project metadata object corresponding to the given name and type.
+   * Here is an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {string} name The name of the metadata object.
+   * @param {string} [type=QNTR("string")] The metadata type.
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Storyboard Pro",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public getProjectMetadata(name: string, type?: string): QScriptValue;
+
+  /**
+   * Return the list of metadatas for the current project.
+   * This method returns an array of javascript objects where each object represent a single metadata
+   * object. Here is an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Storyboard Pro",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public getProjectMetadatas(): QScriptValue;
+
+  /**
+   * Returns baseName if valid and unused or return a valid name based on baseName and naming rules.
+   * Returns empty string in case of error.
+   * @param {string} sceneId - sceneId of target scene
+   * @param {string} baseName - name
+   * @returns {string}
+   */
+  public getValidSceneName(sceneId: string, baseName: string): string;
+
+  /**
    * Insert a new panel.
    * @param {boolean} after - whether the panel should be created after the target panel
    * @param {string} panelId - panelId of target panel
@@ -4810,6 +5002,21 @@ declare class StoryboardManager extends QObject {
    * @returns {string}
    */
   public panelInScene(sceneId: string, index: int): string;
+
+  /**
+   * Removes a project metadata object from the list of project metadata objects.
+   * @param {string} panelId
+   * @param {QScriptValue} meta A metadata object.
+   * @returns {boolean}
+   */
+  public removePanelMetadata(panelId: string, meta: QScriptValue): boolean;
+
+  /**
+   * Removes a project metadata object from the list of project metadata objects.
+   * @param {QScriptValue} meta A metadata object.
+   * @returns {boolean}
+   */
+  public removeProjectMetadata(meta: QScriptValue): boolean;
 
   /**
    * Rename a panel.
@@ -4945,6 +5152,49 @@ declare class StoryboardManager extends QObject {
   public setPanelDuration(panelId: string, frames: int): boolean;
 
   /**
+   * Either inserts a new project metadata object or sets the value of an existing project metadata
+   * object.
+   * If a metadata object already exist with the given name and type properties, then sets its value with
+   * the given value property. Otherwise, inserts a new metadata object with the given name, type(default
+   * is string), creator(default is executable), version(default is 1.0) and values properties. Here is
+   * an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {string} panelId
+   * @param {QScriptValue} meta A metadata object.
+   * @returns {void}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Storyboard Pro",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public setPanelMetadata(panelId: string, meta: QScriptValue): void;
+
+  /**
+   * Either inserts a new project metadata object or sets the value of an existing project metadata
+   * object.
+   * If a metadata object already exist with the given name and type properties, then sets its value with
+   * the given value property. Otherwise, inserts a new metadata object with the given name, type(default
+   * is string), creator(default is executable), version(default is 1.0) and values properties. Here is
+   * an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {QScriptValue} meta A metadata object.
+   * @returns {void}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Storyboard Pro",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public setProjectMetadata(meta: QScriptValue): void;
+
+  /**
    * Split a panel into 2 panels.
    * @param {string} panelId - panelId of target panel
    * @param {int} atFrame - frame at which to split ( measured from start of project )
@@ -4979,7 +5229,7 @@ declare class StoryboardManager extends QObject {
  * The tool preset manager returns information about the existing tool presets and provides to the user
  * the functionality to select a tool preset with its "id" property. Presets can be defined by the
  * following properties:
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classToolPresetManager.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classToolPresetManager.html}
  * @example
  * // Activate the Preset named "preset"
  * var toolPresetManager = new ToolPresetManager();
@@ -5009,7 +5259,7 @@ declare class ToolPresetManager extends QObject {
 /**
  * The Action JavaScript global object. Trigger action associated to menu or tool bar items.
  * Call either global actions or actions associated to a specific responder.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classAction.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classAction.html}
  * @example
  * function callAbout() {
  *     // Call the global action onActionAbout() which will show the About dialog.
@@ -5123,7 +5373,7 @@ declare class Action extends SCR_BaseInterface {
 
 /**
  * The DrawingTools JavaScript global object. Get information about the currently selected drawing.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDrawingTools.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDrawingTools.html}
  * @example
  * var params = new DrawingToolParams;
  * params.applyAllDrawings = true;
@@ -5216,13 +5466,13 @@ declare class DrawingTools extends SCR_BaseInterface {
 
 /**
  * The FileDialog JavaScript global object. A simplified version of the Qt file dialogs.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classFileDialog.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classFileDialog.html}
  */
 declare class FileDialog extends SCR_BaseInterface {
   /**
    * Function that will return an existing directory selected by the user.
-   * @param {string} [dir=String::null] The directory to open the file dialog to.
-   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {string} [dir=""] The directory to open the file dialog to.
+   * @param {string} [title=""] The title for the file dialog.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
@@ -5234,8 +5484,8 @@ declare class FileDialog extends SCR_BaseInterface {
 
   /**
    * Function that returns an existing file selected by the user.
-   * @param {string} [filter=String::null] The filter for which files to select.
-   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {string} [filter=""] The filter for which files to select.
+   * @param {string} [title=""] The title for the file dialog.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
@@ -5247,9 +5497,9 @@ declare class FileDialog extends SCR_BaseInterface {
 
   /**
    * Function that will return one or more existing files selected by the user.
-   * @param {string} [dir=String::null] The directory to open the file dialog to.
-   * @param {string} [filter=String::null] The filter for which files to select.
-   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {string} [dir=""] The directory to open the file dialog to.
+   * @param {string} [filter=""] The filter for which files to select.
+   * @param {string} [title=""] The title for the file dialog.
    * @param {QWidget} [parent=0] Unused.
    * @returns {StringList}
    */
@@ -5262,8 +5512,8 @@ declare class FileDialog extends SCR_BaseInterface {
 
   /**
    * Function that will return a file name selected by the user.
-   * @param {string} [filter=String::null] The filter for which files to select.
-   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {string} [filter=""] The filter for which files to select.
+   * @param {string} [title=""] The title for the file dialog.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
@@ -5276,7 +5526,7 @@ declare class FileDialog extends SCR_BaseInterface {
 
 /**
  * The fileMapper JavaScript global object. Map paths from one format to another.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classfileMapper.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classfileMapper.html}
  */
 declare class fileMapper extends SCR_BaseInterface {
   /**
@@ -5320,7 +5570,7 @@ declare class fileMapper extends SCR_BaseInterface {
  * This interface is used obtain and change the number of current frame. The current frame is the frame
  * at which the red playhead is in the Timeline view. It is based on the amount of frames since the
  * first frame of the project which, in this interface, is frame 1.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classframe.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classframe.html}
  * @example
  * function insertMarkersAtFrame(int myFrame) {
  *     // Return the current frame.
@@ -5358,16 +5608,16 @@ declare class frame extends SCR_BaseInterface {
 /**
  * The Input JavaScript global object. A simplified version of the Qt input dialogs.
  * Provides a simple convenient dialog to get a single value from the user.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classInput.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classInput.html}
  */
 declare class Input extends SCR_BaseInterface {
   /**
    * Function to get an item from the user.
    * @param {string} label A prompt for the input you want.
    * @param {StringList} itemList A list of items for the user to choose from.
-   * @param {string} [currentItem=String::null] The currently selected item from the list.
+   * @param {string} [currentItem=""] The currently selected item from the list.
    * @param {boolean} [editable=false] Whether or not the user can enter their own item.
-   * @param {string} [title=String::null] The title for the dialog box.
+   * @param {string} [title=""] The title for the dialog box.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
@@ -5383,7 +5633,7 @@ declare class Input extends SCR_BaseInterface {
   /**
    * Function to get an item from the user.
    * @param {StringList} itemList A list of items for the user to choose from.
-   * @param {string} [currentItem=String::null] The currently selected item from the list.
+   * @param {string} [currentItem=""] The currently selected item from the list.
    * @param {boolean} [editable=false] Whether or not the user can enter their own item.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
@@ -5397,12 +5647,12 @@ declare class Input extends SCR_BaseInterface {
 
   /**
    * Function to get a number from the user.
-   * @param {string} [label=String::null] A prompt for the input you want.
+   * @param {string} [label=""] A prompt for the input you want.
    * @param {double} [value=0] Number to appear in the dialog box number field when opened.
    * @param {int} [decimals=0] The number of decimals that will be allowed in the input.
    * @param {double} [minValue=-2147483647] The minimum value allowed for the input.
    * @param {double} [maxValue=2147483647] The maximum value allowed for the input.
-   * @param {string} [title=String::null] The title for the dialog box.
+   * @param {string} [title=""] The title for the dialog box.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
@@ -5418,9 +5668,9 @@ declare class Input extends SCR_BaseInterface {
 
   /**
    * Function to get a string from the user.
-   * @param {string} [label=String::null] A prompt for the input you want.
-   * @param {string} [text=String::null] Text to appear in the dialog box text field when opened.
-   * @param {string} [title=String::null] The title for the dialog box.
+   * @param {string} [label=""] A prompt for the input you want.
+   * @param {string} [text=""] Text to appear in the dialog box text field when opened.
+   * @param {string} [title=""] The title for the dialog box.
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
@@ -5434,7 +5684,7 @@ declare class Input extends SCR_BaseInterface {
 
 /**
  * The KeyModifiers JavaScript global object. Query key modifiers.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classKeyModifiers.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classKeyModifiers.html}
  */
 declare class KeyModifiers extends SCR_BaseInterface {
   /**
@@ -5464,7 +5714,7 @@ declare class KeyModifiers extends SCR_BaseInterface {
 
 /**
  * The MessageBox JavaScript class. A simplified version of the MessageBox Qt dialog.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classMessageBox.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classMessageBox.html}
  * @example
  * MessageBox.warning(" This is a warning.");
  */
@@ -5530,7 +5780,7 @@ declare class MessageBox extends SCR_BaseInterface {
 /**
  * The MessageLog JavaScript global object. Allows the user to print messages to the message log
  * window.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classMessageLog.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classMessageLog.html}
  * @example
  * MessageLog.trace("Export template failed. Nothing selected.");
  */
@@ -5589,10 +5839,13 @@ declare class MessageLog extends SCR_BaseInterface {
 /**
  * The PenstyleManager JavaScript global object. Query/modify the current penstyle and list of
  * penstyles.
- * The list of penstyles includes the brush, pencil and texture styles.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classPenstyleManager.html}
+ * The list of penstyles differs by active tool. Query the currentToolId to know which list is active.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classPenstyleManager.html}
  * @example
  * function queryPenstyles() {
+ *     // work on the brush pen styles by activating the tool
+ *     Action.perform("onActionChooseBrushTool()", "sceneUI");
+ *
  *     var num = PenstyleManager.getNumberOfPenstyles();
  *     for (var i = 0; i < num; ++i) {
  *         MessageLog.trace("penstyle name is " + PenstyleManager.getPenstyleName(i));
@@ -5633,6 +5886,14 @@ declare class PenstyleManager extends SCR_BaseInterface {
   public changeCurrentPenstyleOutlineSmoothness(smooth: double): void;
 
   /**
+   * Returns the name of the currently active tool.
+   * Pen styles are separated by tools. Use this value to know which set of pen styles are currently
+   * active.
+   * @returns {string}
+   */
+  public currentToolName(): string;
+
+  /**
    * Formats the penstyle list into a string, which can be used to store the penstyle list and import it
    * later.
    * @returns {string}
@@ -5660,7 +5921,7 @@ declare class PenstyleManager extends SCR_BaseInterface {
   public getCurrentPenstyleEraserFlag(): boolean;
 
   /**
-   * Returns the index of the current penstyle.
+   * Returns the index of the current penstyle for the active tool.
    * @returns {int}
    */
   public getCurrentPenstyleIndex(): int;
@@ -5678,7 +5939,7 @@ declare class PenstyleManager extends SCR_BaseInterface {
   public getCurrentPenstyleMinimumSize(): double;
 
   /**
-   * Returns the name of the current penstyle.
+   * Returns the name of the current penstyle for the active tool.
    * @returns {string}
    */
   public getCurrentPenstyleName(): string;
@@ -5696,7 +5957,7 @@ declare class PenstyleManager extends SCR_BaseInterface {
   public getNumberOfPenstyles(): int;
 
   /**
-   * Returns the name of the penstyle at the given index.
+   * Returns the name of the penstyle at the given index for the current tool.
    * @param {int} index Index of the penstyle.
    * @returns {string}
    */
@@ -5716,14 +5977,14 @@ declare class PenstyleManager extends SCR_BaseInterface {
   public savePenstyles(): void;
 
   /**
-   * Sets the current penstyle.
+   * Sets the current penstyle for the active tool.
    * @param {int} index Index of penstyle to be set as current penstyle.
    * @returns {void}
    */
   public setCurrentPenstyleByIndex(index: int): void;
 
   /**
-   * Sets the current penstyle.
+   * Sets the current penstyle for the active tool.
    * @param {string} name Name of the penstyle to be set as current penstyle.
    * @returns {void}
    */
@@ -5737,7 +5998,7 @@ declare class PenstyleManager extends SCR_BaseInterface {
  * file prefs.xml contains a description of all preferences recognized by the application. The keyword
  * to access each predefined preference is also found in that file. Scripts can change or retrieve any
  * existing preference, and may create new preferences.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classpreferences.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classpreferences.html}
  * @example
  * function toggleAutoSaveLayout() {
  *     var b;
@@ -5831,28 +6092,10 @@ declare class preferences extends SCR_BaseInterface {
 }
 
 /**
- * The scene JavaScript global object. Retrieve and set global scene attributes, like the aspect ratio
- * of the cells in the scene grid.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classscene.html}
- * @example
- * function setScene() {
- *     // Sets the beginning of the undo/redo command wrapper
- *     scene.beginUndoRedoAccum("Set Scene");
- *
- *     // Sets the aspect ratio of the scene to 4, 3
- *     scene.setUnitsAspectRatio(4, 3);
- *
- *     // Sets the number of units in the scene
- *     scene.setNumberOfUnits(1200, 900, 12);
- *
- *     // Sets the value of the center coordinate
- *     scene.setCoordAtCenter(5000, 5000);
- *
- *     // Terminates the undo/redo command wrapper
- *     scene.endUndoRedoAccum();
- * }
+ * The project JavaScript global object. Retrieve and set global project attributes.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classproject.html}
  */
-declare class scene extends SCR_BaseInterface {
+declare class project extends SCR_BaseInterface {
   /**
    * This function starts the accumulation of all of the functions between it and the endUndoRedoAccum
    * function as one command that will appear in the undo/redo list. If you do not use this function with
@@ -5876,61 +6119,16 @@ declare class scene extends SCR_BaseInterface {
   public clearHistory(): void;
 
   /**
-   * Closes the current scene.
-   * Exiting functions Anyone of these is final and absolute. Nothing in the script will be executed
-   * after these calls.
-   * @returns {void}
-   */
-  public closeScene(): void;
-
-  /**
-   * Closes the current scene and exits.
-   * @returns {void}
-   */
-  public closeSceneAndExit(): void;
-
-  /**
-   * Closes the current scene and open the scene specified by it's file path.
-   * @param {string} filePath The full path to the file to open.
-   * @returns {boolean}
-   */
-  public closeSceneAndOpenOffline(filePath: string): boolean;
-
-  /**
-   * Returns the X value of the centre coordinate of the scene grid.
+   * Returns the X value of the centre coordinate of the grid.
    * @returns {int}
    */
   public coordAtCenterX(): int;
 
   /**
-   * Returns the Y value of the centre coordinate of the scene grid.
+   * Returns the Y value of the centre coordinate of the grid.
    * @returns {int}
    */
   public coordAtCenterY(): int;
-
-  /**
-   * Returns the name of the current environment.
-   * @returns {string}
-   */
-  public currentEnvironment(): string;
-
-  /**
-   * Returns the path of the current environment.
-   * @returns {string}
-   */
-  public currentEnvironmentPath(): string;
-
-  /**
-   * Returns the name of the current job.
-   * @returns {string}
-   */
-  public currentJob(): string;
-
-  /**
-   * Returns the path of the current job.
-   * @returns {string}
-   */
-  public currentJobPath(): string;
 
   /**
    * Returns the current project path.
@@ -5959,25 +6157,7 @@ declare class scene extends SCR_BaseInterface {
   public currentResolutionY(): int;
 
   /**
-   * Returns the name of the current scene.
-   * @returns {string}
-   */
-  public currentScene(): string;
-
-  /**
-   * Returns the ID of the current version.
-   * @returns {int}
-   */
-  public currentVersion(): int;
-
-  /**
-   * Returns the name or the number of the current scene version.
-   * @returns {string}
-   */
-  public currentVersionName(): string;
-
-  /**
-   * Returns the default resolution field of view (FOV). The default FOV is a global scene parameter.
+   * Returns the default resolution field of view (FOV). The default FOV is a global project parameter.
    * @returns {double}
    */
   public defaultResolutionFOV(): double;
@@ -5993,7 +6173,7 @@ declare class scene extends SCR_BaseInterface {
   /**
    * Returns the X value of the default resolution.
    * This resolution is a global parameter saved with the project, not the current preview resolution.
-   * For example, when the default scene resolution is 720x540 pixels this function will return 720.
+   * For example, when the default project resolution is 720x540 pixels this function will return 720.
    * @returns {int}
    */
   public defaultResolutionX(): int;
@@ -6001,7 +6181,7 @@ declare class scene extends SCR_BaseInterface {
   /**
    * Returns the Y value of the default resolution.
    * This resolution is a global parameter saved with the project, not the current preview resolution.
-   * For example, when the default scene resolution is 720x540 pixels this function will return 540.
+   * For example, when the default project resolution is 720x540 pixels this function will return 540.
    * @returns {int}
    */
   public defaultResolutionY(): int;
@@ -6015,73 +6195,20 @@ declare class scene extends SCR_BaseInterface {
   public endUndoRedoAccum(): void;
 
   /**
-   * Converts an OGL coordinate into a field coordinate.
-   * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
-   * @returns {QObject}
-   */
-  public fromOGL(pointOrVector: QObject): QObject;
-
-  /**
-   * Converts the X-value of an OpenGL coordinate to the X-value of a field coordinate.
-   * @param {double} oglX The X-value of an OpenGL coordinate.
-   * @returns {double}
-   */
-  public fromOGLX(oglX: double): double;
-
-  /**
-   * Converts the Y-value of an OpenGL coordinate to the Y-value of a field coordinate.
-   * @param {double} oglY The Y-value of an OpenGL coordinate.
-   * @returns {double}
-   */
-  public fromOGLY(oglY: double): double;
-
-  /**
-   * Converts the Z-value of an OpenGL coordinate to the Z-value of a field coordinate.
-   * @param {double} oglZ The Z-value of an OpenGL coordinate.
-   * @returns {double}
-   */
-  public fromOGLZ(oglZ: double): double;
-
-  /**
-   * Returns the model matrix for the default camera.
-   * @param {int} frame The frame to retrieve the camera matrix at.
-   * @returns {QObject}
-   */
-  public getCameraMatrix(frame: int): QObject;
-
-  /**
-   * Retrieves the default display set in the current scene.
-   * @returns {string}
-   */
-  public getDefaultDisplay(): string;
-
-  /**
    * Returns the frame rate, as frames per second.
    * @returns {double}
    */
   public getFrameRate(): double;
 
   /**
-   * Returns all palettes that were either unrecovered or recovered but not yet saved, depending on the
-   * arguments of the function.
-   * @param {boolean} unrecovered Whether or not to return unrecovered palettes.
-   * @param {boolean} recoveredNotYetSaved Whether or not to return recovered but not yet saved palettes.
-   * @returns {StringList}
-   */
-  public getMissingPalettes(
-    unrecovered: boolean,
-    recoveredNotYetSaved: boolean
-  ): StringList;
-
-  /**
-   * Returns true if the scene was ever modified.
+   * Returns true if the project was ever modified.
    * It will return true even if the modifications have been saved.
    * @returns {boolean}
    */
   public hasBeenDirty(): boolean;
 
   /**
-   * Tells if the scene has been modified since its last save.
+   * Tells if the project has been modified since its last save.
    * @returns {boolean}
    */
   public isDirty(): boolean;
@@ -6097,7 +6224,7 @@ declare class scene extends SCR_BaseInterface {
    * {
    *     "name": "myMetadata",
    *     "type": "string",
-   *     "creator": "Harmony Premium",
+   *     "creator": "Storyboard Pro",
    *     "version": "1.0",
    *     "value": "foo"
    * }
@@ -6105,7 +6232,7 @@ declare class scene extends SCR_BaseInterface {
   public metadata(name: string, type?: string): QScriptValue;
 
   /**
-   * Return the list of metadatas for the current scene.
+   * Return the list of metadatas for the current project.
    * This method returns an array of javascript objects where each object represent a single metadata
    * object. Here is an example of a metadata object:
    * Supported values for type are: string, int, double, bool.
@@ -6114,7 +6241,7 @@ declare class scene extends SCR_BaseInterface {
    * {
    *     "name": "myMetadata",
    *     "type": "string",
-   *     "creator": "Harmony Premium",
+   *     "creator": "Storyboard Pro",
    *     "version": "1.0",
    *     "value": "foo"
    * }
@@ -6144,22 +6271,41 @@ declare class scene extends SCR_BaseInterface {
   public namedResolutionY(name: string): int;
 
   /**
-   * Returns the number of units in the X axis of the scene grid.
+   * Returns the number of units in the X axis of the grid.
    * @returns {int}
    */
   public numberOfUnitsX(): int;
 
   /**
-   * Returns the number of units in the Y axis of the scene grid.
+   * Returns the number of units in the Y axis of the grid.
    * @returns {int}
    */
   public numberOfUnitsY(): int;
 
   /**
-   * Returns the number of units in the Z axis of the scene grid.
+   * Returns the number of units in the Z axis of the grid.
    * @returns {int}
    */
   public numberOfUnitsZ(): int;
+
+  /**
+   * Closes the current project, and open the one specified by it's file path.
+   * @param {string} filePath The full path to the file to open.
+   * @returns {boolean}
+   */
+  public openProject(filePath: string): boolean;
+
+  /**
+   * Returns the ID of the current version.
+   * @returns {int}
+   */
+  public projectVersion(): int;
+
+  /**
+   * Returns the name of the current project version.
+   * @returns {string}
+   */
+  public projectVersionName(): string;
 
   /**
    * Redoes the last n operations. If n is not specified, it will be 1.
@@ -6182,11 +6328,12 @@ declare class scene extends SCR_BaseInterface {
   public saveAll(): boolean;
 
   /**
-   * Save the current project to the specified folder or sbpz file.
-   * Save the current project to the specified folder or sbpz file. The current project is updated to use
-   * that folder or sbpz file. Any error or message is reported using the standard error logger, user
-   * will see message popup. Cannot be use in batch mode.
-   * @param {string} pathname New folder of the project (ie: /Users/a_user/Documents/my_save_as_project ) or new sbpz file /Users/a_user/Documents/my_save_as_project.sbpz )
+   * Save the current project to the specified folder.
+   * Save the current project to the specified folder. Folder must not exists. The current project is
+   * updated to use that folder. Any error or message is reported using the standard error logger (so, in
+   * non batch mode, user will see message popup).
+   * This API only works in standalone as you cannot 'Save As' in database.
+   * @param {string} pathname New folder of the project (ie: /Users/a_user/Documents/my_save_as_project )
    * @returns {boolean}
    */
   public saveAs(pathname: string): boolean;
@@ -6208,46 +6355,20 @@ declare class scene extends SCR_BaseInterface {
   public setCoordAtCenter(x: int, y: int): boolean;
 
   /**
-   * Sets the default scene resolution and field of view.
-   * @param {int} x Set the X resolution for the scene in pixels.
-   * @param {int} y Set the Y resolution for the scene in pixels.
+   * Sets the default project resolution and field of view.
+   * @param {int} x Set the X resolution for the project in pixels.
+   * @param {int} y Set the Y resolution for the project in pixels.
    * @param {double} fov Set the field of view in degree. Typical value is 41.112.
    * @returns {boolean}
    */
   public setDefaultResolution(x: int, y: int, fov: double): boolean;
 
   /**
-   * This function sets the default scene resolution name.
+   * This function sets the default project resolution name.
    * @param {string} name Set the current resolution preset name to this value.
    * @returns {boolean}
    */
   public setDefaultResolutionName(name: string): boolean;
-
-  /**
-   * Changes the default texture pixel density for new Bitmap Drawings.
-   * The example below uses scene.setDefaultTexturePixelDensityforBitmapDrawings() to reduce the scene
-   * settings' default pixel density for bitmap drawings to 20%.
-   * @param {double} normalizedDensity The new normalized default pixel density (1.0 = 100%)
-   * @returns {void}
-   * @example
-   * scene.setDefaultTexturePixelDensityforBitmapDrawings(0.2);
-   */
-  public setDefaultTexturePixelDensityforBitmapDrawings(
-    normalizedDensity?: double
-  ): void;
-
-  /**
-   * Changes the default texture pixel density for new Vector Drawings.
-   * The example below uses scene.setDefaultTexturePixelDensityforVectorDrawings() to increase the scene
-   * settings' default pixel density for vector drawings to 300%.
-   * @param {double} normalizedDensity The new normalized default pixel density (1.0 = 100%)
-   * @returns {void}
-   * @example
-   * scene.setDefaultTexturePixelDensityforVectorDrawings(3.0);
-   */
-  public setDefaultTexturePixelDensityforVectorDrawings(
-    normalizedDensity?: double
-  ): void;
 
   /**
    * This function set the default frame rate of the project. The frame rate is expressed as frames per
@@ -6270,7 +6391,7 @@ declare class scene extends SCR_BaseInterface {
    * {
    *     "name": "myMetadata",
    *     "type": "string",
-   *     "creator": "Harmony Premium",
+   *     "creator": "Storyboard Pro",
    *     "version": "1.0",
    *     "value": "foo"
    * }
@@ -6278,63 +6399,22 @@ declare class scene extends SCR_BaseInterface {
   public setMetadata(meta: QScriptValue): void;
 
   /**
-   * Sets the number of X, Y, and Z units in the scene grid.
-   * @param {int} x The X value of the scene grid.
-   * @param {int} y The Y value of the scene grid.
-   * @param {int} z The Z value of the scene grid.
+   * Sets the number of X, Y, and Z units in the grid.
+   * @param {int} x The X value of the grid.
+   * @param {int} y The Y value of the grid.
+   * @param {int} z The Z value of the grid.
    * @returns {boolean}
    */
   public setNumberOfUnits(x: int, y: int, z: int): boolean;
 
   /**
-   * Sets the aspect ratio of the scene. The scene's final aspect ratio will be: X * numberOfUnitsX()/Y *
-   * numberOfUnitsY().
+   * Sets the aspect ratio of the project. The project's final aspect ratio will be: X *
+   * numberOfUnitsX()/Y * numberOfUnitsY().
    * @param {double} x The X value of the new aspect ratio.
    * @param {double} y The Y value of the new aspect ratio.
    * @returns {boolean}
    */
   public setUnitsAspectRatio(x: double, y: double): boolean;
-
-  /**
-   * Returns the temporary project path.
-   * @returns {string}
-   */
-  public tempProjectPath(): string;
-
-  /**
-   * For windows, returns the remapped temporary project path.
-   * The remapped temporary project path.
-   * @returns {string}
-   */
-  public tempProjectPathRemapped(): string;
-
-  /**
-   * Converts a field coordinate into an OGL coordinate.
-   * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
-   * @returns {QObject}
-   */
-  public toOGL(pointOrVector: QObject): QObject;
-
-  /**
-   * Converts the X-value of a field coordinate to the X-value of an OpenGL coordinate.
-   * @param {double} fieldX The X-value of a field coordinate.
-   * @returns {double}
-   */
-  public toOGLX(fieldX: double): double;
-
-  /**
-   * Converts the Y-value of a field coordinate to the Y-value of an OpenGL coordinate.
-   * @param {double} fieldY The Y-value of a field coordinate.
-   * @returns {double}
-   */
-  public toOGLY(fieldY: double): double;
-
-  /**
-   * Converts the Z-value of a field coordinate to the Z-value of an OpenGL coordinate.
-   * @param {double} fieldZ The Z-value of a field coordinate.
-   * @returns {double}
-   */
-  public toOGLZ(fieldZ: double): double;
 
   /**
    * Undoes the last n operations. If n is not specified, it will be 1.
@@ -6344,23 +6424,39 @@ declare class scene extends SCR_BaseInterface {
   public undo(depth?: int): void;
 
   /**
-   * Returns the X value of the aspect ratio of the cells in the scene grid.
+   * Returns the X value of the aspect ratio of the cells in the grid.
    * @returns {double}
    */
   public unitsAspectRatioX(): double;
 
   /**
-   * Returns the Y value of the aspect ratio of the cells in the scene grid.
+   * Returns the Y value of the aspect ratio of the cells in the grid.
    * @returns {double}
    */
   public unitsAspectRatioY(): double;
 }
 
 /**
+ * The scene interface has been deprecated in Storyboard Pro. Project interface should be used instead.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classscene.html}
+ */
+declare class scene extends SCR_BaseInterface {
+  /**
+   * Save the current project to the specified folder or sbpz file.
+   * Save the current project to the specified folder or sbpz file. The current project is updated to use
+   * that folder or sbpz file. Any error or message is reported using the standard error logger, user
+   * will see message popup. Cannot be use in batch mode.
+   * @param {string} pathname New folder of the project (ie: /Users/a_user/Documents/my_save_as_project ) or new sbpz file /Users/a_user/Documents/my_save_as_project.sbpz )
+   * @returns {boolean}
+   */
+  public saveAs(pathname: string): boolean;
+}
+
+/**
  * The System JavaScript global object. Call system specific command directly.
  * SCR_SystemInterface allows access to environment variables and printing to the command prompt or
  * Terminal.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classSystem.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classSystem.html}
  * @example
  * System.println("This text is printed in the command prompt or the Terminal");
  * var tempFolder = System.getenv("TEMP");
@@ -6381,7 +6477,8 @@ declare class System extends SCR_BaseInterface {
   public println(text: string): void;
 
   /**
-   * Processes the next event in a while loop. It can not be accessed from the scriptModule.
+   * Processes the next event in a while loop. It can not be accessed from the scriptModule, neither from
+   * writeModule.
    * @returns {void}
    */
   public processOneEvent(): void;
@@ -6391,7 +6488,7 @@ declare class System extends SCR_BaseInterface {
  * The TimelineMarker JavaScript global object. Remove or edit timeline markers.
  * This interface is used to access the functionalities of the Timeline Markers such as
  * create/remove/edit markers.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classTimeLineMarker.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classTimelineMarker.html}
  * @example
  * function addMarkerAtFrame(int frame) {
  *     var mLength = 0;
@@ -6404,7 +6501,7 @@ declare class System extends SCR_BaseInterface {
  *     TimelineMarker.createMarker(marker);
  * }
  */
-declare class TimeLineMarker extends SCR_BaseInterface {
+declare class TimelineMarker extends SCR_BaseInterface {
   /**
 * Creates a marker.
 * @param {QScriptValue} marker - The marker to create. A marker object has the following properties:
@@ -6412,6 +6509,7 @@ Property  Type  Description
 frame  int  The number of the frame.
 length  int  (Optional) The length of the marker.
 color  int or String  (Optional) The colour of the marker. Can be an integer RGBA value or a standard W3C colour keyword name in a string.
+name  String  (Optional) Name for the marker
 notes  String  (Optional) Notes for the marker
 * @returns {QScriptValue}
 */
@@ -6429,23 +6527,47 @@ notes  String  (Optional) Notes for the marker
      */
     color: int | string;
     /**
+     * (Optional) Name for the marker
+     */
+    name: string;
+    /**
      * (Optional) Notes for the marker
      */
     notes: string;
   }): QScriptValue;
 
   /**
-   * Delete the marker
+   * Delete the marker.
    * @param {QScriptValue} marker - The marker to delete.
    * @returns {boolean}
    */
   public deleteMarker(marker: QScriptValue): boolean;
 
   /**
-   * Return the all the markers in the current Timeline.
+   * Returns all the markers in the current Timeline.
+   * @returns {QScriptValue}
+   */
+  public getAllMarkers(): QScriptValue;
+
+  /**
+   * Return a markers in the current Timeline that overlap the given frame.
+   * @param {int} atFrame
+   * @returns {QScriptValue}
+   */
+  public getFirstMarkerAt(atFrame: int): QScriptValue;
+
+  /**
+   * Returns all the markers in the current Timeline.
    * @returns {QScriptValue}
    */
   public getMarkers(): QScriptValue;
+
+  /**
+   * Return all the markers in the current Timeline that overlap the given frame.
+   * @param {int} atFrame
+   * @returns {QScriptValue}
+   */
+  public getMarkersAtFrame(atFrame: int): QScriptValue;
 
   /**
    * Modifies a marker with marker object.
@@ -6469,7 +6591,7 @@ notes  String  (Optional) Notes for the marker
  * to see what it does. Look for lightTableExampleUsingPredefinedUI. It will display a non-modal widget
  * that allows the adjustment of the light table settings in the camera view. Please refer to Qt
  * documentation for the list of accessible widget properties.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classUiloader.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classUiloader.html}
  * @example
  * function lightTableExampleUsingPredefineUI() {
  *     this.opacityChanged = function(digitValue) {
@@ -6550,7 +6672,7 @@ declare class Uiloader extends SCR_BaseInterface {
 
 /**
  * The View functions provide information about the contents of selected View windows.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classview.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classview.html}
  * @example
  * function viewScript() {
  *     var myView = view.currentView();
@@ -6586,6 +6708,13 @@ declare class view extends SCR_BaseInterface {
   public type(viewName: string): string;
 
   /**
+   * Returns a list of available views of the given type.
+   * @param {string} [viewType=""] The type of view to get the list of available views for.
+   * @returns {StringList}
+   */
+  public viewList(viewType?: string): StringList;
+
+  /**
    * Returns the position of the top left corner of the given view.
    * The point (0,0) is the top left corner of the main display.
    * @param {string} viewName The name of the view to get the position of.
@@ -6596,7 +6725,7 @@ declare class view extends SCR_BaseInterface {
 
 /**
  * The CheckBox JavaScript class. A simplified version of the CheckBox Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classCheckBox.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classCheckBox.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "CheckBox Example";
@@ -6630,7 +6759,7 @@ declare class CheckBox extends SCRIPT_QSWidget {
  * This class and the associated widget classes are used to build simple dialogs.
  * The widgets you can add to a Dialog are: LineEdit, NumberEdit, TimeEdit, DateEdit, SpinBox,
  * CheckBox, RadioButton, ComboBox, GroupBox, Slider, SCRIPT_QSButton and Label
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classDialog.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classDialog.html}
  * @example
  * function sampleDialog() {
  *     var d = new Dialog();
@@ -6730,7 +6859,7 @@ declare class Dialog extends SCRIPT_QSWidget {
 
 /**
  * The GroupBox JavaScript class. A simplified version of the GroupBox Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classGroupBox.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classGroupBox.html}
  * @example
  * var groupBox = new GroupBox();
  * groupBox.title = "Group One";
@@ -6778,7 +6907,7 @@ declare class GroupBox extends SCRIPT_QSWidget {
 
 /**
  * The Label JavaScript class. A simplified version of the Label Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classLabel.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classLabel.html}
  * @example
  * var bodyText = new Label();
  * bodyText.text = "This is will be displayed in the body of the dialog.";
@@ -6794,7 +6923,7 @@ declare class Label extends SCRIPT_QSWidget {
 
 /**
  * The RadioButton JavaScript class. A simplified version of the RadioButton Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classRadioButton.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classRadioButton.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "RadioButton Example";
@@ -6835,7 +6964,7 @@ declare class RadioButton extends SCRIPT_QSWidget {
  * The Button JavaScript class. A simplified Button Qt widget.
  * This example creates a button with the label "Set Colour" that will call a function that sets the
  * colour of something whenever the button is pressed.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classSCRIPT__QSButton.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classSCRIPT__QSButton.html}
  * @example
  * var setter = new Button();
  * setter.label = "Set Colour";
@@ -6858,7 +6987,7 @@ declare class SCRIPT_QSButton extends SCRIPT_QSWidget {
 
 /**
  * The TextEdit JavaScript class. A simplified version of the TextEdit Qt widget.
- * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classTextEdit.html}
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classTextEdit.html}
  * @example
  * var myDialog = new Dialog();
  * myDialog.title = "TextEdit Example";

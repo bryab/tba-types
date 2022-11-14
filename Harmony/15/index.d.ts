@@ -1,1611 +1,12757 @@
-/// <reference path="../index.d.ts" />
-/// <reference path="../../shared/15/index.d.ts" />
+/// <reference path="../../shared/qtscript.d.ts" />
+
+declare class BAPP_SpecialFolders {}
+declare class GlobalObject {}
+declare class QScriptable {}
+
 /**
- * The node JavaScript global object
+ * The specialFolders JavaScript global object. Provide the path to application specific paths.
+ * By using the SpecialFolders functions, you can retrieve information about the different folders
+ * (directories) used by the application. All of the functions are read-only. They return strings that
+ * represent folders in use by the various applications. Depending on the application (e.g. Toon Boom
+ * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classspecialFolders.html}
+ * @example
+ * var scriptFolder = specialFolders.resource + "/scripts";
  */
-declare namespace node {
+declare class specialFolders extends BAPP_SpecialFolders {
   /**
-   * returns the name of the Top level in the network, which is "Top".
+   * A read-only property containing the folder where the platforms specific applications are stored.
+   * Application and Binary folders are different on OS X, but are identical on all other platforms.
+   * @returns {string}
    */
-  function root(): string;
+  static app: string;
 
   /**
-   * returns a true or false value indicating if the node is a Group.
+   * This is a read-only property that contains the folder where the platforms specific binaries are
+   * stored. Application and Binary folders are different on OS X. They are identical on all other
+   * platforms.
+   * @returns {string}
    */
-  function isGroup(node: string): boolean;
+  static bin: string;
 
   /**
-   * returns the name of a node
+   * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
+   * are stored.
+   * @returns {string}
    */
-  function getName(node: string): string;
+  static bin32: string;
 
   /**
-   * returns the node type. These are all of the built-in node types available from the Stage node like: READ, COMPOSITE, PEG, QUADMAP, SHADOW, etc
+   * read-only property that contains the folder where application configuration files are stored.
+   * Normally, this is the /etc folder.
+   * @returns {string}
    */
-  function type(node: string): NodeType;
+  static config: string;
 
   /**
-   * returns an integer that indicates the number of nodes contained in a group.
+   * This is a read-only property that contains the database folder.
+   * @returns {string}
    */
-  function numberOfSubNodes(parent: string): int;
+  static database: string;
 
   /**
-   * return an array of sub nodes.
+   * read-only property that indicates where the [install]/etc folder is.
+   * @returns {string}
    */
-  function subNodes(parentGroup: string): NodePath[];
+  static etc: string;
 
   /**
-   * returns the path of a node in a group. Nodes are counted starting with zero
+   * This is a read-only property that contains the folder where the html help folder is.
+   * @returns {string}
    */
-  function subNode(parent: string, iSubNode: int): string;
+  static htmlHelp: string;
 
   /**
-   * This function returns the full path name of a child node belonging to a parent group. This function will validate that the parent group exists and that the child node exists in that parent. This function should be used instead of manually concatenating the full path name of child nodes.
+   * read-only property that contains the folder where the language files are stored.
+   * @returns {string}
    */
-  function subNodeByName(parent: string, name: string): string;
+  static lang: string;
 
   /**
-   * returns the path of the parent level of a node contained in a group
+   * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
+   * property.
+   * @returns {string}
    */
-  function parentNode(node: string): string;
+  static legacyPlugins: string;
 
   /**
-   * returns the null string that is returned by other functions when there is an error.
+   * This is a read-only property that contains the folder where the platforms specific libraries are
+   * stored.
+   * @returns {string}
    */
-  function noNode(): string;
+  static library: string;
 
   /**
-   * returns true or false to indicate if a node path is equal to another. Used to compare node paths.
+   * read-only property that contains the platform specific folder.
+   * @returns {string}
    */
-  function equals(node1: string, node2: string): boolean;
+  static platform: string;
 
   /**
-   * returns the value(s) of the node selected attribute(s).
+   * Location where the plugins that comply with the current SDK are stored.
+   * @returns {string}
    */
-  function getTextAttr(node: string, atFrame: double, attrName: string): string;
+  static plugins: string;
 
   /**
-   * returns a Attribute object that represents the node selected attribute(s).
+   * read-only property that contains where the resources files are stored.
+   * @returns {string}
    */
-  function getAttr(node: string, atFrame: double, attrName: string): Attribute;
+  static resource: string;
 
   /**
-   * returns a list of Attribute objects in specified node or node complex attribute.
+   * read-only property for the root installation folder
+   * @returns {string}
    */
-  function getAttrList(node: string, atFrame: double, attrName?: string): QList<Attribute>;
+  static root: string;
 
   /**
-   * returns the name of the column that an attribute is linked to. If the attribute is not linked to a column, the function returns the null string.
+   * This is a read-only property that contains where the application will create its temporary files.
+   * @returns {string}
    */
-  function linkedColumn(node: string, attrName: string): string;
+  static temp: string;
 
   /**
-   * returns an integer indicating the X position of a node in the network
+   * This is a read-only property that contains the folder where templates are stored.
+   * @returns {string}
    */
-  function coordX(node: string): int;
+  static templateLibrary: string;
 
   /**
-   * returns an integer indicating the Y position of a node in the network
+   * This is a read-only property that contains the folder where the user configuration is stored.
+   * @returns {string}
    */
-  function coordY(node: string): int;
+  static userConfig: string;
 
   /**
-   * returns an integer indicating the Z position of a node in the network
+   * This is a read-only property that contains the folder where the user scripts are stored.
+   * @returns {string}
    */
-  function coordZ(node: string): int;
-
-  /**
-   * returns the width of a given node. This width / height parameter is useful for computing the position of nodes in the Network view. It uses the same unit system as the coordX() and coordY() functions.
-   */
-  function width(node: string): int;
-
-  /**
-   * returns the height of a given node. This width / height parameter is useful for computing the position of nodes in the Network view. It uses the same unit system as the coordX() and coordY() functions.
-   */
-  function height(node: string): int;
-
-  /**
-   * sets the position of a node in the network.
-   */
-  function setCoord(node: string, x: int, y: int): boolean;
-
-  /**
-   * sets the position of a node in the network.
-   */
-  function setCoord(node: string, x: int, y: int, z: int): boolean;
-
-  /**
-   * the number of input ports on the node.
-   */
-  function numberOfInputPorts(node: string): int;
-
-  /**
-   * returns true or false to indicate if a port is connected to another node.
-   */
-  function isLinked(node: string, iPort: int): boolean;
-
-  /**
-   * returns the path for the node that the port is linked to.
-   */
-  function srcNode(node: string, iPort: int): string;
-
-  /**
-   * If the srcNode is a Group, this function returns the path of the node inside the Group node that is the source. If the source is not inside a group, the flatSrcNode function behaves like the srcNode function.
-   */
-  function flatSrcNode(node: string, iPort: int): string;
-
-  /**
-   * returns the source node path, the port number and the link ID for this destination node is connected to.
-   */
-  function srcNodeInfo(node: string, iPort: int): QScriptValue;
-
-  /**
-   * the number of output ports on a node.
-   */
-  function numberOfOutputPorts(node: string): int;
-
-  /**
-   * the number of nodes actually linked from the output ports.
-   */
-  function numberOfOutputLinks(node: string, iPort: int): int;
-
-  /**
-   * returns the path of the destination node linked to by the output port on the source node.
-   */
-  function dstNode(sourceNode: string, iPort: int, iLink: int): string;
-
-  /**
-   * returns the path and addition information of the destination node linked to the source node.
-   */
-  function dstNodeInfo(sourceNode: string, iPort: int, iLink: int): QScriptValue;
-
-  /**
-   * returns true if the peg's groupAtNetworkBuilding attribute is true.
-   */
-  function groupAtNetworkBuilding(node: string): boolean;
-
-  /**
-   * returns the value of the "Add Composite To Group" attribute of the peg-node. This method is obsolete.
-   */
-  function addCompositeToGroup(node: string): boolean;
-
-  /**
-   * adds a node to the network.
-   */
-  function add(parentGroup: string, name: string, type: string, x: int, y: int, z: int): string;
-
-  /**
-   * Return existing or add a group multi port in node.
-   */
-  function getGroupInputModule(parentGroup: string, name: string, x: int, y: int, z: int): string;
-
-  /**
-   * Return existing or add a group multi port out node.
-   */
-  function getGroupOutputModule(parentGroup: string, name: string, x: int, y: int, z: int): string;
-
-  /**
-   * Delete a single node. Optionally, delete all columns and element associated to that node. The column and element would only be removed when no other nodes refer to them. This function returns true when successful.
-   */
-  function deleteNode(nodePath: string, deleteTimedValues?: boolean, deleteElements?: boolean): boolean;
-
-  /**
-   * Create a group from the selection of nodes. The list of nodes is a string where the nodes are separated by commas. The actual name of each node in the list of nodes must include the full path of that node. The function returns the full path of the created group, or an empty string if the creation of the node failed.
-   */
-  function createGroup(nodes: string, groupName: string): string;
-
-  /**
-   * moves the specified node within the specified group. Similar to performing a drag and drop of a node to a group from the timeline.
-   */
-  function moveToGroup(nodeName: string, groupName: string): string;
-
-  /**
-   * Explode a group into its parent group. This function is identical to the "Explode Selected Group" from the Network view.
-   */
-  function explodeGroup(groupName: string): boolean;
-
-  /**
-   * changes the name of a node.
-   */
-  function rename(node: string, newName: string): boolean;
-
-  /**
-   * Create a new attribute for the given node.
-   */
-  function createDynamicAttr(node: string, type: string, attrName: string, displayName: string, linkable: boolean): boolean;
-
-  /**
-   * Remove a dynamic attribute for the given node.
-   */
-  function removeDynamicAttr(node: string, attrName: string): boolean;
-
-  /**
-   * changes the value of an attribute in a node.
-   */
-  function setTextAttr(node: NodePath, attrName: AttrKeyword, atFrame: int, attrValue: string | number): boolean;
-
-  /**
-   * links an attribute to a function column in the Xsheet View.
-   */
-  function linkAttr(node: string, attrName: string, columnName: string): boolean;
-
-  /**
-   * unlinks an attribute from a function column.
-   */
-  function unlinkAttr(node: string, attrName: string): boolean;
-
-  /**
-   * links a port on a node to a port on another node.
-   */
-  function link(srcNode: string, srcPort: int, dstNode: string, dstPort: int): boolean;
-
-  /**
-   * links a port on a node to a port on another node. Fancy version that allow easier connecting to a group node, or setup the proper connection order.
-   */
-  function link(srcNode: string, srcPort: int, dstNode: string, dstPort: int, mayAddOutputPort: boolean, mayAddInputPort: boolean): boolean;
-
-  /**
-   * unlinks a port on one node from the port on another node.
-   */
-  function unlink(dstNode: string, inPort: int): boolean;
-
-  /**
-   * Setters and getters for the enable/disable property of a node.
-   */
-  function setEnable(node: string, flag: boolean): boolean;
-
-  /**
-   * returns whether a node is enabled or not.
-   */
-  function getEnable(node: string): boolean;
-
-  /**
-   * Setters and getters for the lock/unlock property of a node.
-   */
-  function setLocked(node: string, lock: boolean): boolean;
-
-  /**
-   * returns the lock flag
-   */
-  function getLocked(node: string): boolean;
-
-  /**
-   * sets the timeline tag flag
-   */
-  function setTimelineTag(node: string, tag: boolean): boolean;
-
-  /**
-   * returns the timeline tag flag
-   */
-  function getTimelineTag(node: string): boolean;
-
-  function getTimelineTagList(node?: string, list?: StringList): StringList;
-
-  /**
-   * sets the node color
-   */
-  function setColor(node: string, color: ColorRGBA): boolean;
-
-  /**
-   * resets the node color
-   */
-  function resetColor(node: string): boolean;
-
-  /**
-   * returns the node color
-   */
-  function getColor(node: string): ColorRGBA;
-
-  /**
-   * This function changes the global display used in the application. The node must be the full path of a display node.
-   */
-  function setAsGlobalDisplay(node: string): boolean;
-
-  /**
-   * This function changes the global display used by the application to "Display All" pseudo-display.
-   */
-  function setGlobalToDisplayAll(): boolean;
-
-  /**
-   * Setters and getters for the default camera.
-   */
-  function setAsDefaultCamera(node: string): boolean;
-
-  /**
-   * returns the name of the default camera.
-   */
-  function getDefaultCamera(): string;
-
-  /**
-   * Returns a list of all cameras within the scene.
-   */
-  function getCameras(): StringList;
-
-  function getMaxVersionNumber(node: string): int;
-
-  function getVersion(node: string): int;
-
-  function setVersion(node: string, version: int): void;
-
-  /**
-   * Returns a collection of node paths for nodes of specified types.
-   */
-  function getNodes(types: StringList): StringList;
-
-  /**
-   * returns the model matrix of a node.
-   */
-  function getMatrix(node: string, frame: int): Matrix4x4;
-
-  /**
-   * returns the pivot of the node
-   */
-  function getPivot(node: string, frame: int): Point3d;
-
-  /**
-   * returns the ColorOverride object for the colour override node
-   */
-  function getColorOverride(node: string): ColorOverride;
-
-  function getElementId(nodeName: string): int;
-
-  /**
-   * This function creates a group for each exposure of the element where there is a symbol and will put the content of the symbol in that group. If disable element is TRUE, will disable the element afterwards. If clearExposure is TRUE, will clear the exposures where there were symbols afterwards. Will use prefix as the prefix for the generated group names.
-   */
-  function explodeElementSymbolsInGroups(element: string, disableElement: boolean, clearExposure: boolean, prefix?: string): void;
-
-  /**
-   * sets the show/hide timeline thumbnails on drawing layers
-   */
-  function setShowTimelineThumbnails(node: string, bShow: boolean): boolean;
-
-  /**
-   * return the show/hide timeline thumbnails flags on drawing layers
-   */
-  function getShowTimelineThumbnails(node: string): boolean;
+  static userScripts: string;
 }
 
 /**
- * The scene JavaScript global object. Retrieve and set global scene attributes, like the aspect ratio of the cells in the scene grid
+ * The CELIO JavaScript global object. Provide information about image file.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classCELIO.html}
  */
-declare namespace scene {
+declare class CELIO {
   /**
-   * returns the ID of the current version.
+   * Returns information about the resolution of an image file.
+   * @param {string} path
+   * @returns {QVariant}
    */
-  function currentVersion(): int;
-
-  /**
-   * returns the name or the number of the current scene version.
-   */
-  function currentVersionName(): string;
+  public getInformation(path: string): QVariant;
 
   /**
-   * returns the name of the current environment.
+   * Returns information about the resolution of an image file. Will also return the layer information if
+   * withLayer argument is true.
+   * @param {string} path
+   * @param {boolean} withLayers
+   * @returns {QVariant}
    */
-  function currentEnvironment(): string;
+  public getInformation(path: string, withLayers: boolean): QVariant;
 
   /**
-   * returns the path of the current environment.
+   * Returns an array describing each layer of a multi-layer image. Currently, only the PSD has multi-
+   * layer information.
+   * @param {string} path
+   * @returns {QVariant}
    */
-  function currentEnvironmentPath(): string;
-
-  /**
-   * returns the name of the current job.
-   */
-  function currentJob(): string;
-
-  /**
-   * returns the path of the current job.
-   */
-  function currentJobPath(): string;
-
-  /**
-   * returns the name of the current scene.
-   */
-  function currentScene(): string;
-
-  /**
-   * Return the current project path.
-   */
-  function currentProjectPath(): string;
-
-  /**
-   * For windows, returns the remapped path.
-   */
-  function currentProjectPathRemapped(): string;
-
-  /**
-   * Return the temporary project path.
-   */
-  function tempProjectPath(): string;
-
-  /**
-   * For windows, returns the remapped temporary project path.
-   */
-  function tempProjectPathRemapped(): string;
-
-  /**
-   * This function starts the accumulation of all of the functions between it and the endUndoRedoAccum function as one command that will appear in the undo/redo list. If you do not use this function with endUndoRedoAccum, each function in the script generates a separate undo/redo entry.
-   */
-  function beginUndoRedoAccum(commandName: string): void;
-
-  /**
-   * This function ends the accumulation all of the functions between it and the beginUndoRedoAccum function as one command that will appear in the undo/redo list. If you do not use this function with beginUndoRedoAccum, each function in the script generates a separate undo/redo entry.
-   */
-  function endUndoRedoAccum(): void;
-
-  /**
-   * This function cancels the accumulation of undo/redo commands. No command will be added to the undo/redo list and all commands that have already been executed will be rolled-back (undone).
-   */
-  function cancelUndoRedoAccum(): void;
-
-  /**
-   * undoes the last n operation. If n is not specified, it will be 1
-   */
-  function undo(depth?: int): void;
-
-  /**
-   * redoes the last n operation. If n is not specified, it will be 1
-   */
-  function redo(depth?: int): void;
-
-  /**
-   * Clear command history.
-   */
-  function clearHistory(): void;
-
-  /**
-   * returns the X value of the aspect ratio of the cells in the scene grid.
-   */
-  function unitsAspectRatioX(): double;
-
-  /**
-   * returns the Y value of the aspect ratio of the cells in the scene grid.
-   */
-  function unitsAspectRatioY(): double;
-
-  /**
-   * returns the number of units in the X axis of the scene grid.
-   */
-  function numberOfUnitsX(): int;
-
-  /**
-   * returns the number of units in the Y axis of the scene grid.
-   */
-  function numberOfUnitsY(): int;
-
-  /**
-   * returns the number of units in the Z axis of the scene grid.
-   */
-  function numberOfUnitsZ(): int;
-
-  /**
-   * returns the X value of the centre coordinate of the scene grid.
-   */
-  function coordAtCenterX(): int;
-
-  /**
-   * returns the Y value of the centre coordinate of the scene grid.
-   */
-  function coordAtCenterY(): int;
-
-  /**
-   * returns the current preview resolution. For example, when the current resolution is 720x540 pixels this function will return 720.
-   */
-  function currentResolutionX(): int;
-
-  /**
-   * returns the current preview resolution. For example, when the current resolution is 720x540 pixels this function will return 540.
-   */
-  function currentResolutionY(): int;
-
-  /**
-   * returns the default resolution name. The resolution name is a global parameter saved with the project. It may be empty when the project is used as a custom resolution, which is not one of the pre-defined resolutions.
-   */
-  function defaultResolutionName(): string;
-
-  /**
-   * returns the default resolution. This resolution is a global parameter saved with the project, not the current preview resolution. For example, when the default scene resolution is 720x540 pixels this function will return 720.
-   */
-  function defaultResolutionX(): int;
-
-  /**
-   * returns the default resolution. This resolution is a global parameter saved with the project, not the current preview resolution. For example, when the default scene resolution is 720x540 pixels this function will return 540.
-   */
-  function defaultResolutionY(): int;
-
-  /**
-   * returns the default resolution field of view (FOV). The default FOV is a global scene parameter.
-   */
-  function defaultResolutionFOV(): double;
-
-  /**
-   * returns the list of known resolution
-   */
-  function namedResolutions(): StringList;
-
-  /**
-   * returns the named resolution. For example, when the named resolution is 720x540 pixels this function will return 720.
-   */
-  function namedResolutionX(name: string): int;
-
-  /**
-   * returns the named resolution. For example, when the named resolution is 720x540 pixels this function will return 540.
-   */
-  function namedResolutionY(name: string): int;
-
-  /**
-   * returns the frame rate, as frame per seconds.
-   */
-  function getFrameRate(): int;
-
-  /**
-   * performs the " save all " command. Effectively, this saves the entire project and all modified files.
-   */
-  function saveAll(): boolean;
-
-  /**
-   * saves the project as a new version.
-   */
-  function saveAsNewVersion(name: string, markAsDefault: boolean): boolean;
-
-  /**
-   * Save the current project to the specified folder.
-    Save the current project to the specified folder. Folder must not exists. The current project is updated to use that folder. Any error or message is reported using the standard error logger (so, in non batch mode, user will see message popup).
-    This API only works in standalone as you cannot 'Save As' in database.
-    Returns true if successfully saved the project.
-    Added 15.0.5
-   */
-  function saveAs(pathname: string): boolean;
-
-  /**
-   * sets the aspect ratio of the scene. The scene's final aspect ratio will be: X * numberOfUnitsX()/Y * numberOfUnitsY()
-   */
-  function setUnitsAspectRatio(x: double, y: double): boolean;
-
-  /**
-   * sets the number of X, Y, and Z units in the scene grid.
-   */
-  function setNumberOfUnits(x: int, y: int, z: int): boolean;
-
-  /**
-   * sets the value of the centre (X, Y) coordinates.
-   */
-  function setCoordAtCenter(x: int, y: int): boolean;
-
-  /**
-   * allows the default scene resolution and field of view to be changed.
-   */
-  function setDefaultResolution(x: int, y: int, fov: double): boolean;
-
-  /**
-   * This function allows the default scene resolution name to be changed.
-   */
-  function setDefaultResolutionName(name: string): boolean;
-
-  /**
-   * This function allows the default frame rate of the project to be changed. The frame rate is expressed as frame per second. Typical value is 12, 24 or 30.
-   */
-  function setFrameRate(frameRate: int): boolean;
-
-  /**
-   * returns the model matrix for the default camera.
-   */
-  function getCameraMatrix(frame: int): Matrix4x4;
-
-  /**
-   * converts a field coordinate into an OGL coordinate
-   */
-  function toOGL(pointOrVector: Point2d): Point2d;
-
-  /**
-   * converts an OGL coordinate into a field coordinate.
-   */
-  function fromOGL(pointOrVector: Point2d): Point2d;
-
-  /**
-   * converts a field coordinate into an OGL coordinate
-   */
-  function toOGL(pointOrVector: Point3d): Point3d;
-
-  /**
-   * converts an OGL coordinate into a field coordinate.
-   */
-  function fromOGL(pointOrVector: Point3d): Point3d;
-
-  /**
-   * converts a field coordinate into an OGL coordinate
-   */
-  function toOGL(pointOrVector: Vector2d): Vector2d;
-
-  /**
-   * converts an OGL coordinate into a field coordinate.
-   */
-  function fromOGL(pointOrVector: Vector2d): Vector2d;
-  /**
-   * retrieves default display set in current scene.
-   */
-  /**
-   * converts a field coordinate into an OGL coordinate
-   */
-  function toOGL(pointOrVector: Vector3d): Vector3d;
-
-  /**
-   * converts an OGL coordinate into a field coordinate.
-   */
-  function fromOGL(pointOrVector: Vector3d): Vector3d;
-
-  /**
-   * retrieves default display set in current scene.
-   */
-  function getDefaultDisplay(): string;
-
-  /**
-   * closes the current scene.
-   */
-  function closeScene(): void;
-
-  /**
-   * closes the current scene and exits.
-   */
-  function closeSceneAndExit(): void;
-
-  /**
-   * closes the current scene and open the scene specified by env, job, scene and version
-   */
-  function closeSceneAndOpen(envName: string, jobName: string, sceneName: string, versionName: string): boolean;
-
-  /**
-   * returns all palettes that were either unrecovered or recovered but not yet saved, depending on the arguments of the function.
-   */
-  function getMissingPalettes(unrecovered: boolean, recoveredNotYetSaved: boolean): StringList;
-
-  function metadatas(): QScriptValue;
-
-  function metadata(name: string, type?: string): QScriptValue;
-
-  function setMetadata(meta: QScriptValue): void;
-
-  function defaultPixelPerModelUnitForBitmapLayers(): double;
-
-  /**
-   * Performs the same operation as the "Scene->Check Files..." menu item.
-   */
-  function checkFiles(options: QVariant): void;
+  public getLayerInformation(path: string): QVariant;
 }
 
 /**
- * The JavaScript class encapsulating a node attribute. Obtain one from the node getAttr or getAttrList methods
+ * The about JavaScript global object. Provides information about the main application and the platform
+ * on which the script is running.
+ * The about class allows querying of platform and application specific constants.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classabout.html}
+ * @example
+ * function printAbout() {
+ *     // Application: full, demo or educational
+ *     MessageLog.trace("Full (commercial) version: " + about.fullVersion);
+ *     MessageLog.trace("Demo version: " + about.demoVersion);
+ *     MessageLog.trace("Educational version: " + about.educVersion);
+ *     MessageLog.trace("Harmony product : " + about.harmony);
+ *
+ *     // Software/Product
+ *     MessageLog.trace("Windows architecture: " + about.windowsArch);
+ *     MessageLog.trace("OSX architecture: " + about.macArch);
+ *     MessageLog.trace("OSX PowerPC architecture: " + about.macPpcArch);
+ *     MessageLog.trace("OSC Intel architecture: " + about.macIntelArch);
+ *     MessageLog.trace("Linux architecture: " + about.linuxArch);
+ *     MessageLog.trace("Interactive: " + about.interactiveApp);
+ *
+ *     // Architecture
+ *     MessageLog.trace("Harmony mode: " + about.mainApp);
+ *     MessageLog.trace("Paint mode: " + about.paintMode);
+ *     MessageLog.trace("XSheet mode: " + about.xsheetMode);
+ *
+ *     // Type of Application
+ *     MessageLog.trace("Scan application: " + about.scanApp);
+ *     MessageLog.trace("ControlCenter application: " + about.controlCenterApp);
+ *     MessageLog.trace("Application path: " + about.applicationPath);
+ * }
  */
-declare class Attribute extends QObject {
+declare class about extends GlobalObject {
   /**
-   * Attribute keyword.
+   * Returns the application. Identical to property "applicationPath".
+   * @returns {string}
    */
-  public keyword(): string;
+  public static getApplicationPath(): string;
 
   /**
-   * Attribute name.
+   * Returns the folder where the binaries can be found.
+   * @returns {string}
    */
-  public name(): string;
+  public static getBinaryPath(): string;
 
   /**
-   * Attribute typeName.
+   * Returns a string that represents the flavor of the application. e.g. Harmony.
+   * @returns {string}
    */
-  public typeName(): AttrValueType;
+  public static getFlavorString(): string;
 
   /**
-   * Fetch boolean value from Attribute at current frame.
+   * Returns the folder where the resources can be found.
+   * @returns {string}
    */
-  public boolValue(): boolean;
+  public static getResourcesPath(): string;
 
   /**
-   * Fetch integer value from Attribute at current frame.
+   * Returns the user name.
+   * @returns {string}
    */
-  public intValue(): int;
+  public static getUserName(): string;
 
   /**
-   * Fetch double value from Attribute at current frame.
+   * Returns the version info string.
+   * @returns {string}
    */
-  public doubleValue(): double;
+  public static getVersionInfoStr(): string;
 
   /**
-   * Fetch String value from Attribute at current frame.
+   * Returns true whenever the application running application is ControlCenter.
+   * @returns {boolean}
    */
-  public textValue(): string;
+  public static isControlCenterApp(): boolean;
 
   /**
-   * Fetch ColorRGBA value from Attribute at current frame.
+   * Returns true when the application is in Database mode.
+   * @returns {boolean}
    */
-  public colorValue(): ColorRGBA;
+  public static isDatabaseMode(): boolean;
 
   /**
-   * Fetch Point2d value from Attribute at current frame.
+   * Returns true whenever this application is a Demo variant.
+   * @returns {boolean}
    */
-  public pos2dValue(): Point2d;
+  public static isDemoVersion(): boolean;
 
   /**
-   * Fetch Point3d value from Attribute at current frame.
+   * Returns true whenever this application is an Educational variant.
+   * @returns {boolean}
    */
-  public pos3dValue(): Point3d;
+  public static isEducVersion(): boolean;
 
   /**
-   * Fetch boolean value from Attribute at the specified frame.
+   * Returns true whenever this application is a Commercial/Full variant.
+   * @returns {boolean}
    */
-  public boolValueAt(frame: double): boolean;
+  public static isFullVersion(): boolean;
 
   /**
-   * Fetch integer value from Attribute at the specified frame.
+   * Returns true when connected to a database or when compiled with Harmony.
+   * @returns {boolean}
    */
-  public intValueAt(frame: double): int;
+  public static isHarmony(): boolean;
 
   /**
-   * Fetch double value from Attribute at the specified frame.
+   * Returns true whenever this application is interactive. All application capable of running scripts
+   * are interactive.
+   * @returns {boolean}
    */
-  public doubleValueAt(frame: double): double;
+  public static isInteractiveApp(): boolean;
 
   /**
-   * Fetch String value from Attribute at the specified frame.
+   * Returns true when running on Linux.
+   * @returns {boolean}
    */
-  public textValueAt(frame: double): string;
+  public static isLinuxArch(): boolean;
 
   /**
-   * Fetch ColorRGBA value from Attribute at the specified frame.
+   * Returns true when running on MacOS.
+   * @returns {boolean}
    */
-  public colorValueAt(frame: double): ColorRGBA;
+  public static isMacArch(): boolean;
 
   /**
-   * Fetch Point2d value from Attribute at the specified frame.
+   * Returns true when running on an Apple OS X operating system or when on Mac Intel.
+   * @returns {boolean}
    */
-  public pos2dValueAt(frame: double): Point2d;
+  public static isMacIntelArch(): boolean;
 
   /**
-   * Fetch Point3d value from Attribute at the specified frame.
+   * Returns true when running on an Apple OS X operating system or when on Mac PowerPC.
+   * @returns {boolean}
    */
-  public pos3dValueAt(frame: double): Point3d;
+  public static isMacPpcArch(): boolean;
 
   /**
-   * Set attribute value.
-   * Note: Does not work for all attributes in my experience (such as CurveModule's offset)
+   * Returns true when the application is Harmony or Storyboard, and not a peripheral application.
+   * @returns {boolean}
    */
-  public setValue(v: string | number | boolean | Point2d | Point3d | ColorRGBA): void;
+  public static isMainApp(): boolean;
 
-  public hasSubAttributes(): boolean;
+  /**
+   * Returns true when the application is in Paint mode.
+   * @returns {boolean}
+   */
+  public static isPaintMode(): boolean;
+
+  /**
+   * Returns true when the application running is Scan.
+   * @returns {boolean}
+   */
+  public static isScanApp(): boolean;
+
+  /**
+   * Returns true whenever the application running is Stage.
+   * @returns {boolean}
+   */
+  public static isStage(): boolean;
+
+  /**
+   * Returns true whenever the application running is an Advanced variant.
+   * @returns {boolean}
+   */
+  public static isStageAdvanced(): boolean;
+
+  /**
+   * Returns true whenever the application running is an Essentials variant.
+   * @returns {boolean}
+   */
+  public static isStageEssentials(): boolean;
+
+  /**
+   * Returns true when running Storyboard.
+   * @returns {boolean}
+   */
+  public static isStoryboard(): boolean;
+
+  /**
+   * Returns true when running on Windows.
+   * @returns {boolean}
+   */
+  public static isWindowsArch(): boolean;
+
+  /**
+   * Returns true when the application is in Xsheet mode.
+   * @returns {boolean}
+   */
+  public static isXsheetMode(): boolean;
+
+  /**
+   * Returns a string that is the name of application.
+   * @returns {string}
+   */
+  public static productName(): string;
+
+  /**
+   * See isStageAdvanced().
+   * @returns {boolean}
+   */
+  static advanced: boolean;
+
+  /**
+   * Application with GUI folder (different than binFolder on Mac, same for all other platforms).
+   * @returns {string}
+   */
+  static applicationPath: string;
+
+  /**
+   * See getBinaryPath().
+   * @returns {string}
+   */
+  static binaryPath: string;
+
+  /**
+   * See isControlCenterApp().
+   * @returns {boolean}
+   */
+  static controlCenterApp: boolean;
+
+  /**
+   * See isDatabaseMode().
+   * @returns {boolean}
+   */
+  static databaseMode: boolean;
+
+  /**
+   * See isDemoVersion().
+   * @returns {boolean}
+   */
+  static demoVersion: boolean;
+
+  /**
+   * See isEducVersion().
+   * @returns {boolean}
+   */
+  static educVersion: boolean;
+
+  /**
+   * See isStageEssentials().
+   * @returns {boolean}
+   */
+  static essentials: boolean;
+
+  /**
+   * See isFullVersion().
+   * @returns {boolean}
+   */
+  static fullVersion: boolean;
+
+  /**
+   * See isHarmony().
+   * @returns {boolean}
+   */
+  static harmony: boolean;
+
+  /**
+   * See isInteractiveApp().
+   * @returns {boolean}
+   */
+  static interactiveApp: boolean;
+
+  /**
+   * See isLinuxArch().
+   * @returns {boolean}
+   */
+  static linuxArch: boolean;
+
+  /**
+   * See isMacArch().
+   * @returns {boolean}
+   */
+  static macArch: boolean;
+
+  /**
+   * See isMacIntelArch().
+   * @returns {boolean}
+   */
+  static macIntelArch: boolean;
+
+  /**
+   * See isMacIntelArch().
+   * @returns {boolean}
+   */
+  static macPpcArch: boolean;
+
+  /**
+   * See isMainApp().
+   * @returns {boolean}
+   */
+  static mainApp: boolean;
+
+  /**
+   * See isPaintMode().
+   * @returns {boolean}
+   */
+  static paintMode: boolean;
+
+  /**
+   * See getResourcesPath().
+   * @returns {string}
+   */
+  static resourcesPath: string;
+
+  /**
+   * See isScanApp().
+   * @returns {boolean}
+   */
+  static scanApp: boolean;
+
+  /**
+   * See isStage().
+   * @returns {boolean}
+   */
+  static stage: boolean;
+
+  /**
+   * See isStoryboard().
+   * @returns {boolean}
+   */
+  static storyboard: boolean;
+
+  /**
+   * See getUserName().
+   * @returns {string}
+   */
+  static userName: string;
+
+  /**
+   * See isWindowsArch().
+   * @returns {boolean}
+   */
+  static windowsArch: boolean;
+
+  /**
+   * See isXsheetMode().
+   * @returns {boolean}
+   */
+  static xsheetMode: boolean;
 }
 
 /**
- * The exporter JavaScript global object. Provides access to the project export directory
+ * The Action JavaScript global object. Trigger action associated to menu or tool bar items.
+ * Call either global actions or actions associated to a specific responder.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classAction.html}
+ * @example
+ * function callAbout() {
+ *     // Call the global action onActionAbout() which will show the About dialog.
+ *     Action.perform("onActionAbout()");
+ * }
+ *
+ * function callDisable3DSubnode() {
+ *     // Validate if the action is available right now. In this example, it will fail if no subnode is selected.
+ *     if (Action.validate("onActionHideSubNode()", "graph3dresponder").isEnabled) {
+ *         // Call the hide subnode action from the 3D Graph menu (or toolbar).
+ *         Action.perform("onActionHideSubNode()", "graph3dresponder");
+ *     }
+ * }
  */
-declare namespace exporter {
+declare class Action extends GlobalObject {
   /**
-   * removes all files from the project export directory.
+   * Perform the requested action (slot - menu item, toolbar item,...)
+   * Perform the requested action for the main application responder. If the main responder doesn't own
+   * the requested action, try to use the current view with focus as the responder.
+   * @param {string} slot The action function name (ex: onMyAction()).
+   * @returns {void}
+   * @example
+   * Action.perform("onActionAbout()");
    */
-  function cleanExportDir(): void;
+  public static perform(slot: string): void;
 
   /**
-   * returns the path of the project export directory.
+   * Perform the requested action (slot - menu item, toolbar item,...)
+   * Perform the requested action for a specific responder.
+   * @param {string} slot The action function name (ex: onMyAction()).
+   * @param {string} responder The responder to the function name (ex: drawingView).
+   * @returns {void}
+   * @example
+   * Action.perform("onActionToggleApplyToolToAllLayers()", "drawingView");
    */
-  function getExportDir(): string;
+  public static perform(slot: string, responder: string): void;
 
   /**
-   * returns true if a scene was exported to a QuickTime in the specified directory
+   * Validate the requested action (slot - menu item, toolbar item,...)
+   * Validate the requested action for the main application responder. If the main responder doesn't own
+   * the requested action, try to use the current view with focus as the responder.
+   * @param {string} slot The action function name(ex : onMyAction()).
+   * @returns {QVariant}
+   * @example
+   * var validateData = Action.validate("onActionAbout()");
    */
-  function exportToQuicktime(displayName: string, startFrame: int, lastFrame: int, withSound: boolean, resX: int, resY: int, dstPath: string, displayModule: string, generateThumbnail: boolean, thumbnailFrame: int): boolean;
+  public static validate(slot: string): QVariant;
 
   /**
-   * export OGL frames to a QuickTime movie. Without QuickTime it will try to fallback to other supported formats.
+   * Validate the requested action (slot - menu item, toolbar item,...)
+   * Validate the requested action for a specific responder.
+   * @param {string} slot The action function name (ex: onMyAction()).
+   * @param {string} responder The responder to the function name (ex: drawingView).
+   * @returns {QVariant}
+   * @example
+   * // Toggle on the Apply Tool to Line and Colour Art option only if it's off.
+   * var validateData = Action.validate("onActionToggleApplyToolToAllLayers()", "drawingView");
+   * if (!validateData.checked)
+   *     Action.perform("onActionToggleApplyToolToAllLayers()", "drawingView");
    */
-  function exportOGLToQuicktime(fileName: string, dstPath: string, startFrame?: int, lastFrame?: int, resX?: int, resY?: int): void;
+  public static validate(slot: string, responder: string): QVariant;
 }
 
 /**
- * The Action JavaScript global object. Trigger action associated to menu or tool bar items
+ * The Backdrop JavaScript global object. Get, set and add backdrops.
+ * The Backdrop methods sometimes use backdrop JavaScript objects which are described as follows:
+ * Color is a integer representation of a RGBA value. It can be obtained with the following
+ * computation.
+ * Here's an example demonstrating how to customize a backdrop
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classBackdrop.html}
+ * @example
+ * {
+ *     "position": {
+ *         "x": -1030,
+ *         "y": -1191,
+ *         "w": 376,
+ *         "h": 284
+ *     },
+ *     "title": {
+ *         "text": "HAIR",
+ *         "color": 4278190080,
+ *         "size": 14,
+ *         "font": "Arial"
+ *     },
+ *     "description": {
+ *         "text": "This backdrop include all the modules of hair.\n",
+ *         "color": 4278190080,
+ *         "size": 14,
+ *         "font": "Arial"
+ *     },
+ *     "color": 4286859713
+ * }
  */
-declare namespace Action {
+declare class Backdrop extends GlobalObject {
   /**
-   * using action manager, perform the requested action (slot - menu item, toolbar item,...)
+   * Adds a single backdrop. The new backdrop is displayed on top of all the others.
+   * @param {string} group The name of the parent group node.
+   * @param {QScriptValue} backdrop A backdrop JavaScript object, as described in the Backdrop class description.
+   * @returns {boolean}
+   * @example
+   * var myBackdrop = {
+   *     "position": {
+   *         "x": -100,
+   *         "y": -100,
+   *         "w": 300,
+   *         "h": 300
+   *     },
+   *     "title": {
+   *         "text": "My Title",
+   *         "color": fromRGBAtoInt(255, 100, 100, 255),
+   *         "size": 14,
+   *         "font": "Arial"
+   *     },
+   *     "description": {
+   *         "text": "This is a new backdrop that will include the node covered by its area.\n",
+   *         "color": fromRGBAtoInt(100, 255, 100, 255),
+   *         "size": 14,
+   *         "font": "Arial"
+   *     },
+   *     "color": fromRGBAtoInt(100, 100, 0, 255)
+   * };
+   *
+   * Backdrop.addBackdrop("Top/MyGroup", myBackdrop);
    */
-  function perform(slot: string): void;
+  public static addBackdrop(group: string, backdrop: QScriptValue): boolean;
 
   /**
-   * using action manager, perform the requested action (slot - menu item, toolbar item,...)
+   * Returns the backdrops of a group.
+   * This method returns an array of JavaScript objects where each object represent a single backdrop.
+   * Since backdrop do not have keys/unique ID, all backdrops are returned in the order they are defined
+   * in the group. The group node must be provided as input.
+   * @param {string} group The name of the group node.
+   * @returns {QScriptValue}
    */
-  function perform(slot: string, responder: string): void;
+  public static backdrops(group: string): QScriptValue;
 
   /**
-   * using action manager, validates the requested action (slot - menu item, toolbar item,...)
+   * Sets the backdrops for the specified group.
+   * This replaces all the backdrops in the group. The backdrop is in the format as the array returned by
+   * 'Backdrop.backdrops(group). The code will parse the JavaScript object, as described in the Backdrop
+   * class description.
+   * @param {string} group The name of the group node.
+   * @param {QScriptValue} backdrops An array of backdrop objects or a single backdrop object. See the Backdrop class description for information on the backdrop object.
+   * @returns {boolean}
    */
-  function validate(slot: string): QVariant;
-
-  /**
-   * using action manager, validates the requested action (slot - menu item, toolbar item,...)
-   */
-  function validate(slot: string, responder: string): QVariant;
+  public static setBackdrops(group: string, backdrops: QScriptValue): boolean;
 }
 
 /**
- * The column JavaScript global object. Retrieve add or remove values from columns in your scene
+ * The column JavaScript global object. Retrieve add or remove values from columns in your scene.
+ * The function below prints information about each column in your scene. For example, one line of
+ * output may be ' element = 2 drawingcolumn (DRAWING) myColumn myElement'.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classcolumn.html}
+ * @example
+ * function printColumnInfo() {
+ *     n = column.numberOf();
+ *     MessageLog.trace("Columns");
+ *     for (i = 0; i < n; ++i) {
+ *         var line;
+ *         var name = column.getName(i);
+ *         var displayName = column.getDisplayName(name);
+ *         var type = column.type(name);
+ *         var line = i + " " + name + "(" + type + ")  " + displayName;
+ *         if (type == "DRAWING")
+ *             line += " element = " +
+ *             column.getElementIdOfDrawing(name);
+ *         MessageLog.trace(line);
+ *     }
+ * }
  */
-declare namespace column {
+declare class column extends GlobalObject {
   /**
-   * returns the number of columns in the scene
+   * Adds a column with the specified name and type.
+   * @param {string} columnName The name of the column.
+   * @param {string} columnType The type of column you want to add. You can add any of the following: DRAWING, SOUND, 3DPATH, BEZIER, EASE, EXPR (for expression), TIMING, QUARTERNION and ANNOTATION.
+   * @param {string} [position=tr("BOTTOM")] Unused.
+   * @returns {boolean}
    */
-  function numberOf(): int;
-
-  /**
-   * returns the unique identifier that names the column. This is not the display name shown in the xsheet
-   */
-  function getName(columnNumber: int): string;
-
-  /**
-   * returns the displayable name (similar to the one displayed in the xsheet view) of a column.
-   */
-  function getDisplayName(columnName: string): string;
+  public static add(
+    columnName: string,
+    columnType: string,
+    position?: string
+  ): boolean;
 
   /**
-   * returns the colour for the given column
+   * Adds a key drawing exposure at the specified frame in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {int} frame The frame number.
+   * @returns {boolean}
    */
-  function getColorForXSheet(columnName: string): ColorRGBA;
+  public static addKeyDrawingExposureAt(
+    columnName: string,
+    frame: int
+  ): boolean;
 
   /**
-   * sets the colour for an Xsheet column
+   * Removes a keyframe from a cell in a column.
+   * @param {string} columnName The name of the column.
+   * @param {double} atFrame The frame number where you want to clear the keyframe.
+   * @returns {boolean}
    */
-  function setColorForXSheet(columnName: string, color: ColorRGBA): void;
-
-  function type(columnName: string): ColumnType;
-
-  function velocityType(columnName: string): string;
+  public static clearKeyFrame(columnName: string, atFrame: double): boolean;
 
   /**
-   * returns the value of a cell in a column.
+   * Creates an empty drawing in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {string} timing The timing as shown in the xsheet.
+   * @returns {boolean}
    */
-  function getEntry(columnName: string, subColumn: int, atFrame: double): string;
+  public static createDrawing(columnName: string, timing: string): boolean;
 
   /**
-   * returns true or false indicating if a cell in a column is a keyframe.
+   * Deletes the drawing at the specified frame in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {int} frame The frame number.
+   * @returns {boolean}
    */
-  function isKeyFrame(columnName: string, subColumn: int, atFrame: double): boolean;
+  public static deleteDrawingAt(columnName: string, frame: int): boolean;
 
   /**
-   * Returns the element id associated with a drawing column.
+   * Duplicates the drawing at the specified frame in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {int} frame The frame number.
+   * @returns {boolean}
    */
-  function getElementIdOfDrawing(columnName: string): int;
+  public static duplicateDrawingAt(columnName: string, frame: int): boolean;
 
   /**
-   * returns the expression text in the identified column.
+   * Fill with previous exposed drawings for the given range of frame.
+   * @param {string} columnName The name of the drawing column.
+   * @param {int} startFrame The starting frame.
+   * @param {int} endFrame The ending frame, just after the last filled frame.
+   * @returns {boolean}
    */
-  function getTextOfExpr(columnName: string): string;
+  public static fillEmptyCels(
+    columnName: string,
+    startFrame: int,
+    endFrame: int
+  ): boolean;
 
   /**
-   * adds a column with the specified name and type
+   * Returns a timing created for the given column at the given frame.
+   * @param {string} columnName The name of the drawing column.
+   * @param {double} forFrame The desired frame to generate a timing for.
+   * @param {boolean} fileExists True if the file exists already.
+   * @returns {string}
    */
-  function add(columnName: string, columnType: ColumnType, position?: string): boolean;
+  public static generateTiming(
+    columnName: string,
+    forFrame: double,
+    fileExists: boolean
+  ): string;
 
   /**
-   * removes the sound column called name from the scene
+   * Returns the colour for the given column.
+   * @param {string} columnName The name of the column.
+   * @returns {ColorRGBA}
    */
-  function removeSoundColumn(columnName: string): boolean;
-
-  /**
-   * removes an unlinked function column called name from the scene
-   */
-  function removeUnlinkedFunctionColumn(columnName: string): boolean;
-
-  /**
-   * renames the specified column
-   */
-  function rename(oldName: string, newName: string): boolean;
-
-  /**
-   * sets the value of a cell in a column
-   */
-  function setEntry(columnName: string, subColumn: int, atFrame: double, value: string): boolean;
-
-  /**
-   * makes a cell in a column a keyframe
-   */
-  function setKeyFrame(columnName: string, atFrame: double): boolean;
-
-  /**
-   * removes a keyframe from a cell in a column.
-   */
-  function clearKeyFrame(columnName: string, atFrame: double): boolean;
-
-  /**
-   * links an empty Drawing column to an element.
-   */
-  function setElementIdOfDrawing(columnName: string, elementId: int): boolean;
-
-  /**
-   * returns a list of all drawing types used in the drawing column. K = key drawings, I = inbetween, B = breakdown
-   */
-  function getDrawingType(columnName: string, atFrame: double): string;
-
-  /**
-   * sts the Drawing type at frame f from column col to be newType. K = key drawings, I = inbetween, B = breakdown
-   */
-  function setDrawingType(columnName: string, atFrame: double, drawingType: string): void;
-
-  /**
-   * Retrieves the list of names of drawing timing columns.
-   */
-  function getDrawingColumnList(): StringList;
+  public static getColorForXSheet(columnName: string): ColorRGBA;
 
   /**
    * Retrieves the list of names of timing columns of the given type.
+   * @param {string} type The type string,i.e."DRAWING".
+   * @returns {StringList}
    */
-  function getColumnListOfType(type: ColumnType): StringList;
-
-  /**
-   * Retrieves the list of timings used in a drawing column.
-   */
-  function getDrawingTimings(columnName: string): StringList;
-
-  /**
-   * returns the next key drawing in a drawing column.
-   */
-  function getNextKeyDrawing(columnName: string, startFrame: int): int;
+  public static getColumnListOfType(type: string): StringList;
 
   /**
    * Retrieves the current version of a timing.
+   * @param {string} columnName The name of the drawing column.
+   * @param {string} timingName The timing as shown in the xsheet.
+   * @returns {int}
    */
-  function getCurrentVersionForDrawing(columnName: string, timingName: string): int;
+  public static getCurrentVersionForDrawing(
+    columnName: string,
+    timingName: string
+  ): int;
 
   /**
-   * Import a sound file in the specified column at the specified frame. This function returns a Boolean indicating the.
+   * Returns the displayable name (similar to the one displayed in the xsheet view) of a column.
+   * @param {string} columnName The name of the column.
+   * @returns {string}
    */
-  function importSound(columnName: string, atFrame: int, soundFilePath: string): boolean;
+  public static getDisplayName(columnName: string): string;
 
   /**
-   * sets the value in the Expression column to the specified text.
+   * Retrieves the list of names of drawing timing columns.
+   * @returns {StringList}
    */
-  function setTextOfExpr(columnName: string, text: string): boolean;
+  public static getDrawingColumnList(): StringList;
 
   /**
-   * returns the drawing name for the specified column at the specified frame
+   * Returns the drawing name for the specified column at the specified frame.
+   * @param {string} columnName The name of the column.
+   * @param {int} frame The frame number.
+   * @returns {string}
    */
-  function getDrawingName(columnName: string, frame: int): string;
-
-  function generateTiming(columnName: string, forFrame: double, fileExists: boolean): string;
+  public static getDrawingName(columnName: string, frame: int): string;
 
   /**
-   * creates an empty drawing in the specified column
+   * Retrieves the list of timings used in a drawing column.
+   * @param {string} columnName The name of the column.
+   * @returns {StringList}
    */
-  function createDrawing(columnName: string, timing: string): boolean;
+  public static getDrawingTimings(columnName: string): StringList;
 
   /**
-   * renames the specified drawing to the new name,in the specified column
+   * Returns a list of all drawing types used in the drawing column. K = key drawings, I = inbetween, B =
+   * breakdown.
+   * @param {string} columnName The name of the column.
+   * @param {double} atFrame The frame number.
+   * @returns {string}
    */
-  function renameDrawing(columnName: string, oldTiming: string, newTiming: string): boolean;
+  public static getDrawingType(columnName: string, atFrame: double): string;
 
   /**
-   * prepends the prefix to the drawing name in the specified column
+   * Returns the element id associated with a drawing column.
+   * @param {string} columnName The name of the column.
+   * @returns {int}
    */
-  function renameDrawingWithPrefix(columnName: string, oldTiming: string, prefix: string): boolean;
+  public static getElementIdOfDrawing(columnName: string): int;
 
   /**
-   * deletes the drawing at the specified frame in the specified column
-   */
-  function deleteDrawingAt(columnName: string, frame: int): boolean;
+* Returns the value of a cell in a column.
+* @param {string} columnName name of column
+* @param {int} subColumn The number value of the sub-column. This only exists in the case of 3D Path columns, which include a group of sub-columns for the X, Y, Z and velocity values on the 3D Path. Each sub-column has a number:
+X = 1
+Y = 2
+Z = 3
+Velocity = 4
+* @param {double} atFrame The frame number that you want to retrieve the value from.
+* @returns {string}
+*/
+  public static getEntry(
+    columnName: string,
+    subColumn: int,
+    atFrame: double
+  ): string;
 
   /**
-   * duplicates the drawing at the specified frame in the specified column
+   * Returns the unique identifier that names the column. This is not the display name shown in the
+   * xsheet.
+   * @param {int} columnNumber This is an integer that represents the numerical value of the column. This integer is between 0 and column.numberOf.
+   * @returns {string}
    */
-  function duplicateDrawingAt(columnName: string, frame: int): boolean;
+  public static getName(columnNumber: int): string;
 
   /**
-   * add a key drawing exposure at the specified frame in the specified column.
+   * Returns the next key drawing in a drawing column.
+   * @param {string} columnName The name of the column.
+   * @param {int} startFrame This is the frame number that specifies the search start point.
+   * @returns {int}
    */
-  function addKeyDrawingExposureAt(columnName: string, frame: int): boolean;
+  public static getNextKeyDrawing(columnName: string, startFrame: int): int;
 
   /**
-   * remove a key drawing exposure at the specified frame in the specified column.
+   * Returns the expression text in the identified column.
+   * @param {string} columnName The name of the column.
+   * @returns {string}
    */
-  function removeKeyDrawingExposureAt(columnName: string, frame: int): boolean;
+  public static getTextOfExpr(columnName: string): string;
 
   /**
-   * remove duplicate key drawing exposure at the specified frame in the specified column.
+   * Import a sound file in the specified column at the specified frame. This function returns a Boolean
+   * indicating the success of the operation.
+   * @param {string} columnName The name of the column.
+   * @param {int} atFrame The frame number.
+   * @param {string} soundFilePath The path to the sound file.
+   * @returns {boolean}
    */
-  function removeDuplicateKeyDrawingExposureAt(columnName: string, frameNumber: int): boolean;
+  public static importSound(
+    columnName: string,
+    atFrame: int,
+    soundFilePath: string
+  ): boolean;
 
   /**
-   * fill with previous exposed drawings for the given range of frame.
-   */
-  function fillEmptyCels(columnName: string, startFrame: int, endFrame: int): boolean;
+* Returns true or false indicating if a cell in a column is a keyframe.
+* @param {string} columnName name of column
+* @param {int} subColumn The number value of the sub-column. This only exists in the case of 3D Path columns, which include a group of sub-columns for the X, Y, Z and velocity values on the 3D Path. Each sub-column has a number:
+X = 1
+Y = 2
+Z = 3
+Velocity = 4
+* @param {double} atFrame The frame number that you want to retrieve the value from.
+* @returns {boolean}
+*/
+  public static isKeyFrame(
+    columnName: string,
+    subColumn: int,
+    atFrame: double
+  ): boolean;
 
   /**
-   * fills the drawings from frame fromFrame to frame toFrame with drawing duplicates named with prefix prefix in column col.
+   * Fills the drawings from startFrame to startFrame+nbFrames with drawing duplicates named with a
+   * prefix.
+   * @param {string} columnName The name of the column.
+   * @param {int} startFrame The starting frame.
+   * @param {int} nbFrames The desired length.
+   * @param {string} prefix The desired prefix.
+   * @param {boolean} keyFramesOnly It will perform this operation only on drawings marked as "K" if keyOnly is true.
+   * @returns {boolean}
    */
-  function lineTestFill(columnName: string, startFrame: int, nbFrames: int, prefix: string, keyFramesOnly: boolean): boolean;
+  public static lineTestFill(
+    columnName: string,
+    startFrame: int,
+    nbFrames: int,
+    prefix: string,
+    keyFramesOnly: boolean
+  ): boolean;
 
   /**
-   * return a SoundColumnInterface object that contains a reference to that sound column. The SoundColumnInterface object contains a useful interface to introspecting the sound and its sound sequences.
+   * Returns the number of columns in the scene.
+   * @returns {int}
    */
-  function soundColumn(columnName: string): SoundColumnInterface;
-}
+  public static numberOf(): int;
 
-/** Config for DrawingTools.clearArt
- * drawing : Drawing Key
- * art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
- */
+  /**
+   * Removes duplicate key drawing exposure at the specified frame in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {int} frameNumber The frame number.
+   * @returns {boolean}
+   */
+  public static removeDuplicateKeyDrawingExposureAt(
+    columnName: string,
+    frameNumber: int
+  ): boolean;
 
-declare interface ClearArtConfig {
-  drawing: string;
-  art?: DrawingLayer;
+  /**
+   * Removes a key drawing exposure at the specified frame in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {int} frame The frame number.
+   * @returns {boolean}
+   */
+  public static removeKeyDrawingExposureAt(
+    columnName: string,
+    frame: int
+  ): boolean;
+
+  /**
+   * Removes the sound column called name from the scene.
+   * @param {string} columnName The name of the column.
+   * @returns {boolean}
+   */
+  public static removeSoundColumn(columnName: string): boolean;
+
+  /**
+   * Removes an unlinked function column called name from the scene.
+   * In order to unlink the function column from it's module, use node.unlinkAttr on it first.
+   * @param {string} columnName The name of the column.
+   * @returns {boolean}
+   */
+  public static removeUnlinkedFunctionColumn(columnName: string): boolean;
+
+  /**
+   * Renames the specified column.
+   * @param {string} oldName The original name of the column you want to change.
+   * @param {string} newName The new name of the column.
+   * @returns {boolean}
+   */
+  public static rename(oldName: string, newName: string): boolean;
+
+  /**
+   * Renames the specified drawing to the new name, in the specified column.
+   * @param {string} columnName The name of the drawing column.
+   * @param {string} oldTiming The old timing as shown in the xsheet.
+   * @param {string} newTiming The desired timing as shown in the xsheet.
+   * @returns {boolean}
+   */
+  public static renameDrawing(
+    columnName: string,
+    oldTiming: string,
+    newTiming: string
+  ): boolean;
+
+  /**
+   * Prepends the prefix to the drawing name in the specified column.
+   * @param {string} columnName The name of drawing the column.
+   * @param {string} oldTiming The old timing as shown in the xsheet.
+   * @param {string} prefix The new prefix.
+   * @returns {boolean}
+   */
+  public static renameDrawingWithPrefix(
+    columnName: string,
+    oldTiming: string,
+    prefix: string
+  ): boolean;
+
+  /**
+   * Sets the colour for an Xsheet column.
+   * Ex. create a pure RED colour object and sets this colour to the column name Drawing
+   * @param {string} columnName The name of the column.
+   * @param {ColorRGBA} color A colour object of type Color.
+   * @returns {void}
+   * @example
+   * var c = new ColorRGBA(255, 0, 0);
+   * column.setColorForXSheet("Drawing", c);
+   */
+  public static setColorForXSheet(columnName: string, color: ColorRGBA): void;
+
+  /**
+   * Sets the Drawing type at frame f from column col to be newType.
+   * K = key drawings, I = inbetween, B = breakdown
+   * @param {string} columnName The name of the column.
+   * @param {double} atFrame The frame number.
+   * @param {string} drawingType K = key drawings, I = inbetween, B = breakdown.
+   * @returns {void}
+   */
+  public static setDrawingType(
+    columnName: string,
+    atFrame: double,
+    drawingType: string
+  ): void;
+
+  /**
+   * Links an empty Drawing column to an element.
+   * @param {string} columnName The name of the column.
+   * @param {int} elementId The id of the element you want to link to the column.
+   * @returns {boolean}
+   */
+  public static setElementIdOfDrawing(
+    columnName: string,
+    elementId: int
+  ): boolean;
+
+  /**
+* Sets the value of a cell in a column.
+* @param {string} columnName The name of the column.
+* @param {int} subColumn The number value of the sub-column. This only exists in the case of 3D Path columns, which include a group of sub-columns for the X, Y, Z and velocity values on the 3D Path. Each sub-column has a number:
+X = 1
+Y = 2
+Z = 3
+Velocity = 4
+* @param {double} atFrame The frame number that you want to retrieve the value from.
+* @param {string} value The new value.
+* @returns {boolean}
+*/
+  public static setEntry(
+    columnName: string,
+    subColumn: int,
+    atFrame: double,
+    value: string
+  ): boolean;
+
+  /**
+   * Makes a cell in a column a keyframe.
+   * @param {string} columnName The name of the column.
+   * @param {double} atFrame The frame number where you want to set the keyframe.
+   * @returns {boolean}
+   */
+  public static setKeyFrame(columnName: string, atFrame: double): boolean;
+
+  /**
+   * Sets the value in the Expression column to the specified text.
+   * @param {string} columnName The name of the column.
+   * @param {string} text The expression text.
+   * @returns {boolean}
+   */
+  public static setTextOfExpr(columnName: string, text: string): boolean;
+
+  /**
+   * Returns a column object that contains a reference to that sound column. The column object contains a
+   * useful interface to introspecting the sound and its sound sequences.
+   * @param {string} columnName The name of the sound column.
+   * @returns {soundColumnInterface}
+   */
+  public static soundColumn(columnName: string): soundColumnInterface;
+
+  /**
+   * This function returns the column type.
+   * There are nine column types: drawing (DRAWING), sound (SOUND), 3D Path (3DPATH), Bezier Curve
+   * (BEZIER), Ease Curve (EASE), Expression (EXPR), Timing (TIMING) for timing columns, Quaternion path
+   * (QUATERNIONPATH) for 3D rotation and Annotation (ANNOTATION) for annotation columns.
+   * @param {string} columnName The name of the column.
+   * @returns {string}
+   */
+  public static type(columnName: string): string;
+
+  /**
+   * This function returns the column type of nested velocity.
+   * If column is of 3D Path (3DPATH) type, retrieve nested velocity type. Either Bezier Curve (BEZIER)
+   * or Ease Curve (EASE).
+   * @param {string} columnName The name of the column.
+   * @returns {string}
+   */
+  public static velocityType(columnName: string): string;
 }
 
 /**
- * The DrawingTools JavaScript global object. Get information about the currently selected drawing
+ * The compositionOrder JavaScript global object. Extract timeline composition order.
+ * Scriptable interface for extracting the timeline composition order.
+ * or
+ * This builds the composition using the node_timeline internal service and return an JavaScript array
+ * of CompositionItem object.
+ *  The array returned is ordered. The first entry is the top most node in the composition order, or is
+ * a parent of nodes.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classcompositionOrder.html}
+ * @example
+ * var composition = composition.buildDefaultCompositionOrder();
  */
-declare namespace DrawingTools {
+declare class compositionOrder extends GlobalObject {
   /**
-   * sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt
+   * Returns an array of Composition objects using the specified display name.
+   * This method is similar to buildDefaultCompositionOrder(), however, instead of working with the
+   * current display, it requires a display module. This method can be used to generate the composition
+   * order from any display module in the project.
+   * @param {string} displayNode The display module name to build the array of Composition objects from.
+   * @returns {QScriptValue}
    */
-  function setCurrentArt(layer: DrawingLayer): void;
+  public static buildCompositionOrderForDisplay(
+    displayNode: string
+  ): QScriptValue;
 
   /**
-   * sets the current drawing to be from column columnName at frame frame
+   * Returns an array of Composition objects using the current default composition order as used by the
+   * camera view or the timeline.
+   * Using the current display, return the tree-like composition as normally returned by the internal
+   * node_timeline service. This method return the "Display All" composite order.
+   * The depth of each Composition can be used to find the parent-child. Top level nodes or parentless
+   * nodes have a depth at 0. Child of this node will have a depth 1 level greater.
+   * @returns {QScriptValue}
    */
-  function setCurrentDrawingFromColumnName(columnName: string, frame?: int): boolean;
+  public static buildDefaultCompositionOrder(): QScriptValue;
+}
+
+/**
+ * The copyPaste JavaScript global object. Copy paste to/from templates.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classcopyPaste.html}
+ */
+declare class copyPaste extends GlobalObject {
+  /**
+   * Create an object that represent a 'copy' of a selection of nodes and a range of frames.
+   * Create an object that represent a 'copy' of a selection of nodes and a range of frames. This object
+   * can be pasted or saved in the template library. It is practically identical to what the user would
+   * copy from a selection of layers and frames in the timeline.
+   * @param {StringList} selectionOfNodes The list of nodes to be copied.
+   * @param {int} startFrame The start frame for the selection. First frame is 1.
+   * @param {int} numFrames The number of frames to copy.
+   * @param {CopyOptions} createOption Options that should be used when doing the creating the copy. See CopyOptions for more information about these options.
+   * @returns {DragObject}
+   */
+  public static copy(
+    selectionOfNodes: StringList,
+    startFrame: int,
+    numFrames: int,
+    createOption: CopyOptions
+  ): DragObject;
 
   /**
-   * sets the current drawing to be from node nodeName at frame frame
+   * Load a template from the file system onto a drag object, which can then be pasted onto the scene.
+   * @param {string} filename - the exact filename of the .tpl folder. Need to be the folder, not the .xstage file.
+   * @param {int} startFrame start frames for the data pasted. Starting at 1. However, if 0 is provided, the whole template is copied.
+   * @param {int} numFrames - number of frames to paste, up to the maximum number of frames. If 'startFrame' is 0, this parameter is disregarded.
+   * @param {CopyOptions} createOption - options that should be used when doing the code. See CopyOptions for more information about these options.
+   * @returns {DragObject}
    */
-  function setCurrentDrawingFromNodeName(nodeName: string, frame?: int): boolean;
+  public static copyFromTemplate(
+    filename: string,
+    startFrame: int,
+    numFrames: int,
+    createOption: CopyOptions
+  ): DragObject;
 
   /**
-   * converts the selected pencil lines in layer of the current drawing using params
+   * Creates template from the current selection in the scene, using only the current drawing versions.
+   * No template is created when there is nothing selected, when the path is not valid or when there is
+   * an IO error.
+   * @param {string} name The name of the new template.
+   * @param {string} path The location of the new template.
+   * @returns {string}
    */
-  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
+  public static createTemplateFromSelection(name: string, path: string): string;
 
   /**
-   * extracts the centerline from srcLayer and puts the extracted line in dstLayer using params.
+   * Returns a copy of the current copy options.
+   * To be used with copy(). There used to be an API to set these parameters globally, for the next
+   * drag&drop
+   * @returns {CopyOptions}
    */
-  function extractCenterline(srcArt?: int, dstArt?: int, params?: DrawingToolParams): void;
+  public static getCurrentCreateOptions(): CopyOptions;
 
+  /**
+   * Returns a copy of the current paste options.
+   * To be used with paste()
+   * @returns {PasteOptions}
+   */
+  public static getCurrentPasteOptions(): PasteOptions;
+
+  /**
+   * Pastes the drag object as an action template. Must paste over a selection of nodes. No new nodes are
+   * created by this action.
+   * @param {DragObject} dragObject The dragObject to be pasted.
+   * @param {StringList} selectionOfNodes The list of nodes to be pasted over.
+   * @param {int} startFrame The start frame for the selection. First frame is 1.
+   * @param {int} numFrames The number of frames to paste across.
+   * @param {PasteOptions} pasteOptions Options that should be used when pasting. See PasteOptions for more information about these options.
+   * @returns {boolean}
+   */
+  public static paste(
+    dragObject: DragObject,
+    selectionOfNodes: StringList,
+    startFrame: int,
+    numFrames: int,
+    pasteOptions: PasteOptions
+  ): boolean;
+
+  /**
+   * Pastes the action template into the scene and excludes nodes that are in the list.
+   * @param {string} srcPath The path of the template.
+   * @param {string} nodeName The name of the existing node in which we will insert template.
+   * @param {int} insertFrame The frame at which insert commences.
+   * @returns {boolean}
+   */
+  public static pasteActionTemplateIntoNode(
+    srcPath: string,
+    nodeName: string,
+    insertFrame: int
+  ): boolean;
+
+  /**
+   * Paste an external drag object as new nodes. This is similar to pasting on the node view where new
+   * nodes are created (from an external selection).
+   * @param {DragObject} dragObject - the actual drag object - see copy() or copyFromTemplate() to create this drag object.
+   * @param {string} groupWhereToDrop - root group where the new nodes will be created. If empty string is provided, it will paste at the root.
+   * @param {PasteOptions} pasteOptions - paste special options (ie. create keyframes, drawings, new columns, or relink columns,.... - see paste special dialog and PasteOptions).
+   * @returns {boolean}
+   */
+  public static pasteNewNodes(
+    dragObject: DragObject,
+    groupWhereToDrop: string,
+    pasteOptions: PasteOptions
+  ): boolean;
+
+  /**
+   * Pastes the template into a group of the scene.
+   * @param {string} srcPath The path of the template.
+   * @param {string} groupName The name of the existing column in which we will insert template.
+   * @param {int} insertFrame The frame at which insert commences.
+   * @returns {boolean}
+   */
+  public static pasteTemplateIntoGroup(
+    srcPath: string,
+    groupName: string,
+    insertFrame: int
+  ): boolean;
+
+  /**
+   * Pastes the template into the scene.
+   * @param {string} templateSrcPath The path of the template.
+   * @param {string} insertColumnName The name of the existing column in which we will insert template.
+   * @param {int} insertFrame The frame at which insert commences.
+   * @returns {boolean}
+   */
+  public static pasteTemplateIntoScene(
+    templateSrcPath: string,
+    insertColumnName: string,
+    insertFrame: int
+  ): boolean;
+
+  /**
+   * @param {QScriptEngine} engine
+   * @returns {void}
+   */
+  public static registerObjects(engine: QScriptEngine): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is false.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setExtendScene(flag: boolean): void;
+
+  /**
+   * When pasting an external template or local content, this functions controls the number of frames of
+   * the content that will be pasted.
+   * The default number of frames is 0, which effectively turn off this override feature and make it
+   * paste the entire copied content length. Set this length to anything >0 to override the number of
+   * frames pasted.
+   * Must be using the paste special mode.
+   * @param {int} nFrames The number of frames that the content will be pasted.
+   * @returns {void}
+   */
+  public static setNumFramesSrc(nFrames: int): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialAddRemoveAngleKeyFrame(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialAddRemoveMotionKeyFrame(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialAddRemoveScalingKeyFrame(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialAddRemoveSkewKeyFrame(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialAddRemoveVelocityKeyFrame(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is REUSE_PALETTES.
+   * Acceptable Strings are: DO_NOTHING REUSE_PALETTES COPY_AND_OVERWRITE_EXISTING_PALETTES
+   * COPY_AND_CREATE_NEW_PALETTES COPY_AND_CREATE_NEW_PALETTES_IN_ELEMENT_FOLDER
+   * COPY_PALETTE_AND_MERGE_COLOURS COPY_PALETTE_AND_UPDATE_COLOURS LINK_TO_ORIGINAL
+   * COPY_SCENE_PALETTE_AND_MERGE_COLOURS COPY_SCENE_PALETTE_AND_UPDATE_COLOURS
+   * @param {string} mode The Color Palette Option mode.
+   * @returns {void}
+   */
+  public static setPasteSpecialColorPaletteOption(mode: string): void;
+
+  /**
+   * Set to true to copy the model directory.
+   * @param {boolean} copy Whether or not to copy the model directory.
+   * @returns {void}
+   */
+  public static setPasteSpecialCopyModelDir(copy: boolean): void;
+
+  /**
+   * Set to true to copy the scan files associated to the selected drawings.
+   * @param {boolean} copy Whether or not to copy the scan files associated to the selected drawings.
+   * @returns {void}
+   */
+  public static setPasteSpecialCopyScanFiles(copy: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is false.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialCreateNewColumn(flag: boolean): void;
+
+  /**
+   * Use this when you want the camera in a template to be set as default camera in the target scene.
+   * @param {boolean} flag Whether or not to set the camera in the template to be set as the default camera in the target scene.
+   * @returns {void}
+   */
+  public static setPasteSpecialDefaultCameraName(flag?: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is ADD_OR_REMOVE_EXPOSURE.
+   * Drawings action Acceptable Strings are: DO_NOTHING ADD_OR_REMOVE_EXPOSURE UPDATE_PIVOT
+   * @param {"DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"} mode The Drawing Action mode.
+   * @returns {void}
+   */
+  public static setPasteSpecialDrawingAction(
+    mode: "DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"
+  ): void;
+
+  /**
+   * PasteSpecial Structure value. Default values are extendExposure : false, keyFrameMode: true.
+   * @param {boolean} extendExposure Whether or not to automatically extend the exposure.
+   * @param {boolean} keyFrameMode Whether or not to enable key frame mode.
+   * @returns {void}
+   */
+  public static setPasteSpecialDrawingAutomaticExtendExposure(
+    extendExposure: boolean,
+    keyFrameMode: boolean
+  ): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is ALWAYS_CREATE if LIBRARY_PASTE_CREATE_NEW_DRAWING is
+   * set, otherwise it is ONLY_CREATE_IF_DOES_NOT_EXIST.
+   * Sets the drawing file mode - only used if the DrawingAction is set to ADD_OR_REMOVE_EXPOSURE
+   * Acceptable Strings are: NEVER_CREATE ONLY_CREATE_IF_DOES_NOT_EXIST ALWAYS_CREATE
+   * ALWAYS_CREATE_AND_VERSION_IF_NECESSARY REPLACE_EXISTING
+   * @param {"NEVER_CREATE"|"ONLY_CREATE_IF_DOES_NOT_EXIST"|"ALWAYS_CREATE"|"ALWAYS_CREATE_AND_VERSION_IF_NECESSARY"} mode The Drawing File mode.
+   * @returns {void}
+   */
+  public static setPasteSpecialDrawingFileMode(
+    mode:
+      | "NEVER_CREATE"
+      | "ONLY_CREATE_IF_DOES_NOT_EXIST"
+      | "ALWAYS_CREATE"
+      | "ALWAYS_CREATE_AND_VERSION_IF_NECESSARY"
+  ): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is ELEMENT_AS_ELEMENT_AND_TIMING_AS_TIMING.
+   * Sets the paste special elementtiming mode for calls to pasteTemplateIntoScene Acceptable strings
+   * are:
+   * ELEMENT_AS_ELEMENT_AND_TIMING_AS_TIMING ALL_DRWGS_AS_ELEMENTS ALL_DRWGS_LINKED_THRU_TIMING_COLS
+   * @param {string} mode
+   * @returns {void}
+   */
+  public static setPasteSpecialElementTimingColumnMode(mode: string): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialForcesKeyFrameAtBegAndEnd(flag: boolean): void;
+
+  /**
+   * Use this when you want to control the paste of all non animate attributes and all local values of a
+   * node.
+   * The default is true.
+   * @param {boolean} flag Whether or not to control the paste of all non animate attributes and all local values of a node.
+   * @returns {void}
+   */
+  public static setPasteSpecialFullTransfer(flag: boolean): void;
+
+  /**
+   * Use this when you want to paste a template and use the actual node names for matching nodes instead
+   * of basic algorithm of composition order.
+   * In this mode, it is important to make sure that all nodes of the template are found in the
+   * destination's group.
+   * @param {boolean} flag Whether or not to use the actual node names for matching nodes when pasting a template.
+   * @returns {void}
+   */
+  public static setPasteSpecialMatchNodeName(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is false.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialOffsetKeyFrames(flag: boolean): void;
+
+  /**
+   * PasteSpecial Structure value. Default value is true.
+   * @param {boolean} flag The new value.
+   * @returns {void}
+   */
+  public static setPasteSpecialReplaceExpressionColumns(flag: boolean): void;
+
+  /**
+   * Set to true to keep timed values names intact, even if cloned i.e. Drawing(3).
+   * @param {boolean} preserve Whether or not to keep timed values names intact.
+   * @returns {void}
+   */
+  public static setPasteSpecialTVPreserveName(preserve: boolean): void;
+
+  /**
+   * When pasting an external template or local content, this functions controls the start frame of the
+   * content that will be pasted.
+   * The default start frame is 1, which means that it will be pasting starting from the first frame of
+   * the copied content. Set this to a value >= 1 to specific the frame to use as a starting frame. Must
+   * be using the paste special mode.
+   * @param {int} startFrame The frame to start at when pasting an external template or local content.
+   * @returns {void}
+   */
+  public static setStartFrameSrc(startFrame: int): void;
+
+  /**
+   * Allows 2 extra options in the template creation.
+   * @param {boolean} flag Set that the copy paste manager is in use.
+   * @param {boolean} [addModellingDir=true] Copies the modeling directory into the template.
+   * @param {boolean} [addScanFiles=true] Copies the *.scans that match the drawings.
+   * @param {boolean} [includeDefaultCameraName=true] Deprecated in 7.8. As long as the camera node is in the selection, it will be copied into the template automatically.
+   * @returns {void}
+   */
+  public static useCreateTemplateSpecial(
+    flag: boolean,
+    addModellingDir?: boolean,
+    addScanFiles?: boolean,
+    includeDefaultCameraName?: boolean
+  ): void;
+
+  /**
+   * Enables PasteSpecial.
+   * This is a STATIC structure - once initialized it may be re-used for the duration of the session. By
+   * default, it is NOT used until usePasteSpecial(true) is called.
+   * The structure defaults are:
+   * NODE
+   * PEG
+   * DRAWING
+   * PALETTE
+   * SRC FRAMES
+   * If Drawing add/remove exposure is set, the following modes are available:
+   * @param {boolean} flag True to enable PasteSpecial.
+   * @returns {void}
+   */
+  public static usePasteSpecial(flag: boolean): void;
+}
+
+/**
+ * The Drawing JavaScript global object. Iterate and manipulate the drawings of an element node.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDrawing.html}
+ * @example
+ * for (var nodeIt in allNodes) {
+ *     if (allNodes.hasOwnProperty(nodeIt)) {
+ *         var layerName = node.getTextAttr(allNodes[nodeIt], 1, "drawing.element.layer");
+ *         var ElementId = node.getElementId(allNodes[nodeIt]);
+ *         for (var j = 0; j < Drawing.numberOf(ElementId); j++) {
+ *             var drawingId = Drawing.name(ElementId, j);
+ *             DrawingTools.recolorDrawing({
+ *                 elementId: ElementId,
+ *                 layer: layerName,
+ *                 exposure: drawingId
+ *             }, this.mapping);
+ *         }
+ *     }
+ * }
+ */
+declare class Drawing extends GlobalObject {
+  /**
+   * Creates a drawing.
+   * @param {int} elementId The unique id of the element.
+   * @param {string} timing The proposed drawing name.
+   * @param {boolean} fileExists Used to indicate that the drawing exists. By default, drawings exist in the temporary folder.
+   * @param {boolean} [storeInProjectFolder=false] Indicate that the drawing exits in the project folder, not in a temporary folder.
+   * @returns {boolean}
+   */
+  public static create(
+    elementId: int,
+    timing: string,
+    fileExists?: boolean,
+    storeInProjectFolder?: boolean
+  ): boolean;
+
+  /**
+   * Returns the 'load' filename of this drawing. This filename may be in the temp folder or project
+   * folder. Before the project is actually saved, this is where the drawing must reside to be found by
+   * the application.
+   * @param {int} elementId The unique id of the element.
+   * @param {string} drawingName The drawing name.
+   * @returns {string}
+   */
+  public static filename(elementId: int, drawingName: string): string;
+
+  /**
+   * Returns true if the given drawing exists in this element.
+   * @param {int} elementId The unique id of the element.
+   * @param {string} timing The drawing name.
+   * @returns {boolean}
+   */
+  public static isExists(elementId: int, timing: string): boolean;
+
+  /**
+   * Returns the drawing id.
+   * @param {int} elementId The unique id of the element.
+   * @param {int} drawingIndex The drawing index.
+   * @returns {string}
+   */
+  public static name(elementId: int, drawingIndex: int): string;
+
+  /**
+   * Returns the number of drawings in the element.
+   * @param {int} elementId The unique id of the element.
+   * @returns {int}
+   */
+  public static numberOf(elementId: int): int;
+}
+
+/**
+ * The DrawingTools JavaScript global object. Get information about the currently selected drawing.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDrawingTools.html}
+ * @example
+ * var params = new DrawingToolParams;
+ * params.applyAllDrawings = true;
+ * DrawingTools.extractCenterline(DrawingTools.lineArt, DrawingTools.colourArt, params);
+ */
+declare class DrawingTools extends GlobalObject {
   /**
    * Clears an art of a drawing.
-     Takes an object that can contain: drawing : Drawing Key art : int The art to clear. 0 = Underlay, 1 = Colour Art, 2 = Line Art, 3 = Overlay
-     Added in 15.0.5
+   * Takes an object that can contain: drawing : Drawing Key art : int The art to clear. 0 = Underlay, 1
+   * = Colour Art, 2 = Line Art, 3 = Overlay
+   * @param {QVariant} config
+   * @returns {boolean}
    */
-  function clearArt(config: ClearArtConfig): void;
-  /**
-   * computes the breaking triangles of the current layer using params.
-   */
-  function computeBreakingTriangles(params?: DrawingToolParams): void;
-
-  function recolorDrawing(): void;
-
-  function getDrawingUsedColors(): QScriptValue;
-
-  function getDrawingUsedColorsWithSource(): QScriptValue;
-
-  function getMultipleDrawingsUsedColors(): QScriptValue;
+  public static clearArt(config: QVariant): boolean;
 
   /**
-   * Performs the same operation as Drawing->Optimize->Optimize menu item.
+   * Computes the breaking triangles of the current layer using params.
+   * @param {DrawingToolParams} [params=0] The DrawingToolParams.
+   * @returns {void}
    */
-  function optimize(config: QVariant): boolean;
+  public static computeBreakingTriangles(params?: DrawingToolParams): void;
+
+  /**
+   * Converts the selected pencil lines in layer of the current drawing using params.
+   * @param {int} [art=LineArtMask] The current drawing.
+   * @param {DrawingToolParams} [params=0] The DrawingToolParams.
+   * @returns {void}
+   */
+  public static convertPencilToBrush(
+    art?: int,
+    params?: DrawingToolParams
+  ): void;
+
+  /**
+   * Extracts the centerline from srcArt and puts the extracted line in dstArt using params.
+   * @param {int} [srcArt=LineArtMask] The source art.
+   * @param {int} [dstArt=ColourArtMask] The destination art layer.
+   * @param {DrawingToolParams} [params=0] The DrawingToolParams.
+   * @returns {void}
+   */
+  public static extractCenterline(
+    srcArt?: int,
+    dstArt?: int,
+    params?: DrawingToolParams
+  ): void;
 
   /**
    * Performs the same operation as Drawing->Optimize->Flatten menu item.
+   * Takes an object that can contain: drawing : Drawing Key removeInvisibleLines : bool default false
+   * @param {QVariant} config
+   * @returns {boolean}
    */
-  function flatten(config: QVariant): boolean;
+  public static flatten(config: QVariant): boolean;
 
   /**
-   * readonly property - returns underlayArt mask
+   * Returns an array containing the set of colour ids used by the drawing.
+   * @returns {QScriptValue}
    */
-  var underlayArt: int;
+  public static getDrawingUsedColors(): QScriptValue;
 
   /**
-   * readonly property - returns colourArt mask
+   * Returns an array of objects describing the set of colour ids used by the drawing along with the
+   * source of the colour.
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "colorId": < string > ,
+   *     "colorSource": < "COLOR" | "PENCIL_TEXTURE" >
+   * }
    */
-  var colourArt: int;
+  public static getDrawingUsedColorsWithSource(): QScriptValue;
 
   /**
-   * readonly property - returns lineArt mask
+   * Return an array containing the set of colour ids used by all drawings in the array.
+   * @returns {QScriptValue}
    */
-  var lineArt: int;
+  public static getMultipleDrawingsUsedColors(): QScriptValue;
 
   /**
-   * readonly property - returns overlayArt mask
+   * Performs the same operation as Drawing->Optimize->Optimize menu item.
+   * Takes an object that can contain: drawing : Drawing Key removeInvisibleLines : bool default false
+   * @param {QVariant} config
+   * @returns {boolean}
    */
-  var overlayArt: int;
+  public static optimize(config: QVariant): boolean;
 
   /**
-   * readonly property - returns mask for all 4 art layers
+   * Recolours the drawing identified by a DrawingKey.
+   * DrawingKey : A DrawingKey, built from { ElementID : id, exposure : "drawingName"}, or {node:
+   * "Qualified_name", frame : i}
+   * ColorMap : An array of colour mappings of the format [ {from : "colorId", to : "colorId"}, ...
+   * ,{...} ].
+   * @returns {void}
    */
-  var allArts: int;
+  public static recolorDrawing(): void;
+
+  /**
+   * Sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt.
+   * @param {int} currentArt
+   * @returns {void}
+   */
+  public static setCurrentArt(currentArt: int): void;
+
+  /**
+   * @param {string} columnName The name of the column to start the drawing at.
+   * @param {int} [frame=1] The frame number to set the current drawing at.
+   * @returns {boolean}
+   */
+  public static setCurrentDrawingFromColumnName(
+    columnName: string,
+    frame?: int
+  ): boolean;
+
+  /**
+   * Sets the current drawing to be from node nodeName at frame frame.
+   * @param {string} nodeName The name of the node to start the drawing at.
+   * @param {int} [frame=1] The frame number to set the current drawing at.
+   * @returns {boolean}
+   */
+  public static setCurrentDrawingFromNodeName(
+    nodeName: string,
+    frame?: int
+  ): boolean;
+
+  /**
+   * vectorize function; Can be called with a variable list of arguments.
+   * You can get the help for vectorize by calling DrawingTools.vectorize.help();
+   * @returns {QVariant}
+   * @example
+   *  vectorize({
+   *      node: "Top/Drawing",
+   *      frame: 1
+   *  }, {
+   *      node: "Top/Output",
+   *      frame: 1
+   *  }, "-threshold 0.5");
+   *  vectorize("-file", {
+   *      node: "Top/Drawing",
+   *      frame: 1
+   *  }, "-outfile", {
+   *      node: "Top/Output",
+   *      frame: 1
+   *  }, "-threshold 0.5");
+   *  vectorize("-file", "full_path.png", "-outfile", "full_path.tvg", "-threshold 0.5");
+   *  var descriptor = new Drawing.Key({
+   *              elementId: 1,
+   *              exposure: "12",
+   *              layer: "eye");
+   *          var outputDescriptor = {
+   *              node: "Top/Eye_v",
+   *              frame: 12
+   *          };
+   *          // It can work with all the return values of Drawing.Key();
+   *          vectorize(descriptor, outputDescriptor, "-threshold 0.5");
+   *
+   *          // A more detailed example
+   *          function vectorizeExample() {
+   *              if (selection.numberOfNodesSelected() != 1) {
+   *                  MessageLog.trace("Please select one Element Node");
+   *                  return;
+   *              }
+   *
+   *              var n = selection.selectedNode(0);
+   *              if (node.type(n) != "READ") {
+   *                  MessageLog.trace("The selected node is NOT an Element Node. ");
+   *                  return;
+   *              }
+   *              var attrType = node.getTextAttr(n, 1, "lineArtDrawingMode");
+   *              if (attrType != "Bitmap") {
+   *                  MessageLog.trace("The selected node must be an Element Node with bitmap line art.");
+   *                  return;
+   *              }
+   *
+   *              var destination = n + "_vect";
+   *              if (!node.getName(destination)) {
+   *                  MessageLog.trace("Please make sure there is a node named " + node.getName(n) + "_vect in the same group as the selected node");
+   *              }
+   *
+   *              var options = {
+   *                  no_break: true,
+   *                  thresh: 0.01,
+   *                  rmv_hairs: 5
+   *              };
+   *              var optionsLine = "-no_break -thresh 0.01 -rmv_hairs 5";
+   *
+   *              scene.beginUndoRedoAccum("Vectorize drawings of " + node.getName(n) + " to " + node.getName(destination));
+   *              for (var i = 1; i < frame.numberOf(); ++i) {
+   *                  var keySrc = Drawing.Key({
+   *                      node: n,
+   *                      frame: i
+   *                  });
+   *                  var keyDst = Drawing.Key({
+   *                      node: destination,
+   *                      frame: i
+   *                  });
+   *                  if (keySrc.isNull || keyDst.isNull) {
+   *                      continue;
+   *                  }
+   *                  var r = DrawingTools.vectorize(keySrc, keyDst, options);
+   *              }
+   *              scene.endUndoRedoAccum();
+   *          }
+   */
+  public static vectorize(): QVariant;
+
+  /**
+   * Returns the mask for all 4 art layers.
+   * @returns {int}
+   */
+  static allArts: int;
+
+  /**
+   * Returns the colourArt mask.
+   * @returns {int}
+   */
+  static colourArt: int;
+
+  /**
+   * Returns the lineArt mask.
+   * @returns {int}
+   */
+  static lineArt: int;
+
+  /**
+   * Returns the overlayArt mask.
+   * @returns {int}
+   */
+  static overlayArt: int;
+
+  /**
+   * Returns the underlayArt mask.
+   * @returns {int}
+   */
+  static underlayArt: int;
 }
 
-declare interface SliderWidgetConfig extends WidgetConfig {
-  /**
-   * The name of the automatically generated double floating point attribute (if none is provided). The value will range from min to max.
-   * or, An attribute of double (floating point) type that can be shared with another widget or node.
-   */
-  data: string | Attribute;
-  /**
-  The length of the slider in fields. 
-  Default: 0.5
-  */
-  length?: float;
-  /**
-   * The radius of the slider handle in fields.
-   * Default: 0.03
-   */
-  radius?: float;
-  /**
-   * Paint a shadow under the slider.
-   * Default: false
-   */
-  drop_shadow?: boolean;
-  /**
-   * Make the slider appears horizontal. Vertical if false.
-   * Default: false
-   */
-  horizontal?: boolean;
-  /**
-   * Minimum value of the slider.
-   * Default: 0
-   */
-  min?: float;
-  /**
-   * Maximum value of the slider.
-   * Default: 100
-   */
-  max?: float;
-  /**
-   * The colour of the handle of the slider.
-   * Default: white
-   */
-  slider_color?: ColorRGBA;
-  /**
-   * The colour of the circle highlighting the handle of the slider.
-   * Default: dark gray
-   */
-  contour_color?: ColorRGBA;
-  /**
-   * The colour of the handle of the slider when selected.
-   * Default: 125,125,255
-   */
-  slider_selection_color?: ColorRGBA;
-  /**
-   * The colour of the frame of the slider.
-   * Default: 200,200,200
-   */
-  frame_color?: ColorRGBA;
-  /**
-   * The colour of the frame of the slider when selected.
-   * Default: 125,125,255
-   */
-  frame_selection_color?: ColorRGBA;
-
-  /**
-   * Default translation in the x axis for the bottom left corner of the slider frame. In fields.
-   * Default: -0.05
-   */
-  xmin?: number;
-  /**
-   * Default translation in the y axis for the bottom left corner of the slider frame. In fields.
-   * Default: -0.1
-   */
-  ymin?: number;
-}
 /**
- * The SliderWidget JavaScript class. A vertical or horizontal slider
+ * The element JavaScript global object. Add, remove, modify or get information about element nodes in
+ * the scene.
+ * With the Element methods, add, remove or retrieve information about the elements in your scene. Each
+ * element has an index (0..nbElements-1), an integer id (key of the element in the database), which is
+ * unique. They have a name (which is not guaranteed to be unique).
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classelement.html}
+ * @example
+ * // Rename each element only once.
+ * var o = Object.keys(elements);
+ * for (var idx in o) {
+ *     var elementKey = o[idx];
+ *     var elementName = element.getNameById(elementKey);
+ *     var newElementName = swapName(elementName);
+ *     element.renameById(elementKey, newElementName);
+ * }
+ *
+ * function addElement {
+ *     var id = element.add("newDrawing", "BW", 12, "TVG", "SCAN");
+ * }
+ */
+declare class element extends GlobalObject {
+  /**
+   * Creates a new element. Returns the element id of the newly added element if successful, otherwise it
+   * returns -1.
+   * @param {string} name The name of the element.
+   * @param {string} scanType "Colour", "Gray_Scale", "BW" (for black and white) or "None".
+   * @param {double} fieldChart 12, 16 or 24.
+   * @param {string} fileFormat "SCAN", "OPT", "PAL", "SGI", "TGA", "YUV", "OMF" or "PSD".
+   * @param {string} vectorize "TVG" or "None".
+   * @returns {int}
+   */
+  public static add(
+    name: string,
+    scanType: string,
+    fieldChart: double,
+    fileFormat: string,
+    vectorize: string
+  ): int;
+
+  /**
+   * Returns the complete element folder. This is normally the element name (unless it has been renamed
+   * and the project is not saved) but may include the ".<element id>" in the name if multiple elements
+   * share the same name.
+   * @param {int} id The unique id of the elements.
+   * @returns {string}
+   */
+  public static completeFolder(id: int): string;
+
+  /**
+   * This function returns the field chart size for a given element. The element ID must be provided. The
+   * field chart is a number such as 12,16 or 24 field.
+   * @param {int} id The unique id of the element.
+   * @returns {double}
+   */
+  public static fieldChart(id: int): double;
+
+  /**
+   * Returns the actual element folder. This is normally the element name (unless it has been renamed and
+   * the project is not saved) but may include the ".<element id>" in the name if multiple elements share
+   * the same name.
+   * @param {int} id The unique id of the element.
+   * @returns {string}
+   */
+  public static folder(id: int): string;
+
+  /**
+   * Returns the current element name.
+   * @param {int} id The unique id of the element.
+   * @returns {string}
+   */
+  public static getNameById(id: int): string;
+
+  /**
+   * Returns the id (key) of the element.
+   * @param {int} elementIndex An integer from 0 to the value returned by the function element.numberOf, representing the index number of the element. The id and the index are not always the same value.
+   * @returns {int}
+   */
+  public static id(elementIndex: int): int;
+
+  /**
+   * Changes the attributes of the folder of element elem.
+   * @param {int} id The unique id of the element.
+   * @param {string} scanType "Colour", "Gray_Scale", "BW" (for black and white) or "None".
+   * @param {double} fieldChart 12, 16 or 24.
+   * @param {string} pixmapFormat 1 for OPT, 3 for SCAN, 4 for SGI, 5 for TGA, 7 for YUV, 9 for OMF or 10 for PSD, 11 for PNG, 12 for JPEG, 13 for BMP, 15 for TIFF.
+   * @param {int} vectorType 1 or 2.
+   * @returns {boolean}
+   */
+  public static modify(
+    id: int,
+    scanType: string,
+    fieldChart: double,
+    pixmapFormat: string,
+    vectorType: int
+  ): boolean;
+
+  /**
+   * Returns the number of elements in the scene.
+   * @returns {int}
+   */
+  public static numberOf(): int;
+
+  /**
+   * Returns the actual name of the drawings. This is different that the element name if this one has
+   * been renamed and the changes have not yet been saved.
+   * @param {int} id The unique id of the element.
+   * @returns {string}
+   */
+  public static physicalName(id: int): string;
+
+  /**
+   * Returns the pixmap format for the provided element ID.
+   * @param {int} id The unique id of the element.
+   * @returns {string}
+   */
+  public static pixmapFormat(id: int): string;
+
+  /**
+   * Removes the given element. Also optionally delete the disk files. This function returns true when
+   * successful.
+   * @param {int} id The unique id of the element.
+   * @param {boolean} deleteDiskFile Optionally, delete the element from the disk.
+   * @returns {boolean}
+   */
+  public static remove(id: int, deleteDiskFile: boolean): boolean;
+
+  /**
+   * Renames an existing element. The element ID must be provided.
+   * @param {int} id The unique id of the element.
+   * @param {string} name The new name of the element. This name must be unique. This operation will physically rename all the files associated to this element.
+   * @returns {boolean}
+   */
+  public static renameById(id: int, name: string): boolean;
+
+  /**
+   * Returns a string that is the scan type of the element. The scan type is either: COLOR, GRAY_SCALE or
+   * BW.
+   * @param {int} id The unique id of the element.
+   * @returns {string}
+   */
+  public static scanType(id: int): string;
+
+  /**
+   * This function returns the vector type for the given element. In theory, there is support for
+   * multiple types of vector drawing. In practice, only TVG has been implemented. The value 0 :
+   * indicates that the element is NOT a vector drawing. It is an IMAGE type. The value 2: indicates that
+   * the element is a TVG vector drawing.
+   * @param {int} id The unique id of the element.
+   * @returns {int}
+   */
+  public static vectorType(id: int): int;
+}
+
+/**
+ * The exporter JavaScript global object. Provides access to the project export directory.
+ * The example below writes the palette list to a file.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classexporter.html}
+ * @example
+ * var exportDir = exporter.getExportDir();
+ * var exportFile = exportDir + "paletteList.txt";
+ *
+ * var logFile = new File(exportFile);
+ *
+ * // FileAccess is a 10.1 interface, 10.0 should use integers
+ * //  ReadOnly  = 0x0001
+ * //  WriteOnly = 0x0002
+ * //  ReadWrite = 0x0003
+ * //  Append    = 0x0004
+ * //  Truncate  = 0x0008
+ * //  Translate = 0x0010
+ * logFile.open(FileAccess.WriteOnly);
+ *
+ * logFile.writeLine(scene.currentScene() + " palettes:");
+ *
+ * logFile.writeLine("");
+ * var numPalettes = PaletteManager.getNumPalettes();
+ *
+ * for (i = 0; i < numPalettes; ++i) {
+ *
+ *     var paletteName = PaletteManager.getPaletteName(i);
+ *
+ *     logFile.writeLine(paletteName);
+ *
+ * }
+ *
+ * MessageBox.information("Palette list exported to: " + exportFile);
+ */
+declare class exporter extends GlobalObject {
+  /**
+   * Removes all files from the project export directory.
+   * @returns {void}
+   */
+  public static cleanExportDir(): void;
+
+  /**
+   * Export OGL frames to a QuickTime movie. Without QuickTime it will try to fallback to other supported
+   * formats.
+   * @param {string} fileName The output file name.
+   * @param {string} dstPath The output file location.
+   * @param {int} [startFrame=-1] The start range of playback, default to playback toolbar start if -1.
+   * @param {int} [lastFrame=-1] The end range of playback, default to playback toolbar stop if -1.
+   * @param {int} [resX=-1] The horizontal resolution, default to preview resolution if -1.
+   * @param {int} [resY=-1] The vertical resolution default to preview resolution if -1.
+   * @returns {void}
+   */
+  public static exportOGLToQuicktime(
+    fileName: string,
+    dstPath: string,
+    startFrame?: int,
+    lastFrame?: int,
+    resX?: int,
+    resY?: int
+  ): void;
+
+  /**
+   * Returns true if a scene was exported to a QuickTime in the specified directory.
+   * @param {string} displayName The display name.
+   * @param {int} startFrame The start range of playback, default to playback toolbar start if -1.
+   * @param {int} lastFrame The end range of playback, default to playback toolbar stop if -1.
+   * @param {boolean} withSound Whether or not the movie will have sound.
+   * @param {int} resX The horizontal resolution, default to preview resolution if -1.
+   * @param {int} resY The vertical resolution default to preview resolution if -1.
+   * @param {string} dstPath The output file location.
+   * @param {string} displayModule The display module.
+   * @param {boolean} generateThumbnail Whether or not to generate a thumbnail for the QuickTime.
+   * @param {int} thumbnailFrame The frame to use for the thumbnail.
+   * @returns {boolean}
+   */
+  public static exportToQuicktime(
+    displayName: string,
+    startFrame?: int,
+    lastFrame?: int,
+    withSound?: boolean,
+    resX?: int,
+    resY?: int,
+    dstPath?: string,
+    displayModule?: string,
+    generateThumbnail?: boolean,
+    thumbnailFrame?: int
+  ): boolean;
+
+  /**
+   * Returns the path of the project export directory.
+   * @returns {string}
+   */
+  public static getExportDir(): string;
+}
+
+/**
+ * The FileDialog JavaScript global object. A simplified version of the Qt file dialogs.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classFileDialog.html}
+ */
+declare class FileDialog extends GlobalObject {
+  /**
+   * Function that will return an existing directory selected by the user.
+   * @param {string} [dir=String::null] The directory to open the file dialog to.
+   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getExistingDirectory(
+    dir?: string,
+    title?: string,
+    parent?: QWidget
+  ): QVariant;
+
+  /**
+   * Function that returns an existing file selected by the user.
+   * @param {string} [filter=String::null] The filter for which files to select.
+   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getOpenFileName(
+    filter?: string,
+    title?: string,
+    parent?: QWidget
+  ): QVariant;
+
+  /**
+   * Function that will return one or more existing files selected by the user.
+   * @param {string} [dir=String::null] The directory to open the file dialog to.
+   * @param {string} [filter=String::null] The filter for which files to select.
+   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {StringList}
+   */
+  public static getOpenFileNames(
+    dir?: string,
+    filter?: string,
+    title?: string,
+    parent?: QWidget
+  ): StringList;
+
+  /**
+   * Function that will return a file name selected by the user.
+   * @param {string} [filter=String::null] The filter for which files to select.
+   * @param {string} [title=String::null] The title for the file dialog.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getSaveFileName(
+    filter?: string,
+    title?: string,
+    parent?: QWidget
+  ): QVariant;
+}
+
+/**
+ * The fileMapper JavaScript global object. Map paths from one format to another.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classfileMapper.html}
+ */
+declare class fileMapper extends GlobalObject {
+  /**
+   * Converts a URL to a path of the form eg. /usadata000/[job]/scene-[scene]/[remainder...].
+   * @param {string} url The url to convert.
+   * @returns {string}
+   */
+  public static fileURLToPath(url: string): string;
+
+  /**
+   * Returns the complete path of the passed path resolving shortcuts in windows. Will also convert the
+   * path separator to '\'.
+   * By example, /usadata000 is mapped to a network drive through a shortcut pointing to
+   * /server/path/usadata000.
+   * The path will be remapped to \\server\path\usadata000\file.txt.
+   * @param {string} path The Path on Windows.
+   * @returns {string}
+   * @example
+   * var remapped = fileMapper.toNativePath("/usadata000/file.txt");
+   */
+  public static toNativePath(path: string): string;
+
+  /**
+   * Converts a path of the form /USA_DB/jobs/[job]/scene-[scene]/[remainder...] to eg.
+   * /usadata000/[job]/scene-[scene]/[remainder...].
+   * If working offline (no database) this function will return the input path.
+   *  In database mode if the path is not of the form
+   * this function will return the input path.
+   *  In database mode if the scene cannot be located in the database this function will return the input
+   * path.
+   * @param {string} path The path to convert.
+   * @returns {string}
+   * @example
+   * /USA_DB/jobs / [job] / scene - [scene] / [remainder...]
+   */
+  public static toScenePath(path: string): string;
+}
+
+/**
+ * The frame JavaScript global object. Get the current frame or number of frames. Add or remove frames
+ * in your scene. Manipulate the timeline marker.
+ * The frame global object can only be used in the Script Editor or the Master Controller node.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classframe.html}
+ * @example
+ * function sceneOpened() {
+ *     // this part of the function launches the newScene function if
+ *     // the scene has only one frame
+ *     if (frame.numberOf() == 1)
+ *         newScene();
+ * }
+ *
+ * function newScene() {
+ *     // this function opens a dialog box named Create New Scene, which
+ *     // allows users to enter the number of frames to add to the scene
+ *     var d = new Dialog;
+ *     d.title = "Create New Scene";
+ *     var nbFrames = new SpinBox;
+ *     nbFrames.label = "Number of Frames";
+ *     nbFrames.minimum = 1;
+ *     nbFrames.maximum = 300;
+ *     nbFrames.value = 60;
+ *     d.add(nbFrames);
+ *     if (d.exec()) {
+ *         var oldNbFrames = frame.numberOf();
+ *         frame.insert(0, nbFrames.value - oldNbFrames);
+ *     }
+ * }
+ */
+declare class frame extends GlobalObject {
+  /**
+   * Returns the number of the current frame.
+   * @returns {int}
+   */
+  public static current(): int;
+
+  /**
+   * Returns if marker exists at this frame.
+   * @param {int} frame current frame
+   * @returns {boolean}
+   */
+  public static hasTimelineMarker(frame: int): boolean;
+
+  /**
+   * Inserts frames at the selected frame number.
+   * atFrame = 0 -> insert before first frame. atFrame = n -> insert after frame n. atFrame =
+   * Application.frame.numberOf() -> insert at end.
+   * @param {int} atFrame The frame number at which the frames will be inserted. Frames are inserted after the frame indicated. Use 0 to insert frames before the first frame.
+   * @param {int} nbFrames The number of frames to insert
+   * @returns {boolean}
+   */
+  public static insert(atFrame: int, nbFrames: int): boolean;
+
+  /**
+   * Returns the number of frames in the scene.
+   * @returns {int}
+   */
+  public static numberOf(): int;
+
+  /**
+   * Deletes frames starting from the selected frame number.
+   * atFrame = 0 -> delete at the beginning atFrame = n -> delete frames following the nth frame atFrame
+   * = Application.frame.nbFrames() -> won't delete anything
+   * @param {int} atFrame The frame number at which the frames will be removed. Frames are removed after the frame indicated. Use 0 to remove frames before the first frame.
+   * @param {int} nbFrames The number of frames to remove
+   * @returns {boolean}
+   */
+  public static remove(atFrame: int, nbFrames: int): boolean;
+
+  /**
+   * Allows you to change the current frame.
+   * @param {int} frame The new current frame
+   * @returns {void}
+   */
+  public static setCurrent(frame: int): void;
+
+  /**
+   * Returns markers length.
+   * @param {int} frame current frame
+   * @returns {int}
+   */
+  public static timelineMarkerLength(frame: int): int;
+
+  /**
+   * Returns markers text.
+   * @param {int} frame current frame
+   * @returns {string}
+   */
+  public static timelineMarkerNote(frame: int): string;
+
+  /**
+   * Returns markers start frame.
+   * @param {int} frame current frame
+   * @returns {int}
+   */
+  public static timelineMarkerStart(frame: int): int;
+}
+
+/**
+ * The func JavaScript global object. Retrieve and modify values of function curves.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classfunc.html}
+ * @example
+ * function addSetFunctions() {
+ *     //creates the function columns if needed
+ *     if (!column.add("3DPATH_FUNC", "3DPATH"))
+ *         MessageLog.trace("Error creating 3dpath column");
+ *
+ *     if (!column.add("BEZIER_FUNC", "BEZIER"))
+ *         MessageLog.trace("Error creating bezier column");
+ *
+ *     if (!column.add("EASE_FUNC", "EASE"))
+ *         MessageLog.trace("Error creating ease column");
+ *
+ *     // adds 2 keyframes on a 3DPATH at frame 6 and 12
+ *     // with values x=2, y=2, z=1, tension=3, continuity=-1, bias=1
+ *     func.addKeyFramePath3d("3DPATH_FUNC", 6, 2, 2, 1, 3, -1, 1);
+ *     func.addKeyFramePath3d("3DPATH_FUNC", 12, 2, 2, 1, 3, -1, 1);
+ *
+ *     // removes a keyframe on 3DPATH at frame 12
+ *     func.removePoint3DPath("3DPATH_FUNC", 12);
+ *
+ *     // prints the number of points on a 3DPath column
+ *     var pathPoints = func.numberOfPointsPath3d("3DPATH_FUNC");
+ *     MessageLog.trace("3DPATH_FUNC column has " + pathPoints + "points");
+ *
+ *     // adds a keyframe on a BEZIER at frame 10 with values y=5,
+ *     // handle_leftx=9, handle_lefty=5, handle_rightx=12,
+ *     // handle_righty=-0.5, constant seg=false, continuity=smooth
+ *     if (!func.setBezierPoint("BEZIER_FUNC", 10, 5, 9, 5, 12, -0.5, false, "SMOOTH"))
+ *         MessageLog.trace("Error creating point on bezier");
+ *
+ *     // sets the step value for a function column starting at frame 1 upto frame 15 hold 2
+ *     func.setHoldStartFrame("BEZIER_FUNC", 1);
+ *     func.setHoldStopFrame("BEZIER_FUNC", 15);
+ *     func.setHoldStep("BEZIER_FUNC", 2);
+ *
+ *     // prints the number of points on a function column
+ *     var bezPoints = func.numberOfPoints("BEZIER_FUNC");
+ *     MessageLog.trace("BEZIER_FUNC column has " + bezPoints + " points");
+ *
+ *     // adds a keyframe on an EASE at frame 10 with values y=5,
+ *     // ease_inx=0, ease_iny=0, ease_outx=0, ease_outy=180
+ *     // constant seg=true, continuity=straight
+ *     if (!func.setEasePoint("EASE_FUNC", 10, 6, 0, 0, 0, 180, true, "STRAIGHT"))
+ *         MessageLog.trace("Error creating point on ease");
+ * }
+ */
+declare class func extends GlobalObject {
+  /**
+   * Adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension,
+   * continuity and bias.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @param {double} x X value for the point.
+   * @param {double} y Y value for the point.
+   * @param {double} z Z value for the point.
+   * @param {double} tension The tension value of the keyframe.
+   * @param {double} continuity The continuity value of the keyframe.
+   * @param {double} bias The bias value of the keyframe.
+   * @returns {boolean}
+   */
+  public static addCtrlPointAfterPath3d(
+    columnName: string,
+    point: int,
+    x: double,
+    y: double,
+    z: double,
+    tension: double,
+    continuity: double,
+    bias: double
+  ): boolean;
+
+  /**
+   * Adds a keyframe to a 3D Path and sets the X, Y and Z value, as well as the tension, continuity and
+   * bias.
+   * @param {string} columnName The name of the column.
+   * @param {int} frame Frame number for the point.
+   * @param {double} x X value for the point.
+   * @param {double} y Y value for the point.
+   * @param {double} z Z value for the point.
+   * @param {double} tension The tension value of the keyframe.
+   * @param {double} continuity The continuity value of the keyframe.
+   * @param {double} bias The bias value of the keyframe.
+   * @returns {boolean}
+   */
+  public static addKeyFramePath3d(
+    columnName: string,
+    frame: int,
+    x: double,
+    y: double,
+    z: double,
+    tension: double,
+    continuity: double,
+    bias: double
+  ): boolean;
+
+  /**
+   * Returns the angle of the ease-in handle.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static angleEaseIn(columnName: string, point: int): double;
+
+  /**
+   * Returns the angle of the ease-out handle.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static angleEaseOut(columnName: string, point: int): double;
+
+  /**
+   * Returns the Start value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
+   * Function Editors.
+   * @param {string} columnName The name of the column.
+   * @returns {int}
+   */
+  public static holdStartFrame(columnName: string): int;
+
+  /**
+   * Returns the Step value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
+   * Function Editors.
+   * @param {string} columnName The name of the column.
+   * @returns {int}
+   */
+  public static holdStep(columnName: string): int;
+
+  /**
+   * Returns the Stop value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
+   * Function Editors.
+   * @param {string} columnName The name of the column.
+   * @returns {int}
+   */
+  public static holdStopFrame(columnName: string): int;
+
+  /**
+   * Returns the number of keyframes and control points on a curve.
+   * @param {string} columnName The name of the column.
+   * @returns {int}
+   */
+  public static numberOfPoints(columnName: string): int;
+
+  /**
+   * Returns the number of keyframes and control points on the 3D Path.
+   * @param {string} columnName The name of the column.
+   * @returns {int}
+   */
+  public static numberOfPointsPath3d(columnName: string): int;
+
+  /**
+   * Returns the bias value for the specified point on the 3D Path.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointBiasPath3d(columnName: string, point: int): double;
+
+  /**
+   * Returns true to indicate that the point is on a constant segment, or false to indicate that the
+   * point is not on a constant segment.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {boolean}
+   */
+  public static pointConstSeg(columnName: string, point: int): boolean;
+
+  /**
+   * Returns the continuity of the curve that follows the point. One of the following values will be
+   * returned, in upper-case: SMOOTH, CORNER or STRAIGHT.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {string}
+   */
+  public static pointContinuity(columnName: string, point: int): string;
+
+  /**
+   * Returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointContinuityPath3d(columnName: string, point: int): double;
+
+  /**
+   * Returns the number of frames in the ease-in.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointEaseIn(columnName: string, point: int): double;
+
+  /**
+   * Returns the number of frames in the ease-out.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointEaseOut(columnName: string, point: int): double;
+
+  /**
+   * Returns the X value of the left handle of a point on a curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointHandleLeftX(columnName: string, point: int): double;
+
+  /**
+   * Returns the Y value of the left handle of a point on a curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointHandleLeftY(columnName: string, point: int): double;
+
+  /**
+   * Returns the X value of the right handle of a point on a curve.
+   * @param {string} columnName The name of the column
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointHandleRightX(columnName: string, point: int): double;
+
+  /**
+   * Returns the Y value of the right handle of a point on a curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointHandleRightY(columnName: string, point: int): double;
+
+  /**
+   * Returns the frame at which it's locked, or returns 0 if the point is not locked.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointLockedAtFrame(columnName: string, point: int): double;
+
+  /**
+   * Returns the tension value for the specified point on the 3D Path.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointTensionPath3d(columnName: string, point: int): double;
+
+  /**
+   * Returns the X value (frame number) of a point on a function curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointX(columnName: string, point: int): double;
+
+  /**
+   * Returns the value of the specified point on the X path.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointXPath3d(columnName: string, point: int): double;
+
+  /**
+   * Returns the Y value of a point on a function curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointY(columnName: string, point: int): double;
+
+  /**
+   * Returns the value of the specified point on the Y path.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointYPath3d(columnName: string, point: int): double;
+
+  /**
+   * Returns the value of the specified point on the Z path.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {double}
+   */
+  public static pointZPath3d(columnName: string, point: int): double;
+
+  /**
+   * Used to remove either a key frame, or a control point.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @returns {boolean}
+   */
+  public static removePointPath3d(columnName: string, point: int): boolean;
+
+  /**
+   * Sets the values of a point on a Bezier function curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} frame Frame number for the point.
+   * @param {double} y Y value for the poin.
+   * @param {double} handleLeftX X value for the left handle of the point.
+   * @param {double} handleLeftY Y value for the left handle.
+   * @param {double} handleRightX X value for the right handle.
+   * @param {double} handleRightY Y value for the right handle.
+   * @param {boolean} constSeg Boolean expression (with a true or false value) to indicate whether the segment is constant or interpolated.
+   * @param {string} continuity String value for the continuity of the point. The string must be in all upper-case. The following are the acceptable values: STRAIGHT, SMOOTH and CORNER.
+   * @returns {boolean}
+   */
+  public static setBezierPoint(
+    columnName: string,
+    frame: int,
+    y: double,
+    handleLeftX: double,
+    handleLeftY: double,
+    handleRightX: double,
+    handleRightY: double,
+    constSeg: boolean,
+    continuity: string
+  ): boolean;
+
+  /**
+   * Sets the values of a point on an Ease function curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} frame Frame number for the point.
+   * @param {double} y Y value for the point.
+   * @param {double} easeIn The number of frames in the ease-in.
+   * @param {double} angleEaseIn The angle of the ease-in handle.
+   * @param {double} easeOut The number of frames in the ease-out.
+   * @param {double} angleEaseOut The angle of the ease-out handle.
+   * @param {boolean} constSeg Boolean expression (with a true or false value) to indicate whether the segment is constant or interpolated.
+   * @param {string} continuity String value for the continuity of the point. The string must be in all upper-case. The following are the acceptable values: STRAIGHT, SMOOTH and CORNER.
+   * @returns {boolean}
+   */
+  public static setEasePoint(
+    columnName: string,
+    frame: int,
+    y: double,
+    easeIn: double,
+    angleEaseIn: double,
+    easeOut: double,
+    angleEaseOut: double,
+    constSeg: boolean,
+    continuity: string
+  ): boolean;
+
+  /**
+   * Sets the Start value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
+   * Editors.
+   * @param {string} columnName The name of the column.
+   * @param {int} start The start frame of the hold.
+   * @returns {boolean}
+   */
+  public static setHoldStartFrame(columnName: string, start: int): boolean;
+
+  /**
+   * Sets the Hold value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
+   * Editors.
+   * @param {string} columnName The name of the column.
+   * @param {int} step The value of the steps in the hold.
+   * @returns {boolean}
+   */
+  public static setHoldStep(columnName: string, step: int): boolean;
+
+  /**
+   * Sets the Stop value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
+   * Editors.
+   * @param {string} columnName The name of the column.
+   * @param {int} stop The stop frame of the hold.
+   * @returns {boolean}
+   */
+  public static setHoldStopFrame(columnName: string, stop: int): boolean;
+
+  /**
+   * Sets the constant segment flag of point i of path p to b.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @param {boolean} constant bool flag.
+   * @returns {boolean}
+   */
+  public static setPath3dPointConstantSegment(
+    columnName: string,
+    point: int,
+    constant: boolean
+  ): boolean;
+
+  /**
+   * Sets the constant segment flag of point found at frame f of path p to b.
+   * @param {string} columnName The name of the column.
+   * @param {double} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @param {boolean} constant bool flag.
+   * @returns {boolean}
+   */
+  public static setPath3dPointConstantSegmentForFrame(
+    columnName: string,
+    point: double,
+    constant: boolean
+  ): boolean;
+
+  /**
+   * Used to set values in either a key frame, or a control point, but cannot change a key frame into a
+   * control point or a control point into a key frame.
+   * To change a key frame into a control point or a control point into a key frame, you must remove the
+   * point and add a new point.
+   * @param {string} columnName The name of the column.
+   * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
+   * @param {double} x X value for the point.
+   * @param {double} y Y value for the point.
+   * @param {double} z Z value for the point.
+   * @param {double} tension The tension value of the keyframe.
+   * @param {double} continuity The continuity value of the keyframe.
+   * @param {double} bias The bias value of the keyframe.
+   * @returns {boolean}
+   */
+  public static setPointPath3d(
+    columnName: string,
+    point: int,
+    x: double,
+    y: double,
+    z: double,
+    tension: double,
+    continuity: double,
+    bias: double
+  ): boolean;
+
+  /**
+   * Sets the values of a point on a Velocity-Based function curve.
+   * @param {string} columnName The name of the column.
+   * @param {int} frame Frame number for the point.
+   * @param {double} y Y value for the point.
+   * @returns {boolean}
+   */
+  public static setVeloBasedPoint(
+    columnName: string,
+    frame: int,
+    y: double
+  ): boolean;
+}
+
+/**
+ * The Input JavaScript global object. A simplified version of the Qt input dialogs.
+ * Provides a simple convenient dialog to get a single value from the user.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classInput.html}
+ */
+declare class Input extends GlobalObject {
+  /**
+   * Function to get an item from the user.
+   * @param {string} label A prompt for the input you want.
+   * @param {StringList} itemList A list of items for the user to choose from.
+   * @param {string} [currentItem=String::null] The currently selected item from the list.
+   * @param {boolean} [editable=false] Whether or not the user can enter their own item.
+   * @param {string} [title=String::null] The title for the dialog box.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getItem(
+    label: string,
+    itemList: StringList,
+    currentItem?: string,
+    editable?: boolean,
+    title?: string,
+    parent?: QWidget
+  ): QVariant;
+
+  /**
+   * Function to get an item from the user.
+   * @param {StringList} itemList A list of items for the user to choose from.
+   * @param {string} [currentItem=String::null] The currently selected item from the list.
+   * @param {boolean} [editable=false] Whether or not the user can enter their own item.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getItem(
+    itemList: StringList,
+    currentItem?: string,
+    editable?: boolean,
+    parent?: QWidget
+  ): QVariant;
+
+  /**
+   * Function to get a number from the user.
+   * @param {string} [label=String::null] A prompt for the input you want.
+   * @param {double} [value=0] Number to appear in the dialog box number field when opened.
+   * @param {int} [decimals=0] The number of decimals that will be allowed in the input.
+   * @param {double} [minValue=-2147483647] The minimum value allowed for the input.
+   * @param {double} [maxValue=2147483647] The maximum value allowed for the input.
+   * @param {string} [title=String::null] The title for the dialog box.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getNumber(
+    label?: string,
+    value?: double,
+    decimals?: int,
+    minValue?: double,
+    maxValue?: double,
+    title?: string,
+    parent?: QWidget
+  ): QVariant;
+
+  /**
+   * Function to get a string from the user.
+   * @param {string} [label=String::null] A prompt for the input you want.
+   * @param {string} [text=String::null] Text to appear in the dialog box text field when opened.
+   * @param {string} [title=String::null] The title for the dialog box.
+   * @param {QWidget} [parent=0] Unused.
+   * @returns {QVariant}
+   */
+  public static getText(
+    label?: string,
+    text?: string,
+    title?: string,
+    parent?: QWidget
+  ): QVariant;
+}
+
+/**
+ * The KeyModifiers JavaScript global object. Query key modifiers.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classKeyModifiers.html}
+ */
+declare class KeyModifiers extends GlobalObject {
+  /**
+   * Check if the Alt key is pressed.
+   * @returns {boolean}
+   */
+  public static IsAlternatePressed(): boolean;
+
+  /**
+   * Check if the Ctrl key is pressed.
+   * @returns {boolean}
+   */
+  public static IsControlPressed(): boolean;
+
+  /**
+   * Check if the Shift key is pressed.
+   * @returns {boolean}
+   */
+  public static IsShiftPressed(): boolean;
+
+  /**
+   * Check if the space key is pressed.
+   * @returns {boolean}
+   */
+  public static IsSpacePressed(): boolean;
+}
+
+/**
+ * The library JavaScript global object. Select templates, and generate thumbnails or movies for them.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classlibrary.html}
+ */
+declare class library extends GlobalObject {
+  /**
+   * Generates the movies for selected templates.
+   * @param {int} idx The index of the templates to generate QuickTime Movie(s) for.
+   * @param {int} start The starting frame for the generated QuickTime Movie(s).
+   * @param {int} end The ending frame for the generated QuickTime Movie(s).
+   * @param {int} xRes Number of pixels in the x-axis.
+   * @param {int} yRes Number of pixels in the y-axis.
+   * @param {string} userName The desired user name.
+   * @param {string} displayNode The display node.
+   * @param {string} dstPath The destination path.
+   * @param {boolean} withSound Whether or not the generated movie(s) will have sound.
+   * @returns {boolean}
+   */
+  public static getQuicktimeMovieForSelectedTpl(
+    idx: int,
+    start: int,
+    end: int,
+    xRes: int,
+    yRes: int,
+    userName: string,
+    displayNode: string,
+    dstPath: string,
+    withSound: boolean
+  ): boolean;
+
+  /**
+   * Returns the path to the ith file that is selected.
+   * @param {int} i The index of the target file in the currently selected files.
+   * @returns {string}
+   */
+  public static getSelectedTemplate(i: int): string;
+
+  /**
+   * Generates the thumbnails for selected templates.
+   * @param {int} idx The index of the templates to generate thumbnails for.
+   * @param {int} res The desired resolution of the thumbnails.
+   * @param {string} dstPath The destination path for the generated thumbnails.
+   * @returns {boolean}
+   */
+  public static getThumbnailForSelectedTpl(
+    idx: int,
+    res: int,
+    dstPath: string
+  ): boolean;
+
+  /**
+   * Returns the number of files that are selected.
+   * @returns {int}
+   */
+  public static numberOfTemplatesSelected(): int;
+}
+
+/**
+ * The MessageBox JavaScript class. A simplified version of the MessageBox Qt dialog.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classMessageBox.html}
+ * @example
+ * MessageBox.warning(" This is a warning.");
+ */
+declare class MessageBox extends GlobalObject {
+  /**
+   * A critical box. By default has one button labeled 'Retry'.
+   * @param {string} text The text to display in the information box body.
+   * @param {int} button0 Default = 1. 1 to display the first button.
+   * @param {int} button1 Default = 0. 1 to display the second button.
+   * @param {int} button2 Default = 0. 1 to display the third button.
+   * @param {string} title The text to display in the title.
+   * @param {QWidget} parent The parent widget to inherit.
+   * @returns {QScriptValue}
+   */
+  public static critical(
+    text: string,
+    button0?: int,
+    button1?: int,
+    button2?: int,
+    title?: string,
+    parent?: QWidget
+  ): QScriptValue;
+
+  /**
+   * An information box. By default has one button labeled 'OK'.
+   * @param {string} text The text to display in the information box body.
+   * @param {int} button0 Default = 1. 1 to display the first button.
+   * @param {int} button1 Default = 0. 1 to display the second button.
+   * @param {int} button2 Default = 0. 1 to display the third button.
+   * @param {string} title The text to display in the title.
+   * @param {QWidget} parent The parent widget to inherit.
+   * @returns {QScriptValue}
+   */
+  public static information(
+    text: string,
+    button0?: int,
+    button1?: int,
+    button2?: int,
+    title?: string,
+    parent?: QWidget
+  ): QScriptValue;
+
+  /**
+   * A warning box. By default has two buttons labeled 'Abort' and 'Retry'.
+   * @param {string} text The text to display in the information box body.
+   * @param {int} button0 Default = 1. 1 to display the first button.
+   * @param {int} button1 Default = 0. 1 to display the second button.
+   * @param {int} button2 Default = 0. 1 to display the third button.
+   * @param {string} title The text to display in the title.
+   * @param {QWidget} parent The parent widget to inherit.
+   * @returns {QScriptValue}
+   */
+  public static warning(
+    text: string,
+    button0?: int,
+    button1?: int,
+    button2?: int,
+    title?: string,
+    parent?: QWidget
+  ): QScriptValue;
+}
+
+/**
+ * The MessageLog JavaScript global object. Allows the user to print messages to the message log
+ * window.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classMessageLog.html}
+ * @example
+ * MessageLog.trace("Export template failed. Nothing selected.");
+ */
+declare class MessageLog extends GlobalObject {
+  /**
+   * Writes the message to the message log if debug mode is on.
+   * @param {string} messageIfDebug The message to be written to the message log if debug mode is on.
+   * @returns {void}
+   */
+  public static debug(messageIfDebug: string): void;
+
+  /**
+   * Prints message to message log as an error.
+   * When running as an interactive application, this will report the error in a modal dialog box (at the
+   * end of the script only). In batch mode, the error is logged to the log file, like trace().
+   * @param {string} message The message to the written to the message log as an error.
+   * @returns {void}
+   */
+  public static error(message: string): void;
+
+  /**
+   * Returns whether the debug mode is set.
+   * @returns {boolean}
+   */
+  public static isDebug(): boolean;
+
+  /**
+   * Sets the debug mode to on/off.
+   * @param {boolean} b If true sets the debug mode to on.
+   * @returns {void}
+   */
+  public static setDebug(b: boolean): void;
+
+  /**
+   * Writes the message to the message log.
+   * @param {string} message The message to be written to the message log.
+   * @returns {void}
+   */
+  public static trace(message: string): void;
+}
+
+/**
+ * The MovieImport JavaScript global object. Import a QuickTime movie in the current scene.
+ * This object is used to import a QuickTime movie in the scene. First the user needs to set up the
+ * importing parameters using the functions: setMovieFilename, setImageFolder, setImagePrefix and
+ * setAudioFile. Then call doImport and after that, the user can iterate over the number of images, the
+ * current image filename and whether an audio file was created or not.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classMovieImport.html}
+ */
+declare class MovieImport extends GlobalObject {
+  /**
+   * Performs the import - no progress bar.
+   * @returns {boolean}
+   */
+  public static doImport(): boolean;
+
+  /**
+   * Returns the complete filename for the imported image 'index' from the last import.
+   * @param {int} index The index of the desired image from the last import.
+   * @returns {string}
+   */
+  public static image(index: int): string;
+
+  /**
+   * Returns true if a sound file was created at the given filename.
+   * @returns {boolean}
+   */
+  public static isAudioFileCreated(): boolean;
+
+  /**
+   * Returns the number of imported images from the last import.
+   * @returns {int}
+   */
+  public static numberOfImages(): int;
+
+  /**
+   * Sets the expected audio filename. must be wav format (as this is currently the only one supported)
+   * sound filename can be left empty. if so, there will not be any file created.
+   * The audio created will contains the sound covered by the range defined by 'startFrame' to
+   * 'stopFrame'.
+   * @param {string} audioFilename The expected audio filename.
+   * @returns {void}
+   */
+  public static setAudioFile(audioFilename: string): void;
+
+  /**
+   * Defines where to store the extracted images.
+   * @param {string} folder The folder to store extracted images.
+   * @returns {void}
+   */
+  public static setImageFolder(folder: string): void;
+
+  /**
+   * Defines which prefix to use to save the images.
+   * @param {string} prefix The prefix to use to save the images.
+   * @returns {void}
+   */
+  public static setImagePrefix(prefix: string): void;
+
+  /**
+   * Defines the input movie filename.
+   * @param {string} filename The input movie filename.
+   * @returns {void}
+   */
+  public static setMovieFilename(filename: string): void;
+
+  /**
+   * Sets the start frame (frame are 1 bound). The default value is 1. This will affect the 'doImport()'
+   * command where only these frames are considered.
+   * @param {int} startFrame The frame to start from.
+   * @returns {void}
+   */
+  public static setStartFrame(startFrame: int): void;
+
+  /**
+   * Sets the desired last frame. This will affect the number of frames that will be extracted by the
+   * 'doImport()' default value: 0 which mean that all frames are imported.
+   * @param {int} stopFrame The frame to stop at.
+   * @returns {void}
+   */
+  public static setStopFrame(stopFrame: int): void;
+}
+
+/**
+ * The node JavaScript global object.
+ * Nodes are synonymous with Filter, IO, Move and Group in the Node View. With node methods, retrieve
+ * values from nodes, effects and composite. Add, link or set their attributes. Nodes can have
+ * identical names, so, their full path is needed to identify a them. The full path always starts with
+ * the root group name which is Top. Then, the other parent group names follow it separated by a "/".
+ * e.g. "Top/MyFirstGroup/MySecondGroup/MyNodeName". The nomenclature is a bit confusing, but node name
+ * methods use the path as the node name most of the time. The parentNode method from this class adds
+ * the Composite node in the parent group of the selected nodes. The link method, in a loop, connects
+ * all selected nodes to the new Composite node. The setCoord() method positions a new node in the Node
+ * View. The syntax for a node paths is: "Top/Group_Name/Node_Name".
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classnode.html}
+ * @example
+ * function compose() {
+ *     var n = selection.numberOfNodesSelected();
+ *     var i, posx, posy;
+ *     if (n > 0) {
+ *         var comp = node.add(node.parentNode(selection.selectedNode(0)), "comp", "COMPOSITE", 0, 0, 0);
+ *         posx = 0;
+ *         posy = -10000;
+ *         for (i = 0; i < n; ++i) {
+ *             var selNode = selection.selectedNode(i);
+ *             node.link(selNode, 0, comp, i);
+ *             posx += node.coordX(selNode);
+ *             if (node.coordY(selNode) > posy)
+ *                 posy = node.coordY(selNode);
+ *         }
+ *         posx /= n;
+ *         posy += 50;
+ *         node.setCoord(comp, posx, posy);
+ *     }
+ * }
+ */
+declare class node extends GlobalObject {
+  /**
+   * Add a node to the Node View.
+   * For an example usage of add, see the above Detailed Description.
+   * @param {string} parentGroup The path of the parent node into which you want to add this node.
+   * @param {string} name The name of the node you will add.
+   * @param {string} type The type of node you will add. The node types are like: READ, COMPOSITE, PEG, QUADMAP, SHADOW, etc.
+   * @param {int} x The X position of the node in the Node View.
+   * @param {int} y The Y position of the node in the Node View.
+   * @param {int} z The Z position of the node in the Node View. This property is important when two nodes overlap.
+   * @returns {string}
+   */
+  public static add(
+    parentGroup: string,
+    name: string,
+    type: string,
+    x: int,
+    y: int,
+    z: int
+  ): string;
+
+  /**
+   * Return the value of the "Add Composite To Group" attribute of the peg-node. This method is obsolete.
+   * @param {string} node The path of the node.
+   * @returns {boolean}
+   */
+  public static addCompositeToGroup(node: string): boolean;
+
+  /**
+   * Returns an integer indicating the X position of a node in the Node View.
+   * The example below takes the path of a group node, uses coordX to retrieve it's X coordinate in the
+   * Node View, then moves it to the right by 50 units.
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * function shiftGroup(exNode) {
+   *     if (node.isGroup(exNode)) {
+   *         var x = node.coordX(exNode);
+   *         var y = node.coordY(exNode);
+   *         x += 50;
+   *         node.setCoord(exNode, x, y);
+   *     }
+   * }
+   */
+  public static coordX(node: string): int;
+
+  /**
+   * Returns an integer indicating the Y position of a node in the Node View.
+   * The example below takes the path of a group node, uses coordY to retrieve it's Y coordinate in the
+   * Node View, then moves it to the down by 50 units.
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * function shiftGroup(exNode) {
+   *     if (node.isGroup(exNode)) {
+   *         var x = node.coordX(exNode);
+   *         var y = node.coordY(exNode);
+   *         y += 50;
+   *         node.setCoord(exNode, x, y);
+   *     }
+   * }
+   */
+  public static coordY(node: string): int;
+
+  /**
+   * Returns an integer indicating the Z position of a node in the Node View.
+   * The example below takes the path of a group node and then shifts its position 50 units to the right,
+   * and down. It also moves its position in the z-axis to the back.
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * function shiftGroup(exNode) {
+   *     if (node.isGroup(exNode)) {
+   *         var x = node.coordX(exNode);
+   *         var y = node.coordY(exNode);
+   *         var z = node.coordZ(exNode);
+   *         x += 50;
+   *         y += 50;
+   *         if (z >= 0)
+   *             z = -1;
+   *         node.setCoord(exNode, x, y, z);
+   *     }
+   * }
+   */
+  public static coordZ(node: string): int;
+
+  /**
+   * Create a new attribute for the given node.
+   * The example below enables the boolean value of a given attribute. If the attribute does not exist,
+   * it creates it and sets it to true.
+   * @param {string} node The name of the node.
+   * @param {string} type Type of attribute to create.
+   * @param {string} attrName The name of the attribute.
+   * @param {string} displayName The name of the attribute as it will appear in the UI.
+   * @param {boolean} linkable Linkable status.
+   * @returns {boolean}
+   * @example
+   * function toggleBool(nodeName, attrName) {
+   *     var attr = node.getAttr(nodeName, 1.0, attrName);
+   *     if (attr.keyword() == "") {
+   *         var visualAttrName = attrName;
+   *         var idx = attrName.lastIndexOf(".");
+   *         if (idx >= 0) {
+   *             visualAttrName = attrName.substr(idx);
+   *         }
+   *
+   *         if (node.createDynamicAttr(nodeName, "BOOL", attrName, visualAttrName, false)) {
+   *             attr = node.getAttr(nodeName, 1.0, attrName);
+   *         }
+   *
+   *         if (attr.keyword() != "") {
+   *             node.setTextAttr(nodeName, attrName, 1.0, "true");
+   *         }
+   *     }
+   * }
+   */
+  public static createDynamicAttr(
+    node: string,
+    type: string,
+    attrName: string,
+    displayName: string,
+    linkable: boolean
+  ): boolean;
+
+  /**
+   * Create a group from the selection of nodes. The list of nodes is a string where the nodes are
+   * separated by commas. The actual name of each node in the list of nodes must include the full path of
+   * that node.
+   * The parent of the group is implicitly specified. It will be the same as the parent of the first node
+   * in the list. The following example creates a group from the currently selected nodes, and verifies
+   * that all of the selected nodes were added.
+   * @param {string} nodes This is a comma delimited list of names of nodes. e.g. (node0,node1,node2)
+   * @param {string} groupName The name of the group to create.
+   * @returns {string}
+   * @example
+   * function groupExample() {
+   *     var selected = selection.selectedNodes();
+   *     var nodesToGroup = selected.join();
+   *     var origParent = node.parentNode(selection.selectedNode(0));
+   *     var group = node.createGroup(nodesToGroup, "group");
+   *
+   *     for (var i = 0; i < selected.length; i++) {
+   *         if (node.parentNode(selection.selectedNode(i) == origParent) MessageLog.trace("Problem adding \"" + selection.selectedNode(i) + "\" to the new group.");
+   *         }
+   *     }
+   */
+  public static createGroup(nodes: string, groupName: string): string;
+
+  /**
+   * Delete a single node. Optionally, delete all columns and element associated to that node. The column
+   * and element would only be removed when no other nodes refer to them.
+   * The following example deletes the currently selected node.
+   * @param {string} nodePath The path of the node.
+   * @param {boolean} [deleteTimedValues=false] A boolean that indicates if the columns referenced by that node shall be removed if they are no longer in use.
+   * @param {boolean} [deleteElements=false] A boolean that indicates if the element should also be removed, if they are no longer in use.
+   * @returns {boolean}
+   * @example
+   * node.deleteNode(selection.selectedNode(0), false, false);
+   */
+  public static deleteNode(
+    nodePath: string,
+    deleteTimedValues?: boolean,
+    deleteElements?: boolean
+  ): boolean;
+
+  /**
+* Returns the path of the destination node linked to by the output port on the source node.
+* The following example returns a list of all of the destination nodes of the node passed in the
+* parameter.
+* @param {string} sourceNode The path of the source node.
+* @param {int} iPort The output port number on which you want to find the connected node. This value is between 0 and the results of the numberOfOutputPorts() method, minus one.
+* @param {int} iLink The link number whose destination node you want to find. This value is between 0 and the results of the numberOfOutputLinks() method, minus one. @return This method returns an object that contains two properties:
+node - The path of connected node.
+port  - The port number on which this node is connected to.
+* @returns {QScriptValue}
+* @example
+*  function destinationNodes(exampleNode) {
+*      var numOutput = node.numberOfOutputPorts(exampleNode);
+*      var listOfDestinationNodes = [];
+* 
+*      for (var i = 0; i < numOutput; i++)
+*          listOfDestinationNodes.push(node.dstNode(exampleNode, i, 0));
+* 
+*      return listOfDestinationNodes;
+*  }
+*  For another example use of dstNode, see link().
+*  @param sourceNode: The path of the node.
+*  @param iPort: The port number on which you want to find the connected node.This value is between 0 and the results of the numberOfOutputPorts() method, minus one.
+*  @param iLink: The link number whose destination node you want to find.This value is between 0 and the results of the numberOfOutputLinks() method, minus one.
+*  @return Returns the path of the destination node linked to by the output port on the source node. /
+*      String dstNode(String sourceNode, int iPort, int iLink);
+*/
+  public static dstNodeInfo(
+    sourceNode: string,
+    iPort: int,
+    iLink: int
+  ): QScriptValue;
+
+  /**
+   * Returns true or false to indicate if a node path is equal to another. Used to compare node paths.
+   * The example below deconstructs and then rebuilds a node path using subNodeByName, then compares the
+   * original to the rebuilt path. This example will print true. exNode is the full name of a node, such
+   * as "Top/MyGroup/MyNode".
+   * @param {string} node1 The path of the first node.
+   * @param {string} node2 The path of the second node.
+   * @returns {boolean}
+   * @example
+   * function nodePathRebuild(exNode) {
+   *     var name = node.getName(exNode);
+   *     var parent = node.parentName(exNode);
+   *
+   *     //With both the parent path and the node name, you can rebuild the original node with subNodeByName
+   *     var rebuiltNode = node.subNodeByName(parent, exNode);
+   *     //This rebuilt node will be equal to the original node
+   *     MessageLog.trace(node.equals(exNode, rebuiltNode)); //This will print true
+   *
+   *     MessageLog.trace(node.equals(exNode, node.noNode()); //Since exNode is a valid node, this will print false
+   *     }
+   */
+  public static equals(node1: string, node2: string): boolean;
+
+  /**
+   * Create a group for each exposure of the element where there is a symbol and will put the content of
+   * the symbol in that group.
+   * If disable element is TRUE, will disable the element afterwards. If clearExposure is TRUE, will
+   * clear the exposures where there were symbols afterwards. Will use prefix as the prefix for the
+   * generated group names.
+   * A symbol combines animation, artwork or layers into a single object that you can control in one
+   * layer.
+   * The example below executes explodeElementSymbolsInGroup for the currently selected drawing node, and
+   * positions the newly created node groups to the left of the original node.
+   * @param {string} element Element node path.
+   * @param {boolean} disableElement True to disable the exploded element.
+   * @param {boolean} clearExposure True to clear the exposure.
+   * @param {string} [prefix=""] Add a prefix to the symbols.
+   * @returns {void}
+   * @example
+   * function explodeSymbol() {
+   *     var symbolNode = selection.selectedNode(0);
+   *
+   *     //Creates a symbol out of the currently selected drawing
+   *     Action.perform("onActionCreateSymbolFromSelection()", "timelineView");
+   *
+   *     var prefix = node.getName(symbolNode) + "_";
+   *     var parent = node.parentNode(symbolNode);
+   *     var path = parent + "/" + prefix;
+   *     var i = 1;
+   *     var x = node.coordX(symbolNode);
+   *     var y = node.coordY(symbolNode);
+   *     var flag = false;
+   *
+   *     node.explodeElementSymbolsInGroup(symbolNode, true, false, prefix);
+   *
+   *     while (i <= frame.numberOf() && flag == false) {
+   *         if (node.type(path + i) != "") {
+   *             node.setCoord((path + i), x, y);
+   *         } else {
+   *             flag = true;
+   *         }
+   *         y = y + 20;
+   *         i++;
+   *     }
+   * }
+   */
+  public static explodeElementSymbolsInGroups(
+    element: string,
+    disableElement: boolean,
+    clearExposure: boolean,
+    prefix?: string
+  ): void;
+
+  /**
+   * Explode a group into its parent group. This method is identical to the "Explode Selected Group" from
+   * the Node View.
+   * The following example creates a group then explodes the group if it was successful.
+   * @param {string} groupName The name of the node.
+   * @returns {boolean}
+   * @example
+   * function groupExample() {
+   *     var selected = selection.selectedNodes();
+   *     var nodesToGroup = selected.join();
+   *     var group = node.createGroup(nodesToGroup, "group");
+   *
+   *     if (node.isGroup(group))
+   *         MessageLog.trace(node.explodeGroup(group));
+   * }
+   */
+  public static explodeGroup(groupName: string): boolean;
+
+  /**
+   * If the Source node is a Group, this method returns the path of the node inside the Group node that
+   * is the source. If the source is not inside a group, the flatSrcNode() method behaves like the
+   * srcNode() method.
+   * The example below prints the source inside the group, and the source outisde the group of the
+   * currently selected node if it is in a group and has a source.
+   * @param {string} node The path of the node.
+   * @param {int} iPort The port number on the destination node whose source node you want to find. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @returns {string}
+   * @example
+   * function sourceFinder() {
+   *     var myNode = selection.selectedNode(0);
+   *     var parentNode = node.parentNode(myNode);
+   *
+   *     if (node.isGroup() && node.isLinked(myNode, 0)) {
+   *         var source = node.srcNode(myNode, 0);
+   *         var flatSource = node.flatSrcNode(myNode, 0);
+   *         MessageLog.trace("Source inside the group: " + source);
+   *         if (source != flatSource)
+   *             MessageLog.trace("Source outside the group: " + flatSource);
+   *     }
+   * }
+   */
+  public static flatSrcNode(node: string, iPort: int): string;
+
+  /**
+   * Returns the Attribute of the given node. The attribute value is for the given frame.
+   * The example below gets the attribute with the corresponding name and returns it's type.
+   * This is just a simple helper function, see createDynamicAttr() or removeDynamicAttr() for a more
+   * complex example using getAttr().
+   * @param {string} node The path of the node.
+   * @param {double} atFrame The frame number at which the attribute value is extracted. This parameter isn't used if the value isn't animated (a local value).
+   * @param {string} attrName The name of the attribute. Access a child attribute by concatenating the parent attribute name with the child name separated by a dot ('.').
+   * @returns {Attribute}
+   * @example
+   * function attrType(nodeName, attrName) {
+   *     var attr = node.getAttr(nodeName, frame.current(), attrName);
+   *
+   *     return attr.typeName();
+   * }
+   */
+  public static getAttr(
+    node: string,
+    atFrame: double,
+    attrName: string
+  ): Attribute;
+
+  /**
+   * Returns a list of Attribute objects of the given node.
+   * This example returns a list of all the attributes of a node, including all the sub attributes.
+   * @param {string} node The path of the node.
+   * @param {double} atFrame The frame number at which the attribute value is extracted. This parameter isn't used if the value isn't animated (a local value).
+   * @param {string} [attrName=String::null] The name of the attribute or an empty string for all top level attributes. Access a child attribute by concatenating the parent attribute name with the child name separated by a dot ('.').
+   * @returns {QList<Attribute>}
+   * @example
+   * function getFlatAttrList(sNode) {
+   *     var attributeName = ""; //This will cause getAttrList to return all attributes.
+   *     var subAttrs = node.getAttrList(sNode, frame.current(), attributeName);
+   *     if (subAttrs.length == 0)
+   *         return [sAttr];
+   *     var subAttrList = [];
+   *     for (var i = 0; i < subAttrs.length; i++) {
+   *         var subAttrKeyword = (sAttr === undefined) ? subAttrs[i].keyword() :
+   *             sAttr + "." + subAttrs[i].keyword();
+   *         subAttrList = subAttrList.concat(getFlatAttrList(sNode, subAtrKeyword));
+   *     }
+   *     return subAttrList;
+   * }
+   */
+  public static getAttrList(
+    node: string,
+    atFrame: double,
+    attrName?: string
+  ): QList<Attribute>;
+
+  /**
+   * Returns a list of all cameras within the scene.
+   * The example below changes the default camera if a second camera exists.
+   * @returns {StringList}
+   * @example
+   * function changeCamera() {
+   *     var cameras = node.getCameras();
+   *     if (cameras.length > 1 && cameras[1]) {
+   *         node.setAsDefaultCamera("Top/MyCamera2");
+   *         MessageLog.trace("New default camera: " + node.getDefaultCamera());
+   *     }
+   * }
+   */
+  public static getCameras(): StringList;
+
+  /**
+   * Returns the node colour.
+   * The example below takes two nodes as parameters, changes the colour of the first node to the colour
+   * of the second node, then resets the second node's colour.
+   * @param {string} node The name of the node.
+   * @returns {ColorRGBA}
+   * @example
+   * function swapAndReset(node1, node2) {
+   *     var newColor = node.getColor(node2);
+   *
+   *     node.setColor(node1, newColor);
+   * }
+   */
+  public static getColor(node: string): ColorRGBA;
+
+  /**
+   * Returns the ColorOverride object for the color override node.
+   * If the selected node is a color override node, returns the ColorOverride object. See the
+   * ColorOverride class for more information about ColorOverride objects.
+   * @param {string} node The name of the node.
+   * @returns {ColorOverride}
+   * @example
+   * var myNode = selection.selectedNode(0));
+   *
+   * if (node.type(myNode) == "COLOR_OVERRIDE_TVG") {
+   *     return node.getColorOverride(myNode);
+   * }
+   */
+  public static getColorOverride(node: string): ColorOverride;
+
+  /**
+   * Returns the name of the default camera.
+   * The example below halves the field of view of the current camera view.
+   * @returns {string}
+   * @example
+   * var cameraNode = "Top/" + node.getDefaultCamera();
+   * var FOV = node.getAttr(cameraNode, frame.current(), "FOV").doubleValue();
+   * node.setTextAttr(cameraNode, "FOV", frame.current(), FOV / 2);
+   */
+  public static getDefaultCamera(): string;
+
+  /**
+   * Returns the Element Id of the node. Has to be an element node, identified with type :: READ.
+   * Returns -1 on fail. The example below uses the Element Ids of all the selected nodes (stored in a
+   * variable named allNodes) to recolour all of the drawings selected.
+   * @param {string} nodeName The name of the node.
+   * @returns {int}
+   * @example
+   * for (var nodeIt in allNodes) {
+   *     if (allNodes.hasOwnProperty(nodeIt)) {
+   *         var layerName = node.getTextAttr(allNodes[nodeIt], 1, "drawing.element.layer");
+   *         var ElementId = node.getElementId(allNodes[nodeIt]);
+   *         for (var j = 0; j < Drawing.numberOf(ElementId); j++) {
+   *             var drawingId = Drawing.name(ElementId, j);
+   *             DrawingTools.recolorDrawing({
+   *                 elementId: ElementId,
+   *                 layer: layerName,
+   *                 exposure: drawingId
+   *             }, this.mapping);
+   *         }
+   *     }
+   * }
+   */
+  public static getElementId(nodeName: string): int;
+
+  /**
+   * Returns whether a node is enabled or not.
+   * The following example disables a node if it is currently enabled.
+   * @param {string} node The name of the node.
+   * @returns {boolean}
+   * @example
+   * function disableNode(exNode) {
+   *     if (node.getEnable(exNode))
+   *         node.setEnable(exNode, false);
+   * }
+   */
+  public static getEnable(node: string): boolean;
+
+  /**
+   * Returns existing or add a group multi port in node.
+   * Add a multi port in node inside the selected group. There can only be a single such node per group.
+   * If there is already such type of node in the group, it will return it. It returns NULL if it cannot
+   * add such node. You cannot add this type of node in the top group of a scene. The following example
+   * creates a group from the currently selected nodes, then returns the input and output modules in an
+   * object.
+   * @param {string} parentGroup The path to the parent group into which you want to add this node.
+   * @param {string} name The name of the node you will add.
+   * @param {int} x The X position of the node in the Node View.
+   * @param {int} y The Y position of the node in the Node View.
+   * @param {int} z The Z position of the node in the Node View. This property is important when two nodes overlap.
+   * @returns {string}
+   * @example
+   * function createGroupFromSelected() {
+   *     var selected = selection.selectedNodes();
+   *     var nodesToGroup = selected.join();
+   *     var group = node.createGroup(nodesToGroup, "group");
+   *
+   *     var inputModule = node.getGroupInputModule(group, "", 0, 0, 0);
+   *     var outputModule = node.getGroupOutputModule(group, "", 0, 0, 0);
+   *
+   *     return {
+   *         input: inputModule,
+   *         output: outputModule
+   *     };
+   * }
+   */
+  public static getGroupInputModule(
+    parentGroup: string,
+    name: string,
+    x: int,
+    y: int,
+    z: int
+  ): string;
+
+  /**
+   * Returns existing or add a group multi port out node.
+   * Add a multi port out node inside the selected group. There can only be a single such node per group,
+   * so, if there is already such node, it returns it. It returns NULL if it cannot add such node. You
+   * cannot add this type of node in the top group of a scene. The following example creates a group from
+   * the currently selected nodes, then returns the input and output modules in an object.
+   * @param {string} parentGroup The path of the parent group into which you want to add this node.
+   * @param {string} name The name of the node you will add.
+   * @param {int} x The X position of the node in the Node View.
+   * @param {int} y The Y position of the node in the Node View.
+   * @param {int} z The Z position of the node in the Node View. This property is important when two nodes overlap.
+   * @returns {string}
+   * @example
+   * function createGroupFromSelected() {
+   *     var selected = selection.selectedNodes();
+   *     var nodesToGroup = selected.join();
+   *     var group = node.createGroup(nodesToGroup, "group");
+   *
+   *     var inputModule = node.getGroupInputModule(group, "", 0, 0, 0);
+   *     var outputModule = node.getGroupOutputModule(group, "", 0, 0, 0);
+   *
+   *     return {
+   *         input: inputModule,
+   *         output: outputModule
+   *     };
+   * }
+   */
+  public static getGroupOutputModule(
+    parentGroup: string,
+    name: string,
+    x: int,
+    y: int,
+    z: int
+  ): string;
+
+  /**
+   * Returns the lock flag.
+   * @param {string} node The name of the node.
+   * @returns {boolean}
+   * @example
+   * MessageLog.trace("Lock flag: " + node.getLocked(exNode));
+   * node.setLocked(exNode, true);
+   */
+  public static getLocked(node: string): boolean;
+
+  /**
+   * Returns the model matrix of a node.
+   * @param {string} node The name of the node.
+   * @param {int} frame Is the int that specifies the frame number.
+   * @returns {QObject}
+   * @example
+   * var myNodeModelMatrix = node.getMatrix("Top/MyNode", frame.current());
+   * var myNodeWorldPosition = myNodeModelMatrix.multiply(new Point3d);
+   *
+   * var myOtherNodeModelMatrix = node.getMatrix("Top/MyOtherNode", frame.current());
+   * var myOtherNodeWorldPosition = myOtherNodeModelMatrix.multiply(new Point3d);
+   * if (myNodeWorldPosition.z > myOtherNodeWorldPosition.z)
+   *     MessageLog.trace("My node is in front of the other node");
+   */
+  public static getMatrix(node: string, frame: int): QObject;
+
+  /**
+   * Returns the number of versions of the node available.
+   * The example below sets current version number of a node to the maximum version number.
+   * @param {string} node The name of the node.
+   * @returns {int}
+   * @example
+   * node.setVersion(exNode, node.getMaxVersionNumber(exNode));
+   */
+  public static getMaxVersionNumber(node: string): int;
+
+  /**
+   * Returns the name of a node.
+   * @param {string} node The path of the node.
+   * @returns {string}
+   */
+  public static getName(node: string): string;
+
+  /**
+   * Returns a collection of node paths for nodes of specified types.
+   * Example usage:
+   * @param {StringList} types
+   * @returns {StringList}
+   * @example
+   * var sl = ["READ", "WRITE", "COLOR_OVERRIDE_TVG"];
+   * var nl = node.getNodes(sl);
+   * for (var i = 0; i < nl.length; ++i) {
+   *     var path = nl[i];
+   *     if (node.type(path) == "COLOR_OVERRIDE_TVG") {
+   *         MessageLog.trace("Colour Override: " + node.getName(path));
+   *         var conode = node.getColorOverride(path);
+   *     } else if (node.type(path) == "READ") {
+   *         MessageLog.trace("Read: " + node.getName(path));
+   *     } else if (node.type(path) == "WRITE") {
+   *         MessageLog.trace("Write: " + node.getName(path));
+   *     }
+   * }
+   */
+  public static getNodes(types: StringList): StringList;
+
+  /**
+   * Returns the pivot of the node.
+   * The example below uses the pivot of a node to extract the rotation, position and scale of the node
+   * from it's model matrix.
+   * @param {string} node The name of the node.
+   * @param {int} frame Is the int that specifies the frame number.
+   * @returns {QObject}
+   * @example
+   * var myNodePivot = node.getPivot("Top/MyNode", frame.current());
+   * var myNodeModelMatrix = node.getMatrix("Top/MyNode", frame.current());
+   *
+   * var rotation = myNodeModelMatrix.extractRotation(myNodePivot, false);
+   * var position = myNodeModelMatrix.extractPosition(myNodePivot, false);
+   * var scale = myNodeModelMatrix.extractScale(myNodePivot, false);
+   *
+   * return [rotation, position, scale];
+   */
+  public static getPivot(node: string, frame: int): QObject;
+
+  /**
+   * Returns the show/hide timeline thumbnail flags on drawing layers.
+   * @param {string} node The name of the node.
+   * @returns {boolean}
+   * @example
+   * MessageLog.trace("Show timeline thumbnails: " + node.getShowTimelineThumbnails(exNode));
+   * node.setShowTimelineThumbnails(exNode, true);
+   */
+  public static getShowTimelineThumbnails(node: string): boolean;
+
+  /**
+   * Returns the value(s) of the node selected attribute(s).
+   * The example below adds the current palette path to the currently selected colour override node.
+   * For example, use the attribute PALETTES.NUMBER to return the number of palettes in the colour
+   * override node palette list. Or, use the attribute PALETTES.x to return the palette at index x from
+   * the colour override node palette list. In this case, x is a number between 0 and the number of
+   * palettes in the list, minus one. If x is not given (argument is "PALETTES") or x is not valid (< 0
+   * or out of range) then 0 is assumed.
+   * @param {string} node The path of the node.
+   * @param {double} atFrame The frame number from which you want to extract the attribute value. If the value is static, you must still pass a value. You can, for example, pass 1 to take the value at the first frame.
+   * @param {string} attrName The attribute whose value you want.
+   * @returns {string}
+   * @example
+   * function fillColourOverride() {
+   *     var myNode = selection.selectedNode(0);
+   *     if (node.type(myNode) == "COLOR_OVERRIDE_TVG") {
+   *         var num1 = node.getTextAttr(myNode, frame.current(), "PALETTES.NUMBER");
+   *         var palettePath = PaletteManager.getCurrentPalettePath();
+   *
+   *         node.setTextAttr(myNode, "PALETTES.ADD", frame.current(), palettePath);
+   *
+   *         var num2 = node.getTextAttr(myNode, frame.current(), "PALETTES.NUMBER");
+   *         if (num2 > num1)
+   *             MessageLog.trace("Palette successfully added.");
+   *     }
+   * }
+   */
+  public static getTextAttr(
+    node: string,
+    atFrame: double,
+    attrName: string
+  ): string;
+
+  /**
+   * Returns the timeline tag flag.
+   * If a timeline tag is set to true, it will be shown when "View Tagged Layers" is selected.
+   * @param {string} node The name of the node.
+   * @returns {boolean}
+   * @example
+   * MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
+   * node.setTimelineTag(exNode, true);
+   */
+  public static getTimelineTag(node: string): boolean;
+
+  /**
+   * Returns a list of timeline tag flags.
+   * @param {string} [node=QNTR("Top")] The name of the top node.
+   * @param {StringList} [list=StringList()] The list of nodes to retrieve timeline tag flags.
+   * @returns {StringList}
+   * @example
+   * function getSetFlags(exNode) {
+   *     if (selection.numberOfNodesSelected <= 1)
+   *         MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
+   *     else {
+   *         var list = selection.selectedNodes();
+   *         MessageLog.trace("Timeline tags: " + node.getTimelineTagList("Top", list.toString()));
+   *     }
+   * }
+   */
+  public static getTimelineTagList(
+    node?: string,
+    list?: StringList
+  ): StringList;
+
+  /**
+   * Returns the current version of the node.
+   * The node may have multiple versions if their rendering output have changed over time.
+   * @param {string} node The name of the node.
+   * @returns {int}
+   * @example
+   * MessageLog.trace("Current node version number: " + node.getVersion(exNode));
+   */
+  public static getVersion(node: string): int;
+
+  /**
+   * Returns true if the peg's groupAtNetworkBuilding() attribute is true.
+   * @param {string} node The path of the node.
+   * @returns {boolean}
+   */
+  public static groupAtNetworkBuilding(node: string): boolean;
+
+  /**
+   * Returns the height of a given node.
+   * This height parameter is useful for computing the position of nodes in the Node View. It uses the
+   * same unit system as the coordX() and coordY() methods. The example below takes 2 nodes as parameters
+   * and moves them one on top of the other in the node view.
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * function nodeLine(node1, node2) //node1 and node2 are paths of 2 nodes
+   * {
+   *     var x = node.coordX(node1);
+   *     var y = node.coordY(node1);
+   *     y -= node.height(node1);
+   *
+   *     node.setCoord(node2, x, y);
+   * }
+   */
+  public static height(node: string): int;
+
+  /**
+   * Returns a true or false value indicating if the node is a group.
+   * The example below uses isGroup to confirm that the node is a group node before printing some
+   * information about it.
+   * @param {string} node The path of the node.
+   * @returns {boolean}
+   * @example
+   * function sourceFinder() {
+   *     var myNode = selection.selectedNode(0);
+   *     var parentNode = node.parentNode(myNode);
+   *
+   *     if (node.isGroup && node.isLinked(myNode, 0)) {
+   *         var source = node.srcNode(myNode, 0);
+   *         var flatSource = node.flatSrcNode(myNode, 0);
+   *         MessageLog.trace("Source inside the group: " + source);
+   *         MessageLog.trace("Source outside the group: " + flatSource);
+   *     }
+   * }
+   */
+  public static isGroup(node: string): boolean;
+
+  /**
+   * Returns true or false to indicate if a port is connected to another node.
+   * The example below inserts a new Peg node inbetween the selected node and it's parent. The new node's
+   * parent is the original parent of the selected node, and the new parent of the selected note is the
+   * created peg.
+   * @param {string} node The path of the node.
+   * @param {int} iPort The number of the port whose link status you want to check. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @returns {boolean}
+   * @example
+   * function insertPeg() {
+   *     var myNode = selection.selectedNode(0);
+   *     var parentNode = node.parentNode(myNode);
+   *
+   *     var newPeg = node.add(parent, "New Peg", "PEG", 0, -50, 0);
+   *     var myNodeDestination = node.dstNode(myNode, 0, 0);
+   *
+   *     if (node.isLinked(myNode, 0)) {
+   *         node.unlink(myNodeDestination, 0);
+   *         node.link(myNode, 0, newPeg, 0);
+   *         node.link(newPeg, 0, myNodeDestination, 0);
+   *     }
+   * }
+   */
+  public static isLinked(node: string, iPort: int): boolean;
+
+  /**
+   * Link a port on a node to a port on another node.
+   * For another example usage of link, see the above Detailed Description.
+   * @param {string} srcNode The path of the node whose output port you want to link to a destination node.
+   * @param {int} srcPort The port that you want to link to the input port on the destination node. This value is between 0 and the results of the numberOfOutputPorts() method, minus one.
+   * @param {string} dstNode The path of the node whose input port you want to link to the source node.
+   * @param {int} dstPort The port on the destination node that you want to link to the output port from the source node. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @returns {boolean}
+   * @example
+   * // Get a node parent and children. The node will be inserted in a group and the parent/children will be connected to the group.
+   * var myNewGroupPath = "Top/MyGroup/MyNewGroup";
+   * var myNodePath = "Top/MyGroup/Drawing";
+   * var srcNodePath = node.srcNode(myNodePath, 0);
+   * var dstNodePaths = [];
+   * for (var i = 0; i < node.numberOfOutputLinks(myNodePath, 0); i++) {
+   *     dstNodePaths.push(node.dstNode(myNodePath, 0, i));
+   * }
+   *
+   * // Move the node into the group.
+   * // moveToGroup creates a composite on which to connect the READ node automatically.
+   * node.moveToGroup(myNodePath, myNewGroupPath);
+   *
+   * // Connect the new group to the parent/children of the node.
+   * node.link(srcNodePath, 0, myNewGroupPath, 0, false, true);
+   *
+   * for (var i = 0; i < dstNodePaths.length; i++) {
+   *     node.link(myNewGroupPath, 0, dstNodePaths[i], 0, true, true);
+   * }
+   */
+  public static link(
+    srcNode: string,
+    srcPort: int,
+    dstNode: string,
+    dstPort: int
+  ): boolean;
+
+  /**
+   * Link a port of a node to a port of another node. This version of the method allows connecting to a
+   * group node, or setup the proper connection order.
+   * @param {string} srcNode The path of the node whose output port you want to link to a destination node.
+   * @param {int} srcPort The port that you want to link to the input port on the destination node. This value is between 0 and the results of the numberOfOutputPorts() method, minus one.
+   * @param {string} dstNode The path of the node whose input port you want to link to the source node.
+   * @param {int} dstPort The port on the destination node that you want to link to the output port from the source node. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @param {boolean} mayAddOutputPort used by group multiport nodes - automatically create a new output port for these nodes.
+   * @param {boolean} mayAddInputPort used by group multiport and composite - automatically create input ports for these nodes.
+   * @returns {boolean}
+   * @example
+   * // Get a node parent and children. The node will be inserted in a group and the parent/children will be connected to the group.
+   * var myNewGroupPath = "Top/MyGroup/MyNewGroup";
+   * var myNodePath = "Top/MyGroup/Drawing";
+   * var srcNodePath = node.srcNode(myNodePath, 0);
+   * var dstNodePaths = [];
+   * for (var i = 0; i < node.numberOfOutputLinks(myNodePath, 0); i++) {
+   *     dstNodePaths.push(node.dstNode(myNodePath, 0, i));
+   * }
+   *
+   * // Move the node into the group.
+   * // moveToGroup creates a composite on which to connect the READ node automatically.
+   * node.moveToGroup(myNodePath, myNewGroupPath);
+   *
+   * // Connect the new group to the parent/children of the node.
+   * node.link(srcNodePath, 0, myNewGroupPath, 0, false, true);
+   *
+   * for (var i = 0; i < dstNodePaths.length; i++) {
+   *     node.link(myNewGroupPath, 0, dstNodePaths[i], 0, true, true);
+   * }
+   */
+  public static link(
+    srcNode: string,
+    srcPort: int,
+    dstNode: string,
+    dstPort: int,
+    mayAddOutputPort: boolean,
+    mayAddInputPort: boolean
+  ): boolean;
+
+  /**
+   * Link an attribute to a function column in the Xsheet View.
+   * The example below links the attributes of a camera peg to two columns to create a camera pan.
+   * @param {string} node The name of the node.
+   * @param {string} attrName The name of the attribute.
+   * @param {string} columnName The name of the column that you want to link to the attribute.
+   * @returns {boolean}
+   * @example
+   * function addCameraPan() {
+   *     var myCamPeg = "Top/Camera_Peg";
+   *
+   *     node.linkAttr(myCamPeg, "POSITION.3DPATH", "Camera_Peg_Path");
+   *     node.linkAttr(myCamPeg, "ROTATION.ANGLEZ", "Camera_Peg_Angle");
+   *
+   *     node.link("myCamPeg", 0, "Top/Camera", 0);
+   * }
+   */
+  public static linkAttr(
+    node: string,
+    attrName: string,
+    columnName: string
+  ): boolean;
+
+  /**
+   * Returns the name of the column that an attribute is linked to. If the attribute is not linked to a
+   * column, the method returns the null string.
+   * @param {string} node The path of the node.
+   * @param {string} attrName The attribute you want to check to see if it is linked to a column.
+   * @returns {string}
+   * @example
+   * function addCameraPan() {
+   *     if (node.getName("Top/Camera_Peg") == "") {
+   *         var myNode = node.add(node.root(), "Camera_Peg", "PEG", -50, 0, 0);
+   *
+   *         column.add("Camera_Peg_Path", "3DPATH");
+   *
+   *         if (node.linkedColumn(myNode, "POSITION.3DPATH") == "") {
+   *             node.linkAttr(myNode, "POSITION.3DPATH", "Camera_Peg_Path");
+   *
+   *             column.setEntry("Camera_Peg_Path", 1, 1, globalStartX);
+   *             column.setEntry("Camera_Peg_Path", 1, globalEndFrame, globalEndX);
+   *
+   *             column.setEntry("Camera_Peg_Path", 2, 1, globalStartY);
+   *             column.setEntry("Camera_Peg_Path", 2, globalEndFrame, globalEndY);
+   *
+   *             column.setEntry("Camera_Peg_Path", 3, 1, globalStartZ);
+   *             column.setEntry("Camera_Peg_Path", 3, globalEndFrame, globalEndZ);
+   *
+   *             column.add("Camera_Peg_Angle", "BEZIER");
+   *             node.linkAttr(myNode, "ROTATION.ANGLEZ", "Camera_Peg_Angle");
+   *
+   *             column.setEntry("Camera_Peg_Angle", 1, globalStartFrame, globalStartAngleZ);
+   *             column.setEntry("Camera_Peg_Angle", 1, globalEndFrame, globalEndAngleZ);
+   *         }
+   *     }
+   *
+   *     if (node.getName("Top/Camera") == "") {
+   *         node.add(node.root(), "Camera", "CAMERA", -50, 50, 0);
+   *     }
+   *
+   *     node.link("Top/Camera_Peg", 0, "Top/Camera", 0);
+   *
+   *     node.setTextAttr("Top/Camera", "OFFSET.Z", 0, 0);
+   * }
+   */
+  public static linkedColumn(node: string, attrName: string): string;
+
+  /**
+   * Move the specified node within the specified group.
+   * This method is equivalent to the drag and drop of a node to a group from the timeline. If an element
+   * node is moved into a group, a composite node will automatically be created to connect the element
+   * node.
+   * @param {string} node The path to the node to group.
+   * @param {string} groupName The path of the target group.
+   * @returns {string}
+   * @example
+   * node.moveToGroup("Top/MyGroup/Drawing", "Top/MyGroup/MyNewGroup");
+   */
+  public static moveToGroup(node: string, groupName: string): string;
+
+  /**
+   * Returns the node path to an invalid node.
+   * Methods that returns a node path will return this value if an error occurred.
+   * @returns {string}
+   * @example
+   * var parentNodePath = node.parentNode("Top/MyNode");
+   * if (parentNodePath == node.noNode())
+   *     return; // something wrong happened
+   */
+  public static noNode(): string;
+
+  /**
+   * The number of input ports on the node.
+   * The example below uses numberOfInputPorts to get the path to the source node of the parameter.
+   * exNode is the full name of a node, such as "Top/MyGroup/MyNode".
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * var numInput = node.numberOfInputPorts(exNode);
+   * var source = node.srcNode(exNode, (numInput - 1));
+   *
+   * //Note: This source node is different than the parent node. The source node is the node connected to one of the input ports of the node. The parent is the parent group of the node.
+   * var parent = node.parentNode(exNode);
+   * MessageLog.trace(node.equals(parent, source)); //This will print false
+   */
+  public static numberOfInputPorts(node: string): int;
+
+  /**
+   * The number of nodes actually linked from the output ports.
+   * For an example use of numberOfOutputLinks see link().
+   * @param {string} node The path of the node.
+   * @param {int} iPort The port number on which you want to locate the node that is connected to it. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @returns {int}
+   */
+  public static numberOfOutputLinks(node: string, iPort: int): int;
+
+  /**
+   * The number of output ports on a node.
+   * The following example returns a list of all of the destination nodes of the node passed in the
+   * parameter.
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * function destinationNodes(exampleNode) {
+   *     var numOutput = node.numberOfOutputPorts(exampleNode);
+   *     var listOfDestinationNodes = [];
+   *
+   *     for (var i = 0; i < numOutput; i++)
+   *         listOfDestinationNodes.push(node.dstNode(exampleNode, i, 0));
+   *
+   *     return listOfDestinationNodes;
+   * }
+   */
+  public static numberOfOutputPorts(node: string): int;
+
+  /**
+   * Returns an integer that indicates the number of nodes contained in a group.
+   * The example below prints all of the sub nodes of a node if the node's type is GROUP. exNode is the
+   * full name of a node, such as "Top/MyGroup".
+   * Sample output of the above example to the Message Log view:
+   * The node Top/MyGroup has 2 sub nodes.
+   * Top/MyGroup/MyNode1
+   * Top/MyGroup/MyNode2
+   * @param {string} parent The path of the parent node.
+   * @returns {int}
+   * @example
+   * function groupInfo(exNode) {
+   *     var i = 0;
+   *     if (node.isGroup(exNode)) {
+   *         MessageLog.trace("The node " + exNode + " has " + node.numberOfSubNodes(exNode) + " sub nodes.");
+   *         while (i < node.numberOfSubNodes(exNode)) {
+   *             MessageLog.trace(node.subNode(exNode, i));
+   *             i++;
+   *         }
+   *     }
+   * }
+   */
+  public static numberOfSubNodes(parent: string): int;
+
+  /**
+   * Returns the path of the parent level of a node contained in a group.
+   * The parent of a node is the parent group that the node is currently in. If the node is not in a
+   * group, it's parent is "Top".
+   * The example below uses the path to the parent of a node to explode the group it is in. exNode is the
+   * full name of a node, such as "Top/MyGroup/MyNode".
+   * @param {string} node The path of the node.
+   * @returns {string}
+   * @example
+   * var parent = node.parentName(exNode);
+   *
+   * node.explodeGroup(parent);
+   */
+  public static parentNode(node: string): string;
+
+  /**
+   * Remove a dynamic attribute for the given node.
+   * The example below attempts to remove the dynamic attribbute for the given node and attribute name.
+   * It will do nothing if that attribute does not exist.
+   * @param {string} node The name of the node.
+   * @param {string} attrName The name of the attribute.
+   * @returns {boolean}
+   * @example
+   * node.removeDynamicAttr(nodeName, attrName);
+   */
+  public static removeDynamicAttr(node: string, attrName: string): boolean;
+
+  /**
+   * Changes the name of a node.
+   * The following example renames a node with the path "Top/myNode".
+   * @param {string} node The name of the node.
+   * @param {string} newName The new name for the node.
+   * @returns {boolean}
+   * @example
+   * node.rename("Top/myNode", "myNodeWithANewName");
+   */
+  public static rename(node: string, newName: string): boolean;
+
+  /**
+   * Reset the node colour.
+   * The example below takes two nodes as parameters, changes the colour of the first node to the colour
+   * of the second node, then resets the second node's colour.
+   * @param {string} node The name of the node.
+   * @returns {boolean}
+   * @example
+   * function swapAndReset(node1, node2) {
+   *     var newColor = node.getColor(node2);
+   *
+   *     node.setColor(node1, newColor);
+   *     node.resetColor(node2);
+   * }
+   */
+  public static resetColor(node: string): boolean;
+
+  /**
+   * Returns the name of the Top level in the Node View, which is "Top".
+   * @returns {string}
+   */
+  public static root(): string;
+
+  /**
+   * Setters and getters for the default camera.
+   * Set the default camera in the scene. Returns whether successful or not.
+   * The example below changes the camera if a second camera exists.
+   * @param {string} node The name of the camera.
+   * @returns {boolean}
+   * @example
+   * function changeCamera() {
+   *     var cameras = node.getCameras();
+   *     if (cameras[1]) {
+   *         node.setAsDefaultCamera(cameras[1]);
+   *         MessageLog.trace("New default camera: " + node.getDefaultCamera());
+   *     }
+   * }
+   */
+  public static setAsDefaultCamera(node: string): boolean;
+
+  /**
+   * Change the global display used in the application. The node must be the full path of a display node.
+   * The example below sets the global display to the node in the parameter. If that node is not a
+   * display node, it sets the global display to "Display All".
+   * @param {string} node The full path of a display node.
+   * @returns {boolean}
+   * @example
+   * function globalDisplaySetter(exNode) {
+   *     if (node.type(exNode) == "DISPLAY") {
+   *         node.setAsGlobalDisplay(exNode);
+   *     } else {
+   *         node.setGlobalToDisplayAll();
+   *     }
+   * }
+   */
+  public static setAsGlobalDisplay(node: string): boolean;
+
+  /**
+   * Set the node colour.
+   * The example below changes the colour of a node to solid red.
+   * @param {string} node The name of the node.
+   * @param {ColorRGBA} color The new colour set for the node. This must be a ColorRGBA object.
+   * @returns {boolean}
+   * @example
+   * function swapAndReset(exNode) {
+   *     //The parameters here are the Red, Green, Blue and Alpha values. (255, 0, 0, 255) is a solid red colour.
+   *     var newColor = new ColorRGBA(255, 0, 0, 255);
+   *
+   *     node.setColor(exNode, newColor);
+   * }
+   */
+  public static setColor(node: string, color: ColorRGBA): boolean;
+
+  /**
+   * Set the position of a node in the Node View.
+   * The example below takes the path of a group node and then shifts its position 50 units to the right,
+   * and down in the node view.
+   * @param {string} node The path of the node.
+   * @param {int} x The X position of the node in the Node View.
+   * @param {int} y The Y position of the node in the Node View.
+   * @returns {boolean}
+   * @example
+   * function shiftGroup(exNode) {
+   *     if (node.isGroup(exNode)) {
+   *         var x = node.coordX(exNode);
+   *         var y = node.coordY(exNode);
+   *         x += 50;
+   *         y += 50;
+   *         node.setCoord(exNode, x, y);
+   *     }
+   * }
+   */
+  public static setCoord(node: string, x: int, y: int): boolean;
+
+  /**
+   * Set the position of a node in the Node View.
+   * The example below takes the path of a group node and then shifts its position 50 units to the right,
+   * and down in the node view. It also moves the group node's position in the z-axis to the back.
+   * @param {string} node The path of the node.
+   * @param {int} x The X position of the node in the Node View.
+   * @param {int} y The Y position of the node in the Node View.
+   * @param {int} z The Z position of the node in the Node View.
+   * @returns {boolean}
+   * @example
+   * function shiftGroup(exNode) {
+   *     if (node.isGroup(exNode)) {
+   *         var x = node.coordX(exNode);
+   *         var y = node.coordY(exNode);
+   *         var z = node.coordZ(exNode);
+   *         x += 50;
+   *         y += 50;
+   *         if (z >= 0)
+   *             z = -1;
+   *         node.setCoord(exNode, x, y, z);
+   *     }
+   * }
+   */
+  public static setCoord(node: string, x: int, y: int, z: int): boolean;
+
+  /**
+   * Setters and getters for the enable/disable property of a node.
+   * Set the enable flag of the node.
+   * The following example disables a node if it is currently enabled.
+   * @param {string} node The name of the node.
+   * @param {boolean} flag If true, enable the node.
+   * @returns {boolean}
+   * @example
+   * function disableNode(exNode) {
+   *     if (node.getEnable(exNode))
+   *         node.setEnable(exNode, false);
+   * }
+   */
+  public static setEnable(node: string, flag: boolean): boolean;
+
+  /**
+   * Change the global display used by the application to "Display All" pseudo-display.
+   * The example below sets the global display to the node in the parameter. If that node is not a
+   * display node, it sets the global display to "Display All".
+   * @returns {boolean}
+   * @example
+   * function globalDisplaySetter(exNode) {
+   *     if (node.type(exNode) == "DISPLAY") {
+   *         node.setAsGlobalDisplay(exNode);
+   *     } else {
+   *         node.setGlobalToDisplayAll();
+   *     }
+   * }
+   */
+  public static setGlobalToDisplayAll(): boolean;
+
+  /**
+   * Setters and getters for the lock/unlock property of a node.
+   * Set the lock flag of the node.
+   * @param {string} node The name of the node.
+   * @param {boolean} lock If true, lock the node.
+   * @returns {boolean}
+   * @example
+   * MessageLog.trace("Lock flag: " + node.getLocked(exNode));
+   * node.setLocked(exNode, true);
+   */
+  public static setLocked(node: string, lock: boolean): boolean;
+
+  /**
+   * Set the show/hide timeline thumbnails on drawing layers.
+   * @param {string} node The name of the node.
+   * @param {boolean} bShow True to show thumbnails.
+   * @returns {boolean}
+   * @example
+   * node.setShowTimelineThumbnails(exNode, true);
+   */
+  public static setShowTimelineThumbnails(
+    node: string,
+    bShow: boolean
+  ): boolean;
+
+  /**
+   * Change the value of an attribute in a node.
+   * Additions specific to the Colour Override node:
+   * Use the attribute PALETTES.CLEAR to clear the palette list in the colour override node.
+   * Use the attribute PALETTES.ADD to add a palette to the palette list of the colour override node.
+   * Attemping to add a palette that already exists will cause setTextAttr to do nothing.
+   * Use the attribute PALETTES.REMOVE to remove a palette from the palette list of the colour override
+   * node.
+   * The example below adds the current palette path to the currently selected colour override node.
+   * @param {string} node The name of the node.
+   * @param {string} attrName The name of the attribute whose value you want to change.
+   * @param {int} atFrame The frame number at which you set the value.
+   * @param {string} attrValue The new value of the attribute.
+   * @returns {boolean}
+   * @example
+   * function fillColourOverride() {
+   *     var myNode = selection.selectedNode(0);
+   *     if (node.type(myNode) == "COLOR_OVERRIDE_TVG") {
+   *         var num1 = node.getTextAttr(myNode, frame.current(), "PALETTES.NUMBER");
+   *         var palettePath = PaletteManager.getCurrentPalettePath();
+   *
+   *         node.setTextAttr(myNode, "PALETTES.ADD", frame.current(), palettePath);
+   *
+   *         var num2 = node.getTextAttr(myNode, frame.current(), "PALETTES.NUMBER");
+   *         if (num2 > num1)
+   *             MessageLog.trace("Palette successfully added.");
+   *     }
+   * }
+   */
+  public static setTextAttr(
+    node: string,
+    attrName: string,
+    atFrame: int,
+    attrValue: string
+  ): boolean;
+
+  /**
+   * Set the timeline tag flag of the node.
+   * If a timeline tag is set to true, it will be shown when "View Tagged Layers" is selected.
+   * @param {string} node The name of the node.
+   * @param {boolean} tag New tag state of the node.
+   * @returns {boolean}
+   * @example
+   * MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
+   * node.setTimelineTag(exNode, true);
+   */
+  public static setTimelineTag(node: string, tag: boolean): boolean;
+
+  /**
+   * Set the version of the node to use.
+   * The example below sets current version number of a node to the maximum version number.
+   * @param {string} node The name of the node.
+   * @param {int} version The new version of the node.
+   * @returns {void}
+   * @example
+   * node.setVersion(exNode, node.getMaxVersionNumber(exNode));
+   */
+  public static setVersion(node: string, version: int): void;
+
+  /**
+   * Returns the path for the node that the port is linked to.
+   * The example below uses numberOfInputPorts to get the path to the source node of the parameter.
+   * exNode is the full name of a node, such as "Top/MyGroup/MyNode".
+   * @param {string} node The path of the node.
+   * @param {int} iPort The port number on the destination node whose source node you want to find. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @returns {string}
+   * @example
+   * var numInput = node.numberOfInputPorts(exNode);
+   * var source = node.srcNode(exNode, (numInput - 1));
+   *
+   * //Note: This source node is different than the parent node. The source node is the node connected to one of the input ports of the node. The parent is the parent group of the node.
+   * var parent = node.parentNode(exNode);
+   * MessageLog.trace(node.equals(parent, source)); //This will print false
+   */
+  public static srcNode(node: string, iPort: int): string;
+
+  /**
+   * Returns the source node path, the output port number and the link ID for this source node that this
+   * destination node is connected to.
+   * The example below shows the relationship between srcNodeInfo and dstNode.
+   * node - the path of the source node this destination node is linked to. This is the same value as the
+   * value returned by srcNode().
+   * port - this is the output port number in the source node that this destination node is connected to.
+   * link - this is the link number in the output port of the source node for this connection.
+   * @param {string} node The path of the source node.
+   * @param {int} iPort the port number of which you want to locate the node that is connected to it. This value is between 0 and the result of numberOfInputPorts() method, minus one. This method is similar to srcNode(), however, it returns an object that contains 3 properties:
+   * @returns {QScriptValue}
+   * @example
+   * var exNode = selection.selectedNode(0);
+   * var numInput = node.numberOfInputPorts(exNode);
+   * var source = node.srcNodeInfo(exNode, 0);
+   *
+   * //Note: This source node is different than the parent node. The source node is the node connected to one of the input ports of the node. The parent is the parent group of the node.
+   * var parent = node.parentNode(exNode);
+   * MessageLog.trace(node.equals(parent, source.node)); //This will print false
+   *
+   * //You can use the 3 properties of the source object to use dstNode()
+   * var destination = node.dstNode(source.node, source.port, source.link);
+   * MessageLog.trace(node.equals(destination, exNode); //This will print true
+   */
+  public static srcNodeInfo(node: string, iPort: int): QScriptValue;
+
+  /**
+   * Returns the path of a node in a group. Nodes are counted starting with zero.
+   * The example below prints all of the sub nodes of a node if the node's type is GROUP. exNode is the
+   * full name of a node, such as "Top/MyGroup".
+   * Sample output of the above example to the Message Log view:
+   * The node Top/MyGroup has 2 sub nodes.
+   * Top/MyGroup/MyNode1
+   * Top/MyGroup/MyNode2
+   * @param {string} parent The path of the parent node.
+   * @param {int} iSubNode An integer representing the numerical value of the node. This value must be between 0 and the numberOfSubNodes() method, minus one, for that point.
+   * @returns {string}
+   * @example
+   * function groupInfo(exNode) {
+   *     var i = 0;
+   *     if (node.isGroup(exNode)) {
+   *         MessageLog.trace("The node " + exNode + " has " + node.numberOfSubNodes(exNode) + " sub nodes.");
+   *         while (i < node.numberOfSubNodes(exNode)) {
+   *             MessageLog.trace(node.subNode(exNode, i));
+   *             i++;
+   *         }
+   *     }
+   * }
+   */
+  public static subNode(parent: string, iSubNode: int): string;
+
+  /**
+   * Returns the full path of a child node belonging to a parent group.
+   * The existence of the parent group is validated as well as the existence of the child node in that
+   * parent. Use this method instead of manually concatenating the full path name of child nodes. The
+   * example below deconstructs and then rebuilds a node path using subNodeByName. exNode is the full
+   * name of a node, such as "Top/MyGroup/MyNode".
+   * @param {string} parent Fully qualified path of the parent group.
+   * @param {string} name The actual node name suffix. This one is only the short name, not the full path of the node.
+   * @returns {string}
+   * @example
+   * var name = node.getName(exNode);
+   * var parent = node.parentName(exNode);
+   *
+   * //With both the parent path and the node name, you can rebuild the original node with subNodeByName
+   * var rebuiltNode = node.subNodeByName(parent, exNode);
+   * //This rebuilt node will be equal to the original node
+   * MessageLog.trace(node.equals(exNode, rebuiltNode)); //This will print true
+   */
+  public static subNodeByName(parent: string, name: string): string;
+
+  /**
+   * Returns an array of sub nodes.
+   * The example below prints an array of a node's subnodes if the node's type is GROUP. exNode is the
+   * full name of a node, such as "Top/MyGroup".
+   * Sample output of the above example to the Message Log view:
+   * The node Top/MyGroup has 2 sub nodes.
+   * Top/MyGroup/MyNode1,Top/MyGroup/MyNode2
+   * @param {string} parentGroup The path of the parent node.
+   * @returns {QScriptValue}
+   * @example
+   * function groupInfo(exNode) {
+   *     var i = 0;
+   *     if (node.isGroup(exNode)) {
+   *         MessageLog.trace("The node " + exNode + " has " + node.numberOfSubNodes(exNode) + " sub nodes.");
+   *         MessageLog.trace(node.subNodes(exNode);
+   *         }
+   *     }
+   */
+  public static subNodes(parentGroup: string): QScriptValue;
+
+  /**
+   * Returns the node type. These are all of the built-in node types available from the Harmony node
+   * like: READ, COMPOSITE, PEG, QUADMAP, SHADOW, etc.
+   * The example below prints all of the sub nodes of a node if the node's type is GROUP. exNode is the
+   * full name of a node, such as "Top/MyGroup".
+   * Sample output of the above example to the Message Log view:
+   * The node Top/MyGroup has 2 sub nodes.
+   * Top/MyGroup/MyNode1
+   * Top/MyGroup/MyNode2
+   * Other example uses of type can be found in getTextAttr(), setTextAttr(),
+   * explodeElementSymbolsInGroups().
+   * @param {string} node The path of the node.
+   * @returns {string}
+   * @example
+   * function groupInfo(exNode) {
+   *     var i = 0;
+   *     if (node.type(exNode) == GROUP) {
+   *         MessageLog.trace("The node " + exNode + " has " + node.numberOfSubNodes(exNode) + " sub nodes.");
+   *         while (i < node.numberOfSubNodes(exNode)) {
+   *             MessageLog.trace(node.subNode(exNode, i));
+   *             i++;
+   *         }
+   *     }
+   * }
+   */
+  public static type(node: string): string;
+
+  /**
+   * Unlink a port on one node from the port on another node.
+   * The example below inserts a new Peg node inbetween the selected node and it's parent. After
+   * unlinking the original node from it's original parent, the original parent is linked to the new
+   * node, and the new node becomes the parent of the original node.
+   * @param {string} dstNode The path of the node whose input port you want to unlink from the source node.
+   * @param {int} inPort The input port that you want to unlink. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
+   * @returns {boolean}
+   * @example
+   * function insertPeg() {
+   *     var myNode = selection.selectedNode(0);
+   *     var parentNode = node.parentNode(myNode);
+   *
+   *     var newPeg = node.add(parent, "New Peg", "PEG", 0, -50, 0);
+   *     var myNodeDestination = node.dstNode(myNode, 0, 0);
+   *
+   *     if (node.isLinked(myNode, 0)) {
+   *         node.unlink(myNodeDestination, 0);
+   *         node.link(myNode, 0, newPeg, 0);
+   *         node.link(newPeg, 0, myNodeDestination, 0);
+   *     }
+   * }
+   */
+  public static unlink(dstNode: string, inPort: int): boolean;
+
+  /**
+   * Unlink an attribute from a function column.
+   * The example below removes a camera pan by unlinking it from the column. It would undo the example
+   * shown for linkAttr() and linkedColumn().
+   * @param {string} node The name of the node.
+   * @param {string} attrName The name of the attribute that you want to unlink.
+   * @returns {boolean}
+   * @example
+   * if (node.linkedColumn(myNode, "POSITION.3DPATH") != "")
+   *     node.unlinkAttr(myNode, "POSITION.3DPATH");
+   */
+  public static unlinkAttr(node: string, attrName: string): boolean;
+
+  /**
+   * Returns the width of a given node.
+   * This width parameter is useful for computing the position of nodes in the Node View. It uses the
+   * same unit system as the coordX() and coordY() methods. The example below takes 2 nodes as parameters
+   * and moves them side by side in the node view.
+   * @param {string} node The path of the node.
+   * @returns {int}
+   * @example
+   * function nodeLine(node1, node2) //node1 and node2 are paths of 2 nodes
+   * {
+   *     var x = node.coordX(node1);
+   *     var y = node.coordY(node1);
+   *     x -= node.width(node1);
+   *
+   *     node.setCoord(node2, x, y);
+   * }
+   */
+  public static width(node: string): int;
+}
+
+/**
+ * The PaletteManager JavaScript global object. Used to get information about the Colour view current
+ * selection.
+ * An example of how to use the palette override attributes of the colour override node, using the
+ * PaletteManager:
+ * Available attributes for getTextAttr:
+ * If no x, or it's invalid, assume a value of 0
+ * Available attributes for setTextAttr:
+ * Note that the frame number argument (to node.getTextAttr() and node.setTextAttr()) is unused, and
+ * the attribute value in "PALETTES.CLEAR" is unused.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPaletteManager.html}
+ * @example
+ * function paletteOverrideExample() {
+ *     if (selection.numberOfNodesSelected() != 1)
+ *         return;
+ *
+ *     // not strictly necessary, depends on whether each setTextAttr() call should be undoable individually
+ *     scene.beginUndoRedoAccum("Palette Overrides");
+ *     var node = selection.selectedNode(0);
+ *
+ *     // return the number of palettes in the palette override list
+ *     var num = node.getTextAttr(node, 1, "PALETTES.NUMBER");
+ *
+ *     // return the first (top-most) palette name in the palette override list (will be "" if the list is empty).
+ *     // note that no palette number is supplied in this example, so 0 is assumed (equivalent to "PALETTES.0")
+ *     var palette = node.getTextAttr(node, 1, "PALETTES");
+ *
+ *     // clear (empty) the list
+ *     node.setTextAttr(node, "PALETTES.CLEAR", 1, "");
+ *
+ *     // should be 0
+ *     num = node.getTextAttr(node, 1, "PALETTES.NUMBER");
+ *
+ *     // add a palette to the palette override list
+ *     var curpath = PaletteManager.getCurrentPalettePath();
+ *
+ *     node.setTextAttr(node, "PALETTES.ADD", 1, curpath);
+ *
+ *     // can also specify a full path for the palette
+ *     // node.setTextAttr(node, "PALETTES.ADD", 1, "/usadata000/.../example.plt");
+ *
+ *     // return the first two palette names (we added one, so one should be non-empty)
+ *     palette = node.getTextAttr(node, 1, "PALETTES.0");
+ *
+ *     // this one should be "", only one in the list
+ *     var palette1 = node.getTextAttr(node, 1, "PALETTES.1");
+ *
+ *     // return the name of the last palette that we added
+ *     num = node.getTextAttr(node, 1, "PALETTES.NUMBER");
+ *     var index = parseInt(num);
+ *     index--;
+ *
+ *     var attr = "PALETTES." + index;
+ *     palette = node.getTextAttr(node, 1, attr);
+ *
+ *     // remove one from the list
+ *     node.setTextAttr(node, "PALETTES.REMOVE", 1, palette);
+ *
+ *     num = node.getTextAttr(node, 1, "PALETTES.NUMBER");
+ *
+ *     scene.endUndoRedoAccum();
+ * }
+ */
+declare class PaletteManager extends GlobalObject {
+  /**
+   * Gets the Id of the colour in the currently selected palette.
+   * @param {int} index Index of colour in palette.
+   * @returns {string}
+   */
+  public static getColorId(index: int): string;
+
+  /**
+   * Gets the name of the colour in the currently selected palette.
+   * @param {int} index Index of colour in palette.
+   * @returns {string}
+   */
+  public static getColorName(index: int): string;
+
+  /**
+   * Gets the current colour Id from the ColourView.
+   * @returns {string}
+   */
+  public static getCurrentColorId(): string;
+
+  /**
+   * Gets the current colour name from the ColourView.
+   * @returns {string}
+   */
+  public static getCurrentColorName(): string;
+
+  /**
+   * Gets the current palette Id from the ColourView.
+   * @returns {string}
+   */
+  public static getCurrentPaletteId(): string;
+
+  /**
+   * Gets the current palette name from the ColourView.
+   * @returns {string}
+   */
+  public static getCurrentPaletteName(): string;
+
+  /**
+   * Gets the current palette path (including palette name) from the ColourView.
+   * @returns {string}
+   */
+  public static getCurrentPalettePath(): string;
+
+  /**
+   * Gets the length of the current palette in the ColourView.
+   * @returns {int}
+   */
+  public static getCurrentPaletteSize(): int;
+
+  /**
+   * Gets number of palettes in the currently selected palette list in the ColourView list.
+   * @returns {int}
+   */
+  public static getNumPalettes(): int;
+
+  /**
+   * Gets number of palettes in the palette list in the ColourView.
+   * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
+   * @returns {int}
+   */
+  public static getNumPalettes(scenePaletteList: boolean): int;
+
+  /**
+   * Gets the Id of the palette in the current palette list.
+   * @param {int} index Index of palette within palette list.
+   * @returns {string}
+   */
+  public static getPaletteId(index: int): string;
+
+  /**
+   * Gets the Id of the palette in the current palette list.
+   * @param {int} index Index of palette within palette list.
+   * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
+   * @returns {string}
+   */
+  public static getPaletteId(index: int, scenePaletteList: boolean): string;
+
+  /**
+   * Gets the name of the palette in the current palette list.
+   * @param {int} index Index of palette within palette list.
+   * @returns {string}
+   */
+  public static getPaletteName(index: int): string;
+
+  /**
+   * Gets the name of the palette in the current palette list.
+   * @param {int} index Index of palette within palette list.
+   * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
+   * @returns {string}
+   */
+  public static getPaletteName(index: int, scenePaletteList: boolean): string;
+
+  /**
+   * Gets the path (including name) of the palette in the current palette list.
+   * @param {int} index Index of palette within palette list
+   * @returns {string}
+   */
+  public static getPalettePath(index: int): string;
+
+  /**
+   * Gets the path (including name) of the palette in the current palette list.
+   * @param {int} index Index of palette within palette list.
+   * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
+   * @returns {string}
+   */
+  public static getPalettePath(index: int, scenePaletteList: boolean): string;
+
+  /**
+   * Sets the current colour in the ColourView.
+   * @param {string} color Id of colour.
+   * @returns {void}
+   */
+  public static setCurrentColorById(color: string): void;
+
+  /**
+   * Sets the current palette and colour in the ColourView.
+   * @param {string} palette Palette Id.
+   * @param {string} color Colour Id.
+   * @returns {void}
+   */
+  public static setCurrentPaletteAndColorById(
+    palette: string,
+    color: string
+  ): void;
+
+  /**
+   * Sets the current palette in the ColourView.
+   * @param {string} palette Id of palette.
+   * @returns {void}
+   */
+  public static setCurrentPaletteById(palette: string): void;
+}
+
+/**
+ * The PaletteObjectManager JavaScript global object. Provides access to palette list (PaletteList) and
+ * palette (Palette) objects.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPaletteObjectManager.html}
+ * @example
+ * function isScenePaletteList(paletteList) {
+ *     // Palette list with an element id of -1 are scene palette lists.
+ *     return paletteList.elementId == -1;
+ * }
+ *
+ * function getMyPalette() {
+ *     // Find the first element palette list that owns a palette named "MyPalette"
+ *     var numPaletteLists = PaletteObjectManager.getNumPaletteLists();
+ *     for (var i = 0; i < numPaletteLists; ++i) {
+ *         var paletteList = PaletteObjectManager.getPaletteListByIndex(i);
+ *         if (isScenePaletteList(paletteList))
+ *             continue;
+ *
+ *         for (var j = 0; j < paletteList.numPalettes; ++j) {
+ *             var palette = paletteList.getPaletteByIndex(j);
+ *             if (palette.getName() == "MyPalette")
+ *                 return palette;
+ *         }
+ *     }
+ * }
+ */
+declare class PaletteObjectManager extends GlobalObject {
+  /**
+   * Returns the number of loaded palette lists.
+   * @returns {int}
+   */
+  public static getNumPaletteLists(): int;
+
+  /**
+   * Returns a Palette object for the loaded palette with the specified palette ID.
+   * @param {string} id The ID of palette to retrieve.
+   * @returns {Palette}
+   */
+  public static getPalette(id: string): Palette;
+
+  /**
+   * Loads the element palette list specified by the element ID 'id' and return the corresponding
+   * PaletteList object.
+   * If the palette list isn't already loaded, the method will load the palette list from the disk.
+   * @param {int} id The element ID.
+   * @returns {PaletteList}
+   */
+  public static getPaletteListByElementId(id: int): PaletteList;
+
+  /**
+   * Returns a PaletteList object for the loaded palette list with the specified list ID.
+   * @param {string} id The ID of palette list to retrieve.
+   * @returns {PaletteList}
+   */
+  public static getPaletteListById(id: string): PaletteList;
+
+  /**
+   * Returns a PaletteList object for the loaded palette list at position 'index'.
+   * @param {int} index The index of palette list to retrieve.
+   * @returns {PaletteList}
+   */
+  public static getPaletteListByIndex(index: int): PaletteList;
+
+  /**
+   * Loads the scene palette list and return the corresponding PaletteList object.
+   * If the palette list isn't already loaded, the method will load the palette list from the disk.
+   * @returns {PaletteList}
+   */
+  public static getScenePaletteList(): PaletteList;
+
+  /**
+   * Removes a palette from the scene and all elements, and schedule the file for deletion on next save.
+   * The method needs to acquire the locks for the palette and each palette list, and throws a JavaScript
+   * exception if it can't get ownership. Returns true on success. Deleting the palette on disk may
+   * affect any drawing which link to the palette, even in other projects.
+   * @param {string} id The ID of palette to remove.
+   * @returns {boolean}
+   */
+  public static removePaletteReferencesAndDeleteOnDisk(id: string): boolean;
+}
+
+/**
+ * The PenstyleManager JavaScript global object. Query/modify the current penstyle and list of
+ * penstyles.
+ * The list of penstyles includes the brush, pencil and texture styles.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPenstyleManager.html}
+ * @example
+ * function queryPenstyles() {
+ *     var num = PenstyleManager.getNumberOfPenstyles();
+ *     for (var i = 0; i < num; ++i) {
+ *         MessageLog.trace("penstyle name is " + PenstyleManager.getPenstyleName(i));
+ *     }
+ *
+ *     MessageLog.trace("The current penstyle has min size of " + PenstyleManager.getCurrentPenstyleMinimumSize() +
+ *         " and maximum size of " + PenstyleManager.getCurrentPenstyleMaximumSize());
+ *
+ * }
+ */
+declare class PenstyleManager extends GlobalObject {
+  /**
+   * Sets the current penstyle centreline smoothness.
+   * @param {double} smooth New centreline smoothness value.
+   * @returns {void}
+   */
+  public static changeCurrentPenstyleCenterlineSmoothness(smooth: double): void;
+
+  /**
+   * Sets the current penstyle maximum size.
+   * @param {double} maximum New maximum size.
+   * @returns {void}
+   */
+  public static changeCurrentPenstyleMaximumSize(maximum: double): void;
+
+  /**
+   * Sets the current penstyle minimum size.
+   * @param {double} minimum New minimum size.
+   * @returns {void}
+   */
+  public static changeCurrentPenstyleMinimumSize(minimum: double): void;
+
+  /**
+   * Sets the current penstyle outline smoothness.
+   * @param {double} smooth New outline smoothness value.
+   * @returns {void}
+   */
+  public static changeCurrentPenstyleOutlineSmoothness(smooth: double): void;
+
+  /**
+   * Formats the penstyle list into a string, which can be used to store the penstyle list and import it
+   * later.
+   * @returns {string}
+   */
+  public static exportPenstyleListToString(): string;
+
+  /**
+   * Create a string representing the penstyle which can be used to store the penstyle and import it
+   * later.
+   * @param {int} index Index of the penstyle.
+   * @returns {string}
+   */
+  public static exportPenstyleToString(index: int): string;
+
+  /**
+   * Gets the current penstyle centerline smoothness.
+   * @returns {double}
+   */
+  public static getCurrentPenstyleCenterlineSmoothness(): double;
+
+  /**
+   * Gets the current penstyle eraser flag.
+   * @returns {boolean}
+   */
+  public static getCurrentPenstyleEraserFlag(): boolean;
+
+  /**
+   * Returns the index of the current penstyle.
+   * @returns {int}
+   */
+  public static getCurrentPenstyleIndex(): int;
+
+  /**
+   * Gets the current penstyle maximum size.
+   * @returns {double}
+   */
+  public static getCurrentPenstyleMaximumSize(): double;
+
+  /**
+   * Gets the current penstyle minimum size.
+   * @returns {double}
+   */
+  public static getCurrentPenstyleMinimumSize(): double;
+
+  /**
+   * Returns the name of the current penstyle.
+   * @returns {string}
+   */
+  public static getCurrentPenstyleName(): string;
+
+  /**
+   * Gets the current penstyle outline smoothness.
+   * @returns {double}
+   */
+  public static getCurrentPenstyleOutlineSmoothness(): double;
+
+  /**
+   * Returns the number of penstyles.
+   * @returns {int}
+   */
+  public static getNumberOfPenstyles(): int;
+
+  /**
+   * Returns the name of the penstyle at the given index.
+   * @param {int} index Index of the penstyle.
+   * @returns {string}
+   */
+  public static getPenstyleName(index: int): string;
+
+  /**
+   * Imports a penstyle list from a previously formatted penstyle string.
+   * @param {string} str A formatted penstyle or penstyle list, which can be created from exportPenstyleToString or exportPenstylesListToString.
+   * @returns {void}
+   */
+  public static importPenstyleListFromString(str: string): void;
+
+  /**
+   * Saves the penstyles.
+   * @returns {void}
+   */
+  public static savePenstyles(): void;
+
+  /**
+   * Sets the current penstyle.
+   * @param {int} index Index of penstyle to be set as current penstyle.
+   * @returns {void}
+   */
+  public static setCurrentPenstyleByIndex(index: int): void;
+
+  /**
+   * Sets the current penstyle.
+   * @param {string} name Name of the penstyle to be set as current penstyle.
+   * @returns {void}
+   */
+  public static setCurrentPenstyleByName(name: string): void;
+}
+
+/**
+ * The preferences JavaScript global object. Set or retrieve user preferences saved in the user local
+ * data.
+ * The actual name and current value of a preference are in stored in the user configuration file. The
+ * file prefs.xml contains a description of all preferences recognized by the application. The keyword
+ * to access each predefined preference is also found in that file. Scripts can change or retrieve any
+ * existing preference, and may create new preferences.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classpreferences.html}
+ * @example
+ * function toggleAutoSaveLayout() {
+ *     var b;
+ *     b = preferences.getBool("AUTO_SAVE_LAYOUT", false);
+ *     MessageLog.trace("preference to automatically save the layout was " + b);
+ *     preferences.setBool("AUTO_SAVE_LAYOUT", !b);
+ *     b = preferences.getBool("AUTO_SAVE_LAYOUT", false);
+ *     MessageLog.trace("preference for auto save layout is now " + b);
+ * }
+ */
+declare class preferences extends GlobalObject {
+  /**
+   * Gets the boolean value from the given preference name.
+   * @param {string} name The name of the preference.
+   * @param {boolean} defaultValue The default value of the preference.
+   * @returns {boolean}
+   */
+  public static getBool(name: string, defaultValue?: boolean): boolean;
+
+  /**
+   * Gets the color from the given preference name.
+   * @param {string} name The preference name.
+   * @param {ColorRGBA} defaultValue The default value of the preference.
+   * @returns {ColorRGBA}
+   */
+  public static getColor(name: string, defaultValue?: ColorRGBA): ColorRGBA;
+
+  /**
+   * Gets the double value from the given preference name.
+   * @param {string} name The preference name.
+   * @param {double} defaultValue The default value of the preference.
+   * @returns {double}
+   */
+  public static getDouble(name: string, defaultValue?: double): double;
+
+  /**
+   * Gets the integer value from the given preference name.
+   * @param {string} name The preference name.
+   * @param {int} defaultValue The default value of the preference.
+   * @returns {double}
+   */
+  public static getInt(name: string, defaultValue?: int): double;
+
+  /**
+   * Gets the string value from the given preference name.
+   * @param {string} name The name of the preference.
+   * @param {string} defaultValue The default value of the preference.
+   * @returns {string}
+   */
+  public static getString(name: string, defaultValue?: string): string;
+
+  /**
+   * Gets the boolean value for the given preference name.
+   * @param {string} name The name of the preference.
+   * @param {boolean} value The boolean to set the preference to.
+   * @returns {void}
+   */
+  public static setBool(name: string, value: boolean): void;
+
+  /**
+   * Sets the color for the given preference name.
+   * @param {string} name The preference name.
+   * @param {ColorRGBA} color The color to set the preference to.
+   * @returns {void}
+   */
+  public static setColor(name: string, color: ColorRGBA): void;
+
+  /**
+   * Sets the double value for the given preference name.
+   * @param {string} name The preference name.
+   * @param {double} value The double to set the preference to.
+   * @returns {void}
+   */
+  public static setDouble(name: string, value: double): void;
+
+  /**
+   * Sets the integer value for the given preference name.
+   * @param {string} name The preference name.
+   * @param {int} value The integer to set the preference to.
+   * @returns {void}
+   */
+  public static setInt(name: string, value: int): void;
+
+  /**
+   * Sets the string value for the given preference name.
+   * @param {string} name The name of the preference.
+   * @param {string} value The string to set the preference to.
+   * @returns {void}
+   */
+  public static setString(name: string, value: string): void;
+}
+
+/**
+ * The render JavaScript global object. Render the scene or a part of the scene.
+ * The scripting environment can receive notifications when the scene frame is ready.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classrender.html}
+ * @example
+ * function frameReady(frame, celImage) {
+ *     MessageLog.trace("Frame " + frame + " Ready.");
+ *     // Save the image here.
+ *     celImage.imageFile("c:/tmp/myimage" + frame + ".png");
+ * }
+ *
+ * function renderFinished() {
+ *     MessageBox.information("Render Finished");
+ * }
+ *
+ * render.renderFinished.connect(renderFinished);
+ * render.frameReady.connect(frameReady);
+ *
+ *
+ * render.setRenderDisplay("Top/Display");
+ * render.renderSceneAll();
+ *
+ * render.renderFinished.disconnect(renderFinished);
+ * render.frameReady.disconnect(frameReady);
+ */
+declare class render extends GlobalObject {
+  /**
+   * Interrupt an active render.
+   * @returns {void}
+   */
+  public static cancelRender(): void;
+
+  /**
+   * disconnect all scripts from signals emitted by this object.
+   * @returns {void}
+   */
+  public static disconnect(): void;
+
+  /**
+   * Render a part of the scene.
+   * After a frame is rendered, a frameReady signal will be emitted. Connect to it to save the rendered
+   * frame.
+   * @param {int} fromFrame render start frame
+   * @param {int} toFrame render end frame
+   * @returns {void}
+   */
+  public static renderScene(fromFrame: int, toFrame: int): void;
+
+  /**
+   * Render the complete scene.
+   * @returns {void}
+   */
+  public static renderSceneAll(): void;
+
+  /**
+   * Enable or disable thumbnail cropping for the render. Mainly used when rendering thumbnails.
+   * @param {boolean} enabled enable or disable cropping during render.
+   * @returns {void}
+   */
+  public static setAutoThumbnailCropping(enabled: boolean): void;
+
+  /**
+   * Set the background color to use when rendering in scene machine mode.
+   * @param {ColorRGBA} bgColor background color
+   * @returns {void}
+   */
+  public static setBgColor(bgColor: ColorRGBA): void;
+
+  /**
+   * Set if rendered frames sets should be combined and in which order. Specify these options if you are
+   * rendering in PAL or NTSC format.
+   * @param {boolean} autoCombine automatically combine the two rendered frame field sets
+   * @param {boolean} secondFieldFirst insert the second frame field set at the beginning
+   * @returns {void}
+   */
+  public static setCombine(
+    autoCombine: boolean,
+    secondFieldFirst: boolean
+  ): void;
+
+  /**
+   * Sets the frame output format.
+   * @param {int} type frame output format: 0 - None, 1 - NTSC, 2 - PAL
+   * @returns {void}
+   */
+  public static setFieldType(type: int): void;
+
+  /**
+   * Set which display module to use for rendering. "Display All" uses the global unconnected display
+   * module.
+   * @param {string} name display name
+   * @returns {void}
+   */
+  public static setRenderDisplay(name: string): void;
+
+  /**
+   * Set the scene resolution to use for rendering.
+   * @param {int} x width pixels
+   * @param {int} y height pixels
+   * @returns {void}
+   */
+  public static setResolution(x: int, y: int): void;
+
+  /**
+   * Set the scene resolution to use for rendering.
+   * @param {string} name a resolution name.
+   * @returns {void}
+   */
+  public static setResolutionName(name: string): void;
+
+  /**
+   * Enable rendering on a white background. The default is false, which renders on a black background.
+   * @param {boolean} enabled When true enables rendering on a white background.
+   * @returns {void}
+   */
+  public static setWhiteBackground(enabled: boolean): void;
+
+  /**
+   * Enable or disable write modules during the render.
+   * @param {boolean} enabled enable or disable write modules
+   * @returns {void}
+   */
+  public static setWriteEnabled(enabled: boolean): void;
+
+  /**
+   * Event that notifies the script that a certain frame is available and at which location.
+   * @param {int} frame rendered frame number
+   * @param {QObject} frameCel rendered frame cel
+   * @returns {void}
+   */
+  public frameReady: QSignal<(frame: int, frameCel: QObject) => void>;
+
+  /**
+   * Event that notifies the script when the render has completed.
+   * @returns {void}
+   */
+  public renderFinished: QSignal<() => void>;
+}
+
+/**
+ * The scene JavaScript global object. Retrieve and set global scene attributes, like the aspect ratio
+ * of the cells in the scene grid.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classscene.html}
+ * @example
+ * function setScene() {
+ *     // Sets the beginning of the undo/redo command wrapper
+ *     scene.beginUndoRedoAccum("Set Scene");
+ *
+ *     // Sets the aspect ratio of the scene to 4, 3
+ *     scene.setUnitsAspectRatio(4, 3);
+ *
+ *     // Sets the number of units in the scene
+ *     scene.setNumberOfUnits(1200, 900, 12);
+ *
+ *     // Sets the value of the center coordinate
+ *     scene.setCoordAtCenter(5000, 5000);
+ *
+ *     // Terminates the undo/redo command wrapper
+ *     scene.endUndoRedoAccum();
+ * }
+ */
+declare class scene extends GlobalObject {
+  /**
+   * This function starts the accumulation of all of the functions between it and the endUndoRedoAccum
+   * function as one command that will appear in the undo/redo list. If you do not use this function with
+   * endUndoRedoAccum, each function in the script generates a separate undo/redo entry.
+   * @param {string} commandName The name of the command to be added to the undo/redo list.
+   * @returns {void}
+   */
+  public static beginUndoRedoAccum(commandName: string): void;
+
+  /**
+   * This function cancels the accumulation of undo/redo commands. No command will be added to the
+   * undo/redo list and all commands that have already been executed will be rolled-back (undone).
+   * @returns {void}
+   */
+  public static cancelUndoRedoAccum(): void;
+
+  /**
+   * Performs the same operation as the "Scene->Check Files..." menu item.
+   * Performs the same operation as the "Scene->Check Files..." menu item. It can be passed an object
+   * that contains options.
+   * report : default false ; returns a human-readable report in the report field summary : default false
+   * ; returns a human-readable summary in the summary field colors : default true ; returns a list of
+   * missing colors in the missingColors field moreInfo : default false ; returns information about the
+   * bitmaps found in the scene layers : default true ; returns layer information of bitmaps when
+   * moreInfo is true (for PSD files) allFiles : default true ; returns the list of TVG and bitmaps if
+   * true. If false returns only TVG files.
+   * The function can also be passed true to make all the options true.
+   * e.g.
+   * var r = scene.checkFiles(true); // turns on all options to true
+   * var s = scene.checkFiles({ allFiles : false }); // Will check only TVG files.
+   * var t = scene.checkFiles({ allFiles : true, modeInfo :true, report : true }); // Will check all
+   * files and display bitmap information and layer informations on bitmap files. Will return a human-
+   * readable report in the report field of the returned object
+   * @param {QVariant} options
+   * @returns {void}
+   */
+  public static checkFiles(options: QVariant): void;
+
+  /**
+   * Clears the command history.
+   * @returns {void}
+   */
+  public static clearHistory(): void;
+
+  /**
+   * Closes the current scene.
+   * Exiting functions Anyone of these is final and absolute. Nothing in the script will be executed
+   * after these calls.
+   * @returns {void}
+   */
+  public static closeScene(): void;
+
+  /**
+   * Closes the current scene and exits.
+   * @returns {void}
+   */
+  public static closeSceneAndExit(): void;
+
+  /**
+   * Closes the current scene and open the scene specified by env, job, scene and version.
+   * @param {string} envName The environment name.
+   * @param {string} jobName The job name.
+   * @param {string} sceneName The scene name.
+   * @param {string} versionName The version name.
+   * @returns {boolean}
+   */
+  public static closeSceneAndOpen(
+    envName: string,
+    jobName: string,
+    sceneName: string,
+    versionName: string
+  ): boolean;
+
+  /**
+   * Returns the X value of the centre coordinate of the scene grid.
+   * @returns {int}
+   */
+  public static coordAtCenterX(): int;
+
+  /**
+   * Returns the Y value of the centre coordinate of the scene grid.
+   * @returns {int}
+   */
+  public static coordAtCenterY(): int;
+
+  /**
+   * Returns the name of the current environment.
+   * @returns {string}
+   */
+  public static currentEnvironment(): string;
+
+  /**
+   * Returns the path of the current environment.
+   * @returns {string}
+   */
+  public static currentEnvironmentPath(): string;
+
+  /**
+   * Returns the name of the current job.
+   * @returns {string}
+   */
+  public static currentJob(): string;
+
+  /**
+   * Returns the path of the current job.
+   * @returns {string}
+   */
+  public static currentJobPath(): string;
+
+  /**
+   * Returns the current project path.
+   * @returns {string}
+   */
+  public static currentProjectPath(): string;
+
+  /**
+   * For windows, returns the remapped path.
+   * @returns {string}
+   */
+  public static currentProjectPathRemapped(): string;
+
+  /**
+   * Returns the X value of the current preview resolution.
+   * For example, when the current resolution is 720x540 pixels this function will return 720.
+   * @returns {int}
+   */
+  public static currentResolutionX(): int;
+
+  /**
+   * Returns the Y value of the current preview resolution.
+   * For example, when the current resolution is 720x540 pixels this function will return 540.
+   * @returns {int}
+   */
+  public static currentResolutionY(): int;
+
+  /**
+   * Returns the name of the current scene.
+   * @returns {string}
+   */
+  public static currentScene(): string;
+
+  /**
+   * Returns the ID of the current version.
+   * @returns {int}
+   */
+  public static currentVersion(): int;
+
+  /**
+   * Returns the name or the number of the current scene version.
+   * @returns {string}
+   */
+  public static currentVersionName(): string;
+
+  /**
+   * Returns the default resolution field of view (FOV). The default FOV is a global scene parameter.
+   * @returns {double}
+   */
+  public static defaultResolutionFOV(): double;
+
+  /**
+   * Returns the default resolution name.
+   * The resolution name is a global parameter saved with the project. It may be empty when the project
+   * is used as a custom resolution, which is not one of the pre-defined resolutions.
+   * @returns {string}
+   */
+  public static defaultResolutionName(): string;
+
+  /**
+   * Returns the X value of the default resolution.
+   * This resolution is a global parameter saved with the project, not the current preview resolution.
+   * For example, when the default scene resolution is 720x540 pixels this function will return 720.
+   * @returns {int}
+   */
+  public static defaultResolutionX(): int;
+
+  /**
+   * Returns the Y value of the default resolution.
+   * This resolution is a global parameter saved with the project, not the current preview resolution.
+   * For example, when the default scene resolution is 720x540 pixels this function will return 540.
+   * @returns {int}
+   */
+  public static defaultResolutionY(): int;
+
+  /**
+   * This function ends the accumulation all of the functions between it and the beginUndoRedoAccum
+   * function as one command that will appear in the undo/redo list. If you do not use this function with
+   * beginUndoRedoAccum, each function in the script generates a separate undo/redo entry.
+   * @returns {void}
+   */
+  public static endUndoRedoAccum(): void;
+
+  /**
+   * Converts an OGL coordinate into a field coordinate.
+   * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
+   * @returns {QObject}
+   */
+  public static fromOGL(pointOrVector: QObject): QObject;
+
+  /**
+   * Returns the model matrix for the default camera.
+   * @param {int} frame The frame to retrieve the camera matrix at.
+   * @returns {QObject}
+   */
+  public static getCameraMatrix(frame: int): QObject;
+
+  /**
+   * Retrieves the default display set in the current scene.
+   * @returns {string}
+   */
+  public static getDefaultDisplay(): string;
+
+  /**
+   * Returns the frame rate, as frames per second.
+   * @returns {int}
+   */
+  public static getFrameRate(): int;
+
+  /**
+   * Returns all palettes that were either unrecovered or recovered but not yet saved, depending on the
+   * arguments of the function.
+   * @param {boolean} unrecovered Whether or not to return unrecovered palettes.
+   * @param {boolean} recoveredNotYetSaved Whether or not to return recovered but not yet saved palettes.
+   * @returns {StringList}
+   */
+  public static getMissingPalettes(
+    unrecovered: boolean,
+    recoveredNotYetSaved: boolean
+  ): StringList;
+
+  /**
+   * Returns the scene start frame.
+   * @returns {int}
+   */
+  public static getStartFrame(): int;
+
+  /**
+   * Returns the scene stop frame.
+   * @returns {int}
+   */
+  public static getStopFrame(): int;
+
+  /**
+   * Returns true if the scene was ever modified.
+   * It will return true even if the modifications have been saved.
+   * @returns {boolean}
+   */
+  public static hasBeenDirty(): boolean;
+
+  /**
+   * Tells if the scene has been modified since its last save.
+   * @returns {boolean}
+   */
+  public static isDirty(): boolean;
+
+  /**
+   * Return a metadata object corresponding to the given name and type.
+   * Here is an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {string} name The name of the metadata object.
+   * @param {string} [type=QNTR("string")] The metadata type.
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Harmony Premium",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public static metadata(name: string, type?: string): QScriptValue;
+
+  /**
+   * Return the list of metadatas for the current scene.
+   * This method returns an array of javascript objects where each object represent a single metadata
+   * object. Here is an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @returns {QScriptValue}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Harmony Premium",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public static metadatas(): QScriptValue;
+
+  /**
+   * Returns the list of known resolutions.
+   * @returns {StringList}
+   */
+  public static namedResolutions(): StringList;
+
+  /**
+   * Returns the X value of the named resolution. For example, when the named resolution is 720x540
+   * pixels this function will return 720.
+   * @param {string} name The name of the resolution to get the value from.
+   * @returns {int}
+   */
+  public static namedResolutionX(name: string): int;
+
+  /**
+   * Returns the Y value of the named resolution. For example, when the named resolution is 720x540
+   * pixels this function will return 540.
+   * @param {string} name The name of the resolution to get the value from.
+   * @returns {int}
+   */
+  public static namedResolutionY(name: string): int;
+
+  /**
+   * Returns the number of units in the X axis of the scene grid.
+   * @returns {int}
+   */
+  public static numberOfUnitsX(): int;
+
+  /**
+   * Returns the number of units in the Y axis of the scene grid.
+   * @returns {int}
+   */
+  public static numberOfUnitsY(): int;
+
+  /**
+   * Returns the number of units in the Z axis of the scene grid.
+   * @returns {int}
+   */
+  public static numberOfUnitsZ(): int;
+
+  /**
+   * Redoes the last n operations. If n is not specified, it will be 1.
+   * @param {int} [depth=1] The number of operations to redo.
+   * @returns {void}
+   */
+  public static redo(depth?: int): void;
+
+  /**
+   * Removes a metadata object from the list of metadata objects.
+   * @param {QScriptValue} meta A metadata object.
+   * @returns {boolean}
+   */
+  public static removeMetadata(meta: QScriptValue): boolean;
+
+  /**
+   * Performs the "save all" command. Effectively, this saves the entire project and all modified files.
+   * @returns {boolean}
+   */
+  public static saveAll(): boolean;
+
+  /**
+   * Save the current project to the specified folder.
+   * Save the current project to the specified folder. Folder must not exists. The current project is
+   * updated to use that folder. Any error or message is reported using the standard error logger (so, in
+   * non batch mode, user will see message popup).
+   * This API only works in standalone as you cannot 'Save As' in database.
+   * @param {string} pathname New folder of the project (ie: /Users/a_user/Documents/my_save_as_project )
+   * @returns {boolean}
+   */
+  public static saveAs(pathname: string): boolean;
+
+  /**
+   * Saves the project as a new version.
+   * @param {string} name The name of the version.
+   * @param {boolean} markAsDefault This is boolean to indicate to mark this version as the default version.
+   * @returns {boolean}
+   */
+  public static saveAsNewVersion(
+    name: string,
+    markAsDefault?: boolean
+  ): boolean;
+
+  /**
+   * Sets the value of the centre (X, Y) coordinates.
+   * @param {int} x The value of the X coordinate at the centre of the grid.
+   * @param {int} y The value of the Y coordinate at the centre of the grid.
+   * @returns {boolean}
+   */
+  public static setCoordAtCenter(x: int, y: int): boolean;
+
+  /**
+   * Sets the default scene resolution and field of view.
+   * @param {int} x Set the X resolution for the scene in pixels.
+   * @param {int} y Set the Y resolution for the scene in pixels.
+   * @param {double} fov Set the field of view in degree. Typical value is 41.112.
+   * @returns {boolean}
+   */
+  public static setDefaultResolution(x: int, y: int, fov: double): boolean;
+
+  /**
+   * This function sets the default scene resolution name.
+   * @param {string} name Set the current resolution preset name to this value.
+   * @returns {boolean}
+   */
+  public static setDefaultResolutionName(name: string): boolean;
+
+  /**
+   * This function set the default frame rate of the project. The frame rate is expressed as frames per
+   * second. Typical value is 12, 24 or 30.
+   * @param {int} frameRate The new frame rate.
+   * @returns {boolean}
+   */
+  public static setFrameRate(frameRate: int): boolean;
+
+  /**
+   * Either inserts a new metadata object or sets the value of an existing metadata object.
+   * If a metadata object already exist with the given name and type properties, then sets its value with
+   * the given value property. Otherwise, inserts a new metadata object with the given name, type(default
+   * is string), creator(default is executable), version(default is 1.0) and values properties. Here is
+   * an example of a metadata object:
+   * Supported values for type are: string, int, double, bool.
+   * @param {QScriptValue} meta A metadata object.
+   * @returns {void}
+   * @example
+   * {
+   *     "name": "myMetadata",
+   *     "type": "string",
+   *     "creator": "Harmony Premium",
+   *     "version": "1.0",
+   *     "value": "foo"
+   * }
+   */
+  public static setMetadata(meta: QScriptValue): void;
+
+  /**
+   * Sets the number of X, Y, and Z units in the scene grid.
+   * @param {int} x The X value of the scene grid.
+   * @param {int} y The Y value of the scene grid.
+   * @param {int} z The Z value of the scene grid.
+   * @returns {boolean}
+   */
+  public static setNumberOfUnits(x: int, y: int, z: int): boolean;
+
+  /**
+   * This function sets the scene start frame. The value is validated to be below the number of frames,
+   * the stop frame is adjusted too if the specified value is bigger.
+   * @param {int} frame The scene start frame.
+   * @returns {boolean}
+   */
+  public static setStartFrame(frame: int): boolean;
+
+  /**
+   * This function sets the scene stop frame. The value is validated to be below the number of frames,
+   * the start frame is adjusted too if the specified value is smaller.
+   * @param {int} frame The scene stop frame.
+   * @returns {boolean}
+   */
+  public static setStopFrame(frame: int): boolean;
+
+  /**
+   * Sets the aspect ratio of the scene. The scene's final aspect ratio will be: X * numberOfUnitsX()/Y *
+   * numberOfUnitsY().
+   * @param {double} x The X value of the new aspect ratio.
+   * @param {double} y The Y value of the new aspect ratio.
+   * @returns {boolean}
+   */
+  public static setUnitsAspectRatio(x: double, y: double): boolean;
+
+  /**
+   * Returns the temporary project path.
+   * @returns {string}
+   */
+  public static tempProjectPath(): string;
+
+  /**
+   * For windows, returns the remapped temporary project path.
+   * The remapped temporary project path.
+   * @returns {string}
+   */
+  public static tempProjectPathRemapped(): string;
+
+  /**
+   * Converts a field coordinate into an OGL coordinate.
+   * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
+   * @returns {QObject}
+   */
+  public static toOGL(pointOrVector: QObject): QObject;
+
+  /**
+   * Undoes the last n operations. If n is not specified, it will be 1.
+   * @param {int} [depth=1] The number of operations to undo.
+   * @returns {void}
+   */
+  public static undo(depth?: int): void;
+
+  /**
+   * Returns the X value of the aspect ratio of the cells in the scene grid.
+   * @returns {double}
+   */
+  public static unitsAspectRatioX(): double;
+
+  /**
+   * Returns the Y value of the aspect ratio of the cells in the scene grid.
+   * @returns {double}
+   */
+  public static unitsAspectRatioY(): double;
+}
+
+/**
+ * The selection JavaScript global object. Retrieve information about the nodes or columns that are
+ * selected.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classselection.html}
+ * @example
+ * function dumpSelectedColumn() {
+ *     // The numberOfColumnsSelected function loops to check all of the selected columns and determine their frame values.
+ *     // The selectedColumn function prints the name of the selected column to the shell and
+ *     // then loops through the values in the column to print them as well.
+ *
+ *     var ncol = selection.numberOfColumnsSelected();
+ *     var nframe = frame.numberOf();
+ *     var i;
+ *
+ *     for (i = 0; i < ncol; ++i) {
+ *         var f;
+ *         var c = selection.selectedColumn(i);
+ *         MessageLog.trace("Column " + c);
+ *         for (f = 1; f <= nframe; ++f) {
+ *             var value = column.getEntry(c, 1, f);
+ *             var keyframe = column.isKeyFrame(c, 1, f);
+ *             if (keyframe) value += " (keyframe)";
+ *             MessageLog.trace(" " + f + ": " + value);
+ *         }
+ *     }
+ * }
+ */
+declare class selection extends GlobalObject {
+  /**
+   * Adds a column to the selection.
+   * @param {string} column The name of column to add to the selection.
+   * @returns {boolean}
+   */
+  public static addColumnToSelection(column: string): boolean;
+
+  /**
+   * Adds the drawing column and it's associated read node to the selection.
+   * @param {string} columnName The displayed name of column.
+   * @returns {boolean}
+   */
+  public static addDrawingColumnToSelection(columnName: string): boolean;
+
+  /**
+   * Adds a node to the selection.
+   * @param {string} node The name of node to add to the selection.
+   * @returns {boolean}
+   */
+  public static addNodeToSelection(node: string): boolean;
+
+  /**
+   * Selects/deselects a set of IDs from the sub selection.
+   * Select a set of sub objects. If the sub object is already selected, this method will deselect it.
+   * @param {string} node The path to the node (ex: "Top/MyNode").
+   * @param {QScriptValue} subSelection An array of sub object IDs or the id (integer) of one sub object.
+   * @returns {boolean}
+   * @example
+   * // Load a previous selection from a JSON file.
+   * var mySelectionFile = System.getenv("TEMP") + "/myHarmonySelection_001.json";
+   * var myFile = new PermanentFile(mySelectionFile);
+   * myFile.open(1);
+   * var jsonFileContent = myFile.read();
+   * myFile.close();
+   *
+   * // Restore the read selection in Harmony.
+   * var newSelection = JSON.parse(jsonFileContent);
+   * selection.addNodeToSelection(newSelection.node);
+   * selection.addSubSelectionForNode(newSelection.node, newSelection.subobjects);
+   */
+  public static addSubSelectionForNode(
+    node: string,
+    subSelection: QScriptValue
+  ): boolean;
+
+  /**
+   * Clears the selection.
+   * @returns {boolean}
+   */
+  public static clearSelection(): boolean;
+
+  /**
+   * Clears all the sub selection on the given node.
+   * @param {string} node The path to the node (ex: "Top/MyNode").
+   * @returns {boolean}
+   * @example
+   * selection.clearSubSelectionForNode("Top/My-Subnode-Animation");
+   */
+  public static clearSubSelectionForNode(node: string): boolean;
+
+  /**
+   * Adds the column to the selection. If the column is a drawing column, also adds the associated read
+   * node to the selection.
+   * @param {string} columnName The displayed name of column.
+   * @returns {boolean}
+   */
+  public static extendSelectionWithColumn(columnName: string): boolean;
+
+  /**
+   * Returns true if the selection has a range.
+   * @returns {boolean}
+   */
+  public static isSelectionRange(): boolean;
+
+  /**
+   * Returns a value for the number of columns selected in the xsheet.
+   * @returns {int}
+   */
+  public static numberOfColumnsSelected(): int;
+
+  /**
+   * Returns the number of selected frames.
+   * @returns {int}
+   */
+  public static numberOfFrames(): int;
+
+  /**
+   * Returns the number of nodes that are selected.
+   * @returns {int}
+   */
+  public static numberOfNodesSelected(): int;
+
+  /**
+   * Removes a node from the selection.
+   * @param {string} node The name of node to be removed from the selection.
+   * @returns {boolean}
+   */
+  public static removeNodeFromSelection(node: string): boolean;
+
+  /**
+   * Selects all nodes and all columns in the scene.
+   * @returns {void}
+   */
+  public static selectAll(): void;
+
+  /**
+   * Returns the ith column selected in the xsheet.
+   * @param {int} i The index of the column.
+   * @returns {string}
+   */
+  public static selectedColumn(i: int): string;
+
+  /**
+   * Returns the path of the selected node.
+   * @param {int} i The index of the node.
+   * @returns {string}
+   */
+  public static selectedNode(i: int): string;
+
+  /**
+   * Returns an Array of all selected nodes.
+   * @returns {QScriptValue}
+   */
+  public static selectedNodes(): QScriptValue;
+
+  /**
+   * Sets the selection frame range.
+   * @param {int} start The beginning frame.
+   * @param {int} length The number of frames selected.
+   * @returns {void}
+   */
+  public static setSelectionFrameRange(start: int, length: int): void;
+
+  /**
+   * Returns the selected start frame.
+   * @returns {int}
+   */
+  public static startFrame(): int;
+
+  /**
+   * Obtains the IDs of the selectable sub objects of the given node.
+   * @param {string} node The path to the node (ex: "Top/MyNode").
+   * @returns {QScriptValue}
+   * @example
+   * // Get the current selection and save it in a JSON file.
+   * var selectedNodeCount = selection.numberOfNodesSelected();
+   * if (selectedNodeCount != 1)
+   *     return;
+   *
+   * var newSelection = new Object;
+   * newSelection.node = selection.selectedNode(0);
+   * newSelection.subobjects = selection.subSelectionForNode(newSelection.node);
+   *
+   * // Save the javascript object containing the selection information in a JSON file in the temp folder.
+   * var mySelectionFile = System.getenv("TEMP") + "/myHarmonySelection_001.json";
+   * var myFile = new PermanentFile(mySelectionFile);
+   * myFile.open(2);
+   * myFile.write(JSON.stringify(newSelection));
+   * myFile.close();
+   */
+  public static subSelectionForNode(node: string): QScriptValue;
+}
+
+/**
+ * The sound JavaScript global object. Access the scene soundtrack in part or in whole. The scripting
+ * environment can receive notifications when scene frame is ready. See the TB_ExportFLV.js script for
+ * an example.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classsound.html}
+ * @example
+ * // Retrieves a 16 bit 48 KHz stereo soundtrack of frames 50 to 100
+ *
+ * sound.setSampleRate(48000);
+ * sound.setChannelSize(16);
+ * sound.setChannelCount(2);
+ * var soundFile = sound.getSoundtrack(50, 100);
+ * MessageBox.information("Soundtrack file location: " + soundFile.path());
+ */
+declare class sound extends GlobalObject {
+  /**
+   * Copy the content of the source file to the destination file and say if the copy is done completely.
+   * @param {string} srcFileName The source file to be copied from.
+   * @param {string} dstFileName The destination file to be copied to.
+   * @returns {boolean}
+   */
+  public static copy(srcFileName: string, dstFileName: string): boolean;
+
+  /**
+   * Return a part of the scene's soundtrack in a temporary file in the WAV format.
+   * @param {int} fromFrame The soundtrack start frame.
+   * @param {int} toFrame The soundtrack end frame.
+   * @returns {QObject}
+   */
+  public static getSoundtrack(fromFrame: int, toFrame: int): QObject;
+
+  /**
+   * Return the scene's soundtrack in a temporary file in the WAV format.
+   * @returns {QObject}
+   */
+  public static getSoundtrackAll(): QObject;
+
+  /**
+   * Check if the export file path is in unicode.
+   * @param {string} exportFilePath The export file path to check.
+   * @returns {boolean}
+   */
+  public static isUnicode(exportFilePath: string): boolean;
+
+  /**
+   * Sets the number of audio channels (i.e 1 for mono and 2 for stereo).
+   * @param {int} count The audio channel count.
+   * @returns {void}
+   */
+  public static setChannelCount(count: int): void;
+
+  /**
+   * Sets the audio channel size (i.e. 8 or 16 bit).
+   * @param {int} size The audio channel size.
+   * @returns {void}
+   */
+  public static setChannelSize(size: int): void;
+
+  /**
+   * Sets the number of frames per second. By default the scene frame rate is used.
+   * @param {int} rate The desired frame rate.
+   * @returns {void}
+   */
+  public static setFrameRate(rate: int): void;
+
+  /**
+   * Sets the audio sample rate in Hz (i.e. 22050, 44100, ...).
+   * @param {double} rate The desired audio sample rate.
+   * @returns {void}
+   */
+  public static setSampleRate(rate: double): void;
+
+  /**
+   * Event that notifies the script when the sound file is available.
+   * @returns {void}
+   */
+  public soundReady: QSignal<() => void>;
+}
+
+/**
+ * The System JavaScript global object. Call system specific command directly.
+ * SCR_SystemInterface allows access to environment variables and printing to the command prompt or
+ * Terminal.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classSystem.html}
+ * @example
+ * System.println("This text is printed in the command prompt or the Terminal");
+ * var tempFolder = System.getenv("TEMP");
+ */
+declare class System extends GlobalObject {
+  /**
+   * Gets the value of an environment variable or the operating system.
+   * @param {string} environmentVariable The desired environment variable.
+   * @returns {string}
+   */
+  public static getenv(environmentVariable: string): string;
+
+  /**
+   * Prints a string to Terminal (Unix) or Command Prompt (Windows).
+   * @param {string} text The text to print to the console.
+   * @returns {void}
+   */
+  public static println(text: string): void;
+
+  /**
+   * Processes the next event in a while loop. It can not be accessed from the scriptModule.
+   * @returns {void}
+   */
+  public static processOneEvent(): void;
+}
+
+/**
+ * The Timeline JavaScript global object. Used to get informations about layers and frames from the
+ * Timeline view.
+ * There are two main groups of Timeline functions:
+ * The layerIdx and selIdx parameters are used in many of the functions:
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTimeline.html}
+ * @example
+ *  function printTimelineLayerInformation() {
+ *      //
+ *      // Print out information for all layers
+ *      //
+ *      var numLayers = Timeline.numLayers;
+ *      for (var i = 0; i < numLayers; i++) {
+ *          if (Timeline.layerIsNode(i))
+ *              MessageLog.trace(i + ": is a node named " + Timeline.layerToNode(i));
+ *
+ *          if (Timeline.layerIsColumn(i))
+ *              MessageLog.trace(" " + i + ": also has an xsheet column named " + Timeline.layerToColumn(i));
+ *      }
+ *
+ *      MessageLog.trace("number of frames selected is " + Timeline.numFrameSel + " starting at " + Timeline.firstFrameSel);
+ *
+ *
+ *      //
+ *      // Print out information on selected layers
+ *      //
+ *
+ *      var numSelLayers = Timeline.numLayerSel;
+ *      for (var i = 0; i < numSelLayers; i++) {
+ *          if (Timeline.selIsNode(i))
+ *              MessageLog.trace(" " + i + ": is a SELECTED node layer with name " + Timeline.selToNode(i));
+ *
+ *          if (Timeline.selIsColumn(i))
+ *              MessageLog.trace(i + ": SELECTED layer name is " + Timeline.selToColumn(i));
+ *
+ *      }
+ *  }
+ */
+declare class Timeline extends GlobalObject {
+  /**
+   * Returns the first frame selected.
+   * @returns {int}
+   */
+  public static firstFrameSel(): int;
+
+  /**
+   * Returns true if the parent layer index is an ancestor of the layer index.
+   * @param {int} parentLayerIndex The parent layer index in the timeline layer.
+   * @param {int} layerIndex The layer index in the timeline layer.
+   * @returns {boolean}
+   */
+  public static isAncestorOf(parentLayerIndex: int, layerIndex: int): boolean;
+
+  /**
+   * Returns true if the layer index is a column.
+   * @param {int} layerIndex The layer index in the timeline layer.
+   * @returns {boolean}
+   */
+  public static layerIsColumn(layerIndex: int): boolean;
+
+  /**
+   * Returns true if the layer is a node.
+   * @param {int} layerIndex The layer index in the timeline layer.
+   * @returns {boolean}
+   */
+  public static layerIsNode(layerIndex: int): boolean;
+
+  /**
+   * Returns the layer as a column, or the empty string if this layer is not a column.
+   * @param {int} layerIndex The layer index in the timeline layer.
+   * @returns {string}
+   */
+  public static layerToColumn(layerIndex: int): string;
+
+  /**
+   * Returns the node associated to the layer, or the empty string if this layer is not a node.
+   * @param {int} layerIndex The layer index in the timeline layer.
+   * @returns {string}
+   */
+  public static layerToNode(layerIndex: int): string;
+
+  /**
+   * Returns the number of the selected frame, if only one frame is selected. It will return zero (0) if
+   * no frames are selected.
+   * @returns {int}
+   */
+  public static numFrameSel(): int;
+
+  /**
+   * Returns the number of layers in the timeline.
+   * @returns {int}
+   */
+  public static numLayers(): int;
+
+  /**
+   * Returns the number of layer selected.
+   * @returns {int}
+   */
+  public static numLayerSel(): int;
+
+  /**
+   * Returns the layer index of the parent node.
+   * @param {int} layerIndex The layer index in the timeline layer.
+   * @returns {int}
+   */
+  public static parentNodeIndex(layerIndex: int): int;
+
+  /**
+   * Returns true if the selectionIndex points to a column.
+   * @param {int} selectionIndex The selection index in the timeline layer.
+   * @returns {boolean}
+   */
+  public static selIsColumn(selectionIndex: int): boolean;
+
+  /**
+   * Returns true if the selection index is a node.
+   * @param {int} selectionIndex The selection index in the timeline layer.
+   * @returns {boolean}
+   */
+  public static selIsNode(selectionIndex: int): boolean;
+
+  /**
+   * Converts the selection index to a column.
+   * @param {int} selectionIndex The selection index in the timeline layer.
+   * @returns {string}
+   */
+  public static selToColumn(selectionIndex: int): string;
+
+  /**
+   * Converts a selection index to a layer index.
+   * @param {int} selectionIndex The selection index in the timeline layer.
+   * @returns {int}
+   */
+  public static selToLayer(selectionIndex: int): int;
+
+  /**
+   * Converts the selection index to a node.
+   * @param {int} selectionIndex The selecton index in the timeline layer.
+   * @returns {string}
+   */
+  public static selToNode(selectionIndex: int): string;
+
+  /**
+   * Returns true if the display was set to unconnected.
+   * @returns {boolean}
+   */
+  public static setDisplayToUnconnected(): boolean;
+
+  /**
+   * Returns the first selected frame number.
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ static firstFrameSel: int;
+
+  /**
+   * Returns the number of selected the frame. If only 1 frame is selected.
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ static numFrameSel: int;
+
+  /**
+   * Returns the number of layers in the timeline.
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ static numLayers: int;
+
+  /**
+   * Returns the number of selected layers.
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ static numLayerSel: int;
+}
+
+/**
+ * The ToolProperties JavaScript global object. Controls the Tool Properties.
+ * This object controls most of the tool properties that can be found on the Tool Properties Panel. The
+ * Tool Presets view must have been loaded for these function to be available.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classToolProperties.html}
+ */
+declare class ToolProperties extends GlobalObject {
+  /**
+   * Sets the Apply to Line Art and Colour Art checkbox state to b; in the Select Tool Options.
+   * @param {boolean} b When true sets the Apply to Line Art and Colour Art checkbox state to checked. When false, unchecks it.
+   * @returns {void}
+   */
+  public static setApplyAllArts(b: boolean): void;
+
+  /**
+   * Sets the apply all drawing mode to b.
+   * @param {boolean} b When true enables the apply all drawing mode.
+   * @returns {void}
+   */
+  public static setApplyAllDrawings(b: boolean): void;
+
+  /**
+   * Sets the apply all visible drawing mode to b.
+   * @param {boolean} b When true enables the apply all visible drawing mode.
+   * @returns {void}
+   */
+  public static setApplyAllVisibleDrawings(b: boolean): void;
+
+  /**
+   * Sets the auto create colour art mode of the current tool to b if applicable.
+   * @param {boolean} b When true enables the auto create colour art mode of the current tool. When false disables it.
+   * @returns {void}
+   */
+  public static setAutoCreateColourArt(b: boolean): void;
+
+  /**
+   * Sets the auto fill mode of Rectangle and Ellipse tools to b.
+   * @param {boolean} b When true enables the auto fill mode of the Rectangle and Ellipse tools.
+   * @returns {void}
+   */
+  public static setAutoFillInside(b: boolean): void;
+
+  /**
+   * Sets the auto flatten mode if applicable.
+   * @param {boolean} b When true enables the auto flatten mode if applicable. When false disables it.
+   * @returns {void}
+   */
+  public static setAutoFlattenMode(b: boolean): void;
+
+  /**
+   * Sets the auto gap closing mode to m. Mode can be 0, 1, 2 or 3, which corresponds to No Gap, Small,
+   * Medium and Large.
+   * @param {int} m Sets the auto gap closing mode to 0, 1, 2 or 3, which corresponds to No Gap, Small, Medium and Large.
+   * @returns {void}
+   */
+  public static setAutogapClosingMode(m: int): void;
+
+  /**
+   * Instructs the ink tool to bring inked lines on top after inking if b is true.
+   * @param {boolean} b When true instructs the ink tool to bring inked lines on top after inking.
+   * @returns {void}
+   */
+  public static setBringInkedLinesOnTop(b: boolean): void;
+
+  /**
+   * Disables the pivot Transform tool manipulator if b is true. A pivot control will still be displayed
+   * but will not be manipulatable.
+   * @param {boolean} b When true disables the pivot Transform tool manipulator.
+   * @returns {void}
+   */
+  public static setDisablePivotControl(b: boolean): void;
+
+  /**
+   * Toggles the Draw Behind mode of the Brush tool.
+   * @param {boolean} b When true enables the Draw Behind mode of the Brush tool. When false, disables it.
+   * @returns {void}
+   */
+  public static setDrawBehindMode(b: boolean): void;
+
+  /**
+   * Sets the magnifier mode.
+   * @param {boolean} b When true enables the magnifier mode. When false disables it.
+   * @returns {void}
+   */
+  public static setDrawingMagnifierMode(b: boolean): void;
+
+  /**
+   * Set the cutter's gesture mode to b.
+   * @param {boolean} b When true enables the cutter's gesture mode.
+   * @returns {void}
+   */
+  public static setGestureCutter(b: boolean): void;
+
+  /**
+   * Sets the join mode of the inked lines to be joinType. Join type can be one of: "ROUND_JOIN",
+   * "MITER_JOIN" or "BEVEL_JOIN".
+   * @param {string} joinType Sets the join mode of the inked lines to be joinType.
+   * @returns {void}
+   */
+  public static setInkJoinMode(joinType: string): void;
+
+  /**
+   * Instructs the ink tool to select inked lines after inking if b is true.
+   * @param {boolean} b When true instructs the ink tool to select inked lines after inking.
+   * @returns {void}
+   */
+  public static setInkLineSelectionMode(b: boolean): void;
+
+  /**
+   * Toggles the auto gap closing functionality for the line and pencil tools. When the auto gap
+   * functionality is on, the line or pencil tool tries to add a stroke line to cover the gap between the
+   * newly created line and any existing line.
+   * @param {boolean} b When true enables the auto gap closing functionality for the Line and Pencil tools.
+   * @returns {void}
+   */
+  public static setLineAutoGapClosing(b: boolean): void;
+
+  /**
+   * Sets the line building mode of the Pencil tool to b.
+   * @param {boolean} b When true enables the line building mode of the Pencil tool.
+   * @returns {void}
+   */
+  public static setLineBuildingMode(b: boolean): void;
+
+  /**
+   * Sets the line pushing mode of the Pencil tool to b.
+   * @param {boolean} b When true enables the line pushing mode of the Pencil tool.
+   * @returns {void}
+   */
+  public static setLinePushingMode(b: boolean): void;
+
+  /**
+   * Sets the select tool mode selection to Lasso or Marquee. If b is true, the mode will be set to
+   * Marquee.
+   * @param {boolean} b When true sets the selection mode to Marquee. When false sets the selection mode to Lasso.
+   * @returns {void}
+   */
+  public static setMarkeeMode(b: boolean): void;
+
+  /**
+   * Set the cutter's gesture break mode to b.
+   * @param {boolean} b When true enables the cutter's gesture break mode.
+   * @returns {void}
+   */
+  public static setMouseGestureBreakeMode(b: boolean): void;
+
+  /**
+   * Instruct the paint tool to remove the opacity texture if b is true.
+   * @param {boolean} b When true enables the remove texture when painting mode is turned on.
+   * @returns {void}
+   */
+  public static setPaintAndRemoveTextureMode(b: boolean): void;
+
+  /**
+   * If b is true, the paint tool will select the newly painted zone after painting. This can be useful
+   * if you want to edit a gradient on multiple zones after painting.
+   * @param {boolean} b When true the paint tool will select the newly painted zone after painting.
+   * @returns {void}
+   */
+  public static setPaintToolShouldSelectPaintedZonesAfterPainting(
+    b: boolean
+  ): void;
+
+  /**
+   * Sets the selection mode of the transform tool to peg mode if b is true.
+   * @param {boolean} b When true enables the selection mode of the transform tool to peg mode.
+   * @returns {void}
+   */
+  public static setPegSelectionMode(b: boolean): void;
+
+  /**
+   * Sets the pencil tip shape used by the eraser, cutter, and ink tools whenever an existing pencil line
+   * gets split by the tool.
+   * @param {string} pencilTip Can have one of the following values: "ROUND_TIP", "FLAT_TIP" or "BEVEL_TIP".
+   * @returns {void}
+   */
+  public static setPencilTipMode(pencilTip: string): void;
+
+  /**
+   * Toggles the permanent selection mode.
+   * @param {boolean} b When true enables the permanent selection mode. When false disables it.
+   * @returns {void}
+   */
+  public static setPermanentSelectionMode(b: boolean): void;
+
+  /**
+   * Sets the Respect Protected Colour mode if applicable.
+   * @param {boolean} b When true enables the Respect Protected Colour mode. When false disables it.
+   * @returns {void}
+   */
+  public static setRespectProtectedColourMode(b: boolean): void;
+
+  /**
+   * Sets the select by colour mode of the Select tool .
+   * @param {boolean} b When true enables the select by color mode of the Select tool. When false disables it.
+   * @returns {void}
+   */
+  public static setSelectByColourMode(b: boolean): void;
+
+  /**
+   * Toggles whether contour editor shows all tool controls or not.
+   * @param {boolean} b When true contour editer shows all tool controls. When false hides them.
+   * @returns {void}
+   */
+  public static setShowHideAllContourEditingControls(b: boolean): void;
+
+  /**
+   * Hides the transform tool manipulator if b is true.
+   * @param {boolean} b When true hides the transform tool manipulator.
+   * @returns {void}
+   */
+  public static setShowHideManipulatorControls(b: boolean): void;
+
+  /**
+   * Shows the inkable lines if b is true.
+   * @param {boolean} b When true shows the inkable lines.
+   * @returns {void}
+   */
+  public static setShowInkableLines(b: boolean): void;
+
+  /**
+   * Sets the smart ink line connection mode to b.
+   * @param {boolean} b When true enables the smart ink line connection mode.
+   * @returns {void}
+   */
+  public static setSmartInkLineConnectionMode(b: boolean): void;
+
+  /**
+   * Sets the snapping mode for the contour, align and grid mode all to the modes specified in argument.
+   * @param {boolean} contour When true enables the snapping mode for the contour mode. When false disables it.
+   * @param {boolean} align When true enables the snapping mode for the align mode. When false disables it.
+   * @param {boolean} grid When true enables the snapping mode for the grid mode. When false disables it.
+   * @returns {void}
+   */
+  public static setSnapping(
+    contour: boolean,
+    align: boolean,
+    grid: boolean
+  ): void;
+
+  /**
+   * Sets the align and grid snapping modes of the transform tool.
+   * @param {boolean} align When true enables the align snapping mode of the transform tool. When false disables it.
+   * @param {boolean} grid When true enables the grid snapping mode of the transform tool. When false disables it.
+   * @returns {void}
+   */
+  public static setTransformToolSnapping(align: boolean, grid: boolean): void;
+
+  /**
+   * Instruct the paint tool to use the gradient/texture matrix stored in the tool if b is true.
+   * @param {boolean} b When true the paint tool will use the gradient/texture matrix stores in the tool.
+   * @returns {void}
+   */
+  public static setUsedStoredColourGradientMode(b: boolean): void;
+}
+
+/**
+ * The UiLoader JavaScript global object allows the user to load pre-defined Qt forms that define Qt
+ * widgets (generally built within Qt Designer).
+ * This allows users to build complex dialogs, using all of the pre-defined widgets that Qt4.8
+ * supports. See Qt documentation for further details: http://qt-project.org/doc/qt-4.8.
+ * This is an example of how to build a dialog using a predefined Qt designer file ( *.ui ) All widgets
+ * may be addressed directly, but through nested names. That is, if you have a checkbox inside a tab
+ * inside a dialog, you should address the widget as dialog.tab.checkbox Once you've figured out its
+ * name, you are allowed to modify all of its properties, plus you have access to both its signals and
+ * slots ( as well as its inherited properties, signals and slots )
+ * This example and the predefined form are part of the installation, so it can be run in the software
+ * to see what it does. Look for lightTableExampleUsingPredefinedUI. It will display a non-modal widget
+ * that allows the adjustment of the light table settings in the camera view. Please refer to Qt
+ * documentation for the list of accessible widget properties.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classUiloader.html}
+ * @example
+ * function lightTableExampleUsingPredefineUI() {
+ *     this.opacityChanged = function(digitValue) {
+ *         this.ui.LightTableOpacityValueLabel.text = digitValue / 256.0;
+ *         preferences.setDouble("DRAWING_LIGHTTABLE_OPACITY", digitValue / 256.0);
+ *     }
+ *
+ *     this.washChanged = function(digitValue) {
+ *         this.ui.LightTableWashValueLabel.text = digitValue / 256.0;
+ *         preferences.setDouble("DRAWING_LIGHTTABLE_WASH", digitValue / 256.0);
+ *     }
+ *
+ *     // Load the ui file (created in Qt designer)
+ *     localPath = specialFolders.resource;
+ *     System.println(localPath);
+ *     localPath += "/forms/lighttable.ui";
+ *
+ *     //System.println( localPath );
+ *     this.ui = UiLoader.load(localPath);
+ *     // Show the dialog in non-modal fashion.
+ *     ui.show();
+ *
+ *     // Modify any properties that seem interesting
+ *     this.ui.windowTitle = "Light Table Values";
+ *     this.ui.LightTableWashValueLabel.text = preferences.getDouble("DRAWING_LIGHTTABLE_OPACITY", 0);
+ *     this.ui.LightTableOpacityValueLabel.text = preferences.getDouble("DRAWING_LIGHTTABLE_WASH", 0);
+ *     this.ui.LightTableWashLabel.text = "LightTable Wash";
+ *     this.ui.LightTableOpacityLabel.text = "LightTable Opacity";
+ *     this.ui.LightTableWashSlider.minimun = 0;
+ *     this.ui.LightTableWashSlider.maximum = 256;
+ *     this.ui.LightTableWashSlider.value = preferences.getDouble("DRAWING_LIGHTTABLE_WASH", 0) * 256;
+ *     this.ui.LightTableOpacitySlider.minimun = 0;
+ *     this.ui.LightTableOpacitySlider.maximum = 256;
+ *     this.ui.LightTableOpacitySlider.value = preferences.getDouble("DRAWING_LIGHTTABLE_OPACITY", 0) * 256;
+ *
+ *     // Connect the sliders signals to a script defined local slot
+ *     ui.LightTableOpacitySlider.valueChanged.connect(this, this.opacityChanged);
+ *     ui.LightTableWashSlider.valueChanged.connect(this, this.washChanged);
+ * }
+ */
+declare class Uiloader extends GlobalObject {
+  /**
+   * Takes a DPI-independent pixel dimension (100% DPI scaling on an HD screen) and scales it to the
+   * current DPI setting.
+   * @param {QScriptContext} context
+   * @param {QScriptEngine} engine
+   * @returns {QScriptValue}
+   */
+  public static dpiScale(
+    context: QScriptContext,
+    engine: QScriptEngine
+  ): QScriptValue;
+
+  /**
+   * Equivalent of QAppliction::exec for those scripts that wish to run their loaded UI as a separate
+   * app.
+   * @param {QScriptContext} context
+   * @param {QScriptEngine} engine
+   * @returns {QScriptValue}
+   */
+  public static exec(
+    context: QScriptContext,
+    engine: QScriptEngine
+  ): QScriptValue;
+
+  /**
+   * Takes a path to a predefined Qt widget form and loads that form.
+   * @param {QScriptContext} context
+   * @param {QScriptEngine} engine
+   * @returns {QScriptValue}
+   */
+  public static load(
+    context: QScriptContext,
+    engine: QScriptEngine
+  ): QScriptValue;
+
+  /**
+   * @param {QScriptContext} context
+   * @param {QScriptEngine} engine
+   * @returns {QScriptValue}
+   */
+  public static setSvgIcon(
+    context: QScriptContext,
+    engine: QScriptEngine
+  ): QScriptValue;
+}
+
+/**
+ * The view JavaScript global object. Provides information about the contents of selected View windows.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classview.html}
+ * @example
+ * function viewScript() {
+ *     var myView = view.currentView();
+ *     MessageLog.trace(view.type(myView));
+ * }
+ */
+declare class view extends GlobalObject {
+  /**
+   * Returns the name of the column for the currently displayed function in the Function View.
+   * @param {string} viewName The current view value, as returned by the currentView function.
+   * @returns {string}
+   */
+  public static column(viewName: string): string;
+
+  /**
+   * Returns the drawing tool manager.
+   * @returns {QObject}
+   */
+  public static currentToolManager(): QObject;
+
+  /**
+   * Returns a unique identifier for the current, active view.
+   * @returns {string}
+   */
+  public static currentView(): string;
+
+  /**
+   * Returns the name of the current Group Node in the active Network View.
+   * @param {string} viewName The current view value, as returned by the currentView function.
+   * @returns {string}
+   */
+  public static group(viewName: string): string;
+
+  /**
+   * Forces a refresh of the drawing and scene planning views.
+   * @returns {void}
+   */
+  public static refreshViews(): void;
+
+  /**
+   * Returns a string that indicates what type of View the currentView is.
+   * @param {string} viewName The current view value, as returned by the currentView function.
+   * @returns {string}
+   */
+  public static type(viewName: string): string;
+}
+
+/**
+ * The ComboBox JavaScript class. A simplified version of the ComboBox Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classComboBox.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “ComboBox Example”;
+ *
+ * var userInput = new ComboBox();
+ * userInput.label = “What is your favourite colour ? ”
+ *
+ *     userInput.editable = true;
+ * userInput.itemList = [“Red”, “Green”, “Blue”, “Yellow”, “White”, “Pink”, “Orange”, “Purple”, “Black”];
+ *
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec())
+ *     MessageLog.trace(“The user’ s favourite colour is“ + userInput.currentItem + “.”);
+ */
+declare class ComboBox extends Labeled {
+  /**
+   * The currently selected item.
+   * @returns {string}
+   */
+  currentItem: string;
+
+  /**
+   * The index of the current item.
+   * @returns {int}
+   */
+  currentItemPos: int;
+
+  /**
+   * Toggle whether the combo box may be edited by the user.
+   * @returns {boolean}
+   */
+  editable: boolean;
+
+  /**
+   * The stringlist of items.
+   * @returns {StringList}
+   */
+  itemList: StringList;
+}
+
+/**
+ * The DateEdit JavaScript class. A simplified version of the DateEdit Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDateEdit.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “DateEdit Example”;
+ *
+ * var userInput = new DateEdit();
+ *
+ * //YMD means the order will be changed to Year:Month:Day in the dialog.
+ * //The possible orders are DMY, MDY, YMD, YDM.
+ * userInput.order = DateEditEnum.YMD;
+ *
+ * var min = new Date(2010, 1, 1);
+ * var max = new Date(2019, 12, 31);
+ * var now = new Date();
+ *
+ * userInput.date = now;
+ * userInput.minimum = min;
+ * userInput.maximum = max;
+ *
+ * userInput.label = “Pick a date from this decade: “;
+ *
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec()) {
+ *     var inputDate = userInput.date;
+ *     var day = inputDate.getDate();
+ *     var month = inputDate.getMonth() + 1;
+ *     var year = inputDate.getFullYear();
+ *
+ *     MessageLog.trace(“The selected date is“ + day + “/“ + month + “/“ + year + “.”);
+ * }
+ */
+declare class DateEdit extends Labeled {
+  /**
+   * The date shown.
+   * @returns {QDate}
+   */
+  date: QDate;
+
+  /**
+   * The maximum date allowed by DateEdit.
+   * @returns {QDate}
+   */
+  maximum: QDate;
+
+  /**
+   * The minimum date allowed by DateEdit.
+   * @returns {QDate}
+   */
+  minimum: QDate;
+
+  /**
+   * Whether the date order shown is DMY, MDY, YMD, or YDM.
+   * @returns {int}
+   */
+  order: int;
+}
+
+/**
+ * The LineEdit JavaScript class. A simplified version of the LineEdit Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classLineEdit.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “LineEdit Example”;
+ *
+ * var userInput = new LineEdit();
+ * userInput.label = “What is your favourite colour ? ”;
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec()) {
+ *     var inputText = userInput.text;
+ *     MessageLog.trace(“Your favourite colour is“ + inputText + “!”);
+ * }
+ */
+declare class LineEdit extends Labeled {
+  /**
+   * Text shown in the LineEdit.
+   * @returns {string}
+   */
+  text: string;
+}
+
+/**
+ * The NumberEdit JavaScript class. A simplified version of the NumberEdit Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classNumberEdit.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “NumberEdit Example”;
+ *
+ * var userInput = new NumberEdit();
+ * userInput.decimals = 3;
+ * userInput.minimum = 0;
+ * userInput.maximum = 1;
+ * userInput.label = “Enter a number between 0 and 1: “;
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec()) {
+ *     var inputNum = userInput.value;
+ *     MessageLog.trace(inputNum);
+ * }
+ */
+declare class NumberEdit extends Labeled {
+  /**
+   * The precision of the NumberEdit.
+   * @returns {double}
+   */
+  decimals: double;
+
+  /**
+   * The maximum value allowed by NumberEdit.
+   * @returns {double}
+   */
+  maximum: double;
+
+  /**
+   * The minimum value allowed by NumberEdit.
+   * @returns {double}
+   */
+  minimum: double;
+
+  /**
+   * The value shown.
+   * @returns {double}
+   */
+  value: double;
+}
+
+/**
+ * The Slider JavaScript class. A simplified version of the Slider Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classSlider.html}
+ * @example
+ * var mySlider;
+ *
+ * function sliderExample() {
+ *     var myDialog = new Dialog();
+ *     myDialog.title = “Slider Example”;
+ *
+ *     var userInput = new Slider();
+ *     userInput.label = “Pick a number.”
+ *
+ *     userInput.minimum = -50;
+ *     userInput.maximum = 50;
+ *     userInput.value = 0;
+ *     userInput.orientation = “Vertical”;
+ *
+ *     //Whenever the valueChanged() signal is sent,
+ *     // the current value of the slider will be printed
+ *     userInput.callback = “printVal”;
+ *
+ *     mySlider = userInput;
+ *
+ *     myDialog.add(userInput);
+ *
+ *     myDialog.exec();
+ * }
+ *
+ * function printVal() {
+ *     //This prints a continuous stream of updating values, as they are changed
+ *     MessageLog.trace(mySlider.value);
+ * }
+ */
+declare class Slider extends Labeled {
+  /**
+   * Sets the value in the slider, triggering the callback.
+   * @param {int} value
+   * @returns {void}
+   */
+  public valueChanged(value: int): void;
+
+  /**
+   * Use this to assign the name of another function. This function will be triggered automatically when
+   * the slider value is modified.
+   * @returns {string}
+   */
+  callback: string;
+
+  /**
+   * The maximum value of the slider.
+   * @returns {int}
+   */
+  maximum: int;
+
+  /**
+   * The minimum value of the slider.
+   * @returns {int}
+   */
+  minimum: int;
+
+  /**
+   * Whether or not the slider is horizontal or vertical.
+   * @returns {string}
+   */
+  orientation: string;
+
+  /**
+   * The value of the slider.
+   * @returns {int}
+   */
+  value: int;
+}
+
+/**
+ * The SpinBox JavaScript class. A simplified version of the SpinBox Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classSpinBox.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “SpinBox Example”;
+ *
+ * var userInput = new SpinBox();
+ * userInput.label = “Pick a number: “;
+ *
+ * userInput.maximum = 100;
+ * userInput.minimum = 1;
+ *
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec())
+ *     MessageLog.trace(“The chosen number is: “+userInput.value + “.”);
+ */
+declare class SpinBox extends Labeled {
+  /**
+   * The maximum value that the spinBox will ascend to. Default value is 99.
+   * @returns {int}
+   */
+  maximum: int;
+
+  /**
+   * The minimum value that the spinBox will descend to. Default value is 0.
+   * @returns {int}
+   */
+  minimum: int;
+
+  /**
+   * The value shown in the spinBox. Default value is 0.
+   * @returns {int}
+   */
+  value: int;
+}
+
+/**
+ * The TimeEdit JavaScript class. A simplified version of the TimeEdit Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTimeEdit.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “TimeEdit Example”;
+ *
+ * var userInput = new TimeEdit();
+ *
+ * var min = new QTime(15, 00, 00);
+ * var max = new QTime(18, 00, 00);
+ * var preset = new QTime(15, 00, 00);
+ *
+ * userInput.time = preset;
+ * userInput.minimum = min;
+ * userInput.maximum = max;
+ *
+ * //These two lines are redundant, as these are already the default values
+ * userInput.showSeconds = false;
+ * userInput.showAMPM = true;
+ *
+ * userInput.label = “Pick an appointment time: “;
+ *
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec())
+ *     MessageLog.trace(“The chosen time is: “+userInput.time + “.”);
+ */
+declare class TimeEdit extends Labeled {
+  /**
+   * The maximum time allowed by TimeEdit.
+   * @returns {QTime}
+   */
+  maximum: QTime;
+
+  /**
+   * The minimum time allowed by TimeEdit.
+   * @returns {QTime}
+   */
+  minimum: QTime;
+
+  /**
+   * Toggle to display the AM : PM display.
+   * @returns {boolean}
+   */
+  showAMPM: boolean;
+
+  /**
+   * Toggle to display seconds in the time.
+   * @returns {boolean}
+   */
+  showSeconds: boolean;
+
+  /**
+   * The current time.
+   * @returns {QTime}
+   */
+  time: QTime;
+}
+
+/**
+ * Base class of the script widget classes.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classWidgetBase.html}
+ */
+declare class WidgetBase extends MO_SignalEmitter {
+  /**
+   * Return the attribute at the given index. If no index is provide, return the first attribute.
+   * @param {int} [index=0] corresponding to the order in which they were provided at the widget creation. The indexes start at 0.
+   * @returns {Attribute}
+   */
+  public data(index?: int): Attribute;
+
+  /**
+   * signal called when this widget is dragged with the Transform tool
+   * @param {QScriptValue} dragContext A DragContext giving information about the currently dragged node and the picking point.
+   * @returns {void}
+   */
+  public drag: QSignal<(dragContext: QScriptValue) => void>;
+
+  /**
+   * signal called on mouse up after having manipulated this widget with the Transform tool
+   * @returns {void}
+   */
+  public dragEnded: QSignal<() => void>;
+
+  /**
+   * signal called on mouse down when picking this widget with the Transform tool
+   * @param {QScriptValue} dragContext A DragContext giving information about the currently dragged node and the picking point.
+   * @returns {void}
+   */
+  public dragStarted: QSignal<(dragContext: QScriptValue) => void>;
+}
+
+/**
+ * The CustomWidget JavaScript class. A widget for which the attribute, drag_manipulator, painter,
+ * picker and local_transformation components are specified at the widget creation.
+ * A widget that can have its look, drag manipulation, transformation and picking be customized. The
+ * look of the widget can be set at the widget creation by specifying a painter property. By example,
+ * the widget can be drawn as a circle, a slider, a point, a plane, an arrow or sphere.
+ * Local transformations let the widget have attributes that affects the widget registered after them.
+ * By example, a translation widget could be declared first and enable the user to drag the widgets
+ * registered after it. The local transformation is specified by the local_transformation property.
+ * The picker property enables the user to choose the selection behaviour after being picked.
+ * The drag_manipulator property enables the user to choose the behavior of the widget when it is
+ * dragged. Please note that the drag behaviour can also be implemented in a javaScript callback with
+ * the CustomWidget.
+ * If a drag manipulator property hasn't been provided, connect the custom widget drag signals to
+ * implement the desired behaviour.
+ * When connecting to a dragStarted or drag signal, the provided context offers methods to compute the
+ * location of the dragging point. See DragContext for more information.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classCustomWidget.html}
+ * @example
+ * var drag_offset = new Vector3d;
+ *
+ * function onDragStart(context) {
+ *     var projectedPoint = context.projectToModelPlane(context.dragPoint());
+ *     var modelPickingPoint = context.multiplyByPostMatrix(projectedPoint);
+ *     var pegPoint = node.getAttr("Top/MyPeg", frame.current(), "POSITION").pos3dValue();
+ *     var modelOriginPoint = scene.toOGL(pegPoint);
+ *
+ *     drag_offset = modelOriginPoint.minus(modelPickingPoint);
+ * }
+ *
+ * function onDragTransX(context) {
+ *     var projectedPoint = context.projectToModelPlane(context.dragPoint());
+ *     var localPoint = context.multiplyByPostMatrix(projectedPoint);
+ *     var fieldPoint = scene.fromOGL(localPoint.add(drag_offset));
+ *
+ *     var newValue = fieldPoint.x;
+ *
+ *     node.setTextAttr("Top/MyController", "TranslationX", frame.current(), newValue);
+ *     node.setTextAttr("Top/MyPeg", "POSITION.X", frame.current(), newValue);
+ * }
+ *
+ * Controller.onShowControl = function() {
+ *     Controller.controls = [];
+ *
+ *     var customWidget = new CustomWidget({
+ *         data: "TranslationX",
+ *         attribute: "DOUBLE",
+ *         drag_manipulator: "SCRIPT",
+ *         painter: "ARROW_X",
+ *         picker: "MONO",
+ *         local_transformation: "TRANSLATION_X"
+ *     });
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     customWidget.dragStarted.connect(onDragStart);
+ *     customWidget.drag.connect(onDragTransX);
+ *     Controller.controls.push(customWidget);
+ * }
+ */
+declare class CustomWidget extends WidgetBase {
+  /**
+   * valueChanged signal called when value of the attribute of the widget has changed
+   * @param {string} newValue The new value of the attribute of the widget in text format. The given value is the equivalent of calling node.getTextAttr() with the widget attribute as the method attribute parameter.
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(newValue: string) => void>;
+}
+
+/**
+ * The Line2dDisplayWidget JavaScript class. A 2 dimensional line linking 2 points.
+ * A simple 2 dimensional line display script widget. This widget offers a 2D visual line in the Camera
+ * view. It is intended to show the relation between 2 distinct points. The line 2D widget cannot be
+ * instantiated without providing it with an array of 2 2D point attributes.
+ * The following properties are supported by the widget:
+ * The following components constitute the widget:
+ * Set the data properties of this widget to an array of 2 2d point attributes at the widget creation.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classLine2dDisplayWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *         Controller.controls = [];
+ *
+ *         var myPointWidgetA = new Point2dWidget();
+ *         var myPointWidgetB = new Point2dWidget();
+ *         var myLine2dDisplayWidget = new Line2dDisplayWidget({
+ *             data: [myPointWidgetA.data(), myPointWidgetB.data()],
+ *             size: 0.05,
+ *             color: ColorRGBA(20, 20, 20)
+ *         });
+ *
+ *         myLine2dDisplayWidget.data(0).setValue(new Point2d(2, 2));
+ *         myLine2dDisplayWidget.data(1).setValue(new Point2d(-2, -2));
+ *
+ *         Controller.controls.push(myPointWidgetA);
+ *         Controller.controls.push(myPointWidgetB);
+ *         Controller.controls.push(myLine2dDisplayWidget);
+ */
+declare class Line2dDisplayWidget extends WidgetBase {}
+
+/**
+ * The Point2dWidget JavaScript class. A 2 dimensional point widget of various shape.
+ * A 2 dimensional point script widget that can be dragged inside a bounding box specified by the user.
+ * The widget manipulator is 2 concentric circles. The color of each circle can be specified at the
+ * object creation. The widget can be dragged in the Camera view while using the Transform tool.
+ * Dragging the widget will modify the value of the widget position in model Field coordinates.
+ * If no 2d position attribute is given at the construction of this object, the object will generate
+ * one of the proper type.
+ * The following properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget. In the callback function, transfer the new widget value into an action (like
+ * modifying a peg attribute value).
+ * Create a point 2d widget in the Controller onShowControl method. Extrapolate its default valuel from
+ * a peg position.
+ * When the value of the script widget changes, update the peg position from the point position in its
+ * bounding box.
+ * When the current frame changes, update the widget position from the position of the peg at the new
+ * current frame.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPoint2dWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     Controller.controls = [];
+ *
+ *     var point2dWidget = new Point2dWidget({
+ *         data: "MyPoint",
+ *
+ *         // bounding box properties
+ *         xmin: -1,
+ *         xmax: 1,
+ *         ymin: -0.5,
+ *         ymax: 0.5,
+ *
+ *         // color properties
+ *         color: ColorRGBA(155, 0, 0),
+ *         selection_color: ColorRGBA(255, 0, 0)
+ *     });
+ *
+ *     // Set the widget default value.
+ *     point2dWidget.data().setValue(getPoint2dValue()); // getPoint2dValue() returns a Point2d
+ *
+ *     // Connect the widget valueChanged signal to the point2dValueChanged slot.
+ *     point2dWidget.valueChanged.connect(point2dValueChanged);
+ *
+ *     // Register the widget to the Controller.
+ *     Controller.controls.push(point2dWidget);
+ * }
+ */
+declare class Point2dWidget extends WidgetBase {
+  /**
+   * Signal notifying the user that the 2d point value was modified by the Transform Tool.
+   * @param {QScriptValue} point2d the new 2d point value. point2d is of JavaScript type Point2d
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(point2d: QScriptValue) => void>;
+}
+
+/**
+ * The Rotation3dWidget JavaScript class. A rotatable spherical widget.
+ * A 3 dimensional rotation script widget. This widget offers a 3D sphere manipulator that can dragged
+ * in the Camera view while using the Transform tool. Dragging the sphere generates a 3D rotation. If
+ * no attribute is given at the construction of this object, the object will generate a 3D rotation
+ * attribute.
+ * The following properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget.
+ * In the callback function, convert the widget value into an action (like modifying a peg attribute
+ * value).
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classRotation3dWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     var myRotation3dWidget = new Rotation3dWidget({
+ *         data: "Rotation3D",
+ *
+ *         radius: 2,
+ *         color: ColorRGBA(0, 255, 0, 120),
+ *         selected_color: ColorRGBA(0, 255, 0, 120)
+ *     });
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     myRotation3dWidget.valueChanged.connect(my3dRotationChangedFunction);
+ *
+ *     Controller.controls.push(myRotation3dWidget);
+ * }
+ */
+declare class Rotation3dWidget extends WidgetBase {
+  /**
+   * valueChanged signal called when the Rotation 3D attribute value has changed
+   * @param {QScriptValue} rotation The new 3D rotation value. To retrieve the rotation per individual axis, get the following properties: rotation.x rotation.y rotation.z
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(rotation: QScriptValue) => void>;
+}
+
+/**
+ * The RotationXWidget JavaScript class. A rotatable circle widget around the x axis.
+ * A rotation script widget along the x axis. This widget offers a circle in the YZ axis. The circle
+ * can be picked and dragged by the user to generate a rotation around the x axis. The following
+ * properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget.
+ * In the callback function, convert the widget value into an action.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classRotationXWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     var Controller.controls = [];
+ *
+ *     var myRotationXdWidget = new RotationXWidget({
+ *         data: "myRotation",
+ *
+ *         radius: 2,
+ *         radius: 0.05,
+ *         color: ColorRGBA(0, 255, 0, 120),
+ *         selected_color: ColorRGBA(0, 255, 0, 120)
+ *     });
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     myRotationXdWidget.valueChanged.connect(myRotationChanged);
+ *
+ *     Controller.controls.push(myRotationXdWidget);
+ * }
+ */
+declare class RotationXWidget extends WidgetBase {
+  /**
+   * @param {float} x
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(x: float) => void>;
+}
+
+/**
+ * The RotationYWidget JavaScript class. A rotatable circle widget around the y axis.
+ * A rotation script widget along the y axis. This widget offers a circle in the XZ axis. The circle
+ * can be picked and dragged by the user to generate a rotation around the y axis. The following
+ * properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget.
+ * In the callback function, convert the widget value into an action.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classRotationYWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     var Controller.controls = [];
+ *     var myRotationYdWidget = new RotationYWidget({
+ *         data: "myRotation",
+ *
+ *         radius: 2,
+ *         radius: 0.05,
+ *         color: ColorRGBA(0, 255, 0, 120),
+ *         selected_color: ColorRGBA(0, 255, 0, 120)
+ *     });
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     myRotationYdWidget.valueChanged.connect(myRotationChanged);
+ *     Controller.controls.push(myRotationYdWidget);
+ * }
+ */
+declare class RotationYWidget extends WidgetBase {
+  /**
+   * @param {float} y
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(y: float) => void>;
+}
+
+/**
+ * The RotationZWidget JavaScript class. A rotatable circle widget around the z axis.
+ * A rotation script widget along the z axis. This widget offers a circle in the YZ axis. The circle
+ * can be picked and dragged by the user to generate a rotation around the z axis. The following
+ * properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget.
+ * In the callback function, convert the widget value into an action.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classRotationZWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     var Controller.controls = [];
+ *
+ *     var myRotationZdWidget = new RotationZWidget({
+ *         data: "myRotation",
+ *
+ *         radius: 2,
+ *         radius: 0.05,
+ *         color: ColorRGBA(0, 255, 0, 120),
+ *         selected_color: ColorRGBA(0, 255, 0, 120)
+ *     });
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     myRotationZdWidget.valueChanged.connect(myRotationChanged);
+ *     Controller.controls.push(myRotationZdWidget);
+ * }
+ */
+declare class RotationZWidget extends WidgetBase {
+  /**
+   * @param {float} z
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(z: float) => void>;
+}
+
+/**
+ * The SliderWidget JavaScript class. A vertical or horizontal slider.
+ * Slider widgets provide to the user a vertical or horizontal slider Camera view control. Its handle
+ * can be slided and dragged by using the Transform tool. The slider value goes from a user defined
+ * minimum value to a user defined maximum value. The user defined values can be specified at the
+ * widget construction. The slider can also be translated by having the user pick and drag its frame.
+ * If no attribute is given at the construction of this object, the object will generate one of the
+ * proper type.
+ * The following properties are supported by the widget:
+ * The following components are used for the slider handle.
+ * The following components are used for the slider frame.
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget. In the callback function, transfer the widget value into an action (like modifying a
+ * peg attribute value).
+ * The previous example demonstrates how to instantiate a new widget and register it in the Controller
+ * global object.
+ * This example shows how to apply a new slider value to a peg.
+ * This example shows how to update the slider widget value when the current frame changes.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classSliderWidget.html}
+ * @example
+ * // Helper function to get the slider value from a Peg value. Completely arbitrary.
+ * function getSliderValueFromPeg() {
+ *     // slider max slider value * (peg position x + 1 (field)) * 2 (fields)
+ *     return 100 * ((node.getAttr("Top/MyPeg_A", frame.current(), "POSITION.X").doubleValue() + 1) / 2 + min slider value(0));
+ * }
+ *
+ * Controller.onShowControl = function() {
+ *     var sliderWidget = new SliderWidget({
+ *         data: "Slider",
+ *         xmin: -0.05,
+ *         ymin: -0.1,
+ *         length: 0.75,
+ *         radius: 0.1,
+ *         frame_color: ColorRGBA(120, 80, 120, 200),
+ *         slider_color: ColorRGBA(170, 135, 0, 200),
+ *         slider_selection_color: ColorRGBA(150, 150, 150, 150),
+ *         frame_selection_color: ColorRGBA(150, 150, 150, 150)
+ *     });
+ *
+ *     // Initialize the slider attribute from the controlled Peg position.
+ *     var initialValue = getSliderValueFromPeg();
+ *     sliderWidget.data().setValue(initialValue); // initialValue is a float
+ *
+ *     // Register a callback for when a transformation tool changes the value of the slider.
+ *     sliderWidget.valueChanged.connect(mySliderValueChanged);
+ *
+ *     // Register the widget to the Controller.
+ *     Controller.controls = [];
+ *     Controller.controls.push(sliderWidget);
+ * }
  */
 declare class SliderWidget extends WidgetBase {
-  constructor(config: SliderWidgetConfig);
   /**
    * Signal notifying the user that the slider value was modified by the Transform Tool.
+   * @param {float} newSliderValue the new slider value
+   * @returns {void}
    */
   public valueChanged: QSignal<(newSliderValue: float) => void>;
 }
 
-declare interface Point2dWidgetConfig extends WidgetConfig {
+/**
+ * The TranslationXWidget JavaScript class. A translatable arrow in the x axis.
+ * A translation along the x axis script widget. This widget offers an arrow manipulators that can be
+ * dragged in the Camera view while using the Transform tool. Dragging the arrow will generate a
+ * translation in the x axis. If no attribute is given at the construction of this object, the object
+ * will generate a double floating point attribute.
+ * The following properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget. In the callback function, transfer the widget value into an action (like modifying a
+ * peg attribute value).
+ * The previous example demonstrates how to instantiate a new widget and register it in the Controller
+ * global object.
+ * This example shows how to apply the difference in translation of a translation widget on an
+ * arbitrary peg in the scene.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTranslationXWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     // Set the widget properties at its creation.
+ *     var translationWidget = new TranslationXWidget({
+ *         data: "TranslationX",
+ *         min: 0.5,
+ *         width: 1,
+ *         color: ColorRGBA(155, 0, 0),
+ *         selection_color: ColorRGBA(255, 0, 0)
+ *     });
+ *
+ *     // Set the widget initial value.
+ *     translationWidget.data().setValue(3);
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     translationWidget.valueChanged.connect(translationXChanged);
+ *     // Register a callback for when the widget is beginning to be dragged
+ *     translationWidget.dragStarted.connect(translationDragStart);
+ *
+ *     // Register the widget in the Controller
+ *     Controller.controls = [];
+ *     Controller.controls.push(translationWidget);
+ * }
+ */
+declare class TranslationXWidget extends WidgetBase {
   /**
-   * The name of the automatically generated 2d position attribute (if none is provided)
-   * or, An attribute of 2d position type that can be shared with another widget or node.
+   * valueChanged signal called when the x translation value has been modified by the Transform tool.
+   * @param {float} x the new x translation value
+   * @returns {void}
    */
-  data: string | Attribute;
-  /**
-   * The size (diameter) of the point manipulator in fields.
-   * Default: 0.01
-   */
-  size?: float;
-  /**
-   * The colour of the point manipulator.
-   * Default: 255,0,0
-   */
-  color?: ColorRGBA;
-  /**
-   * The colour of the inner point manipulator (override the color property if both are found).
-   */
-  inner_color?: ColorRGBA;
-  /**
-   * The colour of the outer point manipulator (override the color property if both are found).
-   */
-  outer_color?: ColorRGBA;
-  /**
-   * The colour of the point manipulator when selected.
-   * Default: light blue
-   */
-  selection_color?: ColorRGBA;
-  /**
-   * The left boundary of the point bounding box in fields.
-   */
-  xmin?: float;
-  /**
-   * The right boundary of the point bounding box in fields.
-   */
-  xmax?: float;
-  /**
-   * The bottom boundary of the point bounding box in fields.
-   */
-  ymin?: float;
-  /**
-   * The top boundary of the point bounding box in fields.
-   */
-  ymax?: float;
+  public valueChanged: QSignal<(x: float) => void>;
 }
 
 /**
- * The Point2dWidget JavaScript class. A 2 dimensional point widget of various shape
+ * The TranslationYWidget JavaScript class. A translatable arrow in the y axis.
+ * A translation along the y axis script widget. This widget offers an arrow manipulators that can be
+ * dragged in the Camera view while using the Transform tool. Dragging the arrow will generate a
+ * translation in the y axis. If no attribute is given at the construction of this object, the object
+ * will generate a double floating point attribute.
+ * The following properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget. In the callback function, transfer the widget value into an action (like modifying a
+ * peg attribute value).
+ * The previous example demonstrates how to instantiate a new widget and register it in the Controller
+ * global object.
+ * This example shows how to apply the difference in translation of a translation widget on an
+ * arbitrary peg in the scene.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTranslationYWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     var translationWidget = new TranslationYWidget({
+ *         data: "TranslationY",
+ *         min: 0.5,
+ *         width: 1,
+ *         color: ColorRGBA(155, 0, 0),
+ *         selection_color: ColorRGBA(255, 0, 0)
+ *     });
+ *
+ *     // Set the widget initial value.
+ *     translationWidget.data().setValue(3);
+ *
+ *     // Register a callback for when a transformation tool value changes.
+ *     translationWidget.valueChanged.connect(translationYChanged);
+ *     translationWidget.dragStarted.connect(translationDragStart);
+ *
+ *     // Register the widget in the Controller
+ *     Controller.controls = [];
+ *     Controller.controls.push(translationWidget);
+ * }
  */
-declare class Point2dWidget extends WidgetBase {
-  constructor(config: Point2dWidgetConfig);
+declare class TranslationYWidget extends WidgetBase {
   /**
-   * Signal notifying the user that the 2d point value was modified by the Transform Tool.
+   * valueChanged signal called when the y translation value has been modified by the Transform tool.
+   * @param {float} y the new y translation value
+   * @returns {void}
    */
-  public valueChanged: QSignal<(point2d: Point2d) => void>;
+  public valueChanged: QSignal<(y: float) => void>;
 }
 
-declare class MCUIPoint2D extends Point2dWidget {}
-
-
-declare class SoundColumnInterface extends QObject {
-
-  public sequences(): SCR_SoundSequenceInterface[];
+/**
+ * The TranslationZWidget JavaScript class. A translatable arrow in the z axis.
+ * A translation along the z axis script widget. This widget offers an arrow manipulators that can be
+ * dragged in the Camera view while using the Transform tool. Dragging the arrow will generate a
+ * translation in the z axis. If no attribute is given at the construction of this object, the object
+ * will generate a double floating point attribute.
+ * The following properties are supported by the widget:
+ * The following components constitute the widget:
+ * Connect to this scriptWidget valueChanged signal to be notified when a modification has been applied
+ * to the widget. In the callback function, transfer the widget value into an action (like modifying a
+ * peg attribute value).
+ * The previous example demonstrates how to instantiate a new widget and register it in the Controller
+ * global object.
+ * This example shows how to apply the difference in translation of a translation widget on an
+ * arbitrary peg in the scene.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTranslationZWidget.html}
+ * @example
+ * Controller.onShowControl = function() {
+ *     var translationWidget = new TranslationZWidget({
+ *         data: "TranslationZ",
+ *         min: 0.5,
+ *         width: 1,
+ *         color: ColorRGBA(0, 0, 155),
+ *         selection_color: ColorRGBA(0, 0, 255)
+ *     });
+ *
+ *     translationWidget.data().setValue(3);
+ *
+ *     translationWidget.valueChanged.connect(translationZChanged);
+ *     translationWidget.dragStarted.connect(translationDragStart);
+ *
+ *     // Register the widget in the Controller
+ *     Controller.controls = [];
+ *     Controller.controls.push(translationWidget);
+ * }
+ */
+declare class TranslationZWidget extends WidgetBase {
+  /**
+   * valueChanged signal called when the z translation value has been modified by the Transform tool.
+   * @param {float} z the new z translation value
+   * @returns {void}
+   */
+  public valueChanged: QSignal<(z: float) => void>;
 }
 
-declare class SCR_SoundSequenceInterface extends QObject {
-  startFrame: number;
-  stopFrame: number;
-  startTime: number;
+/**
+ * The JavaScript class encapsulating a node attribute. Obtain one from the node getAttr or getAttrList
+ * methods.
+ * This class is polymorphic and can be used to handle multiple types as long as they are compatible
+ * with the initial attribute.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classAttribute.html}
+ */
+declare class Attribute extends QObject {
+  /**
+   * Fetches the boolean value from the Attribute at the current frame.
+   * This example prints just the boolean values from a list of attributes of a selected node.
+   * @returns {boolean}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "BOOL") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             MessageLog.trace(wAttr.boolValue());
+   *         }
+   *     }
+   * }
+   */
+  public boolValue(): boolean;
+
+  /**
+   * Fetches the boolean value from the Attribute at the specified frame.
+   * This example prints just the boolean values from a list of attributes of a selected node.
+   * @param {double} frame The frame number.
+   * @returns {boolean}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "BOOL") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             //frame.current() is used here making it functionally identical to wAttr.boolValue()
+   *             MessageLog.trace(wAttr.boolValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public boolValueAt(frame: double): boolean;
+
+  /**
+   * Fetches the ColorRGBA value from the Attribute at the current frame.
+   * This example sets the colour value of a colour card to a bright green, and prints the new colour
+   * value.
+   * @returns {ColorRGBA}
+   * @example
+   * function greenColorCard() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "COLOR_CARD") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *         var myColor = new ColorRGBA(86, 255, 0, 255);
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].typeName() == "COLOR") {
+   *                 myAttr[i].setValue(myColor);
+   *                 MessageLog.trace(myAttr[i].colorValue());
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public colorValue(): ColorRGBA;
+
+  /**
+   * Fetches the ColorRGBA value from the Attribute at the specified frame.
+   * This example sets the colour value of a colour card to a bright green, and prints the new colour
+   * value.
+   * @param {double} frame The frame number.
+   * @returns {ColorRGBA}
+   * @example
+   * function greenColorCard() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "COLOR_CARD") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *         var myColor = new ColorRGBA(86, 255, 0, 255);
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].typeName() == "COLOR") {
+   *                 myAttr[i].setValue(myColor);
+   *                 //frame.current() is used here, making it functionally identical to myAttr[i].colorValue()
+   *                 MessageLog.trace(myAttr[i].colorValueAt(frame.current()));
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public colorValueAt(frame: double): ColorRGBA;
+
+  /**
+   * Fetches the double value from the Attribute at the current frame.
+   * This example prints just the double values from a list of attributes of a selected node.
+   * @returns {double}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "DOUBLE") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             MessageLog.trace(wAttr.doubleValue());
+   *         }
+   *     }
+   * }
+   */
+  public doubleValue(): double;
+
+  /**
+   * Fetches the double value from the Attribute at the specified frame.
+   * This example prints just the double values from a list of attributes of a selected node.
+   * @param {double} frame The frame number.
+   * @returns {double}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "DOUBLE") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             //frame.current() is used here making it functionally identical to wAttr.doubleValue()
+   *             MessageLog.trace(wAttr.doubleValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public doubleValueAt(frame: double): double;
+
+  /**
+   * Returns true if the Attribute has sub attributes.
+   * This example prints the attributes of a drawing node that have sub attributes.
+   * @returns {boolean}
+   * @example
+   * function printHasSubAttributes() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "READ") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].hasSubAttributes()) {
+   *                 MessageLog.trace("The attribute \"" + myAttr[i].name() + "\" has at least one sub attribute.");
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public hasSubAttributes(): boolean;
+
+  /**
+   * Fetches the integer value from the Attribute at the current frame.
+   * This example prints just the integer values from a list of attributes of a selected node.
+   * @returns {int}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "INT") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             MessageLog.trace(wAttr.intValue());
+   *         }
+   *     }
+   * }
+   */
+  public intValue(): int;
+
+  /**
+   * Fetches the integer value from the Attribute at the specified frame.
+   * This example prints just the integer values from a list of attributes of a selected node.
+   * @param {double} frame The frame number.
+   * @returns {int}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "INT") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             //frame.current() is used here making it functionally identical to wAttr.intValue()
+   *             MessageLog.trace(wAttr.intValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public intValueAt(frame: double): int;
+
+  /**
+   * The keyword associated with the Attribute.
+   * This example returns a list of all the attributes of a node, including all the sub attributes.
+   * @returns {string}
+   * @example
+   * function getFlatAttrList(sNode, sAttr) {
+   *     var subAttrs = node.getAttrList(sNode, frame.current(), sAttr);
+   *     if (subAttrs.length == 0)
+   *         return [sAttr];
+   *     var subAttrList = [];
+   *     for (var i = 0; i < subAttrs.length; i++) {
+   *         var subAttrKeyword = (sAttr === undefined) ? subAttrs[i].keyword() :
+   *             sAttr + "." + subAttrs[i].keyword();
+   *         subAttrList = subAttrList.concat(getFlatAttrList(sNode, subAtrKeyword));
+   *     }
+   *     return subAttrList;
+   * }
+   */
+  public keyword(): string;
+
+  /**
+   * The name of the Attribute.
+   * This is the name as seen in the Layer Properties or Timeline views. The name of an Attribute is not
+   * unique within an attribute set.
+   * This example sets the 3d position of a drawing to the 3d point (5,10,0) using name() while iterating
+   * through the list of attributes.
+   * @returns {string}
+   * @example
+   * function moveDrawing() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "READ") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *         var position = new Point3d(5, 10, 0);
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].name() == "Position") {
+   *                 myAttr[i].setValue(position);
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public name(): string;
+
+  /**
+   * Fetches the Point2d value from the Attribute at the current frame.
+   * This example prints just the Point2d values from a list of attributes of a selected node.
+   * @returns {Point2d}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "POSITION_2D") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             MessageLog.trace(wAttr.pos2dValue(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public pos2dValue(): Point2d;
+
+  /**
+   * Fetches the Point2d value from the Attribute at the specified frame.
+   * This example prints just the Point2d values from a list of attributes of a selected node.
+   * @param {double} frame The frame number.
+   * @returns {Point2d}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "POSITION_2D") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             //frame.current() is used here making it functionally identical to wAttr.pos2dValue()
+   *             MessageLog.trace(wAttr.pos2dValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public pos2dValueAt(frame: double): Point2d;
+
+  /**
+   * Fetches the Point3d value from Attribute at current frame.
+   * This example prints just the Point3d values from a list of attributes of a selected node.
+   * @returns {Point3d}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "POSITION_3D") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             MessageLog.trace(wAttr.pos3dValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public pos3dValue(): Point3d;
+
+  /**
+   * Fetches the Point3d value from the Attribute at the specified frame.
+   * This example prints just the Point3d values from a list of attributes of a selected node.
+   * @param {double} frame The frame number.
+   * @returns {Point3d}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "POSITION_3D") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             //frame.current() is used here making it functionally identical to wAttr.pos3dValue()
+   *             MessageLog.trace(wAttr.pos3dValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public pos3dValueAt(frame: double): Point3d;
+
+  /**
+   * Sets the value of the Attribute.
+   * This example sets the 3d position of a drawing to the 3d point (5,10,0).
+   * @param {QObject} value The QObject (such as Point3d or ColorRGBA) value to set the Attribute to.
+   * @returns {void}
+   * @example
+   * function moveDrawing() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "READ") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *         var position = new Point3d(5, 10, 0);
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].name() == "Position") {
+   *                 myAttr[i].setValue(position);
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public setValue(value: QObject): void;
+
+  /**
+   * Sets the value of the Attribute.
+   * This example sets the Pencil Lines Smoothing attribute of a drawing node to 100.
+   * @param {int} value The integer value to set the Attribute to.
+   * @returns {void}
+   * @example
+   * function setPencilLinesSmoothing() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "READ") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].name() == "Pencil Lines Smoothing" && myAttr[i].typeName() == "INT") {
+   *                 myAttr[i].setValue(100);
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public setValue(value: int): void;
+
+  /**
+   * Sets the value of the Attribute.
+   * This example sets the Skew value of a drawing to 50 via the list of attributes of the selected node.
+   * If the selected node is not a drawing node, it does nothing.
+   * @param {double} value The double value to set the Attribute to.
+   * @returns {void}
+   * @example
+   * function setSkew() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (attrList[j] == "SKEW") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             wAttr.setValue(50);
+   *         }
+   *     }
+   * }
+   */
+  public setValue(value: double): void;
+
+  /**
+   * Sets the value of the Attribute.
+   * This example flips a drawing horizontally.
+   * @param {boolean} value The boolean value to set the Attribute to.
+   * @returns {void}
+   * @example
+   * function moveDrawing() {
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     if (node.type(sNode) == "READ") {
+   *         var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *
+   *         for (i = 0; i < myAttr.length; i++) {
+   *             if (myAttr[i].name() == "Flip Horizontal" && myAttr[i].typeName() == "BOOL") {
+   *                 myAttr[i].setValue(!myAttr[i].boolValue());
+   *             }
+   *         }
+   *     }
+   * }
+   */
+  public setValue(value: boolean): void;
+
+  /**
+   * Sets the value of the Attribute.
+   * This example changes the Palette Name attribute of a node. The composite node has this attribute.
+   * @param {string} value The String value to set the Attribute to.
+   * @returns {void}
+   * @example
+   * function setLocalName(newName) {
+   *     var sNode = selection.selectedNode(0);
+   *     var myAttr = node.getAttrList(sNode, frame.current(), "");
+   *
+   *     for (i = 0; i < myAttr.length; i++) {
+   *         if (myAttr[i].name() == "Palette Name" && myAttr[i].typeName() == "STRING") {
+   *             myAttr[i].setValue(newName);
+   *         }
+   *     }
+   * }
+   */
+  public setValue(value: string): void;
+
+  /**
+   * @param {QObject} value
+   * @param {double} frame
+   * @returns {void}
+   */
+  public setValueAt(value: QObject, frame: double): void;
+
+  /**
+   * @param {int} value
+   * @param {double} frame
+   * @returns {void}
+   */
+  public setValueAt(value: int, frame: double): void;
+
+  /**
+   * @param {double} value
+   * @param {double} frame
+   * @returns {void}
+   */
+  public setValueAt(value: double, frame: double): void;
+
+  /**
+   * @param {boolean} value
+   * @param {double} frame
+   * @returns {void}
+   */
+  public setValueAt(value: boolean, frame: double): void;
+
+  /**
+   * @param {string} value
+   * @param {double} frame
+   * @returns {void}
+   */
+  public setValueAt(value: string, frame: double): void;
+
+  /**
+   * Fetches the String value from the Attribute at the current frame.
+   * This example prints just the string values from a list of attributes of a selected node.
+   * @returns {string}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "STRING") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             MessageLog.trace(wAttr.textValue());
+   *         }
+   *     }
+   * }
+   */
+  public textValue(): string;
+
+  /**
+   * Fetches the String value from the Attribute at the specified frame.
+   * This example prints just the string values from a list of attributes of a selected node.
+   * @param {double} frame The frame number.
+   * @returns {string}
+   * @example
+   * function printValue() {
+   *     if (selection.numberOfNodesSelected() != 1) {
+   *         MessageLog.trace("Please select only one node");
+   *         return;
+   *     }
+   *     var attrList = getFlatAttrList(sNode);
+   *     var sNode = selection.selectedNode(0);
+   *
+   *     MessageLog.trace("Node name: \"" + sNode + "\"");
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.typeName() == "STRING") {
+   *             MessageLog.trace(" \"" + attrList[j] + "\"(" + wAttr.typeName() + ")");
+   *             //frame.current() is used here making it functionally identical to wAttr.textValue()
+   *             MessageLog.trace(wAttr.textValueAt(frame.current()));
+   *         }
+   *     }
+   * }
+   */
+  public textValueAt(frame: double): string;
+
+  /**
+   * The typeName value associated with the Attribute type.
+   * This example uses typeName to print just the boolean values from a list of attributes of a selected
+   * node.
+   * @returns {AttrValueType}
+   * @example
+   * function copyAttr(node1, node2, attrKeyword) {
+   *     var attrList = getFlatAttrList(node1);
+   *
+   *     for (var j = 0; j < attrList.length; j++) {
+   *         var wAttr = node.getAttr(sNode, 1, attrList[j]);
+   *         if (wAttr.keyword() == attrKeyword) {
+   *             node.createDynamicAttr(node2, wAttr.typeName(), wAttr.keyword(), wAttr.name(), true);
+   *         }
+   *     }
+   * }
+   */
+  public typeName(): AttrValueType;
+}
+
+/**
+ * Base class for color and texture pots stored in palettes.
+ * Also see Palette.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classBaseColor.html}
+ */
+declare class BaseColor extends QObject {
+  /**
+   * @param {string} n
+   * @returns {void}
+   */
+  public setName(n: string): void;
+
+  /**
+   * Unique ID of the color.
+   * @returns {string}
+   */
+  id: string;
+
+  /**
+   * If true, the color pot is a texture.
+   * @returns {boolean}
+   */
+  isTexture: boolean;
+
+  /**
+   * Returns true if the color is valid.
+   * @returns {boolean}
+   */
+  isValid: boolean;
+
+  /**
+   * The color pot name.
+   * @returns {string}
+   */
   name: string;
-  filename: string;
 }
 
 /**
- * The func JavaScript global object. Retrieve and modify values of function curves
+ * The JavaScript class for manipulating colours. Can be created from a Palette object.
+ * A Color object can be a solid colour, a linear gradient or a radial gradient.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classColor.html}
+ * @example
+ * var myColor = palette.createNewSolidColor("myColorName", ColorRGBA(120, 120, 120, 120);
  */
-declare namespace func {
+declare class Color extends BaseColor {
   /**
-   * returns the Start value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors.
+   * Set the rgba or gradient values of the colour.
+   * @param {QVariant} v Is either an object for solid colours or an array of objects for gradients
+   * @returns {void}
+   * @example
+   * var paletteList = PaletteObjectManager.getScenePaletteList();
+   *
+   * if (paletteList.numPalettes < 1)
+   *     return;
+   *
+   * var myPalette = paletteList.getPaletteByIndex(0);
+   *
+   * if (myPalette.nColors < 1)
+   *     return;
+   *
+   * var myColor = myPalette.getColorByIndex(0);
+   * myColor.setColorData({
+   *     r: 255,
+   *     g: 0,
+   *     b: 0,
+   *     a: 255
+   * });
    */
-  function holdStartFrame(columnName: string): int;
+  public setColorData(v: QVariant): void;
 
   /**
-   * returns the Stop value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
+   * @param {string} colorType One of the ColorType, ex: "SOLID_COLOR", "LINEAR_GRADIENT" or "RADIAL_GRADIENT"
+   * @returns {void}
    */
-  function holdStopFrame(columnName: string): int;
+  public setColorType(colorType: string): void;
 
   /**
-   * returns the Step value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
+   * @param {int} t A constant from the ColorType class.
+   * @returns {void}
    */
-  function holdStep(columnName: string): int;
+  public setColorType(t: int): void;
 
   /**
-   * returns the number of keyframes and control points on a curve
+   * The colour as either an object if the colour is solid or an array of objects if it is a gradient.
+   * For example: The solid colour red:
+   * The gradient colour going from red to green:
+   * @returns {QVariant}
+   * @example
+   * {
+   *     r: 255,
+   *     g: 0,
+   *     b: 0,
+   *     a: 255
+   * }
    */
-  function numberOfPoints(columnName: string): int;
+  colorData: QVariant;
 
   /**
-   * returns the X value (frame number) of a point on a function curve
+   * The type of colour can be: ColorType.SOLID_COLOR, ColorType.LINEAR_GRADIENT or
+   * ColorType.RADIAL_GRADIENT.
+   * @returns {int}
    */
-  function pointX(columnName: string, point: int): double;
-
-  /**
-   * returns the Y value of a point on a function curve
-   */
-  function pointY(columnName: string, point: int): double;
-
-  /**
-   * returns a 1 (one) to indicate that the point is on a constant segment, or a 0 (zero) to indicate that the point is not on a constant segment
-   */
-  function pointConstSeg(columnName: string, point: int): boolean;
-
-  /**
-   * returns the continuity of the curve that follows the point. One of the following values will be returned, in upper-case: SMOOTH, CORNER or STRAIGHT
-   */
-  function pointContinuity(columnName: string, point: int): ContinuityValue;
-
-  /**
-   * returns the X value of the left handle of a point on a curve
-   */
-  function pointHandleLeftX(columnName: string, point: int): double;
-
-  /**
-   * returns the Y value of the left handle of a point on a curve.
-   */
-  function pointHandleLeftY(columnName: string, point: int): double;
-
-  /**
-   * returns the X value of the right handle of a point on a curve.
-   */
-  function pointHandleRightX(columnName: string, point: int): double;
-
-  /**
-   * returns the Y value of the right handle of a point on a curve
-   */
-  function pointHandleRightY(columnName: string, point: int): double;
-
-  /**
-   * returns the number of frames in the ease-in
-   */
-  function pointEaseIn(columnName: string, point: int): double;
-
-  /**
-   * returns the angle of the ease-in handle
-   */
-  function angleEaseIn(columnName: string, point: int): double;
-
-  /**
-   * returns the number of frames in the ease-out
-   */
-  function pointEaseOut(columnName: string, point: int): double;
-
-  /**
-   * returns the angle of the ease-out handle
-   */
-  function angleEaseOut(columnName: string, point: int): double;
-
-  /**
-   * returns the number of keyframes and control points on the 3D Path
-   */
-  function numberOfPointsPath3d(columnName: string): int;
-
-  /**
-   * returns the value of the specified point on the X path
-   */
-  function pointXPath3d(columnName: string, point: int): double;
-
-  /**
-   * returns the value of the specified point on the Y path
-   */
-  function pointYPath3d(columnName: string, point: int): double;
-
-  /**
-   * returns the value of the specified point on the Z path
-   */
-  function pointZPath3d(columnName: string, point: int): double;
-
-  /**
-   * returns the tension value for the specified point on the 3D Path
-   */
-  function pointTensionPath3d(columnName: string, point: int): double;
-
-  /**
-   * returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
-   */
-  function pointContinuityPath3d(columnName: string, point: int): ContinuityValue;
-
-  /**
-   * returns the bias value for the specified point on the 3D Path
-   */
-  function pointBiasPath3d(columnName: string, point: int): double;
-
-  /**
-   * returns the frame at which it's locked, or returns 0 if the point is not locked.
-   */
-  function pointLockedAtFrame(columnName: string, point: int): double;
-
-  /**
-   * sets the Start value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
-   */
-  function setHoldStartFrame(columnName: string, start: int): boolean;
-
-  /**
-   * sets the Stop value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors
-   */
-  function setHoldStopFrame(columnName: string, stop: int): boolean;
-
-  /**
-   * sets the Hold value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function Editors.
-   */
-  function setHoldStep(columnName: string, step: int): boolean;
-
-  /**
-   * sets the values of a point on a Bezier function curve
-   */
-  function setBezierPoint(columnName: string, frame: int, y: double, handleLeftX: double, handleLeftY: double, handleRightX: double, handleRightY: double, constSeg: boolean, continuity: ContinuityValue): boolean;
-
-  /**
-   * sets the values of a point on an Ease function curve
-   */
-  function setEasePoint(columnName: string, frame: int, y: double, easeIn: double, angleEaseIn: double, easeOut: double, angleEaseOut: double, constSeg: boolean, continuity: ContinuityValue): boolean;
-
-  /**
-   * sets the values of a point on a Velocity-Based function curve
-   */
-  function setVeloBasedPoint(columnName: string, frame: int, y: double): boolean;
-
-  /**
-   * adds a keyframe to a 3D Path and sets the X, Y and Z value, as well as the tension, continuity and bias.
-   */
-  function addKeyFramePath3d(columnName: string, frame: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
-
-  /**
-   * adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension, continuity and bias
-   */
-  function addCtrlPointAfterPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
-
-  /**
-   * removePointPath3d may be used to remove either a key frame, or a control point
-   */
-  function removePointPath3d(columnName: string, point: int): boolean;
-
-  /**
-   * setPointPath3d may be used to set values in either a key frame, or a control point, but cannot change a key frame into a control point or a control point into a key frame. To change a key frame into a control point or a control point into a key frame, you must remove the point and add a new point.
-   */
-  function setPointPath3d(columnName: string, point: int, x: double, y: double, z: double, tension: double, continuity: ContinuityValue, bias: double): boolean;
-
-  /**
-   * sets the constant segment flag of point i of path p to b.
-   */
-  function setPath3dPointConstantSegment(columnName: string, point: int, constant: boolean): boolean;
-
-  /**
-   * sets the constant segment flag of point found at frame f of path p to b.
-   */
-  function setPath3dPointConstantSegmentForFrame(columnName: string, point: double, constant: boolean): boolean;
+  colorType: int;
 }
 
 /**
- * The JavaScript class providing informations about a specific palette
+ * The JavaScript class for manipulating textures. Can be created from a Palette object.
+ * Class for texture color pots. The texture bitmap is stored internally in the palette once the
+ * texture color pot has been created.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTexture.html}
+ * @example
+ * var myTexture = myPalette.createNewTexture("myTextureName", filename, false);
+ */
+declare class Texture extends BaseColor {
+  /**
+   * Will make a copy of the image and store it in the texture.
+   * @param {QImage} image
+   * @returns {void}
+   */
+  public setTextureBitmap(image: QImage): void;
+
+  /**
+   * Will load the file in a bitmap and make an internal copy.
+   * @param {string} filename
+   * @returns {void}
+   */
+  public setTextureFile(filename: string): void;
+
+  /**
+   * Set the tiling attribute.
+   * @returns {void}
+   */
+  public setTiled(): void;
+
+  /**
+   * Will return a copy of the texture bitmap.
+   * @returns {QImage}
+   */
+  bitmap: QImage;
+
+  /**
+   * Height of the texture. -1 if invalid texture.
+   * @returns {int}
+   */
+  height: int;
+
+  /**
+   * True if the texture is tiled.
+   * @returns {boolean}
+   */
+  tiled: boolean;
+
+  /**
+   * Width of the texture. -1 if invalid texture.
+   * @returns {int}
+   */
+  width: int;
+}
+
+/**
+ * The JavaScript class for manipulating colour override nodes. Created from the node global object.
+ * Used to get information about palettes associated to a colour override node, or to add or remove a
+ * palette from the node.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classColorOverride.html}
+ * @example
+ * var myColorOverride = node.getColorOverride("Top/MyColorOverrideNode");
+ */
+declare class ColorOverride extends QObject {
+  /**
+   * Add a full palette path at the bottom of the list of whole palette overrides.
+   * @param {string} path Path of this new palette override.
+   * @returns {void}
+   */
+  public addPalette(path: string): void;
+
+  /**
+   * Clear the list of whole palette overrides.
+   * @returns {void}
+   */
+  public clearPalettes(): void;
+
+  /**
+   * Returns the number of individual colour overrides.
+   * @returns {int}
+   */
+  public getNumColorOverrides(): int;
+
+  /**
+   * Returns the number of whole palette overrides.
+   * @returns {int}
+   */
+  public getNumPalettes(): int;
+
+  /**
+   * Returns the number of selected colours.
+   * @returns {int}
+   */
+  public getNumSelectedColors(): int;
+
+  /**
+   * Returns the full path (including name and extension) of the palette to which the override colour
+   * belongs.
+   * @param {int} index Index in the list of individual colour overrides.
+   * @returns {string}
+   */
+  public getOverridePalettePath(index: int): string;
+
+  /**
+   * Returns the path of a texture file for the colour override at the specified position in the list.
+   * @param {int} index Index in the list of individual colour overrides. Applies for one of the modes that references a texture.
+   * @returns {string}
+   */
+  public getOverrideTexturePath(index: int): string;
+
+  /**
+   * Returns the full path (including name and extension) of the palette to which the selected colour
+   * belongs.
+   * @param {int} index Index in the list of selected colours.
+   * @returns {string}
+   */
+  public getSelectedPalettePath(index: int): string;
+
+  /**
+   * Returns the full path (including name and extension) of the palette override at postion 'index'.
+   * @param {int} index Index of the palette in the list of palette overrides.
+   * @returns {string}
+   */
+  public palettePath(index: int): string;
+
+  /**
+   * Remove a palette with the supplied path from the list of whole palette overrides.
+   * @param {string} path Path of this palette to remove.
+   * @returns {void}
+   */
+  public removePalette(path: string): void;
+
+  /**
+   * Sets the full path (including name and extension) of the palette to which the override colour
+   * belongs.
+   * @param {int} index Index in the list of individual colour overrides.
+   * @param {string} path New path for the palette.
+   * @returns {void}
+   */
+  public setOverridePalettePath(index: int, path: string): void;
+
+  /**
+   * Sets the path of a texture file for the colour override at the specified position in the list.
+   * Applies for one of the modes that references a texture.
+   * @param {int} index Index in the list of individual colour overrides.
+   * @param {string} path Texture path.
+   * @returns {void}
+   */
+  public setOverrideTexturePath(index: int, path: string): void;
+
+  /**
+   * Set the path (including name and extension) of the palette at position 'index'.
+   * @param {int} index Index of the palette in the list of palette overrides.
+   * @param {string} path New path of this palette override.
+   * @returns {void}
+   */
+  public setPalettePath(index: int, path: string): void;
+
+  /**
+   * Sets the full path (including name and extension) of the palette to which the selected colour
+   * belongs.
+   * @param {int} index Index in the list of selected colours.
+   * @param {string} path New path for the palette.
+   * @returns {void}
+   */
+  public setSelectedPalettePath(index: int, path: string): void;
+}
+
+/**
+ * The ColorRGBA JavaScript class. Represent an 8 bits per channel Red Green Blue Alpha colour.
+ * The ColorRGBA class defines a four-dimensional container for colors. ColorRGBA objects can be
+ * instantiated in the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classColorRGBA.html}
+ */
+declare class ColorRGBA extends QObject {
+  /**
+   * Create a new default ColorRGBA (ie. opaque white).
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Create a new ColorRGBA.
+   * @param {double} r Red value
+   * @param {double} g Green value
+   * @param {double} b Blue value
+   * @param {double} a Alpha value
+   * @returns {void}
+   */
+  constructor(r: double, g: double, b: double, a: double);
+
+  /**
+   * alpha value [ 0, 255 ]
+   * @returns {int}
+   */
+  a: int;
+
+  /**
+   * blue value [ 0, 255 ]
+   * @returns {int}
+   */
+  b: int;
+
+  /**
+   * green value [ 0, 255 ]
+   * @returns {int}
+   */
+  g: int;
+
+  /**
+   * red value [ 0, 255 ]
+   * @returns {int}
+   */
+  r: int;
+}
+
+/**
+ * The JavaScript class for defining the different color types. Obtain it from Constants.
+ * The constants can be used in Palette and Color methods.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classColorType.html}
+ * @example
+ * myPalette.createNewColor(PaletteObjectManager.Constants.ColorType.SOLID_COLOR, "myPaletteName", {
+ *     r: 255,
+ *     g: 0,
+ *     b: 0,
+ *     a: 255
+ * });
+ */
+declare class ColorType extends QObject {
+  /**
+   * Represents a linear gradient color.
+   * @returns {int}
+   */
+  LINEAR_GRADIENT: int;
+
+  /**
+   * Represents a radial gradient color.
+   * @returns {int}
+   */
+  RADIAL_GRADIENT: int;
+
+  /**
+   * Represents a solid color.
+   * @returns {int}
+   */
+  SOLID_COLOR: int;
+}
+
+/**
+ * The JavaScript class for getting the composition information of a node. Obtain one from the
+ * compositionOrder global object.
+ * Represent a single entry in the composition order. The composition is an array of composition items.
+ * Each item contains all the information for rebuilding the composition.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classCompositionItem.html}
+ */
+declare class CompositionItem extends QObject {
+  /**
+   * Number of children listed in the composition attached to node.
+   * @returns {int}
+   */
+  public numChildren(): int;
+
+  /**
+   * Depth level of this node. Depths starts at zero for parent less node and increases for every level
+   * of parent this node has.
+   * @returns {int}
+   */
+  public depth(): int;
+
+  /**
+   * True when this node has a parent but the parent is not present in the composition. Some modules,
+   * such as composite module, are never listed in the composition, however, they can be the parent of
+   * some other modules that will be listed in the composition.
+   * @returns {boolean}
+   */
+  isNodeBroken: boolean;
+
+  /**
+   * True when this node is a normal node and has a parent.
+   * @returns {boolean}
+   */
+  isNodeNormal: boolean;
+
+  /**
+   * True when this node is a root (it has no parent).
+   * @returns {boolean}
+   */
+  isNodeRoot: boolean;
+
+  /**
+   * Parent less node that is within a child group.
+   * @returns {boolean}
+   */
+  isNodeSubnodeRoot: boolean;
+
+  /**
+   * The name of this node ( see node interface ).
+   * @returns {string}
+   */
+  node: string;
+}
+
+/**
+ * The JavaScript class for getting the constant colour and palette data. Obtain it from
+ * PaletteObjectManager.
+ * How to retrieve the palette locations:
+ * How to get the colour type constants:
+ * How to get the palette list type constants:
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classConstants.html}
+ * @example
+ * var envPath = PaletteObjectManager.Constants.Location.ENVIRONMENT;
+ */
+declare class Constants extends QObject {
+  /**
+   * Holds the constants to define the color types.
+   * @returns {ColorType}
+   */
+  ColorType: ColorType;
+
+  /**
+   * Holds the constants to represent a palette location.
+   * @returns {PaletteLocation}
+   */
+  Location: PaletteLocation;
+
+  /**
+   * @returns {PaletteListType}
+   */
+  PaletteListType: PaletteListType;
+}
+
+/**
+ * The Controller JavaScript object. This object is available in Master Controller callback functions.
+ * Controller is created and added to the scripting environment of the master controller and allows the
+ * script running in that context to do a variety of tasks, such as:
+ * The Controller object is only available in its callback functions like onShowControl or
+ * onFrameChanged. However, it is possible to store a reference to it in the global scope of the Master
+ * Controller script.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classController.html}
+ * @example
+ * var myController = Controller; // Capture the Controller
+ * function sliderValueChanged(newSliderValue) {
+ *     // Use the captured Controller here.
+ *     var layerSpacing = node.getAttr(myController.node, frame.current(), "Layer_Spacing").doubleValue();
+ *     repositionNodes(layerSpacing);
+ * }
+ *
+ * // The Controller object is available in its callback functions.
+ * Controller.onShowControl = function() {
+ *     Controller.controls = [];
+ *     Controller.controls.push(new SliderWidget({
+ *         data: "myAttribute"
+ *     }));
+ *     Controller.controls.push(new SliderWidget({
+ *         xmin: 4
+ *     }));
+ *     Controller.controls[0].valueChanged.connect(sliderValueChanged);
+ * }
+ *
+ * Controller.onHideControl = function() {
+ *     MessageLog("Number of controls " + Controller.controls.length);
+ * }
+ *
+ * Controller.onFrameChanged = function() {
+ *     // Synchronize the 2 sliders values on frame change.
+ *     var value = node.getAttr(Controller.node, frame.current(), "myAttribute").doubleValue();
+ *     Controller.controls[1].data().setValue(value);
+ * }
+ */
+declare class Controller extends QObject {
+  /**
+   * The script widget array.
+   * @returns {QScriptValue}
+   * @example
+   * Controller.controls = [];
+   * Controller.controls.push(new SliderWidget());
+   * Controller.controls.push(new SliderWidget());
+   *
+   * // Use the standard default value.
+   * Controller.controls[0].data().setValue(25);
+   * Controller.controls[1].data().setValue(60);
+   */
+  controls: QScriptValue;
+
+  /**
+   * @returns {QScriptValue}
+   */
+  data: QScriptValue;
+
+  /**
+   * The object type "__master_controller_object__".
+   * @returns {string}
+   */
+  name: string;
+
+  /**
+   * The node path to the Master Controller node ex: "Top/MyMasterController".
+   * @returns {string}
+   * @example
+   * var myController = Controller; // Capture the Controller to be able to use it elsewhere than in its callback functions.
+   * function sliderValueChanged(newSliderValue) {
+   *     var myOtherWidgetValue = node.getAttr(myController.node, frame.current(), "MyOtherSlider").doubleValue();
+   *     // ...
+   * }
+   */
+  node: string;
+
+  /**
+   * Called when the current frame of the application changes.
+   * @returns {QScriptValue}
+   * @example
+   * Controller.onFrameChanged = function() {
+   *     var value = 100 * (node.getAttr("Top/MyPeg", frame.current(), "POSITION.X").doubleValue() + 1) / 2;
+   *     myController.controls[0].data().setValue(value);
+   * }
+   */
+  onFrameChanged: QScriptValue;
+
+  /**
+   * Called when the user hides the Master Controller node controls.
+   * @returns {QScriptValue}
+   * @example
+   * Controller.onHideControl = function() {
+   *     MessageLog.trace("Hide the script widget");
+   * }
+   */
+  onHideControl: QScriptValue;
+
+  /**
+   * Called when the user shows the Master Controller node controls.
+   * @returns {QScriptValue}
+   * @example
+   * Controller.onShowControl = function() {
+   *     // Create the controls array
+   *     Controller.controls = [];
+   *
+   *     // Create a 2d point widget.
+   *     Controller.controls.push(new Point2dWidget());
+   *     Controller.controls[0].valueChanged.connect(point2dValueChanged);
+   * }
+   */
+  onShowControl: QScriptValue;
+}
+
+/**
+ * The JavaScript class for getting or setting the model directory, the scan files and the default
+ * camera name flags when copying. Obtain from the copyPaste global object.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classCopyOptions.html}
+ * @example
+ * var myCopyOptions = copyPaste.getCurrentCreateOptions();
+ * myCopyOptions.addModelsDir = false;
+ *
+ * copyPaste.copy(selectionOfNodes, startFrame, numFrames, myCopyOptions);
+ */
+declare class CopyOptions extends QObject {
+  /**
+   * @returns {boolean}
+   */
+  addModelsDir: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  addScanFiles: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  defaultCameraName: boolean;
+}
+
+/**
+ * The DateEditEnum JavaScript global object. Specifies the type of display order of day, month, year.
+ * Use with DateEdit.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDateEditEnum.html}
+ * @example
+ * widget.order = DateEditEnum.YDM;
+ */
+declare class DateEditEnum extends QObject {}
+
+/**
+ * The Dir JavaScript class. Interface to operating system Dir operations, e.g. mkdir, rmdir, rename,
+ * etc.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDir.html}
+ * @example
+ * var dir = new Dir;
+ * dir.path = this._exportDir;
+ * dir.mkdirs();
+ */
+declare class Dir extends QObject {
+  /**
+   * Construct a Dir from a directory path.
+   * @param {string} path The path of a directory.
+   * @returns {void}
+   */
+  constructor(path: string);
+
+  /**
+   * Get absolute file path for filename given in parameter.
+   * @param {string} [file=String::null] The filename to get the absolute path of.
+   * @returns {string}
+   */
+  public absFilePath(file?: string): string;
+
+  /**
+   * Changes the current directory to the given directory name.
+   * @param {string} dirName The desired directory name.
+   * @returns {void}
+   */
+  public cd(dirName: string): void;
+
+  /**
+   * Go up in directory hierarchy.
+   * @returns {void}
+   */
+  public cdUp(): void;
+
+  /**
+   * Returns a list of the names of all the files and directories in the directory, ordered according to
+   * the name and attribute filters.
+   * @param {string} filter The filter to apply to the directories and files.
+   * @param {int} [filterSpec=-1] The filter flags.
+   * @param {int} [sortSpec=-1] The sort flags.
+   * @returns {StringList}
+   */
+  public entryList(
+    filter: string,
+    filterSpec?: int,
+    sortSpec?: int
+  ): StringList;
+
+  /**
+   * Check if the file/folder exist.
+   * @param {string} fileName The name of the file/folder.
+   * @returns {boolean}
+   */
+  public fileExists(fileName: string): boolean;
+
+  /**
+   * Get file path for the current directory from the file parameter.
+   * @param {string} [file=String::null] The filename to get the path of.
+   * @returns {string}
+   */
+  public filePath(file?: string): string;
+
+  /**
+   * Create a directory with given name.
+   * @param {string} [dirName=String::null] The name of the directory to be created.
+   * @returns {void}
+   */
+  public mkdir(dirName?: string): void;
+
+  /**
+   * Create directory recursively if a path of a directory not yet created is given.
+   * @param {string} [dirName=String::null] The name of the directory to be created.
+   * @returns {void}
+   * Note: Does not appear to work on Windows paths.
+   */
+  public mkdirs(dirName?: string): void;
+
+  /**
+   * Remove a file with the given name.
+   * @param {string} fileName The name of the file to be removed.
+   * @returns {void}
+   */
+  public remove(fileName: string): void;
+
+  /**
+   * Rename a file/folder with the name given to the new name.
+   * @param {string} oldName The current name of the file.
+   * @param {string} newName The desired name for the file.
+   * @returns {void}
+   */
+  public rename(oldName: string, newName: string): void;
+
+  /**
+   * Remove a directory with given name.
+   * @param {string} [dirName=String::null] The name of the directory to be removed.
+   * @returns {void}
+   */
+  public rmdir(dirName?: string): void;
+
+  /**
+   * Remove directory recursively if a path of directory is given.
+   * @param {string} [dirName=String::null] The name of the directory to be removed.
+   * @returns {void}
+   */
+  public rmdirs(dirName?: string): void;
+
+  /**
+   * Sets the application's current working directory to path.
+   * @returns {void}
+   */
+  public setCurrent(): void;
+
+  /**
+   * Returns the absolute path of the directory.
+   * @returns {string}
+   */
+  absPath: string;
+
+  /**
+   * Returns the canonical path of the directory.
+   * @returns {string}
+   */
+  canonicalPath: string;
+
+  /**
+   * Returns true if the directory exists.
+   * @returns {boolean}
+   */
+  exists: boolean;
+
+  /**
+   * Returns the name of the directory.
+   * @returns {string}
+   */
+  name: string;
+
+  /**
+   * Returns the path of the directory.
+   * @returns {string}
+   */
+  path: string;
+
+  /**
+   * Returns true if the directory is readable.
+   * @returns {boolean}
+   */
+  readable: boolean;
+}
+
+/**
+ * The DirSpec JavaScript global object. Enum for directory operations.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDirSpec.html}
+ * @example
+ * var myDirectorySpec = DirSpec.Dirs;
+ */
+declare class DirSpec extends QObject {}
+
+/**
+ * The JavaScript class for converting position from one coordinate system to another. Obtain it as a
+ * parameter to the WidgetBase drag signals.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDragContext.html}
+ * @example
+ * var drag_offset = new Vector3d;
+ *
+ * function onDragStart(context) {
+ *     var projectedPoint = context.projectToModelPlane(context.dragPoint());
+ *     var modelPickingPoint = context.multiplyByPostMatrix(projectedPoint);
+ *     var modelOriginPoint = scene.toOGL(Point3d(getPosX(), getPosY(), getPosZ()));
+ *
+ *     drag_offset = modelOriginPoint.minus(modelPickingPoint);
+ * }
+ *
+ * var drag_offsetZ = new Vector3d;
+ *
+ * function onDragStartZ(context) {
+ *     var planeRotation = new Matrix4x4;
+ *     planeRotation.rotateDegrees(90, Vector3d(0, 1, 0));
+ *     context.transformModelMatrix(planeRotation);
+ *
+ *     var projectedPoint = context.projectToModelPlane(context.dragPoint());
+ *
+ *     var inversePlaneRotation = new Matrix4x4;
+ *     inversePlaneRotation.rotateDegrees(-90, Vector3d(0, 1, 0));
+ *     context.transformModelMatrix(inversePlaneRotation);
+ *
+ *     var modelPickingPoint = context.multiplyByPostMatrix(planeRotation.multiply(Point3d(projectedPoint.x, projectedPoint.y, 0)));
+ *
+ *     var modelOriginPoint = scene.toOGL(Point3d(getPosX(), getPosY(), getPosZ()));
+ *     drag_offsetZ = modelOriginPoint.minus(modelPickingPoint);
+ * }
+ */
+declare class DragContext extends QObject {
+  /**
+   * Return the picking point in world coordinates.
+   * @returns {QObject}
+   */
+  public dragPoint(): QObject;
+
+  /**
+   * Multiply by the matrix of transformations associated with the script widgets registered after the
+   * current one.
+   * @param {QObject} modelPoint3d A Point3d in the context node model coordinates
+   * @returns {QObject}
+   */
+  public multiplyByPostMatrix(modelPoint3d: QObject): QObject;
+
+  /**
+   * Project a given point in world coordinates to the screen and then back to the model plane.
+   * @param {QObject} worldPoint3d A Point3d or Point2d (Point2d will have their z at 0) in world coordinates
+   * @returns {QObject}
+   */
+  public projectToModelPlane(worldPoint3d: QObject): QObject;
+
+  /**
+   * Transform a given point in world coordinates to the model space.
+   * Apply the model matrix of the camera chain to the world 3d point given as a parameter.If the input
+   * is a 2d point, its z value is set to 0.
+   * @param {QObject} worldPoint3d A Point2d or Point3d in world coordinates
+   * @returns {QObject}
+   */
+  public transformFromWorldToModel(worldPoint3d: QObject): QObject;
+
+  /**
+   * Transform the camera chain model matrix.
+   * @param {Matrix4x4} transformationMatrix The Matrix4x4 to apply to the model matrix.
+   * @returns {QObject}
+   */
+  public transformModelMatrix(transformationMatrix: Matrix4x4): QObject;
+}
+
+/**
+ * The JavaScript class representing a dragged object. Obtain from the copyPaste global object copy
+ * method.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDragObject.html}
+ * @example
+ * var myCopyOptions = copyPaste.getCurrentCreateOptions();
+ * myCopyOptions.addModelsDir = false;
+ *
+ * var myDragObject = copyPaste.copy(selectionOfNodes, startFrame, numFrames, myCopyOptions);
+ */
+declare class DragObject extends QObject {
+  /**
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * @param {DD_DragObject} dragObject
+   * @returns {void}
+   */
+  constructor(dragObject: DD_DragObject);
+
+  /**
+   * @returns {DD_DragObject}
+   */
+  public dragObject(): DD_DragObject;
+}
+
+/**
+ * The DrawingToolParams JavaScript class. Set or unset the "apply on all drawings" setting of the
+ * DrawingTools methods.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDrawingToolParams.html}
+ * @example
+ * var params = new DrawingToolParams;
+ * params.applyAllDrawings = true;
+ * DrawingTools.extractCenterline(DrawingTools.lineArt, DrawingTools.colourArt, params);
+ */
+declare class DrawingToolParams extends QObject {
+  /**
+   * @returns {boolean}
+   */
+  public applyAllDrawings(): boolean;
+
+  /**
+   * Called when progress updates. Emits signal "pulse".
+   * @returns {void}
+   */
+  public canceled(): void;
+
+  /**
+   * Returns the maximum position that pulses will generate.
+   * @returns {int}
+   */
+  public progress(): int;
+
+  /**
+   * @returns {int}
+   */
+  public range(): int;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setApplyAllDrawings(b: boolean): void;
+
+  /**
+   * Sets the maximum position that pulses will generate.
+   * @returns {void}
+   */
+  public setProgress(): void;
+
+  /**
+   * Returns the current progress update.
+   * @returns {void}
+   */
+  public setRange(): void;
+
+  /**
+   * Signals cancelation of the processing.
+   * @returns {boolean}
+   */
+  public wasCanceled(): boolean;
+
+  /**
+   * Returns true if a cancelation signal was received.
+   * @returns {void}
+   */
+  public pulse: QSignal<() => void>;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ applyAllDrawings: boolean;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ progress: int;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ range: int;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ wasCanceled: boolean;
+}
+
+/**
+ * The File JavaScript class. Open, close, read, write, get information about files.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classFile.html}
+ * @example
+ * var file = new File(filePath);
+ * if (file.exists) {
+ *     var message = "The output file \"" + file.name + "\" exists. Do you wish to overwrite it?"
+ *     var ans = MessageBox.warning(message, MessageBox.Yes, MessageBox.No);
+ *     var check = MessageBox.Yes;
+ *
+ *     if (ans != MessageBox.Yes)
+ *         return false;
+ * }
+ * return true;
+ */
+declare class File extends QObject {
+  /**
+   * @param {string} filename The path to the file.
+   * @returns {void}
+   */
+  constructor(filename: string);
+
+  /**
+   * Close the file.
+   * @returns {void}
+   */
+  public close(): void;
+
+  /**
+   * Open the file with specific access mode.
+   * @param {int} accessMode The specified access mode. The possible access modes are w (write), r (read) and x (execute).
+   * @returns {void}
+   */
+  public open(accessMode: int): void;
+
+  /**
+   * Read all the file.
+   * @returns {string}
+   */
+  public read(): string;
+
+  /**
+   * Read the next char of the file.
+   * @returns {int}
+   */
+  public readByte(): int;
+
+  /**
+   * Read one line of the file.
+   * @returns {string}
+   */
+  public readLine(): string;
+
+  /**
+   * Read each line of the file.
+   * @returns {StringList}
+   */
+  public readLines(): StringList;
+
+  /**
+   * Remove the file.
+   * @returns {void}
+   */
+  public remove(): void;
+
+  /**
+   * Write a string in the file.
+   * @param {string} data The data to be written to the file.
+   * @param {int} [length=-1] The length of the data to be written.
+   * @returns {void}
+   */
+  public write(data: string, length?: int): void;
+
+  /**
+   * Write a char in the file.
+   * @param {int} byte The char to write to the file.
+   * @returns {void}
+   */
+  public writeByte(byte: int): void;
+
+  /**
+   * Write a string in the file and go next line.
+   * @param {string} data The data to be written to the file.
+   * @returns {void}
+   */
+  public writeLine(data: string): void;
+
+  /**
+   * Base file name.
+   * @returns {string}
+   */
+  baseName: string;
+
+  /**
+   * Date when the file was created.
+   * @returns {QDateTime}
+   */
+  created: QDateTime;
+
+  /**
+   * File reach end.
+   * @returns {boolean}
+   */
+  eof: boolean;
+
+  /**
+   * File executable flag.
+   * @returns {boolean}
+   */
+  executable: boolean;
+
+  /**
+   * File exists.
+   * @returns {boolean}
+   */
+  exists: boolean;
+
+  /**
+   * File extension.
+   * @returns {string}
+   */
+  extension: string;
+
+  /**
+   * File name.
+   * @returns {string}
+   */
+  fullName: string;
+
+  /**
+   * File hidden flag.
+   * @returns {boolean}
+   */
+  hidden: boolean;
+
+  /**
+   * Date when the file was modified.
+   * @returns {QDateTime}
+   */
+  lastModified: QDateTime;
+
+  /**
+   * Date when the file was read.
+   * @returns {QDateTime}
+   */
+  lastRead: QDateTime;
+
+  /**
+   * File name.
+   * @returns {string}
+   */
+  name: string;
+
+  /**
+   * File path.
+   * @returns {string}
+   */
+  path: string;
+
+  /**
+   * File readable flag.
+   * @returns {boolean}
+   */
+  readable: boolean;
+
+  /**
+   * Size of the file.
+   * @returns {int}
+   */
+  size: int;
+
+  /**
+   * @returns {string}
+   */
+  symLink: string;
+
+  /**
+   * File writable flag.
+   * @returns {boolean}
+   */
+  writable: boolean;
+}
+
+/**
+ * The FileAccess JavaScript global object. Enum to define file operation.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classFileAccess.html}
+ * @example
+ * var file = new File(filePath);
+ * f.open(FileAccess.ReadOnly);
+ */
+declare class FileAccess extends QObject {}
+
+/**
+ * The IO JavaScript global object. Enumerates the different types of stream behaviour the ImageFile
+ * can take.
+ * The FileIOType class enumerates the different types of stream behaviour the ImageFile can take. An
+ * instance of this class is directly accessible through the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classFileIOType.html}
+ */
+declare class FileIOType extends QObject {}
+
+/**
+ * The PermanentFile and TemporaryFile JavaScript classes. Used to represent an actual image file on
+ * disk.
+ * Files can be instantiated in the scripting environment or retrieved in an SM_InputPortWrapper
+ * object.
+ * There are two possible constructors: the PermanentFile or TemporaryFile. The PermanentFile takes the
+ * name of a file as an argument.
+ * The TemporaryFile takes an extension as an argument, an returns a temporary file with that
+ * extension. The temporary file and its containing directory will be deleted on exit.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classFileWrapper.html}
+ * @example
+ * file = new PermanentFile("C:\file.txt");
+ *
+ * file.open(IO.WRITE_ONLY); // open with write only stream
+ * file.writeLine("Hello World!"); // write line to file
+ * file.close(); // close file
+ */
+declare class FileWrapper extends QObject {
+  /**
+   * Create a new FileWrapper.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Create a new FileWrapper.
+   * @param {string} path Path to physical FileWrapper
+   * @returns {void}
+   */
+  constructor(path: string);
+
+  /**
+   * Closes the file stream.
+   * @returns {boolean}
+   */
+  public close(): boolean;
+
+  /**
+   * Copy current FileWrapper to new FileWrapper destination.
+   * @param {FileWrapper} dest The desired destination of the FileWrapper.
+   * @returns {boolean}
+   */
+  public copy(dest: FileWrapper): boolean;
+
+  /**
+   * Verify if file exists on the disk.
+   * @returns {boolean}
+   */
+  public exists(): boolean;
+
+  /**
+   * Retrieve file extension.
+   * @returns {string}
+   */
+  public extension(): string;
+
+  /**
+   * Checks if the file is closed.
+   * @returns {boolean}
+   */
+  public isClose(): boolean;
+
+  /**
+   * Check if file is opened.
+   * @returns {boolean}
+   */
+  public isOpen(): boolean;
+
+  /**
+   * Moves the current FileWrapper to a new FileWrapper destination.
+   * @param {FileWrapper} dest The desired destination of the FileWrapper.
+   * @returns {boolean}
+   */
+  public move(dest: FileWrapper): boolean;
+
+  /**
+   * Opens the file stream for read/write.
+   * @param {int} [m=int(FileIOType::WRITE_ONLY)] IO stream descriptor.
+   * @returns {boolean}
+   */
+  public open(m?: int): boolean;
+
+  /**
+   * Retrieves the full file path.
+   * @returns {string}
+   */
+  public path(): string;
+
+  /**
+   * Read entire content of stream.
+   * @returns {string}
+   */
+  public read(): string;
+
+  /**
+   * Read single line of stream.
+   * @returns {string}
+   */
+  public readLine(): string;
+
+  /**
+   * Remove physical file manually. Cannot remove file if there is an open stream.
+   * @returns {boolean}
+   */
+  public remove(): boolean;
+
+  /**
+   * Change extension for file name. Extension won't change if there is an open stream.
+   * @param {string} ext Extension String of image file.
+   * @returns {FileWrapper}
+   */
+  public setExtension(ext: string): FileWrapper;
+
+  /**
+   * Specify absolute path of this image file. Name of file can not be changed if there is an open
+   * stream.
+   * @param {string} path Absolute path String of image file.
+   * @returns {FileWrapper}
+   */
+  public setPath(path: string): FileWrapper;
+
+  /**
+   * Write string in current stream.
+   * @param {string} text Text to write.
+   * @returns {void}
+   */
+  public write(text: string): void;
+
+  /**
+   * Write entire contents of the parameter file in the current stream.
+   * @param {FileWrapper} file FileWrapper object.
+   * @returns {void}
+   */
+  public writeFile(file: FileWrapper): void;
+
+  /**
+   * Write string line in current stream.
+   * @param {string} text Text to write.
+   * @returns {void}
+   */
+  public writeLine(text: string): void;
+}
+
+/**
+ * The LayoutExport JavaScript class. Pop up a dialog, render layout and manage the export progress
+ * bar.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classLayoutExport.html}
+ */
+declare class LayoutExport extends QObject {
+  /**
+   * Add a node to be rendered.
+   * @param {LayoutExportParams} params The layout export parameters of the dialog when the dialog is closed. Passed as a reference.
+   * @returns {boolean}
+   */
+  public addRender(params: LayoutExportParams): boolean;
+
+  /**
+   * Show the Layout Export dialog.
+   * @param {LayoutExportParams} params The layout export parameters of the dialog when the dialog is closed. Passed as a reference.
+   * @param {boolean} showExportMultiple Display the export multiple files checkbox.
+   * @param {boolean} showImageSize Display the image size group of widget.
+   * @param {string} dialogTitle The dialog's title
+   * @returns {boolean}
+   */
+  public execDialog(
+    params: LayoutExportParams,
+    showExportMultiple: boolean,
+    showImageSize: boolean,
+    dialogTitle: string
+  ): boolean;
+
+  /**
+   * Render the nodes.
+   * @returns {void}
+   */
+  public flush(): void;
+
+  /**
+   * @returns {void}
+   */
+  public hideProgress(): void;
+
+  /**
+   * Get the path to the output files.
+   * @param {LayoutExportParams} params
+   * @returns {string}
+   */
+  public outputFilePath(params: LayoutExportParams): string;
+
+  /**
+   * @returns {boolean}
+   */
+  public progressCanceled(): boolean;
+
+  /**
+   * @param {LayoutExportParams} params
+   * @returns {boolean}
+   */
+  public save(params: LayoutExportParams): boolean;
+
+  /**
+   * @param {LayoutExportParams} params
+   * @returns {void}
+   */
+  public saveXli(params: LayoutExportParams): void;
+
+  /**
+   * @param {string} lbl
+   * @returns {void}
+   */
+  public setProgressLabel(lbl: string): void;
+
+  /**
+   * @param {int} totalSteps
+   * @returns {void}
+   */
+  public showProgress(totalSteps: int): void;
+
+  /**
+   * @param {int} progress
+   * @returns {void}
+   */
+  public updateProgress(progress: int): void;
+}
+
+/**
+ * The LayoutExportParams JavaScript class. Use a set parameters for the LayoutExport dialog.
+ * Layout Export parameters
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classLayoutExportParams.html}
+ * @example
+ *  var le = new LayoutExport;
+ *  var params = new LayoutExportParams;
+ *
+ *  //  Fetch export values from dialog
+ *  if (le.execDialog(params, true, true, translator.tr("Export Layout Images from Selection")) == false)
+ *      return;
+ *
+ *  if (le.save(params)) {
+ *      le.saveXli(params);
+ *      MessageLog.trace(le.outputFilePath(params) + " was successfully exported.");
+ *  }
+ */
+declare class LayoutExportParams extends QObject {
+  /**
+   * @returns {double}
+   */
+  public borderScale(): double;
+
+  /**
+   * @returns {int}
+   */
+  public cameraScope(): int;
+
+  /**
+   * @returns {int}
+   */
+  public customScopeFirst(): int;
+
+  /**
+   * @returns {int}
+   */
+  public customScopeLast(): int;
+
+  /**
+   * @returns {boolean}
+   */
+  public exportAllCameraFrame(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public exportCameraFrame(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public exportCameraFrameLabel(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public exportMultipleFiles(): boolean;
+
+  /**
+   * @returns {string}
+   */
+  public fileDirectory(): string;
+
+  /**
+   * @returns {string}
+   */
+  public fileFormat(): string;
+
+  /**
+   * @returns {string}
+   */
+  public filePattern(): string;
+
+  /**
+   * @returns {int}
+   */
+  public frame(): int;
+
+  /**
+   * @returns {string}
+   */
+  public layoutname(): string;
+
+  /**
+   * @returns {string}
+   */
+  public node(): string;
+
+  /**
+   * @returns {boolean}
+   */
+  public readColor(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public readLine(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public readOverlay(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public readUnderlay(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public renderStaticCameraAtSceneRes(): boolean;
+
+  /**
+   * @param {double} borderScale
+   * @returns {void}
+   */
+  public setBorderScale(borderScale: double): void;
+
+  /**
+   * @param {int} i
+   * @returns {void}
+   */
+  public setCameraScope(i: int): void;
+
+  /**
+   * @param {int} i
+   * @returns {void}
+   */
+  public setCustomScopeFirst(i: int): void;
+
+  /**
+   * @param {int} i
+   * @returns {void}
+   */
+  public setCustomScopeLast(i: int): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setExportAllCameraFrame(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setExportCameraFrame(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setExportCameraFrameLabel(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setExportMultipleFiles(b: boolean): void;
+
+  /**
+   * @param {string} fileDirectory
+   * @returns {void}
+   */
+  public setFileDirectory(fileDirectory: string): void;
+
+  /**
+   * @param {string} fileFormat
+   * @returns {void}
+   */
+  public setFileFormat(fileFormat: string): void;
+
+  /**
+   * @param {string} filePattern
+   * @returns {void}
+   */
+  public setFilePattern(filePattern: string): void;
+
+  /**
+   * @param {int} i
+   * @returns {void}
+   */
+  public setFrame(i: int): void;
+
+  /**
+   * @param {string} layoutname
+   * @returns {void}
+   */
+  public setLayoutname(layoutname: string): void;
+
+  /**
+   * @param {string} node
+   * @returns {void}
+   */
+  public setNode(node: string): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setReadColor(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setReadLine(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setReadOverlay(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setReadUnderlay(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setRenderStaticCameraAtSceneRes(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setWhiteBackground(b: boolean): void;
+
+  /**
+   * @param {double} zoomScale
+   * @returns {void}
+   */
+  public setZoomScale(zoomScale: double): void;
+
+  /**
+   * @returns {boolean}
+   */
+  public whiteBackground(): boolean;
+
+  /**
+   * @returns {double}
+   */
+  public zoomScale(): double;
+
+  /**
+   * @returns {double}
+   */
+  // /* Invalid - Duplicate property name */ borderScale: double;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ cameraScope: int;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ customScopeFirst: int;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ customScopeLast: int;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ exportAllCameraFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ exportCameraFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ exportCameraFrameLabel: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ exportMultipleFiles: boolean;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ fileDirectory: string;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ fileFormat: string;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ filePattern: string;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ frame: int;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ layoutname: string;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ node: string;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ readColor: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ readLine: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ readOverlay: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ readUnderlay: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ renderStaticCameraAtSceneRes: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ whiteBackground: boolean;
+
+  /**
+   * @returns {double}
+   */
+  // /* Invalid - Duplicate property name */ zoomScale: double;
+}
+
+/**
+ * The Matrix4x4 JavaScript class. Defines a four by four matrix container.
+ * Matrix4x4 objects can be instantiated in the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classMatrix4x4.html}
+ * @example
+ * m = new Matrix4x4(); // create empty matrix
+ * raxis = new Vector3d(0, 0, 1); // create new axis Vector3d
+ * m.rotateDegrees(90, raxis); // rotate matrix 90 degrees on z axis
+ * m.scale(2.0, 1.0, 2.0); // scale matrix non-uniformly
+ */
+declare class Matrix4x4 extends QObject {
+  /**
+   * Create a new empty Matrix4x4.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Retrieve the axis from a Matrix4x4.
+   * @param {int} axisIndex Axis index 0 for the X axis, 1 for Y axis, 2 for Z axis.
+   * @returns {Vector3d}
+   */
+  public axis(axisIndex: int): Vector3d;
+
+  /**
+   * Clear current Matrix4x4.
+   * @returns {Matrix4x4}
+   */
+  public clear(): Matrix4x4;
+
+  /**
+   * Extract position from matrix.
+   * @param {Point3d} [pivot=NULL]
+   * @param {boolean} [force3d=false]
+   * @returns {Point3d}
+   */
+  public extractPosition(pivot?: Point3d, force3d?: boolean): Point3d;
+
+  /**
+   * Extract rotation from matrix.
+   * @param {Point3d} [pivot=NULL]
+   * @param {boolean} [force3d=false]
+   * @returns {Point3d}
+   */
+  public extractRotation(pivot?: Point3d, force3d?: boolean): Point3d;
+
+  /**
+   * Extract scale from matrix.
+   * @param {Point3d} [pivot=NULL]
+   * @param {boolean} [force3d=false]
+   * @returns {Point3d}
+   */
+  public extractScale(pivot?: Point3d, force3d?: boolean): Point3d;
+
+  /**
+   * Extract skew from matrix.
+   * @param {Point3d} [pivot=NULL]
+   * @returns {double}
+   */
+  public extractSkew(pivot?: Point3d): double;
+
+  /**
+   * Invert current Matrix4x4.
+   * @returns {Matrix4x4}
+   */
+  public getInverse(): Matrix4x4;
+
+  /**
+   * Transpose current Matrix4x4.
+   * @returns {Matrix4x4}
+   */
+  public getTranspose(): Matrix4x4;
+
+  /**
+   * Invert current Matrix4x4.
+   * @returns {Matrix4x4}
+   */
+  public inverse(): Matrix4x4;
+
+  /**
+   * Test if Matrix4x4 is empty.
+   * @returns {boolean}
+   */
+  public isEmpty(): boolean;
+
+  /**
+   * Multiply current Matrix4x4 with specified Matrix4x4.
+   * @param {Matrix4x4} m2 Second Matrix4x4
+   * @returns {QObject}
+   */
+  public multiply(m2: Matrix4x4): QObject;
+
+  /**
+   * Multiply specified Point3d with current Matrix4x4.
+   * @param {Point3d} p Point3d
+   * @returns {Point3d}
+   */
+  public multiply(p: Point3d): Point3d;
+
+  /**
+   * Multiply specified Vector3d with current Matrix4x4.
+   * @param {Vector3d} v Vector3d
+   * @returns {QObject}
+   */
+  public multiply(v: Vector3d): QObject;
+
+  /**
+   * Multiply current Matrix4x4 with specified Matrix4x4.
+   * @param {Matrix4x4} m2 Second Matrix4x4
+   * @returns {Matrix4x4}
+   */
+  public multiplyEq(m2: Matrix4x4): Matrix4x4;
+
+  /**
+   * Normalize current Matrix4x4.
+   * @returns {Matrix4x4}
+   */
+  public normalize(): Matrix4x4;
+
+  /**
+   * Retrieve Matrix4x4 origin.
+   * @returns {Point3d}
+   */
+  public origin(): Point3d;
+
+  /**
+   * Calculate an orthogonal projection Matrix4x4.
+   * @param {double} left Left volume value
+   * @param {double} right Right volume value
+   * @param {double} bottom Bottom volume value
+   * @param {double} top Top volume value
+   * @param {double} zNear Near volume value
+   * @param {double} zFar Far volume value
+   * @returns {Matrix4x4}
+   */
+  public orthogonalProject(
+    left: double,
+    right: double,
+    bottom: double,
+    top: double,
+    zNear: double,
+    zFar: double
+  ): Matrix4x4;
+
+  /**
+   * Calculate a perspective projection Matrix4x4.
+   * @param {double} left Left volume value
+   * @param {double} right Right volume value
+   * @param {double} bottom Bottom volume value
+   * @param {double} top Top volume value
+   * @param {double} zNear Near volume value
+   * @param {double} zFar Far volume value
+   * @returns {Matrix4x4}
+   */
+  public perspectiveProject(
+    left: double,
+    right: double,
+    bottom: double,
+    top: double,
+    zNear: double,
+    zFar: double
+  ): Matrix4x4;
+
+  /**
+   * Calculate a perspective projection Matrix4x4.
+   * @param {double} fovy Vertical field of view angle in radians
+   * @param {double} ratio Screen ratio
+   * @param {double} zNear Near clipping plane
+   * @param {double} zFar Far clipping plane
+   * @returns {Matrix4x4}
+   */
+  public perspectiveProject(
+    fovy: double,
+    ratio: double,
+    zNear: double,
+    zFar: double
+  ): Matrix4x4;
+
+  /**
+   * @param {string} label
+   * @returns {void}
+   */
+  public print(label: string): void;
+
+  /**
+   * Rotate current Matrix4x4.
+   * @param {double} deg Angle in degrees
+   * @param {Vector3d} v Axis of rotation
+   * @returns {Matrix4x4}
+   */
+  public rotateDegrees(deg: double, v: Vector3d): Matrix4x4;
+
+  /**
+   * Rotate current Matrix4x4.
+   * @param {Vector3d} v Axis of plane
+   * @param {Point3d} p Center of plane
+   * @returns {Matrix4x4}
+   */
+  public rotatePlane(v: Vector3d, p: Point3d): Matrix4x4;
+
+  /**
+   * Rotate current Matrix4x4.
+   * @param {double} rad Angle in radians
+   * @param {Vector3d} v Axis of rotation
+   * @returns {Matrix4x4}
+   */
+  public rotateRadians(rad: double, v: Vector3d): Matrix4x4;
+
+  /**
+   * Scale current Matrix4x4.
+   * @param {double} sx Scale value on x axis
+   * @param {double} sy Scale value on y axis
+   * @param {double} [sz=1.0] Scale value on z axis
+   * @returns {Matrix4x4}
+   */
+  public scale(sx: double, sy: double, sz?: double): Matrix4x4;
+
+  /**
+   * Set matrix rotation from Euler angles.
+   * @param {double} rx Euler Angle first component
+   * @param {double} ry Euler Angle second component
+   * @param {double} rz Euler Angle third component
+   * @returns {Matrix4x4}
+   */
+  public setFromEulerAngles(rx: double, ry: double, rz: double): Matrix4x4;
+
+  /**
+   * Shear current Matrix4x4.
+   * @param {double} sk Shear value
+   * @returns {Matrix4x4}
+   */
+  public skew(sk: double): Matrix4x4;
+
+  /**
+   * Translate current Matrix4x4 with specified Vector3d.
+   * @param {Vector3d} v Vector3d
+   * @returns {Matrix4x4}
+   */
+  public translate(v: Vector3d): Matrix4x4;
+
+  /**
+   * Translate current Matrix4x4.
+   * @param {double} dx Translation distance on x axis
+   * @param {double} dy Translation distance on y axis
+   * @param {double} [dz=0.0] Translation distance on z axis
+   * @returns {Matrix4x4}
+   */
+  public translate(dx: double, dy: double, dz?: double): Matrix4x4;
+
+  /**
+   * Transpose current Matrix4x4.
+   * @returns {Matrix4x4}
+   */
+  public transpose(): Matrix4x4;
+
+  /**
+   * Retrieve single value from Matrix4x4.
+   * @param {int} row Row value
+   * @param {int} column Column value
+   * @returns {double}
+   */
+  public value(row: int, column: int): double;
+
+  /**
+   * 1st row and 1st column value
+   * @returns {double}
+   */
+  m00: double;
+
+  /**
+   * 1st row and 2nd column value
+   * @returns {double}
+   */
+  m01: double;
+
+  /**
+   * 1st row and 3rd column value
+   * @returns {double}
+   */
+  m02: double;
+
+  /**
+   * 1st row and 4th column value
+   * @returns {double}
+   */
+  m03: double;
+
+  /**
+   * 2nd row and 1st column value
+   * @returns {double}
+   */
+  m10: double;
+
+  /**
+   * 2nd row and 2nd column value
+   * @returns {double}
+   */
+  m11: double;
+
+  /**
+   * 2nd row and 3rd column value
+   * @returns {double}
+   */
+  m12: double;
+
+  /**
+   * 2nd row and 4th column value
+   * @returns {double}
+   */
+  m13: double;
+
+  /**
+   * 3rd row and 1st column value
+   * @returns {double}
+   */
+  m20: double;
+
+  /**
+   * 3rd row and 2nd column value
+   * @returns {double}
+   */
+  m21: double;
+
+  /**
+   * 3rd row and 3rd column value
+   * @returns {double}
+   */
+  m22: double;
+
+  /**
+   * 3rd row and 4th column value
+   * @returns {double}
+   */
+  m23: double;
+
+  /**
+   * 4th row and 1st column value
+   * @returns {double}
+   */
+  m30: double;
+
+  /**
+   * 4th row and 2nd column value
+   * @returns {double}
+   */
+  m31: double;
+
+  /**
+   * 4th row and 3rd column value
+   * @returns {double}
+   */
+  m32: double;
+
+  /**
+   * 4th row and 4th column value
+   * @returns {double}
+   */
+  m33: double;
+}
+
+/**
+ * The JavaScript class providing information about a specific palette.
+ * A Palette object can be obtained from PaletteList methods like getPaletteByIndex, getPaletteById or
+ * createPalette or from the PaletteObjectManager method getPalette. The Palette class defines a
+ * palette of colours. It provides access to functionalities of palettes like:
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPalette.html}
+ * @example
+ * var paletteList = PaletteObjectManager.getPaletteListByElementId(elementId);
+ * for (var j = 0; j < paletteList.numPalettes; ++j) {
+ *     var myPalette = paletteList.getPaletteByIndex(j);
+ *     var path = myPalette.getPath() + "/" + myPalette.getName();
+ * }
  */
 declare class Palette extends QObject {
   /**
-   * Returns the folder in which this palette is located.
+   * Move a color to this palette.
+   * Will remove the colour from its original palette and move it to this one. Returns false if the
+   * colour is invalid or if this is the same palette as the current colour palette. If this palette has
+   * a colour with the same colour ID as the source colour, it will return false also.
+   * @param {BaseColor} color The colour to be acquired.
+   * @returns {boolean}
    */
-  public getPath(): string;
+  public acquire(color: BaseColor): boolean;
 
   /**
-   * Returns the name of this palette. The extension (".plt") is not included.
+   * Create a clone of a colour object - this colorID is identical to original colour.
+   * Will create a copy of the colour with all the same values including the colorID. The source must be
+   * from another palette otherwise it will return an invalid color.
+   * @param {BaseColor} source The source colour to be cloned.
+   * @returns {BaseColor}
    */
-  public getName(): string;
+  public cloneColor(source: BaseColor): BaseColor;
 
   /**
-   * Returns whether the palette object is valid.
+   * Create a clone of a colour object - resolve the potential ID conflict by either cloning or
+   * duplicating the colour.
+   * This version allow you to specify whether to replace an already existing color when cloning the
+   * palette.
+   * @param {BaseColor} source The source colour to be cloned.
+   * @param {boolean} replaceOnIDConflict True to replace an already existing colour when cloning the palette.
+   * @returns {BaseColor}
    */
-  public isValid(): boolean;
+  public cloneColor(source: BaseColor, replaceOnIDConflict: boolean): BaseColor;
 
   /**
-   * Was the palette successfully loaded from disk (true or false)?
-   */
-  public isLoaded(): boolean;
-
-  /**
-   * Was the palette found at the location specified by the path and name (true or false)?
-   */
-  public isNotFound(): boolean;
-
-  /**
-   * Iterate over the colours. Return an invalid colour if the index is out of bound or otherwise invalid.
-   */
-  public getColorByIndex(index: int): BaseColor;
-
-  /**
-   * Retrieve a colour by id. If the colour is not found, the isValid property will be false.
-   */
-  public getColorById(uniqueId: string): BaseColor;
-
-  /**
-   * Try to obtain the database lock. Return true on success, and false on failure. The lock will be held until it is released in script or the ui. Safe to call multiple time to get the lock state.
-   */
-  public getLock(): boolean;
-
-  /**
-   * Release access to the palette. Other users will be able to obtain the access rights to the palette.
-   */
-  public releaseLock(): boolean;
-
-  /**
-   * The following methods test the type of the wrapped palette.
-   */
-  public isColorPalette(): boolean;
-
-  /**
-   * Returns whether the palette is a texture palette.
-   */
-  public isTexturePalette(): boolean;
-
-  /**
-   * sets the type of the palette to be a color palette
-   */
-  public setToColorPalette(): void;
-
-  /**
-   * sets the type of the palette to be a texture palette
-   */
-  public setToTexturePalette(): void;
-
-  /**
-   * Create a new colour of a given type.
-   */
-  public createNewColor(colorType: int, name: string, colorData: QVariant): Color;
-
-  /**
-   * Create a new solid colour.
-   */
-  public createNewSolidColor(name: string, colorData: QVariant): Color;
+* Create a new colour of a given type.
+* @param {int} colorType colorType can be:
+ColorType.SOLID_COLOR
+ColorType.LINEAR_GRADIENT
+ColorType.RADIAL_GRADIENT
+* @param {string} name The name of the colour to be created.
+* @param {QVariant} colorData Depending on the value of colorType argument, colorData has to be either an array of objects or an object. If the colorType argument is SOLID_COLOR, the colorData must be an object defined like this: { r : 255, g: 0, b: 0, a : 255 } to represent a solid red colour. If the colorType argument is one of the gradients, there must be an array of objects, one for each gradient tack. For example: [ { r : 255, g: 0, b: 0, a : 255, t: 0 }, { r : 0, g: 0, b: 255, a : 255, t: 1 } ] would define a gradient going from red to blue. The t parameter in each object represents the tack position and is a double value going from 0 to 1.
+* @returns {Color}
+*/
+  public createNewColor(
+    colorType: int,
+    name: string,
+    colorData: QVariant
+  ): Color;
 
   /**
    * Create a new linear gradient colour.
+   * Same as createNewColor(ColorType.LINEAR_GRADIENT, name, colorData);
+   * @param {string} name The name of the colour to be created.
+   * @param {QVariant} colorData colorData must be an array of objects, one for each gradient tack. For example: [ { r : 255, g: 0, b: 0, a : 255, t: 0 }, { r : 0, g: 0, b: 255, a : 255, t: 1 } ] would define a gradient going from red to blue. The t parameter in each object represents the tack position and is a double value going from 0 to 1.
+   * @returns {Color}
    */
   public createNewLinearGradientColor(name: string, colorData: QVariant): Color;
 
   /**
    * Create a new radial gradient colour.
+   * Same as createNewColor(ColorType.RADIAL_GRADIENT, name, colorData);
+   * @param {string} name The name of the colour to be created.
+   * @param {QVariant} colorData colorData must be an array of objects, one for each gradient tack. For example: [ { r : 255, g: 0, b: 0, a : 255, t: 0 }, { r : 0, g: 0, b: 255, a : 255, t: 1 } ] would define a gradient going from red to blue. The t parameter in each object represents the tack position and is a double value going from 0 to 1.
+   * @returns {Color}
    */
   public createNewRadialGradientColor(name: string, colorData: QVariant): Color;
 
   /**
-   * Create a new texture colour object.
+   * Create a new solid colour.
+   * Same as createNewColor(ColorType.SOLID_COLOR, name, colorData);
+   * @param {string} name The name of the colour to be created.
+   * @param {QVariant} colorData colorData must be an object defined like this example: { r : 255, g: 0, b: 0, a : 255 } which represents a solid red colour.
+   * @returns {Color}
    */
-  public createNewTexture(name: string, filename: string, tiled: boolean): Texture;
+  public createNewSolidColor(name: string, colorData: QVariant): Color;
+
+  /**
+   * Create a new texture colour object.
+   * Creates a texture pot. Copies the bitmap file internally to the palette.
+   * @param {string} name The name of the texture to be created.
+   * @param {string} filename The name of the file to be turned into a texture.
+   * @param {boolean} tiled Whether or not the texture will be tiled or not.
+   * @returns {Texture}
+   */
+  public createNewTexture(
+    name: string,
+    filename: string,
+    tiled: boolean
+  ): Texture;
 
   /**
    * Create a new texture from a QImage object (may not be done from the script).
+   * Creates a texture pot. Will copy the bitmap data internally to the palette.
+   * @param {string} name The name of the texture to be created.
+   * @param {QImage} bitmap The bitmap to be turned into a texture.
+   * @param {boolean} tiled Whether or not the texture will be tiled or not.
+   * @returns {Texture}
    */
-  public createNewTexture(name: string, bitmap: QImage, tiled: boolean): Texture;
+  public createNewTexture(
+    name: string,
+    bitmap: QImage,
+    tiled: boolean
+  ): Texture;
 
   /**
-   * Create a duplicate of a colour object - this colourID is unique.
+   * Create a duplicate of a colour object - this colorID is unique.
+   * Creates a copy of the colour with all the same values as source except for the colorID which will be
+   * a new uniqueID.
+   * @param {BaseColor} source The source colour to be duplicated.
+   * @returns {BaseColor}
    */
   public duplicateColor(source: BaseColor): BaseColor;
 
   /**
-   * Create a clone of a colour object - this colourID is identical to original colour.
+   * Returns the colour found by the given Id. If the colour is not found, the isValid property will be
+   * false.
+   * @param {string} uniqueId The id of the colour.
+   * @returns {BaseColor}
    */
-  public cloneColor(source: BaseColor): BaseColor;
+  public getColorById(uniqueId: string): BaseColor;
 
   /**
-   * Create a clone of a colour object - resolve the potential ID conflict by either cloning or duplicating the colour.
+   * Returns the colour found at the given index. Returns an invalid colour if the index is out of bound
+   * or otherwise invalid.
+   * @param {int} index The zero based index of the colour.
+   * @returns {BaseColor}
    */
-  public cloneColor(source: BaseColor, replaceOnIDConflict: boolean): BaseColor;
+  public getColorByIndex(index: int): BaseColor;
 
   /**
-   * Delete a colour from the palette.
+   * Try to obtain the database lock. Return true on success, and false on failure. The lock will be held
+   * until it is released in script or the ui. Safe to call multiple time to get the lock state.
+   * @returns {boolean}
    */
-  public removeColor(uniqueId: string): boolean;
+  public getLock(): boolean;
 
   /**
-   * Move a colour at the specified index.
+   * Returns the name of this palette. The extension (".plt") is not included.
+   * @returns {string}
+   */
+  public getName(): string;
+
+  /**
+   * Returns the folder in which this palette is located.
+   * @returns {string}
+   */
+  public getPath(): string;
+
+  /**
+   * Returns whether the palette is a colour palette.
+   * @returns {boolean}
+   */
+  public isColorPalette(): boolean;
+
+  /**
+   * Returns true if the palette was successfully loaded from the disk.
+   * @returns {boolean}
+   */
+  public isLoaded(): boolean;
+
+  /**
+   * Returns true if the palette was found at the location specified by the path and name.
+   * @returns {boolean}
+   */
+  public isNotFound(): boolean;
+
+  /**
+   * Returns whether the palette is a texture palette.
+   * @returns {boolean}
+   */
+  public isTexturePalette(): boolean;
+
+  /**
+   * Returns true if the palette object is valid.
+   * @returns {boolean}
+   */
+  public isValid(): boolean;
+
+  /**
+   * Moves a colour at the specified index.
+   * Moves the colour at given index just before the colour at beforeIndex in the list. Moves the colour
+   * at the end if beforeIndex is -1.
+   * @param {int} index The index of the colour to be moved.
+   * @param {int} beforeIndex The index of the colour that the color will be moved before.
+   * @returns {boolean}
    */
   public moveColor(index: int, beforeIndex: int): boolean;
 
   /**
-   * Move a colour to this palette.
+   * Release access to the palette. Other users will be able to obtain the access rights to the palette.
+   * @returns {boolean}
    */
-  public acquire(color: BaseColor): boolean;
+  public releaseLock(): boolean;
 
   /**
-   * Number of colours in this palette.
+   * Delete a colour from the palette.
+   * Permanently delete a colour.
+   * @param {string} uniqueId The uniqueID of the colour to be removed.
+   * @returns {boolean}
    */
-  nColors: int;
+  public removeColor(uniqueId: string): boolean;
+
+  /**
+   * Sets the type of the palette to be a colour palette.
+   * @returns {void}
+   */
+  public setToColorPalette(): void;
+
+  /**
+   * Sets the type of the palette to be a texture palette.
+   * @returns {void}
+   */
+  public setToTexturePalette(): void;
+
+  /**
+   * Returns the element id in which the palette is stored if location is PaletteLocation ELEMENT.
+   * Returns -1 if the palette is not stored in an element.
+   * @returns {int}
+   */
+  elementId: int;
 
   /**
    * The palette ID of this palette.
+   * @returns {string}
    */
   id: string;
 
   /**
    * Returns one of the PaletteLocation constants or -1 if the palette is invalid.
+   * @returns {int}
    */
   location: int;
 
   /**
-   * Returns the element id in which the palette is stored if location is PaletteLocation ELEMENT. Returns -1 if the palette is not stored in an element.
+   * Number of colours in this palette.
+   * @returns {int}
+   */
+  nColors: int;
+}
+
+/**
+ * The JavaScript class providing information about a palette list. Obtain from PaletteObjectManager
+ * methods like getPaletteListByElementId, getScenePaletteList or getPaletteListById.
+ * Defines a collection of palettes.
+ * Provides access to some of the standard functionality of palette lists. Some methods change the
+ * state of the palette list. If the database access lock cannot be obtained, they will throw a
+ * javascript exception.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPaletteList.html}
+ */
+declare class PaletteList extends QObject {
+  /**
+   * Adds a palette to the end of this palette list, returning a Palette object.
+   * @param {string} path Path to existing palette file.
+   * @returns {Palette}
+   */
+  public addPalette(path: string): Palette;
+
+  /**
+   * Adds a palette to the end of this palette list, returning a Palette object.
+   * @param {int} location One of the valid PaletteLocation constants in that context. Any value except PaletteLocation.EXTERNAL.
+   * @param {int} elementId The element ID if location is PaletteLocation.ELEMENT. Ignored in other cases.
+   * @param {string} name The disk name of the palette.
+   * @returns {Palette}
+   */
+  public addPaletteAtLocation(
+    location: int,
+    elementId: int,
+    name: string
+  ): Palette;
+
+  /**
+   * Create a new palette from a path String.
+   * If the file indicated by path already exists, it will append a number to the path to create a unique
+   * name.
+   * @param {string} path The path to create the palette from.
+   * @returns {Palette}
+   */
+  public createPalette(path: string): Palette;
+
+  /**
+   * Create a palette from a path String, inserted at position Index.
+   * If the file indicated by path already exists, it will append a number to the path to create a unique
+   * name.
+   * @param {string} path The path to create the palette from.
+   * @param {int} index The index for the created palette to be inserted at.
+   * @returns {Palette}
+   */
+  public createPalette(path: string, index: int): Palette;
+
+  /**
+   * Create a Palette at a physical location relative to the project.
+   * If the location is not in an element, the parameter element ID is ignored.
+   * @param {int} location The location for the palette to be created at.
+   * @param {int} elementId The Id of the element found at the location.
+   * @param {string} diskName The name of the disk.
+   * @returns {Palette}
+   */
+  public createPaletteAtLocation(
+    location: int,
+    elementId: int,
+    diskName: string
+  ): Palette;
+
+  /**
+   * Create a Palette at a physical location relative to the project, inserted at index in the
+   * paletteList.
+   * If the location is not in an element, the parameter element ID is ignored.
+   * @param {int} location The location for the palette to be created at.
+   * @param {int} elementId The Id of the element found at the location.
+   * @param {string} diskName The name of the disk.
+   * @param {int} index The index that the new plaette will be inserted at.
+   * @returns {Palette}
+   */
+  public createPaletteAtLocation(
+    location: int,
+    elementId: int,
+    diskName: string,
+    index: int
+  ): Palette;
+
+  /**
+   * Search the given color ID and return the first match, also looking in the scene palette list if
+   * applicable.
+   * @param {string} colorId The color ID to search.
+   * @returns {Palette}
+   */
+  public findPaletteOfColor(colorId: string): Palette;
+
+  /**
+   * Try getting the database lock, returning true on success or false on failure. Without the lock,
+   * methods that change the state of the palette list can fail.
+   * @returns {boolean}
+   */
+  public getLock(): boolean;
+
+  /**
+   * Returns a Palette object for the palette with ID 'id'.
+   * @param {string} id palette ID of palette in this palette list.
+   * @returns {Palette}
+   */
+  public getPaletteById(id: string): Palette;
+
+  /**
+   * Returns a Palette object for the palette with ID 'id'.
+   * @param {string} id Palette ID of palette in this palette list.
+   * @param {boolean} lookInLinkedPalettes whether to look in other accessible palettes, typically the scene palette List when searching from an element palette list.
+   * @returns {Palette}
+   */
+  public getPaletteById(id: string, lookInLinkedPalettes: boolean): Palette;
+
+  /**
+   * Returns a Palette object for the palette at position 'index'.
+   * @param {int} index Index of palette in this palette list.
+   * @returns {Palette}
+   */
+  public getPaletteByIndex(index: int): Palette;
+
+  /**
+   * Returns the folder in which this palette list is located.
+   * @returns {string}
+   */
+  public getPath(): string;
+
+  /**
+   * Adds a palette to this palette list at the position specified by 'index', returning a Palette
+   * object.
+   * @param {string} path Path to existing palette file.
+   * @param {int} index The index of the position where the palette is inserted.
+   * @returns {Palette}
+   */
+  public insertPalette(path: string, index: int): Palette;
+
+  /**
+   * Adds a palette to this palette list at the position specified by 'index', returning a Palette
+   * object.
+   * @param {int} location One of the valid PaletteLocation constants in that context. Any value except PaletteLocation.EXTERNAL.
+   * @param {int} elementId The element ID if location is PaletteLocation.ELEMENT. Ignored in other cases.
+   * @param {string} name Path to existing palette file.
+   * @param {int} index The index of the position where the palette is inserted.
+   * @returns {Palette}
+   */
+  public insertPaletteAtLocation(
+    location: int,
+    elementId: int,
+    name: string,
+    index: int
+  ): Palette;
+
+  /**
+   * Returns true if the palette was successfully loaded from the disk.
+   * @returns {boolean}
+   */
+  public isLoaded(): boolean;
+
+  /**
+   * Returns true if the palette list object is valid.
+   * @returns {boolean}
+   */
+  public isValid(): boolean;
+
+  /**
+   * Move the specified palette down one place in this palette list.
+   * @param {string} id ID of the palette to move.
+   * @returns {boolean}
+   */
+  public movePaletteDown(id: string): boolean;
+
+  /**
+   * Move the specified palette up one place in this palette list.
+   * @param {string} id ID of the palette to move.
+   * @returns {boolean}
+   */
+  public movePaletteUp(id: string): boolean;
+
+  /**
+   * Release the lock.
+   * @returns {boolean}
+   */
+  public releaseLock(): boolean;
+
+  /**
+   * Remove the palette by path.
+   * @param {string} path The path of the palette to remove.
+   * @returns {boolean}
+   */
+  public removePalette(path: string): boolean;
+
+  /**
+   * Remove the palette with the specified palette ID.
+   * @param {string} id ID of the palette to remove.
+   * @returns {boolean}
+   */
+  public removePaletteById(id: string): boolean;
+
+  /**
+   * Remove the palette at the position specified by 'index'.
+   * @param {int} index Index of palette to remove.
+   * @returns {boolean}
+   */
+  public removePaletteByIndex(index: int): boolean;
+
+  /**
+   * Will return the elementId of this palette list if the type is PaletteListType.Element. Will return
+   * -1 if the type is PaletteListType.Scene.
+   * @returns {int}
    */
   elementId: int;
+
+  /**
+   * The palette list ID of this palette list.
+   * @returns {string}
+   */
+  id: string;
+
+  /**
+   * Number of palettes in this palette list.
+   * @returns {int}
+   */
+  numPalettes: int;
+
+  /**
+   * The type of palette list. One of the PaletteListType constants.
+   * @returns {int}
+   */
+  type: int;
 }
+
+/**
+ * The JavaScript class for getting the palette list type. Obtain it from Constants.
+ * Defines the types of palette list. They can be Scene, Element, Hidden or Unspecified.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPaletteListType.html}
+ * @example
+ * var paletteListType = PaletteObjectManager.Constants.PaletteListType.Scene;
+ */
+declare class PaletteListType extends QObject {
+  /**
+   * Represent the Job location of the project. A palette created with this location would be stored in
+   * the job folder.
+   * @returns {int}
+   */
+  Element: int;
+
+  /**
+   * Represent the Scene location of the project. A palette created with this location would be stored in
+   * the scene folder.
+   * @returns {int}
+   */
+  Hidden: int;
+
+  /**
+   * The PaletteList is a Scene palette list if its.
+   * @returns {int}
+   */
+  Scene: int;
+
+  /**
+   * The palette list type is unspecified. Maybe the palette list is invalid.
+   * @returns {int}
+   */
+  Unspecified: int;
+}
+
+/**
+ * The JavaScript class for defining the standard palette locations. Obtain it from Constants.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPaletteLocation.html}
+ * @example
+ * var envPath = PaletteObjectManager.Constants.Location.ENVIRONMENT;
+ * var jobPath = PaletteObjectManager.Constants.Location.JOB;
+ * var scenePath = PaletteObjectManager.Constants.Location.SCENE;
+ * var elementPath = PaletteObjectManager.Constants.Location.ELEMENT;
+ * var externalPath = PaletteObjectManager.Constants.Location.EXTERNAL;
+ */
+declare class PaletteLocation extends QObject {
+  /**
+   * Represent a location in an element of the project.
+   * @returns {int}
+   */
+  ELEMENT: int;
+
+  /**
+   * Represent the Environment location of the project. A palette created with this location would be
+   * stored in the environment folder.
+   * @returns {int}
+   */
+  ENVIRONMENT: int;
+
+  /**
+   * Represents a location outside the project.
+   * @returns {int}
+   */
+  EXTERNAL: int;
+
+  /**
+   * Represent the Job location of the project. A palette created with this location would be stored in
+   * the job folder.
+   * @returns {int}
+   */
+  JOB: int;
+
+  /**
+   * Represent the Scene location of the project. A palette created with this location would be stored in
+   * the scene folder.
+   * @returns {int}
+   */
+  SCENE: int;
+}
+
+/**
+ * This class is used to retrieve Constants used in the palette and colors.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPaletteLocator.html}
+ */
+declare class PaletteLocator extends QObject {
+  /**
+   * Will return the full palette-library path for a given location.
+   * @param {int} location One of the PaletteLocation constants.
+   * @param {int} elementId If location is PaletteLocation.ELEMENT, the element id
+   * @returns {string}
+   */
+  public folderForLocation(location: int, elementId: int): string;
+
+  /**
+   * Will copy the plt file at the specified location in the project.
+   * @param {string} palettePath The full source palette file path.
+   * @param {int} location One of the PaletteLocation constants.
+   * @param {int} elementId If location is PaletteLocation.ELEMENT, the element id
+   * @param {string} paletteName The name the palette will have in the project.
+   * @returns {boolean}
+   */
+  public importPaletteAtLocation(
+    palettePath: string,
+    location: int,
+    elementId: int,
+    paletteName: string
+  ): boolean;
+
+  /**
+   * Will return the filename of the palette including the .plt extension for a given palette and
+   * location.
+   * @param {int} location One of the PaletteLocation constants.
+   * @param {int} elementId If location is PaletteLocation.ELEMENT, the element id
+   * @param {string} paletteName The palette name without the .plt extension
+   * @returns {string}
+   */
+  public palettePathForLocation(
+    location: int,
+    elementId: int,
+    paletteName: string
+  ): string;
+
+  /**
+   * Will return the list of all .plt files at a given location.
+   * @param {int} location One of the PaletteLocation constants.
+   * @param {int} elementId If location is PaletteLocation.ELEMENT, the element id
+   * @param {boolean} fullFileName If true will return the complete path list. Will return only the names otherwise.
+   * @returns {StringList}
+   */
+  public palettesAtLocation(
+    location: int,
+    elementId: int,
+    fullFileName: boolean
+  ): StringList;
+
+  /**
+   * Will return the texture folder of the palette for a given palette and location.
+   * @param {int} location One of the PaletteLocation constants.
+   * @param {int} elementId If location is PaletteLocation.ELEMENT, the element id
+   * @param {string} paletteName The palette name without the .plt extension
+   * @returns {string}
+   */
+  public textureFolderForLocation(
+    location: int,
+    elementId: int,
+    paletteName: string
+  ): string;
+}
+
+/**
+ * The JavaScript class for getting or setting the model directory, the scan files and the default
+ * camera name flags when pasting. Obtain from the copyPaste global object.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPasteOptions.html}
+ * @example
+ * var myPasteOptions = copyPaste.getCurrentPasteOptions();
+ * myPasteOptions.extendScene = false;
+ * myPasteOptions.defaultCameraName = true;
+ *
+ * copyPaste.paste(dragObject, selectionOfNodes, startFrame, numFrames, myPasteOptions);
+ */
+declare class PasteOptions extends QObject {
+  /**
+   * @returns {boolean}
+   */
+  addRemoveAngleKeyFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  addRemoveMotionKeyFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  addRemoveScalingKeyFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  addRemoveSkewKeyFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  addRemoveVelocityKeyFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  autoExtendExposure: boolean;
+
+  /**
+   * @returns {string}
+   */
+  colourPalette: string;
+
+  /**
+   * @returns {boolean}
+   */
+  copyModelsDir: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  copyScanFiles: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  createNewColumn: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  defaultCameraName: boolean;
+
+  /**
+   * set the delete mode. Value strings : REMOVE, EMPTY, DELETE_NOTHING. Default: DELETE_NOTHING )
+   * @returns {string}
+   */
+  deleteMode: string;
+
+  /**
+   * @returns {string}
+   */
+  drawingFileMode: string;
+
+  /**
+   * @returns {string}
+   */
+  drawingPasteAction: string;
+
+  /**
+   * @returns {boolean}
+   */
+  drawingSubstitution: boolean;
+
+  /**
+   * @returns {string}
+   */
+  elementMode: string;
+
+  /**
+   * @returns {boolean}
+   */
+  extendScene: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  forceKeyframeAtBeginningAndEnd: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  fullTransfer: boolean;
+
+  /**
+   * @returns {int}
+   */
+  matchNodeName: int;
+
+  /**
+   * @returns {int}
+   */
+  numberOfFramesSource: int;
+
+  /**
+   * @returns {boolean}
+   */
+  offsetKeyFrame: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  preserveColumnName: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  replaceExpressionColumns: boolean;
+
+  /**
+   * @returns {int}
+   */
+  startFrameSource: int;
+
+  /**
+   * set the write mode. Value strings: INSERT,OVERWRITE, DO_NOTHING. Default: OVERWRITE )
+   * @returns {string}
+   */
+  writeMode: string;
+}
+
+/**
+ * The Point2d JavaScript class. Defines a two dimensional point.
+ * The Point2d class defines a bi-dimensional point container. Point2d objects can be instantiated in
+ * the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPoint2d.html}
+ */
+declare class Point2d extends QObject {
+  /**
+   * Create a new empty Point2d.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Create a new Point2d.
+   * @param {double} x X value
+   * @param {double} y Y value
+   * @returns {void}
+   */
+  constructor(x: double, y: double);
+
+  /**
+   * Add specified Vector2d to current Point2d.
+   * @param {Vector2d} v Vector2d
+   * @returns {Point2d}
+   */
+  public add(v: Vector2d): Point2d;
+
+  /**
+   * Add specified Vector2d to current Point2d.
+   * @param {Vector2d} v Vector2d
+   * @returns {Point2d}
+   */
+  public addEq(v: Vector2d): Point2d;
+
+  /**
+   * Calculate distance between two points.
+   * @param {Point2d} p2 Second Point2d
+   * @returns {double}
+   */
+  public distance(p2: Point2d): double;
+
+  /**
+   * Calculate square distance between two points.
+   * @param {Point2d} p2 Second Point2d
+   * @returns {double}
+   */
+  public distanceSq(p2: Point2d): double;
+
+  /**
+   * Calculate Point2d as interpolation between two points.
+   * @param {double} t Factor of interpolation [ 0, 1 ]
+   * @param {Point2d} p1 First Point2d
+   * @param {Point2d} p2 Second Point2d
+   * @returns {Point2d}
+   */
+  public interpolate(t: double, p1: Point2d, p2: Point2d): Point2d;
+
+  /**
+   * Substracts current Point2d with specified Point2d.
+   * @param {Point2d} p2 Second Point2d
+   * @returns {Vector2d}
+   */
+  public minus(p2: Point2d): Vector2d;
+
+  /**
+   * Substracts current Point2d with specified Vector2d.
+   * @param {Vector2d} v Vector2d
+   * @returns {Point2d}
+   */
+  public minus(v: Vector2d): Point2d;
+
+  /**
+   * Substract current Point2d with specified Vector2d.
+   * @param {Vector2d} v Vector2d
+   * @returns {Point2d}
+   */
+  public minusEq(v: Vector2d): Point2d;
+
+  /**
+   * round x and y to floor with a resolution of 1.0/64.0
+   * @returns {Point2d}
+   */
+  public round(): Point2d;
+
+  /**
+   * round x and y to floor with a resolution given
+   * @param {double} quantum
+   * @returns {Point2d}
+   */
+  public round(quantum: double): Point2d;
+
+  /**
+   * Rounds this point in the direction of the given vector and using the resolution of 1.0/64.0.
+   * @param {Vector2d} v
+   * @returns {Point2d}
+   */
+  public round(v: Vector2d): Point2d;
+
+  /**
+   * Rounds this point in the direction of the given vector and using the given resolution.
+   * @param {Vector2d} v
+   * @param {double} quantum
+   * @returns {Point2d}
+   */
+  public round(v: Vector2d, quantum: double): Point2d;
+
+  /**
+   * Set the value of x, y coordinate.
+   * @returns {void}
+   */
+  public setXY(): void;
+
+  /**
+   * Copy Point2d into a Vector2d container.
+   * @returns {Vector2d}
+   */
+  public toVector2d(): Vector2d;
+
+  /**
+   * x value
+   * @returns {double}
+   */
+  x: double;
+
+  /**
+   * y value
+   * @returns {double}
+   */
+  y: double;
+}
+
+/**
+ * The Point3d JavaScript class. Defines a three dimensional point.
+ * The Point3d class defines a three dimensional point container. Point3d objects can be instantiated
+ * in the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classPoint3d.html}
+ */
+declare class Point3d extends QObject {
+  /**
+   * Create a new empty Point3d.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Create a new Point3d.
+   * @param {double} x X value
+   * @param {double} y Y value
+   * @param {double} z Z value
+   * @returns {void}
+   */
+  constructor(x: double, y: double, z: double);
+
+  /**
+   * Add specified Vector3d to current Point3d.
+   * @param {Vector3d} v Vector3d
+   * @returns {Point3d}
+   */
+  public add(v: Vector3d): Point3d;
+
+  /**
+   * Add specified Vector3d to current Point3d.
+   * @param {Vector3d} v Vector3d
+   * @returns {Point3d}
+   */
+  public addEq(v: Vector3d): Point3d;
+
+  /**
+   * Calculate distance between current Point3d and specified Point3d.
+   * @param {Point3d} p2 Second Point3d
+   * @returns {double}
+   */
+  public distance(p2: Point3d): double;
+
+  /**
+   * Calculate square distance between current Point3d and specified Point3d.
+   * @param {Point3d} p2 Second Point3d
+   * @returns {double}
+   */
+  public distanceSq(p2: Point3d): double;
+
+  /**
+   * Calculate Point3d as interpolation between two points.
+   * @param {double} t Factor of interpolation [ 0, 1 ]
+   * @param {Point3d} p1 First Point3d
+   * @param {Point3d} p2 Second Point3d
+   * @returns {Point3d}
+   */
+  public interpolate(t: double, p1: Point3d, p2: Point3d): Point3d;
+
+  /**
+   * Test if current Point3d is equal to specified Point3d.
+   * @param {Point3d} p2 Second Point3d
+   * @returns {boolean}
+   */
+  public isEqual(p2: Point3d): boolean;
+
+  /**
+   * Test if current Point3d is not equal to specified Point3d.
+   * @param {Point3d} p2 Second Point3d
+   * @returns {boolean}
+   */
+  public isNotEqual(p2: Point3d): boolean;
+
+  /**
+   * Test if Point3d is at origin.
+   * @returns {boolean}
+   */
+  public isOrigin(): boolean;
+
+  /**
+   * Substracts current Point3d with specified Vector3d.
+   * @param {Vector3d} v Vector3d
+   * @returns {Point3d}
+   */
+  public minus(v: Vector3d): Point3d;
+
+  /**
+   * Substracts current Point3d with specified Point3d.
+   * @param {Point3d} p2 Second Point3d
+   * @returns {Vector3d}
+   */
+  public minus(p2: Point3d): Vector3d;
+
+  /**
+   * Substract current Point3d with specified Vector3d.
+   * @param {Vector3d} v Vector3d
+   * @returns {Point3d}
+   */
+  public minusEq(v: Vector3d): Point3d;
+
+  /**
+   * Round x, y coordinate to floor with the given resolution.
+   * @param {double} quantum
+   * @returns {Point3d}
+   */
+  public round(quantum: double): Point3d;
+
+  /**
+   * Set the x, y, z coordinate to the given.
+   * @param {double} x
+   * @param {double} y
+   * @param {double} z
+   * @returns {void}
+   */
+  public setXYZ(x: double, y: double, z: double): void;
+
+  /**
+   * Convert current Point3d to bi-dimensional Point2d.
+   * @returns {Point2d}
+   */
+  public toPoint2d(): Point2d;
+
+  /**
+   * @returns {double}
+   */
+  x: double;
+
+  /**
+   * @returns {double}
+   */
+  y: double;
+
+  /**
+   * @returns {double}
+   */
+  z: double;
+}
+
+/**
+ * The Process JavaScript class. Used to launch an external process.
+ * Processes can be instantiated in the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classProcess.html}
+ * @example
+ * p1 = new Process("rndr -t file.rib"); // create process from single string
+ * p2 = new Process("rndr", "-t", "file.rib"); // create process using separate arguments
+ *
+ * // Both commands execute same process
+ * p1.launch();
+ * p2.launch();
+ *
+ * // Launch a new process and detach it from application.
+ * // Application will not be monitored by script module.
+ * p3 = new Process("rndr -t file.rib");
+ * p3.launchAndDetach();
+ *
+ * // Create a process from a specified PID.
+ * p4 = new Process(1234);
+ *
+ * // Verify if process is still alive and terminate it
+ * if (p4.isAlive()) {
+ *     p4.terminate();
+ * }
+ */
+declare class Process extends QObject {
+  /**
+   * Create a new Process. A process created with a pid cannot be launched as it already should have
+   * been. terminate() and isAlive() functions can still be called with such a process.
+   * @param {int} pid PID of already existing process.
+   * @returns {void}
+   */
+  constructor(pid: int);
+
+  /**
+   * Create a new Process.
+   * @param {string} name Path or name of process to execute.
+   * @returns {void}
+   */
+  constructor(name: string);
+
+  /**
+   * Create a new Process.
+   * @param {string} name Path or name of process to execute.
+   * @param {StringList} list List of arguments.
+   * @returns {void}
+   */
+  constructor(name: string, list: StringList);
+
+  /**
+   * Create a new Process.
+   * @param {string} commandLine Entire command line to launch.
+   * @returns {void}
+   */
+  constructor(commandLine: string);
+
+  /**
+   * Create a new Process.
+   * @param {StringList} [args=StringList()] A StringList of arguments.
+   * @returns {void}
+   */
+  constructor(args?: StringList);
+
+  /**
+   * Returns the arguments for the process.
+   * @returns {StringList}
+   */
+  public arguments(): StringList;
+
+  /**
+   * Retruns true if you can read the Standard error file line by line.
+   * @returns {boolean}
+   */
+  public canReadLineStderr(): boolean;
+
+  /**
+   * Returns true if you can read the Standard output file line by line.
+   * @returns {boolean}
+   */
+  public canReadLineStdout(): boolean;
+
+  /**
+   * Closes the Standard input file.
+   * @returns {void}
+   */
+  public closeStdin(): void;
+
+  /**
+   * Fetch command line to be executed in this process.
+   * @returns {string}
+   */
+  public commandLine(): string;
+
+  /**
+   * Fetch error code.
+   * @returns {int}
+   */
+  public errorCode(): int;
+
+  /**
+   * Fetch error message.
+   * @returns {string}
+   */
+  public errorMessage(): string;
+
+  /**
+   * Whether or not running the process was a failure. A non-zero exit status indicates failure.
+   * @returns {int}
+   */
+  public exitStatus(): int;
+
+  /**
+   * Verify if process is still alive.
+   * @returns {boolean}
+   */
+  public isAlive(): boolean;
+
+  /**
+   * Kills the process.
+   * @returns {void}
+   */
+  public kill(): void;
+
+  /**
+   * Launch process.
+   * @returns {int}
+   */
+  public launch(): int;
+
+  /**
+   * Launches the Process.
+   * @param {string} buf The data to write.
+   * @param {StringList} [env=0] The process environment.
+   * @returns {void}
+   */
+  public launch(buf: string, env?: StringList): void;
+
+  /**
+   * Launch process and detach it from application.
+   * @returns {int}
+   */
+  public launchAndDetach(): int;
+
+  /**
+   * Fetch process PID.
+   * @returns {int}
+   */
+  public pid(): int;
+
+  /**
+   * Returns the next line of the Standard error file.
+   * @returns {string}
+   */
+  public readLineStderr(): string;
+
+  /**
+   * Returns the next line of the Standard output file.
+   * @returns {string}
+   */
+  public readLineStdout(): string;
+
+  /**
+   * Returns the contents of the Standard error file.
+   * @returns {string}
+   */
+  public readStderr(): string;
+
+  /**
+   * Returns the contents of the Standard output file.
+   * @returns {string}
+   */
+  public readStdout(): string;
+
+  /**
+   * Returns true if the process is running.
+   * @returns {boolean}
+   */
+  public running(): boolean;
+
+  /**
+   * Sets the arguments for running the process.
+   * @param {StringList} arguments A StringList of arguments.
+   * @returns {void}
+   */
+  public setArguments(arguments: StringList): void;
+
+  /**
+   * Sets the current working directory.
+   * @param {string} workingDirectory The path to the desired working directory.
+   * @returns {void}
+   */
+  public setWorkingDirectory(workingDirectory: string): void;
+
+  /**
+   * Starts the process.
+   * @param {StringList} [env=0] The process environment.
+   * @returns {void}
+   */
+  public start(env?: StringList): void;
+
+  /**
+   * Terminates the process.
+   * @returns {void}
+   */
+  public terminate(): void;
+
+  /**
+   * Tries to terminate the process.
+   * @returns {void}
+   */
+  public tryTerminate(): void;
+
+  /**
+   * Returns the current working directory.
+   * @returns {string}
+   */
+  public workingDirectory(): string;
+
+  /**
+   * Writes to the Standard input file.
+   * @param {string} buffer The data to write.
+   * @returns {void}
+   */
+  public writeToStdin(buffer: string): void;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Overriding method in parent class with different parameters */public objectName (): string;
+
+  /**
+   * @returns {void}
+   */
+  public launchFinished: QSignal<() => void>;
+
+  /**
+   * @returns {void}
+   */
+  public processExited: QSignal<() => void>;
+
+  /**
+   * @returns {void}
+   */
+  public readyReadStderr: QSignal<() => void>;
+
+  /**
+   * @returns {void}
+   */
+  public readyReadStdout: QSignal<() => void>;
+
+  /**
+   * @returns {void}
+   */
+  public wroteToStdin: QSignal<() => void>;
+
+  /**
+   * @returns {StringList}
+   */
+  // /* Invalid - Duplicate property name */ arguments: StringList;
+
+  /**
+   * @returns {int}
+   */
+  // /* Invalid - Duplicate property name */ exitStatus: int;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ running: boolean;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ workingDirectory: string;
+}
+
+/**
+ * The RemoteCmd JavaScript class. Send one sided commands to a remote host.
+ * RemoteCmd allows user to send one sided commands to a remote host
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classRemoteCmd.html}
+ */
+declare class RemoteCmd {
+  /**
+   * Create a new RemoteCmd remote command object.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Connect to a remote machine.
+   * @param {string} machine String Machine name
+   * @param {int} port Port number
+   * @returns {boolean}
+   */
+  public connect(machine: string, port: int): boolean;
+
+  /**
+   * Retrieve connection status
+   * @returns {boolean}
+   */
+  public connected(): boolean;
+
+  /**
+   * Connect to a remote machine.
+   * @param {string} machine String Machine name
+   * @param {int} port Port number
+   * @param {int} timeout Timeout value
+   * @returns {boolean}
+   */
+  public connectTimeout(machine: string, port: int, timeout: int): boolean;
+
+  /**
+   * Disconnect from remote machine.
+   * @returns {void}
+   */
+  public disconnect(): void;
+
+  /**
+   * Retrieve last received response from server.
+   * @returns {string}
+   */
+  public lastReceived(): string;
+
+  /**
+   * Query response from server.
+   * @param {int} timeout Time out value in milliseconds. -1 for infinity.
+   * @returns {boolean}
+   */
+  public receive(timeout: int): boolean;
+
+  /**
+   * Query a packaged response from server.
+   * @param {int} timeout Time out value in milliseconds. -1 for infinity.
+   * @returns {boolean}
+   */
+  public receiveMsg(timeout: int): boolean;
+
+  /**
+   * Send a command to remote machine.
+   * @param {string} cmd String command
+   * @returns {boolean}
+   */
+  public send(cmd: string): boolean;
+
+  /**
+   * Send a packaged message to remote machine.
+   * @param {string} msg String message
+   * @returns {boolean}
+   */
+  public sendMsg(msg: string): boolean;
+}
+
+/**
+ * The Vector2d JavaScript class. Defines a two dimensional vector.
+ * The Vector2d class defines a bi-dimensional vector container. Vector2d objects can be instantiated
+ * in the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classVector2d.html}
+ */
+declare class Vector2d extends QObject {
+  /**
+   * Create a new empty Vector2d.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Create a new Vector2d.
+   * @param {double} x X value
+   * @param {double} y Y value
+   * @returns {void}
+   */
+  constructor(x: double, y: double);
+
+  /**
+   * Retrieve degree angle defined by Vector2d.
+   * @returns {double}
+   */
+  public degreeAngle(): double;
+
+  /**
+   * Calculate dot product between current Vector2d and specified Vector2d.
+   * @param {Vector2d} v2 Second Vector2d
+   * @returns {double}
+   */
+  public dot(v2: Vector2d): double;
+
+  /**
+   * Normalize current Vector2d.
+   * @returns {Vector2d}
+   */
+  public getNormalized(): Vector2d;
+
+  /**
+   * Project current Vector2d onto specified Vector2d.
+   * @param {Vector2d} v2 Vector2d to project onto
+   * @returns {Vector2d}
+   */
+  public getProjection(v2: Vector2d): Vector2d;
+
+  /**
+   * Test if the two vectors are equals.
+   * @param {Vector2d} v2 Second Vector2d
+   * @returns {boolean}
+   */
+  public isEqual(v2: Vector2d): boolean;
+
+  /**
+   * Test if the two vectors are not equals.
+   * @param {Vector2d} v2 Second Vector2d
+   * @returns {boolean}
+   */
+  public isNotEqual(v2: Vector2d): boolean;
+
+  /**
+   * Test if Vector2d is zero.
+   * @returns {boolean}
+   */
+  public isZero(): boolean;
+
+  /**
+   * Retrieve length of Vector2d.
+   * @returns {double}
+   */
+  public length(): double;
+
+  /**
+   * Retrieve square length of Vector2d.
+   * @returns {double}
+   */
+  public lengthSq(): double;
+
+  /**
+   * Negate current Vector2d.
+   * @returns {Vector2d}
+   */
+  public negate(): Vector2d;
+
+  /**
+   * Normalize current Vector2d.
+   * @returns {Vector2d}
+   */
+  public normalize(): Vector2d;
+
+  /**
+   * Project current Vector2d onto specified Vector2d.
+   * @param {Vector2d} v2 Vector2d to project onto
+   * @returns {Vector2d}
+   */
+  public project(v2: Vector2d): Vector2d;
+
+  /**
+   * Retrieve radian angle defined by Vector2d.
+   * @returns {double}
+   */
+  public radianAngle(): double;
+
+  /**
+   * Rotate Vector2d counter-clockwise of specified radian angle.
+   * @param {double} rad Radian angle
+   * @returns {Vector2d}
+   */
+  public rotate(rad: double): Vector2d;
+
+  /**
+   * Rotate Vector2d counter-clockwise of 270 degrees.
+   * @returns {Vector2d}
+   */
+  public rotate270(): Vector2d;
+
+  /**
+   * Rotate Vector2d counter-clockwise of 90 degrees.
+   * @returns {Vector2d}
+   */
+  public rotate90(): Vector2d;
+
+  /**
+   * x value
+   * @returns {double}
+   */
+  x: double;
+
+  /**
+   * y value
+   * @returns {double}
+   */
+  y: double;
+}
+
+/**
+ * The Vector3d JavaScript class. Defines a three dimensional vector.
+ * The Vector3d class defines a three-dimensional vector container. Vector3d objects can be
+ * instantiated in the scripting environment.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classVector3d.html}
+ */
+declare class Vector3d extends QObject {
+  /**
+   * Create a new empty Vector3d.
+   * @returns {void}
+   */
+  constructor();
+
+  /**
+   * Create a new Vector3d.
+   * @param {double} x X value
+   * @param {double} y Y value
+   * @param {double} z Z value
+   * @returns {void}
+   */
+  constructor(x: double, y: double, z: double);
+
+  /**
+   * Calculate cross product between current Vector3d and specified Vector3d.
+   * @param {Vector3d} v2 Second Vector3d
+   * @returns {Vector3d}
+   */
+  public cross(v2: Vector3d): Vector3d;
+
+  /**
+   * Calculate dot product between current Vector3d and specified Vector3d.
+   * @param {Vector3d} v2 Second Vector3d
+   * @returns {double}
+   */
+  public dot(v2: Vector3d): double;
+
+  /**
+   * Calculate cosine angle between current Vector3d and specified Vector3d.
+   * @param {Vector3d} v2 Second Vector3d
+   * @returns {double}
+   */
+  public getCos(v2: Vector3d): double;
+
+  /**
+   * Normalize current Vector3d.
+   * @returns {Vector3d}
+   */
+  public getNormalized(): Vector3d;
+
+  /**
+   * Project current Vector3d onto specified Vector3d.
+   * @param {Vector3d} v2 Vector3d to project onto
+   * @returns {Vector3d}
+   */
+  public getProjection(v2: Vector3d): Vector3d;
+
+  /**
+   * Get ratio from projection of current Vector3d onto specified Vector3d.
+   * @param {Vector3d} v2 Vector3d to project onto
+   * @returns {double}
+   */
+  public getProjectionRatio(v2: Vector3d): double;
+
+  /**
+   * Calculate sine angle between current Vector3d and specified Vector3d.
+   * @param {Vector3d} v2 Second Vector3d
+   * @returns {double}
+   */
+  public getSin(v2: Vector3d): double;
+
+  /**
+   * Test if the two vectors are equals.
+   * @param {Vector3d} v2 Second Vector3d
+   * @returns {boolean}
+   */
+  public isEqual(v2: Vector3d): boolean;
+
+  /**
+   * Test if the two vectors are not equals.
+   * @param {Vector3d} v2 Second Vector3d
+   * @returns {boolean}
+   */
+  public isNotEqual(v2: Vector3d): boolean;
+
+  /**
+   * Test if Vector3d is zero.
+   * @returns {boolean}
+   */
+  public isZero(): boolean;
+
+  /**
+   * Retrieve length of Vector3d.
+   * @returns {double}
+   */
+  public length(): double;
+
+  /**
+   * Retrieve square length of Vector3d.
+   * @returns {double}
+   */
+  public lengthSq(): double;
+
+  /**
+   * Negate current Vector3d.
+   * @returns {Vector3d}
+   */
+  public negate(): Vector3d;
+
+  /**
+   * Normalize current Vector3d.
+   * @returns {Vector3d}
+   */
+  public normalize(): Vector3d;
+
+  /**
+   * Project current Vector3d onto specified Vector3d.
+   * @param {Vector3d} v2 Vector3d to project onto
+   * @returns {Vector3d}
+   */
+  public project(v2: Vector3d): Vector3d;
+
+  /**
+   * Set the x, y, z coordinate to the given.
+   * @param {double} x
+   * @param {double} y
+   * @param {double} z
+   * @returns {void}
+   */
+  public setXYZ(x: double, y: double, z: double): void;
+
+  /**
+   * x value
+   * @returns {double}
+   */
+  x: double;
+
+  /**
+   * y value
+   * @returns {double}
+   */
+  y: double;
+
+  /**
+   * z value
+   * @returns {double}
+   */
+  z: double;
+}
+
+/**
+ * The deformation JavaScript global object. Provide deformation node parent matrix transformations.
+ * Node interface specific to deformation networks.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classdeformation.html}
+ * @example
+ * function correctBoneMatrixFromPrevBone(prevBone, startMatrix, prevMatrix) {
+ *     var correctedMatrix = bones[prevBone];
+ *     if (correctedMatrix) {
+ *         // override startMatrix and prevMatrix with prevbone correction
+ *         startMatrix.clear();
+ *         prevMatrix.clear();
+ *         startMatrix.multiplyEq(correctedMatrix);
+ *         prevMatrix.multiplyEq(correctedMatrix);
+ *     }
+ * }
+ *
+ * function correctBoneLength(nodeName, restLength, restOrientation, minLength, startMatrix, endMatrix) {
+ *
+ *     if (restLength < minLength) {
+ *         var lengthOffset = new Vector2d(minLength, 0);
+ *         lengthOffset = scene.toOGL(lengthOffset);
+ *
+ *         // redo matrix
+ *         endMatrix.clear();
+ *         endMatrix.multiplyEq(startMatrix);
+ *         endMatrix.rotateDegrees(restOrientation, new Vector3d(0, 0, 1));
+ *         endMatrix.translate(lengthOffset.x, lengthOffset.y, 0.0);
+ *
+ *         bones[nodeName] = new Matrix4x4().multiply(endMatrix);
+ *     }
+ * }
+ *
+ * function correctDeformBone(prevBone, nodeName, nextBone, startMatrix, endMatrix, prevMatrix, i) {
+ *     if (prevBone != "") {
+ *         var nodeNameKey = nodeName + i.toString();
+ *         var prevBoneKey = prevBone + i.toString();
+ *
+ *         var length = Number(node.getTextAttr(nodeName, i, "length"));
+ *         var radius = Number(node.getTextAttr(nodeName, i, "radius"));
+ *         var orientation = Number(node.getTextAttr(nodeName, i, "orientation"));
+ *         var nextBoneRadius = nextBone != "" ? Number(node.getTextAttr(nextBone, i, "radius")) : 0.0;
+ *         var minLength = radius + nextBoneRadius + 1 / 32;
+ *
+ *         correctBoneMatrixFromPrevBone(prevBoneKey, startMatrix, prevMatrix);
+ *         correctBoneLength(nodeNameKey, length, orientation, minLength, startMatrix, endMatrix);
+ *     }
+ * }
+ *
+ * startMatrix = deformation.lastDeformMatrix(nodeName, 0);
+ * endMatrix = deformation.nextDeformMatrix(nodeName, 0);
+ * prevMatrix = (prevBone != "") ? deformation.nextDeformMatrix(prevBone, 0) : (new Matrix4x4());
+ *
+ * correctDeformBone(prevBone, nodeName, nextBone, startMatrix, endMatrix, prevMatrix, i);
+ */
+declare class deformation extends SCR_AbstractInterface {
+  /**
+   * @param {string} node
+   * @param {int} frame
+   * @returns {Matrix4x4}
+   */
+  public lastDeformMatrix(node: string, frame: int): Matrix4x4;
+
+  /**
+   * @param {string} node
+   * @returns {Matrix4x4}
+   */
+  public lastRestMatrix(node: string): Matrix4x4;
+
+  /**
+   * @param {string} node
+   * @param {int} frame
+   * @returns {Matrix4x4}
+   */
+  public nextDeformMatrix(node: string, frame: int): Matrix4x4;
+
+  /**
+   * @param {string} node
+   * @returns {Matrix4x4}
+   */
+  public nextRestMatrix(node: string): Matrix4x4;
+}
+
+/**
+ * The WebCCExporter JavaScript global object. Generate movies encoded in H.264.
+ * This is an interface used by WebCC to generate a movie encoded in H.264 using a plugin that must be
+ * downloaded separately from Cisco website. The plugin name is OpenH264.
+ *  Using this API, user may generate valid QuickTime/H264 movie without using the QuickTime Technology
+ * from Apple. This plugin works on Linux, where QuickTime is not available and will also work on
+ * Windows and OSX.
+ * See usage example in script: TB_WebCC_Render.js
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classExportOH264.html}
+ */
+declare class ExportOH264 extends SCR_AbstractInterface {
+  /**
+   * Generate a H264 movie with or without sound, using a list of images. The range of frames is only
+   * used when including sound. The frame rate of the movie is the scene frame rate.
+   * Typically, you would use this function in a two stage render:
+   * @param {string} movieFilename the filename of the movie to generate
+   * @param {StringList} framesFilenames an Array of filenames, each of the filename is a frame of the movie.
+   * @param {int} [firstFrame=1] the initial start frame of the movie - used when extracting soundtrack - default : 1
+   * @param {int} [lastFrame=-1] the last frame rendered - default: -1 (all frames)
+   * @param {boolean} [withSound=true] include soundtrack or not - default: true
+   * @returns {void}
+   */
+  public exportMovieFromFiles(
+    movieFilename: string,
+    framesFilenames: StringList,
+    firstFrame?: int,
+    lastFrame?: int,
+    withSound?: boolean
+  ): void;
+
+  /**
+   * Generates a movie for the specified WRITE node. The node must be configured to render for QUICKTIME.
+   * This function triggers a softrender for the specified write, it captures the images and sends them
+   * to the OpenH264 plugins to generate a movie. If sound is required, it will also produce a
+   * soundtrack, uncompressed.
+   * The user can control the start frame and end frame.
+   * @param {string} moduleName the name of the WRITE module - as used by the node interface (ie. 'Top/Write' ).
+   * @param {int} [firstFrame=1] the initial start frame of the movie - default : 1
+   * @param {int} [lastFrame=-1] the last frame rendered - default: -1 (all frames)
+   * @param {boolean} [withSound=true] include soundtrack or not - default: true
+   * @param {string} [movieFile=""] the name of the movie file generated - default: empty - so, it uses the filename specified in the WRITE node.
+   * @returns {void}
+   */
+  public exportMovieFromWriteModule(
+    moduleName: string,
+    firstFrame?: int,
+    lastFrame?: int,
+    withSound?: boolean,
+    movieFile?: string
+  ): void;
+
+  /**
+   * Generates a movie for each WRITE node configured to render with QuickTime. Basically, this function
+   * scans the whole scene and trigger a softrender for each write nodes. The write node must be enabled
+   * and must already configured to render with QuickTime (ie. render a movie, at least).
+   * The sound track is rendered in movie.
+   * The user can control the start frame and end frame.
+   * @param {int} [fromFrame=1] the initial start frame of each movies - default : 1
+   * @param {int} [toFrame=-1] the last frame rendered - default: -1 (all frames)
+   * @returns {void}
+   */
+  public exportMovieFromWriteModules(fromFrame?: int, toFrame?: int): void;
+}
+
+/**
+ * The Button JavaScript class. A simplified Button Qt widget.
+ * This example creates a button with the label "Set Colour" that will call a function that sets the
+ * colour of something whenever the button is pressed.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classButton.html}
+ * @example
+ * var setter = new Button();
+ * setter.label = "Set Colour";
+ * setter.callback = "colourSetter";
+ */
+declare class Button extends SCRIPT_QSWidget {
+  /**
+   * Use this to assign the name of another function. This function will be triggered automatically when
+   * the button is pressed.
+   * @returns {string}
+   */
+  callback: string;
+
+  /**
+   * Set the text on the button.
+   * @returns {string}
+   */
+  label: string;
+}
+
+/**
+ * The CheckBox JavaScript class. A simplified version of the CheckBox Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classCheckBox.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “CheckBox Example”;
+ *
+ * var userInput = new CheckBox();
+ * userInput.text = “Is this guide helpful ? ”
+ *
+ *     myDialog.add(userInput);
+ *
+ * if (myDialog.exec()) {
+ *     if (userInput.checked);
+ *     MessageLog.trace(“The guide is helpful!”);
+ * }
+ */
+declare class CheckBox extends SCRIPT_QSWidget {
+  /**
+   * Toggle whether or not the CheckBox is checked.
+   * @returns {boolean}
+   */
+  checked: boolean;
+
+  /**
+   * The text shown alongside the CheckBox.
+   * @returns {string}
+   */
+  text: string;
+}
+
+/**
+ * The Dialog JavaScript class. A simplified version of the Qt dialog.
+ * This class and the associated widget classes are used to build simple dialogs.
+ * The widgets you can add to a Dialog are: LineEdit, NumberEdit, TimeEdit, DateEdit, SpinBox,
+ * CheckBox, RadioButton, ComboBox, GroupBox, Slider, Button and Label
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classDialog.html}
+ * @example
+ * function sampleDialog() {
+ *     var d = new Dialog();
+ *     d.title = "Sample Dialog";
+ *
+ *     var inputL = new LineEdit;
+ *     inputL.label = "Sample Line Edit";
+ *     d.add(inputL);
+ *
+ *     if (d.exec()) {
+ *         var sampleText = inputL.text;
+ *         MessageLog.trace("The input text is " + sampleText + ".");
+ *     }
+ * }
+ */
+declare class Dialog extends SCRIPT_QSWidget {
+  /**
+   * Adds a widget to the dialog.
+   * @param {SCRIPT_QSWidget} widget
+   * @returns {void}
+   */
+  public add(widget: SCRIPT_QSWidget): void;
+
+  /**
+   * Adds spacers to the dialog layout.
+   * @param {int} space
+   * @returns {void}
+   * @example
+   * myDialog.addSpace(25);
+   */
+  public addSpace(space: int): void;
+
+  /**
+   * Run the dialog in modal mode. Pressing ok accepts the dialog input. Pressing cancel cancels the
+   * dialog.
+   * @returns {boolean}
+   */
+  public exec(): boolean;
+
+  /**
+   * Add a new column to the dialog.
+   * @returns {void}
+   * @example
+   * myDialog.newColumn();
+   */
+  public newColumn(): void;
+
+  /**
+   * Adds a new tab to the dialog.
+   * @param {string} label
+   * @returns {void}
+   * @example
+   * myDialog.newTab(“This is your tab label”);
+   */
+  public newTab(label: string): void;
+
+  /**
+   * The label of the Cancel button.
+   * @returns {string}
+   * @example
+   * myDialog.cancelButtonText = “Click here to reject”;
+   */
+  cancelButtonText: string;
+
+  /**
+   * The title of the dialog. (Legacy, but still supported)
+   * @returns {string}
+   * @example
+   * myDialog.caption = “My First Dialog”;
+   */
+  caption: string;
+
+  /**
+   * The label of the OK button.
+   * @returns {string}
+   * @example
+   * myDialog.okButtonText = “Click here to accept”;
+   */
+  okButtonText: string;
+
+  /**
+   * The title of the dialog.
+   * @returns {string}
+   * @example
+   * myDialog.title = “My First Dialog”;
+   */
+  title: string;
+
+  /**
+   * The width of the dialog in pixels.
+   * @returns {int}
+   * @example
+   * myDialog.width = 500;
+   */
+  width: int;
+}
+
+/**
+ * The GroupBox JavaScript class. A simplified version of the GroupBox Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classGroupBox.html}
+ * @example
+ * var groupBox = new GroupBox();
+ * groupBox.title = “Group One”;
+ * myDialog.add(groupBox);
+ */
+declare class GroupBox extends SCRIPT_QSWidget {
+  /**
+   * Adds a widget to the groupBox.
+   * @param {SCRIPT_QSWidget} widget
+   * @returns {void}
+   */
+  public add(widget: SCRIPT_QSWidget): void;
+
+  /**
+   * Adds a spacer to the groupbox.
+   * @param {int} space
+   * @returns {void}
+   * @example
+   * groupBox.addSpace(15);
+   */
+  public addSpace(space: int): void;
+
+  /**
+   * Clears all the widgets in the group box.
+   * @returns {void}
+   * @example
+   * groupBox.clear;
+   */
+  public clear(): void;
+
+  /**
+   * Creates a newColumn in the groupbox. It will be used by all subsequent add operations.
+   * @returns {void}
+   * @example
+   * groupBox.newColumn();
+   */
+  public newColumn(): void;
+
+  /**
+   * Title of groupBox.
+   * @returns {string}
+   */
+  title: string;
+}
+
+/**
+ * The Label JavaScript class. A simplified version of the Label Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classLabel.html}
+ * @example
+ * var bodyText = new Label();
+ * bodyText.text = “This is will be displayed in the body of the dialog.”;
+ * myDialog.add(bodyText);
+ */
+declare class Label extends SCRIPT_QSWidget {
+  /**
+   * Text shown on the label.
+   * @returns {string}
+   */
+  text: string;
+}
+
+/**
+ * The RadioButton JavaScript class. A simplified version of the RadioButton Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classRadioButton.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “RadioButton Example”;
+ *
+ * var optionOne = new RadioButton();
+ * optionOne.text = “Pick me!”;
+ * var optionTwo = new RadioButton();
+ * optionTwo.text = “No, pick me!”;
+ *
+ * myDialog.add(optionOne);
+ * myDialog.newColumn();
+ * myDialog.add(optionTwo);
+ *
+ * if (myDialog.exec()) {
+ *     if (optionOne.checked)
+ *         MessageLog.trace(“You picked the first option.”);
+ *     else if (optionTwo.checked)
+ *         MessageLog.trace(“You picked the second option.”);
+ *     else
+ *         MessageLog.trace(“Neither option was selected.”);
+ * }
+ */
+declare class RadioButton extends SCRIPT_QSWidget {
+  /**
+   * Toggle whether or not the RadioButton is checked.
+   * @returns {boolean}
+   */
+  checked: boolean;
+
+  /**
+   * The text for the RadioButton label.
+   * @returns {string}
+   */
+  text: string;
+}
+
+/**
+ * The TextEdit JavaScript class. A simplified version of the TextEdit Qt widget.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classTextEdit.html}
+ * @example
+ * var myDialog = new Dialog();
+ * myDialog.title = “TextEdit Example”;
+ *
+ * var userInput = new TextEdit();
+ * userInput.text = “Tell us how you feel about this tutorial.”
+ * myDialog.add(userInput);
+ *
+ * if (myDialog.exec()) {
+ *     var inputText = userInput.text;
+ *     MessageLog.trace(inputText);
+ * }
+ */
+declare class TextEdit extends SCRIPT_QSWidget {
+  /**
+   * The text string shown in the widget.
+   * @returns {string}
+   */
+  text: string;
+}
+
+/**
+ * The ExportVideoDlg JavaScript class. A dialog that can be used before an export to query the user
+ * about various settings.
+ * By default, it provides a field for asking an output file location, for specifying a range of frame
+ * and for specifying a vertical and horizontal resolution. However, it does not provide an exporting
+ * backend module.
+ * It is then your responsibility to export the video in a fitting format. To support audio and video
+ * options, you have to connect to the showAudioOptions and showVideoOptions signals and show an
+ * appropriate dialog whenever the signals are sent. Additionally, you must register the file formats
+ * available from your exporter. If there are more than one, you should listen to the fileFormatChanged
+ * signal and rewire the video and audio options if needed. To retrieve the options, use the getters
+ * for the settings property after the dialog is closed. The start export/update progress/end export
+ * serves to provides a progress bar if desired
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classExportVideoDlg.html}
+ */
+declare class ExportVideoDlg extends UI_DialogController {
+  /**
+   * Add a file extension to be known by the dialog, displaying it in the file explorer.
+   * @param {string} type The desired file type to be added.
+   * @param {string} typeDesc A description of the file type to be added.
+   * @returns {void}
+   */
+  public addFileType(type: string, typeDesc: string): void;
+
+  /**
+   * Clear all the file extensions.
+   * @returns {void}
+   */
+  public clearFileTypes(): void;
+
+  /**
+   * Enable the progress bar for the export.
+   * @returns {void}
+   */
+  public enableProgress(): void;
+
+  /**
+   * Close the export progress dialog.
+   * @returns {void}
+   */
+  public endExport(): void;
+
+  /**
+   * Open the dialog widget.
+   * @returns {int}
+   */
+  public Exec(): int;
+
+  /**
+   * Get the audio configuration.
+   * @returns {string}
+   */
+  public getAudioConfig(): string;
+
+  /**
+   * Get the name to display.
+   * @returns {string}
+   */
+  public getDisplayName(): string;
+
+  /**
+   * Get the first scene frame index to export.
+   * @returns {int}
+   */
+  public getFromRange(): int;
+
+  /**
+   * Get the output file.
+   * @returns {string}
+   */
+  public getOutputFile(): string;
+
+  /**
+   * Get the prefix used to set preferences.
+   * @returns {string}
+   */
+  public getPrefPrefix(): string;
+
+  /**
+   * Get the x resolution of the scene.
+   * @returns {int}
+   */
+  public getResX(): int;
+
+  /**
+   * Get the y resolution of the scene.
+   * @returns {int}
+   */
+  public getResY(): int;
+
+  /**
+   * Get the title of the dialog.
+   * @returns {string}
+   */
+  public getTitle(): string;
+
+  /**
+   * Get the last scene frame index to export.
+   * @returns {int}
+   */
+  public getToRange(): int;
+
+  /**
+   * Get the video and audio configuration.
+   * @returns {string}
+   */
+  public getVideoAndAudioConfig(): string;
+
+  /**
+   * Get the video configuration.
+   * @returns {string}
+   */
+  public getVideoConfig(): string;
+
+  /**
+   * Initialize dialog and settings for export.
+   * @returns {void}
+   */
+  public init(): void;
+
+  /**
+   * Set the audio configuration.
+   * @param {string} config The audio configuration.
+   * @returns {void}
+   */
+  public setAudioConfig(config: string): void;
+
+  /**
+   * Set the prefix used to set preferences.
+   * @param {string} prefix The desired prefix used to set preferences.
+   * @returns {void}
+   */
+  public setPrefPrefix(prefix: string): void;
+
+  /**
+   * Set the title of the dialog.
+   * @param {string} title The desired title of the dialog.
+   * @returns {void}
+   */
+  public setTitle(title: string): void;
+
+  /**
+   * Set the both video and audio configuration.
+   * @param {string} config The video and audio configuration.
+   * @returns {void}
+   */
+  public setVideoAndAudioConfig(config: string): void;
+
+  /**
+   * Set the video configuration.
+   * @param {string} config The video configuration.
+   * @returns {void}
+   */
+  public setVideoConfig(config: string): void;
+
+  /**
+   * Open a dialog for the export frame progress.
+   * @returns {void}
+   */
+  public startExport(): void;
+
+  /**
+   * Update the progress for the export.
+   * @param {int} progress The current progress.
+   * @returns {void}
+   */
+  public updateProgress(progress: int): void;
+
+  /**
+   * Reports when the export is canceled.
+   * @returns {void}
+   */
+  public exportCanceled: QSignal<() => void>;
+
+  /**
+   * Sends the index of the newly selected format, depending on the order of format registration.
+   * @returns {void}
+   */
+  public fileFormatChanged: QSignal<() => void>;
+
+  /**
+   * Support audio options.
+   * @returns {void}
+   */
+  public showAudioOptions: QSignal<() => void>;
+
+  /**
+   * Support video and audio options.
+   * @returns {void}
+   */
+  public showVideoAndAudioOptions: QSignal<() => void>;
+
+  /**
+   * Support video options.
+   * @returns {void}
+   */
+  public showVideoOptions: QSignal<() => void>;
+
+  /**
+   * Audio configuration.
+   * @returns {string}
+   */
+  audioConfig: string;
+
+  /**
+   * Name displayed of the dialog.
+   * @returns {string}
+   */
+  display: string;
+
+  /**
+   * Begin index frame used for export.
+   * @returns {int}
+   */
+  fromFrame: int;
+
+  /**
+   * File used for output.
+   * @returns {string}
+   */
+  outputFile: string;
+
+  /**
+   * the prefix to use for the preference items
+   * @returns {string}
+   */
+  prefPrefix: string;
+
+  /**
+   * title of the dialog
+   * @returns {string}
+   */
+  title: string;
+
+  /**
+   * End index frame used for export.
+   * @returns {int}
+   */
+  toFrame: int;
+
+  /**
+   * Video configuration.
+   * @returns {string}
+   */
+  videoConfig: string;
+}
+
+/**
+ * Deformation utility functions.
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/namespaceDeformationUtils.html}
+ */
+declare module DeformationUtils {
+  /**
+   * Return a VertexTransform to apply a deformation node transformation.
+   * @param {string} node the path to the last node in a deformation chain (ex: "Top/LastDeformationOfAChain")
+   * @returns {QScriptValue}
+   * @example
+   * var vertexTransform = createVertexTransform("Top/LastDeformationOfAChain");
+   * var fieldOffset = node.getAttr("Top/myOffset", frame.current(), "offset").pos2dValue();
+   * // Apply the deformation chain deformation to the offset point.
+   * // By example, use this function to apply a deformation chain on another deformation chain.
+   * var newFieldOffset = vertexTransform.applyVertexTransform(fieldOffset);
+   */
+  function createVertexTransform(node: string): QScriptValue;
+
+  /**
+   * Return the deformation matrix describing the parent deformation.
+   * @param {string} node the path to the node (ex: "Top/MyDeformation")
+   * @param {double} frame the frame at which the parent transformation is evaluated Ex: var parentMatrix = getDeformationComponentMatrix("Top/MyDeformation", frame.current());var newPoint = parentMatrix.multiply(myPoint);
+   * @returns {QScriptValue}
+   * @example
+   * var parentMatrix = getDeformationComponentMatrix("Top/MyDeformation", frame.current());
+   * var newPoint = parentMatrix.multiply(myPoint);
+   */
+  function getDeformationComponentMatrix(
+    node: string,
+    frame: double
+  ): QScriptValue;
+}
+
+/**
+ *
+ * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/namespaceMath.html}
+ */
+declare module Math {}
+
+/**
+ * scripting object to a sound column... Allow object oriented object interaction with sound sequence.
+ * In Harmony, this object is created by the global scripting interface column.getSoundColumn(
+ * columnName );
+ * In Storyboard, this object is created by the scripting interface SoundTrackManager.getSoundColumn(
+ * columnName );
+ * It includes methods to iterate over the sound column content. At this moment, it cannot do any
+ * modification to the sound column.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classsoundColumnInterface.html}
+ */
+declare class soundColumnInterface extends QObject {
+  /**
+   * @returns {string}
+   */
+  public column(): string;
+
+  /**
+   * @returns {soundSequenceInterface[]}
+   */
+  public sequences(): soundSequenceInterface[];
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ column: string;
+}
+
+/**
+ *
+ * {@link https://docs.toonboom.com/help/storyboard-pro-7/storyboard/scripting/reference/classsoundSequenceInterface.html}
+ */
+declare class soundSequenceInterface extends QObject {
+  /**
+   * @param {int} startFrame
+   * @param {int} endFrame
+   * @param {float} startTime
+   * @param {float} stopTime
+   * @param {string} name
+   * @param {string} filename
+   * @returns {void}
+   */
+  constructor(
+    startFrame: int,
+    endFrame: int,
+    startTime: float,
+    stopTime: float,
+    name: string,
+    filename: string
+  );
+
+  /**
+   * path resolved filename
+   * @returns {string}
+   */
+  public filename(): string;
+
+  /**
+   * named of this sound sequence - derived from the filename
+   * @returns {string}
+   */
+  public name(): string;
+
+  /**
+   * returns the start frame of this sound sequence, 1 based.
+   * @returns {int}
+   */
+  public startFrame(): int;
+
+  /**
+   * returns the start time in second from the beginning of the sound file. The start time is sync with
+   * ths start frame.
+   * @returns {float}
+   */
+  public startTime(): float;
+
+  /**
+   * returns the stop frame of this sound sequence, value is 1 based
+   * @returns {int}
+   */
+  public stopFrame(): int;
+
+  /**
+   * returns the stop time in second. sound will stop playing when reaching either the stop time or the
+   * stop frame, whichever comes first
+   * @returns {float}
+   */
+  public stopTime(): float;
+
+  /**
+   * @returns {int}
+   */
+  public stopFrame(): int;
+
+  /**
+   * @returns {int}
+   */
+  public startFrame(): int;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ filename: string;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ name: string;
+
+  /**
+   * @returns {float}
+   */
+  // /* Invalid - Duplicate property name */ startTime: float;
+
+  /**
+   * @returns {float}
+   */
+  // /* Invalid - Duplicate property name */ stopTime: float;
+}
+
+declare class MC_DragContext extends QObject {}
+
+/**
+ * Helpful custom interfaces below
+ */
+
+/**
+ * Column Type as returned by column.type()
+ */
+declare type ColumnType =
+  | "DRAWING"
+  | "SOUND"
+  | "3DPATH"
+  | "BEZIER"
+  | "EASE"
+  | "EXPR"
+  | "TIMING"
+  | "QUATERNION"
+  | "QUATERNIONPATH"
+  | "ANNOTATION";
+
+/**
+ * Type name as returned by Attribute.typeName()
+ */
+declare type AttrValueType =
+  | "ALIAS"
+  | "ARRAY_POSITION_2D"
+  | "ARRAY_STRING"
+  | "BOOL"
+  | "COLOR"
+  | "COMPATIBILITY"
+  | "CUSTOM_NAME"
+  | "DOUBLE"
+  | "DOUBLEVB"
+  | "DRAWING"
+  | "ELEMENT"
+  | "ENABLE"
+  | "FILE_EDITOR"
+  | "FILE_LIBRARY"
+  | "GENERIC_ENUM"
+  | "HSL"
+  | "HUE_RANGE"
+  | "INT"
+  | "LOCKED"
+  | "PATH_3D"
+  | "POINT_2D"
+  | "POSITION_2D"
+  | "POSITION_3D"
+  | "PUSH_BUTTON"
+  | "QUATERNION_PATH"
+  | "ROTATION_3D"
+  | "SCALE_3D"
+  | "SIMPLE_BEZIER"
+  | "STRING"
+  | "TIMING";
