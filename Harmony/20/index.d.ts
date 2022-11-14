@@ -2,7 +2,8 @@
 
 declare class BAPP_SpecialFolders {}
 declare class GlobalObject {}
-declare class QScriptable {} /// <reference path="../ui.d.ts" />
+declare class QScriptable {}
+/// <reference path="../ui.d.ts" />
 
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
