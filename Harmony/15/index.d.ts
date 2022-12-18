@@ -1,8 +1,20 @@
 /// <reference path="../../shared/qtscript.d.ts" />
 
+/**
+ * Undocumented types (FIXME)
+ */
 declare class BAPP_SpecialFolders {}
 declare class GlobalObject {}
 declare class QScriptable {}
+declare class SCRIPT_QSWidget extends QWidget {}
+declare class Labeled extends QWidget {}
+declare class MO_SignalEmitter extends QWidget {}
+declare class SCR_AbstractInterface {}
+declare type QScriptContext = any;
+declare type QScriptEngine = any;
+declare type QScriptValue = any;
+declare type DD_DragObject = any;
+declare class UI_DialogController {}
 
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
@@ -14,13 +26,13 @@ declare class QScriptable {}
  * @example
  * var scriptFolder = specialFolders.resource + "/scripts";
  */
-declare class specialFolders extends BAPP_SpecialFolders {
+declare namespace specialFolders {
   /**
    * A read-only property containing the folder where the platforms specific applications are stored.
    * Application and Binary folders are different on OS X, but are identical on all other platforms.
    * @returns {string}
    */
-  static app: string;
+  var app: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific binaries are
@@ -28,120 +40,120 @@ declare class specialFolders extends BAPP_SpecialFolders {
    * platforms.
    * @returns {string}
    */
-  static bin: string;
+  var bin: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
    * are stored.
    * @returns {string}
    */
-  static bin32: string;
+  var bin32: string;
 
   /**
    * read-only property that contains the folder where application configuration files are stored.
    * Normally, this is the /etc folder.
    * @returns {string}
    */
-  static config: string;
+  var config: string;
 
   /**
    * This is a read-only property that contains the database folder.
    * @returns {string}
    */
-  static database: string;
+  var database: string;
 
   /**
    * read-only property that indicates where the [install]/etc folder is.
    * @returns {string}
    */
-  static etc: string;
+  var etc: string;
 
   /**
    * This is a read-only property that contains the folder where the html help folder is.
    * @returns {string}
    */
-  static htmlHelp: string;
+  var htmlHelp: string;
 
   /**
    * read-only property that contains the folder where the language files are stored.
    * @returns {string}
    */
-  static lang: string;
+  var lang: string;
 
   /**
    * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
    * property.
    * @returns {string}
    */
-  static legacyPlugins: string;
+  var legacyPlugins: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific libraries are
    * stored.
    * @returns {string}
    */
-  static library: string;
+  var library: string;
 
   /**
    * read-only property that contains the platform specific folder.
    * @returns {string}
    */
-  static platform: string;
+  var platform: string;
 
   /**
    * Location where the plugins that comply with the current SDK are stored.
    * @returns {string}
    */
-  static plugins: string;
+  var plugins: string;
 
   /**
    * read-only property that contains where the resources files are stored.
    * @returns {string}
    */
-  static resource: string;
+  var resource: string;
 
   /**
    * read-only property for the root installation folder
    * @returns {string}
    */
-  static root: string;
+  var root: string;
 
   /**
    * This is a read-only property that contains where the application will create its temporary files.
    * @returns {string}
    */
-  static temp: string;
+  var temp: string;
 
   /**
    * This is a read-only property that contains the folder where templates are stored.
    * @returns {string}
    */
-  static templateLibrary: string;
+  var templateLibrary: string;
 
   /**
    * This is a read-only property that contains the folder where the user configuration is stored.
    * @returns {string}
    */
-  static userConfig: string;
+  var userConfig: string;
 
   /**
    * This is a read-only property that contains the folder where the user scripts are stored.
    * @returns {string}
    */
-  static userScripts: string;
+  var userScripts: string;
 }
 
 /**
  * The CELIO JavaScript global object. Provide information about image file.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classCELIO.html}
  */
-declare class CELIO {
+declare namespace CELIO {
   /**
    * Returns information about the resolution of an image file.
    * @param {string} path
    * @returns {QVariant}
    */
-  public getInformation(path: string): QVariant;
+  function getInformation(path: string): QVariant;
 
   /**
    * Returns information about the resolution of an image file. Will also return the layer information if
@@ -150,7 +162,7 @@ declare class CELIO {
    * @param {boolean} withLayers
    * @returns {QVariant}
    */
-  public getInformation(path: string, withLayers: boolean): QVariant;
+  function getInformation(path: string, withLayers: boolean): QVariant;
 
   /**
    * Returns an array describing each layer of a multi-layer image. Currently, only the PSD has multi-
@@ -158,7 +170,7 @@ declare class CELIO {
    * @param {string} path
    * @returns {QVariant}
    */
-  public getLayerInformation(path: string): QVariant;
+  function getLayerInformation(path: string): QVariant;
 }
 
 /**
@@ -193,313 +205,313 @@ declare class CELIO {
  *     MessageLog.trace("Application path: " + about.applicationPath);
  * }
  */
-declare class about extends GlobalObject {
+declare namespace about {
   /**
    * Returns the application. Identical to property "applicationPath".
    * @returns {string}
    */
-  public static getApplicationPath(): string;
+  function getApplicationPath(): string;
 
   /**
    * Returns the folder where the binaries can be found.
    * @returns {string}
    */
-  public static getBinaryPath(): string;
+  function getBinaryPath(): string;
 
   /**
    * Returns a string that represents the flavor of the application. e.g. Harmony.
    * @returns {string}
    */
-  public static getFlavorString(): string;
+  function getFlavorString(): string;
 
   /**
    * Returns the folder where the resources can be found.
    * @returns {string}
    */
-  public static getResourcesPath(): string;
+  function getResourcesPath(): string;
 
   /**
    * Returns the user name.
    * @returns {string}
    */
-  public static getUserName(): string;
+  function getUserName(): string;
 
   /**
    * Returns the version info string.
    * @returns {string}
    */
-  public static getVersionInfoStr(): string;
+  function getVersionInfoStr(): string;
 
   /**
    * Returns true whenever the application running application is ControlCenter.
    * @returns {boolean}
    */
-  public static isControlCenterApp(): boolean;
+  function isControlCenterApp(): boolean;
 
   /**
    * Returns true when the application is in Database mode.
    * @returns {boolean}
    */
-  public static isDatabaseMode(): boolean;
+  function isDatabaseMode(): boolean;
 
   /**
    * Returns true whenever this application is a Demo variant.
    * @returns {boolean}
    */
-  public static isDemoVersion(): boolean;
+  function isDemoVersion(): boolean;
 
   /**
    * Returns true whenever this application is an Educational variant.
    * @returns {boolean}
    */
-  public static isEducVersion(): boolean;
+  function isEducVersion(): boolean;
 
   /**
    * Returns true whenever this application is a Commercial/Full variant.
    * @returns {boolean}
    */
-  public static isFullVersion(): boolean;
+  function isFullVersion(): boolean;
 
   /**
    * Returns true when connected to a database or when compiled with Harmony.
    * @returns {boolean}
    */
-  public static isHarmony(): boolean;
+  function isHarmony(): boolean;
 
   /**
    * Returns true whenever this application is interactive. All application capable of running scripts
    * are interactive.
    * @returns {boolean}
    */
-  public static isInteractiveApp(): boolean;
+  function isInteractiveApp(): boolean;
 
   /**
    * Returns true when running on Linux.
    * @returns {boolean}
    */
-  public static isLinuxArch(): boolean;
+  function isLinuxArch(): boolean;
 
   /**
    * Returns true when running on MacOS.
    * @returns {boolean}
    */
-  public static isMacArch(): boolean;
+  function isMacArch(): boolean;
 
   /**
    * Returns true when running on an Apple OS X operating system or when on Mac Intel.
    * @returns {boolean}
    */
-  public static isMacIntelArch(): boolean;
+  function isMacIntelArch(): boolean;
 
   /**
    * Returns true when running on an Apple OS X operating system or when on Mac PowerPC.
    * @returns {boolean}
    */
-  public static isMacPpcArch(): boolean;
+  function isMacPpcArch(): boolean;
 
   /**
    * Returns true when the application is Harmony or Storyboard, and not a peripheral application.
    * @returns {boolean}
    */
-  public static isMainApp(): boolean;
+  function isMainApp(): boolean;
 
   /**
    * Returns true when the application is in Paint mode.
    * @returns {boolean}
    */
-  public static isPaintMode(): boolean;
+  function isPaintMode(): boolean;
 
   /**
    * Returns true when the application running is Scan.
    * @returns {boolean}
    */
-  public static isScanApp(): boolean;
+  function isScanApp(): boolean;
 
   /**
    * Returns true whenever the application running is Stage.
    * @returns {boolean}
    */
-  public static isStage(): boolean;
+  function isStage(): boolean;
 
   /**
    * Returns true whenever the application running is an Advanced variant.
    * @returns {boolean}
    */
-  public static isStageAdvanced(): boolean;
+  function isStageAdvanced(): boolean;
 
   /**
    * Returns true whenever the application running is an Essentials variant.
    * @returns {boolean}
    */
-  public static isStageEssentials(): boolean;
+  function isStageEssentials(): boolean;
 
   /**
    * Returns true when running Storyboard.
    * @returns {boolean}
    */
-  public static isStoryboard(): boolean;
+  function isStoryboard(): boolean;
 
   /**
    * Returns true when running on Windows.
    * @returns {boolean}
    */
-  public static isWindowsArch(): boolean;
+  function isWindowsArch(): boolean;
 
   /**
    * Returns true when the application is in Xsheet mode.
    * @returns {boolean}
    */
-  public static isXsheetMode(): boolean;
+  function isXsheetMode(): boolean;
 
   /**
    * Returns a string that is the name of application.
    * @returns {string}
    */
-  public static productName(): string;
+  function productName(): string;
 
   /**
    * See isStageAdvanced().
    * @returns {boolean}
    */
-  static advanced: boolean;
+  var advanced: boolean;
 
   /**
    * Application with GUI folder (different than binFolder on Mac, same for all other platforms).
    * @returns {string}
    */
-  static applicationPath: string;
+  var applicationPath: string;
 
   /**
    * See getBinaryPath().
    * @returns {string}
    */
-  static binaryPath: string;
+  var binaryPath: string;
 
   /**
    * See isControlCenterApp().
    * @returns {boolean}
    */
-  static controlCenterApp: boolean;
+  var controlCenterApp: boolean;
 
   /**
    * See isDatabaseMode().
    * @returns {boolean}
    */
-  static databaseMode: boolean;
+  var databaseMode: boolean;
 
   /**
    * See isDemoVersion().
    * @returns {boolean}
    */
-  static demoVersion: boolean;
+  var demoVersion: boolean;
 
   /**
    * See isEducVersion().
    * @returns {boolean}
    */
-  static educVersion: boolean;
+  var educVersion: boolean;
 
   /**
    * See isStageEssentials().
    * @returns {boolean}
    */
-  static essentials: boolean;
+  var essentials: boolean;
 
   /**
    * See isFullVersion().
    * @returns {boolean}
    */
-  static fullVersion: boolean;
+  var fullVersion: boolean;
 
   /**
    * See isHarmony().
    * @returns {boolean}
    */
-  static harmony: boolean;
+  var harmony: boolean;
 
   /**
    * See isInteractiveApp().
    * @returns {boolean}
    */
-  static interactiveApp: boolean;
+  var interactiveApp: boolean;
 
   /**
    * See isLinuxArch().
    * @returns {boolean}
    */
-  static linuxArch: boolean;
+  var linuxArch: boolean;
 
   /**
    * See isMacArch().
    * @returns {boolean}
    */
-  static macArch: boolean;
+  var macArch: boolean;
 
   /**
    * See isMacIntelArch().
    * @returns {boolean}
    */
-  static macIntelArch: boolean;
+  var macIntelArch: boolean;
 
   /**
    * See isMacIntelArch().
    * @returns {boolean}
    */
-  static macPpcArch: boolean;
+  var macPpcArch: boolean;
 
   /**
    * See isMainApp().
    * @returns {boolean}
    */
-  static mainApp: boolean;
+  var mainApp: boolean;
 
   /**
    * See isPaintMode().
    * @returns {boolean}
    */
-  static paintMode: boolean;
+  var paintMode: boolean;
 
   /**
    * See getResourcesPath().
    * @returns {string}
    */
-  static resourcesPath: string;
+  var resourcesPath: string;
 
   /**
    * See isScanApp().
    * @returns {boolean}
    */
-  static scanApp: boolean;
+  var scanApp: boolean;
 
   /**
    * See isStage().
    * @returns {boolean}
    */
-  static stage: boolean;
+  var stage: boolean;
 
   /**
    * See isStoryboard().
    * @returns {boolean}
    */
-  static storyboard: boolean;
+  var storyboard: boolean;
 
   /**
    * See getUserName().
    * @returns {string}
    */
-  static userName: string;
+  var userName: string;
 
   /**
    * See isWindowsArch().
    * @returns {boolean}
    */
-  static windowsArch: boolean;
+  var windowsArch: boolean;
 
   /**
    * See isXsheetMode().
    * @returns {boolean}
    */
-  static xsheetMode: boolean;
+  var xsheetMode: boolean;
 }
 
 /**
@@ -520,7 +532,7 @@ declare class about extends GlobalObject {
  *     }
  * }
  */
-declare class Action extends GlobalObject {
+declare namespace Action {
   /**
    * Perform the requested action (slot - menu item, toolbar item,...)
    * Perform the requested action for the main application responder. If the main responder doesn't own
@@ -530,7 +542,7 @@ declare class Action extends GlobalObject {
    * @example
    * Action.perform("onActionAbout()");
    */
-  public static perform(slot: string): void;
+  function perform(slot: string): void;
 
   /**
    * Perform the requested action (slot - menu item, toolbar item,...)
@@ -541,7 +553,7 @@ declare class Action extends GlobalObject {
    * @example
    * Action.perform("onActionToggleApplyToolToAllLayers()", "drawingView");
    */
-  public static perform(slot: string, responder: string): void;
+  function perform(slot: string, responder: string): void;
 
   /**
    * Validate the requested action (slot - menu item, toolbar item,...)
@@ -552,7 +564,7 @@ declare class Action extends GlobalObject {
    * @example
    * var validateData = Action.validate("onActionAbout()");
    */
-  public static validate(slot: string): QVariant;
+  function validate(slot: string): QVariant;
 
   /**
    * Validate the requested action (slot - menu item, toolbar item,...)
@@ -566,7 +578,7 @@ declare class Action extends GlobalObject {
    * if (!validateData.checked)
    *     Action.perform("onActionToggleApplyToolToAllLayers()", "drawingView");
    */
-  public static validate(slot: string, responder: string): QVariant;
+  function validate(slot: string, responder: string): QVariant;
 }
 
 /**
@@ -599,7 +611,7 @@ declare class Action extends GlobalObject {
  *     "color": 4286859713
  * }
  */
-declare class Backdrop extends GlobalObject {
+declare namespace Backdrop {
   /**
    * Adds a single backdrop. The new backdrop is displayed on top of all the others.
    * @param {string} group The name of the parent group node.
@@ -630,7 +642,7 @@ declare class Backdrop extends GlobalObject {
    *
    * Backdrop.addBackdrop("Top/MyGroup", myBackdrop);
    */
-  public static addBackdrop(group: string, backdrop: QScriptValue): boolean;
+  function addBackdrop(group: string, backdrop: QScriptValue): boolean;
 
   /**
    * Returns the backdrops of a group.
@@ -640,7 +652,7 @@ declare class Backdrop extends GlobalObject {
    * @param {string} group The name of the group node.
    * @returns {QScriptValue}
    */
-  public static backdrops(group: string): QScriptValue;
+  function backdrops(group: string): QScriptValue;
 
   /**
    * Sets the backdrops for the specified group.
@@ -651,7 +663,7 @@ declare class Backdrop extends GlobalObject {
    * @param {QScriptValue} backdrops An array of backdrop objects or a single backdrop object. See the Backdrop class description for information on the backdrop object.
    * @returns {boolean}
    */
-  public static setBackdrops(group: string, backdrops: QScriptValue): boolean;
+  function setBackdrops(group: string, backdrops: QScriptValue): boolean;
 }
 
 /**
@@ -676,7 +688,7 @@ declare class Backdrop extends GlobalObject {
  *     }
  * }
  */
-declare class column extends GlobalObject {
+declare namespace column {
   /**
    * Adds a column with the specified name and type.
    * @param {string} columnName The name of the column.
@@ -684,7 +696,7 @@ declare class column extends GlobalObject {
    * @param {string} [position=tr("BOTTOM")] Unused.
    * @returns {boolean}
    */
-  public static add(
+  function add(
     columnName: string,
     columnType: string,
     position?: string
@@ -696,10 +708,7 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static addKeyDrawingExposureAt(
-    columnName: string,
-    frame: int
-  ): boolean;
+  function addKeyDrawingExposureAt(columnName: string, frame: int): boolean;
 
   /**
    * Removes a keyframe from a cell in a column.
@@ -707,7 +716,7 @@ declare class column extends GlobalObject {
    * @param {double} atFrame The frame number where you want to clear the keyframe.
    * @returns {boolean}
    */
-  public static clearKeyFrame(columnName: string, atFrame: double): boolean;
+  function clearKeyFrame(columnName: string, atFrame: double): boolean;
 
   /**
    * Creates an empty drawing in the specified column.
@@ -715,7 +724,7 @@ declare class column extends GlobalObject {
    * @param {string} timing The timing as shown in the xsheet.
    * @returns {boolean}
    */
-  public static createDrawing(columnName: string, timing: string): boolean;
+  function createDrawing(columnName: string, timing: string): boolean;
 
   /**
    * Deletes the drawing at the specified frame in the specified column.
@@ -723,7 +732,7 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static deleteDrawingAt(columnName: string, frame: int): boolean;
+  function deleteDrawingAt(columnName: string, frame: int): boolean;
 
   /**
    * Duplicates the drawing at the specified frame in the specified column.
@@ -731,7 +740,7 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static duplicateDrawingAt(columnName: string, frame: int): boolean;
+  function duplicateDrawingAt(columnName: string, frame: int): boolean;
 
   /**
    * Fill with previous exposed drawings for the given range of frame.
@@ -740,7 +749,7 @@ declare class column extends GlobalObject {
    * @param {int} endFrame The ending frame, just after the last filled frame.
    * @returns {boolean}
    */
-  public static fillEmptyCels(
+  function fillEmptyCels(
     columnName: string,
     startFrame: int,
     endFrame: int
@@ -753,7 +762,7 @@ declare class column extends GlobalObject {
    * @param {boolean} fileExists True if the file exists already.
    * @returns {string}
    */
-  public static generateTiming(
+  function generateTiming(
     columnName: string,
     forFrame: double,
     fileExists: boolean
@@ -764,14 +773,14 @@ declare class column extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {ColorRGBA}
    */
-  public static getColorForXSheet(columnName: string): ColorRGBA;
+  function getColorForXSheet(columnName: string): ColorRGBA;
 
   /**
    * Retrieves the list of names of timing columns of the given type.
    * @param {string} type The type string,i.e."DRAWING".
    * @returns {StringList}
    */
-  public static getColumnListOfType(type: string): StringList;
+  function getColumnListOfType(type: string): StringList;
 
   /**
    * Retrieves the current version of a timing.
@@ -779,7 +788,7 @@ declare class column extends GlobalObject {
    * @param {string} timingName The timing as shown in the xsheet.
    * @returns {int}
    */
-  public static getCurrentVersionForDrawing(
+  function getCurrentVersionForDrawing(
     columnName: string,
     timingName: string
   ): int;
@@ -789,13 +798,13 @@ declare class column extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static getDisplayName(columnName: string): string;
+  function getDisplayName(columnName: string): string;
 
   /**
    * Retrieves the list of names of drawing timing columns.
    * @returns {StringList}
    */
-  public static getDrawingColumnList(): StringList;
+  function getDrawingColumnList(): StringList;
 
   /**
    * Returns the drawing name for the specified column at the specified frame.
@@ -803,14 +812,14 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {string}
    */
-  public static getDrawingName(columnName: string, frame: int): string;
+  function getDrawingName(columnName: string, frame: int): string;
 
   /**
    * Retrieves the list of timings used in a drawing column.
    * @param {string} columnName The name of the column.
    * @returns {StringList}
    */
-  public static getDrawingTimings(columnName: string): StringList;
+  function getDrawingTimings(columnName: string): StringList;
 
   /**
    * Returns a list of all drawing types used in the drawing column. K = key drawings, I = inbetween, B =
@@ -819,14 +828,14 @@ declare class column extends GlobalObject {
    * @param {double} atFrame The frame number.
    * @returns {string}
    */
-  public static getDrawingType(columnName: string, atFrame: double): string;
+  function getDrawingType(columnName: string, atFrame: double): string;
 
   /**
    * Returns the element id associated with a drawing column.
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static getElementIdOfDrawing(columnName: string): int;
+  function getElementIdOfDrawing(columnName: string): int;
 
   /**
 * Returns the value of a cell in a column.
@@ -839,7 +848,7 @@ Velocity = 4
 * @param {double} atFrame The frame number that you want to retrieve the value from.
 * @returns {string}
 */
-  public static getEntry(
+  function getEntry(
     columnName: string,
     subColumn: int,
     atFrame: double
@@ -851,7 +860,7 @@ Velocity = 4
    * @param {int} columnNumber This is an integer that represents the numerical value of the column. This integer is between 0 and column.numberOf.
    * @returns {string}
    */
-  public static getName(columnNumber: int): string;
+  function getName(columnNumber: int): string;
 
   /**
    * Returns the next key drawing in a drawing column.
@@ -859,14 +868,14 @@ Velocity = 4
    * @param {int} startFrame This is the frame number that specifies the search start point.
    * @returns {int}
    */
-  public static getNextKeyDrawing(columnName: string, startFrame: int): int;
+  function getNextKeyDrawing(columnName: string, startFrame: int): int;
 
   /**
    * Returns the expression text in the identified column.
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static getTextOfExpr(columnName: string): string;
+  function getTextOfExpr(columnName: string): string;
 
   /**
    * Import a sound file in the specified column at the specified frame. This function returns a Boolean
@@ -876,7 +885,7 @@ Velocity = 4
    * @param {string} soundFilePath The path to the sound file.
    * @returns {boolean}
    */
-  public static importSound(
+  function importSound(
     columnName: string,
     atFrame: int,
     soundFilePath: string
@@ -893,7 +902,7 @@ Velocity = 4
 * @param {double} atFrame The frame number that you want to retrieve the value from.
 * @returns {boolean}
 */
-  public static isKeyFrame(
+  function isKeyFrame(
     columnName: string,
     subColumn: int,
     atFrame: double
@@ -909,7 +918,7 @@ Velocity = 4
    * @param {boolean} keyFramesOnly It will perform this operation only on drawings marked as "K" if keyOnly is true.
    * @returns {boolean}
    */
-  public static lineTestFill(
+  function lineTestFill(
     columnName: string,
     startFrame: int,
     nbFrames: int,
@@ -921,7 +930,7 @@ Velocity = 4
    * Returns the number of columns in the scene.
    * @returns {int}
    */
-  public static numberOf(): int;
+  function numberOf(): int;
 
   /**
    * Removes duplicate key drawing exposure at the specified frame in the specified column.
@@ -929,7 +938,7 @@ Velocity = 4
    * @param {int} frameNumber The frame number.
    * @returns {boolean}
    */
-  public static removeDuplicateKeyDrawingExposureAt(
+  function removeDuplicateKeyDrawingExposureAt(
     columnName: string,
     frameNumber: int
   ): boolean;
@@ -940,17 +949,14 @@ Velocity = 4
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static removeKeyDrawingExposureAt(
-    columnName: string,
-    frame: int
-  ): boolean;
+  function removeKeyDrawingExposureAt(columnName: string, frame: int): boolean;
 
   /**
    * Removes the sound column called name from the scene.
    * @param {string} columnName The name of the column.
    * @returns {boolean}
    */
-  public static removeSoundColumn(columnName: string): boolean;
+  function removeSoundColumn(columnName: string): boolean;
 
   /**
    * Removes an unlinked function column called name from the scene.
@@ -958,7 +964,7 @@ Velocity = 4
    * @param {string} columnName The name of the column.
    * @returns {boolean}
    */
-  public static removeUnlinkedFunctionColumn(columnName: string): boolean;
+  function removeUnlinkedFunctionColumn(columnName: string): boolean;
 
   /**
    * Renames the specified column.
@@ -966,7 +972,7 @@ Velocity = 4
    * @param {string} newName The new name of the column.
    * @returns {boolean}
    */
-  public static rename(oldName: string, newName: string): boolean;
+  function rename(oldName: string, newName: string): boolean;
 
   /**
    * Renames the specified drawing to the new name, in the specified column.
@@ -975,7 +981,7 @@ Velocity = 4
    * @param {string} newTiming The desired timing as shown in the xsheet.
    * @returns {boolean}
    */
-  public static renameDrawing(
+  function renameDrawing(
     columnName: string,
     oldTiming: string,
     newTiming: string
@@ -988,7 +994,7 @@ Velocity = 4
    * @param {string} prefix The new prefix.
    * @returns {boolean}
    */
-  public static renameDrawingWithPrefix(
+  function renameDrawingWithPrefix(
     columnName: string,
     oldTiming: string,
     prefix: string
@@ -1004,7 +1010,7 @@ Velocity = 4
    * var c = new ColorRGBA(255, 0, 0);
    * column.setColorForXSheet("Drawing", c);
    */
-  public static setColorForXSheet(columnName: string, color: ColorRGBA): void;
+  function setColorForXSheet(columnName: string, color: ColorRGBA): void;
 
   /**
    * Sets the Drawing type at frame f from column col to be newType.
@@ -1014,7 +1020,7 @@ Velocity = 4
    * @param {string} drawingType K = key drawings, I = inbetween, B = breakdown.
    * @returns {void}
    */
-  public static setDrawingType(
+  function setDrawingType(
     columnName: string,
     atFrame: double,
     drawingType: string
@@ -1026,10 +1032,7 @@ Velocity = 4
    * @param {int} elementId The id of the element you want to link to the column.
    * @returns {boolean}
    */
-  public static setElementIdOfDrawing(
-    columnName: string,
-    elementId: int
-  ): boolean;
+  function setElementIdOfDrawing(columnName: string, elementId: int): boolean;
 
   /**
 * Sets the value of a cell in a column.
@@ -1043,7 +1046,7 @@ Velocity = 4
 * @param {string} value The new value.
 * @returns {boolean}
 */
-  public static setEntry(
+  function setEntry(
     columnName: string,
     subColumn: int,
     atFrame: double,
@@ -1056,7 +1059,7 @@ Velocity = 4
    * @param {double} atFrame The frame number where you want to set the keyframe.
    * @returns {boolean}
    */
-  public static setKeyFrame(columnName: string, atFrame: double): boolean;
+  function setKeyFrame(columnName: string, atFrame: double): boolean;
 
   /**
    * Sets the value in the Expression column to the specified text.
@@ -1064,7 +1067,7 @@ Velocity = 4
    * @param {string} text The expression text.
    * @returns {boolean}
    */
-  public static setTextOfExpr(columnName: string, text: string): boolean;
+  function setTextOfExpr(columnName: string, text: string): boolean;
 
   /**
    * Returns a column object that contains a reference to that sound column. The column object contains a
@@ -1072,7 +1075,7 @@ Velocity = 4
    * @param {string} columnName The name of the sound column.
    * @returns {soundColumnInterface}
    */
-  public static soundColumn(columnName: string): soundColumnInterface;
+  function soundColumn(columnName: string): soundColumnInterface;
 
   /**
    * This function returns the column type.
@@ -1082,7 +1085,7 @@ Velocity = 4
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static type(columnName: string): string;
+  function type(columnName: string): string;
 
   /**
    * This function returns the column type of nested velocity.
@@ -1091,7 +1094,7 @@ Velocity = 4
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static velocityType(columnName: string): string;
+  function velocityType(columnName: string): string;
 }
 
 /**
@@ -1106,7 +1109,7 @@ Velocity = 4
  * @example
  * var composition = composition.buildDefaultCompositionOrder();
  */
-declare class compositionOrder extends GlobalObject {
+declare namespace compositionOrder {
   /**
    * Returns an array of Composition objects using the specified display name.
    * This method is similar to buildDefaultCompositionOrder(), however, instead of working with the
@@ -1115,9 +1118,7 @@ declare class compositionOrder extends GlobalObject {
    * @param {string} displayNode The display module name to build the array of Composition objects from.
    * @returns {QScriptValue}
    */
-  public static buildCompositionOrderForDisplay(
-    displayNode: string
-  ): QScriptValue;
+  function buildCompositionOrderForDisplay(displayNode: string): QScriptValue;
 
   /**
    * Returns an array of Composition objects using the current default composition order as used by the
@@ -1128,14 +1129,14 @@ declare class compositionOrder extends GlobalObject {
    * nodes have a depth at 0. Child of this node will have a depth 1 level greater.
    * @returns {QScriptValue}
    */
-  public static buildDefaultCompositionOrder(): QScriptValue;
+  function buildDefaultCompositionOrder(): QScriptValue;
 }
 
 /**
  * The copyPaste JavaScript global object. Copy paste to/from templates.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classcopyPaste.html}
  */
-declare class copyPaste extends GlobalObject {
+declare namespace copyPaste {
   /**
    * Create an object that represent a 'copy' of a selection of nodes and a range of frames.
    * Create an object that represent a 'copy' of a selection of nodes and a range of frames. This object
@@ -1147,7 +1148,7 @@ declare class copyPaste extends GlobalObject {
    * @param {CopyOptions} createOption Options that should be used when doing the creating the copy. See CopyOptions for more information about these options.
    * @returns {DragObject}
    */
-  public static copy(
+  function copy(
     selectionOfNodes: StringList,
     startFrame: int,
     numFrames: int,
@@ -1162,7 +1163,7 @@ declare class copyPaste extends GlobalObject {
    * @param {CopyOptions} createOption - options that should be used when doing the code. See CopyOptions for more information about these options.
    * @returns {DragObject}
    */
-  public static copyFromTemplate(
+  function copyFromTemplate(
     filename: string,
     startFrame: int,
     numFrames: int,
@@ -1177,7 +1178,7 @@ declare class copyPaste extends GlobalObject {
    * @param {string} path The location of the new template.
    * @returns {string}
    */
-  public static createTemplateFromSelection(name: string, path: string): string;
+  function createTemplateFromSelection(name: string, path: string): string;
 
   /**
    * Returns a copy of the current copy options.
@@ -1185,14 +1186,14 @@ declare class copyPaste extends GlobalObject {
    * drag&drop
    * @returns {CopyOptions}
    */
-  public static getCurrentCreateOptions(): CopyOptions;
+  function getCurrentCreateOptions(): CopyOptions;
 
   /**
    * Returns a copy of the current paste options.
    * To be used with paste()
    * @returns {PasteOptions}
    */
-  public static getCurrentPasteOptions(): PasteOptions;
+  function getCurrentPasteOptions(): PasteOptions;
 
   /**
    * Pastes the drag object as an action template. Must paste over a selection of nodes. No new nodes are
@@ -1204,7 +1205,7 @@ declare class copyPaste extends GlobalObject {
    * @param {PasteOptions} pasteOptions Options that should be used when pasting. See PasteOptions for more information about these options.
    * @returns {boolean}
    */
-  public static paste(
+  function paste(
     dragObject: DragObject,
     selectionOfNodes: StringList,
     startFrame: int,
@@ -1219,7 +1220,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} insertFrame The frame at which insert commences.
    * @returns {boolean}
    */
-  public static pasteActionTemplateIntoNode(
+  function pasteActionTemplateIntoNode(
     srcPath: string,
     nodeName: string,
     insertFrame: int
@@ -1233,7 +1234,7 @@ declare class copyPaste extends GlobalObject {
    * @param {PasteOptions} pasteOptions - paste special options (ie. create keyframes, drawings, new columns, or relink columns,.... - see paste special dialog and PasteOptions).
    * @returns {boolean}
    */
-  public static pasteNewNodes(
+  function pasteNewNodes(
     dragObject: DragObject,
     groupWhereToDrop: string,
     pasteOptions: PasteOptions
@@ -1246,7 +1247,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} insertFrame The frame at which insert commences.
    * @returns {boolean}
    */
-  public static pasteTemplateIntoGroup(
+  function pasteTemplateIntoGroup(
     srcPath: string,
     groupName: string,
     insertFrame: int
@@ -1259,7 +1260,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} insertFrame The frame at which insert commences.
    * @returns {boolean}
    */
-  public static pasteTemplateIntoScene(
+  function pasteTemplateIntoScene(
     templateSrcPath: string,
     insertColumnName: string,
     insertFrame: int
@@ -1269,14 +1270,14 @@ declare class copyPaste extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {void}
    */
-  public static registerObjects(engine: QScriptEngine): void;
+  function registerObjects(engine: QScriptEngine): void;
 
   /**
    * PasteSpecial Structure value. Default value is false.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setExtendScene(flag: boolean): void;
+  function setExtendScene(flag: boolean): void;
 
   /**
    * When pasting an external template or local content, this functions controls the number of frames of
@@ -1288,42 +1289,42 @@ declare class copyPaste extends GlobalObject {
    * @param {int} nFrames The number of frames that the content will be pasted.
    * @returns {void}
    */
-  public static setNumFramesSrc(nFrames: int): void;
+  function setNumFramesSrc(nFrames: int): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveAngleKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveAngleKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveMotionKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveMotionKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveScalingKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveScalingKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveSkewKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveSkewKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveVelocityKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveVelocityKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is REUSE_PALETTES.
@@ -1334,35 +1335,35 @@ declare class copyPaste extends GlobalObject {
    * @param {string} mode The Color Palette Option mode.
    * @returns {void}
    */
-  public static setPasteSpecialColorPaletteOption(mode: string): void;
+  function setPasteSpecialColorPaletteOption(mode: string): void;
 
   /**
    * Set to true to copy the model directory.
    * @param {boolean} copy Whether or not to copy the model directory.
    * @returns {void}
    */
-  public static setPasteSpecialCopyModelDir(copy: boolean): void;
+  function setPasteSpecialCopyModelDir(copy: boolean): void;
 
   /**
    * Set to true to copy the scan files associated to the selected drawings.
    * @param {boolean} copy Whether or not to copy the scan files associated to the selected drawings.
    * @returns {void}
    */
-  public static setPasteSpecialCopyScanFiles(copy: boolean): void;
+  function setPasteSpecialCopyScanFiles(copy: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is false.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialCreateNewColumn(flag: boolean): void;
+  function setPasteSpecialCreateNewColumn(flag: boolean): void;
 
   /**
    * Use this when you want the camera in a template to be set as default camera in the target scene.
    * @param {boolean} flag Whether or not to set the camera in the template to be set as the default camera in the target scene.
    * @returns {void}
    */
-  public static setPasteSpecialDefaultCameraName(flag?: boolean): void;
+  function setPasteSpecialDefaultCameraName(flag?: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is ADD_OR_REMOVE_EXPOSURE.
@@ -1370,7 +1371,7 @@ declare class copyPaste extends GlobalObject {
    * @param {"DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"} mode The Drawing Action mode.
    * @returns {void}
    */
-  public static setPasteSpecialDrawingAction(
+  function setPasteSpecialDrawingAction(
     mode: "DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"
   ): void;
 
@@ -1380,7 +1381,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} keyFrameMode Whether or not to enable key frame mode.
    * @returns {void}
    */
-  public static setPasteSpecialDrawingAutomaticExtendExposure(
+  function setPasteSpecialDrawingAutomaticExtendExposure(
     extendExposure: boolean,
     keyFrameMode: boolean
   ): void;
@@ -1394,7 +1395,7 @@ declare class copyPaste extends GlobalObject {
    * @param {"NEVER_CREATE"|"ONLY_CREATE_IF_DOES_NOT_EXIST"|"ALWAYS_CREATE"|"ALWAYS_CREATE_AND_VERSION_IF_NECESSARY"} mode The Drawing File mode.
    * @returns {void}
    */
-  public static setPasteSpecialDrawingFileMode(
+  function setPasteSpecialDrawingFileMode(
     mode:
       | "NEVER_CREATE"
       | "ONLY_CREATE_IF_DOES_NOT_EXIST"
@@ -1410,14 +1411,14 @@ declare class copyPaste extends GlobalObject {
    * @param {string} mode
    * @returns {void}
    */
-  public static setPasteSpecialElementTimingColumnMode(mode: string): void;
+  function setPasteSpecialElementTimingColumnMode(mode: string): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialForcesKeyFrameAtBegAndEnd(flag: boolean): void;
+  function setPasteSpecialForcesKeyFrameAtBegAndEnd(flag: boolean): void;
 
   /**
    * Use this when you want to control the paste of all non animate attributes and all local values of a
@@ -1426,7 +1427,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} flag Whether or not to control the paste of all non animate attributes and all local values of a node.
    * @returns {void}
    */
-  public static setPasteSpecialFullTransfer(flag: boolean): void;
+  function setPasteSpecialFullTransfer(flag: boolean): void;
 
   /**
    * Use this when you want to paste a template and use the actual node names for matching nodes instead
@@ -1436,28 +1437,28 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} flag Whether or not to use the actual node names for matching nodes when pasting a template.
    * @returns {void}
    */
-  public static setPasteSpecialMatchNodeName(flag: boolean): void;
+  function setPasteSpecialMatchNodeName(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is false.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialOffsetKeyFrames(flag: boolean): void;
+  function setPasteSpecialOffsetKeyFrames(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialReplaceExpressionColumns(flag: boolean): void;
+  function setPasteSpecialReplaceExpressionColumns(flag: boolean): void;
 
   /**
    * Set to true to keep timed values names intact, even if cloned i.e. Drawing(3).
    * @param {boolean} preserve Whether or not to keep timed values names intact.
    * @returns {void}
    */
-  public static setPasteSpecialTVPreserveName(preserve: boolean): void;
+  function setPasteSpecialTVPreserveName(preserve: boolean): void;
 
   /**
    * When pasting an external template or local content, this functions controls the start frame of the
@@ -1468,7 +1469,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} startFrame The frame to start at when pasting an external template or local content.
    * @returns {void}
    */
-  public static setStartFrameSrc(startFrame: int): void;
+  function setStartFrameSrc(startFrame: int): void;
 
   /**
    * Allows 2 extra options in the template creation.
@@ -1478,7 +1479,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} [includeDefaultCameraName=true] Deprecated in 7.8. As long as the camera node is in the selection, it will be copied into the template automatically.
    * @returns {void}
    */
-  public static useCreateTemplateSpecial(
+  function useCreateTemplateSpecial(
     flag: boolean,
     addModellingDir?: boolean,
     addScanFiles?: boolean,
@@ -1499,7 +1500,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} flag True to enable PasteSpecial.
    * @returns {void}
    */
-  public static usePasteSpecial(flag: boolean): void;
+  function usePasteSpecial(flag: boolean): void;
 }
 
 /**
@@ -1521,7 +1522,7 @@ declare class copyPaste extends GlobalObject {
  *     }
  * }
  */
-declare class Drawing extends GlobalObject {
+declare namespace Drawing {
   /**
    * Creates a drawing.
    * @param {int} elementId The unique id of the element.
@@ -1530,7 +1531,7 @@ declare class Drawing extends GlobalObject {
    * @param {boolean} [storeInProjectFolder=false] Indicate that the drawing exits in the project folder, not in a temporary folder.
    * @returns {boolean}
    */
-  public static create(
+  function create(
     elementId: int,
     timing: string,
     fileExists?: boolean,
@@ -1545,7 +1546,7 @@ declare class Drawing extends GlobalObject {
    * @param {string} drawingName The drawing name.
    * @returns {string}
    */
-  public static filename(elementId: int, drawingName: string): string;
+  function filename(elementId: int, drawingName: string): string;
 
   /**
    * Returns true if the given drawing exists in this element.
@@ -1553,7 +1554,7 @@ declare class Drawing extends GlobalObject {
    * @param {string} timing The drawing name.
    * @returns {boolean}
    */
-  public static isExists(elementId: int, timing: string): boolean;
+  function isExists(elementId: int, timing: string): boolean;
 
   /**
    * Returns the drawing id.
@@ -1561,14 +1562,14 @@ declare class Drawing extends GlobalObject {
    * @param {int} drawingIndex The drawing index.
    * @returns {string}
    */
-  public static name(elementId: int, drawingIndex: int): string;
+  function name(elementId: int, drawingIndex: int): string;
 
   /**
    * Returns the number of drawings in the element.
    * @param {int} elementId The unique id of the element.
    * @returns {int}
    */
-  public static numberOf(elementId: int): int;
+  function numberOf(elementId: int): int;
 }
 
 /**
@@ -1579,7 +1580,7 @@ declare class Drawing extends GlobalObject {
  * params.applyAllDrawings = true;
  * DrawingTools.extractCenterline(DrawingTools.lineArt, DrawingTools.colourArt, params);
  */
-declare class DrawingTools extends GlobalObject {
+declare namespace DrawingTools {
   /**
    * Clears an art of a drawing.
    * Takes an object that can contain: drawing : Drawing Key art : int The art to clear. 0 = Underlay, 1
@@ -1587,14 +1588,14 @@ declare class DrawingTools extends GlobalObject {
    * @param {QVariant} config
    * @returns {boolean}
    */
-  public static clearArt(config: QVariant): boolean;
+  function clearArt(config: QVariant): boolean;
 
   /**
    * Computes the breaking triangles of the current layer using params.
    * @param {DrawingToolParams} [params=0] The DrawingToolParams.
    * @returns {void}
    */
-  public static computeBreakingTriangles(params?: DrawingToolParams): void;
+  function computeBreakingTriangles(params?: DrawingToolParams): void;
 
   /**
    * Converts the selected pencil lines in layer of the current drawing using params.
@@ -1602,10 +1603,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {DrawingToolParams} [params=0] The DrawingToolParams.
    * @returns {void}
    */
-  public static convertPencilToBrush(
-    art?: int,
-    params?: DrawingToolParams
-  ): void;
+  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
 
   /**
    * Extracts the centerline from srcArt and puts the extracted line in dstArt using params.
@@ -1614,7 +1612,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {DrawingToolParams} [params=0] The DrawingToolParams.
    * @returns {void}
    */
-  public static extractCenterline(
+  function extractCenterline(
     srcArt?: int,
     dstArt?: int,
     params?: DrawingToolParams
@@ -1626,13 +1624,13 @@ declare class DrawingTools extends GlobalObject {
    * @param {QVariant} config
    * @returns {boolean}
    */
-  public static flatten(config: QVariant): boolean;
+  function flatten(config: QVariant): boolean;
 
   /**
    * Returns an array containing the set of colour ids used by the drawing.
    * @returns {QScriptValue}
    */
-  public static getDrawingUsedColors(): QScriptValue;
+  function getDrawingUsedColors(): QScriptValue;
 
   /**
    * Returns an array of objects describing the set of colour ids used by the drawing along with the
@@ -1644,13 +1642,13 @@ declare class DrawingTools extends GlobalObject {
    *     "colorSource": < "COLOR" | "PENCIL_TEXTURE" >
    * }
    */
-  public static getDrawingUsedColorsWithSource(): QScriptValue;
+  function getDrawingUsedColorsWithSource(): QScriptValue;
 
   /**
    * Return an array containing the set of colour ids used by all drawings in the array.
    * @returns {QScriptValue}
    */
-  public static getMultipleDrawingsUsedColors(): QScriptValue;
+  function getMultipleDrawingsUsedColors(): QScriptValue;
 
   /**
    * Performs the same operation as Drawing->Optimize->Optimize menu item.
@@ -1658,7 +1656,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {QVariant} config
    * @returns {boolean}
    */
-  public static optimize(config: QVariant): boolean;
+  function optimize(config: QVariant): boolean;
 
   /**
    * Recolours the drawing identified by a DrawingKey.
@@ -1668,21 +1666,21 @@ declare class DrawingTools extends GlobalObject {
    * ,{...} ].
    * @returns {void}
    */
-  public static recolorDrawing(): void;
+  function recolorDrawing(): void;
 
   /**
    * Sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt.
    * @param {int} currentArt
    * @returns {void}
    */
-  public static setCurrentArt(currentArt: int): void;
+  function setCurrentArt(currentArt: int): void;
 
   /**
    * @param {string} columnName The name of the column to start the drawing at.
    * @param {int} [frame=1] The frame number to set the current drawing at.
    * @returns {boolean}
    */
-  public static setCurrentDrawingFromColumnName(
+  function setCurrentDrawingFromColumnName(
     columnName: string,
     frame?: int
   ): boolean;
@@ -1693,7 +1691,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {int} [frame=1] The frame number to set the current drawing at.
    * @returns {boolean}
    */
-  public static setCurrentDrawingFromNodeName(
+  function setCurrentDrawingFromNodeName(
     nodeName: string,
     frame?: int
   ): boolean;
@@ -1777,37 +1775,37 @@ declare class DrawingTools extends GlobalObject {
    *              scene.endUndoRedoAccum();
    *          }
    */
-  public static vectorize(): QVariant;
+  function vectorize(): QVariant;
 
   /**
    * Returns the mask for all 4 art layers.
    * @returns {int}
    */
-  static allArts: int;
+  var allArts: int;
 
   /**
    * Returns the colourArt mask.
    * @returns {int}
    */
-  static colourArt: int;
+  var colourArt: int;
 
   /**
    * Returns the lineArt mask.
    * @returns {int}
    */
-  static lineArt: int;
+  var lineArt: int;
 
   /**
    * Returns the overlayArt mask.
    * @returns {int}
    */
-  static overlayArt: int;
+  var overlayArt: int;
 
   /**
    * Returns the underlayArt mask.
    * @returns {int}
    */
-  static underlayArt: int;
+  var underlayArt: int;
 }
 
 /**
@@ -1831,7 +1829,7 @@ declare class DrawingTools extends GlobalObject {
  *     var id = element.add("newDrawing", "BW", 12, "TVG", "SCAN");
  * }
  */
-declare class element extends GlobalObject {
+declare namespace element {
   /**
    * Creates a new element. Returns the element id of the newly added element if successful, otherwise it
    * returns -1.
@@ -1842,7 +1840,7 @@ declare class element extends GlobalObject {
    * @param {string} vectorize "TVG" or "None".
    * @returns {int}
    */
-  public static add(
+  function add(
     name: string,
     scanType: string,
     fieldChart: double,
@@ -1857,7 +1855,7 @@ declare class element extends GlobalObject {
    * @param {int} id The unique id of the elements.
    * @returns {string}
    */
-  public static completeFolder(id: int): string;
+  function completeFolder(id: int): string;
 
   /**
    * This function returns the field chart size for a given element. The element ID must be provided. The
@@ -1865,7 +1863,7 @@ declare class element extends GlobalObject {
    * @param {int} id The unique id of the element.
    * @returns {double}
    */
-  public static fieldChart(id: int): double;
+  function fieldChart(id: int): double;
 
   /**
    * Returns the actual element folder. This is normally the element name (unless it has been renamed and
@@ -1874,21 +1872,21 @@ declare class element extends GlobalObject {
    * @param {int} id The unique id of the element.
    * @returns {string}
    */
-  public static folder(id: int): string;
+  function folder(id: int): string;
 
   /**
    * Returns the current element name.
    * @param {int} id The unique id of the element.
    * @returns {string}
    */
-  public static getNameById(id: int): string;
+  function getNameById(id: int): string;
 
   /**
    * Returns the id (key) of the element.
    * @param {int} elementIndex An integer from 0 to the value returned by the function element.numberOf, representing the index number of the element. The id and the index are not always the same value.
    * @returns {int}
    */
-  public static id(elementIndex: int): int;
+  function id(elementIndex: int): int;
 
   /**
    * Changes the attributes of the folder of element elem.
@@ -1899,7 +1897,7 @@ declare class element extends GlobalObject {
    * @param {int} vectorType 1 or 2.
    * @returns {boolean}
    */
-  public static modify(
+  function modify(
     id: int,
     scanType: string,
     fieldChart: double,
@@ -1911,7 +1909,7 @@ declare class element extends GlobalObject {
    * Returns the number of elements in the scene.
    * @returns {int}
    */
-  public static numberOf(): int;
+  function numberOf(): int;
 
   /**
    * Returns the actual name of the drawings. This is different that the element name if this one has
@@ -1919,14 +1917,14 @@ declare class element extends GlobalObject {
    * @param {int} id The unique id of the element.
    * @returns {string}
    */
-  public static physicalName(id: int): string;
+  function physicalName(id: int): string;
 
   /**
    * Returns the pixmap format for the provided element ID.
    * @param {int} id The unique id of the element.
    * @returns {string}
    */
-  public static pixmapFormat(id: int): string;
+  function pixmapFormat(id: int): string;
 
   /**
    * Removes the given element. Also optionally delete the disk files. This function returns true when
@@ -1935,7 +1933,7 @@ declare class element extends GlobalObject {
    * @param {boolean} deleteDiskFile Optionally, delete the element from the disk.
    * @returns {boolean}
    */
-  public static remove(id: int, deleteDiskFile: boolean): boolean;
+  function remove(id: int, deleteDiskFile: boolean): boolean;
 
   /**
    * Renames an existing element. The element ID must be provided.
@@ -1943,7 +1941,7 @@ declare class element extends GlobalObject {
    * @param {string} name The new name of the element. This name must be unique. This operation will physically rename all the files associated to this element.
    * @returns {boolean}
    */
-  public static renameById(id: int, name: string): boolean;
+  function renameById(id: int, name: string): boolean;
 
   /**
    * Returns a string that is the scan type of the element. The scan type is either: COLOR, GRAY_SCALE or
@@ -1951,7 +1949,7 @@ declare class element extends GlobalObject {
    * @param {int} id The unique id of the element.
    * @returns {string}
    */
-  public static scanType(id: int): string;
+  function scanType(id: int): string;
 
   /**
    * This function returns the vector type for the given element. In theory, there is support for
@@ -1961,7 +1959,7 @@ declare class element extends GlobalObject {
    * @param {int} id The unique id of the element.
    * @returns {int}
    */
-  public static vectorType(id: int): int;
+  function vectorType(id: int): int;
 }
 
 /**
@@ -1998,12 +1996,12 @@ declare class element extends GlobalObject {
  *
  * MessageBox.information("Palette list exported to: " + exportFile);
  */
-declare class exporter extends GlobalObject {
+declare namespace exporter {
   /**
    * Removes all files from the project export directory.
    * @returns {void}
    */
-  public static cleanExportDir(): void;
+  function cleanExportDir(): void;
 
   /**
    * Export OGL frames to a QuickTime movie. Without QuickTime it will try to fallback to other supported
@@ -2016,7 +2014,7 @@ declare class exporter extends GlobalObject {
    * @param {int} [resY=-1] The vertical resolution default to preview resolution if -1.
    * @returns {void}
    */
-  public static exportOGLToQuicktime(
+  function exportOGLToQuicktime(
     fileName: string,
     dstPath: string,
     startFrame?: int,
@@ -2039,7 +2037,7 @@ declare class exporter extends GlobalObject {
    * @param {int} thumbnailFrame The frame to use for the thumbnail.
    * @returns {boolean}
    */
-  public static exportToQuicktime(
+  function exportToQuicktime(
     displayName: string,
     startFrame?: int,
     lastFrame?: int,
@@ -2056,14 +2054,14 @@ declare class exporter extends GlobalObject {
    * Returns the path of the project export directory.
    * @returns {string}
    */
-  public static getExportDir(): string;
+  function getExportDir(): string;
 }
 
 /**
  * The FileDialog JavaScript global object. A simplified version of the Qt file dialogs.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classFileDialog.html}
  */
-declare class FileDialog extends GlobalObject {
+declare namespace FileDialog {
   /**
    * Function that will return an existing directory selected by the user.
    * @param {string} [dir=String::null] The directory to open the file dialog to.
@@ -2071,7 +2069,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getExistingDirectory(
+  function getExistingDirectory(
     dir?: string,
     title?: string,
     parent?: QWidget
@@ -2084,7 +2082,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getOpenFileName(
+  function getOpenFileName(
     filter?: string,
     title?: string,
     parent?: QWidget
@@ -2098,7 +2096,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {StringList}
    */
-  public static getOpenFileNames(
+  function getOpenFileNames(
     dir?: string,
     filter?: string,
     title?: string,
@@ -2112,7 +2110,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getSaveFileName(
+  function getSaveFileName(
     filter?: string,
     title?: string,
     parent?: QWidget
@@ -2123,13 +2121,13 @@ declare class FileDialog extends GlobalObject {
  * The fileMapper JavaScript global object. Map paths from one format to another.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classfileMapper.html}
  */
-declare class fileMapper extends GlobalObject {
+declare namespace fileMapper {
   /**
    * Converts a URL to a path of the form eg. /usadata000/[job]/scene-[scene]/[remainder...].
    * @param {string} url The url to convert.
    * @returns {string}
    */
-  public static fileURLToPath(url: string): string;
+  function fileURLToPath(url: string): string;
 
   /**
    * Returns the complete path of the passed path resolving shortcuts in windows. Will also convert the
@@ -2142,7 +2140,7 @@ declare class fileMapper extends GlobalObject {
    * @example
    * var remapped = fileMapper.toNativePath("/usadata000/file.txt");
    */
-  public static toNativePath(path: string): string;
+  function toNativePath(path: string): string;
 
   /**
    * Converts a path of the form /USA_DB/jobs/[job]/scene-[scene]/[remainder...] to eg.
@@ -2157,7 +2155,7 @@ declare class fileMapper extends GlobalObject {
    * @example
    * /USA_DB/jobs / [job] / scene - [scene] / [remainder...]
    */
-  public static toScenePath(path: string): string;
+  function toScenePath(path: string): string;
 }
 
 /**
@@ -2190,19 +2188,19 @@ declare class fileMapper extends GlobalObject {
  *     }
  * }
  */
-declare class frame extends GlobalObject {
+declare namespace frame {
   /**
    * Returns the number of the current frame.
    * @returns {int}
    */
-  public static current(): int;
+  function current(): int;
 
   /**
    * Returns if marker exists at this frame.
    * @param {int} frame current frame
    * @returns {boolean}
    */
-  public static hasTimelineMarker(frame: int): boolean;
+  function hasTimelineMarker(frame: int): boolean;
 
   /**
    * Inserts frames at the selected frame number.
@@ -2212,13 +2210,13 @@ declare class frame extends GlobalObject {
    * @param {int} nbFrames The number of frames to insert
    * @returns {boolean}
    */
-  public static insert(atFrame: int, nbFrames: int): boolean;
+  function insert(atFrame: int, nbFrames: int): boolean;
 
   /**
    * Returns the number of frames in the scene.
    * @returns {int}
    */
-  public static numberOf(): int;
+  function numberOf(): int;
 
   /**
    * Deletes frames starting from the selected frame number.
@@ -2228,35 +2226,35 @@ declare class frame extends GlobalObject {
    * @param {int} nbFrames The number of frames to remove
    * @returns {boolean}
    */
-  public static remove(atFrame: int, nbFrames: int): boolean;
+  function remove(atFrame: int, nbFrames: int): boolean;
 
   /**
    * Allows you to change the current frame.
    * @param {int} frame The new current frame
    * @returns {void}
    */
-  public static setCurrent(frame: int): void;
+  function setCurrent(frame: int): void;
 
   /**
    * Returns markers length.
    * @param {int} frame current frame
    * @returns {int}
    */
-  public static timelineMarkerLength(frame: int): int;
+  function timelineMarkerLength(frame: int): int;
 
   /**
    * Returns markers text.
    * @param {int} frame current frame
    * @returns {string}
    */
-  public static timelineMarkerNote(frame: int): string;
+  function timelineMarkerNote(frame: int): string;
 
   /**
    * Returns markers start frame.
    * @param {int} frame current frame
    * @returns {int}
    */
-  public static timelineMarkerStart(frame: int): int;
+  function timelineMarkerStart(frame: int): int;
 }
 
 /**
@@ -2308,7 +2306,7 @@ declare class frame extends GlobalObject {
  *         MessageLog.trace("Error creating point on ease");
  * }
  */
-declare class func extends GlobalObject {
+declare namespace func {
   /**
    * Adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension,
    * continuity and bias.
@@ -2322,7 +2320,7 @@ declare class func extends GlobalObject {
    * @param {double} bias The bias value of the keyframe.
    * @returns {boolean}
    */
-  public static addCtrlPointAfterPath3d(
+  function addCtrlPointAfterPath3d(
     columnName: string,
     point: int,
     x: double,
@@ -2346,7 +2344,7 @@ declare class func extends GlobalObject {
    * @param {double} bias The bias value of the keyframe.
    * @returns {boolean}
    */
-  public static addKeyFramePath3d(
+  function addKeyFramePath3d(
     columnName: string,
     frame: int,
     x: double,
@@ -2363,7 +2361,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static angleEaseIn(columnName: string, point: int): double;
+  function angleEaseIn(columnName: string, point: int): double;
 
   /**
    * Returns the angle of the ease-out handle.
@@ -2371,7 +2369,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static angleEaseOut(columnName: string, point: int): double;
+  function angleEaseOut(columnName: string, point: int): double;
 
   /**
    * Returns the Start value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
@@ -2379,7 +2377,7 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static holdStartFrame(columnName: string): int;
+  function holdStartFrame(columnName: string): int;
 
   /**
    * Returns the Step value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
@@ -2387,7 +2385,7 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static holdStep(columnName: string): int;
+  function holdStep(columnName: string): int;
 
   /**
    * Returns the Stop value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
@@ -2395,21 +2393,21 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static holdStopFrame(columnName: string): int;
+  function holdStopFrame(columnName: string): int;
 
   /**
    * Returns the number of keyframes and control points on a curve.
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static numberOfPoints(columnName: string): int;
+  function numberOfPoints(columnName: string): int;
 
   /**
    * Returns the number of keyframes and control points on the 3D Path.
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static numberOfPointsPath3d(columnName: string): int;
+  function numberOfPointsPath3d(columnName: string): int;
 
   /**
    * Returns the bias value for the specified point on the 3D Path.
@@ -2417,7 +2415,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointBiasPath3d(columnName: string, point: int): double;
+  function pointBiasPath3d(columnName: string, point: int): double;
 
   /**
    * Returns true to indicate that the point is on a constant segment, or false to indicate that the
@@ -2426,7 +2424,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {boolean}
    */
-  public static pointConstSeg(columnName: string, point: int): boolean;
+  function pointConstSeg(columnName: string, point: int): boolean;
 
   /**
    * Returns the continuity of the curve that follows the point. One of the following values will be
@@ -2435,7 +2433,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {string}
    */
-  public static pointContinuity(columnName: string, point: int): string;
+  function pointContinuity(columnName: string, point: int): string;
 
   /**
    * Returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
@@ -2443,7 +2441,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointContinuityPath3d(columnName: string, point: int): double;
+  function pointContinuityPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the number of frames in the ease-in.
@@ -2451,7 +2449,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointEaseIn(columnName: string, point: int): double;
+  function pointEaseIn(columnName: string, point: int): double;
 
   /**
    * Returns the number of frames in the ease-out.
@@ -2459,7 +2457,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointEaseOut(columnName: string, point: int): double;
+  function pointEaseOut(columnName: string, point: int): double;
 
   /**
    * Returns the X value of the left handle of a point on a curve.
@@ -2467,7 +2465,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleLeftX(columnName: string, point: int): double;
+  function pointHandleLeftX(columnName: string, point: int): double;
 
   /**
    * Returns the Y value of the left handle of a point on a curve.
@@ -2475,7 +2473,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleLeftY(columnName: string, point: int): double;
+  function pointHandleLeftY(columnName: string, point: int): double;
 
   /**
    * Returns the X value of the right handle of a point on a curve.
@@ -2483,7 +2481,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleRightX(columnName: string, point: int): double;
+  function pointHandleRightX(columnName: string, point: int): double;
 
   /**
    * Returns the Y value of the right handle of a point on a curve.
@@ -2491,7 +2489,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleRightY(columnName: string, point: int): double;
+  function pointHandleRightY(columnName: string, point: int): double;
 
   /**
    * Returns the frame at which it's locked, or returns 0 if the point is not locked.
@@ -2499,7 +2497,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointLockedAtFrame(columnName: string, point: int): double;
+  function pointLockedAtFrame(columnName: string, point: int): double;
 
   /**
    * Returns the tension value for the specified point on the 3D Path.
@@ -2507,7 +2505,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointTensionPath3d(columnName: string, point: int): double;
+  function pointTensionPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the X value (frame number) of a point on a function curve.
@@ -2515,7 +2513,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointX(columnName: string, point: int): double;
+  function pointX(columnName: string, point: int): double;
 
   /**
    * Returns the value of the specified point on the X path.
@@ -2523,7 +2521,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointXPath3d(columnName: string, point: int): double;
+  function pointXPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the Y value of a point on a function curve.
@@ -2531,7 +2529,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointY(columnName: string, point: int): double;
+  function pointY(columnName: string, point: int): double;
 
   /**
    * Returns the value of the specified point on the Y path.
@@ -2539,7 +2537,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointYPath3d(columnName: string, point: int): double;
+  function pointYPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the value of the specified point on the Z path.
@@ -2547,7 +2545,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointZPath3d(columnName: string, point: int): double;
+  function pointZPath3d(columnName: string, point: int): double;
 
   /**
    * Used to remove either a key frame, or a control point.
@@ -2555,7 +2553,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {boolean}
    */
-  public static removePointPath3d(columnName: string, point: int): boolean;
+  function removePointPath3d(columnName: string, point: int): boolean;
 
   /**
    * Sets the values of a point on a Bezier function curve.
@@ -2570,7 +2568,7 @@ declare class func extends GlobalObject {
    * @param {string} continuity String value for the continuity of the point. The string must be in all upper-case. The following are the acceptable values: STRAIGHT, SMOOTH and CORNER.
    * @returns {boolean}
    */
-  public static setBezierPoint(
+  function setBezierPoint(
     columnName: string,
     frame: int,
     y: double,
@@ -2595,7 +2593,7 @@ declare class func extends GlobalObject {
    * @param {string} continuity String value for the continuity of the point. The string must be in all upper-case. The following are the acceptable values: STRAIGHT, SMOOTH and CORNER.
    * @returns {boolean}
    */
-  public static setEasePoint(
+  function setEasePoint(
     columnName: string,
     frame: int,
     y: double,
@@ -2614,7 +2612,7 @@ declare class func extends GlobalObject {
    * @param {int} start The start frame of the hold.
    * @returns {boolean}
    */
-  public static setHoldStartFrame(columnName: string, start: int): boolean;
+  function setHoldStartFrame(columnName: string, start: int): boolean;
 
   /**
    * Sets the Hold value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
@@ -2623,7 +2621,7 @@ declare class func extends GlobalObject {
    * @param {int} step The value of the steps in the hold.
    * @returns {boolean}
    */
-  public static setHoldStep(columnName: string, step: int): boolean;
+  function setHoldStep(columnName: string, step: int): boolean;
 
   /**
    * Sets the Stop value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
@@ -2632,7 +2630,7 @@ declare class func extends GlobalObject {
    * @param {int} stop The stop frame of the hold.
    * @returns {boolean}
    */
-  public static setHoldStopFrame(columnName: string, stop: int): boolean;
+  function setHoldStopFrame(columnName: string, stop: int): boolean;
 
   /**
    * Sets the constant segment flag of point i of path p to b.
@@ -2641,7 +2639,7 @@ declare class func extends GlobalObject {
    * @param {boolean} constant bool flag.
    * @returns {boolean}
    */
-  public static setPath3dPointConstantSegment(
+  function setPath3dPointConstantSegment(
     columnName: string,
     point: int,
     constant: boolean
@@ -2654,7 +2652,7 @@ declare class func extends GlobalObject {
    * @param {boolean} constant bool flag.
    * @returns {boolean}
    */
-  public static setPath3dPointConstantSegmentForFrame(
+  function setPath3dPointConstantSegmentForFrame(
     columnName: string,
     point: double,
     constant: boolean
@@ -2675,7 +2673,7 @@ declare class func extends GlobalObject {
    * @param {double} bias The bias value of the keyframe.
    * @returns {boolean}
    */
-  public static setPointPath3d(
+  function setPointPath3d(
     columnName: string,
     point: int,
     x: double,
@@ -2693,7 +2691,7 @@ declare class func extends GlobalObject {
    * @param {double} y Y value for the point.
    * @returns {boolean}
    */
-  public static setVeloBasedPoint(
+  function setVeloBasedPoint(
     columnName: string,
     frame: int,
     y: double
@@ -2705,7 +2703,7 @@ declare class func extends GlobalObject {
  * Provides a simple convenient dialog to get a single value from the user.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classInput.html}
  */
-declare class Input extends GlobalObject {
+declare namespace Input {
   /**
    * Function to get an item from the user.
    * @param {string} label A prompt for the input you want.
@@ -2716,7 +2714,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getItem(
+  function getItem(
     label: string,
     itemList: StringList,
     currentItem?: string,
@@ -2733,7 +2731,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getItem(
+  function getItem(
     itemList: StringList,
     currentItem?: string,
     editable?: boolean,
@@ -2751,7 +2749,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getNumber(
+  function getNumber(
     label?: string,
     value?: double,
     decimals?: int,
@@ -2769,7 +2767,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getText(
+  function getText(
     label?: string,
     text?: string,
     title?: string,
@@ -2781,37 +2779,37 @@ declare class Input extends GlobalObject {
  * The KeyModifiers JavaScript global object. Query key modifiers.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classKeyModifiers.html}
  */
-declare class KeyModifiers extends GlobalObject {
+declare namespace KeyModifiers {
   /**
    * Check if the Alt key is pressed.
    * @returns {boolean}
    */
-  public static IsAlternatePressed(): boolean;
+  function IsAlternatePressed(): boolean;
 
   /**
    * Check if the Ctrl key is pressed.
    * @returns {boolean}
    */
-  public static IsControlPressed(): boolean;
+  function IsControlPressed(): boolean;
 
   /**
    * Check if the Shift key is pressed.
    * @returns {boolean}
    */
-  public static IsShiftPressed(): boolean;
+  function IsShiftPressed(): boolean;
 
   /**
    * Check if the space key is pressed.
    * @returns {boolean}
    */
-  public static IsSpacePressed(): boolean;
+  function IsSpacePressed(): boolean;
 }
 
 /**
  * The library JavaScript global object. Select templates, and generate thumbnails or movies for them.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classlibrary.html}
  */
-declare class library extends GlobalObject {
+declare namespace library {
   /**
    * Generates the movies for selected templates.
    * @param {int} idx The index of the templates to generate QuickTime Movie(s) for.
@@ -2825,7 +2823,7 @@ declare class library extends GlobalObject {
    * @param {boolean} withSound Whether or not the generated movie(s) will have sound.
    * @returns {boolean}
    */
-  public static getQuicktimeMovieForSelectedTpl(
+  function getQuicktimeMovieForSelectedTpl(
     idx: int,
     start: int,
     end: int,
@@ -2842,7 +2840,7 @@ declare class library extends GlobalObject {
    * @param {int} i The index of the target file in the currently selected files.
    * @returns {string}
    */
-  public static getSelectedTemplate(i: int): string;
+  function getSelectedTemplate(i: int): string;
 
   /**
    * Generates the thumbnails for selected templates.
@@ -2851,7 +2849,7 @@ declare class library extends GlobalObject {
    * @param {string} dstPath The destination path for the generated thumbnails.
    * @returns {boolean}
    */
-  public static getThumbnailForSelectedTpl(
+  function getThumbnailForSelectedTpl(
     idx: int,
     res: int,
     dstPath: string
@@ -2861,7 +2859,7 @@ declare class library extends GlobalObject {
    * Returns the number of files that are selected.
    * @returns {int}
    */
-  public static numberOfTemplatesSelected(): int;
+  function numberOfTemplatesSelected(): int;
 }
 
 /**
@@ -2870,7 +2868,7 @@ declare class library extends GlobalObject {
  * @example
  * MessageBox.warning(" This is a warning.");
  */
-declare class MessageBox extends GlobalObject {
+declare namespace MessageBox {
   /**
    * A critical box. By default has one button labeled 'Retry'.
    * @param {string} text The text to display in the information box body.
@@ -2881,7 +2879,7 @@ declare class MessageBox extends GlobalObject {
    * @param {QWidget} parent The parent widget to inherit.
    * @returns {QScriptValue}
    */
-  public static critical(
+  function critical(
     text: string,
     button0?: int,
     button1?: int,
@@ -2900,7 +2898,7 @@ declare class MessageBox extends GlobalObject {
    * @param {QWidget} parent The parent widget to inherit.
    * @returns {QScriptValue}
    */
-  public static information(
+  function information(
     text: string,
     button0?: int,
     button1?: int,
@@ -2919,7 +2917,7 @@ declare class MessageBox extends GlobalObject {
    * @param {QWidget} parent The parent widget to inherit.
    * @returns {QScriptValue}
    */
-  public static warning(
+  function warning(
     text: string,
     button0?: int,
     button1?: int,
@@ -2936,13 +2934,13 @@ declare class MessageBox extends GlobalObject {
  * @example
  * MessageLog.trace("Export template failed. Nothing selected.");
  */
-declare class MessageLog extends GlobalObject {
+declare namespace MessageLog {
   /**
    * Writes the message to the message log if debug mode is on.
    * @param {string} messageIfDebug The message to be written to the message log if debug mode is on.
    * @returns {void}
    */
-  public static debug(messageIfDebug: string): void;
+  function debug(messageIfDebug: string): void;
 
   /**
    * Prints message to message log as an error.
@@ -2951,27 +2949,27 @@ declare class MessageLog extends GlobalObject {
    * @param {string} message The message to the written to the message log as an error.
    * @returns {void}
    */
-  public static error(message: string): void;
+  function error(message: string): void;
 
   /**
    * Returns whether the debug mode is set.
    * @returns {boolean}
    */
-  public static isDebug(): boolean;
+  function isDebug(): boolean;
 
   /**
    * Sets the debug mode to on/off.
    * @param {boolean} b If true sets the debug mode to on.
    * @returns {void}
    */
-  public static setDebug(b: boolean): void;
+  function setDebug(b: boolean): void;
 
   /**
    * Writes the message to the message log.
    * @param {string} message The message to be written to the message log.
    * @returns {void}
    */
-  public static trace(message: string): void;
+  function trace(message: string): void;
 }
 
 /**
@@ -2982,31 +2980,31 @@ declare class MessageLog extends GlobalObject {
  * current image filename and whether an audio file was created or not.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classMovieImport.html}
  */
-declare class MovieImport extends GlobalObject {
+declare namespace MovieImport {
   /**
    * Performs the import - no progress bar.
    * @returns {boolean}
    */
-  public static doImport(): boolean;
+  function doImport(): boolean;
 
   /**
    * Returns the complete filename for the imported image 'index' from the last import.
    * @param {int} index The index of the desired image from the last import.
    * @returns {string}
    */
-  public static image(index: int): string;
+  function image(index: int): string;
 
   /**
    * Returns true if a sound file was created at the given filename.
    * @returns {boolean}
    */
-  public static isAudioFileCreated(): boolean;
+  function isAudioFileCreated(): boolean;
 
   /**
    * Returns the number of imported images from the last import.
    * @returns {int}
    */
-  public static numberOfImages(): int;
+  function numberOfImages(): int;
 
   /**
    * Sets the expected audio filename. must be wav format (as this is currently the only one supported)
@@ -3016,28 +3014,28 @@ declare class MovieImport extends GlobalObject {
    * @param {string} audioFilename The expected audio filename.
    * @returns {void}
    */
-  public static setAudioFile(audioFilename: string): void;
+  function setAudioFile(audioFilename: string): void;
 
   /**
    * Defines where to store the extracted images.
    * @param {string} folder The folder to store extracted images.
    * @returns {void}
    */
-  public static setImageFolder(folder: string): void;
+  function setImageFolder(folder: string): void;
 
   /**
    * Defines which prefix to use to save the images.
    * @param {string} prefix The prefix to use to save the images.
    * @returns {void}
    */
-  public static setImagePrefix(prefix: string): void;
+  function setImagePrefix(prefix: string): void;
 
   /**
    * Defines the input movie filename.
    * @param {string} filename The input movie filename.
    * @returns {void}
    */
-  public static setMovieFilename(filename: string): void;
+  function setMovieFilename(filename: string): void;
 
   /**
    * Sets the start frame (frame are 1 bound). The default value is 1. This will affect the 'doImport()'
@@ -3045,7 +3043,7 @@ declare class MovieImport extends GlobalObject {
    * @param {int} startFrame The frame to start from.
    * @returns {void}
    */
-  public static setStartFrame(startFrame: int): void;
+  function setStartFrame(startFrame: int): void;
 
   /**
    * Sets the desired last frame. This will affect the number of frames that will be extracted by the
@@ -3053,7 +3051,7 @@ declare class MovieImport extends GlobalObject {
    * @param {int} stopFrame The frame to stop at.
    * @returns {void}
    */
-  public static setStopFrame(stopFrame: int): void;
+  function setStopFrame(stopFrame: int): void;
 }
 
 /**
@@ -3089,7 +3087,7 @@ declare class MovieImport extends GlobalObject {
  *     }
  * }
  */
-declare class node extends GlobalObject {
+declare namespace node {
   /**
    * Add a node to the Node View.
    * For an example usage of add, see the above Detailed Description.
@@ -3101,7 +3099,7 @@ declare class node extends GlobalObject {
    * @param {int} z The Z position of the node in the Node View. This property is important when two nodes overlap.
    * @returns {string}
    */
-  public static add(
+  function add(
     parentGroup: string,
     name: string,
     type: string,
@@ -3115,7 +3113,7 @@ declare class node extends GlobalObject {
    * @param {string} node The path of the node.
    * @returns {boolean}
    */
-  public static addCompositeToGroup(node: string): boolean;
+  function addCompositeToGroup(node: string): boolean;
 
   /**
    * Returns an integer indicating the X position of a node in the Node View.
@@ -3133,7 +3131,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static coordX(node: string): int;
+  function coordX(node: string): int;
 
   /**
    * Returns an integer indicating the Y position of a node in the Node View.
@@ -3151,7 +3149,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static coordY(node: string): int;
+  function coordY(node: string): int;
 
   /**
    * Returns an integer indicating the Z position of a node in the Node View.
@@ -3173,7 +3171,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static coordZ(node: string): int;
+  function coordZ(node: string): int;
 
   /**
    * Create a new attribute for the given node.
@@ -3205,7 +3203,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static createDynamicAttr(
+  function createDynamicAttr(
     node: string,
     type: string,
     attrName: string,
@@ -3235,7 +3233,7 @@ declare class node extends GlobalObject {
    *         }
    *     }
    */
-  public static createGroup(nodes: string, groupName: string): string;
+  function createGroup(nodes: string, groupName: string): string;
 
   /**
    * Delete a single node. Optionally, delete all columns and element associated to that node. The column
@@ -3248,7 +3246,7 @@ declare class node extends GlobalObject {
    * @example
    * node.deleteNode(selection.selectedNode(0), false, false);
    */
-  public static deleteNode(
+  function deleteNode(
     nodePath: string,
     deleteTimedValues?: boolean,
     deleteElements?: boolean
@@ -3281,7 +3279,7 @@ port  - The port number on which this node is connected to.
 *  @return Returns the path of the destination node linked to by the output port on the source node. /
 *      String dstNode(String sourceNode, int iPort, int iLink);
 */
-  public static dstNodeInfo(
+  function dstNodeInfo(
     sourceNode: string,
     iPort: int,
     iLink: int
@@ -3308,7 +3306,7 @@ port  - The port number on which this node is connected to.
    *     MessageLog.trace(node.equals(exNode, node.noNode()); //Since exNode is a valid node, this will print false
    *     }
    */
-  public static equals(node1: string, node2: string): boolean;
+  function equals(node1: string, node2: string): boolean;
 
   /**
    * Create a group for each exposure of the element where there is a symbol and will put the content of
@@ -3353,7 +3351,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static explodeElementSymbolsInGroups(
+  function explodeElementSymbolsInGroups(
     element: string,
     disableElement: boolean,
     clearExposure: boolean,
@@ -3376,7 +3374,7 @@ port  - The port number on which this node is connected to.
    *         MessageLog.trace(node.explodeGroup(group));
    * }
    */
-  public static explodeGroup(groupName: string): boolean;
+  function explodeGroup(groupName: string): boolean;
 
   /**
    * If the Source node is a Group, this method returns the path of the node inside the Group node that
@@ -3401,7 +3399,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static flatSrcNode(node: string, iPort: int): string;
+  function flatSrcNode(node: string, iPort: int): string;
 
   /**
    * Returns the Attribute of the given node. The attribute value is for the given frame.
@@ -3419,11 +3417,7 @@ port  - The port number on which this node is connected to.
    *     return attr.typeName();
    * }
    */
-  public static getAttr(
-    node: string,
-    atFrame: double,
-    attrName: string
-  ): Attribute;
+  function getAttr(node: string, atFrame: double, attrName: string): Attribute;
 
   /**
    * Returns a list of Attribute objects of the given node.
@@ -3447,7 +3441,7 @@ port  - The port number on which this node is connected to.
    *     return subAttrList;
    * }
    */
-  public static getAttrList(
+  function getAttrList(
     node: string,
     atFrame: double,
     attrName?: string
@@ -3466,7 +3460,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static getCameras(): StringList;
+  function getCameras(): StringList;
 
   /**
    * Returns the node colour.
@@ -3481,7 +3475,7 @@ port  - The port number on which this node is connected to.
    *     node.setColor(node1, newColor);
    * }
    */
-  public static getColor(node: string): ColorRGBA;
+  function getColor(node: string): ColorRGBA;
 
   /**
    * Returns the ColorOverride object for the color override node.
@@ -3496,7 +3490,7 @@ port  - The port number on which this node is connected to.
    *     return node.getColorOverride(myNode);
    * }
    */
-  public static getColorOverride(node: string): ColorOverride;
+  function getColorOverride(node: string): ColorOverride;
 
   /**
    * Returns the name of the default camera.
@@ -3507,7 +3501,7 @@ port  - The port number on which this node is connected to.
    * var FOV = node.getAttr(cameraNode, frame.current(), "FOV").doubleValue();
    * node.setTextAttr(cameraNode, "FOV", frame.current(), FOV / 2);
    */
-  public static getDefaultCamera(): string;
+  function getDefaultCamera(): string;
 
   /**
    * Returns the Element Id of the node. Has to be an element node, identified with type :: READ.
@@ -3531,7 +3525,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static getElementId(nodeName: string): int;
+  function getElementId(nodeName: string): int;
 
   /**
    * Returns whether a node is enabled or not.
@@ -3544,7 +3538,7 @@ port  - The port number on which this node is connected to.
    *         node.setEnable(exNode, false);
    * }
    */
-  public static getEnable(node: string): boolean;
+  function getEnable(node: string): boolean;
 
   /**
    * Returns existing or add a group multi port in node.
@@ -3574,7 +3568,7 @@ port  - The port number on which this node is connected to.
    *     };
    * }
    */
-  public static getGroupInputModule(
+  function getGroupInputModule(
     parentGroup: string,
     name: string,
     x: int,
@@ -3609,7 +3603,7 @@ port  - The port number on which this node is connected to.
    *     };
    * }
    */
-  public static getGroupOutputModule(
+  function getGroupOutputModule(
     parentGroup: string,
     name: string,
     x: int,
@@ -3625,7 +3619,7 @@ port  - The port number on which this node is connected to.
    * MessageLog.trace("Lock flag: " + node.getLocked(exNode));
    * node.setLocked(exNode, true);
    */
-  public static getLocked(node: string): boolean;
+  function getLocked(node: string): boolean;
 
   /**
    * Returns the model matrix of a node.
@@ -3641,7 +3635,7 @@ port  - The port number on which this node is connected to.
    * if (myNodeWorldPosition.z > myOtherNodeWorldPosition.z)
    *     MessageLog.trace("My node is in front of the other node");
    */
-  public static getMatrix(node: string, frame: int): QObject;
+  function getMatrix(node: string, frame: int): QObject;
 
   /**
    * Returns the number of versions of the node available.
@@ -3651,14 +3645,14 @@ port  - The port number on which this node is connected to.
    * @example
    * node.setVersion(exNode, node.getMaxVersionNumber(exNode));
    */
-  public static getMaxVersionNumber(node: string): int;
+  function getMaxVersionNumber(node: string): int;
 
   /**
    * Returns the name of a node.
    * @param {string} node The path of the node.
    * @returns {string}
    */
-  public static getName(node: string): string;
+  function getName(node: string): string;
 
   /**
    * Returns a collection of node paths for nodes of specified types.
@@ -3680,7 +3674,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static getNodes(types: StringList): StringList;
+  function getNodes(types: StringList): StringList;
 
   /**
    * Returns the pivot of the node.
@@ -3699,7 +3693,7 @@ port  - The port number on which this node is connected to.
    *
    * return [rotation, position, scale];
    */
-  public static getPivot(node: string, frame: int): QObject;
+  function getPivot(node: string, frame: int): QObject;
 
   /**
    * Returns the show/hide timeline thumbnail flags on drawing layers.
@@ -3709,7 +3703,7 @@ port  - The port number on which this node is connected to.
    * MessageLog.trace("Show timeline thumbnails: " + node.getShowTimelineThumbnails(exNode));
    * node.setShowTimelineThumbnails(exNode, true);
    */
-  public static getShowTimelineThumbnails(node: string): boolean;
+  function getShowTimelineThumbnails(node: string): boolean;
 
   /**
    * Returns the value(s) of the node selected attribute(s).
@@ -3738,11 +3732,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static getTextAttr(
-    node: string,
-    atFrame: double,
-    attrName: string
-  ): string;
+  function getTextAttr(node: string, atFrame: double, attrName: string): string;
 
   /**
    * Returns the timeline tag flag.
@@ -3753,7 +3743,7 @@ port  - The port number on which this node is connected to.
    * MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
    * node.setTimelineTag(exNode, true);
    */
-  public static getTimelineTag(node: string): boolean;
+  function getTimelineTag(node: string): boolean;
 
   /**
    * Returns a list of timeline tag flags.
@@ -3770,10 +3760,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static getTimelineTagList(
-    node?: string,
-    list?: StringList
-  ): StringList;
+  function getTimelineTagList(node?: string, list?: StringList): StringList;
 
   /**
    * Returns the current version of the node.
@@ -3783,14 +3770,14 @@ port  - The port number on which this node is connected to.
    * @example
    * MessageLog.trace("Current node version number: " + node.getVersion(exNode));
    */
-  public static getVersion(node: string): int;
+  function getVersion(node: string): int;
 
   /**
    * Returns true if the peg's groupAtNetworkBuilding() attribute is true.
    * @param {string} node The path of the node.
    * @returns {boolean}
    */
-  public static groupAtNetworkBuilding(node: string): boolean;
+  function groupAtNetworkBuilding(node: string): boolean;
 
   /**
    * Returns the height of a given node.
@@ -3809,7 +3796,7 @@ port  - The port number on which this node is connected to.
    *     node.setCoord(node2, x, y);
    * }
    */
-  public static height(node: string): int;
+  function height(node: string): int;
 
   /**
    * Returns a true or false value indicating if the node is a group.
@@ -3830,7 +3817,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static isGroup(node: string): boolean;
+  function isGroup(node: string): boolean;
 
   /**
    * Returns true or false to indicate if a port is connected to another node.
@@ -3855,7 +3842,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static isLinked(node: string, iPort: int): boolean;
+  function isLinked(node: string, iPort: int): boolean;
 
   /**
    * Link a port on a node to a port on another node.
@@ -3886,7 +3873,7 @@ port  - The port number on which this node is connected to.
    *     node.link(myNewGroupPath, 0, dstNodePaths[i], 0, true, true);
    * }
    */
-  public static link(
+  function link(
     srcNode: string,
     srcPort: int,
     dstNode: string,
@@ -3924,7 +3911,7 @@ port  - The port number on which this node is connected to.
    *     node.link(myNewGroupPath, 0, dstNodePaths[i], 0, true, true);
    * }
    */
-  public static link(
+  function link(
     srcNode: string,
     srcPort: int,
     dstNode: string,
@@ -3950,7 +3937,7 @@ port  - The port number on which this node is connected to.
    *     node.link("myCamPeg", 0, "Top/Camera", 0);
    * }
    */
-  public static linkAttr(
+  function linkAttr(
     node: string,
     attrName: string,
     columnName: string
@@ -3998,7 +3985,7 @@ port  - The port number on which this node is connected to.
    *     node.setTextAttr("Top/Camera", "OFFSET.Z", 0, 0);
    * }
    */
-  public static linkedColumn(node: string, attrName: string): string;
+  function linkedColumn(node: string, attrName: string): string;
 
   /**
    * Move the specified node within the specified group.
@@ -4011,7 +3998,7 @@ port  - The port number on which this node is connected to.
    * @example
    * node.moveToGroup("Top/MyGroup/Drawing", "Top/MyGroup/MyNewGroup");
    */
-  public static moveToGroup(node: string, groupName: string): string;
+  function moveToGroup(node: string, groupName: string): string;
 
   /**
    * Returns the node path to an invalid node.
@@ -4022,7 +4009,7 @@ port  - The port number on which this node is connected to.
    * if (parentNodePath == node.noNode())
    *     return; // something wrong happened
    */
-  public static noNode(): string;
+  function noNode(): string;
 
   /**
    * The number of input ports on the node.
@@ -4038,7 +4025,7 @@ port  - The port number on which this node is connected to.
    * var parent = node.parentNode(exNode);
    * MessageLog.trace(node.equals(parent, source)); //This will print false
    */
-  public static numberOfInputPorts(node: string): int;
+  function numberOfInputPorts(node: string): int;
 
   /**
    * The number of nodes actually linked from the output ports.
@@ -4047,7 +4034,7 @@ port  - The port number on which this node is connected to.
    * @param {int} iPort The port number on which you want to locate the node that is connected to it. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
    * @returns {int}
    */
-  public static numberOfOutputLinks(node: string, iPort: int): int;
+  function numberOfOutputLinks(node: string, iPort: int): int;
 
   /**
    * The number of output ports on a node.
@@ -4066,7 +4053,7 @@ port  - The port number on which this node is connected to.
    *     return listOfDestinationNodes;
    * }
    */
-  public static numberOfOutputPorts(node: string): int;
+  function numberOfOutputPorts(node: string): int;
 
   /**
    * Returns an integer that indicates the number of nodes contained in a group.
@@ -4090,7 +4077,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static numberOfSubNodes(parent: string): int;
+  function numberOfSubNodes(parent: string): int;
 
   /**
    * Returns the path of the parent level of a node contained in a group.
@@ -4105,7 +4092,7 @@ port  - The port number on which this node is connected to.
    *
    * node.explodeGroup(parent);
    */
-  public static parentNode(node: string): string;
+  function parentNode(node: string): string;
 
   /**
    * Remove a dynamic attribute for the given node.
@@ -4117,7 +4104,7 @@ port  - The port number on which this node is connected to.
    * @example
    * node.removeDynamicAttr(nodeName, attrName);
    */
-  public static removeDynamicAttr(node: string, attrName: string): boolean;
+  function removeDynamicAttr(node: string, attrName: string): boolean;
 
   /**
    * Changes the name of a node.
@@ -4128,7 +4115,7 @@ port  - The port number on which this node is connected to.
    * @example
    * node.rename("Top/myNode", "myNodeWithANewName");
    */
-  public static rename(node: string, newName: string): boolean;
+  function rename(node: string, newName: string): boolean;
 
   /**
    * Reset the node colour.
@@ -4144,13 +4131,13 @@ port  - The port number on which this node is connected to.
    *     node.resetColor(node2);
    * }
    */
-  public static resetColor(node: string): boolean;
+  function resetColor(node: string): boolean;
 
   /**
    * Returns the name of the Top level in the Node View, which is "Top".
    * @returns {string}
    */
-  public static root(): string;
+  function root(): string;
 
   /**
    * Setters and getters for the default camera.
@@ -4167,7 +4154,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static setAsDefaultCamera(node: string): boolean;
+  function setAsDefaultCamera(node: string): boolean;
 
   /**
    * Change the global display used in the application. The node must be the full path of a display node.
@@ -4184,7 +4171,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static setAsGlobalDisplay(node: string): boolean;
+  function setAsGlobalDisplay(node: string): boolean;
 
   /**
    * Set the node colour.
@@ -4200,7 +4187,7 @@ port  - The port number on which this node is connected to.
    *     node.setColor(exNode, newColor);
    * }
    */
-  public static setColor(node: string, color: ColorRGBA): boolean;
+  function setColor(node: string, color: ColorRGBA): boolean;
 
   /**
    * Set the position of a node in the Node View.
@@ -4221,7 +4208,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static setCoord(node: string, x: int, y: int): boolean;
+  function setCoord(node: string, x: int, y: int): boolean;
 
   /**
    * Set the position of a node in the Node View.
@@ -4246,7 +4233,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static setCoord(node: string, x: int, y: int, z: int): boolean;
+  function setCoord(node: string, x: int, y: int, z: int): boolean;
 
   /**
    * Setters and getters for the enable/disable property of a node.
@@ -4261,7 +4248,7 @@ port  - The port number on which this node is connected to.
    *         node.setEnable(exNode, false);
    * }
    */
-  public static setEnable(node: string, flag: boolean): boolean;
+  function setEnable(node: string, flag: boolean): boolean;
 
   /**
    * Change the global display used by the application to "Display All" pseudo-display.
@@ -4277,7 +4264,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static setGlobalToDisplayAll(): boolean;
+  function setGlobalToDisplayAll(): boolean;
 
   /**
    * Setters and getters for the lock/unlock property of a node.
@@ -4289,7 +4276,7 @@ port  - The port number on which this node is connected to.
    * MessageLog.trace("Lock flag: " + node.getLocked(exNode));
    * node.setLocked(exNode, true);
    */
-  public static setLocked(node: string, lock: boolean): boolean;
+  function setLocked(node: string, lock: boolean): boolean;
 
   /**
    * Set the show/hide timeline thumbnails on drawing layers.
@@ -4299,10 +4286,7 @@ port  - The port number on which this node is connected to.
    * @example
    * node.setShowTimelineThumbnails(exNode, true);
    */
-  public static setShowTimelineThumbnails(
-    node: string,
-    bShow: boolean
-  ): boolean;
+  function setShowTimelineThumbnails(node: string, bShow: boolean): boolean;
 
   /**
    * Change the value of an attribute in a node.
@@ -4333,7 +4317,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static setTextAttr(
+  function setTextAttr(
     node: string,
     attrName: string,
     atFrame: int,
@@ -4350,7 +4334,7 @@ port  - The port number on which this node is connected to.
    * MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
    * node.setTimelineTag(exNode, true);
    */
-  public static setTimelineTag(node: string, tag: boolean): boolean;
+  function setTimelineTag(node: string, tag: boolean): boolean;
 
   /**
    * Set the version of the node to use.
@@ -4361,7 +4345,7 @@ port  - The port number on which this node is connected to.
    * @example
    * node.setVersion(exNode, node.getMaxVersionNumber(exNode));
    */
-  public static setVersion(node: string, version: int): void;
+  function setVersion(node: string, version: int): void;
 
   /**
    * Returns the path for the node that the port is linked to.
@@ -4378,7 +4362,7 @@ port  - The port number on which this node is connected to.
    * var parent = node.parentNode(exNode);
    * MessageLog.trace(node.equals(parent, source)); //This will print false
    */
-  public static srcNode(node: string, iPort: int): string;
+  function srcNode(node: string, iPort: int): string;
 
   /**
    * Returns the source node path, the output port number and the link ID for this source node that this
@@ -4404,7 +4388,7 @@ port  - The port number on which this node is connected to.
    * var destination = node.dstNode(source.node, source.port, source.link);
    * MessageLog.trace(node.equals(destination, exNode); //This will print true
    */
-  public static srcNodeInfo(node: string, iPort: int): QScriptValue;
+  function srcNodeInfo(node: string, iPort: int): QScriptValue;
 
   /**
    * Returns the path of a node in a group. Nodes are counted starting with zero.
@@ -4429,7 +4413,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static subNode(parent: string, iSubNode: int): string;
+  function subNode(parent: string, iSubNode: int): string;
 
   /**
    * Returns the full path of a child node belonging to a parent group.
@@ -4449,7 +4433,7 @@ port  - The port number on which this node is connected to.
    * //This rebuilt node will be equal to the original node
    * MessageLog.trace(node.equals(exNode, rebuiltNode)); //This will print true
    */
-  public static subNodeByName(parent: string, name: string): string;
+  function subNodeByName(parent: string, name: string): string;
 
   /**
    * Returns an array of sub nodes.
@@ -4469,7 +4453,7 @@ port  - The port number on which this node is connected to.
    *         }
    *     }
    */
-  public static subNodes(parentGroup: string): QScriptValue;
+  function subNodes(parentGroup: string): QScriptValue;
 
   /**
    * Returns the node type. These are all of the built-in node types available from the Harmony node
@@ -4496,7 +4480,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static type(node: string): string;
+  function type(node: string): string;
 
   /**
    * Unlink a port on one node from the port on another node.
@@ -4521,7 +4505,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  public static unlink(dstNode: string, inPort: int): boolean;
+  function unlink(dstNode: string, inPort: int): boolean;
 
   /**
    * Unlink an attribute from a function column.
@@ -4534,7 +4518,7 @@ port  - The port number on which this node is connected to.
    * if (node.linkedColumn(myNode, "POSITION.3DPATH") != "")
    *     node.unlinkAttr(myNode, "POSITION.3DPATH");
    */
-  public static unlinkAttr(node: string, attrName: string): boolean;
+  function unlinkAttr(node: string, attrName: string): boolean;
 
   /**
    * Returns the width of a given node.
@@ -4553,7 +4537,7 @@ port  - The port number on which this node is connected to.
    *     node.setCoord(node2, x, y);
    * }
    */
-  public static width(node: string): int;
+  function width(node: string): int;
 }
 
 /**
@@ -4619,76 +4603,76 @@ port  - The port number on which this node is connected to.
  *     scene.endUndoRedoAccum();
  * }
  */
-declare class PaletteManager extends GlobalObject {
+declare namespace PaletteManager {
   /**
    * Gets the Id of the colour in the currently selected palette.
    * @param {int} index Index of colour in palette.
    * @returns {string}
    */
-  public static getColorId(index: int): string;
+  function getColorId(index: int): string;
 
   /**
    * Gets the name of the colour in the currently selected palette.
    * @param {int} index Index of colour in palette.
    * @returns {string}
    */
-  public static getColorName(index: int): string;
+  function getColorName(index: int): string;
 
   /**
    * Gets the current colour Id from the ColourView.
    * @returns {string}
    */
-  public static getCurrentColorId(): string;
+  function getCurrentColorId(): string;
 
   /**
    * Gets the current colour name from the ColourView.
    * @returns {string}
    */
-  public static getCurrentColorName(): string;
+  function getCurrentColorName(): string;
 
   /**
    * Gets the current palette Id from the ColourView.
    * @returns {string}
    */
-  public static getCurrentPaletteId(): string;
+  function getCurrentPaletteId(): string;
 
   /**
    * Gets the current palette name from the ColourView.
    * @returns {string}
    */
-  public static getCurrentPaletteName(): string;
+  function getCurrentPaletteName(): string;
 
   /**
    * Gets the current palette path (including palette name) from the ColourView.
    * @returns {string}
    */
-  public static getCurrentPalettePath(): string;
+  function getCurrentPalettePath(): string;
 
   /**
    * Gets the length of the current palette in the ColourView.
    * @returns {int}
    */
-  public static getCurrentPaletteSize(): int;
+  function getCurrentPaletteSize(): int;
 
   /**
    * Gets number of palettes in the currently selected palette list in the ColourView list.
    * @returns {int}
    */
-  public static getNumPalettes(): int;
+  function getNumPalettes(): int;
 
   /**
    * Gets number of palettes in the palette list in the ColourView.
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {int}
    */
-  public static getNumPalettes(scenePaletteList: boolean): int;
+  function getNumPalettes(scenePaletteList: boolean): int;
 
   /**
    * Gets the Id of the palette in the current palette list.
    * @param {int} index Index of palette within palette list.
    * @returns {string}
    */
-  public static getPaletteId(index: int): string;
+  function getPaletteId(index: int): string;
 
   /**
    * Gets the Id of the palette in the current palette list.
@@ -4696,14 +4680,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {string}
    */
-  public static getPaletteId(index: int, scenePaletteList: boolean): string;
+  function getPaletteId(index: int, scenePaletteList: boolean): string;
 
   /**
    * Gets the name of the palette in the current palette list.
    * @param {int} index Index of palette within palette list.
    * @returns {string}
    */
-  public static getPaletteName(index: int): string;
+  function getPaletteName(index: int): string;
 
   /**
    * Gets the name of the palette in the current palette list.
@@ -4711,14 +4695,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {string}
    */
-  public static getPaletteName(index: int, scenePaletteList: boolean): string;
+  function getPaletteName(index: int, scenePaletteList: boolean): string;
 
   /**
    * Gets the path (including name) of the palette in the current palette list.
    * @param {int} index Index of palette within palette list
    * @returns {string}
    */
-  public static getPalettePath(index: int): string;
+  function getPalettePath(index: int): string;
 
   /**
    * Gets the path (including name) of the palette in the current palette list.
@@ -4726,14 +4710,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {string}
    */
-  public static getPalettePath(index: int, scenePaletteList: boolean): string;
+  function getPalettePath(index: int, scenePaletteList: boolean): string;
 
   /**
    * Sets the current colour in the ColourView.
    * @param {string} color Id of colour.
    * @returns {void}
    */
-  public static setCurrentColorById(color: string): void;
+  function setCurrentColorById(color: string): void;
 
   /**
    * Sets the current palette and colour in the ColourView.
@@ -4741,17 +4725,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {string} color Colour Id.
    * @returns {void}
    */
-  public static setCurrentPaletteAndColorById(
-    palette: string,
-    color: string
-  ): void;
+  function setCurrentPaletteAndColorById(palette: string, color: string): void;
 
   /**
    * Sets the current palette in the ColourView.
    * @param {string} palette Id of palette.
    * @returns {void}
    */
-  public static setCurrentPaletteById(palette: string): void;
+  function setCurrentPaletteById(palette: string): void;
 }
 
 /**
@@ -4780,19 +4761,19 @@ declare class PaletteManager extends GlobalObject {
  *     }
  * }
  */
-declare class PaletteObjectManager extends GlobalObject {
+declare namespace PaletteObjectManager {
   /**
    * Returns the number of loaded palette lists.
    * @returns {int}
    */
-  public static getNumPaletteLists(): int;
+  function getNumPaletteLists(): int;
 
   /**
    * Returns a Palette object for the loaded palette with the specified palette ID.
    * @param {string} id The ID of palette to retrieve.
    * @returns {Palette}
    */
-  public static getPalette(id: string): Palette;
+  function getPalette(id: string): Palette;
 
   /**
    * Loads the element palette list specified by the element ID 'id' and return the corresponding
@@ -4801,28 +4782,28 @@ declare class PaletteObjectManager extends GlobalObject {
    * @param {int} id The element ID.
    * @returns {PaletteList}
    */
-  public static getPaletteListByElementId(id: int): PaletteList;
+  function getPaletteListByElementId(id: int): PaletteList;
 
   /**
    * Returns a PaletteList object for the loaded palette list with the specified list ID.
    * @param {string} id The ID of palette list to retrieve.
    * @returns {PaletteList}
    */
-  public static getPaletteListById(id: string): PaletteList;
+  function getPaletteListById(id: string): PaletteList;
 
   /**
    * Returns a PaletteList object for the loaded palette list at position 'index'.
    * @param {int} index The index of palette list to retrieve.
    * @returns {PaletteList}
    */
-  public static getPaletteListByIndex(index: int): PaletteList;
+  function getPaletteListByIndex(index: int): PaletteList;
 
   /**
    * Loads the scene palette list and return the corresponding PaletteList object.
    * If the palette list isn't already loaded, the method will load the palette list from the disk.
    * @returns {PaletteList}
    */
-  public static getScenePaletteList(): PaletteList;
+  function getScenePaletteList(): PaletteList;
 
   /**
    * Removes a palette from the scene and all elements, and schedule the file for deletion on next save.
@@ -4832,7 +4813,7 @@ declare class PaletteObjectManager extends GlobalObject {
    * @param {string} id The ID of palette to remove.
    * @returns {boolean}
    */
-  public static removePaletteReferencesAndDeleteOnDisk(id: string): boolean;
+  function removePaletteReferencesAndDeleteOnDisk(id: string): boolean;
 }
 
 /**
@@ -4852,41 +4833,41 @@ declare class PaletteObjectManager extends GlobalObject {
  *
  * }
  */
-declare class PenstyleManager extends GlobalObject {
+declare namespace PenstyleManager {
   /**
    * Sets the current penstyle centreline smoothness.
    * @param {double} smooth New centreline smoothness value.
    * @returns {void}
    */
-  public static changeCurrentPenstyleCenterlineSmoothness(smooth: double): void;
+  function changeCurrentPenstyleCenterlineSmoothness(smooth: double): void;
 
   /**
    * Sets the current penstyle maximum size.
    * @param {double} maximum New maximum size.
    * @returns {void}
    */
-  public static changeCurrentPenstyleMaximumSize(maximum: double): void;
+  function changeCurrentPenstyleMaximumSize(maximum: double): void;
 
   /**
    * Sets the current penstyle minimum size.
    * @param {double} minimum New minimum size.
    * @returns {void}
    */
-  public static changeCurrentPenstyleMinimumSize(minimum: double): void;
+  function changeCurrentPenstyleMinimumSize(minimum: double): void;
 
   /**
    * Sets the current penstyle outline smoothness.
    * @param {double} smooth New outline smoothness value.
    * @returns {void}
    */
-  public static changeCurrentPenstyleOutlineSmoothness(smooth: double): void;
+  function changeCurrentPenstyleOutlineSmoothness(smooth: double): void;
 
   /**
    * Formats the penstyle list into a string, which can be used to store the penstyle list and import it
    * later.
    * @returns {string}
    */
-  public static exportPenstyleListToString(): string;
+  function exportPenstyleListToString(): string;
 
   /**
    * Create a string representing the penstyle which can be used to store the penstyle and import it
@@ -4894,89 +4875,89 @@ declare class PenstyleManager extends GlobalObject {
    * @param {int} index Index of the penstyle.
    * @returns {string}
    */
-  public static exportPenstyleToString(index: int): string;
+  function exportPenstyleToString(index: int): string;
 
   /**
    * Gets the current penstyle centerline smoothness.
    * @returns {double}
    */
-  public static getCurrentPenstyleCenterlineSmoothness(): double;
+  function getCurrentPenstyleCenterlineSmoothness(): double;
 
   /**
    * Gets the current penstyle eraser flag.
    * @returns {boolean}
    */
-  public static getCurrentPenstyleEraserFlag(): boolean;
+  function getCurrentPenstyleEraserFlag(): boolean;
 
   /**
    * Returns the index of the current penstyle.
    * @returns {int}
    */
-  public static getCurrentPenstyleIndex(): int;
+  function getCurrentPenstyleIndex(): int;
 
   /**
    * Gets the current penstyle maximum size.
    * @returns {double}
    */
-  public static getCurrentPenstyleMaximumSize(): double;
+  function getCurrentPenstyleMaximumSize(): double;
 
   /**
    * Gets the current penstyle minimum size.
    * @returns {double}
    */
-  public static getCurrentPenstyleMinimumSize(): double;
+  function getCurrentPenstyleMinimumSize(): double;
 
   /**
    * Returns the name of the current penstyle.
    * @returns {string}
    */
-  public static getCurrentPenstyleName(): string;
+  function getCurrentPenstyleName(): string;
 
   /**
    * Gets the current penstyle outline smoothness.
    * @returns {double}
    */
-  public static getCurrentPenstyleOutlineSmoothness(): double;
+  function getCurrentPenstyleOutlineSmoothness(): double;
 
   /**
    * Returns the number of penstyles.
    * @returns {int}
    */
-  public static getNumberOfPenstyles(): int;
+  function getNumberOfPenstyles(): int;
 
   /**
    * Returns the name of the penstyle at the given index.
    * @param {int} index Index of the penstyle.
    * @returns {string}
    */
-  public static getPenstyleName(index: int): string;
+  function getPenstyleName(index: int): string;
 
   /**
    * Imports a penstyle list from a previously formatted penstyle string.
    * @param {string} str A formatted penstyle or penstyle list, which can be created from exportPenstyleToString or exportPenstylesListToString.
    * @returns {void}
    */
-  public static importPenstyleListFromString(str: string): void;
+  function importPenstyleListFromString(str: string): void;
 
   /**
    * Saves the penstyles.
    * @returns {void}
    */
-  public static savePenstyles(): void;
+  function savePenstyles(): void;
 
   /**
    * Sets the current penstyle.
    * @param {int} index Index of penstyle to be set as current penstyle.
    * @returns {void}
    */
-  public static setCurrentPenstyleByIndex(index: int): void;
+  function setCurrentPenstyleByIndex(index: int): void;
 
   /**
    * Sets the current penstyle.
    * @param {string} name Name of the penstyle to be set as current penstyle.
    * @returns {void}
    */
-  public static setCurrentPenstyleByName(name: string): void;
+  function setCurrentPenstyleByName(name: string): void;
 }
 
 /**
@@ -4997,14 +4978,14 @@ declare class PenstyleManager extends GlobalObject {
  *     MessageLog.trace("preference for auto save layout is now " + b);
  * }
  */
-declare class preferences extends GlobalObject {
+declare namespace preferences {
   /**
    * Gets the boolean value from the given preference name.
    * @param {string} name The name of the preference.
    * @param {boolean} defaultValue The default value of the preference.
    * @returns {boolean}
    */
-  public static getBool(name: string, defaultValue?: boolean): boolean;
+  function getBool(name: string, defaultValue?: boolean): boolean;
 
   /**
    * Gets the color from the given preference name.
@@ -5012,7 +4993,7 @@ declare class preferences extends GlobalObject {
    * @param {ColorRGBA} defaultValue The default value of the preference.
    * @returns {ColorRGBA}
    */
-  public static getColor(name: string, defaultValue?: ColorRGBA): ColorRGBA;
+  function getColor(name: string, defaultValue?: ColorRGBA): ColorRGBA;
 
   /**
    * Gets the double value from the given preference name.
@@ -5020,7 +5001,7 @@ declare class preferences extends GlobalObject {
    * @param {double} defaultValue The default value of the preference.
    * @returns {double}
    */
-  public static getDouble(name: string, defaultValue?: double): double;
+  function getDouble(name: string, defaultValue?: double): double;
 
   /**
    * Gets the integer value from the given preference name.
@@ -5028,7 +5009,7 @@ declare class preferences extends GlobalObject {
    * @param {int} defaultValue The default value of the preference.
    * @returns {double}
    */
-  public static getInt(name: string, defaultValue?: int): double;
+  function getInt(name: string, defaultValue?: int): double;
 
   /**
    * Gets the string value from the given preference name.
@@ -5036,7 +5017,7 @@ declare class preferences extends GlobalObject {
    * @param {string} defaultValue The default value of the preference.
    * @returns {string}
    */
-  public static getString(name: string, defaultValue?: string): string;
+  function getString(name: string, defaultValue?: string): string;
 
   /**
    * Gets the boolean value for the given preference name.
@@ -5044,7 +5025,7 @@ declare class preferences extends GlobalObject {
    * @param {boolean} value The boolean to set the preference to.
    * @returns {void}
    */
-  public static setBool(name: string, value: boolean): void;
+  function setBool(name: string, value: boolean): void;
 
   /**
    * Sets the color for the given preference name.
@@ -5052,7 +5033,7 @@ declare class preferences extends GlobalObject {
    * @param {ColorRGBA} color The color to set the preference to.
    * @returns {void}
    */
-  public static setColor(name: string, color: ColorRGBA): void;
+  function setColor(name: string, color: ColorRGBA): void;
 
   /**
    * Sets the double value for the given preference name.
@@ -5060,7 +5041,7 @@ declare class preferences extends GlobalObject {
    * @param {double} value The double to set the preference to.
    * @returns {void}
    */
-  public static setDouble(name: string, value: double): void;
+  function setDouble(name: string, value: double): void;
 
   /**
    * Sets the integer value for the given preference name.
@@ -5068,7 +5049,7 @@ declare class preferences extends GlobalObject {
    * @param {int} value The integer to set the preference to.
    * @returns {void}
    */
-  public static setInt(name: string, value: int): void;
+  function setInt(name: string, value: int): void;
 
   /**
    * Sets the string value for the given preference name.
@@ -5076,7 +5057,7 @@ declare class preferences extends GlobalObject {
    * @param {string} value The string to set the preference to.
    * @returns {void}
    */
-  public static setString(name: string, value: string): void;
+  function setString(name: string, value: string): void;
 }
 
 /**
@@ -5104,18 +5085,18 @@ declare class preferences extends GlobalObject {
  * render.renderFinished.disconnect(renderFinished);
  * render.frameReady.disconnect(frameReady);
  */
-declare class render extends GlobalObject {
+declare namespace render {
   /**
    * Interrupt an active render.
    * @returns {void}
    */
-  public static cancelRender(): void;
+  function cancelRender(): void;
 
   /**
    * disconnect all scripts from signals emitted by this object.
    * @returns {void}
    */
-  public static disconnect(): void;
+  function disconnect(): void;
 
   /**
    * Render a part of the scene.
@@ -5125,27 +5106,27 @@ declare class render extends GlobalObject {
    * @param {int} toFrame render end frame
    * @returns {void}
    */
-  public static renderScene(fromFrame: int, toFrame: int): void;
+  function renderScene(fromFrame: int, toFrame: int): void;
 
   /**
    * Render the complete scene.
    * @returns {void}
    */
-  public static renderSceneAll(): void;
+  function renderSceneAll(): void;
 
   /**
    * Enable or disable thumbnail cropping for the render. Mainly used when rendering thumbnails.
    * @param {boolean} enabled enable or disable cropping during render.
    * @returns {void}
    */
-  public static setAutoThumbnailCropping(enabled: boolean): void;
+  function setAutoThumbnailCropping(enabled: boolean): void;
 
   /**
    * Set the background color to use when rendering in scene machine mode.
    * @param {ColorRGBA} bgColor background color
    * @returns {void}
    */
-  public static setBgColor(bgColor: ColorRGBA): void;
+  function setBgColor(bgColor: ColorRGBA): void;
 
   /**
    * Set if rendered frames sets should be combined and in which order. Specify these options if you are
@@ -5154,17 +5135,14 @@ declare class render extends GlobalObject {
    * @param {boolean} secondFieldFirst insert the second frame field set at the beginning
    * @returns {void}
    */
-  public static setCombine(
-    autoCombine: boolean,
-    secondFieldFirst: boolean
-  ): void;
+  function setCombine(autoCombine: boolean, secondFieldFirst: boolean): void;
 
   /**
    * Sets the frame output format.
    * @param {int} type frame output format: 0 - None, 1 - NTSC, 2 - PAL
    * @returns {void}
    */
-  public static setFieldType(type: int): void;
+  function setFieldType(type: int): void;
 
   /**
    * Set which display module to use for rendering. "Display All" uses the global unconnected display
@@ -5172,7 +5150,7 @@ declare class render extends GlobalObject {
    * @param {string} name display name
    * @returns {void}
    */
-  public static setRenderDisplay(name: string): void;
+  function setRenderDisplay(name: string): void;
 
   /**
    * Set the scene resolution to use for rendering.
@@ -5180,28 +5158,28 @@ declare class render extends GlobalObject {
    * @param {int} y height pixels
    * @returns {void}
    */
-  public static setResolution(x: int, y: int): void;
+  function setResolution(x: int, y: int): void;
 
   /**
    * Set the scene resolution to use for rendering.
    * @param {string} name a resolution name.
    * @returns {void}
    */
-  public static setResolutionName(name: string): void;
+  function setResolutionName(name: string): void;
 
   /**
    * Enable rendering on a white background. The default is false, which renders on a black background.
    * @param {boolean} enabled When true enables rendering on a white background.
    * @returns {void}
    */
-  public static setWhiteBackground(enabled: boolean): void;
+  function setWhiteBackground(enabled: boolean): void;
 
   /**
    * Enable or disable write modules during the render.
    * @param {boolean} enabled enable or disable write modules
    * @returns {void}
    */
-  public static setWriteEnabled(enabled: boolean): void;
+  function setWriteEnabled(enabled: boolean): void;
 
   /**
    * Event that notifies the script that a certain frame is available and at which location.
@@ -5209,13 +5187,13 @@ declare class render extends GlobalObject {
    * @param {QObject} frameCel rendered frame cel
    * @returns {void}
    */
-  public frameReady: QSignal<(frame: int, frameCel: QObject) => void>;
+  const frameReady: QSignal<(frame: int, frameCel: QObject) => void>;
 
   /**
    * Event that notifies the script when the render has completed.
    * @returns {void}
    */
-  public renderFinished: QSignal<() => void>;
+  const renderFinished: QSignal<() => void>;
 }
 
 /**
@@ -5240,7 +5218,7 @@ declare class render extends GlobalObject {
  *     scene.endUndoRedoAccum();
  * }
  */
-declare class scene extends GlobalObject {
+declare namespace scene {
   /**
    * This function starts the accumulation of all of the functions between it and the endUndoRedoAccum
    * function as one command that will appear in the undo/redo list. If you do not use this function with
@@ -5248,14 +5226,14 @@ declare class scene extends GlobalObject {
    * @param {string} commandName The name of the command to be added to the undo/redo list.
    * @returns {void}
    */
-  public static beginUndoRedoAccum(commandName: string): void;
+  function beginUndoRedoAccum(commandName: string): void;
 
   /**
    * This function cancels the accumulation of undo/redo commands. No command will be added to the
    * undo/redo list and all commands that have already been executed will be rolled-back (undone).
    * @returns {void}
    */
-  public static cancelUndoRedoAccum(): void;
+  function cancelUndoRedoAccum(): void;
 
   /**
    * Performs the same operation as the "Scene->Check Files..." menu item.
@@ -5277,13 +5255,13 @@ declare class scene extends GlobalObject {
    * @param {QVariant} options
    * @returns {void}
    */
-  public static checkFiles(options: QVariant): void;
+  function checkFiles(options: QVariant): void;
 
   /**
    * Clears the command history.
    * @returns {void}
    */
-  public static clearHistory(): void;
+  function clearHistory(): void;
 
   /**
    * Closes the current scene.
@@ -5291,13 +5269,13 @@ declare class scene extends GlobalObject {
    * after these calls.
    * @returns {void}
    */
-  public static closeScene(): void;
+  function closeScene(): void;
 
   /**
    * Closes the current scene and exits.
    * @returns {void}
    */
-  public static closeSceneAndExit(): void;
+  function closeSceneAndExit(): void;
 
   /**
    * Closes the current scene and open the scene specified by env, job, scene and version.
@@ -5307,7 +5285,7 @@ declare class scene extends GlobalObject {
    * @param {string} versionName The version name.
    * @returns {boolean}
    */
-  public static closeSceneAndOpen(
+  function closeSceneAndOpen(
     envName: string,
     jobName: string,
     sceneName: string,
@@ -5318,87 +5296,87 @@ declare class scene extends GlobalObject {
    * Returns the X value of the centre coordinate of the scene grid.
    * @returns {int}
    */
-  public static coordAtCenterX(): int;
+  function coordAtCenterX(): int;
 
   /**
    * Returns the Y value of the centre coordinate of the scene grid.
    * @returns {int}
    */
-  public static coordAtCenterY(): int;
+  function coordAtCenterY(): int;
 
   /**
    * Returns the name of the current environment.
    * @returns {string}
    */
-  public static currentEnvironment(): string;
+  function currentEnvironment(): string;
 
   /**
    * Returns the path of the current environment.
    * @returns {string}
    */
-  public static currentEnvironmentPath(): string;
+  function currentEnvironmentPath(): string;
 
   /**
    * Returns the name of the current job.
    * @returns {string}
    */
-  public static currentJob(): string;
+  function currentJob(): string;
 
   /**
    * Returns the path of the current job.
    * @returns {string}
    */
-  public static currentJobPath(): string;
+  function currentJobPath(): string;
 
   /**
    * Returns the current project path.
    * @returns {string}
    */
-  public static currentProjectPath(): string;
+  function currentProjectPath(): string;
 
   /**
    * For windows, returns the remapped path.
    * @returns {string}
    */
-  public static currentProjectPathRemapped(): string;
+  function currentProjectPathRemapped(): string;
 
   /**
    * Returns the X value of the current preview resolution.
    * For example, when the current resolution is 720x540 pixels this function will return 720.
    * @returns {int}
    */
-  public static currentResolutionX(): int;
+  function currentResolutionX(): int;
 
   /**
    * Returns the Y value of the current preview resolution.
    * For example, when the current resolution is 720x540 pixels this function will return 540.
    * @returns {int}
    */
-  public static currentResolutionY(): int;
+  function currentResolutionY(): int;
 
   /**
    * Returns the name of the current scene.
    * @returns {string}
    */
-  public static currentScene(): string;
+  function currentScene(): string;
 
   /**
    * Returns the ID of the current version.
    * @returns {int}
    */
-  public static currentVersion(): int;
+  function currentVersion(): int;
 
   /**
    * Returns the name or the number of the current scene version.
    * @returns {string}
    */
-  public static currentVersionName(): string;
+  function currentVersionName(): string;
 
   /**
    * Returns the default resolution field of view (FOV). The default FOV is a global scene parameter.
    * @returns {double}
    */
-  public static defaultResolutionFOV(): double;
+  function defaultResolutionFOV(): double;
 
   /**
    * Returns the default resolution name.
@@ -5406,7 +5384,7 @@ declare class scene extends GlobalObject {
    * is used as a custom resolution, which is not one of the pre-defined resolutions.
    * @returns {string}
    */
-  public static defaultResolutionName(): string;
+  function defaultResolutionName(): string;
 
   /**
    * Returns the X value of the default resolution.
@@ -5414,7 +5392,7 @@ declare class scene extends GlobalObject {
    * For example, when the default scene resolution is 720x540 pixels this function will return 720.
    * @returns {int}
    */
-  public static defaultResolutionX(): int;
+  function defaultResolutionX(): int;
 
   /**
    * Returns the Y value of the default resolution.
@@ -5422,7 +5400,7 @@ declare class scene extends GlobalObject {
    * For example, when the default scene resolution is 720x540 pixels this function will return 540.
    * @returns {int}
    */
-  public static defaultResolutionY(): int;
+  function defaultResolutionY(): int;
 
   /**
    * This function ends the accumulation all of the functions between it and the beginUndoRedoAccum
@@ -5430,33 +5408,33 @@ declare class scene extends GlobalObject {
    * beginUndoRedoAccum, each function in the script generates a separate undo/redo entry.
    * @returns {void}
    */
-  public static endUndoRedoAccum(): void;
+  function endUndoRedoAccum(): void;
 
   /**
    * Converts an OGL coordinate into a field coordinate.
    * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
    * @returns {QObject}
    */
-  public static fromOGL(pointOrVector: QObject): QObject;
+  function fromOGL(pointOrVector: QObject): QObject;
 
   /**
    * Returns the model matrix for the default camera.
    * @param {int} frame The frame to retrieve the camera matrix at.
    * @returns {QObject}
    */
-  public static getCameraMatrix(frame: int): QObject;
+  function getCameraMatrix(frame: int): QObject;
 
   /**
    * Retrieves the default display set in the current scene.
    * @returns {string}
    */
-  public static getDefaultDisplay(): string;
+  function getDefaultDisplay(): string;
 
   /**
    * Returns the frame rate, as frames per second.
    * @returns {int}
    */
-  public static getFrameRate(): int;
+  function getFrameRate(): int;
 
   /**
    * Returns all palettes that were either unrecovered or recovered but not yet saved, depending on the
@@ -5465,7 +5443,7 @@ declare class scene extends GlobalObject {
    * @param {boolean} recoveredNotYetSaved Whether or not to return recovered but not yet saved palettes.
    * @returns {StringList}
    */
-  public static getMissingPalettes(
+  function getMissingPalettes(
     unrecovered: boolean,
     recoveredNotYetSaved: boolean
   ): StringList;
@@ -5474,26 +5452,26 @@ declare class scene extends GlobalObject {
    * Returns the scene start frame.
    * @returns {int}
    */
-  public static getStartFrame(): int;
+  function getStartFrame(): int;
 
   /**
    * Returns the scene stop frame.
    * @returns {int}
    */
-  public static getStopFrame(): int;
+  function getStopFrame(): int;
 
   /**
    * Returns true if the scene was ever modified.
    * It will return true even if the modifications have been saved.
    * @returns {boolean}
    */
-  public static hasBeenDirty(): boolean;
+  function hasBeenDirty(): boolean;
 
   /**
    * Tells if the scene has been modified since its last save.
    * @returns {boolean}
    */
-  public static isDirty(): boolean;
+  function isDirty(): boolean;
 
   /**
    * Return a metadata object corresponding to the given name and type.
@@ -5511,7 +5489,7 @@ declare class scene extends GlobalObject {
    *     "value": "foo"
    * }
    */
-  public static metadata(name: string, type?: string): QScriptValue;
+  function metadata(name: string, type?: string): QScriptValue;
 
   /**
    * Return the list of metadatas for the current scene.
@@ -5528,13 +5506,13 @@ declare class scene extends GlobalObject {
    *     "value": "foo"
    * }
    */
-  public static metadatas(): QScriptValue;
+  function metadatas(): QScriptValue;
 
   /**
    * Returns the list of known resolutions.
    * @returns {StringList}
    */
-  public static namedResolutions(): StringList;
+  function namedResolutions(): StringList;
 
   /**
    * Returns the X value of the named resolution. For example, when the named resolution is 720x540
@@ -5542,7 +5520,7 @@ declare class scene extends GlobalObject {
    * @param {string} name The name of the resolution to get the value from.
    * @returns {int}
    */
-  public static namedResolutionX(name: string): int;
+  function namedResolutionX(name: string): int;
 
   /**
    * Returns the Y value of the named resolution. For example, when the named resolution is 720x540
@@ -5550,45 +5528,45 @@ declare class scene extends GlobalObject {
    * @param {string} name The name of the resolution to get the value from.
    * @returns {int}
    */
-  public static namedResolutionY(name: string): int;
+  function namedResolutionY(name: string): int;
 
   /**
    * Returns the number of units in the X axis of the scene grid.
    * @returns {int}
    */
-  public static numberOfUnitsX(): int;
+  function numberOfUnitsX(): int;
 
   /**
    * Returns the number of units in the Y axis of the scene grid.
    * @returns {int}
    */
-  public static numberOfUnitsY(): int;
+  function numberOfUnitsY(): int;
 
   /**
    * Returns the number of units in the Z axis of the scene grid.
    * @returns {int}
    */
-  public static numberOfUnitsZ(): int;
+  function numberOfUnitsZ(): int;
 
   /**
    * Redoes the last n operations. If n is not specified, it will be 1.
    * @param {int} [depth=1] The number of operations to redo.
    * @returns {void}
    */
-  public static redo(depth?: int): void;
+  function redo(depth?: int): void;
 
   /**
    * Removes a metadata object from the list of metadata objects.
    * @param {QScriptValue} meta A metadata object.
    * @returns {boolean}
    */
-  public static removeMetadata(meta: QScriptValue): boolean;
+  function removeMetadata(meta: QScriptValue): boolean;
 
   /**
    * Performs the "save all" command. Effectively, this saves the entire project and all modified files.
    * @returns {boolean}
    */
-  public static saveAll(): boolean;
+  function saveAll(): boolean;
 
   /**
    * Save the current project to the specified folder.
@@ -5599,7 +5577,7 @@ declare class scene extends GlobalObject {
    * @param {string} pathname New folder of the project (ie: /Users/a_user/Documents/my_save_as_project )
    * @returns {boolean}
    */
-  public static saveAs(pathname: string): boolean;
+  function saveAs(pathname: string): boolean;
 
   /**
    * Saves the project as a new version.
@@ -5607,10 +5585,7 @@ declare class scene extends GlobalObject {
    * @param {boolean} markAsDefault This is boolean to indicate to mark this version as the default version.
    * @returns {boolean}
    */
-  public static saveAsNewVersion(
-    name: string,
-    markAsDefault?: boolean
-  ): boolean;
+  function saveAsNewVersion(name: string, markAsDefault?: boolean): boolean;
 
   /**
    * Sets the value of the centre (X, Y) coordinates.
@@ -5618,7 +5593,7 @@ declare class scene extends GlobalObject {
    * @param {int} y The value of the Y coordinate at the centre of the grid.
    * @returns {boolean}
    */
-  public static setCoordAtCenter(x: int, y: int): boolean;
+  function setCoordAtCenter(x: int, y: int): boolean;
 
   /**
    * Sets the default scene resolution and field of view.
@@ -5627,14 +5602,14 @@ declare class scene extends GlobalObject {
    * @param {double} fov Set the field of view in degree. Typical value is 41.112.
    * @returns {boolean}
    */
-  public static setDefaultResolution(x: int, y: int, fov: double): boolean;
+  function setDefaultResolution(x: int, y: int, fov: double): boolean;
 
   /**
    * This function sets the default scene resolution name.
    * @param {string} name Set the current resolution preset name to this value.
    * @returns {boolean}
    */
-  public static setDefaultResolutionName(name: string): boolean;
+  function setDefaultResolutionName(name: string): boolean;
 
   /**
    * This function set the default frame rate of the project. The frame rate is expressed as frames per
@@ -5642,7 +5617,7 @@ declare class scene extends GlobalObject {
    * @param {int} frameRate The new frame rate.
    * @returns {boolean}
    */
-  public static setFrameRate(frameRate: int): boolean;
+  function setFrameRate(frameRate: int): boolean;
 
   /**
    * Either inserts a new metadata object or sets the value of an existing metadata object.
@@ -5662,7 +5637,7 @@ declare class scene extends GlobalObject {
    *     "value": "foo"
    * }
    */
-  public static setMetadata(meta: QScriptValue): void;
+  function setMetadata(meta: QScriptValue): void;
 
   /**
    * Sets the number of X, Y, and Z units in the scene grid.
@@ -5671,7 +5646,7 @@ declare class scene extends GlobalObject {
    * @param {int} z The Z value of the scene grid.
    * @returns {boolean}
    */
-  public static setNumberOfUnits(x: int, y: int, z: int): boolean;
+  function setNumberOfUnits(x: int, y: int, z: int): boolean;
 
   /**
    * This function sets the scene start frame. The value is validated to be below the number of frames,
@@ -5679,7 +5654,7 @@ declare class scene extends GlobalObject {
    * @param {int} frame The scene start frame.
    * @returns {boolean}
    */
-  public static setStartFrame(frame: int): boolean;
+  function setStartFrame(frame: int): boolean;
 
   /**
    * This function sets the scene stop frame. The value is validated to be below the number of frames,
@@ -5687,7 +5662,7 @@ declare class scene extends GlobalObject {
    * @param {int} frame The scene stop frame.
    * @returns {boolean}
    */
-  public static setStopFrame(frame: int): boolean;
+  function setStopFrame(frame: int): boolean;
 
   /**
    * Sets the aspect ratio of the scene. The scene's final aspect ratio will be: X * numberOfUnitsX()/Y *
@@ -5696,46 +5671,46 @@ declare class scene extends GlobalObject {
    * @param {double} y The Y value of the new aspect ratio.
    * @returns {boolean}
    */
-  public static setUnitsAspectRatio(x: double, y: double): boolean;
+  function setUnitsAspectRatio(x: double, y: double): boolean;
 
   /**
    * Returns the temporary project path.
    * @returns {string}
    */
-  public static tempProjectPath(): string;
+  function tempProjectPath(): string;
 
   /**
    * For windows, returns the remapped temporary project path.
    * The remapped temporary project path.
    * @returns {string}
    */
-  public static tempProjectPathRemapped(): string;
+  function tempProjectPathRemapped(): string;
 
   /**
    * Converts a field coordinate into an OGL coordinate.
    * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
    * @returns {QObject}
    */
-  public static toOGL(pointOrVector: QObject): QObject;
+  function toOGL(pointOrVector: QObject): QObject;
 
   /**
    * Undoes the last n operations. If n is not specified, it will be 1.
    * @param {int} [depth=1] The number of operations to undo.
    * @returns {void}
    */
-  public static undo(depth?: int): void;
+  function undo(depth?: int): void;
 
   /**
    * Returns the X value of the aspect ratio of the cells in the scene grid.
    * @returns {double}
    */
-  public static unitsAspectRatioX(): double;
+  function unitsAspectRatioX(): double;
 
   /**
    * Returns the Y value of the aspect ratio of the cells in the scene grid.
    * @returns {double}
    */
-  public static unitsAspectRatioY(): double;
+  function unitsAspectRatioY(): double;
 }
 
 /**
@@ -5765,27 +5740,27 @@ declare class scene extends GlobalObject {
  *     }
  * }
  */
-declare class selection extends GlobalObject {
+declare namespace selection {
   /**
    * Adds a column to the selection.
    * @param {string} column The name of column to add to the selection.
    * @returns {boolean}
    */
-  public static addColumnToSelection(column: string): boolean;
+  function addColumnToSelection(column: string): boolean;
 
   /**
    * Adds the drawing column and it's associated read node to the selection.
    * @param {string} columnName The displayed name of column.
    * @returns {boolean}
    */
-  public static addDrawingColumnToSelection(columnName: string): boolean;
+  function addDrawingColumnToSelection(columnName: string): boolean;
 
   /**
    * Adds a node to the selection.
    * @param {string} node The name of node to add to the selection.
    * @returns {boolean}
    */
-  public static addNodeToSelection(node: string): boolean;
+  function addNodeToSelection(node: string): boolean;
 
   /**
    * Selects/deselects a set of IDs from the sub selection.
@@ -5806,7 +5781,7 @@ declare class selection extends GlobalObject {
    * selection.addNodeToSelection(newSelection.node);
    * selection.addSubSelectionForNode(newSelection.node, newSelection.subobjects);
    */
-  public static addSubSelectionForNode(
+  function addSubSelectionForNode(
     node: string,
     subSelection: QScriptValue
   ): boolean;
@@ -5815,7 +5790,7 @@ declare class selection extends GlobalObject {
    * Clears the selection.
    * @returns {boolean}
    */
-  public static clearSelection(): boolean;
+  function clearSelection(): boolean;
 
   /**
    * Clears all the sub selection on the given node.
@@ -5824,7 +5799,7 @@ declare class selection extends GlobalObject {
    * @example
    * selection.clearSubSelectionForNode("Top/My-Subnode-Animation");
    */
-  public static clearSubSelectionForNode(node: string): boolean;
+  function clearSubSelectionForNode(node: string): boolean;
 
   /**
    * Adds the column to the selection. If the column is a drawing column, also adds the associated read
@@ -5832,64 +5807,64 @@ declare class selection extends GlobalObject {
    * @param {string} columnName The displayed name of column.
    * @returns {boolean}
    */
-  public static extendSelectionWithColumn(columnName: string): boolean;
+  function extendSelectionWithColumn(columnName: string): boolean;
 
   /**
    * Returns true if the selection has a range.
    * @returns {boolean}
    */
-  public static isSelectionRange(): boolean;
+  function isSelectionRange(): boolean;
 
   /**
    * Returns a value for the number of columns selected in the xsheet.
    * @returns {int}
    */
-  public static numberOfColumnsSelected(): int;
+  function numberOfColumnsSelected(): int;
 
   /**
    * Returns the number of selected frames.
    * @returns {int}
    */
-  public static numberOfFrames(): int;
+  function numberOfFrames(): int;
 
   /**
    * Returns the number of nodes that are selected.
    * @returns {int}
    */
-  public static numberOfNodesSelected(): int;
+  function numberOfNodesSelected(): int;
 
   /**
    * Removes a node from the selection.
    * @param {string} node The name of node to be removed from the selection.
    * @returns {boolean}
    */
-  public static removeNodeFromSelection(node: string): boolean;
+  function removeNodeFromSelection(node: string): boolean;
 
   /**
    * Selects all nodes and all columns in the scene.
    * @returns {void}
    */
-  public static selectAll(): void;
+  function selectAll(): void;
 
   /**
    * Returns the ith column selected in the xsheet.
    * @param {int} i The index of the column.
    * @returns {string}
    */
-  public static selectedColumn(i: int): string;
+  function selectedColumn(i: int): string;
 
   /**
    * Returns the path of the selected node.
    * @param {int} i The index of the node.
    * @returns {string}
    */
-  public static selectedNode(i: int): string;
+  function selectedNode(i: int): string;
 
   /**
    * Returns an Array of all selected nodes.
    * @returns {QScriptValue}
    */
-  public static selectedNodes(): QScriptValue;
+  function selectedNodes(): QScriptValue;
 
   /**
    * Sets the selection frame range.
@@ -5897,13 +5872,13 @@ declare class selection extends GlobalObject {
    * @param {int} length The number of frames selected.
    * @returns {void}
    */
-  public static setSelectionFrameRange(start: int, length: int): void;
+  function setSelectionFrameRange(start: int, length: int): void;
 
   /**
    * Returns the selected start frame.
    * @returns {int}
    */
-  public static startFrame(): int;
+  function startFrame(): int;
 
   /**
    * Obtains the IDs of the selectable sub objects of the given node.
@@ -5926,7 +5901,7 @@ declare class selection extends GlobalObject {
    * myFile.write(JSON.stringify(newSelection));
    * myFile.close();
    */
-  public static subSelectionForNode(node: string): QScriptValue;
+  function subSelectionForNode(node: string): QScriptValue;
 }
 
 /**
@@ -5943,14 +5918,14 @@ declare class selection extends GlobalObject {
  * var soundFile = sound.getSoundtrack(50, 100);
  * MessageBox.information("Soundtrack file location: " + soundFile.path());
  */
-declare class sound extends GlobalObject {
+declare namespace sound {
   /**
    * Copy the content of the source file to the destination file and say if the copy is done completely.
    * @param {string} srcFileName The source file to be copied from.
    * @param {string} dstFileName The destination file to be copied to.
    * @returns {boolean}
    */
-  public static copy(srcFileName: string, dstFileName: string): boolean;
+  function copy(srcFileName: string, dstFileName: string): boolean;
 
   /**
    * Return a part of the scene's soundtrack in a temporary file in the WAV format.
@@ -5958,54 +5933,54 @@ declare class sound extends GlobalObject {
    * @param {int} toFrame The soundtrack end frame.
    * @returns {QObject}
    */
-  public static getSoundtrack(fromFrame: int, toFrame: int): QObject;
+  function getSoundtrack(fromFrame: int, toFrame: int): QObject;
 
   /**
    * Return the scene's soundtrack in a temporary file in the WAV format.
    * @returns {QObject}
    */
-  public static getSoundtrackAll(): QObject;
+  function getSoundtrackAll(): QObject;
 
   /**
    * Check if the export file path is in unicode.
    * @param {string} exportFilePath The export file path to check.
    * @returns {boolean}
    */
-  public static isUnicode(exportFilePath: string): boolean;
+  function isUnicode(exportFilePath: string): boolean;
 
   /**
    * Sets the number of audio channels (i.e 1 for mono and 2 for stereo).
    * @param {int} count The audio channel count.
    * @returns {void}
    */
-  public static setChannelCount(count: int): void;
+  function setChannelCount(count: int): void;
 
   /**
    * Sets the audio channel size (i.e. 8 or 16 bit).
    * @param {int} size The audio channel size.
    * @returns {void}
    */
-  public static setChannelSize(size: int): void;
+  function setChannelSize(size: int): void;
 
   /**
    * Sets the number of frames per second. By default the scene frame rate is used.
    * @param {int} rate The desired frame rate.
    * @returns {void}
    */
-  public static setFrameRate(rate: int): void;
+  function setFrameRate(rate: int): void;
 
   /**
    * Sets the audio sample rate in Hz (i.e. 22050, 44100, ...).
    * @param {double} rate The desired audio sample rate.
    * @returns {void}
    */
-  public static setSampleRate(rate: double): void;
+  function setSampleRate(rate: double): void;
 
   /**
    * Event that notifies the script when the sound file is available.
    * @returns {void}
    */
-  public soundReady: QSignal<() => void>;
+  const soundReady: QSignal<() => void>;
 }
 
 /**
@@ -6017,26 +5992,26 @@ declare class sound extends GlobalObject {
  * System.println("This text is printed in the command prompt or the Terminal");
  * var tempFolder = System.getenv("TEMP");
  */
-declare class System extends GlobalObject {
+declare namespace System {
   /**
    * Gets the value of an environment variable or the operating system.
    * @param {string} environmentVariable The desired environment variable.
    * @returns {string}
    */
-  public static getenv(environmentVariable: string): string;
+  function getenv(environmentVariable: string): string;
 
   /**
    * Prints a string to Terminal (Unix) or Command Prompt (Windows).
    * @param {string} text The text to print to the console.
    * @returns {void}
    */
-  public static println(text: string): void;
+  function println(text: string): void;
 
   /**
    * Processes the next event in a while loop. It can not be accessed from the scriptModule.
    * @returns {void}
    */
-  public static processOneEvent(): void;
+  function processOneEvent(): void;
 }
 
 /**
@@ -6077,12 +6052,12 @@ declare class System extends GlobalObject {
  *      }
  *  }
  */
-declare class Timeline extends GlobalObject {
+declare namespace Timeline {
   /**
    * Returns the first frame selected.
    * @returns {int}
    */
-  public static firstFrameSel(): int;
+  function firstFrameSel(): int;
 
   /**
    * Returns true if the parent layer index is an ancestor of the layer index.
@@ -6090,126 +6065,126 @@ declare class Timeline extends GlobalObject {
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {boolean}
    */
-  public static isAncestorOf(parentLayerIndex: int, layerIndex: int): boolean;
+  function isAncestorOf(parentLayerIndex: int, layerIndex: int): boolean;
 
   /**
    * Returns true if the layer index is a column.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {boolean}
    */
-  public static layerIsColumn(layerIndex: int): boolean;
+  function layerIsColumn(layerIndex: int): boolean;
 
   /**
    * Returns true if the layer is a node.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {boolean}
    */
-  public static layerIsNode(layerIndex: int): boolean;
+  function layerIsNode(layerIndex: int): boolean;
 
   /**
    * Returns the layer as a column, or the empty string if this layer is not a column.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {string}
    */
-  public static layerToColumn(layerIndex: int): string;
+  function layerToColumn(layerIndex: int): string;
 
   /**
    * Returns the node associated to the layer, or the empty string if this layer is not a node.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {string}
    */
-  public static layerToNode(layerIndex: int): string;
+  function layerToNode(layerIndex: int): string;
 
   /**
    * Returns the number of the selected frame, if only one frame is selected. It will return zero (0) if
    * no frames are selected.
    * @returns {int}
    */
-  public static numFrameSel(): int;
+  function numFrameSel(): int;
 
   /**
    * Returns the number of layers in the timeline.
    * @returns {int}
    */
-  public static numLayers(): int;
+  function numLayers(): int;
 
   /**
    * Returns the number of layer selected.
    * @returns {int}
    */
-  public static numLayerSel(): int;
+  function numLayerSel(): int;
 
   /**
    * Returns the layer index of the parent node.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {int}
    */
-  public static parentNodeIndex(layerIndex: int): int;
+  function parentNodeIndex(layerIndex: int): int;
 
   /**
    * Returns true if the selectionIndex points to a column.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {boolean}
    */
-  public static selIsColumn(selectionIndex: int): boolean;
+  function selIsColumn(selectionIndex: int): boolean;
 
   /**
    * Returns true if the selection index is a node.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {boolean}
    */
-  public static selIsNode(selectionIndex: int): boolean;
+  function selIsNode(selectionIndex: int): boolean;
 
   /**
    * Converts the selection index to a column.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {string}
    */
-  public static selToColumn(selectionIndex: int): string;
+  function selToColumn(selectionIndex: int): string;
 
   /**
    * Converts a selection index to a layer index.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {int}
    */
-  public static selToLayer(selectionIndex: int): int;
+  function selToLayer(selectionIndex: int): int;
 
   /**
    * Converts the selection index to a node.
    * @param {int} selectionIndex The selecton index in the timeline layer.
    * @returns {string}
    */
-  public static selToNode(selectionIndex: int): string;
+  function selToNode(selectionIndex: int): string;
 
   /**
    * Returns true if the display was set to unconnected.
    * @returns {boolean}
    */
-  public static setDisplayToUnconnected(): boolean;
+  function setDisplayToUnconnected(): boolean;
 
   /**
    * Returns the first selected frame number.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static firstFrameSel: int;
+  // /* Invalid - Duplicate property name */ var firstFrameSel: int;
 
   /**
    * Returns the number of selected the frame. If only 1 frame is selected.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static numFrameSel: int;
+  // /* Invalid - Duplicate property name */ var numFrameSel: int;
 
   /**
    * Returns the number of layers in the timeline.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static numLayers: int;
+  // /* Invalid - Duplicate property name */ var numLayers: int;
 
   /**
    * Returns the number of selected layers.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static numLayerSel: int;
+  // /* Invalid - Duplicate property name */ var numLayerSel: int;
 }
 
 /**
@@ -6218,48 +6193,48 @@ declare class Timeline extends GlobalObject {
  * Tool Presets view must have been loaded for these function to be available.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/classToolProperties.html}
  */
-declare class ToolProperties extends GlobalObject {
+declare namespace ToolProperties {
   /**
    * Sets the Apply to Line Art and Colour Art checkbox state to b; in the Select Tool Options.
    * @param {boolean} b When true sets the Apply to Line Art and Colour Art checkbox state to checked. When false, unchecks it.
    * @returns {void}
    */
-  public static setApplyAllArts(b: boolean): void;
+  function setApplyAllArts(b: boolean): void;
 
   /**
    * Sets the apply all drawing mode to b.
    * @param {boolean} b When true enables the apply all drawing mode.
    * @returns {void}
    */
-  public static setApplyAllDrawings(b: boolean): void;
+  function setApplyAllDrawings(b: boolean): void;
 
   /**
    * Sets the apply all visible drawing mode to b.
    * @param {boolean} b When true enables the apply all visible drawing mode.
    * @returns {void}
    */
-  public static setApplyAllVisibleDrawings(b: boolean): void;
+  function setApplyAllVisibleDrawings(b: boolean): void;
 
   /**
    * Sets the auto create colour art mode of the current tool to b if applicable.
    * @param {boolean} b When true enables the auto create colour art mode of the current tool. When false disables it.
    * @returns {void}
    */
-  public static setAutoCreateColourArt(b: boolean): void;
+  function setAutoCreateColourArt(b: boolean): void;
 
   /**
    * Sets the auto fill mode of Rectangle and Ellipse tools to b.
    * @param {boolean} b When true enables the auto fill mode of the Rectangle and Ellipse tools.
    * @returns {void}
    */
-  public static setAutoFillInside(b: boolean): void;
+  function setAutoFillInside(b: boolean): void;
 
   /**
    * Sets the auto flatten mode if applicable.
    * @param {boolean} b When true enables the auto flatten mode if applicable. When false disables it.
    * @returns {void}
    */
-  public static setAutoFlattenMode(b: boolean): void;
+  function setAutoFlattenMode(b: boolean): void;
 
   /**
    * Sets the auto gap closing mode to m. Mode can be 0, 1, 2 or 3, which corresponds to No Gap, Small,
@@ -6267,14 +6242,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} m Sets the auto gap closing mode to 0, 1, 2 or 3, which corresponds to No Gap, Small, Medium and Large.
    * @returns {void}
    */
-  public static setAutogapClosingMode(m: int): void;
+  function setAutogapClosingMode(m: int): void;
 
   /**
    * Instructs the ink tool to bring inked lines on top after inking if b is true.
    * @param {boolean} b When true instructs the ink tool to bring inked lines on top after inking.
    * @returns {void}
    */
-  public static setBringInkedLinesOnTop(b: boolean): void;
+  function setBringInkedLinesOnTop(b: boolean): void;
 
   /**
    * Disables the pivot Transform tool manipulator if b is true. A pivot control will still be displayed
@@ -6282,28 +6257,28 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true disables the pivot Transform tool manipulator.
    * @returns {void}
    */
-  public static setDisablePivotControl(b: boolean): void;
+  function setDisablePivotControl(b: boolean): void;
 
   /**
    * Toggles the Draw Behind mode of the Brush tool.
    * @param {boolean} b When true enables the Draw Behind mode of the Brush tool. When false, disables it.
    * @returns {void}
    */
-  public static setDrawBehindMode(b: boolean): void;
+  function setDrawBehindMode(b: boolean): void;
 
   /**
    * Sets the magnifier mode.
    * @param {boolean} b When true enables the magnifier mode. When false disables it.
    * @returns {void}
    */
-  public static setDrawingMagnifierMode(b: boolean): void;
+  function setDrawingMagnifierMode(b: boolean): void;
 
   /**
    * Set the cutter's gesture mode to b.
    * @param {boolean} b When true enables the cutter's gesture mode.
    * @returns {void}
    */
-  public static setGestureCutter(b: boolean): void;
+  function setGestureCutter(b: boolean): void;
 
   /**
    * Sets the join mode of the inked lines to be joinType. Join type can be one of: "ROUND_JOIN",
@@ -6311,14 +6286,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {string} joinType Sets the join mode of the inked lines to be joinType.
    * @returns {void}
    */
-  public static setInkJoinMode(joinType: string): void;
+  function setInkJoinMode(joinType: string): void;
 
   /**
    * Instructs the ink tool to select inked lines after inking if b is true.
    * @param {boolean} b When true instructs the ink tool to select inked lines after inking.
    * @returns {void}
    */
-  public static setInkLineSelectionMode(b: boolean): void;
+  function setInkLineSelectionMode(b: boolean): void;
 
   /**
    * Toggles the auto gap closing functionality for the line and pencil tools. When the auto gap
@@ -6327,21 +6302,21 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true enables the auto gap closing functionality for the Line and Pencil tools.
    * @returns {void}
    */
-  public static setLineAutoGapClosing(b: boolean): void;
+  function setLineAutoGapClosing(b: boolean): void;
 
   /**
    * Sets the line building mode of the Pencil tool to b.
    * @param {boolean} b When true enables the line building mode of the Pencil tool.
    * @returns {void}
    */
-  public static setLineBuildingMode(b: boolean): void;
+  function setLineBuildingMode(b: boolean): void;
 
   /**
    * Sets the line pushing mode of the Pencil tool to b.
    * @param {boolean} b When true enables the line pushing mode of the Pencil tool.
    * @returns {void}
    */
-  public static setLinePushingMode(b: boolean): void;
+  function setLinePushingMode(b: boolean): void;
 
   /**
    * Sets the select tool mode selection to Lasso or Marquee. If b is true, the mode will be set to
@@ -6349,21 +6324,21 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true sets the selection mode to Marquee. When false sets the selection mode to Lasso.
    * @returns {void}
    */
-  public static setMarkeeMode(b: boolean): void;
+  function setMarkeeMode(b: boolean): void;
 
   /**
    * Set the cutter's gesture break mode to b.
    * @param {boolean} b When true enables the cutter's gesture break mode.
    * @returns {void}
    */
-  public static setMouseGestureBreakeMode(b: boolean): void;
+  function setMouseGestureBreakeMode(b: boolean): void;
 
   /**
    * Instruct the paint tool to remove the opacity texture if b is true.
    * @param {boolean} b When true enables the remove texture when painting mode is turned on.
    * @returns {void}
    */
-  public static setPaintAndRemoveTextureMode(b: boolean): void;
+  function setPaintAndRemoveTextureMode(b: boolean): void;
 
   /**
    * If b is true, the paint tool will select the newly painted zone after painting. This can be useful
@@ -6371,16 +6346,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true the paint tool will select the newly painted zone after painting.
    * @returns {void}
    */
-  public static setPaintToolShouldSelectPaintedZonesAfterPainting(
-    b: boolean
-  ): void;
+  function setPaintToolShouldSelectPaintedZonesAfterPainting(b: boolean): void;
 
   /**
    * Sets the selection mode of the transform tool to peg mode if b is true.
    * @param {boolean} b When true enables the selection mode of the transform tool to peg mode.
    * @returns {void}
    */
-  public static setPegSelectionMode(b: boolean): void;
+  function setPegSelectionMode(b: boolean): void;
 
   /**
    * Sets the pencil tip shape used by the eraser, cutter, and ink tools whenever an existing pencil line
@@ -6388,56 +6361,56 @@ declare class ToolProperties extends GlobalObject {
    * @param {string} pencilTip Can have one of the following values: "ROUND_TIP", "FLAT_TIP" or "BEVEL_TIP".
    * @returns {void}
    */
-  public static setPencilTipMode(pencilTip: string): void;
+  function setPencilTipMode(pencilTip: string): void;
 
   /**
    * Toggles the permanent selection mode.
    * @param {boolean} b When true enables the permanent selection mode. When false disables it.
    * @returns {void}
    */
-  public static setPermanentSelectionMode(b: boolean): void;
+  function setPermanentSelectionMode(b: boolean): void;
 
   /**
    * Sets the Respect Protected Colour mode if applicable.
    * @param {boolean} b When true enables the Respect Protected Colour mode. When false disables it.
    * @returns {void}
    */
-  public static setRespectProtectedColourMode(b: boolean): void;
+  function setRespectProtectedColourMode(b: boolean): void;
 
   /**
    * Sets the select by colour mode of the Select tool .
    * @param {boolean} b When true enables the select by color mode of the Select tool. When false disables it.
    * @returns {void}
    */
-  public static setSelectByColourMode(b: boolean): void;
+  function setSelectByColourMode(b: boolean): void;
 
   /**
    * Toggles whether contour editor shows all tool controls or not.
    * @param {boolean} b When true contour editer shows all tool controls. When false hides them.
    * @returns {void}
    */
-  public static setShowHideAllContourEditingControls(b: boolean): void;
+  function setShowHideAllContourEditingControls(b: boolean): void;
 
   /**
    * Hides the transform tool manipulator if b is true.
    * @param {boolean} b When true hides the transform tool manipulator.
    * @returns {void}
    */
-  public static setShowHideManipulatorControls(b: boolean): void;
+  function setShowHideManipulatorControls(b: boolean): void;
 
   /**
    * Shows the inkable lines if b is true.
    * @param {boolean} b When true shows the inkable lines.
    * @returns {void}
    */
-  public static setShowInkableLines(b: boolean): void;
+  function setShowInkableLines(b: boolean): void;
 
   /**
    * Sets the smart ink line connection mode to b.
    * @param {boolean} b When true enables the smart ink line connection mode.
    * @returns {void}
    */
-  public static setSmartInkLineConnectionMode(b: boolean): void;
+  function setSmartInkLineConnectionMode(b: boolean): void;
 
   /**
    * Sets the snapping mode for the contour, align and grid mode all to the modes specified in argument.
@@ -6446,11 +6419,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} grid When true enables the snapping mode for the grid mode. When false disables it.
    * @returns {void}
    */
-  public static setSnapping(
-    contour: boolean,
-    align: boolean,
-    grid: boolean
-  ): void;
+  function setSnapping(contour: boolean, align: boolean, grid: boolean): void;
 
   /**
    * Sets the align and grid snapping modes of the transform tool.
@@ -6458,14 +6427,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} grid When true enables the grid snapping mode of the transform tool. When false disables it.
    * @returns {void}
    */
-  public static setTransformToolSnapping(align: boolean, grid: boolean): void;
+  function setTransformToolSnapping(align: boolean, grid: boolean): void;
 
   /**
    * Instruct the paint tool to use the gradient/texture matrix stored in the tool if b is true.
    * @param {boolean} b When true the paint tool will use the gradient/texture matrix stores in the tool.
    * @returns {void}
    */
-  public static setUsedStoredColourGradientMode(b: boolean): void;
+  function setUsedStoredColourGradientMode(b: boolean): void;
 }
 
 /**
@@ -6523,7 +6492,7 @@ declare class ToolProperties extends GlobalObject {
  *     ui.LightTableWashSlider.valueChanged.connect(this, this.washChanged);
  * }
  */
-declare class Uiloader extends GlobalObject {
+declare namespace Uiloader {
   /**
    * Takes a DPI-independent pixel dimension (100% DPI scaling on an HD screen) and scales it to the
    * current DPI setting.
@@ -6531,7 +6500,7 @@ declare class Uiloader extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static dpiScale(
+  function dpiScale(
     context: QScriptContext,
     engine: QScriptEngine
   ): QScriptValue;
@@ -6543,10 +6512,7 @@ declare class Uiloader extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static exec(
-    context: QScriptContext,
-    engine: QScriptEngine
-  ): QScriptValue;
+  function exec(context: QScriptContext, engine: QScriptEngine): QScriptValue;
 
   /**
    * Takes a path to a predefined Qt widget form and loads that form.
@@ -6554,17 +6520,14 @@ declare class Uiloader extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static load(
-    context: QScriptContext,
-    engine: QScriptEngine
-  ): QScriptValue;
+  function load(context: QScriptContext, engine: QScriptEngine): QScriptValue;
 
   /**
    * @param {QScriptContext} context
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static setSvgIcon(
+  function setSvgIcon(
     context: QScriptContext,
     engine: QScriptEngine
   ): QScriptValue;
@@ -6579,45 +6542,45 @@ declare class Uiloader extends GlobalObject {
  *     MessageLog.trace(view.type(myView));
  * }
  */
-declare class view extends GlobalObject {
+declare namespace view {
   /**
    * Returns the name of the column for the currently displayed function in the Function View.
    * @param {string} viewName The current view value, as returned by the currentView function.
    * @returns {string}
    */
-  public static column(viewName: string): string;
+  function column(viewName: string): string;
 
   /**
    * Returns the drawing tool manager.
    * @returns {QObject}
    */
-  public static currentToolManager(): QObject;
+  function currentToolManager(): QObject;
 
   /**
    * Returns a unique identifier for the current, active view.
    * @returns {string}
    */
-  public static currentView(): string;
+  function currentView(): string;
 
   /**
    * Returns the name of the current Group Node in the active Network View.
    * @param {string} viewName The current view value, as returned by the currentView function.
    * @returns {string}
    */
-  public static group(viewName: string): string;
+  function group(viewName: string): string;
 
   /**
    * Forces a refresh of the drawing and scene planning views.
    * @returns {void}
    */
-  public static refreshViews(): void;
+  function refreshViews(): void;
 
   /**
    * Returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
    * @returns {string}
    */
-  public static type(viewName: string): string;
+  function type(viewName: string): string;
 }
 
 /**
@@ -12546,7 +12509,7 @@ declare class ExportVideoDlg extends UI_DialogController {
  * Deformation utility functions.
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/namespaceDeformationUtils.html}
  */
-declare module DeformationUtils {
+declare namespace DeformationUtils {
   /**
    * Return a VertexTransform to apply a deformation node transformation.
    * @param {string} node the path to the last node in a deformation chain (ex: "Top/LastDeformationOfAChain")
@@ -12579,7 +12542,10 @@ declare module DeformationUtils {
  *
  * {@link https://docs.toonboom.com/help/harmony-15/scripting/script/namespaceMath.html}
  */
-declare module Math {}
+declare namespace Math {}
+
+declare type PermanentFile = FileWrapper;
+declare type TemporaryFile = FileWrapper;
 
 /**
  * scripting object to a sound column... Allow object oriented object interaction with sound sequence.

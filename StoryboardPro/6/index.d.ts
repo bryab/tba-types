@@ -1,8 +1,21 @@
 /// <reference path="../../shared/qtscript.d.ts" />
 
+/**
+ * Undocumented types (FIXME)
+ */
 declare class BAPP_SpecialFolders {}
 declare class GlobalObject {}
 declare class QScriptable {}
+declare class SCRIPT_QSWidget extends QWidget {}
+declare class Labeled extends QWidget {}
+declare class MO_SignalEmitter extends QWidget {}
+declare class SCR_AbstractInterface {}
+declare type QScriptContext = any;
+declare type QScriptEngine = any;
+declare type QScriptValue = any;
+declare type DD_DragObject = any;
+declare class UI_DialogController {}
+
 declare class SCR_BaseInterface {}
 
 /**
@@ -12,13 +25,13 @@ declare class SCR_BaseInterface {}
  * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
  * {@link https://docs.toonboom.com/help/storyboard-pro-6/storyboard/scripting/reference/classspecialFolders.html}
  */
-declare class specialFolders extends BAPP_SpecialFolders {
+declare namespace specialFolders {
   /**
    * A read-only property containing the folder where the platforms specific applications are stored.
    * Application and Binary folders are different on OS X, but are identical on all other platforms.
    * @returns {string}
    */
-  static app: string;
+  var app: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific binaries are
@@ -26,89 +39,89 @@ declare class specialFolders extends BAPP_SpecialFolders {
    * platforms.
    * @returns {string}
    */
-  static bin: string;
+  var bin: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
    * are stored.
    * @returns {string}
    */
-  static bin32: string;
+  var bin32: string;
 
   /**
    * read-only property that contains the folder where application configuration files are stored.
    * Normally, this is the /etc folder.
    * @returns {string}
    */
-  static config: string;
+  var config: string;
 
   /**
    * read-only property that indicates where the <install>/etc folder is.
    * @returns {string}
    */
-  static etc: string;
+  var etc: string;
 
   /**
    * This is a read-only property that contains the folder where the html help folder is.
    * @returns {string}
    */
-  static htmlHelp: string;
+  var htmlHelp: string;
 
   /**
    * read-only property that contains the folder where the language files are stored.
    * @returns {string}
    */
-  static lang: string;
+  var lang: string;
 
   /**
    * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
    * property.
    * @returns {string}
    */
-  static legacyPlugins: string;
+  var legacyPlugins: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific libraries are
    * stored.
    * @returns {string}
    */
-  static library: string;
+  var library: string;
 
   /**
    * read-only property that contains the platform specific folder.
    * @returns {string}
    */
-  static platform: string;
+  var platform: string;
 
   /**
    * Location where the plugins that comply with the current SDK are stored.
    * @returns {string}
    */
-  static plugins: string;
+  var plugins: string;
 
   /**
    * read-only property that contains where the resources files are stored.
    * @returns {string}
    */
-  static resource: string;
+  var resource: string;
 
   /**
    * read-only property for the root installation folder
    * @returns {string}
    */
-  static root: string;
+  var root: string;
 
   /**
    * This is a read-only property that contains where the application will create its temporary files.
    * @returns {string}
    */
-  static temp: string;
+  var temp: string;
 
   /**
    * This is a read-only property that contains the folder where the user configuration is stored.
    * @returns {string}
    */
-  static userConfig: string;
+  var userConfig: string;
 }
 
 /**
@@ -2565,23 +2578,23 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
       /**
        * When true, the matte is created on a new layer.
        */
-      onNewLayer: boolean;
+      onNewLayer?: boolean;
       /**
        * The number of the frame.
        */
-      radius: double;
+      radius?: double;
       /**
        * (Optional) Set to true to copy source strokes on the new layer. Can only be used if onNewLayer is set to true as well.
        */
-      copyStrokes: boolean;
+      copyStrokes?: boolean;
       /**
        * (Optional) Set to true to replace a previously generated matte layer. Can only be used if onNewLayer is set to true as well.
        */
-      replaceLayer: boolean;
+      replaceLayer?: boolean;
       /**
        * (Optional) Colour used to create the matte. Can be an hex RGB value or a standard W3C colour keyword name in a string. If not specified, the current colour will be used.
        */
-      color: int | string;
+      color?: int | string;
     }
   ): boolean;
 
@@ -4174,13 +4187,13 @@ declare class Action extends SCR_BaseInterface {
  * You can use it in Script Editor only.
  * {@link https://docs.toonboom.com/help/storyboard-pro-6/storyboard/scripting/reference/classDrawingTools.html}
  */
-declare class DrawingTools extends SCR_BaseInterface {
+declare namespace DrawingTools {
   /**
    * computes the breaking triangles of the current layer using params.
    * @param {DrawingToolParams} [params=0]
    * @returns {void}
    */
-  public computeBreakingTriangles(params?: DrawingToolParams): void;
+  function computeBreakingTriangles(params?: DrawingToolParams): void;
 
   /**
    * converts the selected pencil lines in layer of the current drawing using params
@@ -4188,7 +4201,7 @@ declare class DrawingTools extends SCR_BaseInterface {
    * @param {DrawingToolParams} [params=0]
    * @returns {void}
    */
-  public convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
+  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
 
   /**
    * extracts the centreline from srcLayer and puts the extracted line in dstLayer using params.
@@ -4197,7 +4210,7 @@ declare class DrawingTools extends SCR_BaseInterface {
    * @param {DrawingToolParams} [params=0]
    * @returns {void}
    */
-  public extractCenterline(
+  function extractCenterline(
     srcArt?: int,
     dstArt?: int,
     params?: DrawingToolParams
@@ -4207,7 +4220,7 @@ declare class DrawingTools extends SCR_BaseInterface {
    * sets the current art to be one of the following : underlayArt, colourArt, lineArt or overlayArt
    * @returns {void}
    */
-  public setCurrentArt(): void;
+  function setCurrentArt(): void;
 
   /**
    * sets the current drawing to be from column columnName at frame frame
@@ -4215,7 +4228,7 @@ declare class DrawingTools extends SCR_BaseInterface {
    * @param {int} [frame=1]
    * @returns {boolean}
    */
-  public setCurrentDrawingFromColumnName(
+  function setCurrentDrawingFromColumnName(
     columnName: string,
     frame?: int
   ): boolean;
@@ -4226,37 +4239,40 @@ declare class DrawingTools extends SCR_BaseInterface {
    * @param {int} [frame=1]
    * @returns {boolean}
    */
-  public setCurrentDrawingFromNodeName(nodeName: string, frame?: int): boolean;
+  function setCurrentDrawingFromNodeName(
+    nodeName: string,
+    frame?: int
+  ): boolean;
 
   /**
    * readonly property - returns mask for all 4 art layers
    * @returns {int}
    */
-  allArts: int;
+  var allArts: int;
 
   /**
    * readonly property - returns colourArt mask
    * @returns {int}
    */
-  colourArt: int;
+  var colourArt: int;
 
   /**
    * readonly property - returns lineArt mask
    * @returns {int}
    */
-  lineArt: int;
+  var lineArt: int;
 
   /**
    * readonly property - returns overlayArt mask
    * @returns {int}
    */
-  overlayArt: int;
+  var overlayArt: int;
 
   /**
    * readonly property - returns underlayArt mask
    * @returns {int}
    */
-  underlayArt: int;
+  var underlayArt: int;
 }
 
 /**
@@ -5270,19 +5286,19 @@ notes  String  (Optional) Notes for the marker
     /**
      * The number of the frame.
      */
-    frame: int;
+    frame?: int;
     /**
      * (Optional) The length of the marker.
      */
-    length: int;
+    length?: int;
     /**
      * (Optional) The colour of the marker. Can be an integer RGBA value or a standard W3C colour keyword name in a string.
      */
-    color: int | string;
+    color?: int | string;
     /**
      * (Optional) Notes for the marker
      */
-    notes: string;
+    notes?: string;
   }): QScriptValue;
 
   /**

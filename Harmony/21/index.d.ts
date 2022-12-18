@@ -1,9 +1,20 @@
 /// <reference path="../../shared/qtscript.d.ts" />
 
+/**
+ * Undocumented types (FIXME)
+ */
 declare class BAPP_SpecialFolders {}
 declare class GlobalObject {}
 declare class QScriptable {}
-/// <reference path="../ui.d.ts" />
+declare class SCRIPT_QSWidget extends QWidget {}
+declare class Labeled extends QWidget {}
+declare class MO_SignalEmitter extends QWidget {}
+declare class SCR_AbstractInterface {}
+declare type QScriptContext = any;
+declare type QScriptEngine = any;
+declare type QScriptValue = any;
+declare type DD_DragObject = any;
+declare class UI_DialogController {}
 
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
@@ -15,13 +26,13 @@ declare class QScriptable {}
  * @example
  * var scriptFolder = specialFolders.resource + "/scripts";
  */
-declare class specialFolders extends BAPP_SpecialFolders {
+declare namespace specialFolders {
   /**
    * A read-only property containing the folder where the platforms specific applications are stored.
    * Application and Binary folders are different on OS X, but are identical on all other platforms.
    * @returns {string}
    */
-  static app: string;
+  var app: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific binaries are
@@ -29,126 +40,126 @@ declare class specialFolders extends BAPP_SpecialFolders {
    * platforms.
    * @returns {string}
    */
-  static bin: string;
+  var bin: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
    * are stored.
    * @returns {string}
    */
-  static bin32: string;
+  var bin32: string;
 
   /**
    * read-only property that contains the folder where application configuration files are stored.
    * Normally, this is the /etc folder.
    * @returns {string}
    */
-  static config: string;
+  var config: string;
 
   /**
    * This is a read-only property that contains the database folder.
    * @returns {string}
    */
-  static database: string;
+  var database: string;
 
   /**
    * read-only property that indicates where the [install]/etc folder is.
    * @returns {string}
    */
-  static etc: string;
+  var etc: string;
 
   /**
    * This is a read-only property that contains the folder where the html help folder is.
    * @returns {string}
    */
-  static htmlHelp: string;
+  var htmlHelp: string;
 
   /**
    * read-only property that contains the folder where the language files are stored.
    * @returns {string}
    */
-  static lang: string;
+  var lang: string;
 
   /**
    * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
    * property.
    * @returns {string}
    */
-  static legacyPlugins: string;
+  var legacyPlugins: string;
 
   /**
    * This is a read-only property that contains the folder where the platforms specific libraries are
    * stored.
    * @returns {string}
    */
-  static library: string;
+  var library: string;
 
   /**
    * read-only property that contains the platform specific folder.
    * @returns {string}
    */
-  static platform: string;
+  var platform: string;
 
   /**
    * Location where the plugins that comply with the current SDK are stored.
    * @returns {string}
    */
-  static plugins: string;
+  var plugins: string;
 
   /**
    * read-only property that contains where the resources files are stored.
    * @returns {string}
    */
-  static resource: string;
+  var resource: string;
 
   /**
    * read-only property for the root installation folder
    * @returns {string}
    */
-  static root: string;
+  var root: string;
 
   /**
    * This is a read-only property that contains where the application will create its temporary files.
    * @returns {string}
    */
-  static temp: string;
+  var temp: string;
 
   /**
    * This is a read-only property that contains the folder where templates are stored.
    * @returns {string}
    */
-  static templateLibrary: string;
+  var templateLibrary: string;
 
   /**
    * This is a read-only property that contains the folder where the user configuration is stored.
    * @returns {string}
    */
-  static userConfig: string;
+  var userConfig: string;
 
   /**
    * This is a read-only property that contains the folder where the user layouts are stored.
    * @returns {string}
    */
-  static userLayouts: string;
+  var userLayouts: string;
 
   /**
    * This is a read-only property that contains the folder where the user scripts are stored.
    * @returns {string}
    */
-  static userScripts: string;
+  var userScripts: string;
 }
 
 /**
  * The CELIO JavaScript global object. Provide information about image file.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classCELIO.html}
  */
-declare class CELIO {
+declare namespace CELIO {
   /**
    * Returns information about the resolution of an image file.
    * @param {string} path
    * @returns {QScriptValue}
    */
-  public getInformation(path: string): QScriptValue;
+  function getInformation(path: string): QScriptValue;
 
   /**
    * Returns information about the resolution of an image file. Will also return the layer information if
@@ -157,13 +168,13 @@ declare class CELIO {
    * @param {boolean} withLayers
    * @returns {QScriptValue}
    */
-  public getInformation(path: string, withLayers: boolean): QScriptValue;
+  function getInformation(path: string, withLayers: boolean): QScriptValue;
 
   /**
    * @param {string} filename Path to the image file.
    * @returns {QScriptValue}
    */
-  public getLayerGroupInformation(filename: string): QScriptValue;
+  function getLayerGroupInformation(filename: string): QScriptValue;
 
   /**
    * Returns an array describing each layer of a multi-layer image. Currently, only the PSD has multi-
@@ -171,7 +182,7 @@ declare class CELIO {
    * @param {string} path
    * @returns {QScriptValue}
    */
-  public getLayerInformation(path: string): QScriptValue;
+  function getLayerInformation(path: string): QScriptValue;
 
   /**
    * Create a multi-layer grouped file from a hierarchical data structure of groups, sub-groups, and
@@ -213,7 +224,7 @@ declare class CELIO {
    *         ];
    *         var result = CELIO.writeLayeredFile('psd', 'PSD4', items, '/path/to/output.psd');
    */
-  public writeLayeredFile(
+  function writeLayeredFile(
     format: string,
     options: string,
     groupArray: QScriptValue,
@@ -254,361 +265,361 @@ declare class CELIO {
  *     MessageLog.trace("Application path: " + about.applicationPath);
  * }
  */
-declare class about extends GlobalObject {
+declare namespace about {
   /**
    * Returns the application. Identical to property "applicationPath".
    * @returns {string}
    */
-  public static getApplicationPath(): string;
+  function getApplicationPath(): string;
 
   /**
    * Returns the folder where the binaries can be found.
    * @returns {string}
    */
-  public static getBinaryPath(): string;
+  function getBinaryPath(): string;
 
   /**
    * Returns the build number.
    * @returns {int}
    */
-  public static getBuildNumber(): int;
+  function getBuildNumber(): int;
 
   /**
    * Returns a string that represents the flavor of the application. e.g. Harmony.
    * @returns {string}
    */
-  public static getFlavorString(): string;
+  function getFlavorString(): string;
 
   /**
    * Returns the major version number.
    * @returns {int}
    */
-  public static getMajorVersion(): int;
+  function getMajorVersion(): int;
 
   /**
    * Returns the minor version number.
    * @returns {int}
    */
-  public static getMinorVersion(): int;
+  function getMinorVersion(): int;
 
   /**
    * Returns the patch version number.
    * @returns {int}
    */
-  public static getPatchVersion(): int;
+  function getPatchVersion(): int;
 
   /**
    * Returns the folder where the resources can be found.
    * @returns {string}
    */
-  public static getResourcesPath(): string;
+  function getResourcesPath(): string;
 
   /**
    * Returns the user name.
    * @returns {string}
    */
-  public static getUserName(): string;
+  function getUserName(): string;
 
   /**
    * Returns the version info string.
    * @returns {string}
    */
-  public static getVersionInfoStr(): string;
+  function getVersionInfoStr(): string;
 
   /**
    * Returns true whenever the application running application is ControlCenter.
    * @returns {boolean}
    */
-  public static isControlCenterApp(): boolean;
+  function isControlCenterApp(): boolean;
 
   /**
    * Returns true when the application is in Database mode.
    * @returns {boolean}
    */
-  public static isDatabaseMode(): boolean;
+  function isDatabaseMode(): boolean;
 
   /**
    * Returns true whenever this application is a Demo variant.
    * @returns {boolean}
    */
-  public static isDemoVersion(): boolean;
+  function isDemoVersion(): boolean;
 
   /**
    * Returns true whenever this application is an Educational variant.
    * @returns {boolean}
    */
-  public static isEducVersion(): boolean;
+  function isEducVersion(): boolean;
 
   /**
    * Returns true whenever this application is a Commercial/Full variant.
    * @returns {boolean}
    */
-  public static isFullVersion(): boolean;
+  function isFullVersion(): boolean;
 
   /**
    * Returns true when connected to a database or when compiled with Harmony.
    * @returns {boolean}
    */
-  public static isHarmony(): boolean;
+  function isHarmony(): boolean;
 
   /**
    * Returns true whenever this application is interactive. All application capable of running scripts
    * are interactive.
    * @returns {boolean}
    */
-  public static isInteractiveApp(): boolean;
+  function isInteractiveApp(): boolean;
 
   /**
    * Returns true when running on Linux.
    * @returns {boolean}
    */
-  public static isLinuxArch(): boolean;
+  function isLinuxArch(): boolean;
 
   /**
    * Returns true when running on MacOS.
    * @returns {boolean}
    */
-  public static isMacArch(): boolean;
+  function isMacArch(): boolean;
 
   /**
    * Returns true when running on an Apple OS X operating system or when on Mac Intel.
    * @returns {boolean}
    */
-  public static isMacIntelArch(): boolean;
+  function isMacIntelArch(): boolean;
 
   /**
    * Returns true when running on an Apple OS X operating system or when on Mac PowerPC.
    * @returns {boolean}
    */
-  public static isMacPpcArch(): boolean;
+  function isMacPpcArch(): boolean;
 
   /**
    * Returns true when the application is Harmony or Storyboard, and not a peripheral application.
    * @returns {boolean}
    */
-  public static isMainApp(): boolean;
+  function isMainApp(): boolean;
 
   /**
    * Returns true when the application is in Paint mode.
    * @returns {boolean}
    */
-  public static isPaintMode(): boolean;
+  function isPaintMode(): boolean;
 
   /**
    * Returns true when the application running is Scan.
    * @returns {boolean}
    */
-  public static isScanApp(): boolean;
+  function isScanApp(): boolean;
 
   /**
    * Returns true whenever the application running is Stage.
    * @returns {boolean}
    */
-  public static isStage(): boolean;
+  function isStage(): boolean;
 
   /**
    * Returns true whenever the application running is an Advanced variant.
    * @returns {boolean}
    */
-  public static isStageAdvanced(): boolean;
+  function isStageAdvanced(): boolean;
 
   /**
    * Returns true whenever the application running is an Essentials variant.
    * @returns {boolean}
    */
-  public static isStageEssentials(): boolean;
+  function isStageEssentials(): boolean;
 
   /**
    * Returns true when running Storyboard.
    * @returns {boolean}
    */
-  public static isStoryboard(): boolean;
+  function isStoryboard(): boolean;
 
   /**
    * Returns true when running on Windows.
    * @returns {boolean}
    */
-  public static isWindowsArch(): boolean;
+  function isWindowsArch(): boolean;
 
   /**
    * Returns true when the application is in Xsheet mode.
    * @returns {boolean}
    */
-  public static isXsheetMode(): boolean;
+  function isXsheetMode(): boolean;
 
   /**
    * returns a string that is the name of application.
    * @returns {string}
    */
-  public static productName(): string;
+  function productName(): string;
 
   /**
    * See isStageAdvanced().
    * @returns {boolean}
    */
-  static advanced: boolean;
+  var advanced: boolean;
 
   /**
    * Application with GUI folder (different than binFolder on Mac, same for all other platforms).
    * @returns {string}
    */
-  static applicationPath: string;
+  var applicationPath: string;
 
   /**
    * See getBinaryPath().
    * @returns {string}
    */
-  static binaryPath: string;
+  var binaryPath: string;
 
   /**
    * See getBuildNumber.
    * @returns {int}
    */
-  static buildNumber: int;
+  var buildNumber: int;
 
   /**
    * See isControlCenterApp().
    * @returns {boolean}
    */
-  static controlCenterApp: boolean;
+  var controlCenterApp: boolean;
 
   /**
    * See isDatabaseMode().
    * @returns {boolean}
    */
-  static databaseMode: boolean;
+  var databaseMode: boolean;
 
   /**
    * See isDemoVersion().
    * @returns {boolean}
    */
-  static demoVersion: boolean;
+  var demoVersion: boolean;
 
   /**
    * See isEducVersion().
    * @returns {boolean}
    */
-  static educVersion: boolean;
+  var educVersion: boolean;
 
   /**
    * See isStageEssentials().
    * @returns {boolean}
    */
-  static essentials: boolean;
+  var essentials: boolean;
 
   /**
    * See isFullVersion().
    * @returns {boolean}
    */
-  static fullVersion: boolean;
+  var fullVersion: boolean;
 
   /**
    * See isHarmony().
    * @returns {boolean}
    */
-  static harmony: boolean;
+  var harmony: boolean;
 
   /**
    * See isInteractiveApp().
    * @returns {boolean}
    */
-  static interactiveApp: boolean;
+  var interactiveApp: boolean;
 
   /**
    * See isLinuxArch().
    * @returns {boolean}
    */
-  static linuxArch: boolean;
+  var linuxArch: boolean;
 
   /**
    * See isMacArch().
    * @returns {boolean}
    */
-  static macArch: boolean;
+  var macArch: boolean;
 
   /**
    * See isMacIntelArch().
    * @returns {boolean}
    */
-  static macIntelArch: boolean;
+  var macIntelArch: boolean;
 
   /**
    * See isMacIntelArch().
    * @returns {boolean}
    */
-  static macPpcArch: boolean;
+  var macPpcArch: boolean;
 
   /**
    * See isMainApp().
    * @returns {boolean}
    */
-  static mainApp: boolean;
+  var mainApp: boolean;
 
   /**
    * See getMajorVersion.
    * @returns {int}
    */
-  static majorVersion: int;
+  var majorVersion: int;
 
   /**
    * See getMinorVersion.
    * @returns {int}
    */
-  static minorVersion: int;
+  var minorVersion: int;
 
   /**
    * See isPaintMode().
    * @returns {boolean}
    */
-  static paintMode: boolean;
+  var paintMode: boolean;
 
   /**
    * See getPatchVersion.
    * @returns {int}
    */
-  static patchVersion: int;
+  var patchVersion: int;
 
   /**
    * See getResourcesPath().
    * @returns {string}
    */
-  static resourcesPath: string;
+  var resourcesPath: string;
 
   /**
    * See isScanApp().
    * @returns {boolean}
    */
-  static scanApp: boolean;
+  var scanApp: boolean;
 
   /**
    * See isStage().
    * @returns {boolean}
    */
-  static stage: boolean;
+  var stage: boolean;
 
   /**
    * See isStoryboard().
    * @returns {boolean}
    */
-  static storyboard: boolean;
+  var storyboard: boolean;
 
   /**
    * See getUserName().
    * @returns {string}
    */
-  static userName: string;
+  var userName: string;
 
   /**
    * See isWindowsArch().
    * @returns {boolean}
    */
-  static windowsArch: boolean;
+  var windowsArch: boolean;
 
   /**
    * See isXsheetMode().
    * @returns {boolean}
    */
-  static xsheetMode: boolean;
+  var xsheetMode: boolean;
 }
 
 /**
@@ -629,7 +640,7 @@ declare class about extends GlobalObject {
  *     }
  * }
  */
-declare class Action extends GlobalObject {
+declare namespace Action {
   /**
    * Retrieve the list of actions for a given responder.
    * Example usage:
@@ -641,7 +652,7 @@ declare class Action extends GlobalObject {
    *     MessageLog.trace("availableAction=" + aList[i]);
    * }
    */
-  public static getActionList(responder: string): StringList;
+  function getActionList(responder: string): StringList;
 
   /**
    * Retrieve the list of responder names.
@@ -653,7 +664,7 @@ declare class Action extends GlobalObject {
    *     MessageLog.trace("ResponderIdentity=" + rList[i]);
    * }
    */
-  public static getResponderList(): StringList;
+  function getResponderList(): StringList;
 
   /**
    * Perform the requested action (slot - menu item, toolbar item,...)
@@ -664,7 +675,7 @@ declare class Action extends GlobalObject {
    * @example
    * Action.perform("onActionAbout()");
    */
-  public static perform(slot: string): void;
+  function perform(slot: string): void;
 
   /**
    * Perform the requested action (slot - menu item, toolbar item,...)
@@ -675,7 +686,7 @@ declare class Action extends GlobalObject {
    * @example
    * Action.perform("onActionToggleApplyToolToAllLayers()", "drawingView");
    */
-  public static perform(slot: string, responder: string): void;
+  function perform(slot: string, responder: string): void;
 
   /**
    * Execute an action using the action manager on the given responder with parameters.
@@ -687,11 +698,7 @@ declare class Action extends GlobalObject {
    * @example
    * Action.perform("onActionShowDeformer(String)", "miniPegModuleResponder", "Top/Deformation-Drawing");
    */
-  public static perform(
-    slot: string,
-    responder: string,
-    parameters: QVariant
-  ): void;
+  function perform(slot: string, responder: string, parameters: QVariant): void;
 
   /**
    * Execute an action using the action manager on all responder instances.
@@ -702,7 +709,7 @@ declare class Action extends GlobalObject {
    * @example
    * Action.perform("onActionFocusOnSelectionNV()", "Node View");
    */
-  public static performForEach(slot: string, responder: string): void;
+  function performForEach(slot: string, responder: string): void;
 
   /**
    * Validate the requested action (slot - menu item, toolbar item,...)
@@ -713,7 +720,7 @@ declare class Action extends GlobalObject {
    * @example
    * var validateData = Action.validate("onActionAbout()");
    */
-  public static validate(slot: string): QVariant;
+  function validate(slot: string): QVariant;
 
   /**
    * Validate the requested action (slot - menu item, toolbar item,...)
@@ -727,7 +734,7 @@ declare class Action extends GlobalObject {
    * if (!validateData.checked)
    *     Action.perform("onActionToggleApplyToolToAllLayers()", "drawingView");
    */
-  public static validate(slot: string, responder: string): QVariant;
+  function validate(slot: string, responder: string): QVariant;
 }
 
 /**
@@ -760,7 +767,7 @@ declare class Action extends GlobalObject {
  *     "color": 4286859713
  * }
  */
-declare class Backdrop extends GlobalObject {
+declare namespace Backdrop {
   /**
    * Adds a single backdrop. The new backdrop is displayed on top of all the others.
    * @param {string} groupPath The full qualified group node path.
@@ -791,7 +798,7 @@ declare class Backdrop extends GlobalObject {
    *
    * Backdrop.addBackdrop("Top/MyGroup", myBackdrop);
    */
-  public static addBackdrop(groupPath: string, backdrop: QScriptValue): boolean;
+  function addBackdrop(groupPath: string, backdrop: QScriptValue): boolean;
 
   /**
    * Returns the backdrops of a group.
@@ -801,7 +808,7 @@ declare class Backdrop extends GlobalObject {
    * @param {string} groupPath The full qualified group node path.
    * @returns {QScriptValue}
    */
-  public static backdrops(groupPath: string): QScriptValue;
+  function backdrops(groupPath: string): QScriptValue;
 
   /**
    * Sets the backdrops for the specified group.
@@ -812,10 +819,7 @@ declare class Backdrop extends GlobalObject {
    * @param {QScriptValue} backdrops An array of backdrop objects or a single backdrop object. See the Backdrop class description for information on the backdrop object.
    * @returns {boolean}
    */
-  public static setBackdrops(
-    groupPath: string,
-    backdrops: QScriptValue
-  ): boolean;
+  function setBackdrops(groupPath: string, backdrops: QScriptValue): boolean;
 }
 
 /**
@@ -842,7 +846,7 @@ declare class Backdrop extends GlobalObject {
  *     }
  * }
  */
-declare class column extends GlobalObject {
+declare namespace column {
   /**
    * Adds a column with the specified name and type.
    * Example usage:
@@ -853,7 +857,7 @@ declare class column extends GlobalObject {
    * @example
    * column.add("ATV-0000000000000501", "FILE_LIBRARY");
    */
-  public static add(
+  function add(
     columnName: string,
     columnType: string,
     position?: string
@@ -865,10 +869,7 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static addKeyDrawingExposureAt(
-    columnName: string,
-    frame: int
-  ): boolean;
+  function addKeyDrawingExposureAt(columnName: string, frame: int): boolean;
 
   /**
    * Removes a keyframe from a cell in a column.
@@ -876,14 +877,14 @@ declare class column extends GlobalObject {
    * @param {double} atFrame The frame number where you want to clear the keyframe.
    * @returns {boolean}
    */
-  public static clearKeyFrame(columnName: string, atFrame: double): boolean;
+  function clearKeyFrame(columnName: string, atFrame: double): boolean;
 
   /**
    * Returns the column marker interface for the given column.
    * @param {string} columnName The name of the column for which to get the column marker.
    * @returns {columnMarkers}
    */
-  public static columnMarkers(columnName: string): columnMarkers;
+  function columnMarkers(columnName: string): columnMarkers;
 
   /**
    * Creates an empty drawing in the specified column.
@@ -891,7 +892,7 @@ declare class column extends GlobalObject {
    * @param {string} timing The timing as shown in the xsheet.
    * @returns {boolean}
    */
-  public static createDrawing(columnName: string, timing: string): boolean;
+  function createDrawing(columnName: string, timing: string): boolean;
 
   /**
    * Deletes the drawing at the specified frame in the specified column.
@@ -899,7 +900,7 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static deleteDrawingAt(columnName: string, frame: int): boolean;
+  function deleteDrawingAt(columnName: string, frame: int): boolean;
 
   /**
    * Duplicates the drawing at the specified frame in the specified column.
@@ -907,7 +908,7 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static duplicateDrawingAt(columnName: string, frame: int): boolean;
+  function duplicateDrawingAt(columnName: string, frame: int): boolean;
 
   /**
    * Fill with previous exposed drawings for the given range of frame.
@@ -916,7 +917,7 @@ declare class column extends GlobalObject {
    * @param {int} endFrame The ending frame, just after the last filled frame.
    * @returns {boolean}
    */
-  public static fillEmptyCels(
+  function fillEmptyCels(
     columnName: string,
     startFrame: int,
     endFrame: int
@@ -930,7 +931,7 @@ declare class column extends GlobalObject {
    * @example
    * var colName = column.generateAnonymousName();
    */
-  public static generateAnonymousName(): string;
+  function generateAnonymousName(): string;
 
   /**
    * Returns a timing created for the given column at the given frame.
@@ -939,7 +940,7 @@ declare class column extends GlobalObject {
    * @param {boolean} fileExists True if the file exists already.
    * @returns {string}
    */
-  public static generateTiming(
+  function generateTiming(
     columnName: string,
     forFrame: double,
     fileExists: boolean
@@ -950,14 +951,14 @@ declare class column extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {ColorRGBA}
    */
-  public static getColorForXSheet(columnName: string): ColorRGBA;
+  function getColorForXSheet(columnName: string): ColorRGBA;
 
   /**
    * Retrieves the list of names of timing columns of the given type.
    * @param {string} type The type of column string,i.e."DRAWING".
    * @returns {StringList}
    */
-  public static getColumnListOfType(type: string): StringList;
+  function getColumnListOfType(type: string): StringList;
 
   /**
    * Retrieves the current version of a timing.
@@ -965,7 +966,7 @@ declare class column extends GlobalObject {
    * @param {string} timingName The timing as shown in the xsheet.
    * @returns {int}
    */
-  public static getCurrentVersionForDrawing(
+  function getCurrentVersionForDrawing(
     columnName: string,
     timingName: string
   ): int;
@@ -975,13 +976,13 @@ declare class column extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static getDisplayName(columnName: string): string;
+  function getDisplayName(columnName: string): string;
 
   /**
    * Retrieves the list of names of drawing timing columns.
    * @returns {StringList}
    */
-  public static getDrawingColumnList(): StringList;
+  function getDrawingColumnList(): StringList;
 
   /**
    * Returns the drawing name for the specified column at the specified frame.
@@ -989,14 +990,14 @@ declare class column extends GlobalObject {
    * @param {int} frame The frame number.
    * @returns {string}
    */
-  public static getDrawingName(columnName: string, frame: int): string;
+  function getDrawingName(columnName: string, frame: int): string;
 
   /**
    * Retrieves the list of timings used in a drawing column.
    * @param {string} columnName The name of the column.
    * @returns {StringList}
    */
-  public static getDrawingTimings(columnName: string): StringList;
+  function getDrawingTimings(columnName: string): StringList;
 
   /**
    * Returns a list of all drawing types used in the drawing column. K = key drawings, I = inbetween, B =
@@ -1005,14 +1006,14 @@ declare class column extends GlobalObject {
    * @param {double} atFrame The frame number.
    * @returns {string}
    */
-  public static getDrawingType(columnName: string, atFrame: double): string;
+  function getDrawingType(columnName: string, atFrame: double): string;
 
   /**
    * Returns the element id associated with a drawing column.
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static getElementIdOfDrawing(columnName: string): int;
+  function getElementIdOfDrawing(columnName: string): int;
 
   /**
 * Returns the value of a cell in a column.
@@ -1025,7 +1026,7 @@ Velocity = 4
 * @param {double} atFrame The frame number that you want to retrieve the value from.
 * @returns {string}
 */
-  public static getEntry(
+  function getEntry(
     columnName: string,
     subColumn: int,
     atFrame: double
@@ -1039,7 +1040,7 @@ Velocity = 4
    * @param {int} nbFrames The desired length.
    * @returns {QImage}
    */
-  public static getImageBlock(
+  function getImageBlock(
     columnName: string,
     startFrame: int,
     nbFrames: int
@@ -1051,7 +1052,7 @@ Velocity = 4
    * @param {int} columnNumber This is an integer that represents the numerical value of the column. This integer is between 0 and column.numberOf.
    * @returns {string}
    */
-  public static getName(columnNumber: int): string;
+  function getName(columnNumber: int): string;
 
   /**
    * Returns the next key drawing in a drawing column.
@@ -1059,7 +1060,7 @@ Velocity = 4
    * @param {int} startFrame This is the frame number that specifies the search start point.
    * @returns {int}
    */
-  public static getNextKeyDrawing(columnName: string, startFrame: int): int;
+  function getNextKeyDrawing(columnName: string, startFrame: int): int;
 
   /**
    * Returns the column's position in the XSheet View.
@@ -1067,14 +1068,14 @@ Velocity = 4
    * @param {string} columnName The name of the column to get the position of.
    * @returns {int}
    */
-  public static getPos(columnName: string): int;
+  function getPos(columnName: string): int;
 
   /**
    * Returns the expression text in the identified column.
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static getTextOfExpr(columnName: string): string;
+  function getTextOfExpr(columnName: string): string;
 
   /**
    * Returns an object containing timesheet values for the column and frame requested. That object will
@@ -1084,7 +1085,7 @@ Velocity = 4
    * @param {double} atFrame The frame number.
    * @returns {QScriptValue}
    */
-  public static getTimesheetEntry(
+  function getTimesheetEntry(
     columnName: string,
     subColumn: int,
     atFrame: double
@@ -1098,7 +1099,7 @@ Velocity = 4
    * @param {string} soundFilePath The path to the sound file.
    * @returns {boolean}
    */
-  public static importSound(
+  function importSound(
     columnName: string,
     atFrame: int,
     soundFilePath: string
@@ -1115,7 +1116,7 @@ Velocity = 4
 * @param {double} atFrame The frame number that you want to retrieve the value from.
 * @returns {boolean}
 */
-  public static isKeyFrame(
+  function isKeyFrame(
     columnName: string,
     subColumn: int,
     atFrame: double
@@ -1131,7 +1132,7 @@ Velocity = 4
    * @param {boolean} keyFramesOnly It will perform this operation only on drawings marked as "K" if keyOnly is true.
    * @returns {boolean}
    */
-  public static lineTestFill(
+  function lineTestFill(
     columnName: string,
     startFrame: int,
     nbFrames: int,
@@ -1147,13 +1148,13 @@ Velocity = 4
    * @param {int} columnTo The position the column will be moved to.
    * @returns {void}
    */
-  public static move(columnFrom: int, columnTo: int): void;
+  function move(columnFrom: int, columnTo: int): void;
 
   /**
    * Returns the number of columns in the scene.
    * @returns {int}
    */
-  public static numberOf(): int;
+  function numberOf(): int;
 
   /**
    * Removes duplicate key drawing exposure at the specified frame in the specified column.
@@ -1161,7 +1162,7 @@ Velocity = 4
    * @param {int} frameNumber The frame number.
    * @returns {boolean}
    */
-  public static removeDuplicateKeyDrawingExposureAt(
+  function removeDuplicateKeyDrawingExposureAt(
     columnName: string,
     frameNumber: int
   ): boolean;
@@ -1172,17 +1173,14 @@ Velocity = 4
    * @param {int} frame The frame number.
    * @returns {boolean}
    */
-  public static removeKeyDrawingExposureAt(
-    columnName: string,
-    frame: int
-  ): boolean;
+  function removeKeyDrawingExposureAt(columnName: string, frame: int): boolean;
 
   /**
    * removes the sound column called name from the scene
    * @param {string} columnName The name of the column.
    * @returns {boolean}
    */
-  public static removeSoundColumn(columnName: string): boolean;
+  function removeSoundColumn(columnName: string): boolean;
 
   /**
    * Removes an unlinked function column called name from the scene.
@@ -1190,7 +1188,7 @@ Velocity = 4
    * @param {string} columnName The name of the column.
    * @returns {boolean}
    */
-  public static removeUnlinkedFunctionColumn(columnName: string): boolean;
+  function removeUnlinkedFunctionColumn(columnName: string): boolean;
 
   /**
    * Renames the specified column.
@@ -1198,7 +1196,7 @@ Velocity = 4
    * @param {string} newName The new name of the column.
    * @returns {boolean}
    */
-  public static rename(oldName: string, newName: string): boolean;
+  function rename(oldName: string, newName: string): boolean;
 
   /**
    * Renames the specified drawing to the new name, in the specified column.
@@ -1207,7 +1205,7 @@ Velocity = 4
    * @param {string} newTiming The desired timing as shown in the xsheet.
    * @returns {boolean}
    */
-  public static renameDrawing(
+  function renameDrawing(
     columnName: string,
     oldTiming: string,
     newTiming: string
@@ -1220,7 +1218,7 @@ Velocity = 4
    * @param {string} prefix The new prefix.
    * @returns {boolean}
    */
-  public static renameDrawingWithPrefix(
+  function renameDrawingWithPrefix(
     columnName: string,
     oldTiming: string,
     prefix: string
@@ -1235,13 +1233,13 @@ Velocity = 4
    * var colId = node.linkedColumn(nodeName, "DRAWING.ELEMENT");
    * column.resetColorForXSheet(colId);
    */
-  public static resetColorForXSheet(columnName: string): void;
+  function resetColorForXSheet(columnName: string): void;
 
   /**
    * Returns the name of the selected column in the XSheet view, including annotation columns.
    * @returns {string}
    */
-  public static selected(): string;
+  function selected(): string;
 
   /**
    * Sets the colour for an Xsheet column.
@@ -1253,7 +1251,7 @@ Velocity = 4
    * var c = new ColorRGBA(255, 0, 0);
    * column.setColorForXSheet("Drawing", c);
    */
-  public static setColorForXSheet(columnName: string, color: ColorRGBA): void;
+  function setColorForXSheet(columnName: string, color: ColorRGBA): void;
 
   /**
    * Sets the Drawing type at frame f from column col to be newType.
@@ -1263,7 +1261,7 @@ Velocity = 4
    * @param {string} drawingType K = key drawings, I = inbetween, B = breakdown.
    * @returns {void}
    */
-  public static setDrawingType(
+  function setDrawingType(
     columnName: string,
     atFrame: double,
     drawingType: string
@@ -1275,10 +1273,7 @@ Velocity = 4
    * @param {int} elementId The id of the element you want to link to the column.
    * @returns {boolean}
    */
-  public static setElementIdOfDrawing(
-    columnName: string,
-    elementId: int
-  ): boolean;
+  function setElementIdOfDrawing(columnName: string, elementId: int): boolean;
 
   /**
    * Sets the value of a cell in a column.
@@ -1291,7 +1286,7 @@ Velocity = 4
    * @example
    * column.setEntry("ATV-0000000000000501", 1, 1, "scripts");
    */
-  public static setEntry(
+  function setEntry(
     columnName: string,
     subColumn: int,
     atFrame: double,
@@ -1304,7 +1299,7 @@ Velocity = 4
    * @param {double} atFrame The frame number where you want to set the keyframe.
    * @returns {boolean}
    */
-  public static setKeyFrame(columnName: string, atFrame: double): boolean;
+  function setKeyFrame(columnName: string, atFrame: double): boolean;
 
   /**
    * Sets the value in the Expression column to the specified text.
@@ -1312,7 +1307,7 @@ Velocity = 4
    * @param {string} text The expression text.
    * @returns {boolean}
    */
-  public static setTextOfExpr(columnName: string, text: string): boolean;
+  function setTextOfExpr(columnName: string, text: string): boolean;
 
   /**
    * Returns a column object that contains a reference to that sound column. The column object contains a
@@ -1320,7 +1315,7 @@ Velocity = 4
    * @param {string} columnName The name of the sound column.
    * @returns {soundColumnInterface}
    */
-  public static soundColumn(columnName: string): soundColumnInterface;
+  function soundColumn(columnName: string): soundColumnInterface;
 
   /**
    * This function returns the column type.
@@ -1330,14 +1325,14 @@ Velocity = 4
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static type(columnName: string): string;
+  function type(columnName: string): string;
 
   /**
    * Updates the XSheet with all newly added and moved columns.
    * update() needs to be called before moving a newly added column.
    * @returns {void}
    */
-  public static update(): void;
+  function update(): void;
 
   /**
    * This function returns the column type of nested velocity.
@@ -1346,7 +1341,7 @@ Velocity = 4
    * @param {string} columnName The name of the column.
    * @returns {string}
    */
-  public static velocityType(columnName: string): string;
+  function velocityType(columnName: string): string;
 }
 
 /**
@@ -1478,7 +1473,7 @@ declare class columnMarkers {
  * @example
  * var composition = composition.buildDefaultCompositionOrder();
  */
-declare class compositionOrder extends GlobalObject {
+declare namespace compositionOrder {
   /**
    * Returns an array of Composition objects using the specified display name.
    * This method is similar to buildDefaultCompositionOrder(), however, instead of working with the
@@ -1487,9 +1482,7 @@ declare class compositionOrder extends GlobalObject {
    * @param {string} displayNode The display module name to build the array of Composition objects from.
    * @returns {QScriptValue}
    */
-  public static buildCompositionOrderForDisplay(
-    displayNode: string
-  ): QScriptValue;
+  function buildCompositionOrderForDisplay(displayNode: string): QScriptValue;
 
   /**
    * Returns an array of Composition objects using the current default composition order as used by the
@@ -1500,14 +1493,14 @@ declare class compositionOrder extends GlobalObject {
    * nodes have a depth at 0. Child of this node will have a depth 1 level greater.
    * @returns {QScriptValue}
    */
-  public static buildDefaultCompositionOrder(): QScriptValue;
+  function buildDefaultCompositionOrder(): QScriptValue;
 }
 
 /**
  * The copyPaste JavaScript global object. Copy paste to/from templates.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classcopyPaste.html}
  */
-declare class copyPaste extends GlobalObject {
+declare namespace copyPaste {
   /**
    * Create an object that represent a 'copy' of a selection of nodes and a range of frames.
    * Create an object that represent a 'copy' of a selection of nodes and a range of frames. This object
@@ -1519,7 +1512,7 @@ declare class copyPaste extends GlobalObject {
    * @param {CopyOptions} createOption Options that should be used when doing the creating the copy. See CopyOptions for more information about these options.
    * @returns {DragObject}
    */
-  public static copy(
+  function copy(
     selectionOfNodes: StringList,
     startFrame: int,
     numFrames: int,
@@ -1534,7 +1527,7 @@ declare class copyPaste extends GlobalObject {
    * @param {CopyOptions} createOption - options that should be used when doing the code. See CopyOptions for more information about these options.
    * @returns {DragObject}
    */
-  public static copyFromTemplate(
+  function copyFromTemplate(
     filename: string,
     startFrame: int,
     numFrames: int,
@@ -1549,7 +1542,7 @@ declare class copyPaste extends GlobalObject {
    * @param {string} path The location of the new template.
    * @returns {string}
    */
-  public static createTemplateFromSelection(name: string, path: string): string;
+  function createTemplateFromSelection(name: string, path: string): string;
 
   /**
    * Returns a copy of the current copy options.
@@ -1557,14 +1550,14 @@ declare class copyPaste extends GlobalObject {
    * drag&drop
    * @returns {CopyOptions}
    */
-  public static getCurrentCreateOptions(): CopyOptions;
+  function getCurrentCreateOptions(): CopyOptions;
 
   /**
    * Returns a copy of the current paste options.
    * To be used with paste()
    * @returns {PasteOptions}
    */
-  public static getCurrentPasteOptions(): PasteOptions;
+  function getCurrentPasteOptions(): PasteOptions;
 
   /**
    * Pastes the drag object as an action template. Must paste over a selection of nodes. No new nodes are
@@ -1576,7 +1569,7 @@ declare class copyPaste extends GlobalObject {
    * @param {PasteOptions} pasteOptions Options that should be used when pasting. See PasteOptions for more information about these options.
    * @returns {boolean}
    */
-  public static paste(
+  function paste(
     dragObject: DragObject,
     selectionOfNodes: StringList,
     startFrame: int,
@@ -1592,7 +1585,7 @@ declare class copyPaste extends GlobalObject {
    * @param {QScriptValue} [compositionOptions={}] Defines how to handle the selection of nodes onto which to paste. Separately controls to paste of groups, effects and composite nodes when building the selection. Default value: { "groups": true, "effects": true, "composites": false }
    * @returns {boolean}
    */
-  public static pasteActionTemplateIntoNode(
+  function pasteActionTemplateIntoNode(
     srcPath: string,
     nodeName: string,
     insertFrame: int,
@@ -1607,7 +1600,7 @@ declare class copyPaste extends GlobalObject {
    * @param {PasteOptions} pasteOptions - paste special options (ie. create keyframes, drawings, new columns, or relink columns,.... - see paste special dialog and PasteOptions).
    * @returns {boolean}
    */
-  public static pasteNewNodes(
+  function pasteNewNodes(
     dragObject: DragObject,
     groupWhereToDrop: string,
     pasteOptions: PasteOptions
@@ -1620,7 +1613,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} insertFrame The frame at which insert commences.
    * @returns {boolean}
    */
-  public static pasteTemplateIntoGroup(
+  function pasteTemplateIntoGroup(
     srcPath: string,
     groupName: string,
     insertFrame: int
@@ -1633,7 +1626,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} insertFrame The frame at which insert commences.
    * @returns {boolean}
    */
-  public static pasteTemplateIntoScene(
+  function pasteTemplateIntoScene(
     templateSrcPath: string,
     insertColumnName: string,
     insertFrame: int
@@ -1643,14 +1636,14 @@ declare class copyPaste extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {void}
    */
-  public static registerObjects(engine: QScriptEngine): void;
+  function registerObjects(engine: QScriptEngine): void;
 
   /**
    * PasteSpecial Structure value. Default value is false.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setExtendScene(flag: boolean): void;
+  function setExtendScene(flag: boolean): void;
 
   /**
    * When pasting an external template or local content, this functions controls the number of frames of
@@ -1662,42 +1655,42 @@ declare class copyPaste extends GlobalObject {
    * @param {int} nFrames The number of frames that the content will be pasted.
    * @returns {void}
    */
-  public static setNumFramesSrc(nFrames: int): void;
+  function setNumFramesSrc(nFrames: int): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveAngleKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveAngleKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveMotionKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveMotionKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveScalingKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveScalingKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveSkewKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveSkewKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialAddRemoveVelocityKeyFrame(flag: boolean): void;
+  function setPasteSpecialAddRemoveVelocityKeyFrame(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is REUSE_PALETTES.
@@ -1708,35 +1701,35 @@ declare class copyPaste extends GlobalObject {
    * @param {string} mode The Color Palette Option mode.
    * @returns {void}
    */
-  public static setPasteSpecialColorPaletteOption(mode: string): void;
+  function setPasteSpecialColorPaletteOption(mode: string): void;
 
   /**
    * Set to true to copy the model directory.
    * @param {boolean} copy Whether or not to copy the model directory.
    * @returns {void}
    */
-  public static setPasteSpecialCopyModelDir(copy: boolean): void;
+  function setPasteSpecialCopyModelDir(copy: boolean): void;
 
   /**
    * Set to true to copy the scan files associated to the selected drawings.
    * @param {boolean} copy Whether or not to copy the scan files associated to the selected drawings.
    * @returns {void}
    */
-  public static setPasteSpecialCopyScanFiles(copy: boolean): void;
+  function setPasteSpecialCopyScanFiles(copy: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is false.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialCreateNewColumn(flag: boolean): void;
+  function setPasteSpecialCreateNewColumn(flag: boolean): void;
 
   /**
    * Use this when you want the camera in a template to be set as default camera in the target scene.
    * @param {boolean} flag Whether or not to set the camera in the template to be set as the default camera in the target scene.
    * @returns {void}
    */
-  public static setPasteSpecialDefaultCameraName(flag?: boolean): void;
+  function setPasteSpecialDefaultCameraName(flag?: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is ADD_OR_REMOVE_EXPOSURE.
@@ -1744,7 +1737,7 @@ declare class copyPaste extends GlobalObject {
    * @param {"DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"} mode The Drawing Action mode.
    * @returns {void}
    */
-  public static setPasteSpecialDrawingAction(
+  function setPasteSpecialDrawingAction(
     mode: "DO_NOTHING" | "ADD_OR_REMOVE_EXPOSURE" | "UPDATE_PIVOT"
   ): void;
 
@@ -1754,7 +1747,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} keyFrameMode Whether or not to enable key frame mode.
    * @returns {void}
    */
-  public static setPasteSpecialDrawingAutomaticExtendExposure(
+  function setPasteSpecialDrawingAutomaticExtendExposure(
     extendExposure: boolean,
     keyFrameMode: boolean
   ): void;
@@ -1768,7 +1761,7 @@ declare class copyPaste extends GlobalObject {
    * @param {"NEVER_CREATE"|"ONLY_CREATE_IF_DOES_NOT_EXIST"|"ALWAYS_CREATE"|"ALWAYS_CREATE_AND_VERSION_IF_NECESSARY"} mode The Drawing File mode.
    * @returns {void}
    */
-  public static setPasteSpecialDrawingFileMode(
+  function setPasteSpecialDrawingFileMode(
     mode:
       | "NEVER_CREATE"
       | "ONLY_CREATE_IF_DOES_NOT_EXIST"
@@ -1784,14 +1777,14 @@ declare class copyPaste extends GlobalObject {
    * @param {string} mode
    * @returns {void}
    */
-  public static setPasteSpecialElementTimingColumnMode(mode: string): void;
+  function setPasteSpecialElementTimingColumnMode(mode: string): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialForcesKeyFrameAtBegAndEnd(flag: boolean): void;
+  function setPasteSpecialForcesKeyFrameAtBegAndEnd(flag: boolean): void;
 
   /**
    * Use this when you want to control the paste of all non animate attributes and all local values of a
@@ -1800,7 +1793,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} flag Whether or not to control the paste of all non animate attributes and all local values of a node.
    * @returns {void}
    */
-  public static setPasteSpecialFullTransfer(flag: boolean): void;
+  function setPasteSpecialFullTransfer(flag: boolean): void;
 
   /**
    * Use this when you want to paste a template and use the actual node names for matching nodes instead
@@ -1810,28 +1803,28 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} flag Whether or not to use the actual node names for matching nodes when pasting a template.
    * @returns {void}
    */
-  public static setPasteSpecialMatchNodeName(flag: boolean): void;
+  function setPasteSpecialMatchNodeName(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is false.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialOffsetKeyFrames(flag: boolean): void;
+  function setPasteSpecialOffsetKeyFrames(flag: boolean): void;
 
   /**
    * PasteSpecial Structure value. Default value is true.
    * @param {boolean} flag The new value.
    * @returns {void}
    */
-  public static setPasteSpecialReplaceExpressionColumns(flag: boolean): void;
+  function setPasteSpecialReplaceExpressionColumns(flag: boolean): void;
 
   /**
    * Set to true to keep timed values names intact, even if cloned i.e. Drawing(3).
    * @param {boolean} preserve Whether or not to keep timed values names intact.
    * @returns {void}
    */
-  public static setPasteSpecialTVPreserveName(preserve: boolean): void;
+  function setPasteSpecialTVPreserveName(preserve: boolean): void;
 
   /**
    * When pasting an external template or local content, this functions controls the start frame of the
@@ -1842,7 +1835,7 @@ declare class copyPaste extends GlobalObject {
    * @param {int} startFrame The frame to start at when pasting an external template or local content.
    * @returns {void}
    */
-  public static setStartFrameSrc(startFrame: int): void;
+  function setStartFrameSrc(startFrame: int): void;
 
   /**
    * Allows 2 extra options in the template creation.
@@ -1852,7 +1845,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} [includeDefaultCameraName=true] Deprecated in 7.8. As long as the camera node is in the selection, it will be copied into the template automatically.
    * @returns {void}
    */
-  public static useCreateTemplateSpecial(
+  function useCreateTemplateSpecial(
     flag: boolean,
     addModellingDir?: boolean,
     addScanFiles?: boolean,
@@ -1873,7 +1866,7 @@ declare class copyPaste extends GlobalObject {
    * @param {boolean} flag True to enable PasteSpecial.
    * @returns {void}
    */
-  public static usePasteSpecial(flag: boolean): void;
+  function usePasteSpecial(flag: boolean): void;
 }
 
 /**
@@ -1895,7 +1888,7 @@ declare class copyPaste extends GlobalObject {
  *     }
  * }
  */
-declare class Drawing extends GlobalObject {
+declare namespace Drawing {
   /**
    * Creates a new drawing inside an element.
    * Create a new empty drawing inside the given element. The drawing file will physically exists in the
@@ -1925,7 +1918,7 @@ declare class Drawing extends GlobalObject {
    * var drawingColumn = node.linkedColumn(nodePath, "DRAWING.ELEMENT");
    * column.setEntry(drawingColumn, 1, frame.current(), exposure);
    */
-  public static create(
+  function create(
     elementId: int,
     timing: string,
     fileExists?: boolean,
@@ -1940,7 +1933,7 @@ declare class Drawing extends GlobalObject {
    * @param {string} drawingName The drawing name.
    * @returns {string}
    */
-  public static filename(elementId: int, drawingName: string): string;
+  function filename(elementId: int, drawingName: string): string;
 
   /**
    * Returns true if the given drawing exists in this element.
@@ -1948,7 +1941,7 @@ declare class Drawing extends GlobalObject {
    * @param {string} timing The drawing name.
    * @returns {boolean}
    */
-  public static isExists(elementId: int, timing: string): boolean;
+  function isExists(elementId: int, timing: string): boolean;
 
   /**
    * Create a drawing key which can be used to test the availability of a drawing.
@@ -1965,7 +1958,7 @@ declare class Drawing extends GlobalObject {
    * if (!drawingKey.isValid)
    *     return;
    */
-  public static Key(object: QScriptValue): QScriptValue;
+  function Key(object: QScriptValue): QScriptValue;
 
   /**
    * Returns the drawing id.
@@ -1973,14 +1966,14 @@ declare class Drawing extends GlobalObject {
    * @param {int} drawingIndex The drawing index.
    * @returns {string}
    */
-  public static name(elementId: int, drawingIndex: int): string;
+  function name(elementId: int, drawingIndex: int): string;
 
   /**
    * Returns the number of drawings in the element.
    * @param {int} elementId The unique id of the element.
    * @returns {int}
    */
-  public static numberOf(elementId: int): int;
+  function numberOf(elementId: int): int;
 }
 
 /**
@@ -1991,7 +1984,7 @@ declare class Drawing extends GlobalObject {
  * params.applyAllDrawings = true;
  * DrawingTools.extractCenterline(DrawingTools.lineArt, DrawingTools.colourArt, params);
  */
-declare class DrawingTools extends GlobalObject {
+declare namespace DrawingTools {
   /**
    * Changes the bitmap layer resolution of a given drawing.
    * The example below uses DrawingTools.changeDrawingBitmapLayerResolution(..) to change all art layers
@@ -2011,7 +2004,7 @@ declare class DrawingTools extends GlobalObject {
    *     art: [2]
    * });
    */
-  public static changeDrawingBitmapLayerResolution(
+  function changeDrawingBitmapLayerResolution(
     drawingKey: QScriptValue,
     pixelPerModelUnit: double,
     options?: QScriptValue
@@ -2036,7 +2029,7 @@ declare class DrawingTools extends GlobalObject {
    *     art: [0, 1, 2, 3]
    * });
    */
-  public static changeDrawingVectorLayerResolution(
+  function changeDrawingVectorLayerResolution(
     drawingKey: QScriptValue,
     pixelPerModelUnit: double,
     options?: QScriptValue
@@ -2049,14 +2042,14 @@ declare class DrawingTools extends GlobalObject {
    * @param {QVariant} config
    * @returns {boolean}
    */
-  public static clearArt(config: QVariant): boolean;
+  function clearArt(config: QVariant): boolean;
 
   /**
    * Computes the breaking triangles of the current layer using params.
    * @param {DrawingToolParams} [params=0] The DrawingToolParams.
    * @returns {void}
    */
-  public static computeBreakingTriangles(params?: DrawingToolParams): void;
+  function computeBreakingTriangles(params?: DrawingToolParams): void;
 
   /**
    * Converts the selected pencil lines in layer of the current drawing using params.
@@ -2064,10 +2057,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {DrawingToolParams} [params=0] The DrawingToolParams.
    * @returns {void}
    */
-  public static convertPencilToBrush(
-    art?: int,
-    params?: DrawingToolParams
-  ): void;
+  function convertPencilToBrush(art?: int, params?: DrawingToolParams): void;
 
   /**
    * Extracts the centerline from srcArt and puts the extracted line in dstArt using params.
@@ -2076,7 +2066,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {DrawingToolParams} [params=0] The DrawingToolParams.
    * @returns {void}
    */
-  public static extractCenterline(
+  function extractCenterline(
     srcArt?: int,
     dstArt?: int,
     params?: DrawingToolParams
@@ -2088,14 +2078,14 @@ declare class DrawingTools extends GlobalObject {
    * @param {QVariant} config
    * @returns {boolean}
    */
-  public static flatten(config: QVariant): boolean;
+  function flatten(config: QVariant): boolean;
 
   /**
    * Returns an array containing the set of colour ids used by the drawing.
    * @param {QScriptValue} drawingKey A key identifying a drawing from a file, an exposure on an element node or drawing of an element.
    * @returns {QScriptValue}
    */
-  public static getDrawingUsedColors(drawingKey: QScriptValue): QScriptValue;
+  function getDrawingUsedColors(drawingKey: QScriptValue): QScriptValue;
 
   /**
    * Returns an array of objects describing the set of colour ids used by the drawing along with the
@@ -2108,7 +2098,7 @@ declare class DrawingTools extends GlobalObject {
    *     "colorSource": < "COLOR" | "PENCIL_TEXTURE" >
    * }
    */
-  public static getDrawingUsedColorsWithSource(
+  function getDrawingUsedColorsWithSource(
     drawingKey: QScriptValue
   ): QScriptValue;
 
@@ -2117,7 +2107,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {QScriptValue} drawingKeyArray An array of keys identifying a drawing from a file, an exposure on an element node or drawing of an element.
    * @returns {QScriptValue}
    */
-  public static getMultipleDrawingsUsedColors(
+  function getMultipleDrawingsUsedColors(
     drawingKeyArray: QScriptValue
   ): QScriptValue;
 
@@ -2127,7 +2117,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {QVariant} config
    * @returns {boolean}
    */
-  public static optimize(config: QVariant): boolean;
+  function optimize(config: QVariant): boolean;
 
   /**
    * Recolours the drawing identified by a drawing key.
@@ -2139,7 +2129,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {QScriptValue} colorMap
    * @returns {void}
    */
-  public static recolorDrawing(
+  function recolorDrawing(
     drawingKey: QScriptValue,
     colorMap: QScriptValue
   ): void;
@@ -2149,14 +2139,14 @@ declare class DrawingTools extends GlobalObject {
    * @param {int} currentArt
    * @returns {void}
    */
-  public static setCurrentArt(currentArt: int): void;
+  function setCurrentArt(currentArt: int): void;
 
   /**
    * @param {string} columnName The name of the column to start the drawing at.
    * @param {int} [frame=1] The frame number to set the current drawing at.
    * @returns {boolean}
    */
-  public static setCurrentDrawingFromColumnName(
+  function setCurrentDrawingFromColumnName(
     columnName: string,
     frame?: int
   ): boolean;
@@ -2167,7 +2157,7 @@ declare class DrawingTools extends GlobalObject {
    * @param {int} [frame=1] The frame number to set the current drawing at.
    * @returns {boolean}
    */
-  public static setCurrentDrawingFromNodeName(
+  function setCurrentDrawingFromNodeName(
     nodeName: string,
     frame?: int
   ): boolean;
@@ -2252,37 +2242,37 @@ declare class DrawingTools extends GlobalObject {
    *              scene.endUndoRedoAccum();
    *          }
    */
-  public static vectorize(): QVariant;
+  function vectorize(): QVariant;
 
   /**
    * Returns the mask for all 4 art layers.
    * @returns {int}
    */
-  static allArts: int;
+  var allArts: int;
 
   /**
    * Returns the colourArt mask.
    * @returns {int}
    */
-  static colourArt: int;
+  var colourArt: int;
 
   /**
    * Returns the lineArt mask.
    * @returns {int}
    */
-  static lineArt: int;
+  var lineArt: int;
 
   /**
    * Returns the overlayArt mask.
    * @returns {int}
    */
-  static overlayArt: int;
+  var overlayArt: int;
 
   /**
    * Returns the underlayArt mask.
    * @returns {int}
    */
-  static underlayArt: int;
+  var underlayArt: int;
 }
 
 /**
@@ -2299,7 +2289,7 @@ declare class DrawingTools extends GlobalObject {
  *     var id = element.add("newDrawing", "BW", 12, "TVG", "SCAN");
  * }
  */
-declare class element extends GlobalObject {
+declare namespace element {
   /**
    * Creates a new element. Returns the element id of the newly added element if successful, otherwise it
    * returns -1.
@@ -2313,7 +2303,7 @@ declare class element extends GlobalObject {
    * // Create a new element to hold TVGs
    * var elementId = element.add("MyElement", "COLOR", 12, "SCAN", "TVG");
    */
-  public static add(
+  function add(
     name: string,
     scanType: string,
     fieldChart: double,
@@ -2328,7 +2318,7 @@ declare class element extends GlobalObject {
    * @param {int} elementId The unique id of the elements.
    * @returns {string}
    */
-  public static completeFolder(elementId: int): string;
+  function completeFolder(elementId: int): string;
 
   /**
    * This function returns the field chart size for a given element. The element ID must be provided. The
@@ -2336,7 +2326,7 @@ declare class element extends GlobalObject {
    * @param {int} elementId The unique id of the element.
    * @returns {double}
    */
-  public static fieldChart(elementId: int): double;
+  function fieldChart(elementId: int): double;
 
   /**
    * Returns the actual element folder. This is normally the element name (unless it has been renamed and
@@ -2345,21 +2335,21 @@ declare class element extends GlobalObject {
    * @param {int} elementId The unique id of the element.
    * @returns {string}
    */
-  public static folder(elementId: int): string;
+  function folder(elementId: int): string;
 
   /**
    * Returns the current element name.
    * @param {int} elementId The unique id of the element.
    * @returns {string}
    */
-  public static getNameById(elementId: int): string;
+  function getNameById(elementId: int): string;
 
   /**
    * Returns the id (key) of the element.
    * @param {int} elementIndex An integer from 0 to the value returned by the function element.numberOf, representing the index number of the element. The id and the index are not always the same value.
    * @returns {int}
    */
-  public static id(elementIndex: int): int;
+  function id(elementIndex: int): int;
 
   /**
    * Changes the attributes of the folder of element elem.
@@ -2370,7 +2360,7 @@ declare class element extends GlobalObject {
    * @param {int} vectorType 0 (None), 1 (PNT) or 2 (TVG).
    * @returns {boolean}
    */
-  public static modify(
+  function modify(
     elementId: int,
     scanType: string,
     fieldChart: double,
@@ -2382,7 +2372,7 @@ declare class element extends GlobalObject {
    * Returns the number of elements in the scene.
    * @returns {int}
    */
-  public static numberOf(): int;
+  function numberOf(): int;
 
   /**
    * Returns the actual name of the drawings. This is different that the element name if this one has
@@ -2390,14 +2380,14 @@ declare class element extends GlobalObject {
    * @param {int} elementId The unique id of the element.
    * @returns {string}
    */
-  public static physicalName(elementId: int): string;
+  function physicalName(elementId: int): string;
 
   /**
    * Returns the pixmap format for the provided element ID.
    * @param {int} elementId The unique id of the element.
    * @returns {string}
    */
-  public static pixmapFormat(elementId: int): string;
+  function pixmapFormat(elementId: int): string;
 
   /**
    * Removes the given element. Optionally delete the disk files. This function returns true when
@@ -2406,7 +2396,7 @@ declare class element extends GlobalObject {
    * @param {boolean} deleteDiskFile Optionally, delete the element from the disk.
    * @returns {boolean}
    */
-  public static remove(elementId: int, deleteDiskFile: boolean): boolean;
+  function remove(elementId: int, deleteDiskFile: boolean): boolean;
 
   /**
    * Renames an existing element. The element ID must be provided.
@@ -2423,7 +2413,7 @@ declare class element extends GlobalObject {
    * var newElementName = "MyNewElementName";
    * element.renameById(elementId, newElementName);
    */
-  public static renameById(elementId: int, name: string): boolean;
+  function renameById(elementId: int, name: string): boolean;
 
   /**
    * Returns a string that is the scan type of the element. The scan type is either: COLOR, GRAY_SCALE or
@@ -2431,7 +2421,7 @@ declare class element extends GlobalObject {
    * @param {int} elementId The unique id of the element.
    * @returns {string}
    */
-  public static scanType(elementId: int): string;
+  function scanType(elementId: int): string;
 
   /**
    * This function returns the vector type for the given element. For standard vector or Toon Boom bitmap
@@ -2442,7 +2432,7 @@ declare class element extends GlobalObject {
    * @param {int} elementId The unique id of the element.
    * @returns {int}
    */
-  public static vectorType(elementId: int): int;
+  function vectorType(elementId: int): int;
 }
 
 /**
@@ -2479,12 +2469,12 @@ declare class element extends GlobalObject {
  *
  * MessageBox.information("Palette list exported to: " + exportFile);
  */
-declare class exporter extends GlobalObject {
+declare namespace exporter {
   /**
    * Removes all files from the project export directory.
    * @returns {void}
    */
-  public static cleanExportDir(): void;
+  function cleanExportDir(): void;
 
   /**
 * Render the scene and export an animated GIF from its rendering.
@@ -2527,39 +2517,39 @@ loop  bool  (Optional) Set the animation to loop. true by default.
 *                 MessageBox.critical(err.message);
 *             }
 */
-  public static exportGIF(params?: {
+  function exportGIF(params?: {
     /**
      * The complete file path to the generated animated GIF.
      */
-    fileName: string;
+    fileName?: string;
     /**
      * (Optional) The display node name. The default display is used if the property isn't specified or if it is an empty string.
      */
-    displayName: string;
+    displayName?: string;
     /**
      * (Optional) The first frame to be exported. The first frame of the scene if the property isn't specified or if it is set to 0.
      */
-    startFrame: int;
+    startFrame?: int;
     /**
      * (Optional) The last frame to be exported. The last frame of the scene if the property isn't specified or if it is set to 0.
      */
-    stopFrame: int;
+    stopFrame?: int;
     /**
      * (Optional) The horizontal pixel resolution. The x resolution of the scene if 0 or not specified.
      */
-    resX: int;
+    resX?: int;
     /**
      * (Optional) The vertical pixel resolution. The y resolution of the scene if 0 or not specified.
      */
-    resY: int;
+    resY?: int;
     /**
      * (Optional) The dithering to use. exporter.None if not specified.
      */
-    dith: int;
+    dith?: int;
     /**
      * (Optional) Set the animation to loop. true by default.
      */
-    loop: boolean;
+    loop?: boolean;
   }): QScriptValue;
 
   /**
@@ -2573,7 +2563,7 @@ loop  bool  (Optional) Set the animation to loop. true by default.
    * @param {int} [resY=-1] The vertical resolution default to preview resolution if -1.
    * @returns {void}
    */
-  public static exportOGLToQuicktime(
+  function exportOGLToQuicktime(
     fileName: string,
     dstPath: string,
     startFrame?: int,
@@ -2596,7 +2586,7 @@ loop  bool  (Optional) Set the animation to loop. true by default.
    * @param {int} thumbnailFrame The frame to use for the thumbnail.
    * @returns {boolean}
    */
-  public static exportToQuicktime(
+  function exportToQuicktime(
     displayName: string,
     startFrame?: int,
     lastFrame?: int,
@@ -2613,14 +2603,14 @@ loop  bool  (Optional) Set the animation to loop. true by default.
    * Returns the path of the project export directory.
    * @returns {string}
    */
-  public static getExportDir(): string;
+  function getExportDir(): string;
 }
 
 /**
  * The FileDialog JavaScript global object. A simplified version of the Qt file dialogs.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classFileDialog.html}
  */
-declare class FileDialog extends GlobalObject {
+declare namespace FileDialog {
   /**
    * Function that will return an existing directory selected by the user.
    * @param {string} [dir=String::null] The directory to open the file dialog to.
@@ -2628,7 +2618,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getExistingDirectory(
+  function getExistingDirectory(
     dir?: string,
     title?: string,
     parent?: QWidget
@@ -2641,7 +2631,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getOpenFileName(
+  function getOpenFileName(
     filter?: string,
     title?: string,
     parent?: QWidget
@@ -2655,7 +2645,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {StringList}
    */
-  public static getOpenFileNames(
+  function getOpenFileNames(
     dir?: string,
     filter?: string,
     title?: string,
@@ -2669,7 +2659,7 @@ declare class FileDialog extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getSaveFileName(
+  function getSaveFileName(
     filter?: string,
     title?: string,
     parent?: QWidget
@@ -2680,13 +2670,13 @@ declare class FileDialog extends GlobalObject {
  * The fileMapper JavaScript global object. Map paths from one format to another.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classfileMapper.html}
  */
-declare class fileMapper extends GlobalObject {
+declare namespace fileMapper {
   /**
    * Converts a URL to a path of the form eg. /usadata000/[job]/scene-[scene]/[remainder...].
    * @param {string} url The url to convert.
    * @returns {string}
    */
-  public static fileURLToPath(url: string): string;
+  function fileURLToPath(url: string): string;
 
   /**
    * Returns the complete path of the passed path resolving shortcuts in windows. Will also convert the
@@ -2699,7 +2689,7 @@ declare class fileMapper extends GlobalObject {
    * @example
    * var remapped = fileMapper.toNativePath("/usadata000/file.txt");
    */
-  public static toNativePath(path: string): string;
+  function toNativePath(path: string): string;
 
   /**
    * Converts a path of the form /USA_DB/jobs/[job]/scene-[scene]/[remainder...] to eg.
@@ -2714,7 +2704,7 @@ declare class fileMapper extends GlobalObject {
    * @example
    * /USA_DB/jobs / [job] / scene - [scene] / [remainder...]
    */
-  public static toScenePath(path: string): string;
+  function toScenePath(path: string): string;
 }
 
 /**
@@ -2747,19 +2737,19 @@ declare class fileMapper extends GlobalObject {
  *     }
  * }
  */
-declare class frame extends GlobalObject {
+declare namespace frame {
   /**
    * Returns the number of the current frame.
    * @returns {int}
    */
-  public static current(): int;
+  function current(): int;
 
   /**
    * Returns if marker exists at this frame.
    * @param {int} frame current frame
    * @returns {boolean}
    */
-  public static hasTimelineMarker(frame: int): boolean;
+  function hasTimelineMarker(frame: int): boolean;
 
   /**
 * Inserts frames at the selected frame number.
@@ -2780,18 +2770,18 @@ extend_exposure  false  Extend the exposure of existing drawings when inserting 
 * };
 * frame.insert(3, 7, options);
 */
-  public static insert(
+  function insert(
     atFrame: int,
     nbFrames: int,
     options?: {
       /**
        * Move the scene markers down the scene when inserting frames.
        */
-      ripple_markers: false;
+      ripple_markers?: false;
       /**
        * Extend the exposure of existing drawings when inserting frames.
        */
-      extend_exposure: false;
+      extend_exposure?: false;
     }
   ): boolean;
 
@@ -2799,7 +2789,7 @@ extend_exposure  false  Extend the exposure of existing drawings when inserting 
    * Returns the number of frames in the scene.
    * @returns {int}
    */
-  public static numberOf(): int;
+  function numberOf(): int;
 
   /**
 * Deletes frames starting from the selected frame number.
@@ -2818,14 +2808,14 @@ ripple_markers  false  Trim and/or delete the scene markers when removing frames
 * };
 * frame.remove(7, 3, options);
 */
-  public static remove(
+  function remove(
     atFrame: int,
     nbFrames: int,
     options?: {
       /**
        * Trim and/or delete the scene markers when removing frames.
        */
-      ripple_markers: false;
+      ripple_markers?: false;
     }
   ): boolean;
 
@@ -2834,28 +2824,28 @@ ripple_markers  false  Trim and/or delete the scene markers when removing frames
    * @param {int} frame The new current frame
    * @returns {void}
    */
-  public static setCurrent(frame: int): void;
+  function setCurrent(frame: int): void;
 
   /**
    * Returns markers length.
    * @param {int} frame current frame
    * @returns {int}
    */
-  public static timelineMarkerLength(frame: int): int;
+  function timelineMarkerLength(frame: int): int;
 
   /**
    * Returns markers text.
    * @param {int} frame current frame
    * @returns {string}
    */
-  public static timelineMarkerNote(frame: int): string;
+  function timelineMarkerNote(frame: int): string;
 
   /**
    * Returns markers start frame.
    * @param {int} frame current frame
    * @returns {int}
    */
-  public static timelineMarkerStart(frame: int): int;
+  function timelineMarkerStart(frame: int): int;
 }
 
 /**
@@ -2907,7 +2897,7 @@ ripple_markers  false  Trim and/or delete the scene markers when removing frames
  *         MessageLog.trace("Error creating point on ease");
  * }
  */
-declare class func extends GlobalObject {
+declare namespace func {
   /**
    * Adds a keyframe after a point on a 3D Path and sets the X, Y and Z values, as well as the tension,
    * continuity and bias.
@@ -2921,7 +2911,7 @@ declare class func extends GlobalObject {
    * @param {double} bias The bias value of the keyframe.
    * @returns {boolean}
    */
-  public static addCtrlPointAfterPath3d(
+  function addCtrlPointAfterPath3d(
     columnName: string,
     point: int,
     x: double,
@@ -2945,7 +2935,7 @@ declare class func extends GlobalObject {
    * @param {double} bias The bias value of the keyframe.
    * @returns {boolean}
    */
-  public static addKeyFramePath3d(
+  function addKeyFramePath3d(
     columnName: string,
     frame: int,
     x: double,
@@ -2962,7 +2952,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static angleEaseIn(columnName: string, point: int): double;
+  function angleEaseIn(columnName: string, point: int): double;
 
   /**
    * Returns the angle of the ease-out handle.
@@ -2970,7 +2960,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static angleEaseOut(columnName: string, point: int): double;
+  function angleEaseOut(columnName: string, point: int): double;
 
   /**
    * Converts a 3D Path to a Separate, tuple of three beziers, and select it.
@@ -3011,7 +3001,7 @@ declare class func extends GlobalObject {
    *     scene.endUndoRedoAccum();
    * }
    */
-  public static convertToSeparate(
+  function convertToSeparate(
     columnName: string,
     conversionAlgo: string
   ): QScriptValue;
@@ -3022,7 +3012,7 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static holdStartFrame(columnName: string): int;
+  function holdStartFrame(columnName: string): int;
 
   /**
    * Returns the Step value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
@@ -3030,7 +3020,7 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static holdStep(columnName: string): int;
+  function holdStep(columnName: string): int;
 
   /**
    * Returns the Stop value from the Hold Value Editor dialog box, for Bezier, Ease and Velo-based
@@ -3038,21 +3028,21 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static holdStopFrame(columnName: string): int;
+  function holdStopFrame(columnName: string): int;
 
   /**
    * Returns the number of keyframes and control points on a curve.
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static numberOfPoints(columnName: string): int;
+  function numberOfPoints(columnName: string): int;
 
   /**
    * Returns the number of keyframes and control points on the 3D Path.
    * @param {string} columnName The name of the column.
    * @returns {int}
    */
-  public static numberOfPointsPath3d(columnName: string): int;
+  function numberOfPointsPath3d(columnName: string): int;
 
   /**
    * Returns the bias value for the specified point on the 3D Path.
@@ -3060,7 +3050,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointBiasPath3d(columnName: string, point: int): double;
+  function pointBiasPath3d(columnName: string, point: int): double;
 
   /**
    * Returns true to indicate that the point is on a constant segment, or false to indicate that the
@@ -3069,7 +3059,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {boolean}
    */
-  public static pointConstSeg(columnName: string, point: int): boolean;
+  function pointConstSeg(columnName: string, point: int): boolean;
 
   /**
    * Returns the continuity of the curve that follows the point. One of the following values will be
@@ -3078,7 +3068,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {string}
    */
-  public static pointContinuity(columnName: string, point: int): string;
+  function pointContinuity(columnName: string, point: int): string;
 
   /**
    * Returns the continuity value (STRAIGHT, SMOOTH or CORNER) for the specified point on the 3D Path.
@@ -3086,7 +3076,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointContinuityPath3d(columnName: string, point: int): double;
+  function pointContinuityPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the number of frames in the ease-in.
@@ -3094,7 +3084,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointEaseIn(columnName: string, point: int): double;
+  function pointEaseIn(columnName: string, point: int): double;
 
   /**
    * Returns the number of frames in the ease-out.
@@ -3102,7 +3092,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointEaseOut(columnName: string, point: int): double;
+  function pointEaseOut(columnName: string, point: int): double;
 
   /**
    * Returns the X value of the left handle of a point on a curve.
@@ -3110,7 +3100,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleLeftX(columnName: string, point: int): double;
+  function pointHandleLeftX(columnName: string, point: int): double;
 
   /**
    * Returns the Y value of the left handle of a point on a curve.
@@ -3118,7 +3108,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleLeftY(columnName: string, point: int): double;
+  function pointHandleLeftY(columnName: string, point: int): double;
 
   /**
    * Returns the X value of the right handle of a point on a curve.
@@ -3126,7 +3116,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleRightX(columnName: string, point: int): double;
+  function pointHandleRightX(columnName: string, point: int): double;
 
   /**
    * Returns the Y value of the right handle of a point on a curve.
@@ -3134,7 +3124,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointHandleRightY(columnName: string, point: int): double;
+  function pointHandleRightY(columnName: string, point: int): double;
 
   /**
    * Returns the frame at which it's locked, or returns 0 if the point is not locked.
@@ -3142,7 +3132,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointLockedAtFrame(columnName: string, point: int): double;
+  function pointLockedAtFrame(columnName: string, point: int): double;
 
   /**
    * Returns the tension value for the specified point on the 3D Path.
@@ -3150,7 +3140,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointTensionPath3d(columnName: string, point: int): double;
+  function pointTensionPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the X value (frame number) of a point on a function curve.
@@ -3158,7 +3148,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointX(columnName: string, point: int): double;
+  function pointX(columnName: string, point: int): double;
 
   /**
    * Returns the value of the specified point on the X path.
@@ -3166,7 +3156,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointXPath3d(columnName: string, point: int): double;
+  function pointXPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the Y value of a point on a function curve.
@@ -3174,7 +3164,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointY(columnName: string, point: int): double;
+  function pointY(columnName: string, point: int): double;
 
   /**
    * Returns the value of the specified point on the Y path.
@@ -3182,7 +3172,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointYPath3d(columnName: string, point: int): double;
+  function pointYPath3d(columnName: string, point: int): double;
 
   /**
    * Returns the value of the specified point on the Z path.
@@ -3190,7 +3180,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {double}
    */
-  public static pointZPath3d(columnName: string, point: int): double;
+  function pointZPath3d(columnName: string, point: int): double;
 
   /**
    * Used to remove either a key frame, or a control point.
@@ -3198,7 +3188,7 @@ declare class func extends GlobalObject {
    * @param {int} point The number of the point on the curve, from 0 to n-1, where n is the total number of points.
    * @returns {boolean}
    */
-  public static removePointPath3d(columnName: string, point: int): boolean;
+  function removePointPath3d(columnName: string, point: int): boolean;
 
   /**
    * Sets the values of a point on a Bezier function curve.
@@ -3213,7 +3203,7 @@ declare class func extends GlobalObject {
    * @param {string} continuity String value for the continuity of the point. The string must be in all upper-case. The following are the acceptable values: STRAIGHT, SMOOTH and CORNER.
    * @returns {boolean}
    */
-  public static setBezierPoint(
+  function setBezierPoint(
     columnName: string,
     frame: int,
     y: double,
@@ -3238,7 +3228,7 @@ declare class func extends GlobalObject {
    * @param {string} continuity String value for the continuity of the point. The string must be in all upper-case. The following are the acceptable values: STRAIGHT, SMOOTH and CORNER.
    * @returns {boolean}
    */
-  public static setEasePoint(
+  function setEasePoint(
     columnName: string,
     frame: int,
     y: double,
@@ -3257,7 +3247,7 @@ declare class func extends GlobalObject {
    * @param {int} start The start frame of the hold.
    * @returns {boolean}
    */
-  public static setHoldStartFrame(columnName: string, start: int): boolean;
+  function setHoldStartFrame(columnName: string, start: int): boolean;
 
   /**
    * Sets the Hold value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
@@ -3266,7 +3256,7 @@ declare class func extends GlobalObject {
    * @param {int} step The value of the steps in the hold.
    * @returns {boolean}
    */
-  public static setHoldStep(columnName: string, step: int): boolean;
+  function setHoldStep(columnName: string, step: int): boolean;
 
   /**
    * Sets the Stop value in the Hold Value Editor dialog box, for Bezier, Ease and Velo-based Function
@@ -3275,7 +3265,7 @@ declare class func extends GlobalObject {
    * @param {int} stop The stop frame of the hold.
    * @returns {boolean}
    */
-  public static setHoldStopFrame(columnName: string, stop: int): boolean;
+  function setHoldStopFrame(columnName: string, stop: int): boolean;
 
   /**
    * Sets the constant segment flag of point i of path p to b.
@@ -3284,7 +3274,7 @@ declare class func extends GlobalObject {
    * @param {boolean} constant bool flag.
    * @returns {boolean}
    */
-  public static setPath3dPointConstantSegment(
+  function setPath3dPointConstantSegment(
     columnName: string,
     point: int,
     constant: boolean
@@ -3297,7 +3287,7 @@ declare class func extends GlobalObject {
    * @param {boolean} constant bool flag.
    * @returns {boolean}
    */
-  public static setPath3dPointConstantSegmentForFrame(
+  function setPath3dPointConstantSegmentForFrame(
     columnName: string,
     point: double,
     constant: boolean
@@ -3318,7 +3308,7 @@ declare class func extends GlobalObject {
    * @param {double} bias The bias value of the keyframe.
    * @returns {boolean}
    */
-  public static setPointPath3d(
+  function setPointPath3d(
     columnName: string,
     point: int,
     x: double,
@@ -3336,7 +3326,7 @@ declare class func extends GlobalObject {
    * @param {double} y Y value for the point.
    * @returns {boolean}
    */
-  public static setVeloBasedPoint(
+  function setVeloBasedPoint(
     columnName: string,
     frame: int,
     y: double
@@ -3347,7 +3337,7 @@ declare class func extends GlobalObject {
    * @param {string} columnName The name of the column.
    * @returns {double}
    */
-  public static tensionEase(columnName: string): double;
+  function tensionEase(columnName: string): double;
 }
 
 /**
@@ -3355,7 +3345,7 @@ declare class func extends GlobalObject {
  * Provides a simple convenient dialog to get a single value from the user.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classInput.html}
  */
-declare class Input extends GlobalObject {
+declare namespace Input {
   /**
    * Function to get an item from the user.
    * @param {string} label A prompt for the input you want.
@@ -3366,7 +3356,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getItem(
+  function getItem(
     label: string,
     itemList: StringList,
     currentItem?: string,
@@ -3383,7 +3373,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getItem(
+  function getItem(
     itemList: StringList,
     currentItem?: string,
     editable?: boolean,
@@ -3401,7 +3391,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getNumber(
+  function getNumber(
     label?: string,
     value?: double,
     decimals?: int,
@@ -3419,7 +3409,7 @@ declare class Input extends GlobalObject {
    * @param {QWidget} [parent=0] Unused.
    * @returns {QVariant}
    */
-  public static getText(
+  function getText(
     label?: string,
     text?: string,
     title?: string,
@@ -3431,37 +3421,37 @@ declare class Input extends GlobalObject {
  * The KeyModifiers JavaScript global object. Query key modifiers.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classKeyModifiers.html}
  */
-declare class KeyModifiers extends GlobalObject {
+declare namespace KeyModifiers {
   /**
    * Check if the Alt key is pressed.
    * @returns {boolean}
    */
-  public static IsAlternatePressed(): boolean;
+  function IsAlternatePressed(): boolean;
 
   /**
    * Check if the Ctrl key is pressed.
    * @returns {boolean}
    */
-  public static IsControlPressed(): boolean;
+  function IsControlPressed(): boolean;
 
   /**
    * Check if the Shift key is pressed.
    * @returns {boolean}
    */
-  public static IsShiftPressed(): boolean;
+  function IsShiftPressed(): boolean;
 
   /**
    * Check if the space key is pressed.
    * @returns {boolean}
    */
-  public static IsSpacePressed(): boolean;
+  function IsSpacePressed(): boolean;
 }
 
 /**
  * The library JavaScript global object. Select templates, and generate thumbnails or movies for them.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classlibrary.html}
  */
-declare class library extends GlobalObject {
+declare namespace library {
   /**
    * Generates the movies for selected templates.
    * @param {int} idx The index of the templates to generate QuickTime Movie(s) for.
@@ -3475,7 +3465,7 @@ declare class library extends GlobalObject {
    * @param {boolean} withSound Whether or not the generated movie(s) will have sound.
    * @returns {boolean}
    */
-  public static getQuicktimeMovieForSelectedTpl(
+  function getQuicktimeMovieForSelectedTpl(
     idx: int,
     start: int,
     end: int,
@@ -3492,7 +3482,7 @@ declare class library extends GlobalObject {
    * @param {int} i The index of the target file in the currently selected files.
    * @returns {string}
    */
-  public static getSelectedTemplate(i: int): string;
+  function getSelectedTemplate(i: int): string;
 
   /**
    * Generates the thumbnails for selected templates.
@@ -3501,7 +3491,7 @@ declare class library extends GlobalObject {
    * @param {string} dstPath The destination path for the generated thumbnails.
    * @returns {boolean}
    */
-  public static getThumbnailForSelectedTpl(
+  function getThumbnailForSelectedTpl(
     idx: int,
     res: int,
     dstPath: string
@@ -3511,7 +3501,7 @@ declare class library extends GlobalObject {
    * Returns the number of files that are selected.
    * @returns {int}
    */
-  public static numberOfTemplatesSelected(): int;
+  function numberOfTemplatesSelected(): int;
 }
 
 /**
@@ -3520,7 +3510,7 @@ declare class library extends GlobalObject {
  * @example
  * MessageBox.warning(" This is a warning.");
  */
-declare class MessageBox extends GlobalObject {
+declare namespace MessageBox {
   /**
    * A critical box. By default has one button labeled 'Retry'.
    * @param {string} text The text to display in the information box body.
@@ -3531,7 +3521,7 @@ declare class MessageBox extends GlobalObject {
    * @param {QWidget} parent The parent widget to inherit.
    * @returns {QScriptValue}
    */
-  public static critical(
+  function critical(
     text: string,
     button0?: int,
     button1?: int,
@@ -3550,7 +3540,7 @@ declare class MessageBox extends GlobalObject {
    * @param {QWidget} parent The parent widget to inherit.
    * @returns {QScriptValue}
    */
-  public static information(
+  function information(
     text: string,
     button0?: int,
     button1?: int,
@@ -3569,7 +3559,7 @@ declare class MessageBox extends GlobalObject {
    * @param {QWidget} parent The parent widget to inherit.
    * @returns {QScriptValue}
    */
-  public static warning(
+  function warning(
     text: string,
     button0?: int,
     button1?: int,
@@ -3586,21 +3576,21 @@ declare class MessageBox extends GlobalObject {
  * @example
  * MessageLog.trace("Export template failed. Nothing selected.");
  */
-declare class MessageLog extends GlobalObject {
+declare namespace MessageLog {
   /**
    * Clears the message log.
    * The same as clearing the message log through the ui. Cleared content can still be retrieved with
    * getLog().
    * @returns {void}
    */
-  public static clearLog(): void;
+  function clearLog(): void;
 
   /**
    * Writes the message to the message log if debug mode is on.
    * @param {string} messageIfDebug The message to be written to the message log if debug mode is on.
    * @returns {void}
    */
-  public static debug(messageIfDebug: string): void;
+  function debug(messageIfDebug: string): void;
 
   /**
    * Prints message to message log as an error.
@@ -3609,33 +3599,33 @@ declare class MessageLog extends GlobalObject {
    * @param {string} message The message to the written to the message log as an error.
    * @returns {void}
    */
-  public static error(message: string): void;
+  function error(message: string): void;
 
   /**
    * Returns the content of the message log.
    * @returns {string}
    */
-  public static getLog(): string;
+  function getLog(): string;
 
   /**
    * Returns whether the debug mode is set.
    * @returns {boolean}
    */
-  public static isDebug(): boolean;
+  function isDebug(): boolean;
 
   /**
    * Sets the debug mode to on/off.
    * @param {boolean} b If true sets the debug mode to on.
    * @returns {void}
    */
-  public static setDebug(b: boolean): void;
+  function setDebug(b: boolean): void;
 
   /**
    * Writes the message to the message log.
    * @param {string} message The message to be written to the message log.
    * @returns {void}
    */
-  public static trace(message: string): void;
+  function trace(message: string): void;
 }
 
 /**
@@ -3646,31 +3636,31 @@ declare class MessageLog extends GlobalObject {
  * current image filename and whether an audio file was created or not.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classMovieImport.html}
  */
-declare class MovieImport extends GlobalObject {
+declare namespace MovieImport {
   /**
    * Performs the import - no progress bar.
    * @returns {boolean}
    */
-  public static doImport(): boolean;
+  function doImport(): boolean;
 
   /**
    * Returns the complete filename for the imported image 'index' from the last import.
    * @param {int} index The index of the desired image from the last import.
    * @returns {string}
    */
-  public static image(index: int): string;
+  function image(index: int): string;
 
   /**
    * Returns true if a sound file was created at the given filename.
    * @returns {boolean}
    */
-  public static isAudioFileCreated(): boolean;
+  function isAudioFileCreated(): boolean;
 
   /**
    * Returns the number of imported images from the last import.
    * @returns {int}
    */
-  public static numberOfImages(): int;
+  function numberOfImages(): int;
 
   /**
    * Sets the expected audio filename. must be wav format (as this is currently the only one supported)
@@ -3680,28 +3670,28 @@ declare class MovieImport extends GlobalObject {
    * @param {string} audioFilename The expected audio filename.
    * @returns {void}
    */
-  public static setAudioFile(audioFilename: string): void;
+  function setAudioFile(audioFilename: string): void;
 
   /**
    * Defines where to store the extracted images.
    * @param {string} folder The folder to store extracted images.
    * @returns {void}
    */
-  public static setImageFolder(folder: string): void;
+  function setImageFolder(folder: string): void;
 
   /**
    * Defines which prefix to use to save the images.
    * @param {string} prefix The prefix to use to save the images.
    * @returns {void}
    */
-  public static setImagePrefix(prefix: string): void;
+  function setImagePrefix(prefix: string): void;
 
   /**
    * Defines the input movie filename.
    * @param {string} filename The input movie filename.
    * @returns {void}
    */
-  public static setMovieFilename(filename: string): void;
+  function setMovieFilename(filename: string): void;
 
   /**
    * Sets the start frame (frame are 1 bound). The default value is 1. This will affect the 'doImport()'
@@ -3709,7 +3699,7 @@ declare class MovieImport extends GlobalObject {
    * @param {int} startFrame The frame to start from.
    * @returns {void}
    */
-  public static setStartFrame(startFrame: int): void;
+  function setStartFrame(startFrame: int): void;
 
   /**
    * Sets the desired last frame. This will affect the number of frames that will be extracted by the
@@ -3717,7 +3707,7 @@ declare class MovieImport extends GlobalObject {
    * @param {int} stopFrame The frame to stop at.
    * @returns {void}
    */
-  public static setStopFrame(stopFrame: int): void;
+  function setStopFrame(stopFrame: int): void;
 }
 
 /**
@@ -3753,7 +3743,7 @@ declare class MovieImport extends GlobalObject {
  *     }
  * }
  */
-declare class node extends GlobalObject {
+declare namespace node {
   /**
    * Add a node to the Node View.
    * For an example usage of add, see the above Detailed Description.
@@ -3765,7 +3755,7 @@ declare class node extends GlobalObject {
    * @param {int} z The Z position of the node in the Node View. This property is important when two nodes overlap.
    * @returns {string}
    */
-  public static add(
+  function add(
     parentGroup: string,
     name: string,
     type: string,
@@ -3779,27 +3769,27 @@ declare class node extends GlobalObject {
    * @param {string} node The path of the node.
    * @returns {boolean}
    */
-  public static addCompositeToGroup(node: string): boolean;
+  function addCompositeToGroup(node: string): boolean;
 
   /**
    * Clears the disabled cache state for all cached nodes.
    * @returns {void}
    */
-  public static clearCacheDisabledState(): void;
+  function clearCacheDisabledState(): void;
 
   /**
    * Clears the disabled cache state for the vNodes passed in param.
    * @param {StringList} vNodes
    * @returns {void}
    */
-  public static clearCacheDisabledState(vNodes: StringList): void;
+  function clearCacheDisabledState(vNodes: StringList): void;
 
   /**
    * Clears the disabled cache state for the vNode passed in param.
    * @param {string} vNode
    * @returns {void}
    */
-  public static clearCacheDisabledState(vNode: string): void;
+  function clearCacheDisabledState(vNode: string): void;
 
   /**
    * Returns an integer indicating the X position of a node in the Node View.
@@ -3817,7 +3807,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static coordX(node: string): int;
+  function coordX(node: string): int;
 
   /**
    * Returns an integer indicating the Y position of a node in the Node View.
@@ -3835,7 +3825,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static coordY(node: string): int;
+  function coordY(node: string): int;
 
   /**
    * Returns an integer indicating the Z position of a node in the Node View.
@@ -3857,7 +3847,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static coordZ(node: string): int;
+  function coordZ(node: string): int;
 
   /**
    * Create a new attribute for the given node.
@@ -3889,7 +3879,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static createDynamicAttr(
+  function createDynamicAttr(
     node: string,
     type: string,
     attrName: string,
@@ -3919,7 +3909,7 @@ declare class node extends GlobalObject {
    *         }
    *     }
    */
-  public static createGroup(nodes: string, groupName: string): string;
+  function createGroup(nodes: string, groupName: string): string;
 
   /**
    * Delete a single node. Optionally, delete all columns and element associated to that node. The column
@@ -3932,7 +3922,7 @@ declare class node extends GlobalObject {
    * @example
    * node.deleteNode(selection.selectedNode(0), false, false);
    */
-  public static deleteNode(
+  function deleteNode(
     nodePath: string,
     deleteTimedValues?: boolean,
     deleteElements?: boolean
@@ -3958,7 +3948,7 @@ declare class node extends GlobalObject {
    * }
    * // For another example use of dstNode, see link().
    */
-  public static dstNode(sourceNode: string, iPort: int, iLink: int): string;
+  function dstNode(sourceNode: string, iPort: int, iLink: int): string;
 
   /**
    * Returns the path and addition information of the destination node linked to the source node.
@@ -3975,7 +3965,7 @@ declare class node extends GlobalObject {
    * var source = node.srcNode(destination.node, destination.port);
    * MessageLog.trace(node.equals(source, exNode); //This will print true
    */
-  public static dstNodeInfo(
+  function dstNodeInfo(
     sourceNode: string,
     iPort: int,
     iLink: int
@@ -4002,7 +3992,7 @@ declare class node extends GlobalObject {
    *     MessageLog.trace(node.equals(exNode, node.noNode()); //Since exNode is a valid node, this will print false
    *     }
    */
-  public static equals(node1: string, node2: string): boolean;
+  function equals(node1: string, node2: string): boolean;
 
   /**
    * Create a group for each exposure of the element where there is a symbol and will put the content of
@@ -4047,7 +4037,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static explodeElementSymbolsInGroups(
+  function explodeElementSymbolsInGroups(
     element: string,
     disableElement: boolean,
     clearExposure: boolean,
@@ -4070,7 +4060,7 @@ declare class node extends GlobalObject {
    *         MessageLog.trace(node.explodeGroup(group));
    * }
    */
-  public static explodeGroup(groupName: string): boolean;
+  function explodeGroup(groupName: string): boolean;
 
   /**
    * If the Source node is a Group, this method returns the path of the node inside the Group node that
@@ -4095,21 +4085,21 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static flatSrcNode(node: string, iPort: int): string;
+  function flatSrcNode(node: string, iPort: int): string;
 
   /**
    * Returns a list of the keywords of all of the Attribute objects of the given node.
    * @param {string} node The path of the node.
    * @returns {StringList}
    */
-  public static getAllAttrKeywords(node: string): StringList;
+  function getAllAttrKeywords(node: string): StringList;
 
   /**
    * Returns a list of the names of all of the Attribute objects of the given node.
    * @param {string} node The path of the node.
    * @returns {StringList}
    */
-  public static getAllAttrNames(node: string): StringList;
+  function getAllAttrNames(node: string): StringList;
 
   /**
    * Returns all nodes that are cached.
@@ -4123,7 +4113,7 @@ declare class node extends GlobalObject {
    *         MessageLog.trace("Node " + cachedNodes[i] + " is cached");
    * }
    */
-  public static getAllCachedNodes(root: string): StringList;
+  function getAllCachedNodes(root: string): StringList;
 
   /**
    * Returns all nodes that are cached.
@@ -4136,7 +4126,7 @@ declare class node extends GlobalObject {
    *         MessageLog.trace("Node " + cachedNodes[i] + " is cached");
    * }
    */
-  public static getAllCachedNodes(): StringList;
+  function getAllCachedNodes(): StringList;
 
   /**
    * Returns the Attribute of the given node. The attribute value is for the given frame.
@@ -4154,11 +4144,7 @@ declare class node extends GlobalObject {
    *     return attr.typeName();
    * }
    */
-  public static getAttr(
-    node: string,
-    atFrame: double,
-    attrName: string
-  ): Attribute;
+  function getAttr(node: string, atFrame: double, attrName: string): Attribute;
 
   /**
    * Returns a list of Attribute objects of the given node.
@@ -4190,7 +4176,7 @@ declare class node extends GlobalObject {
    *     return attributeList;
    * }
    */
-  public static getAttrList(
+  function getAttrList(
     node: string,
     atFrame: double,
     attrName?: string
@@ -4207,13 +4193,13 @@ declare class node extends GlobalObject {
    *         node.setCached(exNode, false);
    * }
    */
-  public static getCached(node: string): boolean;
+  function getCached(node: string): boolean;
 
   /**
    * Returns how much of the cache capacity is filled up. [0,1].
    * @returns {double}
    */
-  public static getCacheFillLevel(): double;
+  function getCacheFillLevel(): double;
 
   /**
    * Returns a list of all cameras within the scene.
@@ -4228,7 +4214,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static getCameras(): StringList;
+  function getCameras(): StringList;
 
   /**
    * Returns the node colour.
@@ -4243,7 +4229,7 @@ declare class node extends GlobalObject {
    *     node.setColor(node1, newColor);
    * }
    */
-  public static getColor(node: string): ColorRGBA;
+  function getColor(node: string): ColorRGBA;
 
   /**
    * Returns the ColorOverride object for the color override node.
@@ -4258,7 +4244,7 @@ declare class node extends GlobalObject {
    *     return node.getColorOverride(myNode);
    * }
    */
-  public static getColorOverride(node: string): ColorOverride;
+  function getColorOverride(node: string): ColorOverride;
 
   /**
    * Returns the name of the default camera.
@@ -4269,7 +4255,7 @@ declare class node extends GlobalObject {
    * var FOV = node.getAttr(cameraNode, frame.current(), "FOV").doubleValue();
    * node.setTextAttr(cameraNode, "FOV", frame.current(), FOV / 2);
    */
-  public static getDefaultCamera(): string;
+  function getDefaultCamera(): string;
 
   /**
    * Returns the Element Id of the node. Has to be an element node, identified with type :: READ.
@@ -4285,7 +4271,7 @@ declare class node extends GlobalObject {
    * var exposure = "MyExposure"; // as seen in the Xsheet
    * Drawing.create(elementId, exposure, false);
    */
-  public static getElementId(nodeName: string): int;
+  function getElementId(nodeName: string): int;
 
   /**
    * Returns whether a node is enabled or not.
@@ -4298,7 +4284,7 @@ declare class node extends GlobalObject {
    *         node.setEnable(exNode, false);
    * }
    */
-  public static getEnable(node: string): boolean;
+  function getEnable(node: string): boolean;
 
   /**
    * Returns existing or add a group multi port in node.
@@ -4328,7 +4314,7 @@ declare class node extends GlobalObject {
    *     };
    * }
    */
-  public static getGroupInputModule(
+  function getGroupInputModule(
     parentGroup: string,
     name: string,
     x: int,
@@ -4363,7 +4349,7 @@ declare class node extends GlobalObject {
    *     };
    * }
    */
-  public static getGroupOutputModule(
+  function getGroupOutputModule(
     parentGroup: string,
     name: string,
     x: int,
@@ -4379,7 +4365,7 @@ declare class node extends GlobalObject {
    * MessageLog.trace("Lock flag: " + node.getLocked(exNode));
    * node.setLocked(exNode, true);
    */
-  public static getLocked(node: string): boolean;
+  function getLocked(node: string): boolean;
 
   /**
    * Returns the model matrix of a node.
@@ -4395,7 +4381,7 @@ declare class node extends GlobalObject {
    * if (myNodeWorldPosition.z > myOtherNodeWorldPosition.z)
    *     MessageLog.trace("My node is in front of the other node");
    */
-  public static getMatrix(node: string, frame: int): QObject;
+  function getMatrix(node: string, frame: int): QObject;
 
   /**
    * Returns the number of versions of the node available.
@@ -4405,14 +4391,14 @@ declare class node extends GlobalObject {
    * @example
    * node.setVersion(exNode, node.getMaxVersionNumber(exNode));
    */
-  public static getMaxVersionNumber(node: string): int;
+  function getMaxVersionNumber(node: string): int;
 
   /**
    * Returns the name of a node.
    * @param {string} node The path of the node.
    * @returns {string}
    */
-  public static getName(node: string): string;
+  function getName(node: string): string;
 
   /**
    * Returns a collection of node paths for nodes of specified types.
@@ -4434,7 +4420,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static getNodes(types: StringList): StringList;
+  function getNodes(types: StringList): StringList;
 
   /**
    * Returns the pivot of the node.
@@ -4453,7 +4439,7 @@ declare class node extends GlobalObject {
    *
    * return [rotation, position, scale];
    */
-  public static getPivot(node: string, frame: int): QObject;
+  function getPivot(node: string, frame: int): QObject;
 
   /**
    * Returns the show/hide timeline thumbnail flags on drawing layers.
@@ -4463,7 +4449,7 @@ declare class node extends GlobalObject {
    * MessageLog.trace("Show timeline thumbnails: " + node.getShowTimelineThumbnails(exNode));
    * node.setShowTimelineThumbnails(exNode, true);
    */
-  public static getShowTimelineThumbnails(node: string): boolean;
+  function getShowTimelineThumbnails(node: string): boolean;
 
   /**
    * Returns the value(s) of the node selected attribute(s).
@@ -4492,11 +4478,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static getTextAttr(
-    node: string,
-    atFrame: double,
-    attrName: string
-  ): string;
+  function getTextAttr(node: string, atFrame: double, attrName: string): string;
 
   /**
    * Returns the timeline tag flag.
@@ -4507,7 +4489,7 @@ declare class node extends GlobalObject {
    * MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
    * node.setTimelineTag(exNode, true);
    */
-  public static getTimelineTag(node: string): boolean;
+  function getTimelineTag(node: string): boolean;
 
   /**
    * Returns a list of timeline tag flags.
@@ -4524,10 +4506,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static getTimelineTagList(
-    node?: string,
-    list?: StringList
-  ): StringList;
+  function getTimelineTagList(node?: string, list?: StringList): StringList;
 
   /**
    * Returns the current version of the node.
@@ -4537,14 +4516,14 @@ declare class node extends GlobalObject {
    * @example
    * MessageLog.trace("Current node version number: " + node.getVersion(exNode));
    */
-  public static getVersion(node: string): int;
+  function getVersion(node: string): int;
 
   /**
    * Returns true if the peg's groupAtNetworkBuilding() attribute is true.
    * @param {string} node The path of the node.
    * @returns {boolean}
    */
-  public static groupAtNetworkBuilding(node: string): boolean;
+  function groupAtNetworkBuilding(node: string): boolean;
 
   /**
    * Returns the height of a given node.
@@ -4563,7 +4542,7 @@ declare class node extends GlobalObject {
    *     node.setCoord(node2, x, y);
    * }
    */
-  public static height(node: string): int;
+  function height(node: string): int;
 
   /**
    * Returns true or false to indicate if a node controls are currently shown.
@@ -4574,7 +4553,7 @@ declare class node extends GlobalObject {
    * @example
    * MessageLog.trace("Shown? " + node.isControlShown("Top/Drawing-P"));
    */
-  public static isControlShown(node: string): boolean;
+  function isControlShown(node: string): boolean;
 
   /**
    * Returns a true or false value indicating if the node is a group.
@@ -4595,7 +4574,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static isGroup(node: string): boolean;
+  function isGroup(node: string): boolean;
 
   /**
    * Returns true or false to indicate if a port is connected to another node.
@@ -4620,7 +4599,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static isLinked(node: string, iPort: int): boolean;
+  function isLinked(node: string, iPort: int): boolean;
 
   /**
    * Returns true if the node can be cached.
@@ -4633,7 +4612,7 @@ declare class node extends GlobalObject {
    *         node.setCached(exNode, false);
    * }
    */
-  public static isSupportingCache(node: string): boolean;
+  function isSupportingCache(node: string): boolean;
 
   /**
    * Link a port on a node to a port on another node.
@@ -4664,7 +4643,7 @@ declare class node extends GlobalObject {
    *     node.link(myNewGroupPath, 0, dstNodePaths[i], 0, true, true);
    * }
    */
-  public static link(
+  function link(
     srcNode: string,
     srcPort: int,
     dstNode: string,
@@ -4702,7 +4681,7 @@ declare class node extends GlobalObject {
    *     node.link(myNewGroupPath, 0, dstNodePaths[i], 0, true, true);
    * }
    */
-  public static link(
+  function link(
     srcNode: string,
     srcPort: int,
     dstNode: string,
@@ -4728,7 +4707,7 @@ declare class node extends GlobalObject {
    *     node.link("myCamPeg", 0, "Top/Camera", 0);
    * }
    */
-  public static linkAttr(
+  function linkAttr(
     node: string,
     attrName: string,
     columnName: string
@@ -4776,7 +4755,7 @@ declare class node extends GlobalObject {
    *     node.setTextAttr("Top/Camera", "OFFSET.Z", 0, 0);
    * }
    */
-  public static linkedColumn(node: string, attrName: string): string;
+  function linkedColumn(node: string, attrName: string): string;
 
   /**
    * Move the specified node within the specified group.
@@ -4789,7 +4768,7 @@ declare class node extends GlobalObject {
    * @example
    * node.moveToGroup("Top/MyGroup/Drawing", "Top/MyGroup/MyNewGroup");
    */
-  public static moveToGroup(node: string, groupName: string): string;
+  function moveToGroup(node: string, groupName: string): string;
 
   /**
    * Returns the node path to an invalid node.
@@ -4800,7 +4779,7 @@ declare class node extends GlobalObject {
    * if (parentNodePath == node.noNode())
    *     return; // something wrong happened
    */
-  public static noNode(): string;
+  function noNode(): string;
 
   /**
    * The number of input ports on the node.
@@ -4816,7 +4795,7 @@ declare class node extends GlobalObject {
    * var parent = node.parentNode(exNode);
    * MessageLog.trace(node.equals(parent, source)); //This will print false
    */
-  public static numberOfInputPorts(node: string): int;
+  function numberOfInputPorts(node: string): int;
 
   /**
    * The number of nodes actually linked from the output ports.
@@ -4825,7 +4804,7 @@ declare class node extends GlobalObject {
    * @param {int} iPort The port number on which you want to locate the node that is connected to it. This value is between 0 and the results of the numberOfInputPorts() method, minus one.
    * @returns {int}
    */
-  public static numberOfOutputLinks(node: string, iPort: int): int;
+  function numberOfOutputLinks(node: string, iPort: int): int;
 
   /**
    * The number of output ports on a node.
@@ -4849,7 +4828,7 @@ declare class node extends GlobalObject {
    *     return listOfDestinationNodes;
    * }
    */
-  public static numberOfOutputPorts(node: string): int;
+  function numberOfOutputPorts(node: string): int;
 
   /**
    * Returns an integer that indicates the number of nodes contained in a group.
@@ -4873,7 +4852,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static numberOfSubNodes(parent: string): int;
+  function numberOfSubNodes(parent: string): int;
 
   /**
    * Returns the path of the parent level of a node contained in a group.
@@ -4888,7 +4867,7 @@ declare class node extends GlobalObject {
    *
    * node.explodeGroup(parent);
    */
-  public static parentNode(node: string): string;
+  function parentNode(node: string): string;
 
   /**
    * Remove a dynamic attribute for the given node.
@@ -4900,7 +4879,7 @@ declare class node extends GlobalObject {
    * @example
    * node.removeDynamicAttr(nodeName, attrName);
    */
-  public static removeDynamicAttr(node: string, attrName: string): boolean;
+  function removeDynamicAttr(node: string, attrName: string): boolean;
 
   /**
    * Changes the name of a node.
@@ -4911,7 +4890,7 @@ declare class node extends GlobalObject {
    * @example
    * node.rename("Top/myNode", "myNodeWithANewName");
    */
-  public static rename(node: string, newName: string): boolean;
+  function rename(node: string, newName: string): boolean;
 
   /**
    * Reset the node colour.
@@ -4927,13 +4906,13 @@ declare class node extends GlobalObject {
    *     node.resetColor(node2);
    * }
    */
-  public static resetColor(node: string): boolean;
+  function resetColor(node: string): boolean;
 
   /**
    * Returns the name of the Top level in the Node View, which is "Top".
    * @returns {string}
    */
-  public static root(): string;
+  function root(): string;
 
   /**
    * Setters and getters for the default camera.
@@ -4950,7 +4929,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static setAsDefaultCamera(node: string): boolean;
+  function setAsDefaultCamera(node: string): boolean;
 
   /**
    * Change the global display used in the application. The node must be the full path of a display node.
@@ -4967,7 +4946,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static setAsGlobalDisplay(node: string): boolean;
+  function setAsGlobalDisplay(node: string): boolean;
 
   /**
    * Set the cached flag for a node.
@@ -4981,7 +4960,7 @@ declare class node extends GlobalObject {
    *         node.setCached(exNode, false);
    * }
    */
-  public static setCached(node: string, cached: boolean): boolean;
+  function setCached(node: string, cached: boolean): boolean;
 
   /**
    * Set the node colour.
@@ -4997,7 +4976,7 @@ declare class node extends GlobalObject {
    *     node.setColor(exNode, newColor);
    * }
    */
-  public static setColor(node: string, color: ColorRGBA): boolean;
+  function setColor(node: string, color: ColorRGBA): boolean;
 
   /**
    * Set the position of a node in the Node View.
@@ -5018,7 +4997,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static setCoord(node: string, x: int, y: int): boolean;
+  function setCoord(node: string, x: int, y: int): boolean;
 
   /**
    * Set the position of a node in the Node View.
@@ -5043,7 +5022,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static setCoord(node: string, x: int, y: int, z: int): boolean;
+  function setCoord(node: string, x: int, y: int, z: int): boolean;
 
   /**
    * Setters and getters for the enable/disable property of a node.
@@ -5058,7 +5037,7 @@ declare class node extends GlobalObject {
    *         node.setEnable(exNode, false);
    * }
    */
-  public static setEnable(node: string, flag: boolean): boolean;
+  function setEnable(node: string, flag: boolean): boolean;
 
   /**
    * Change the global display used by the application to "Display All" pseudo-display.
@@ -5074,7 +5053,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static setGlobalToDisplayAll(): boolean;
+  function setGlobalToDisplayAll(): boolean;
 
   /**
    * Setters and getters for the lock/unlock property of a node.
@@ -5086,7 +5065,7 @@ declare class node extends GlobalObject {
    * MessageLog.trace("Lock flag: " + node.getLocked(exNode));
    * node.setLocked(exNode, true);
    */
-  public static setLocked(node: string, lock: boolean): boolean;
+  function setLocked(node: string, lock: boolean): boolean;
 
   /**
    * Sets the outline mode of the given node.
@@ -5094,7 +5073,7 @@ declare class node extends GlobalObject {
    * @param {boolean} bOutlineMode The mode to set the outline to.
    * @returns {boolean}
    */
-  public static setOutlineMode(node: string, bOutlineMode: boolean): boolean;
+  function setOutlineMode(node: string, bOutlineMode: boolean): boolean;
 
   /**
    * Set the show/hide timeline thumbnails on drawing layers.
@@ -5104,10 +5083,7 @@ declare class node extends GlobalObject {
    * @example
    * node.setShowTimelineThumbnails(exNode, true);
    */
-  public static setShowTimelineThumbnails(
-    node: string,
-    bShow: boolean
-  ): boolean;
+  function setShowTimelineThumbnails(node: string, bShow: boolean): boolean;
 
   /**
    * Change the value of an attribute in a node.
@@ -5138,7 +5114,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static setTextAttr(
+  function setTextAttr(
     node: string,
     attrName: string,
     atFrame: int,
@@ -5155,7 +5131,7 @@ declare class node extends GlobalObject {
    * MessageLog.trace("Timeline tag: " + node.getTimelineTag(exNode));
    * node.setTimelineTag(exNode, true);
    */
-  public static setTimelineTag(node: string, tag: boolean): boolean;
+  function setTimelineTag(node: string, tag: boolean): boolean;
 
   /**
    * Set the version of the node to use.
@@ -5166,7 +5142,7 @@ declare class node extends GlobalObject {
    * @example
    * node.setVersion(exNode, node.getMaxVersionNumber(exNode));
    */
-  public static setVersion(node: string, version: int): void;
+  function setVersion(node: string, version: int): void;
 
   /**
    * Shows or hide the controls associated to a node. Similar to hitting "Show Controls" in the Camera
@@ -5178,7 +5154,7 @@ declare class node extends GlobalObject {
    * @example
    * node.showControls("Top/Drawing-P", true);
    */
-  public static showControls(node: string, show: boolean): boolean;
+  function showControls(node: string, show: boolean): boolean;
 
   /**
    * Returns the path for the node that the port is linked to.
@@ -5195,7 +5171,7 @@ declare class node extends GlobalObject {
    * var parent = node.parentNode(exNode);
    * MessageLog.trace(node.equals(parent, source)); //This will print false
    */
-  public static srcNode(node: string, iPort: int): string;
+  function srcNode(node: string, iPort: int): string;
 
   /**
    * Returns the source node path, the output port number and the link ID for this source node that this
@@ -5221,7 +5197,7 @@ declare class node extends GlobalObject {
    * var destination = node.dstNode(source.node, source.port, source.link);
    * MessageLog.trace(node.equals(destination, exNode); //This will print true
    */
-  public static srcNodeInfo(node: string, iPort: int): QScriptValue;
+  function srcNodeInfo(node: string, iPort: int): QScriptValue;
 
   /**
    * Returns whether or not the source port on the given node is a Matte Port.
@@ -5229,7 +5205,7 @@ declare class node extends GlobalObject {
    * @param {int} iPort The port number to check whether or not it is a Matte Port. This value is between 0 and the result of numberOfInputPorts() minus one.
    * @returns {boolean}
    */
-  public static srcPortIsMattePort(node: string, iPort: int): boolean;
+  function srcPortIsMattePort(node: string, iPort: int): boolean;
 
   /**
    * Returns the path of a node in a group. Nodes are counted starting with zero.
@@ -5254,7 +5230,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static subNode(parent: string, iSubNode: int): string;
+  function subNode(parent: string, iSubNode: int): string;
 
   /**
    * Returns the full path of a child node belonging to a parent group.
@@ -5274,7 +5250,7 @@ declare class node extends GlobalObject {
    * //This rebuilt node will be equal to the original node
    * MessageLog.trace(node.equals(exNode, rebuiltNode)); //This will print true
    */
-  public static subNodeByName(parent: string, name: string): string;
+  function subNodeByName(parent: string, name: string): string;
 
   /**
    * Returns an array of sub nodes.
@@ -5294,7 +5270,7 @@ declare class node extends GlobalObject {
    *         }
    *     }
    */
-  public static subNodes(parentGroup: string): QScriptValue;
+  function subNodes(parentGroup: string): QScriptValue;
 
   /**
    * Returns the node type. These are all of the built-in node types available from the Harmony node
@@ -5321,7 +5297,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static type(node: string): string;
+  function type(node: string): string;
 
   /**
    * Unlink a port on one node from the port on another node.
@@ -5346,7 +5322,7 @@ declare class node extends GlobalObject {
    *     }
    * }
    */
-  public static unlink(dstNode: string, inPort: int): boolean;
+  function unlink(dstNode: string, inPort: int): boolean;
 
   /**
    * Unlink an attribute from a function column.
@@ -5359,7 +5335,7 @@ declare class node extends GlobalObject {
    * if (node.linkedColumn(myNode, "POSITION.3DPATH") != "")
    *     node.unlinkAttr(myNode, "POSITION.3DPATH");
    */
-  public static unlinkAttr(node: string, attrName: string): boolean;
+  function unlinkAttr(node: string, attrName: string): boolean;
 
   /**
    * Returns the width of a given node.
@@ -5378,7 +5354,7 @@ declare class node extends GlobalObject {
    *     node.setCoord(node2, x, y);
    * }
    */
-  public static width(node: string): int;
+  function width(node: string): int;
 }
 
 /**
@@ -5444,82 +5420,82 @@ declare class node extends GlobalObject {
  *     scene.endUndoRedoAccum();
  * }
  */
-declare class PaletteManager extends GlobalObject {
+declare namespace PaletteManager {
   /**
    * Applies the current colour selection to the current drawing selection.
    * @returns {void}
    */
-  public static applyColorSelection(): void;
+  function applyColorSelection(): void;
 
   /**
    * Gets the Id of the colour in the currently selected palette.
    * @param {int} index Index of colour in palette.
    * @returns {string}
    */
-  public static getColorId(index: int): string;
+  function getColorId(index: int): string;
 
   /**
    * Gets the name of the colour in the currently selected palette.
    * @param {int} index Index of colour in palette.
    * @returns {string}
    */
-  public static getColorName(index: int): string;
+  function getColorName(index: int): string;
 
   /**
    * Gets the current colour Id from the ColourView.
    * @returns {string}
    */
-  public static getCurrentColorId(): string;
+  function getCurrentColorId(): string;
 
   /**
    * Gets the current colour name from the ColourView.
    * @returns {string}
    */
-  public static getCurrentColorName(): string;
+  function getCurrentColorName(): string;
 
   /**
    * Gets the current palette Id from the ColourView.
    * @returns {string}
    */
-  public static getCurrentPaletteId(): string;
+  function getCurrentPaletteId(): string;
 
   /**
    * Gets the current palette name from the ColourView.
    * @returns {string}
    */
-  public static getCurrentPaletteName(): string;
+  function getCurrentPaletteName(): string;
 
   /**
    * Gets the current palette path (including palette name) from the ColourView.
    * @returns {string}
    */
-  public static getCurrentPalettePath(): string;
+  function getCurrentPalettePath(): string;
 
   /**
    * Gets the length of the current palette in the ColourView.
    * @returns {int}
    */
-  public static getCurrentPaletteSize(): int;
+  function getCurrentPaletteSize(): int;
 
   /**
    * Gets number of palettes in the currently selected palette list in the ColourView list.
    * @returns {int}
    */
-  public static getNumPalettes(): int;
+  function getNumPalettes(): int;
 
   /**
    * Gets number of palettes in the palette list in the ColourView.
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {int}
    */
-  public static getNumPalettes(scenePaletteList: boolean): int;
+  function getNumPalettes(scenePaletteList: boolean): int;
 
   /**
    * Gets the Id of the palette in the current palette list.
    * @param {int} index Index of palette within palette list.
    * @returns {string}
    */
-  public static getPaletteId(index: int): string;
+  function getPaletteId(index: int): string;
 
   /**
    * Gets the Id of the palette in the current palette list.
@@ -5527,14 +5503,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {string}
    */
-  public static getPaletteId(index: int, scenePaletteList: boolean): string;
+  function getPaletteId(index: int, scenePaletteList: boolean): string;
 
   /**
    * Gets the name of the palette in the current palette list.
    * @param {int} index Index of palette within palette list.
    * @returns {string}
    */
-  public static getPaletteName(index: int): string;
+  function getPaletteName(index: int): string;
 
   /**
    * Gets the name of the palette in the current palette list.
@@ -5542,14 +5518,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {string}
    */
-  public static getPaletteName(index: int, scenePaletteList: boolean): string;
+  function getPaletteName(index: int, scenePaletteList: boolean): string;
 
   /**
    * Gets the path (including name) of the palette in the current palette list.
    * @param {int} index Index of palette within palette list
    * @returns {string}
    */
-  public static getPalettePath(index: int): string;
+  function getPalettePath(index: int): string;
 
   /**
    * Gets the path (including name) of the palette in the current palette list.
@@ -5557,14 +5533,14 @@ declare class PaletteManager extends GlobalObject {
    * @param {boolean} scenePaletteList Whether to check scene palette list or element palette list.
    * @returns {string}
    */
-  public static getPalettePath(index: int, scenePaletteList: boolean): string;
+  function getPalettePath(index: int, scenePaletteList: boolean): string;
 
   /**
    * Sets the current colour in the ColourView.
    * @param {string} color Id of colour.
    * @returns {void}
    */
-  public static setCurrentColorById(color: string): void;
+  function setCurrentColorById(color: string): void;
 
   /**
    * Sets the current palette and colour in the ColourView.
@@ -5572,23 +5548,20 @@ declare class PaletteManager extends GlobalObject {
    * @param {string} color Colour Id.
    * @returns {void}
    */
-  public static setCurrentPaletteAndColorById(
-    palette: string,
-    color: string
-  ): void;
+  function setCurrentPaletteAndColorById(palette: string, color: string): void;
 
   /**
    * Sets the current palette in the ColourView.
    * @param {string} palette Id of palette.
    * @returns {void}
    */
-  public static setCurrentPaletteById(palette: string): void;
+  function setCurrentPaletteById(palette: string): void;
 
   /**
    * @param {string} texture
    * @returns {void}
    */
-  public static setCurrentPencilTextureById(texture: string): void;
+  function setCurrentPencilTextureById(texture: string): void;
 }
 
 /**
@@ -5617,19 +5590,19 @@ declare class PaletteManager extends GlobalObject {
  *     }
  * }
  */
-declare class PaletteObjectManager extends GlobalObject {
+declare namespace PaletteObjectManager {
   /**
    * Returns the number of loaded palette lists.
    * @returns {int}
    */
-  public static getNumPaletteLists(): int;
+  function getNumPaletteLists(): int;
 
   /**
    * Returns a Palette object for the loaded palette with the specified palette ID.
    * @param {string} id The ID of palette to retrieve.
    * @returns {Palette}
    */
-  public static getPalette(id: string): Palette;
+  function getPalette(id: string): Palette;
 
   /**
    * Loads the element palette list specified by the element ID 'id' and return the corresponding
@@ -5638,28 +5611,28 @@ declare class PaletteObjectManager extends GlobalObject {
    * @param {int} id The element ID.
    * @returns {PaletteList}
    */
-  public static getPaletteListByElementId(id: int): PaletteList;
+  function getPaletteListByElementId(id: int): PaletteList;
 
   /**
    * Returns a PaletteList object for the loaded palette list with the specified list ID.
    * @param {string} id The ID of palette list to retrieve.
    * @returns {PaletteList}
    */
-  public static getPaletteListById(id: string): PaletteList;
+  function getPaletteListById(id: string): PaletteList;
 
   /**
    * Returns a PaletteList object for the loaded palette list at position 'index'.
    * @param {int} index The index of palette list to retrieve.
    * @returns {PaletteList}
    */
-  public static getPaletteListByIndex(index: int): PaletteList;
+  function getPaletteListByIndex(index: int): PaletteList;
 
   /**
    * Loads the scene palette list and return the corresponding PaletteList object.
    * If the palette list isn't already loaded, the method will load the palette list from the disk.
    * @returns {PaletteList}
    */
-  public static getScenePaletteList(): PaletteList;
+  function getScenePaletteList(): PaletteList;
 
   /**
    * Removes a palette from the scene and all elements, and schedule the file for deletion on next save.
@@ -5669,7 +5642,7 @@ declare class PaletteObjectManager extends GlobalObject {
    * @param {string} id The ID of palette to remove.
    * @returns {boolean}
    */
-  public static removePaletteReferencesAndDeleteOnDisk(id: string): boolean;
+  function removePaletteReferencesAndDeleteOnDisk(id: string): boolean;
 }
 
 /**
@@ -5692,34 +5665,34 @@ declare class PaletteObjectManager extends GlobalObject {
  *
  * }
  */
-declare class PenstyleManager extends GlobalObject {
+declare namespace PenstyleManager {
   /**
    * Sets the current penstyle centreline smoothness.
    * @param {double} smooth New centreline smoothness value.
    * @returns {void}
    */
-  public static changeCurrentPenstyleCenterlineSmoothness(smooth: double): void;
+  function changeCurrentPenstyleCenterlineSmoothness(smooth: double): void;
 
   /**
    * Sets the current penstyle maximum size.
    * @param {double} maximum New maximum size.
    * @returns {void}
    */
-  public static changeCurrentPenstyleMaximumSize(maximum: double): void;
+  function changeCurrentPenstyleMaximumSize(maximum: double): void;
 
   /**
    * Sets the current penstyle minimum size.
    * @param {double} minimum New minimum size.
    * @returns {void}
    */
-  public static changeCurrentPenstyleMinimumSize(minimum: double): void;
+  function changeCurrentPenstyleMinimumSize(minimum: double): void;
 
   /**
    * Sets the current penstyle outline smoothness.
    * @param {double} smooth New outline smoothness value.
    * @returns {void}
    */
-  public static changeCurrentPenstyleOutlineSmoothness(smooth: double): void;
+  function changeCurrentPenstyleOutlineSmoothness(smooth: double): void;
 
   /**
    * Returns the name of the currently active tool.
@@ -5727,14 +5700,14 @@ declare class PenstyleManager extends GlobalObject {
    * active.
    * @returns {string}
    */
-  public static currentToolName(): string;
+  function currentToolName(): string;
 
   /**
    * Formats the penstyle list into a string, which can be used to store the penstyle list and import it
    * later.
    * @returns {string}
    */
-  public static exportPenstyleListToString(): string;
+  function exportPenstyleListToString(): string;
 
   /**
    * Create a string representing the penstyle which can be used to store the penstyle and import it
@@ -5742,89 +5715,89 @@ declare class PenstyleManager extends GlobalObject {
    * @param {int} index Index of the penstyle.
    * @returns {string}
    */
-  public static exportPenstyleToString(index: int): string;
+  function exportPenstyleToString(index: int): string;
 
   /**
    * Gets the current penstyle centerline smoothness.
    * @returns {double}
    */
-  public static getCurrentPenstyleCenterlineSmoothness(): double;
+  function getCurrentPenstyleCenterlineSmoothness(): double;
 
   /**
    * Gets the current penstyle eraser flag.
    * @returns {boolean}
    */
-  public static getCurrentPenstyleEraserFlag(): boolean;
+  function getCurrentPenstyleEraserFlag(): boolean;
 
   /**
    * Returns the index of the current penstyle for the active tool.
    * @returns {int}
    */
-  public static getCurrentPenstyleIndex(): int;
+  function getCurrentPenstyleIndex(): int;
 
   /**
    * Gets the current penstyle maximum size.
    * @returns {double}
    */
-  public static getCurrentPenstyleMaximumSize(): double;
+  function getCurrentPenstyleMaximumSize(): double;
 
   /**
    * Gets the current penstyle minimum size.
    * @returns {double}
    */
-  public static getCurrentPenstyleMinimumSize(): double;
+  function getCurrentPenstyleMinimumSize(): double;
 
   /**
    * Returns the name of the current penstyle for the active tool.
    * @returns {string}
    */
-  public static getCurrentPenstyleName(): string;
+  function getCurrentPenstyleName(): string;
 
   /**
    * Gets the current penstyle outline smoothness.
    * @returns {double}
    */
-  public static getCurrentPenstyleOutlineSmoothness(): double;
+  function getCurrentPenstyleOutlineSmoothness(): double;
 
   /**
    * Returns the number of penstyles.
    * @returns {int}
    */
-  public static getNumberOfPenstyles(): int;
+  function getNumberOfPenstyles(): int;
 
   /**
    * Returns the name of the penstyle at the given index for the current tool.
    * @param {int} index Index of the penstyle.
    * @returns {string}
    */
-  public static getPenstyleName(index: int): string;
+  function getPenstyleName(index: int): string;
 
   /**
    * Imports a penstyle list from a previously formatted penstyle string.
    * @param {string} str A formatted penstyle or penstyle list, which can be created from exportPenstyleToString or exportPenstylesListToString.
    * @returns {void}
    */
-  public static importPenstyleListFromString(str: string): void;
+  function importPenstyleListFromString(str: string): void;
 
   /**
    * Saves the penstyles.
    * @returns {void}
    */
-  public static savePenstyles(): void;
+  function savePenstyles(): void;
 
   /**
    * Sets the current penstyle for the active tool.
    * @param {int} index Index of penstyle to be set as current penstyle.
    * @returns {void}
    */
-  public static setCurrentPenstyleByIndex(index: int): void;
+  function setCurrentPenstyleByIndex(index: int): void;
 
   /**
    * Sets the current penstyle for the active tool.
    * @param {string} name Name of the penstyle to be set as current penstyle.
    * @returns {void}
    */
-  public static setCurrentPenstyleByName(name: string): void;
+  function setCurrentPenstyleByName(name: string): void;
 }
 
 /**
@@ -5845,14 +5818,14 @@ declare class PenstyleManager extends GlobalObject {
  *     MessageLog.trace("preference for auto save layout is now " + b);
  * }
  */
-declare class preferences extends GlobalObject {
+declare namespace preferences {
   /**
    * Gets the boolean value from the given preference name.
    * @param {string} name The name of the preference.
    * @param {boolean} defaultValue The default value of the preference.
    * @returns {boolean}
    */
-  public static getBool(name: string, defaultValue?: boolean): boolean;
+  function getBool(name: string, defaultValue?: boolean): boolean;
 
   /**
    * Gets the color from the given preference name.
@@ -5860,7 +5833,7 @@ declare class preferences extends GlobalObject {
    * @param {ColorRGBA} defaultValue The default value of the preference.
    * @returns {ColorRGBA}
    */
-  public static getColor(name: string, defaultValue?: ColorRGBA): ColorRGBA;
+  function getColor(name: string, defaultValue?: ColorRGBA): ColorRGBA;
 
   /**
    * Gets the double value from the given preference name.
@@ -5868,7 +5841,7 @@ declare class preferences extends GlobalObject {
    * @param {double} defaultValue The default value of the preference.
    * @returns {double}
    */
-  public static getDouble(name: string, defaultValue?: double): double;
+  function getDouble(name: string, defaultValue?: double): double;
 
   /**
    * Gets the integer value from the given preference name.
@@ -5876,7 +5849,7 @@ declare class preferences extends GlobalObject {
    * @param {int} defaultValue The default value of the preference.
    * @returns {double}
    */
-  public static getInt(name: string, defaultValue?: int): double;
+  function getInt(name: string, defaultValue?: int): double;
 
   /**
    * Gets the string value from the given preference name.
@@ -5884,7 +5857,7 @@ declare class preferences extends GlobalObject {
    * @param {string} defaultValue The default value of the preference.
    * @returns {string}
    */
-  public static getString(name: string, defaultValue?: string): string;
+  function getString(name: string, defaultValue?: string): string;
 
   /**
    * Gets the boolean value for the given preference name.
@@ -5892,7 +5865,7 @@ declare class preferences extends GlobalObject {
    * @param {boolean} value The boolean to set the preference to.
    * @returns {void}
    */
-  public static setBool(name: string, value: boolean): void;
+  function setBool(name: string, value: boolean): void;
 
   /**
    * Sets the color for the given preference name.
@@ -5900,7 +5873,7 @@ declare class preferences extends GlobalObject {
    * @param {ColorRGBA} color The color to set the preference to.
    * @returns {void}
    */
-  public static setColor(name: string, color: ColorRGBA): void;
+  function setColor(name: string, color: ColorRGBA): void;
 
   /**
    * Sets the double value for the given preference name.
@@ -5908,7 +5881,7 @@ declare class preferences extends GlobalObject {
    * @param {double} value The double to set the preference to.
    * @returns {void}
    */
-  public static setDouble(name: string, value: double): void;
+  function setDouble(name: string, value: double): void;
 
   /**
    * Sets the integer value for the given preference name.
@@ -5916,7 +5889,7 @@ declare class preferences extends GlobalObject {
    * @param {int} value The integer to set the preference to.
    * @returns {void}
    */
-  public static setInt(name: string, value: int): void;
+  function setInt(name: string, value: int): void;
 
   /**
    * Sets the string value for the given preference name.
@@ -5924,7 +5897,7 @@ declare class preferences extends GlobalObject {
    * @param {string} value The string to set the preference to.
    * @returns {void}
    */
-  public static setString(name: string, value: string): void;
+  function setString(name: string, value: string): void;
 }
 
 /**
@@ -5952,18 +5925,18 @@ declare class preferences extends GlobalObject {
  * render.renderFinished.disconnect(renderFinished);
  * render.frameReady.disconnect(frameReady);
  */
-declare class render extends GlobalObject {
+declare namespace render {
   /**
    * Interrupt an active render.
    * @returns {void}
    */
-  public static cancelRender(): void;
+  function cancelRender(): void;
 
   /**
    * disconnect all scripts from signals emitted by this object.
    * @returns {void}
    */
-  public static disconnect(): void;
+  function disconnect(): void;
 
   /**
    * Render a part of the scene.
@@ -5973,27 +5946,27 @@ declare class render extends GlobalObject {
    * @param {int} toFrame render end frame
    * @returns {void}
    */
-  public static renderScene(fromFrame: int, toFrame: int): void;
+  function renderScene(fromFrame: int, toFrame: int): void;
 
   /**
    * Render the complete scene.
    * @returns {void}
    */
-  public static renderSceneAll(): void;
+  function renderSceneAll(): void;
 
   /**
    * Enable or disable thumbnail cropping for the render. Mainly used when rendering thumbnails.
    * @param {boolean} enabled enable or disable cropping during render.
    * @returns {void}
    */
-  public static setAutoThumbnailCropping(enabled: boolean): void;
+  function setAutoThumbnailCropping(enabled: boolean): void;
 
   /**
    * Set the background color to use when rendering in scene machine mode.
    * @param {ColorRGBA} bgColor background color
    * @returns {void}
    */
-  public static setBgColor(bgColor: ColorRGBA): void;
+  function setBgColor(bgColor: ColorRGBA): void;
 
   /**
    * Set if rendered frames sets should be combined and in which order. Specify these options if you are
@@ -6002,17 +5975,14 @@ declare class render extends GlobalObject {
    * @param {boolean} secondFieldFirst insert the second frame field set at the beginning
    * @returns {void}
    */
-  public static setCombine(
-    autoCombine: boolean,
-    secondFieldFirst: boolean
-  ): void;
+  function setCombine(autoCombine: boolean, secondFieldFirst: boolean): void;
 
   /**
    * Sets the frame output format.
    * @param {int} type frame output format: 0 - None, 1 - NTSC, 2 - PAL
    * @returns {void}
    */
-  public static setFieldType(type: int): void;
+  function setFieldType(type: int): void;
 
   /**
    * Set which display module to use for rendering. "Display All" uses the global unconnected display
@@ -6020,7 +5990,7 @@ declare class render extends GlobalObject {
    * @param {string} name display name
    * @returns {void}
    */
-  public static setRenderDisplay(name: string): void;
+  function setRenderDisplay(name: string): void;
 
   /**
    * Set the scene resolution to use for rendering.
@@ -6028,28 +5998,28 @@ declare class render extends GlobalObject {
    * @param {int} y height pixels
    * @returns {void}
    */
-  public static setResolution(x: int, y: int): void;
+  function setResolution(x: int, y: int): void;
 
   /**
    * Set the scene resolution to use for rendering.
    * @param {string} name a resolution name.
    * @returns {void}
    */
-  public static setResolutionName(name: string): void;
+  function setResolutionName(name: string): void;
 
   /**
    * Enable rendering on a white background. The default is false, which renders on a black background.
    * @param {boolean} enabled When true enables rendering on a white background.
    * @returns {void}
    */
-  public static setWhiteBackground(enabled: boolean): void;
+  function setWhiteBackground(enabled: boolean): void;
 
   /**
    * Enable or disable write modules during the render.
    * @param {boolean} enabled enable or disable write modules
    * @returns {void}
    */
-  public static setWriteEnabled(enabled: boolean): void;
+  function setWriteEnabled(enabled: boolean): void;
 
   /**
    * Event that notifies the script that a certain frame is available and at which location.
@@ -6057,13 +6027,13 @@ declare class render extends GlobalObject {
    * @param {QObject} frameCel rendered frame Cel
    * @returns {void}
    */
-  public frameReady: QSignal<(frame: int, frameCel: QObject) => void>;
+  const frameReady: QSignal<(frame: int, frameCel: QObject) => void>;
 
   /**
    * Event that notifies the script when the render has completed.
    * @returns {void}
    */
-  public renderFinished: QSignal<() => void>;
+  const renderFinished: QSignal<() => void>;
 }
 
 /**
@@ -6088,7 +6058,7 @@ declare class render extends GlobalObject {
  *     scene.endUndoRedoAccum();
  * }
  */
-declare class scene extends GlobalObject {
+declare namespace scene {
   /**
    * This function starts the accumulation of all of the functions between it and the endUndoRedoAccum
    * function as one command that will appear in the undo/redo list. If you do not use this function with
@@ -6096,14 +6066,14 @@ declare class scene extends GlobalObject {
    * @param {string} commandName The name of the command to be added to the undo/redo list.
    * @returns {void}
    */
-  public static beginUndoRedoAccum(commandName: string): void;
+  function beginUndoRedoAccum(commandName: string): void;
 
   /**
    * This function cancels the accumulation of undo/redo commands. No command will be added to the
    * undo/redo list and all commands that have already been executed will be rolled-back (undone).
    * @returns {void}
    */
-  public static cancelUndoRedoAccum(): void;
+  function cancelUndoRedoAccum(): void;
 
   /**
    * Performs the same operation as the "Scene->Check Files..." menu item.
@@ -6131,13 +6101,13 @@ declare class scene extends GlobalObject {
    *     report: true
    * }); // Will check all files and display bitmap information and layer informations on bitmap files. Will return a human-readable report in the report field of the returned object
    */
-  public static checkFiles(options: QVariant): void;
+  function checkFiles(options: QVariant): void;
 
   /**
    * Clears the command history.
    * @returns {void}
    */
-  public static clearHistory(): void;
+  function clearHistory(): void;
 
   /**
    * Closes the current scene.
@@ -6145,13 +6115,13 @@ declare class scene extends GlobalObject {
    * after these calls.
    * @returns {void}
    */
-  public static closeScene(): void;
+  function closeScene(): void;
 
   /**
    * Closes the current scene and exits.
    * @returns {void}
    */
-  public static closeSceneAndExit(): void;
+  function closeSceneAndExit(): void;
 
   /**
    * Closes the current scene and open the scene specified by env, job, scene and version.
@@ -6161,7 +6131,7 @@ declare class scene extends GlobalObject {
    * @param {string} versionName The version name.
    * @returns {boolean}
    */
-  public static closeSceneAndOpen(
+  function closeSceneAndOpen(
     envName: string,
     jobName: string,
     sceneName: string,
@@ -6173,107 +6143,107 @@ declare class scene extends GlobalObject {
    * @param {string} filePath The full path to the file to open.
    * @returns {boolean}
    */
-  public static closeSceneAndOpenOffline(filePath: string): boolean;
+  function closeSceneAndOpenOffline(filePath: string): boolean;
 
   /**
    * Returns the scene working colour space name.
    * The empty name corresponds to disabled colour space management.
    * @returns {string}
    */
-  public static colorSpace(): string;
+  function colorSpace(): string;
 
   /**
    * Returns the list of supported colour space names.
    * The list is empty if colour space management is disabled.
    * @returns {StringList}
    */
-  public static colorSpaceNames(): StringList;
+  function colorSpaceNames(): StringList;
 
   /**
    * Returns the X value of the centre coordinate of the scene grid.
    * @returns {int}
    */
-  public static coordAtCenterX(): int;
+  function coordAtCenterX(): int;
 
   /**
    * Returns the Y value of the centre coordinate of the scene grid.
    * @returns {int}
    */
-  public static coordAtCenterY(): int;
+  function coordAtCenterY(): int;
 
   /**
    * Returns the name of the current environment.
    * @returns {string}
    */
-  public static currentEnvironment(): string;
+  function currentEnvironment(): string;
 
   /**
    * Returns the path of the current environment.
    * @returns {string}
    */
-  public static currentEnvironmentPath(): string;
+  function currentEnvironmentPath(): string;
 
   /**
    * Returns the name of the current job.
    * @returns {string}
    */
-  public static currentJob(): string;
+  function currentJob(): string;
 
   /**
    * Returns the path of the current job.
    * @returns {string}
    */
-  public static currentJobPath(): string;
+  function currentJobPath(): string;
 
   /**
    * Returns the current project path.
    * @returns {string}
    */
-  public static currentProjectPath(): string;
+  function currentProjectPath(): string;
 
   /**
    * For windows, returns the remapped path.
    * @returns {string}
    */
-  public static currentProjectPathRemapped(): string;
+  function currentProjectPathRemapped(): string;
 
   /**
    * Returns the X value of the current preview resolution.
    * For example, when the current resolution is 720x540 pixels this function will return 720.
    * @returns {int}
    */
-  public static currentResolutionX(): int;
+  function currentResolutionX(): int;
 
   /**
    * Returns the Y value of the current preview resolution.
    * For example, when the current resolution is 720x540 pixels this function will return 540.
    * @returns {int}
    */
-  public static currentResolutionY(): int;
+  function currentResolutionY(): int;
 
   /**
    * Returns the name of the current scene.
    * @returns {string}
    */
-  public static currentScene(): string;
+  function currentScene(): string;
 
   /**
    * Returns the ID of the current version.
    * @returns {int}
    */
-  public static currentVersion(): int;
+  function currentVersion(): int;
 
   /**
    * Returns the name or the number of the current scene version.
    * @returns {string}
    */
-  public static currentVersionName(): string;
+  function currentVersionName(): string;
 
   /**
    * Returns the default resolution field of view (FOV). The default FOV is a global scene parameter.
    * @returns {double}
    */
-  public static defaultResolutionFOV(): double;
+  function defaultResolutionFOV(): double;
 
   /**
    * Returns the default resolution name.
@@ -6281,7 +6251,7 @@ declare class scene extends GlobalObject {
    * is used as a custom resolution, which is not one of the pre-defined resolutions.
    * @returns {string}
    */
-  public static defaultResolutionName(): string;
+  function defaultResolutionName(): string;
 
   /**
    * Returns the X value of the default resolution.
@@ -6289,7 +6259,7 @@ declare class scene extends GlobalObject {
    * For example, when the default scene resolution is 720x540 pixels this function will return 720.
    * @returns {int}
    */
-  public static defaultResolutionX(): int;
+  function defaultResolutionX(): int;
 
   /**
    * Returns the Y value of the default resolution.
@@ -6297,7 +6267,7 @@ declare class scene extends GlobalObject {
    * For example, when the default scene resolution is 720x540 pixels this function will return 540.
    * @returns {int}
    */
-  public static defaultResolutionY(): int;
+  function defaultResolutionY(): int;
 
   /**
    * This function ends the accumulation all of the functions between it and the beginUndoRedoAccum
@@ -6305,54 +6275,54 @@ declare class scene extends GlobalObject {
    * beginUndoRedoAccum, each function in the script generates a separate undo/redo entry.
    * @returns {void}
    */
-  public static endUndoRedoAccum(): void;
+  function endUndoRedoAccum(): void;
 
   /**
    * Converts an OGL coordinate into a field coordinate.
    * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
    * @returns {QScriptValue}
    */
-  public static fromOGL(pointOrVector: QObject): QScriptValue;
+  function fromOGL(pointOrVector: QObject): QScriptValue;
 
   /**
    * Converts the X-value of an OpenGL coordinate to the X-value of a field coordinate.
    * @param {double} oglX The X-value of an OpenGL coordinate.
    * @returns {double}
    */
-  public static fromOGLX(oglX: double): double;
+  function fromOGLX(oglX: double): double;
 
   /**
    * Converts the Y-value of an OpenGL coordinate to the Y-value of a field coordinate.
    * @param {double} oglY The Y-value of an OpenGL coordinate.
    * @returns {double}
    */
-  public static fromOGLY(oglY: double): double;
+  function fromOGLY(oglY: double): double;
 
   /**
    * Converts the Z-value of an OpenGL coordinate to the Z-value of a field coordinate.
    * @param {double} oglZ The Z-value of an OpenGL coordinate.
    * @returns {double}
    */
-  public static fromOGLZ(oglZ: double): double;
+  function fromOGLZ(oglZ: double): double;
 
   /**
    * Returns the model matrix for the default camera.
    * @param {int} frame The frame to retrieve the camera matrix at.
    * @returns {QObject}
    */
-  public static getCameraMatrix(frame: int): QObject;
+  function getCameraMatrix(frame: int): QObject;
 
   /**
    * Retrieves the default display set in the current scene.
    * @returns {string}
    */
-  public static getDefaultDisplay(): string;
+  function getDefaultDisplay(): string;
 
   /**
    * Returns the frame rate, as frames per second.
    * @returns {double}
    */
-  public static getFrameRate(): double;
+  function getFrameRate(): double;
 
   /**
    * Returns all palettes that were either unrecovered or recovered but not yet saved, depending on the
@@ -6361,7 +6331,7 @@ declare class scene extends GlobalObject {
    * @param {boolean} recoveredNotYetSaved Whether or not to return recovered but not yet saved palettes.
    * @returns {StringList}
    */
-  public static getMissingPalettes(
+  function getMissingPalettes(
     unrecovered: boolean,
     recoveredNotYetSaved: boolean
   ): StringList;
@@ -6370,26 +6340,26 @@ declare class scene extends GlobalObject {
    * Returns the scene start frame.
    * @returns {int}
    */
-  public static getStartFrame(): int;
+  function getStartFrame(): int;
 
   /**
    * Returns the scene stop frame.
    * @returns {int}
    */
-  public static getStopFrame(): int;
+  function getStopFrame(): int;
 
   /**
    * Returns true if the scene was ever modified.
    * It will return true even if the modifications have been saved.
    * @returns {boolean}
    */
-  public static hasBeenDirty(): boolean;
+  function hasBeenDirty(): boolean;
 
   /**
    * Tells if the scene has been modified since its last save.
    * @returns {boolean}
    */
-  public static isDirty(): boolean;
+  function isDirty(): boolean;
 
   /**
    * Return a metadata object corresponding to the given name and type.
@@ -6407,7 +6377,7 @@ declare class scene extends GlobalObject {
    *     "value": "foo"
    * }
    */
-  public static metadata(name: string, type?: string): QScriptValue;
+  function metadata(name: string, type?: string): QScriptValue;
 
   /**
    * Return the list of metadatas for the current scene.
@@ -6424,13 +6394,13 @@ declare class scene extends GlobalObject {
    *     "value": "foo"
    * }
    */
-  public static metadatas(): QScriptValue;
+  function metadatas(): QScriptValue;
 
   /**
    * Returns the list of known resolutions.
    * @returns {StringList}
    */
-  public static namedResolutions(): StringList;
+  function namedResolutions(): StringList;
 
   /**
    * Returns the X value of the named resolution. For example, when the named resolution is 720x540
@@ -6438,7 +6408,7 @@ declare class scene extends GlobalObject {
    * @param {string} name The name of the resolution to get the value from.
    * @returns {int}
    */
-  public static namedResolutionX(name: string): int;
+  function namedResolutionX(name: string): int;
 
   /**
    * Returns the Y value of the named resolution. For example, when the named resolution is 720x540
@@ -6446,45 +6416,45 @@ declare class scene extends GlobalObject {
    * @param {string} name The name of the resolution to get the value from.
    * @returns {int}
    */
-  public static namedResolutionY(name: string): int;
+  function namedResolutionY(name: string): int;
 
   /**
    * Returns the number of units in the X axis of the scene grid.
    * @returns {int}
    */
-  public static numberOfUnitsX(): int;
+  function numberOfUnitsX(): int;
 
   /**
    * Returns the number of units in the Y axis of the scene grid.
    * @returns {int}
    */
-  public static numberOfUnitsY(): int;
+  function numberOfUnitsY(): int;
 
   /**
    * Returns the number of units in the Z axis of the scene grid.
    * @returns {int}
    */
-  public static numberOfUnitsZ(): int;
+  function numberOfUnitsZ(): int;
 
   /**
    * Redoes the last n operations. If n is not specified, it will be 1.
    * @param {int} [depth=1] The number of operations to redo.
    * @returns {void}
    */
-  public static redo(depth?: int): void;
+  function redo(depth?: int): void;
 
   /**
    * Removes a metadata object from the list of metadata objects.
    * @param {QScriptValue} meta A metadata object.
    * @returns {boolean}
    */
-  public static removeMetadata(meta: QScriptValue): boolean;
+  function removeMetadata(meta: QScriptValue): boolean;
 
   /**
    * Performs the "save all" command. Effectively, this saves the entire project and all modified files.
    * @returns {boolean}
    */
-  public static saveAll(): boolean;
+  function saveAll(): boolean;
 
   /**
    * Save the current project to the specified folder.
@@ -6495,7 +6465,7 @@ declare class scene extends GlobalObject {
    * @param {string} pathname New folder of the project (ie: /Users/a_user/Documents/my_save_as_project )
    * @returns {boolean}
    */
-  public static saveAs(pathname: string): boolean;
+  function saveAs(pathname: string): boolean;
 
   /**
    * Saves the project as a new version.
@@ -6503,17 +6473,14 @@ declare class scene extends GlobalObject {
    * @param {boolean} markAsDefault This is boolean to indicate to mark this version as the default version.
    * @returns {boolean}
    */
-  public static saveAsNewVersion(
-    name: string,
-    markAsDefault?: boolean
-  ): boolean;
+  function saveAsNewVersion(name: string, markAsDefault?: boolean): boolean;
 
   /**
    * This function sets the scene working colour space name.
    * @param {string} name Set the scene working colour space name.
    * @returns {boolean}
    */
-  public static setColorSpace(name: string): boolean;
+  function setColorSpace(name: string): boolean;
 
   /**
    * Sets the value of the centre (X, Y) coordinates.
@@ -6521,7 +6488,7 @@ declare class scene extends GlobalObject {
    * @param {int} y The value of the Y coordinate at the centre of the grid.
    * @returns {boolean}
    */
-  public static setCoordAtCenter(x: int, y: int): boolean;
+  function setCoordAtCenter(x: int, y: int): boolean;
 
   /**
    * Sets the default scene resolution and field of view.
@@ -6530,14 +6497,14 @@ declare class scene extends GlobalObject {
    * @param {double} fov Set the field of view in degree. Typical value is 41.112.
    * @returns {boolean}
    */
-  public static setDefaultResolution(x: int, y: int, fov: double): boolean;
+  function setDefaultResolution(x: int, y: int, fov: double): boolean;
 
   /**
    * This function sets the default scene resolution name.
    * @param {string} name Set the current resolution preset name to this value.
    * @returns {boolean}
    */
-  public static setDefaultResolutionName(name: string): boolean;
+  function setDefaultResolutionName(name: string): boolean;
 
   /**
    * Changes the default texture pixel density for new Bitmap Drawings.
@@ -6548,7 +6515,7 @@ declare class scene extends GlobalObject {
    * @example
    * scene.setDefaultTexturePixelDensityforBitmapDrawings(0.2);
    */
-  public static setDefaultTexturePixelDensityforBitmapDrawings(
+  function setDefaultTexturePixelDensityforBitmapDrawings(
     normalizedDensity?: double
   ): void;
 
@@ -6561,7 +6528,7 @@ declare class scene extends GlobalObject {
    * @example
    * scene.setDefaultTexturePixelDensityforVectorDrawings(3.0);
    */
-  public static setDefaultTexturePixelDensityforVectorDrawings(
+  function setDefaultTexturePixelDensityforVectorDrawings(
     normalizedDensity?: double
   ): void;
 
@@ -6571,7 +6538,7 @@ declare class scene extends GlobalObject {
    * @param {double} frameRate The new frame rate.
    * @returns {boolean}
    */
-  public static setFrameRate(frameRate: double): boolean;
+  function setFrameRate(frameRate: double): boolean;
 
   /**
    * Either inserts a new metadata object or sets the value of an existing metadata object.
@@ -6591,7 +6558,7 @@ declare class scene extends GlobalObject {
    *     "value": "foo"
    * }
    */
-  public static setMetadata(meta: QScriptValue): void;
+  function setMetadata(meta: QScriptValue): void;
 
   /**
    * Sets the number of X, Y, and Z units in the scene grid.
@@ -6600,7 +6567,7 @@ declare class scene extends GlobalObject {
    * @param {int} z The Z value of the scene grid.
    * @returns {boolean}
    */
-  public static setNumberOfUnits(x: int, y: int, z: int): boolean;
+  function setNumberOfUnits(x: int, y: int, z: int): boolean;
 
   /**
    * This function sets the scene start frame. The value is validated to be below the number of frames,
@@ -6608,7 +6575,7 @@ declare class scene extends GlobalObject {
    * @param {int} frame The scene start frame.
    * @returns {boolean}
    */
-  public static setStartFrame(frame: int): boolean;
+  function setStartFrame(frame: int): boolean;
 
   /**
    * This function sets the scene stop frame. The value is validated to be below the number of frames,
@@ -6616,7 +6583,7 @@ declare class scene extends GlobalObject {
    * @param {int} frame The scene stop frame.
    * @returns {boolean}
    */
-  public static setStopFrame(frame: int): boolean;
+  function setStopFrame(frame: int): boolean;
 
   /**
    * Sets the aspect ratio of the scene. The scene's final aspect ratio will be: X * numberOfUnitsX()/Y *
@@ -6625,67 +6592,67 @@ declare class scene extends GlobalObject {
    * @param {double} y The Y value of the new aspect ratio.
    * @returns {boolean}
    */
-  public static setUnitsAspectRatio(x: double, y: double): boolean;
+  function setUnitsAspectRatio(x: double, y: double): boolean;
 
   /**
    * Returns the temporary project path.
    * @returns {string}
    */
-  public static tempProjectPath(): string;
+  function tempProjectPath(): string;
 
   /**
    * For windows, returns the remapped temporary project path.
    * The remapped temporary project path.
    * @returns {string}
    */
-  public static tempProjectPathRemapped(): string;
+  function tempProjectPathRemapped(): string;
 
   /**
    * Converts a field coordinate into an OGL coordinate.
    * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
    * @returns {QScriptValue}
    */
-  public static toOGL(pointOrVector: QObject): QScriptValue;
+  function toOGL(pointOrVector: QObject): QScriptValue;
 
   /**
    * Converts the X-value of a field coordinate to the X-value of an OpenGL coordinate.
    * @param {double} fieldX The X-value of a field coordinate.
    * @returns {double}
    */
-  public static toOGLX(fieldX: double): double;
+  function toOGLX(fieldX: double): double;
 
   /**
    * Converts the Y-value of a field coordinate to the Y-value of an OpenGL coordinate.
    * @param {double} fieldY The Y-value of a field coordinate.
    * @returns {double}
    */
-  public static toOGLY(fieldY: double): double;
+  function toOGLY(fieldY: double): double;
 
   /**
    * Converts the Z-value of a field coordinate to the Z-value of an OpenGL coordinate.
    * @param {double} fieldZ The Z-value of a field coordinate.
    * @returns {double}
    */
-  public static toOGLZ(fieldZ: double): double;
+  function toOGLZ(fieldZ: double): double;
 
   /**
    * Undoes the last n operations. If n is not specified, it will be 1.
    * @param {int} [depth=1] The number of operations to undo.
    * @returns {void}
    */
-  public static undo(depth?: int): void;
+  function undo(depth?: int): void;
 
   /**
    * Returns the X value of the aspect ratio of the cells in the scene grid.
    * @returns {double}
    */
-  public static unitsAspectRatioX(): double;
+  function unitsAspectRatioX(): double;
 
   /**
    * Returns the Y value of the aspect ratio of the cells in the scene grid.
    * @returns {double}
    */
-  public static unitsAspectRatioY(): double;
+  function unitsAspectRatioY(): double;
 }
 
 /**
@@ -6715,35 +6682,35 @@ declare class scene extends GlobalObject {
  *     }
  * }
  */
-declare class selection extends GlobalObject {
+declare namespace selection {
   /**
    * Add a column to the selection.
    * returns whether columns was located and successfully added to the selection
    * @param {string} column name of column
    * @returns {boolean}
    */
-  public static addColumnToSelection(column: string): boolean;
+  function addColumnToSelection(column: string): boolean;
 
   /**
    * Adds the drawing column and it's associated read node to the selection.
    * @param {string} columnName The displayed name of column.
    * @returns {boolean}
    */
-  public static addDrawingColumnToSelection(columnName: string): boolean;
+  function addDrawingColumnToSelection(columnName: string): boolean;
 
   /**
    * Adds an array of nodes to the selection.
    * @param {QScriptValue} nodes An array containing the qualified name of nodes to be selected.
    * @returns {void}
    */
-  public static addNodesToSelection(nodes: QScriptValue): void;
+  function addNodesToSelection(nodes: QScriptValue): void;
 
   /**
    * Adds a node to the selection.
    * @param {string} node The name of node to add to the selection.
    * @returns {boolean}
    */
-  public static addNodeToSelection(node: string): boolean;
+  function addNodeToSelection(node: string): boolean;
 
   /**
    * Selects/deselects a set of IDs from the sub selection.
@@ -6764,7 +6731,7 @@ declare class selection extends GlobalObject {
    * selection.addNodeToSelection(newSelection.node);
    * selection.addSubSelectionForNode(newSelection.node, newSelection.subobjects);
    */
-  public static addSubSelectionForNode(
+  function addSubSelectionForNode(
     node: string,
     subSelection: QScriptValue
   ): boolean;
@@ -6775,13 +6742,13 @@ declare class selection extends GlobalObject {
    * @param {string} waypoint qualified name of waypoint
    * @returns {boolean}
    */
-  public static addWaypointToSelection(waypoint: string): boolean;
+  function addWaypointToSelection(waypoint: string): boolean;
 
   /**
    * Clears the selection.
    * @returns {boolean}
    */
-  public static clearSelection(): boolean;
+  function clearSelection(): boolean;
 
   /**
    * Clears all the sub selection on the given node.
@@ -6790,7 +6757,7 @@ declare class selection extends GlobalObject {
    * @example
    * selection.clearSubSelectionForNode("Top/My-Subnode-Animation");
    */
-  public static clearSubSelectionForNode(node: string): boolean;
+  function clearSubSelectionForNode(node: string): boolean;
 
   /**
    * Adds the column to the selection. If the column is a drawing column, also adds the associated read
@@ -6798,38 +6765,38 @@ declare class selection extends GlobalObject {
    * @param {string} columnName The displayed name of column.
    * @returns {boolean}
    */
-  public static extendSelectionWithColumn(columnName: string): boolean;
+  function extendSelectionWithColumn(columnName: string): boolean;
 
   /**
    * Returns true if the selection has a range.
    * @returns {boolean}
    */
-  public static isSelectionRange(): boolean;
+  function isSelectionRange(): boolean;
 
   /**
    * Returns a value for the number of columns selected in the xsheet.
    * @returns {int}
    */
-  public static numberOfColumnsSelected(): int;
+  function numberOfColumnsSelected(): int;
 
   /**
    * Returns the number of selected frames.
    * @returns {int}
    */
-  public static numberOfFrames(): int;
+  function numberOfFrames(): int;
 
   /**
    * Returns the number of nodes that are selected.
    * @returns {int}
    */
-  public static numberOfNodesSelected(): int;
+  function numberOfNodesSelected(): int;
 
   /**
    * Removes a node from the selection.
    * @param {string} node The name of node to be removed from the selection.
    * @returns {boolean}
    */
-  public static removeNodeFromSelection(node: string): boolean;
+  function removeNodeFromSelection(node: string): boolean;
 
   /**
    * Remove a waypoint from the selection.
@@ -6837,46 +6804,46 @@ declare class selection extends GlobalObject {
    * @param {string} waypoint qualified name of waypoint
    * @returns {boolean}
    */
-  public static removeWaypointFromSelection(waypoint: string): boolean;
+  function removeWaypointFromSelection(waypoint: string): boolean;
 
   /**
    * Selects all nodes and all columns in the scene.
    * @returns {void}
    */
-  public static selectAll(): void;
+  function selectAll(): void;
 
   /**
    * Returns the ith column selected in the xsheet.
    * @param {int} i The index of the column.
    * @returns {string}
    */
-  public static selectedColumn(i: int): string;
+  function selectedColumn(i: int): string;
 
   /**
    * Returns the path of the selected node.
    * @param {int} i The index of the node.
    * @returns {string}
    */
-  public static selectedNode(i: int): string;
+  function selectedNode(i: int): string;
 
   /**
    * Returns an Array of all selected nodes.
    * @returns {QScriptValue}
    */
-  public static selectedNodes(): QScriptValue;
+  function selectedNodes(): QScriptValue;
 
   /**
    * Returns the path of the selected waypoint.
    * @param {int} i The index of the waypoint.
    * @returns {string}
    */
-  public static selectedWaypoint(i: int): string;
+  function selectedWaypoint(i: int): string;
 
   /**
    * Returns an Array of all selected waypoints.
    * @returns {QScriptValue}
    */
-  public static selectedWaypoints(): QScriptValue;
+  function selectedWaypoints(): QScriptValue;
 
   /**
    * Sets the selection frame range.
@@ -6884,13 +6851,13 @@ declare class selection extends GlobalObject {
    * @param {int} length The number of frames selected.
    * @returns {void}
    */
-  public static setSelectionFrameRange(start: int, length: int): void;
+  function setSelectionFrameRange(start: int, length: int): void;
 
   /**
    * Returns the selected start frame.
    * @returns {int}
    */
-  public static startFrame(): int;
+  function startFrame(): int;
 
   /**
    * Obtains the IDs of the selectable sub objects of the given node.
@@ -6913,7 +6880,7 @@ declare class selection extends GlobalObject {
    * myFile.write(JSON.stringify(newSelection));
    * myFile.close();
    */
-  public static subSelectionForNode(node: string): QScriptValue;
+  function subSelectionForNode(node: string): QScriptValue;
 }
 
 /**
@@ -6930,14 +6897,14 @@ declare class selection extends GlobalObject {
  * var soundFile = sound.getSoundtrack(50, 100);
  * MessageBox.information("Soundtrack file location: " + soundFile.path());
  */
-declare class sound extends GlobalObject {
+declare namespace sound {
   /**
    * Copy the content of the source file to the destination file and say if the copy is done completely.
    * @param {string} srcFileName The source file to be copied from.
    * @param {string} dstFileName The destination file to be copied to.
    * @returns {boolean}
    */
-  public static copy(srcFileName: string, dstFileName: string): boolean;
+  function copy(srcFileName: string, dstFileName: string): boolean;
 
   /**
    * Return a part of the scene's soundtrack in a temporary file in the WAV format.
@@ -6945,54 +6912,54 @@ declare class sound extends GlobalObject {
    * @param {int} toFrame The soundtrack end frame.
    * @returns {QObject}
    */
-  public static getSoundtrack(fromFrame: int, toFrame: int): QObject;
+  function getSoundtrack(fromFrame: int, toFrame: int): QObject;
 
   /**
    * Return the scene's soundtrack in a temporary file in the WAV format.
    * @returns {QObject}
    */
-  public static getSoundtrackAll(): QObject;
+  function getSoundtrackAll(): QObject;
 
   /**
    * Check if the export file path is in unicode.
    * @param {string} exportFilePath The export file path to check.
    * @returns {boolean}
    */
-  public static isUnicode(exportFilePath: string): boolean;
+  function isUnicode(exportFilePath: string): boolean;
 
   /**
    * Sets the number of audio channels (i.e 1 for mono and 2 for stereo).
    * @param {int} count The audio channel count.
    * @returns {void}
    */
-  public static setChannelCount(count: int): void;
+  function setChannelCount(count: int): void;
 
   /**
    * Sets the audio channel size (i.e. 8 or 16 bit).
    * @param {int} size The audio channel size.
    * @returns {void}
    */
-  public static setChannelSize(size: int): void;
+  function setChannelSize(size: int): void;
 
   /**
    * Sets the number of frames per second. By default the scene frame rate is used.
    * @param {double} rate The desired frame rate.
    * @returns {void}
    */
-  public static setFrameRate(rate: double): void;
+  function setFrameRate(rate: double): void;
 
   /**
    * Sets the audio sample rate in Hz (i.e. 22050, 44100, ...).
    * @param {double} rate The desired audio sample rate.
    * @returns {void}
    */
-  public static setSampleRate(rate: double): void;
+  function setSampleRate(rate: double): void;
 
   /**
    * Event that notifies the script when the sound file is available.
    * @returns {void}
    */
-  public soundReady: QSignal<() => void>;
+  const soundReady: QSignal<() => void>;
 }
 
 /**
@@ -7004,27 +6971,27 @@ declare class sound extends GlobalObject {
  * System.println("This text is printed in the command prompt or the Terminal");
  * var tempFolder = System.getenv("TEMP");
  */
-declare class System extends GlobalObject {
+declare namespace System {
   /**
    * Gets the value of an environment variable or the operating system.
    * @param {string} environmentVariable The desired environment variable.
    * @returns {string}
    */
-  public static getenv(environmentVariable: string): string;
+  function getenv(environmentVariable: string): string;
 
   /**
    * Prints a string to Terminal (Unix) or Command Prompt (Windows).
    * @param {string} text The text to print to the console.
    * @returns {void}
    */
-  public static println(text: string): void;
+  function println(text: string): void;
 
   /**
    * Processes the next event in a while loop. It can not be accessed from the scriptModule, neither from
    * writeModule.
    * @returns {void}
    */
-  public static processOneEvent(): void;
+  function processOneEvent(): void;
 }
 
 /**
@@ -7065,13 +7032,13 @@ declare class System extends GlobalObject {
  *      }
  *  }
  */
-declare class Timeline extends GlobalObject {
+declare namespace Timeline {
   /**
    * Centers the timeline view on the given frame.
    * @param {int} frameNum The frame number to center on
    * @returns {void}
    */
-  public static centerOnFrame(frameNum: int): void;
+  function centerOnFrame(frameNum: int): void;
 
   /**
    * Changes the type of a Timeline Frame Marker.
@@ -7080,7 +7047,7 @@ declare class Timeline extends GlobalObject {
    * @param {string} markerType The type to change the marker to.
    * @returns {boolean}
    */
-  public static changeFrameMarkerType(
+  function changeFrameMarkerType(
     layerIndex: int,
     markerId: int,
     markerType: string
@@ -7097,7 +7064,7 @@ declare class Timeline extends GlobalObject {
    * @param {int} frameNumber The frame to create the marker on.
    * @returns {int}
    */
-  public static createFrameMarker(
+  function createFrameMarker(
     layerIndex: int,
     markerType: string,
     frameNumber: int
@@ -7109,7 +7076,7 @@ declare class Timeline extends GlobalObject {
    * @param {int} markerId The id of the marker to delete.
    * @returns {boolean}
    */
-  public static deleteFrameMarker(layerIndex: int, markerId: int): boolean;
+  function deleteFrameMarker(layerIndex: int, markerId: int): boolean;
 
   /**
    * Return an array of object representing the Timeline Frame Markers for the given layer index, with
@@ -7122,7 +7089,7 @@ declare class Timeline extends GlobalObject {
    * @param {string} markerType The type of frame marker to filter for.
    * @returns {QScriptValue}
    */
-  public static filterFrameMarkers(
+  function filterFrameMarkers(
     layerIndex: int,
     markerType: string
   ): QScriptValue;
@@ -7131,13 +7098,13 @@ declare class Timeline extends GlobalObject {
    * Returns the first frame selected.
    * @returns {int}
    */
-  public static firstFrameSel(): int;
+  function firstFrameSel(): int;
 
   /**
    * Returns a list of Timeline Frame Marker types.
    * @returns {StringList}
    */
-  public static frameMarkerTypes(): StringList;
+  function frameMarkerTypes(): StringList;
 
   /**
    * Return an array of object representing the Timeline Frame Markers for the given layer index.
@@ -7148,7 +7115,7 @@ declare class Timeline extends GlobalObject {
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {QScriptValue}
    */
-  public static getAllFrameMarkers(layerIndex: int): QScriptValue;
+  function getAllFrameMarkers(layerIndex: int): QScriptValue;
 
   /**
    * Return an object representing the Timeline Frame Marker at the given frame for the given layer
@@ -7161,7 +7128,7 @@ declare class Timeline extends GlobalObject {
    * @param {int} frameNumber The frame number.
    * @returns {QScriptValue}
    */
-  public static getFrameMarker(layerIndex: int, frameNumber: int): QScriptValue;
+  function getFrameMarker(layerIndex: int, frameNumber: int): QScriptValue;
 
   /**
    * Returns true if the parent layer index is an ancestor of the layer index.
@@ -7169,35 +7136,35 @@ declare class Timeline extends GlobalObject {
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {boolean}
    */
-  public static isAncestorOf(parentLayerIndex: int, layerIndex: int): boolean;
+  function isAncestorOf(parentLayerIndex: int, layerIndex: int): boolean;
 
   /**
    * Returns true if the layer index is a column.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {boolean}
    */
-  public static layerIsColumn(layerIndex: int): boolean;
+  function layerIsColumn(layerIndex: int): boolean;
 
   /**
    * Returns true if the layer is a node.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {boolean}
    */
-  public static layerIsNode(layerIndex: int): boolean;
+  function layerIsNode(layerIndex: int): boolean;
 
   /**
    * Returns the layer as a column, or the empty string if this layer is not a column.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {string}
    */
-  public static layerToColumn(layerIndex: int): string;
+  function layerToColumn(layerIndex: int): string;
 
   /**
    * Returns the node associated to the layer, or the empty string if this layer is not a node.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {string}
    */
-  public static layerToNode(layerIndex: int): string;
+  function layerToNode(layerIndex: int): string;
 
   /**
    * Moves a Timeline Frame Marker from it's current frame to the new frame.
@@ -7206,7 +7173,7 @@ declare class Timeline extends GlobalObject {
    * @param {int} newFrame The frame to move to the marker to.
    * @returns {boolean}
    */
-  public static moveFrameMarker(
+  function moveFrameMarker(
     layerIndex: int,
     markerId: int,
     newFrame: int
@@ -7217,91 +7184,91 @@ declare class Timeline extends GlobalObject {
    * no frames are selected.
    * @returns {int}
    */
-  public static numFrameSel(): int;
+  function numFrameSel(): int;
 
   /**
    * Returns the number of layers in the timeline.
    * @returns {int}
    */
-  public static numLayers(): int;
+  function numLayers(): int;
 
   /**
    * Returns the number of layer selected.
    * @returns {int}
    */
-  public static numLayerSel(): int;
+  function numLayerSel(): int;
 
   /**
    * Returns the layer index of the parent node.
    * @param {int} layerIndex The layer index in the timeline layer.
    * @returns {int}
    */
-  public static parentNodeIndex(layerIndex: int): int;
+  function parentNodeIndex(layerIndex: int): int;
 
   /**
    * Returns true if the selectionIndex points to a column.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {boolean}
    */
-  public static selIsColumn(selectionIndex: int): boolean;
+  function selIsColumn(selectionIndex: int): boolean;
 
   /**
    * Returns true if the selection index is a node.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {boolean}
    */
-  public static selIsNode(selectionIndex: int): boolean;
+  function selIsNode(selectionIndex: int): boolean;
 
   /**
    * Converts the selection index to a column.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {string}
    */
-  public static selToColumn(selectionIndex: int): string;
+  function selToColumn(selectionIndex: int): string;
 
   /**
    * Converts a selection index to a layer index.
    * @param {int} selectionIndex The selection index in the timeline layer.
    * @returns {int}
    */
-  public static selToLayer(selectionIndex: int): int;
+  function selToLayer(selectionIndex: int): int;
 
   /**
    * Converts the selection index to a node.
    * @param {int} selectionIndex The selecton index in the timeline layer.
    * @returns {string}
    */
-  public static selToNode(selectionIndex: int): string;
+  function selToNode(selectionIndex: int): string;
 
   /**
    * Returns true if the display was set to unconnected.
    * @returns {boolean}
    */
-  public static setDisplayToUnconnected(): boolean;
+  function setDisplayToUnconnected(): boolean;
 
   /**
    * Returns the first selected frame number.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static firstFrameSel: int;
+  // /* Invalid - Duplicate property name */ var firstFrameSel: int;
 
   /**
    * Returns the number of selected the frame. If only 1 frame is selected.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static numFrameSel: int;
+  // /* Invalid - Duplicate property name */ var numFrameSel: int;
 
   /**
    * Returns the number of layers in the timeline.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static numLayers: int;
+  // /* Invalid - Duplicate property name */ var numLayers: int;
 
   /**
    * Returns the number of selected layers.
    * @returns {int}
    */
-  // /* Invalid - Duplicate property name */ static numLayerSel: int;
+  // /* Invalid - Duplicate property name */ var numLayerSel: int;
 }
 
 /**
@@ -7321,7 +7288,7 @@ declare class Timeline extends GlobalObject {
  *     TimelineMarker.createMarker(marker);
  * }
  */
-declare class TimelineMarker extends GlobalObject {
+declare namespace TimelineMarker {
   /**
 * Creates a marker.
 * @param {QScriptValue} marker - The marker to create. A marker object has the following properties:
@@ -7333,27 +7300,27 @@ name  String  (Optional) Name for the marker
 notes  String  (Optional) Notes for the marker
 * @returns {QScriptValue}
 */
-  public static createMarker(marker: {
+  function createMarker(marker: {
     /**
      * The number of the frame.
      */
-    frame: int;
+    frame?: int;
     /**
      * (Optional) The length of the marker.
      */
-    length: int;
+    length?: int;
     /**
      * (Optional) The colour of the marker. Can be an integer RGBA value or a standard W3C colour keyword name in a string.
      */
-    color: int | string;
+    color?: int | string;
     /**
      * (Optional) Name for the marker
      */
-    name: string;
+    name?: string;
     /**
      * (Optional) Notes for the marker
      */
-    notes: string;
+    notes?: string;
   }): QScriptValue;
 
   /**
@@ -7361,34 +7328,34 @@ notes  String  (Optional) Notes for the marker
    * @param {QScriptValue} marker - The marker to delete.
    * @returns {boolean}
    */
-  public static deleteMarker(marker: QScriptValue): boolean;
+  function deleteMarker(marker: QScriptValue): boolean;
 
   /**
    * Returns all the markers in the current Timeline.
    * @returns {QScriptValue}
    */
-  public static getAllMarkers(): QScriptValue;
+  function getAllMarkers(): QScriptValue;
 
   /**
    * Return a markers in the current Timeline that overlap the given frame.
    * @param {int} atFrame
    * @returns {QScriptValue}
    */
-  public static getFirstMarkerAt(atFrame: int): QScriptValue;
+  function getFirstMarkerAt(atFrame: int): QScriptValue;
 
   /**
    * Return all the markers in the current Timeline that overlap the given frame.
    * @param {int} atFrame
    * @returns {QScriptValue}
    */
-  public static getMarkersAtFrame(atFrame: int): QScriptValue;
+  function getMarkersAtFrame(atFrame: int): QScriptValue;
 
   /**
    * Modifies a marker with marker object.
    * @param {QScriptValue} marker - The marker object to replace the marker with.
    * @returns {QScriptValue}
    */
-  public static setMarker(marker: QScriptValue): QScriptValue;
+  function setMarker(marker: QScriptValue): QScriptValue;
 }
 
 /**
@@ -7397,83 +7364,83 @@ notes  String  (Optional) Notes for the marker
  * Tool Presets view must have been loaded for these function to be available.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classToolProperties.html}
  */
-declare class ToolProperties extends GlobalObject {
+declare namespace ToolProperties {
   /**
    * Gets all of the global properties.
    * A global property is a tool property that is unique to a tool, or is set globally for all tools.
    * @returns {QScriptValue}
    */
-  public static getAllGlobalProperties(): QScriptValue;
+  function getAllGlobalProperties(): QScriptValue;
 
   /**
    * Gets all of the specific properties of the given tool.
    * @param {string} toolName The tool to get the properties of.
    * @returns {QScriptValue}
    */
-  public static getAllToolSpecificProperties(toolName: string): QScriptValue;
+  function getAllToolSpecificProperties(toolName: string): QScriptValue;
 
   /**
    * Gets the antialiasing mode property.
    * Possible values are: AntialiasingOff = 0 AntialiasingOn = 1
    * @returns {int}
    */
-  public static getAntialiasingMode(): int;
+  function getAntialiasingMode(): int;
 
   /**
    * Gets the apply to all layers property.
    * @returns {boolean}
    */
-  public static getApplyToAllLayers(): boolean;
+  function getApplyToAllLayers(): boolean;
 
   /**
    * Gets the auto fill inside property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getAutoFillInside(toolName: string): boolean;
+  function getAutoFillInside(toolName: string): boolean;
 
   /**
    * Gets the auto flatten mode property.
    * @returns {boolean}
    */
-  public static getAutoFlattenMode(): boolean;
+  function getAutoFlattenMode(): boolean;
 
   /**
    * Gets the auto gap closing mode property.
    * Possible values are: NONE = 0 SMALL = 1 MEDIUM = 2 LARGE = 3
    * @returns {int}
    */
-  public static getAutoGapClosingMode(): int;
+  function getAutoGapClosingMode(): int;
 
   /**
    * Gets the auto gap line closing property.
    * @returns {boolean}
    */
-  public static getAutoGapLineClosing(): boolean;
+  function getAutoGapLineClosing(): boolean;
 
   /**
    * Gets the text auto kerning property.
    * @returns {boolean}
    */
-  public static getAutoKerning(): boolean;
+  function getAutoKerning(): boolean;
 
   /**
    * Gets the bitmap paint alpha property.
    * @returns {int}
    */
-  public static getBitmapPaintAlpha(): int;
+  function getBitmapPaintAlpha(): int;
 
   /**
    * Gets the bitmap paint color tolerance property.
    * @returns {int}
    */
-  public static getBitmapPaintColorTolerance(): int;
+  function getBitmapPaintColorTolerance(): int;
 
   /**
    * Gets the bitmap paint max overlap property.
    * @returns {int}
    */
-  public static getBitmapPaintMaxOverlap(): int;
+  function getBitmapPaintMaxOverlap(): int;
 
   /**
    * Gets the bitmap paint source art property.
@@ -7481,305 +7448,305 @@ declare class ToolProperties extends GlobalObject {
    * BitmapPaintSourceLineArt = 2 BitmapPaintSourceOverlayArt = 3 BitmapPaintSourceCurrentArt = 255
    * @returns {int}
    */
-  public static getBitmapPaintSourceArt(): int;
+  function getBitmapPaintSourceArt(): int;
 
   /**
    * Gets the bounding box movable property.
    * @returns {boolean}
    */
-  public static getBoundingBoxMovable(): boolean;
+  function getBoundingBoxMovable(): boolean;
 
   /**
    * Gets the brush mode property.
    * Possible values are: OverlayBrushMode = 0 RepaintBrushMode = 1
    * @returns {int}
    */
-  public static getBrushMode(): int;
+  function getBrushMode(): int;
 
   /**
    * Gets the change symbol pivot on all frames property.
    * @returns {boolean}
    */
-  public static getChangeSymbolPivotOnAllFrames(): boolean;
+  function getChangeSymbolPivotOnAllFrames(): boolean;
 
   /**
    * Gets the control point selection mode property.
    * Possible values are: Drawing = 0 ControlPoint = 1
    * @returns {int}
    */
-  public static getControlPointSelectionMode(): int;
+  function getControlPointSelectionMode(): int;
 
   /**
    * Gets the create color art on brush property.
    * @returns {boolean}
    */
-  public static getCreateColorArtOnBrush(): boolean;
+  function getCreateColorArtOnBrush(): boolean;
 
   /**
    * Gets the enable break gesture property.
    * @returns {boolean}
    */
-  public static getCutEnableBreakGesture(): boolean;
+  function getCutEnableBreakGesture(): boolean;
 
   /**
    * Gets the enable cutter gesture property.
    * @returns {boolean}
    */
-  public static getCutEnableCutterGesture(): boolean;
+  function getCutEnableCutterGesture(): boolean;
 
   /**
    * Gets the hide pivot manipulator controls property.
    * @returns {boolean}
    */
-  public static getDisablePivotManipulatorControl(): boolean;
+  function getDisablePivotManipulatorControl(): boolean;
 
   /**
    * Gets the draw behind property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getDrawBehind(toolName: string): boolean;
+  function getDrawBehind(toolName: string): boolean;
 
   /**
    * Gets the drawing magnifier property.
    * @returns {boolean}
    */
-  public static getDrawingMagnifier(): boolean;
+  function getDrawingMagnifier(): boolean;
 
   /**
    * Gets the drawing type property.
    * Possible values are: DrawingVector = 0 DrawingBitmap = 1
    * @returns {int}
    */
-  public static getDrawingType(): int;
+  function getDrawingType(): int;
 
   /**
    * Gets the element mode property.
    * Possible values are: SelectedElements = 0 VisibleElements = 1 LinkedElements = 2
    * @returns {int}
    */
-  public static getElementMode(): int;
+  function getElementMode(): int;
 
   /**
    * Gets the frame mode property.
    * Possible values are: CurrentFrame = 0 AllFrames = 1 OnionSkinFrames = 2
    * @returns {int}
    */
-  public static getFrameMode(): int;
+  function getFrameMode(): int;
 
   /**
    * Gets hide manipulator controls property.
    * @returns {boolean}
    */
-  public static getHideManipulatorControls(): boolean;
+  function getHideManipulatorControls(): boolean;
 
   /**
    * Gets the hide rotate manipulator controls property.
    * @returns {boolean}
    */
-  public static getHideRotateManipulatorControls(): boolean;
+  function getHideRotateManipulatorControls(): boolean;
 
   /**
    * Gets the hide scale manipulator controls property.
    * @returns {boolean}
    */
-  public static getHideScaleManipulatorControls(): boolean;
+  function getHideScaleManipulatorControls(): boolean;
 
   /**
    * Gets the hide translate manipulator controls property.
    * @returns {boolean}
    */
-  public static getHideTranslateManipulatorControls(): boolean;
+  function getHideTranslateManipulatorControls(): boolean;
 
   /**
    * Gets the ink intelligent mode property.
    * @returns {boolean}
    */
-  public static getInkIntelligentMode(): boolean;
+  function getInkIntelligentMode(): boolean;
 
   /**
    * Gets the ink join mode property.
    * Possible values are: UNDEFINED_JOIN = 0 ROUND_JOIN = 1 MITER_JOIN = 2 BEVEL_JOIN = 3
    * @returns {int}
    */
-  public static getInkJoinMode(): int;
+  function getInkJoinMode(): int;
 
   /**
    * Gets the ink raise mode property.
    * @returns {boolean}
    */
-  public static getInkRaiseMode(): boolean;
+  function getInkRaiseMode(): boolean;
 
   /**
    * Gets the ink selection mode property.
    * @returns {boolean}
    */
-  public static getInkSelectionMode(): boolean;
+  function getInkSelectionMode(): boolean;
 
   /**
    * Gets the show inkable lines property.
    * @returns {boolean}
    */
-  public static getInkShowInkableLines(): boolean;
+  function getInkShowInkableLines(): boolean;
 
   /**
    * Gets keep proportions property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getKeepProportions(toolName: string): boolean;
+  function getKeepProportions(toolName: string): boolean;
 
   /**
    * Gets the line building mode property.
    * @returns {boolean}
    */
-  public static getLineBuildingMode(): boolean;
+  function getLineBuildingMode(): boolean;
 
   /**
    * Gets the line mode property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getLineMode(toolName: string): boolean;
+  function getLineMode(toolName: string): boolean;
 
   /**
    * Gets the line pushing mode property.
    * @returns {boolean}
    */
-  public static getLinePushingMode(): boolean;
+  function getLinePushingMode(): boolean;
 
   /**
    * Returns the line tool mode. 1: normal, 2: Quadratic, 3: Cubic.
    * @returns {int}
    */
-  public static getLineToolMode(): int;
+  function getLineToolMode(): int;
 
   /**
    * Gets the lock color property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getLockColor(toolName: string): boolean;
+  function getLockColor(toolName: string): boolean;
 
   /**
    * Gets the lock pen style width property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getLockPenStyleWidth(toolName: string): boolean;
+  function getLockPenStyleWidth(toolName: string): boolean;
 
   /**
    * Gets the merge with top layer property.
    * @returns {boolean}
    */
-  public static getMergeWithTopLayer(): boolean;
+  function getMergeWithTopLayer(): boolean;
 
   /**
    * Gets the paint destroy texture property.
    * @returns {boolean}
    */
-  public static getPaintDestroyTexture(): boolean;
+  function getPaintDestroyTexture(): boolean;
 
   /**
    * Gets the paint element mode property.
    * Possible values are: SelectedElements = 0 VisibleElements = 1 LinkedElements = 2
    * @returns {int}
    */
-  public static getPaintElementMode(): int;
+  function getPaintElementMode(): int;
 
   /**
    * Gets the paint mode property.
    * Possible values are: PAINT = 0 UNPAINT = 1 REPAINT = 2 PAINT_UNPAINTED = 3
    * @returns {int}
    */
-  public static getPaintMode(): int;
+  function getPaintMode(): int;
 
   /**
    * Gets the pencil tip mode property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {int}
    */
-  public static getPencilTipMode(toolName: string): int;
+  function getPencilTipMode(toolName: string): int;
 
   /**
    * Gets the permanent selection mode property.
    * @returns {boolean}
    */
-  public static getPermanentSelectionMode(): boolean;
+  function getPermanentSelectionMode(): boolean;
 
   /**
    * Gets the perspective mode property.
    * Possible values are: PerspectiveMode = 0 LatticeMode = 1
    * @returns {int}
    */
-  public static getPerspectiveMode(): int;
+  function getPerspectiveMode(): int;
 
   /**
    * Gets the prevent drawing property.
    * @returns {boolean}
    */
-  public static getPreventDrawing(): boolean;
+  function getPreventDrawing(): boolean;
 
   /**
    * Gets the prevent scene planning property.
    * @returns {boolean}
    */
-  public static getPreventScenePlanning(): boolean;
+  function getPreventScenePlanning(): boolean;
 
   /**
    * Gets the respect sticky color property.
    * @returns {boolean}
    */
-  public static getRespectStickyColor(): boolean;
+  function getRespectStickyColor(): boolean;
 
   /**
    * Gets the retrace mode property.
    * @returns {boolean}
    */
-  public static getRetraceMode(): boolean;
+  function getRetraceMode(): boolean;
 
   /**
    * Gets the maximum retrace noise property.
    * @returns {double}
    */
-  public static getRetraceNoiseMax(): double;
+  function getRetraceNoiseMax(): double;
 
   /**
    * Gets the maximum retrace offset property.
    * @returns {double}
    */
-  public static getRetraceOffsetMax(): double;
+  function getRetraceOffsetMax(): double;
 
   /**
    * Gets the retrace probability property.
    * @returns {double}
    */
-  public static getRetraceProbability(): double;
+  function getRetraceProbability(): double;
 
   /**
    * Gets the maximum retrace tilt property.
    * @returns {double}
    */
-  public static getRetraceTiltMax(): double;
+  function getRetraceTiltMax(): double;
 
   /**
    * Gets the select after paint or ink property.
    * @returns {boolean}
    */
-  public static getSelectAfterPaintOrInk(): boolean;
+  function getSelectAfterPaintOrInk(): boolean;
 
   /**
    * Gets the select by color property.
    * @returns {boolean}
    */
-  public static getSelectByColor(): boolean;
+  function getSelectByColor(): boolean;
 
   /**
    * Gets the selection is lasso property.
    * Possible values are: Lasso mode = true Markee mode = false
    * @returns {boolean}
    */
-  public static getSelectionIsLasso(): boolean;
+  function getSelectionIsLasso(): boolean;
 
   /**
    * Gets the selection mode property.
@@ -7787,185 +7754,185 @@ declare class ToolProperties extends GlobalObject {
    * = 3
    * @returns {int}
    */
-  public static getSelectionMode(): int;
+  function getSelectionMode(): int;
 
   /**
    * Gets the show advanced controls property.
    * @returns {boolean}
    */
-  public static getShowAdvancedControls(): boolean;
+  function getShowAdvancedControls(): boolean;
 
   /**
    * Gets the show all conotur editing controls property.
    * @returns {boolean}
    */
-  public static getShowAllContourEditingControls(): boolean;
+  function getShowAllContourEditingControls(): boolean;
 
   /**
    * Gets the show other drawing thumbnail property.
    * @returns {boolean}
    */
-  public static getShowOtherDrawingThumbnail(): boolean;
+  function getShowOtherDrawingThumbnail(): boolean;
 
   /**
    * Gets the smooth pen style center smooth property.
    * @returns {double}
    */
-  public static getSmoothPenStyleCenterSmooth(): double;
+  function getSmoothPenStyleCenterSmooth(): double;
 
   /**
    * Gets the smooth pen style maximum property.
    * @returns {double}
    */
-  public static getSmoothPenStyleMax(): double;
+  function getSmoothPenStyleMax(): double;
 
   /**
    * Gets the smooth pen style minimum property.
    * @returns {double}
    */
-  public static getSmoothPenStyleMin(): double;
+  function getSmoothPenStyleMin(): double;
 
   /**
    * Gets the smooth pen style minimum ratio property.
    * @returns {double}
    */
-  public static getSmoothPenStyleMinRatio(): double;
+  function getSmoothPenStyleMinRatio(): double;
 
   /**
    * Gets the smooth selector property.
    * Possible values are: SMOOTH_BRUSH = 0 SMOOTH_MARQUEE = 1 SMOOTH_LASSO = 2
    * @returns {int}
    */
-  public static getSmoothSelector(): int;
+  function getSmoothSelector(): int;
 
   /**
    * Gets the smooth show points property.
    * @returns {boolean}
    */
-  public static getSmoothShowPoints(): boolean;
+  function getSmoothShowPoints(): boolean;
 
   /**
    * Gets the snap mode property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getSnapMode(toolName: string): boolean;
+  function getSnapMode(toolName: string): boolean;
 
   /**
    * Gets the snap to 3D mode property.
    * @returns {boolean}
    */
-  public static getSnapTo3DMode(): boolean;
+  function getSnapTo3DMode(): boolean;
 
   /**
    * Gets the snap to bounding boxes property.
    * @returns {boolean}
    */
-  public static getSnapToBoundingBoxes(): boolean;
+  function getSnapToBoundingBoxes(): boolean;
 
   /**
    * Gets the snap to contour property.
    * @returns {boolean}
    */
-  public static getSnapToContour(): boolean;
+  function getSnapToContour(): boolean;
 
   /**
    * Gets the snap to grid property.
    * @returns {boolean}
    */
-  public static getSnapToGrid(): boolean;
+  function getSnapToGrid(): boolean;
 
   /**
    * Gets the stroke smooth value property.
    * @returns {double}
    */
-  public static getStrokeSmoothValue(): double;
+  function getStrokeSmoothValue(): double;
 
   /**
    * Gets the text alignment property.
    * @returns {int}
    */
-  public static getTextAlignment(): int;
+  function getTextAlignment(): int;
 
   /**
    * Gets the text font property.
    * @returns {int}
    */
-  public static getTextFont(): int;
+  function getTextFont(): int;
 
   /**
    * Gets the text indent property.
    * @returns {int}
    */
-  public static getTextIndent(): int;
+  function getTextIndent(): int;
 
   /**
    * Gets the text kerning property.
    * @returns {int}
    */
-  public static getTextKerning(): int;
+  function getTextKerning(): int;
 
   /**
    * Gets the text line space property.
    * @returns {int}
    */
-  public static getTextLineSpace(): int;
+  function getTextLineSpace(): int;
 
   /**
    * Gets the text size property.
    * @returns {int}
    */
-  public static getTextSize(): int;
+  function getTextSize(): int;
 
   /**
    * Gets the text style property.
    * @returns {int}
    */
-  public static getTextStyle(): int;
+  function getTextStyle(): int;
 
   /**
    * Gets the thickness adjust mode property.
    * @returns {boolean}
    */
-  public static getThicknessAdjustMode(): boolean;
+  function getThicknessAdjustMode(): boolean;
 
   /**
    * @param {string} toolName
    * @returns {QScriptValue}
    */
-  public static getToolIdFromName(toolName: string): QScriptValue;
+  function getToolIdFromName(toolName: string): QScriptValue;
 
   /**
    * Gets the tool resolution height property.
    * @returns {int}
    */
-  public static getToolResolutionHeight(): int;
+  function getToolResolutionHeight(): int;
 
   /**
    * Gets the tool resolution width property.
    * @returns {int}
    */
-  public static getToolResolutionWidth(): int;
+  function getToolResolutionWidth(): int;
 
   /**
    * Gets the trim extra lines property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getTrimExtraLines(toolName: string): boolean;
+  function getTrimExtraLines(toolName: string): boolean;
 
   /**
    * Gets the trim extra lines match property of the given tool.
    * @param {string} toolName The tool to get the property of.
    * @returns {boolean}
    */
-  public static getTrimExtraLinesMatch(toolName: string): boolean;
+  function getTrimExtraLinesMatch(toolName: string): boolean;
 
   /**
    * Gets the zoom in mode property.
    * @returns {boolean}
    */
-  public static getZoomInMode(): boolean;
+  function getZoomInMode(): boolean;
 
   /**
    * Sets the specific properties of the given tool.
@@ -7973,7 +7940,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {QScriptValue} newValues An object storing the new values of all or some of the specified tool's properties.
    * @returns {void}
    */
-  public static setAllToolSpecificProperties(
+  function setAllToolSpecificProperties(
     toolName: string,
     newValues: QScriptValue
   ): void;
@@ -7984,49 +7951,49 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the antialiasing mode to.
    * @returns {void}
    */
-  public static setAntialiasingMode(mode: int): void;
+  function setAntialiasingMode(mode: int): void;
 
   /**
    * Sets the Apply to Line Art and Colour Art checkbox state to b; in the Select Tool Options.
    * @param {boolean} b When true sets the Apply to Line Art and Colour Art checkbox state to checked. When false, unchecks it.
    * @returns {void}
    */
-  public static setApplyAllArts(b: boolean): void;
+  function setApplyAllArts(b: boolean): void;
 
   /**
    * Sets the apply all drawing mode to b.
    * @param {boolean} b When true enables the apply all drawing mode.
    * @returns {void}
    */
-  public static setApplyAllDrawings(b: boolean): void;
+  function setApplyAllDrawings(b: boolean): void;
 
   /**
    * Sets the apply all visible drawing mode to b.
    * @param {boolean} b When true enables the apply all visible drawing mode.
    * @returns {void}
    */
-  public static setApplyAllVisibleDrawings(b: boolean): void;
+  function setApplyAllVisibleDrawings(b: boolean): void;
 
   /**
    * Sets the apply to all layers property.
    * @param {boolean} b The new apply to all layers flag.
    * @returns {void}
    */
-  public static setApplyToAllLayers(b: boolean): void;
+  function setApplyToAllLayers(b: boolean): void;
 
   /**
    * Sets the auto create colour art mode of the current tool to b if applicable.
    * @param {boolean} b When true enables the auto create colour art mode of the current tool. When false disables it.
    * @returns {void}
    */
-  public static setAutoCreateColourArt(b: boolean): void;
+  function setAutoCreateColourArt(b: boolean): void;
 
   /**
    * Sets the auto fill mode of Rectangle and Ellipse tools to b.
    * @param {boolean} b When true enables the auto fill mode of the Rectangle and Ellipse tools.
    * @returns {void}
    */
-  public static setAutoFillInside(b: boolean): void;
+  function setAutoFillInside(b: boolean): void;
 
   /**
    * Sets the auto fill inside property of the given tool.
@@ -8034,14 +8001,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new auto fill inside flag.
    * @returns {void}
    */
-  public static setAutoFillInside(toolName: string, b: boolean): void;
+  function setAutoFillInside(toolName: string, b: boolean): void;
 
   /**
    * Sets the auto flatten mode if applicable.
    * @param {boolean} b When true enables the auto flatten mode if applicable. When false disables it.
    * @returns {void}
    */
-  public static setAutoFlattenMode(b: boolean): void;
+  function setAutoFlattenMode(b: boolean): void;
 
   /**
    * Sets the auto gap closing mode to m. Mode can be 0, 1, 2 or 3, which corresponds to No Gap, Small,
@@ -8049,42 +8016,42 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} m Sets the auto gap closing mode to 0, 1, 2 or 3, which corresponds to No Gap, Small, Medium and Large.
    * @returns {void}
    */
-  public static setAutogapClosingMode(m: int): void;
+  function setAutogapClosingMode(m: int): void;
 
   /**
    * Sets the auto gap line closing property.
    * @param {boolean} b The new auto gap line closing flag.
    * @returns {void}
    */
-  public static setAutoGapLineClosing(b: boolean): void;
+  function setAutoGapLineClosing(b: boolean): void;
 
   /**
    * Sets the text auto kerning property.
    * @param {boolean} b The new text auto kerning flag.
    * @returns {void}
    */
-  public static setAutoKerning(b: boolean): void;
+  function setAutoKerning(b: boolean): void;
 
   /**
    * Sets the bitmap paint alpha property.
    * @param {int} value The new bitmap paint alpha value.
    * @returns {void}
    */
-  public static setBitmapPaintAlpha(value: int): void;
+  function setBitmapPaintAlpha(value: int): void;
 
   /**
    * Sets the bitmap paint color tolerance property.
    * @param {int} value The new bitmap paint color tolerance value.
    * @returns {void}
    */
-  public static setBitmapPaintColorTolerance(value: int): void;
+  function setBitmapPaintColorTolerance(value: int): void;
 
   /**
    * Sets the bitmap paint max overlap property.
    * @param {int} value The new bitmap paint max overlap value.
    * @returns {void}
    */
-  public static setBitmapPaintMaxOverlap(value: int): void;
+  function setBitmapPaintMaxOverlap(value: int): void;
 
   /**
    * Sets the bitmap paint source art property.
@@ -8093,21 +8060,21 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The mode to set the bitmap paint source art to.
    * @returns {void}
    */
-  public static setBitmapPaintSourceArt(mode: int): void;
+  function setBitmapPaintSourceArt(mode: int): void;
 
   /**
    * Sets the bounding box movable property.
    * @param {boolean} b The new bounding box movable flag.
    * @returns {void}
    */
-  public static setBoundingBoxMovable(b: boolean): void;
+  function setBoundingBoxMovable(b: boolean): void;
 
   /**
    * Instructs the ink tool to bring inked lines on top after inking if b is true.
    * @param {boolean} b When true instructs the ink tool to bring inked lines on top after inking.
    * @returns {void}
    */
-  public static setBringInkedLinesOnTop(b: boolean): void;
+  function setBringInkedLinesOnTop(b: boolean): void;
 
   /**
    * Sets the brush mode property.
@@ -8115,14 +8082,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the stencil brush mode to.
    * @returns {void}
    */
-  public static setBrushMode(mode: int): void;
+  function setBrushMode(mode: int): void;
 
   /**
    * Sets the change symbol pivot on all frames property.
    * @param {boolean} b The new change symbol pivot on all frames flag.
    * @returns {void}
    */
-  public static setChangeSymbolPivotOnAllFrames(b: boolean): void;
+  function setChangeSymbolPivotOnAllFrames(b: boolean): void;
 
   /**
    * Sets the control point selection mode property.
@@ -8130,28 +8097,28 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the control point selection mode to.
    * @returns {void}
    */
-  public static setControlPointSelectionMode(mode: int): void;
+  function setControlPointSelectionMode(mode: int): void;
 
   /**
    * Sets create color art on brush property.
    * @param {boolean} b The create color art on brush flag.
    * @returns {void}
    */
-  public static setCreateColorArtOnBrush(b: boolean): void;
+  function setCreateColorArtOnBrush(b: boolean): void;
 
   /**
    * Sets the enable break gesture property.
    * @param {boolean} b The new enable break gesture flag.
    * @returns {void}
    */
-  public static setCutEnableBreakGesture(b: boolean): void;
+  function setCutEnableBreakGesture(b: boolean): void;
 
   /**
    * Sets the enable cutter gesture property.
    * @param {boolean} b The new enable cutter gesture flag.
    * @returns {void}
    */
-  public static setCutEnableCutterGesture(b: boolean): void;
+  function setCutEnableCutterGesture(b: boolean): void;
 
   /**
    * Disables the pivot Transform tool manipulator if b is true. A pivot control will still be displayed
@@ -8159,14 +8126,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true disables the pivot Transform tool manipulator.
    * @returns {void}
    */
-  public static setDisablePivotControl(b: boolean): void;
+  function setDisablePivotControl(b: boolean): void;
 
   /**
    * Sets the hide pivot manipulator controls property.
    * @param {boolean} b The new hide pivot manipulator controls flag.
    * @returns {void}
    */
-  public static setDisablePivotManipulatorControl(b: boolean): void;
+  function setDisablePivotManipulatorControl(b: boolean): void;
 
   /**
    * Sets the draw behind property of the given tool.
@@ -8174,28 +8141,28 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new draw behind flag.
    * @returns {void}
    */
-  public static setDrawBehind(toolName: string, b: boolean): void;
+  function setDrawBehind(toolName: string, b: boolean): void;
 
   /**
    * Toggles the Draw Behind mode of the Brush tool.
    * @param {boolean} b When true enables the Draw Behind mode of the Brush tool. When false, disables it.
    * @returns {void}
    */
-  public static setDrawBehindMode(b: boolean): void;
+  function setDrawBehindMode(b: boolean): void;
 
   /**
    * Sets the drawing magnifier property.
    * @param {boolean} b The new drawing magnifier flag.
    * @returns {void}
    */
-  public static setDrawingMagnifier(b: boolean): void;
+  function setDrawingMagnifier(b: boolean): void;
 
   /**
    * Sets the magnifier mode.
    * @param {boolean} b When true enables the magnifier mode. When false disables it.
    * @returns {void}
    */
-  public static setDrawingMagnifierMode(b: boolean): void;
+  function setDrawingMagnifierMode(b: boolean): void;
 
   /**
    * Sets the drawing type property.
@@ -8203,7 +8170,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the drawing type to.
    * @returns {void}
    */
-  public static setDrawingType(mode: int): void;
+  function setDrawingType(mode: int): void;
 
   /**
    * Sets the element mode property.
@@ -8211,7 +8178,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the element mode to.
    * @returns {void}
    */
-  public static setElementMode(mode: int): void;
+  function setElementMode(mode: int): void;
 
   /**
    * Sets the frame mode property.
@@ -8219,14 +8186,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the frame mode to.
    * @returns {void}
    */
-  public static setFrameMode(mode: int): void;
+  function setFrameMode(mode: int): void;
 
   /**
    * Set the cutter's gesture mode to b.
    * @param {boolean} b When true enables the cutter's gesture mode.
    * @returns {void}
    */
-  public static setGestureCutter(b: boolean): void;
+  function setGestureCutter(b: boolean): void;
 
   /**
    * Sets the global properties found in the parameter.
@@ -8234,42 +8201,42 @@ declare class ToolProperties extends GlobalObject {
    * @param {QScriptValue} newValues An object storing all or some of the global properties to set new values of.
    * @returns {void}
    */
-  public static setGlobalProperties(newValues: QScriptValue): void;
+  function setGlobalProperties(newValues: QScriptValue): void;
 
   /**
    * Sets the hide manipulator controls property.
    * @param {boolean} b The new hide manipulator controls flag.
    * @returns {void}
    */
-  public static setHideManipulatorControls(b: boolean): void;
+  function setHideManipulatorControls(b: boolean): void;
 
   /**
    * Sets the hide rotate manipulator controls property.
    * @param {boolean} b The new hide rotate manipulator controls flag.
    * @returns {void}
    */
-  public static setHideRotateManipulatorControls(b: boolean): void;
+  function setHideRotateManipulatorControls(b: boolean): void;
 
   /**
    * Sets the hide scale manipulator controls property.
    * @param {boolean} b The new hide scale manipulator controls flag.
    * @returns {void}
    */
-  public static setHideScaleManipulatorControls(b: boolean): void;
+  function setHideScaleManipulatorControls(b: boolean): void;
 
   /**
    * Sets the hide translate manipulator controls property.
    * @param {boolean} b The new hide translate manipulator controls flag.
    * @returns {void}
    */
-  public static setHideTranslateManipulatorControls(b: boolean): void;
+  function setHideTranslateManipulatorControls(b: boolean): void;
 
   /**
    * Sets the ink intelligent mode property.
    * @param {boolean} b The new ink intelligent mode.
    * @returns {void}
    */
-  public static setInkIntelligentMode(b: boolean): void;
+  function setInkIntelligentMode(b: boolean): void;
 
   /**
    * Sets the join mode of the inked lines to be joinType. Join type can be one of: "ROUND_JOIN",
@@ -8277,7 +8244,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {string} joinType Sets the join mode of the inked lines to be joinType.
    * @returns {void}
    */
-  public static setInkJoinMode(joinType: string): void;
+  function setInkJoinMode(joinType: string): void;
 
   /**
    * Sets the ink join mode property.
@@ -8285,35 +8252,35 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the ink join mode to.
    * @returns {void}
    */
-  public static setInkJoinMode(mode: int): void;
+  function setInkJoinMode(mode: int): void;
 
   /**
    * Instructs the ink tool to select inked lines after inking if b is true.
    * @param {boolean} b When true instructs the ink tool to select inked lines after inking.
    * @returns {void}
    */
-  public static setInkLineSelectionMode(b: boolean): void;
+  function setInkLineSelectionMode(b: boolean): void;
 
   /**
    * Sets the ink raise mode property.
    * @param {boolean} b The new ink raise mode.
    * @returns {void}
    */
-  public static setInkRaiseMode(b: boolean): void;
+  function setInkRaiseMode(b: boolean): void;
 
   /**
    * Sets the ink selection mode property.
    * @param {boolean} b The new ink selection mode.
    * @returns {void}
    */
-  public static setInkSelectionMode(b: boolean): void;
+  function setInkSelectionMode(b: boolean): void;
 
   /**
    * Sets the show inkable lines property.
    * @param {boolean} b The new show inkable lines flag.
    * @returns {void}
    */
-  public static setInkShowInkableLines(b: boolean): void;
+  function setInkShowInkableLines(b: boolean): void;
 
   /**
    * Sets the keep proportions property of the given tool.
@@ -8321,7 +8288,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new keep proportions flag.
    * @returns {void}
    */
-  public static setKeepProportions(toolName: string, b: boolean): void;
+  function setKeepProportions(toolName: string, b: boolean): void;
 
   /**
    * Toggles the auto gap closing functionality for the line and pencil tools. When the auto gap
@@ -8330,14 +8297,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true enables the auto gap closing functionality for the Line and Pencil tools.
    * @returns {void}
    */
-  public static setLineAutoGapClosing(b: boolean): void;
+  function setLineAutoGapClosing(b: boolean): void;
 
   /**
    * Sets the line building mode property.
    * @param {boolean} b The new line building mode.
    * @returns {void}
    */
-  public static setLineBuildingMode(b: boolean): void;
+  function setLineBuildingMode(b: boolean): void;
 
   /**
    * Sets the line mode property of the given tool.
@@ -8345,38 +8312,38 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new line mode flag.
    * @returns {void}
    */
-  public static setLineMode(toolName: string, b: boolean): void;
+  function setLineMode(toolName: string, b: boolean): void;
 
   /**
    * Sets the line pushing mode property.
    * @param {boolean} b The new line pushing mode.
    * @returns {void}
    */
-  public static setLinePushingMode(b: boolean): void;
+  function setLinePushingMode(b: boolean): void;
 
   /**
    * Sets the line tool mode. 1: normal, 2: Quadratic, 3: Cubic.
    * @returns {void}
    */
-  public static setLineToolMode(): void;
+  function setLineToolMode(): void;
 
   /**
    * Shortcut for setLineToolMode(3)
    * @returns {void}
    */
-  public static setLineToolModeCubic(): void;
+  function setLineToolModeCubic(): void;
 
   /**
    * Shortcut for setLineToolMode(1)
    * @returns {void}
    */
-  public static setLineToolModeNormal(): void;
+  function setLineToolModeNormal(): void;
 
   /**
    * Shortcut for setLineToolMode(2)
    * @returns {void}
    */
-  public static setLineToolModeQuadratic(): void;
+  function setLineToolModeQuadratic(): void;
 
   /**
    * Sets the lock color property of the given tool.
@@ -8384,7 +8351,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new lock color flag.
    * @returns {void}
    */
-  public static setLockColor(toolName: string, b: boolean): void;
+  function setLockColor(toolName: string, b: boolean): void;
 
   /**
    * Sets the lock pen style width property of the given tool.
@@ -8392,7 +8359,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new lock pen style width flag.
    * @returns {void}
    */
-  public static setLockPenStyleWidth(toolName: string, b: boolean): void;
+  function setLockPenStyleWidth(toolName: string, b: boolean): void;
 
   /**
    * Sets the select tool mode selection to Lasso or Marquee. If b is true, the mode will be set to
@@ -8400,35 +8367,35 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true sets the selection mode to Marquee. When false sets the selection mode to Lasso.
    * @returns {void}
    */
-  public static setMarkeeMode(b: boolean): void;
+  function setMarkeeMode(b: boolean): void;
 
   /**
    * Sets the merge with top layer property.
    * @param {boolean} b The new merge with top layer flag.
    * @returns {void}
    */
-  public static setMergeWithTopLayer(b: boolean): void;
+  function setMergeWithTopLayer(b: boolean): void;
 
   /**
    * Set the cutter's gesture break mode to b.
    * @param {boolean} b When true enables the cutter's gesture break mode.
    * @returns {void}
    */
-  public static setMouseGestureBreakeMode(b: boolean): void;
+  function setMouseGestureBreakeMode(b: boolean): void;
 
   /**
    * Instruct the paint tool to remove the opacity texture if b is true.
    * @param {boolean} b When true enables the remove texture when painting mode is turned on.
    * @returns {void}
    */
-  public static setPaintAndRemoveTextureMode(b: boolean): void;
+  function setPaintAndRemoveTextureMode(b: boolean): void;
 
   /**
    * Sets the paint destroy texture property.
    * @param {boolean} b The new paint destroy texture flag.
    * @returns {void}
    */
-  public static setPaintDestroyTexture(b: boolean): void;
+  function setPaintDestroyTexture(b: boolean): void;
 
   /**
    * Sets paint element mode property.
@@ -8436,7 +8403,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the paint element mode to.
    * @returns {void}
    */
-  public static setPaintElementMode(mode: int): void;
+  function setPaintElementMode(mode: int): void;
 
   /**
    * Sets the paint mode property.
@@ -8444,7 +8411,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the paint mode to.
    * @returns {void}
    */
-  public static setPaintMode(mode: int): void;
+  function setPaintMode(mode: int): void;
 
   /**
    * If b is true, the paint tool will select the newly painted zone after painting. This can be useful
@@ -8452,16 +8419,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b When true the paint tool will select the newly painted zone after painting.
    * @returns {void}
    */
-  public static setPaintToolShouldSelectPaintedZonesAfterPainting(
-    b: boolean
-  ): void;
+  function setPaintToolShouldSelectPaintedZonesAfterPainting(b: boolean): void;
 
   /**
    * Sets the selection mode of the transform tool to peg mode if b is true.
    * @param {boolean} b When true enables the selection mode of the transform tool to peg mode.
    * @returns {void}
    */
-  public static setPegSelectionMode(b: boolean): void;
+  function setPegSelectionMode(b: boolean): void;
 
   /**
    * Sets the pencil tip shape used by the eraser, cutter, and ink tools whenever an existing pencil line
@@ -8469,7 +8434,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {string} pencilTip Can have one of the following values: "ROUND_TIP", "FLAT_TIP" or "BEVEL_TIP".
    * @returns {void}
    */
-  public static setPencilTipMode(pencilTip: string): void;
+  function setPencilTipMode(pencilTip: string): void;
 
   /**
    * Sets the pencil tip mode property of the given tool.
@@ -8477,14 +8442,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The new pencil tip mode.
    * @returns {void}
    */
-  public static setPencilTipMode(toolName: string, mode: int): void;
+  function setPencilTipMode(toolName: string, mode: int): void;
 
   /**
    * Toggles the permanent selection mode.
    * @param {boolean} b When true enables the permanent selection mode. When false disables it.
    * @returns {void}
    */
-  public static setPermanentSelectionMode(b: boolean): void;
+  function setPermanentSelectionMode(b: boolean): void;
 
   /**
    * Sets the perspective mode property.
@@ -8492,84 +8457,84 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the perspective mode to.
    * @returns {void}
    */
-  public static setPerspectiveMode(mode: int): void;
+  function setPerspectiveMode(mode: int): void;
 
   /**
    * Sets the prevent drawing property.
    * @param {boolean} b The new prevent drawing flag.
    * @returns {void}
    */
-  public static setPreventDrawing(b: boolean): void;
+  function setPreventDrawing(b: boolean): void;
 
   /**
    * Sets the prevent scene planning property.
    * @param {boolean} b The new prevent drawing flag.
    * @returns {void}
    */
-  public static setPreventScenePlanning(b: boolean): void;
+  function setPreventScenePlanning(b: boolean): void;
 
   /**
    * Sets the Respect Protected Colour mode if applicable.
    * @param {boolean} b When true enables the Respect Protected Colour mode. When false disables it.
    * @returns {void}
    */
-  public static setRespectProtectedColourMode(b: boolean): void;
+  function setRespectProtectedColourMode(b: boolean): void;
 
   /**
    * Sets the retrace mode property.
    * @param {boolean} b The new retrace mode.
    * @returns {void}
    */
-  public static setRetraceMode(b: boolean): void;
+  function setRetraceMode(b: boolean): void;
 
   /**
    * Sets the maximum retrace noise property.
    * @param {double} max The new maximum retrace noise value.
    * @returns {void}
    */
-  public static setRetraceNoiseMax(max: double): void;
+  function setRetraceNoiseMax(max: double): void;
 
   /**
    * Sets the maximum retrace offset property.
    * @param {double} max The new maximum retrace offset value.
    * @returns {void}
    */
-  public static setRetraceOffsetMax(max: double): void;
+  function setRetraceOffsetMax(max: double): void;
 
   /**
    * Sets the retrace probability property.
    * @param {double} probability The new retrace probability value.
    * @returns {void}
    */
-  public static setRetraceProbability(probability: double): void;
+  function setRetraceProbability(probability: double): void;
 
   /**
    * Sets the maximum retrace tilt property.
    * @param {double} max The new maximum retrace tilt value.
    * @returns {void}
    */
-  public static setRetraceTiltMax(max: double): void;
+  function setRetraceTiltMax(max: double): void;
 
   /**
    * Sets the select after paint or ink property.
    * @param {boolean} b The new select after paint or ink flag.
    * @returns {void}
    */
-  public static setSelectAfterPaintOrInk(b: boolean): void;
+  function setSelectAfterPaintOrInk(b: boolean): void;
 
   /**
    * Sets the select by color property.
    * @param {boolean} b The new select by color flag.
    * @returns {void}
    */
-  public static setSelectByColor(b: boolean): void;
+  function setSelectByColor(b: boolean): void;
 
   /**
    * Sets the select by colour mode of the Select tool .
    * @param {boolean} b When true enables the select by color mode of the Select tool. When false disables it.
    * @returns {void}
    */
-  public static setSelectByColourMode(b: boolean): void;
+  function setSelectByColourMode(b: boolean): void;
 
   /**
    * Sets the selection is lasso property.
@@ -8577,7 +8542,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b True to set the selection mode to lasso, false for markee.
    * @returns {void}
    */
-  public static setSelectionIsLasso(b: boolean): void;
+  function setSelectionIsLasso(b: boolean): void;
 
   /**
    * Sets the selection mode property.
@@ -8586,77 +8551,77 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the selection mode to.
    * @returns {void}
    */
-  public static setSelectionMode(mode: int): void;
+  function setSelectionMode(mode: int): void;
 
   /**
    * Sets the show advanced controls property.
    * @param {boolean} b The new show advanced controls flag.
    * @returns {void}
    */
-  public static setShowAdvancedControls(b: boolean): void;
+  function setShowAdvancedControls(b: boolean): void;
 
   /**
    * Toggles whether contour editor shows all tool controls or not.
    * @param {boolean} b When true contour editer shows all tool controls. When false hides them.
    * @returns {void}
    */
-  public static setShowHideAllContourEditingControls(b: boolean): void;
+  function setShowHideAllContourEditingControls(b: boolean): void;
 
   /**
    * Hides the transform tool manipulator if b is true.
    * @param {boolean} b When true hides the transform tool manipulator.
    * @returns {void}
    */
-  public static setShowHideManipulatorControls(b: boolean): void;
+  function setShowHideManipulatorControls(b: boolean): void;
 
   /**
    * Shows the inkable lines if b is true.
    * @param {boolean} b When true shows the inkable lines.
    * @returns {void}
    */
-  public static setShowInkableLines(b: boolean): void;
+  function setShowInkableLines(b: boolean): void;
 
   /**
    * Sets the show other drawing thumbnail property.
    * @param {boolean} b The new show other drawing thumbnail flag.
    * @returns {void}
    */
-  public static setShowOtherDrawingThumbnail(b: boolean): void;
+  function setShowOtherDrawingThumbnail(b: boolean): void;
 
   /**
    * Sets the smart ink line connection mode to b.
    * @param {boolean} b When true enables the smart ink line connection mode.
    * @returns {void}
    */
-  public static setSmartInkLineConnectionMode(b: boolean): void;
+  function setSmartInkLineConnectionMode(b: boolean): void;
 
   /**
    * Sets the smooth pen style center smooth property.
    * @param {double} value The new smooth pen style center smooth value.
    * @returns {void}
    */
-  public static setSmoothPenStyleCenterSmooth(value: double): void;
+  function setSmoothPenStyleCenterSmooth(value: double): void;
 
   /**
    * Sets the smooth pen style maximum property.
    * @param {double} value The new smooth pen style maximum value.
    * @returns {void}
    */
-  public static setSmoothPenStyleMax(value: double): void;
+  function setSmoothPenStyleMax(value: double): void;
 
   /**
    * Sets the smooth pen style minimum property.
    * @param {double} value The new smooth pen style minimum value.
    * @returns {void}
    */
-  public static setSmoothPenStyleMin(value: double): void;
+  function setSmoothPenStyleMin(value: double): void;
 
   /**
    * Sets the smooth pen style minimum ratio property.
    * @param {double} value The new smooth pen style minimum ratio value.
    * @returns {void}
    */
-  public static setSmoothPenStyleMinRatio(value: double): void;
+  function setSmoothPenStyleMinRatio(value: double): void;
 
   /**
    * Sets the smooth selector property.
@@ -8664,14 +8629,14 @@ declare class ToolProperties extends GlobalObject {
    * @param {int} mode The value to set the smooth selector mode to.
    * @returns {void}
    */
-  public static setSmoothSelector(mode: int): void;
+  function setSmoothSelector(mode: int): void;
 
   /**
    * Sets the smooth show points property.
    * @param {boolean} b The new smooth show points flag.
    * @returns {void}
    */
-  public static setSmoothShowPoints(b: boolean): void;
+  function setSmoothShowPoints(b: boolean): void;
 
   /**
    * Sets the snap mode property of the given tool.
@@ -8679,7 +8644,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new snap mode flag.
    * @returns {void}
    */
-  public static setSnapMode(toolName: string, b: boolean): void;
+  function setSnapMode(toolName: string, b: boolean): void;
 
   /**
    * Sets the snapping mode for the contour, align and grid mode all to the modes specified in argument.
@@ -8688,116 +8653,112 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} grid When true enables the snapping mode for the grid mode. When false disables it.
    * @returns {void}
    */
-  public static setSnapping(
-    contour: boolean,
-    align: boolean,
-    grid: boolean
-  ): void;
+  function setSnapping(contour: boolean, align: boolean, grid: boolean): void;
 
   /**
    * Sets the snap to 3D mode property.
    * @param {boolean} b The new snap to 3D mode flag.
    * @returns {void}
    */
-  public static setSnapTo3DMode(b: boolean): void;
+  function setSnapTo3DMode(b: boolean): void;
 
   /**
    * Sets the snap to bounding boxes property.
    * @param {boolean} b The new snap to bounding boxes flag.
    * @returns {void}
    */
-  public static setSnapToBoundingBoxes(b: boolean): void;
+  function setSnapToBoundingBoxes(b: boolean): void;
 
   /**
    * Sets the snap to contour property.
    * @param {boolean} b The new snap to contour flag.
    * @returns {void}
    */
-  public static setSnapToContour(b: boolean): void;
+  function setSnapToContour(b: boolean): void;
 
   /**
    * Sets the snap to grid property.
    * @param {boolean} b The new snap to grid flag.
    * @returns {void}
    */
-  public static setSnapToGrid(b: boolean): void;
+  function setSnapToGrid(b: boolean): void;
 
   /**
    * Sets the stroke smooth value property.
    * @param {double} d The new stroke smooth value.
    * @returns {void}
    */
-  public static setStrokeSmoothValue(d: double): void;
+  function setStrokeSmoothValue(d: double): void;
 
   /**
    * Sets the text alignment property.
    * @param {int} alignment The new text alignment.
    * @returns {void}
    */
-  public static setTextAlignment(alignment: int): void;
+  function setTextAlignment(alignment: int): void;
 
   /**
    * Sets the text font property.
    * @param {int} font The new text font.
    * @returns {void}
    */
-  public static setTextFont(font: int): void;
+  function setTextFont(font: int): void;
 
   /**
    * Sets the text indent property.
    * @param {int} indent The new text indent value.
    * @returns {void}
    */
-  public static setTextIndent(indent: int): void;
+  function setTextIndent(indent: int): void;
 
   /**
    * Sets the text kerning property.
    * @param {int} kerning The new text kerning.
    * @returns {void}
    */
-  public static setTextKerning(kerning: int): void;
+  function setTextKerning(kerning: int): void;
 
   /**
    * Sets the text line space property.
    * @param {int} lineSpace The new text line space value.
    * @returns {void}
    */
-  public static setTextLineSpace(lineSpace: int): void;
+  function setTextLineSpace(lineSpace: int): void;
 
   /**
    * Sets the text size property.
    * @param {int} size The new text size.
    * @returns {void}
    */
-  public static setTextSize(size: int): void;
+  function setTextSize(size: int): void;
 
   /**
    * Sets the text style property.
    * @param {int} style The new text style.
    * @returns {void}
    */
-  public static setTextStyle(style: int): void;
+  function setTextStyle(style: int): void;
 
   /**
    * Sets the thickness adjust mode property.
    * @param {boolean} b The new thickness adjust mode.
    * @returns {void}
    */
-  public static setThicknessAdjustMode(b: boolean): void;
+  function setThicknessAdjustMode(b: boolean): void;
 
   /**
    * Sets the tool resolution height property.
    * @param {int} height The new tool resolution height.
    * @returns {void}
    */
-  public static setToolResolutionHeight(height: int): void;
+  function setToolResolutionHeight(height: int): void;
 
   /**
    * Sets the tool resolution width property.
    * @param {int} width The new tool resolution width.
    * @returns {void}
    */
-  public static setToolResolutionWidth(width: int): void;
+  function setToolResolutionWidth(width: int): void;
 
   /**
    * Sets the align and grid snapping modes of the transform tool.
@@ -8805,7 +8766,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} grid When true enables the grid snapping mode of the transform tool. When false disables it.
    * @returns {void}
    */
-  public static setTransformToolSnapping(align: boolean, grid: boolean): void;
+  function setTransformToolSnapping(align: boolean, grid: boolean): void;
 
   /**
    * Sets the trim extra lines property of the given tool.
@@ -8813,7 +8774,7 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new trim extra lines flag.
    * @returns {void}
    */
-  public static setTrimExtraLines(toolName: string, b: boolean): void;
+  function setTrimExtraLines(toolName: string, b: boolean): void;
 
   /**
    * Sets the trim extra lines match property of the given tool.
@@ -8821,27 +8782,27 @@ declare class ToolProperties extends GlobalObject {
    * @param {boolean} b The new trim extra lines match flag.
    * @returns {void}
    */
-  public static setTrimExtraLinesMatch(toolName: string, b: boolean): void;
+  function setTrimExtraLinesMatch(toolName: string, b: boolean): void;
 
   /**
    * Instruct the paint tool to use the gradient/texture matrix stored in the tool if b is true.
    * @param {boolean} b When true the paint tool will use the gradient/texture matrix stores in the tool.
    * @returns {void}
    */
-  public static setUsedStoredColourGradientMode(b: boolean): void;
+  function setUsedStoredColourGradientMode(b: boolean): void;
 
   /**
    * Sets the zoom in mode property.
    * @param {boolean} b The new zoom in mode flag.
    * @returns {void}
    */
-  public static setZoomInMode(b: boolean): void;
+  function setZoomInMode(b: boolean): void;
 
   /**
    * Gets all of the available tools.
    * @returns {QScriptValue}
    */
-  public static toolNames(): QScriptValue;
+  function toolNames(): QScriptValue;
 }
 
 /**
@@ -8899,7 +8860,7 @@ declare class ToolProperties extends GlobalObject {
  *     ui.LightTableWashSlider.valueChanged.connect(this, this.washChanged);
  * }
  */
-declare class Uiloader extends GlobalObject {
+declare namespace Uiloader {
   /**
    * Takes a DPI-independent pixel dimension (100% DPI scaling on an HD screen) and scales it to the
    * current DPI setting.
@@ -8907,7 +8868,7 @@ declare class Uiloader extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static dpiScale(
+  function dpiScale(
     context: QScriptContext,
     engine: QScriptEngine
   ): QScriptValue;
@@ -8919,10 +8880,7 @@ declare class Uiloader extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static exec(
-    context: QScriptContext,
-    engine: QScriptEngine
-  ): QScriptValue;
+  function exec(context: QScriptContext, engine: QScriptEngine): QScriptValue;
 
   /**
    * Takes a path to a predefined Qt widget form and loads that form.
@@ -8930,17 +8888,14 @@ declare class Uiloader extends GlobalObject {
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static load(
-    context: QScriptContext,
-    engine: QScriptEngine
-  ): QScriptValue;
+  function load(context: QScriptContext, engine: QScriptEngine): QScriptValue;
 
   /**
    * @param {QScriptContext} context
    * @param {QScriptEngine} engine
    * @returns {QScriptValue}
    */
-  public static setSvgIcon(
+  function setSvgIcon(
     context: QScriptContext,
     engine: QScriptEngine
   ): QScriptValue;
@@ -8955,13 +8910,13 @@ declare class Uiloader extends GlobalObject {
  *     MessageLog.trace(view.type(myView));
  * }
  */
-declare class view extends GlobalObject {
+declare namespace view {
   /**
    * Returns the name of the column for the currently displayed function in the Function View.
    * @param {string} viewName The current view value, as returned by the currentView function.
    * @returns {string}
    */
-  public static column(viewName: string): string;
+  function column(viewName: string): string;
 
   /**
    * Returns the drawing tool manager.
@@ -8969,40 +8924,40 @@ declare class view extends GlobalObject {
    * @param {string} [viewName=""] The name of the view to get the drawing tool manager from.
    * @returns {QObject}
    */
-  public static currentToolManager(viewName?: string): QObject;
+  function currentToolManager(viewName?: string): QObject;
 
   /**
    * Returns a unique identifier for the current, active view.
    * @returns {string}
    */
-  public static currentView(): string;
+  function currentView(): string;
 
   /**
    * Returns the name of the current Group Node in the active Network View.
    * @param {string} viewName The current view value, as returned by the currentView function.
    * @returns {string}
    */
-  public static group(viewName: string): string;
+  function group(viewName: string): string;
 
   /**
    * Forces a refresh of the drawing and scene planning views.
    * @returns {void}
    */
-  public static refreshViews(): void;
+  function refreshViews(): void;
 
   /**
    * Returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
    * @returns {string}
    */
-  public static type(viewName: string): string;
+  function type(viewName: string): string;
 
   /**
    * Returns a list of available views of the given type.
    * @param {string} [viewType=""] The type of view to get the list of available views for.
    * @returns {StringList}
    */
-  public static viewList(viewType?: string): StringList;
+  function viewList(viewType?: string): StringList;
 
   /**
    * Returns the position of the top left corner of the given view.
@@ -9010,7 +8965,7 @@ declare class view extends GlobalObject {
    * @param {string} viewName The name of the view to get the position of.
    * @returns {QPoint}
    */
-  public static viewPosition(viewName: string): QPoint;
+  function viewPosition(viewName: string): QPoint;
 }
 
 /**
@@ -9028,7 +8983,7 @@ declare class view extends GlobalObject {
  * waypoint.linkWaypointToWaypoint("Top/MyWaypoint1", "Top/MyWaypoint2");
  * waypoint.linkWaypointToInport("Top/MyWaypoint2", "Top/Composite", 0, true);
  */
-declare class waypoint extends GlobalObject {
+declare namespace waypoint {
   /**
    * Add a waypoint to the Node View.
    * For an example usage of add, see the above Detailed Description.
@@ -9038,7 +8993,7 @@ declare class waypoint extends GlobalObject {
    * @param {int} y The Y position of the waypoint in the Node View.
    * @returns {string}
    */
-  public static add(
+  function add(
     parentGroup: string,
     instanceName: string,
     x: int,
@@ -9056,7 +9011,7 @@ declare class waypoint extends GlobalObject {
    * for (var i = 0; i < childNodes.length; ++i)
    *     MessageLog.trace("child name:" + childNodes[i] + " Inport:" + childInports[i]);
    */
-  public static childInports(wpQualifiedName: string): QScriptValue;
+  function childInports(wpQualifiedName: string): QScriptValue;
 
   /**
    * Retrieve the list of children port nodes directly connected to the specified waypoint.
@@ -9069,7 +9024,7 @@ declare class waypoint extends GlobalObject {
    * for (var i = 0; i < childNodes.length; ++i)
    *     MessageLog.trace("child name:" + childNodes[i] + " Inport:" + childInports[i]);
    */
-  public static childNodes(wpQualifiedName: string): StringList;
+  function childNodes(wpQualifiedName: string): StringList;
 
   /**
    * Retrieve the list of children waypoints.
@@ -9079,7 +9034,7 @@ declare class waypoint extends GlobalObject {
    * var childWps = waypoint.childWaypoints("Top/waypoint_1");
    * MessageLog.trace(childWps);
    */
-  public static childWaypoints(wpQualifiedName: string): StringList;
+  function childWaypoints(wpQualifiedName: string): StringList;
 
   /**
    * Retrieve the list of waypoints directly linked to the specified node output port.
@@ -9090,7 +9045,7 @@ declare class waypoint extends GlobalObject {
    * var childWps = waypoint.childWaypoints("Top/composite", 0);
    * MessageLog.trace(childWps);
    */
-  public static childWaypoints(
+  function childWaypoints(
     nodeQualifiedName: string,
     outPortId: int
   ): StringList;
@@ -9109,7 +9064,7 @@ declare class waypoint extends GlobalObject {
    *     waypoint.setCoord(exWaypoint, x, y);
    * }
    */
-  public static coordX(qualifiedName: string): int;
+  function coordX(qualifiedName: string): int;
 
   /**
    * Returns an integer indicating the X position of a waypoint in the Node View.
@@ -9125,7 +9080,7 @@ declare class waypoint extends GlobalObject {
    *     waypoint.setCoord(exWaypoint, x, y);
    * }
    */
-  public static coordY(qualifiedName: string): int;
+  function coordY(qualifiedName: string): int;
 
   /**
    * Delete a single waypoint.
@@ -9136,7 +9091,7 @@ declare class waypoint extends GlobalObject {
    * @example
    * waypoint.deleteWaypoint(selection.selectedWaypoint(0));
    */
-  public static deleteWaypoint(qualifiedName: string): boolean;
+  function deleteWaypoint(qualifiedName: string): boolean;
 
   /**
    * Retrieve all the waypoints found along the cable of the specified node input port.
@@ -9144,7 +9099,7 @@ declare class waypoint extends GlobalObject {
    * @param {int} inPortId The in port from which the waypoint path starts. This value is between 0 and the number of node in ports, minus one.
    * @returns {StringList}
    */
-  public static getAllWaypointsAbove(
+  function getAllWaypointsAbove(
     nodeQualifiedName: string,
     inPortId: int
   ): StringList;
@@ -9155,7 +9110,7 @@ declare class waypoint extends GlobalObject {
    * @param {int} outPortId The out port from which waypoints are linked. This value is between 0 and the number of node out ports, minus one.
    * @returns {StringList}
    */
-  public static getAllWaypointsBelow(
+  function getAllWaypointsBelow(
     nodeQualifiedName: string,
     outPortId: int
   ): StringList;
@@ -9168,7 +9123,7 @@ declare class waypoint extends GlobalObject {
    * var groupWps = waypoint.getWaypointsInGroup("Top");
    * MessageLog.trace(groupWps);
    */
-  public static getWaypointsInGroup(groupQualifiedName: string): StringList;
+  function getWaypointsInGroup(groupQualifiedName: string): StringList;
 
   /**
    * Link an output port from a node to a waypoint.
@@ -9180,7 +9135,7 @@ declare class waypoint extends GlobalObject {
    * waypoint.add("Top", "MyWaypoint1", -110, 10);
    * waypoint.linkOutportToWaypoint("Top/Drawing", 0, "Top/MyWaypoint1");
    */
-  public static linkOutportToWaypoint(
+  function linkOutportToWaypoint(
     nodeQualifiedName: string,
     outPortId: int,
     wpQualifiedName: string
@@ -9197,7 +9152,7 @@ declare class waypoint extends GlobalObject {
    * waypoint.add("Top", "MyWaypoint1", -110, 10);
    * waypoint.linkWaypointToInport("Top/MyWaypoint1", "Top/Composite", 0, true);
    */
-  public static linkWaypointToInport(
+  function linkWaypointToInport(
     wpQualifiedName: string,
     nodeQualifiedName: string,
     inPortId: int,
@@ -9214,7 +9169,7 @@ declare class waypoint extends GlobalObject {
    * waypoint.add("Top", "MyWaypoint2", -110, 60);
    * waypoint.linkWaypointToWaypoint("Top/MyWaypoint1", "Top/MyWaypoint2");
    */
-  public static linkWaypointToWaypoint(
+  function linkWaypointToWaypoint(
     srcQualifiedName: string,
     dstQualifiedName: string
   ): boolean;
@@ -9227,7 +9182,7 @@ declare class waypoint extends GlobalObject {
    * var parentNode = waypoint.parentNode("Top/waypoint_1");
    * MessageLog.trace(parentNode);
    */
-  public static parentNode(wpQualifiedName: string): string;
+  function parentNode(wpQualifiedName: string): string;
 
   /**
    * Get parent outport index, if applicable.
@@ -9237,7 +9192,7 @@ declare class waypoint extends GlobalObject {
    * var parentOutport = waypoint.parentOutport("Top/waypoint_1");
    * MessageLog.trace(parentOutport);
    */
-  public static parentOutport(wpQualifiedName: string): int;
+  function parentOutport(wpQualifiedName: string): int;
 
   /**
    * Get parent waypoint path.
@@ -9247,7 +9202,7 @@ declare class waypoint extends GlobalObject {
    * var parentWp = waypoint.parentWaypoint("Top/waypoint_1");
    * MessageLog.trace(parentWp);
    */
-  public static parentWaypoint(wpQualifiedName: string): string;
+  function parentWaypoint(wpQualifiedName: string): string;
 
   /**
    * Retrieve the waypoint above a node port, linked to the specified input port.
@@ -9258,10 +9213,7 @@ declare class waypoint extends GlobalObject {
    * var parentWp = waypoint.parentWaypoint("Top/composite", 0);
    * MessageLog.trace(parentWp);
    */
-  public static parentWaypoint(
-    nodeQualifiedName: string,
-    inPortId: int
-  ): string;
+  function parentWaypoint(nodeQualifiedName: string, inPortId: int): string;
 
   /**
    * Set the position of a waypoint in the Node View.
@@ -9280,7 +9232,7 @@ declare class waypoint extends GlobalObject {
    *     waypoint.setCoord(exWaypoint, x, y);
    * }
    */
-  public static setCoord(qualifiedName: string, x: int, y: int): void;
+  function setCoord(qualifiedName: string, x: int, y: int): void;
 
   /**
    * Unlink all children node and children waypoints from the specified waypoint.
@@ -9290,7 +9242,7 @@ declare class waypoint extends GlobalObject {
    * @example
    * waypoint.unlinkAllChildren("Top/waypoint_1");
    */
-  public static unlinkAllChildren(wpQualifiedName: string): boolean;
+  function unlinkAllChildren(wpQualifiedName: string): boolean;
 
   /**
    * Unlink the child input port from the waypoint.
@@ -9301,7 +9253,7 @@ declare class waypoint extends GlobalObject {
    * @example
    * waypoint.unlinkChildInport("Top/waypoint_1", "Top/Composite", 1);
    */
-  public static unlinkChildInport(
+  function unlinkChildInport(
     wpQualifiedName: string,
     nodeQualifiedName: string,
     inPortId: int
@@ -9315,7 +9267,7 @@ declare class waypoint extends GlobalObject {
    * @example
    * waypoint.unlinkChildNode("Top/waypoint_1", "Top/Composite_1");
    */
-  public static unlinkChildNode(
+  function unlinkChildNode(
     wpQualifiedName: string,
     nodeQualifiedName: string
   ): boolean;
@@ -9329,7 +9281,7 @@ declare class waypoint extends GlobalObject {
    * @example
    * waypoint.unlinkChildWaypoint("Top/waypoint_1", "Top/waypoint_2");
    */
-  public static unlinkChildWaypoint(
+  function unlinkChildWaypoint(
     wpQualifiedName: string,
     childWpQualifiedName: string
   ): boolean;
@@ -9341,7 +9293,7 @@ declare class waypoint extends GlobalObject {
    * @example
    * waypoint.unlinkParent("Top/waypoint_1");
    */
-  public static unlinkParent(wpQualifiedName: string): boolean;
+  function unlinkParent(wpQualifiedName: string): boolean;
 }
 
 /**
@@ -9350,32 +9302,32 @@ declare class waypoint extends GlobalObject {
  * selection.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/classxsheet.html}
  */
-declare class xsheet extends GlobalObject {
+declare namespace xsheet {
   /**
    * Simulates the effect of auto-advancing the cursor in the XSheet after entering values.
    * @returns {void}
    */
-  public static autoAdvance(): void;
+  function autoAdvance(): void;
 
   /**
    * Returns an array containing the current xsheet table cursor position and selection: [ leftColumn,
    * topRow, rightColumn, bottomRow ].
    * @returns {QScriptValue}
    */
-  public static getCursorPosition(): QScriptValue;
+  function getCursorPosition(): QScriptValue;
 
   /**
    * The number of frames that cells are exposed by default when editing timings.
    * @returns {QScriptValue}
    */
-  public static holdValue(): QScriptValue;
+  function holdValue(): QScriptValue;
 
   /**
    * Returns the column ID associated with the visible column at given index.
    * @param {int} i Visible index of the column in the XSheet. Note that hidden columns don't count in that index.
    * @returns {string}
    */
-  public static visibleLinkedColumn(i: int): string;
+  function visibleLinkedColumn(i: int): string;
 }
 
 /**
@@ -16694,7 +16646,7 @@ declare class ExportVideoDlg extends UI_DialogController {
  * Deformation utility functions.
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/namespaceDeformationUtils.html}
  */
-declare module DeformationUtils {
+declare namespace DeformationUtils {
   /**
    * Return a VertexTransform to apply a deformation node transformation.
    * @param {string} node the path to the last node in a deformation chain (ex: "Top/LastDeformationOfAChain")
@@ -16727,7 +16679,2306 @@ declare module DeformationUtils {
  *
  * {@link https://docs.toonboom.com/help/harmony-21/scripting/script/namespaceMath.html}
  */
-declare module Math {}
+declare namespace Math {}
+
+/**
+ *
+ *     This object is used to call Python functions.
+ *
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-PythonManager-PyObjectWrapper.html}
+ */
+declare class PyObjectWrapper {
+  /**
+   * This object is used to call Python functions.
+   * @example
+   * //JavaScript file
+   * var myPythonObject = PythonManager.createPyObject("C:/pathToScript/pythonScript.py");
+   *
+   * var result = myPythonObject.py.add(6,6); //the name of the function, "add", corresponds to a Python function with the same name defined in a Python script.
+   * MessageLog.trace(result); //show "12" in the MessageLog
+   */
+  constructor();
+
+  /**
+   * Add an abject, variable, function or script interface to the Python object.
+   * Skip adding to avoid object reloading if an object with this name already exists.
+   * @param {string} name Name of the object in Python
+   * @param {Object} value Value of the object
+   * @returns {boolean}
+   */
+  public addObject(name: string, value: Object): boolean;
+
+  /**
+   * Validate if the Python object contains a variable, object, function or script interface with the
+   * specified name.
+   * @param {string} name Name of the object in Python
+   * @returns {boolean}
+   */
+  public hasObject(name: string): boolean;
+
+  /**
+   * Set an object, variable, function or script interface in the Python object.
+   * Add a new object with the specified name if not yet existed, else override existing one.
+   * @param {string} name Name of the object in Python
+   * @param {Object} value Value of the object
+   * @returns {boolean}
+   */
+  public setObject(name: string, value: Object): boolean;
+}
+
+/**
+ *
+ *     Constructor to be called in scripting.
+ *
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/ScriptToolbarDef.html}
+ */
+declare class ScriptToolbarDef {
+  /**
+   * Constructor to be called in scripting.
+   * @param {Object} toolbarDef The definition of the toolbar.
+   */
+  constructor(toolbarDef: {
+    /**
+     * The unique id of the toolbar. Use of reverse DNS is recommended to avoid conflicts with other organizations.
+     */
+    id?: string;
+    /**
+     * The textual name of the toolbar as will appear in the toolbar menu.
+     */
+    text?: string;
+    /**
+     * The definition of the toolbar.
+     */
+    customizable?: boolean;
+  });
+
+  /**
+   * This method adds a button to a toolbar.
+   * @param {Object} button An object defining the properties of the button.
+   */
+  public addButton(button: {
+    /**
+     * The tooltip of the button.
+     */
+    text?: string;
+    /**
+     * The icon displayed in the toolbar.
+     */
+    icon?: string;
+    /**
+     * If true, the button will be checkable.
+     */
+    checkable?: boolean;
+    /**
+     * The action id if the action was added using ScriptManager.addAction or the name of a function in the current file or using the syntax: functionName in file.js.
+     */
+    action?: string;
+    /**
+     * The slot to call. If action is provided, this item is not needed.
+     */
+    slot?: string;
+    /**
+     * The first parameter value of the slot to call.
+     */
+    itemParameter?: string;
+    /**
+     * The shortcut id that can trigger this action.
+     */
+    shortcut?: string;
+  }): void;
+}
+
+/**
+ * This module provides functions to query drawing content. It contains these submodules: geometry and
+ * query.
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-Drawing.html}
+ */
+declare namespace Drawing {
+  /**
+   * Each drawig has a set of metadata that can be defined and retrieved. These metadata are stored in
+   * the drawing file. Each metadata is assigned to a key.
+   * @param {Object} args Dictionary of arguments.
+   * @example
+   *  var settings = Tools.getToolSettings();
+   *  var config = {
+   *     drawing  : settings.currentDrawing,
+   *     owner : "com.mycompany.script"
+   *  };
+   *  var metadata = Drawing.getMetaData(config);
+   */
+  function getMetaData(args: {
+    /**
+     * Drawing descriptor.
+     */
+    drawing?: Object;
+    /**
+     * The metada data unique identifier. It is strongly suggested to use reverse DNS to make sure your key is not conflicting with another one.
+     */
+    owner?: string;
+  }): void;
+
+  /**
+   * At any time, a drawing has a modification counter. No drawing can have the same modification
+   * counter. When a drawing changes, this counter increases. Capturing this can be useful for situation
+   * where a complex computation needs to be cached until the drawing is changed.
+   * @param {Object} args Dictionary of arguments.
+   * @example
+   *   var settings = Tools.getToolSettings();
+   *   var config = {
+   *      drawing  : settings.currentDrawing
+   *   };
+   *   var counter = Drawing.getModificationCounter(config);
+   *  // If there are no current drawing
+   *  counter = false;
+   *  // example of returned value
+   *  counter = 59;
+   *  // Add a brush in the drawing... and run the example again
+   *  counter = 72;
+   */
+  function getModificationCounter(args: {
+    /**
+     * Drawing descriptor.
+     */
+    drawing?: Object;
+  }): void;
+
+  /**
+   * Returns the drawing pivot.
+   * @param {Object} args Dictionary of arguments.
+   * @example
+   *   var settings = Tools.getToolSettings();
+   *   var config = {
+   *      drawing  : settings.currentDrawing
+   *   };
+   *   var pivot = Drawing.getPivot(config);
+   *   // Example of return value
+   *   pivot = {
+   *     x: 534.2, y: 20.1
+   *   };
+   *   pivot = false; // If the drawing is invalid.
+   */
+  function getPivot(args: {
+    /**
+     * Drawing descriptor.
+     */
+    drawing?: Object;
+  }): void;
+
+  /**
+   * Returns the drawing pivot.
+   * @param {Objet} args Dictionary of arguments
+   * @example
+   *  var settings = Tools.getToolSettings();
+   *  var complexObject = {
+   *     strings : [ "a", "b"],
+   *     a : 12
+   *  };
+   *  var arguments = {
+   *    owner: "com.mycompany.script",
+   *    drawing: settings.currentDrawing,
+   *    metadata: [
+   *       { key: "key1", value: "1"},
+   *       { key: "key2", value: "2"},
+   *       { key: "key3", value: JSON.stringify(complexObject)}
+   *    ]
+   *  }
+   *  Drawing.setMetaData(arguments);
+   *  var retrieved = Drawing.getMetaData({ drawing : arguments.drawing, owner : arguments.owner});
+   *
+   *  // The key/value at index 2 is a complex object. Parse it.
+   *  if (retrieved)
+   *     retrieved[2].value = JSON.parse(retrieved[2].value);
+   *  System.println("retrieved: " + JSON.stringify(retrieved));
+   * // console displays:
+   * // retrieved: [{"key":"key1","value":"1"},{"key":"key2","value":"2"},{"key":"key3","value":{"strings":["a","b"],"a":12}}]
+   */
+  function setMetaData(args: {
+    /**
+     * Drawing descriptor.
+     */
+    drawing?: Object;
+    /**
+     * The metada data unique identifier. It is strongly suggested to use reverse DNS to make sure your key is not conflicting with another one.
+     */
+    owner?: string;
+    /**
+     * An array of key/value pairs. The key and value must be strings. If you want to store a more complex object, you can store its JSON representation using JSON.stringify() and restore it on reading using JSON.parse().
+     */
+    metadata?: any[];
+  }): void;
+
+  /**
+   * Returns the drawing pivot.
+   * @param {Object} args Dictionary of arguments.
+   * @example
+   *   var settings = Tools.getToolSettings();
+   *   var config = {
+   *      drawing  : settings.currentDrawing
+   *   };
+   *   var pivot = Drawing.getPivot(config);
+   *   System.println("pivot before = " + JSON.stringify(pivot, null, ' ') + ";");
+   *   pivot.x += 100;
+   *   config.pivot = pivot;
+   *   Drawing.setPivot(config);
+   *   pivot = Drawing.getPivot(config);
+   *   System.println("pivot after = " + JSON.stringify(pivot, null, ' ') + ";");
+   */
+  function setPivot(args: {
+    /**
+     * Drawing descriptor.
+     */
+    drawing?: Object;
+    /**
+     * Pivot object.
+     */
+    pivot?: Object;
+  }): void;
+}
+
+declare namespace Drawing {
+  /**
+   * This module provides functions to generate geometry like circle or rectangle or manipulate Bezier
+   * paths.
+   * Notes:
+   *
+   * The units for the drawings in the Toon Boom Animation's vector drawing are in the range [-2500,
+   * 2500] for the x axis
+   *   of a 12 field grid. Since the grid has an aspect ratio of 4/3, the vertical range (y axis) is in
+   * the [-1875, 1875] range.
+   *   The Toon Boom Animation's vector drawing coordinate system is not finite which means coordinates
+   * can be bigger than the 2500 value
+   *   of the 12 fields. For numerical stability reasons, it is not recommended to use coordinates higher
+   * than 64000 because for very big numbers,
+   *   there will be a loss of precision on the fractional part of the numbers.
+   *
+   * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-Drawing_geometry.html}
+   */
+  namespace geometry {
+    /**
+     * This function returns a bezier path that approximates a circle with 4 cubic beziers
+     * @param {Object} arg Parameters for the generated circle
+     * @returns {{x: double, y: double, onCurve: boolean}[]}
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function createCircle(arg: {
+      /**
+       * The x coordinate of the center of the circle.
+       */
+      x?: double;
+      /**
+       * The y coordinate of the center of the circle.
+       */
+      y?: double;
+      /**
+       * The radius of the circle. This parameter is mandatory if radiusX and radiusY are not used.
+       */
+      radius?: double;
+      /**
+       * The x radius of the circle in the case of an ellipse.
+       */
+      radiusX?: double;
+      /**
+       * The y radius of the circle in the case of an ellipse.
+       */
+      radiusY?: double;
+    }): { x: double; y: double; onCurve: boolean }[];
+
+    /**
+     * This function returns a rectangular bezier path
+     * @param {Box2d} box
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function createRectangle(box: {
+      /**
+       * The min x coordinate.
+       */
+      x0?: double;
+      /**
+       * The max x coordinate.
+       */
+      x1?: double;
+      /**
+       * The min y coordinate.
+       */
+      y0?: double;
+      /**
+       * The max y coordinate.
+       */
+      y1?: double;
+    }): void;
+
+    /**
+     * This function returns a polyline from a cubic or quadratic bezier path
+     * @param {Object} arg A dictionary of options
+     * @returns {{x: double, y: double}[]}
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function discretize(arg: {
+      /**
+       * The needed precision. 0-100.
+       */
+      precision?: double;
+      /**
+       * The Bezier path to be discretized.
+       */
+      path?: BezierPoint[];
+    }): { x: double; y: double }[];
+
+    /**
+     * This function evaluates a bezier path at different parameter values
+     * @param {Object} arg
+     * @returns {{x:double, y:double, t:double}[]}
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function evaluate(arg: {
+      /**
+       * The Bezier path to be discretized.
+       */
+      path?: BezierPoint[];
+      /**
+       * A list parameters to evaluate the path at.
+       */
+      params?: double[];
+    }): { x: double; y: double; t: double }[];
+
+    /**
+     * This function returns a fitted bezier path from a polyline bezier path
+     * @param {Object} arg
+     * @returns {BezierPoint[]}
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function fit(arg: {
+      /**
+       * If true, fits a single bezier otherwise generates a bezier path with any number of beziers.
+       */
+      oneBezier?: boolean;
+      path?: Point2d[];
+    }): BezierPoint[];
+
+    /**
+     * Returns the closest point to each points of a list
+     * @param {Object} arg
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function getClosestPoint(arg: {
+      /**
+       * The bezier path.
+       */
+      path?: BezierPoint[];
+      /**
+       * List of points.
+       */
+      points?: Point2d[];
+    }): void;
+
+    /**
+     * This function returns intersections from bezier paths
+     * @param {Object} arg
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function getIntersections(arg: {
+      /**
+       * The first Bezier path
+       */
+      path0?: BezierPoint[];
+      /**
+       * The second Bezier path
+       */
+      path1?: BezierPoint[];
+    }): void;
+
+    /**
+     * This function insert points at the given parameters t on a Bezier path
+     * @param {Object} arg
+     * @returns {BezierPoint[]}
+     * @example
+     *    var arg = {
+     *       path : [ {x: 0, y: 0, onCurve: true}, {x: 100, y: 100, onCurve: true} ],
+     *       params : [ 0.25, 0.5, 0.75]
+     *    }
+     *    var newPath = Drawing.geometry.insertPoints(arg);
+     *   // newPath now contains:
+     *   newPath = [
+     *   {"x":0,"y":0,"onCurve":true},
+     *   {"x":25,"y":25,"onCurve":true},
+     *   {"x":50,"y":50,"onCurve":true},
+     *   {"x":75,"y":75,"onCurve":true},
+     *   {"x":100,"y":100,"onCurve":true}
+     *   ];
+     */
+    function insertPoints(arg: {
+      /**
+       * The bezier path.
+       */
+      path?: BezierPoint[];
+      /**
+       * Parameters to insert points at.
+       */
+      params?: double[];
+    }): BezierPoint[];
+
+    /**
+     * This function returns true if points provided in an array a contained withing a closed bezier path
+     * @param {Object} arg
+     * @returns {boolean[]}
+     */
+    function pathIsContaining(arg: {
+      /**
+       * The closed bezier path.
+       */
+      path?: BezierPoint[];
+      /**
+       * The 2d points to test.
+       */
+      points?: Point2d[];
+    }): boolean[];
+
+    /**
+     * This function splits a Bezier path in different paths at given parameters
+     * @param {Object} arg
+     * @returns {BezierPoint[][]}
+     */
+    function split(arg: {
+      /**
+       * The bezier path.
+       */
+      path?: BezierPoint[];
+      /**
+       * Parameters to split at.
+       */
+      params?: double[];
+    }): BezierPoint[][];
+
+    /**
+     * This function returns the constants used in the geometry computations
+     * @returns {GeometryConstants}
+     */
+    function getConstants(): GeometryConstants;
+  }
+}
+
+declare namespace Drawing {
+  /**
+   * This module mainly provides functions to query drawing content.
+   * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-Drawing_query.html}
+   */
+  namespace query {
+    /**
+     * Evaluates a list of strokes of a drawing at specified params. This method can be used to sample a
+     * drawing's strokes
+     *  at regular parameters.
+     * @param {EvaluateStrokesArgument} arg A list or options.
+     * @example
+     *  var settings = Tools.getToolSettings();
+     *  if (!settings.currentDrawing) return;
+     *  var config = {
+     *     drawing  : settings.currentDrawing,
+     *     art : settings.activeArt,
+     *     paths : [
+     *        { polygon: true, path : [ {x: 0, y: 0}, {x : 2500, y: 1875}]}
+     *     ]
+     *  };
+     *  var intersection = Drawing.query.getIntersections(config);
+     *
+     * // Here is an example of the return value of this method.
+     * // It returns an array of intersecting of intersections for each intersecting stroke.
+     * intersections =
+     * [
+     *    [
+     *       {
+     *          "layer":1,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":1143.9253778337531,   // x0, y0, x1 and y1 are the raw evaluation
+     *                "y0":857.9440333753148,    // of the input path and the strokes at the intersection point.
+     *                "t0":0.45757015113350125,  // The parameter t on the input path.
+     *                "x1":1143.9253778337531,
+     *                "y1":857.9440333753149,
+     *                "t1":4.9557816435768265,  // The parameter t on the intersected drawing stroke
+     *                "x":1143.921875,          // The rounded intersection x
+     *                "y":857.9375              // The rounded intersection y
+     *             },
+     *             {
+     *                "x0":1471.1965339233038,
+     *                "y0":1103.3974004424779,
+     *                "t0":0.5884786135693215,
+     *                "x1":1471.1965339233038,
+     *                "y1":1103.3974004424779,
+     *                "t1":11.477369100294986,
+     *                "x":1471.203125,
+     *                "y":1103.390625
+     *             }
+     *          ]
+     *       },
+     *       {
+     *          "layer":0,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":719.0348772321428,
+     *                "y0":539.2761579241071,
+     *                "t0":0.28761395089285713,
+     *                "x1":719.0348772321429,
+     *                "y1":539.2761579241071,
+     *                "t1":4.998731340680804,
+     *                "x":719.03125,
+     *                "y":539.28125
+     *             }
+     *          ]
+     *       }
+     *    ]
+     * ];
+     */
+    function evaluateStrokes(arg: {
+      /**
+       * The drawing descriptor.
+       */
+      drawing?: Object;
+      /**
+       * The list of stroke to evaluate with the param at which to evaluate them.
+       */
+      strokes?: StrokeDescriptorAndParams[];
+    }): void;
+
+    /**
+     * Returns the bounding box of a drawing
+     * @param {DrawingQueryBasicArguments} args Dictionary of arguments
+     * @example
+     *  var settings = Tools.getToolSettings();
+     *  if (!settings.currentDrawing) return;
+     *  var config = {
+     *     drawing  : settings.currentDrawing,
+     *     art : settings.activeArt,
+     *     paths : [
+     *        { polygon: true, path : [ {x: 0, y: 0}, {x : 2500, y: 1875}]}
+     *     ]
+     *  };
+     *  var intersection = Drawing.query.getIntersections(config);
+     *
+     * // Here is an example of the return value of this method.
+     * // It returns an array of intersecting of intersections for each intersecting stroke.
+     * intersections =
+     * [
+     *    [
+     *       {
+     *          "layer":1,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":1143.9253778337531,   // x0, y0, x1 and y1 are the raw evaluation
+     *                "y0":857.9440333753148,    // of the input path and the strokes at the intersection point.
+     *                "t0":0.45757015113350125,  // The parameter t on the input path.
+     *                "x1":1143.9253778337531,
+     *                "y1":857.9440333753149,
+     *                "t1":4.9557816435768265,  // The parameter t on the intersected drawing stroke
+     *                "x":1143.921875,          // The rounded intersection x
+     *                "y":857.9375              // The rounded intersection y
+     *             },
+     *             {
+     *                "x0":1471.1965339233038,
+     *                "y0":1103.3974004424779,
+     *                "t0":0.5884786135693215,
+     *                "x1":1471.1965339233038,
+     *                "y1":1103.3974004424779,
+     *                "t1":11.477369100294986,
+     *                "x":1471.203125,
+     *                "y":1103.390625
+     *             }
+     *          ]
+     *       },
+     *       {
+     *          "layer":0,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":719.0348772321428,
+     *                "y0":539.2761579241071,
+     *                "t0":0.28761395089285713,
+     *                "x1":719.0348772321429,
+     *                "y1":539.2761579241071,
+     *                "t1":4.998731340680804,
+     *                "x":719.03125,
+     *                "y":539.28125
+     *             }
+     *          ]
+     *       }
+     *    ]
+     * ];
+     */
+    function getBox(args: DrawingQueryBasicArguments): void;
+
+    /**
+     * Returns the closest point in a drawing for a list of points
+     * @param {DrawingQueryBasicArguments} args Dictionary of arguments
+     * @example
+     *  var settings = Tools.getToolSettings();
+     *  if (!settings.currentDrawing) return;
+     *  var config = {
+     *     drawing  : settings.currentDrawing,
+     *     art : settings.activeArt,
+     *     paths : [
+     *        { polygon: true, path : [ {x: 0, y: 0}, {x : 2500, y: 1875}]}
+     *     ]
+     *  };
+     *  var intersection = Drawing.query.getIntersections(config);
+     *
+     * // Here is an example of the return value of this method.
+     * // It returns an array of intersecting of intersections for each intersecting stroke.
+     * intersections =
+     * [
+     *    [
+     *       {
+     *          "layer":1,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":1143.9253778337531,   // x0, y0, x1 and y1 are the raw evaluation
+     *                "y0":857.9440333753148,    // of the input path and the strokes at the intersection point.
+     *                "t0":0.45757015113350125,  // The parameter t on the input path.
+     *                "x1":1143.9253778337531,
+     *                "y1":857.9440333753149,
+     *                "t1":4.9557816435768265,  // The parameter t on the intersected drawing stroke
+     *                "x":1143.921875,          // The rounded intersection x
+     *                "y":857.9375              // The rounded intersection y
+     *             },
+     *             {
+     *                "x0":1471.1965339233038,
+     *                "y0":1103.3974004424779,
+     *                "t0":0.5884786135693215,
+     *                "x1":1471.1965339233038,
+     *                "y1":1103.3974004424779,
+     *                "t1":11.477369100294986,
+     *                "x":1471.203125,
+     *                "y":1103.390625
+     *             }
+     *          ]
+     *       },
+     *       {
+     *          "layer":0,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":719.0348772321428,
+     *                "y0":539.2761579241071,
+     *                "t0":0.28761395089285713,
+     *                "x1":719.0348772321429,
+     *                "y1":539.2761579241071,
+     *                "t1":4.998731340680804,
+     *                "x":719.03125,
+     *                "y":539.28125
+     *             }
+     *          ]
+     *       }
+     *    ]
+     * ];
+     */
+    function getClosestPoint(args: DrawingQueryBasicArguments): void;
+
+    /**
+     * This function returns all the data of the drawing using contours and pencil strokes.
+     *  This method differs from the Drawing.query.getStrokes() method. For example, it returns
+     *  the color definitions and is thus more suitable to make export functions rather than vector
+     *  drawing manipulations.
+     * @param {Object} args Dictionary of arguments.
+     * @example
+     *  var settings = Tools.getToolSettings();
+     *  if (!settings.currentDrawing) return;
+     *  var config = {
+     *     drawing  : settings.currentDrawing,
+     *     art : settings.activeArt,
+     *     paths : [
+     *        { polygon: true, path : [ {x: 0, y: 0}, {x : 2500, y: 1875}]}
+     *     ]
+     *  };
+     *  var intersection = Drawing.query.getIntersections(config);
+     *
+     * // Here is an example of the return value of this method.
+     * // It returns an array of intersecting of intersections for each intersecting stroke.
+     * intersections =
+     * [
+     *    [
+     *       {
+     *          "layer":1,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":1143.9253778337531,   // x0, y0, x1 and y1 are the raw evaluation
+     *                "y0":857.9440333753148,    // of the input path and the strokes at the intersection point.
+     *                "t0":0.45757015113350125,  // The parameter t on the input path.
+     *                "x1":1143.9253778337531,
+     *                "y1":857.9440333753149,
+     *                "t1":4.9557816435768265,  // The parameter t on the intersected drawing stroke
+     *                "x":1143.921875,          // The rounded intersection x
+     *                "y":857.9375              // The rounded intersection y
+     *             },
+     *             {
+     *                "x0":1471.1965339233038,
+     *                "y0":1103.3974004424779,
+     *                "t0":0.5884786135693215,
+     *                "x1":1471.1965339233038,
+     *                "y1":1103.3974004424779,
+     *                "t1":11.477369100294986,
+     *                "x":1471.203125,
+     *                "y":1103.390625
+     *             }
+     *          ]
+     *       },
+     *       {
+     *          "layer":0,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":719.0348772321428,
+     *                "y0":539.2761579241071,
+     *                "t0":0.28761395089285713,
+     *                "x1":719.0348772321429,
+     *                "y1":539.2761579241071,
+     *                "t1":4.998731340680804,
+     *                "x":719.03125,
+     *                "y":539.28125
+     *             }
+     *          ]
+     *       }
+     *    ]
+     * ];
+     */
+    function getData(args: {
+      /**
+       * Drawing descriptor.
+       */
+      drawing?: Object;
+    }): void;
+
+    /**
+     * This method is similar to Drawing.query.getStrokes. There is an additional layers parameter to
+     * specify which layer
+     *  to return the strokes for. This could be used, for example in a function that would only modify the
+     * top layer of a drawing.
+     * @param {DrawingQueryBasicArguments} args Dictionary of arguments
+     * @example
+     *  var settings = Tools.getToolSettings();
+     *  if (!settings.currentDrawing) return;
+     *  var config = {
+     *     drawing  : settings.currentDrawing,
+     *     art : settings.activeArt,
+     *     paths : [
+     *        { polygon: true, path : [ {x: 0, y: 0}, {x : 2500, y: 1875}]}
+     *     ]
+     *  };
+     *  var intersection = Drawing.query.getIntersections(config);
+     *
+     * // Here is an example of the return value of this method.
+     * // It returns an array of intersecting of intersections for each intersecting stroke.
+     * intersections =
+     * [
+     *    [
+     *       {
+     *          "layer":1,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":1143.9253778337531,   // x0, y0, x1 and y1 are the raw evaluation
+     *                "y0":857.9440333753148,    // of the input path and the strokes at the intersection point.
+     *                "t0":0.45757015113350125,  // The parameter t on the input path.
+     *                "x1":1143.9253778337531,
+     *                "y1":857.9440333753149,
+     *                "t1":4.9557816435768265,  // The parameter t on the intersected drawing stroke
+     *                "x":1143.921875,          // The rounded intersection x
+     *                "y":857.9375              // The rounded intersection y
+     *             },
+     *             {
+     *                "x0":1471.1965339233038,
+     *                "y0":1103.3974004424779,
+     *                "t0":0.5884786135693215,
+     *                "x1":1471.1965339233038,
+     *                "y1":1103.3974004424779,
+     *                "t1":11.477369100294986,
+     *                "x":1471.203125,
+     *                "y":1103.390625
+     *             }
+     *          ]
+     *       },
+     *       {
+     *          "layer":0,
+     *          "strokeIndex":0,
+     *          "intersections":[
+     *             {
+     *                "x0":719.0348772321428,
+     *                "y0":539.2761579241071,
+     *                "t0":0.28761395089285713,
+     *                "x1":719.0348772321429,
+     *                "y1":539.2761579241071,
+     *                "t1":4.998731340680804,
+     *                "x":719.03125,
+     *                "y":539.28125
+     *             }
+     *          ]
+     *       }
+     *    ]
+     * ];
+     */
+    function getIntersections(args: DrawingQueryBasicArguments): void;
+
+    /**
+     * This method is similar to Drawing.query.getStrokes. There is an additional layers parameter to
+     * specify which layer
+     *  to return the strokes for. This could be used, for example in a function that would only modify the
+     * top layer of a drawing.
+     * @param {Object} args Dictionary of arguments.
+     * @example
+     *   var settings = Tools.getToolSettings();
+     *   if (!settings.currentDrawing) return;
+     *   var config = {
+     *      drawing  : settings.currentDrawing,
+     *      art : settings.activeArt
+     *   };
+     *   var strokes = Drawing.query.getStrokes(config);
+     *   // Here is an example of the returned value for an unbordered painted rectangle.
+     *   // Refer to the tutorial on the vector model to know how to interpret this data
+     *   strokes =
+     *   {
+     *    "layers":[
+     *       {
+     *          "index":0,
+     *          "shaders":[
+     *             {
+     *                "colorId":"08e9426feb78d771"
+     *             }
+     *          ],
+     *          "joints":[
+     *             {
+     *                "x":-1205.5625, "y":1004.15625,
+     *                "strokes":[
+     *                   {
+     *                      "strokeIndex":0, "vertex":0
+     *                   },
+     *                   {
+     *                      "strokeIndex":0,  "vertex":4
+     *                   }
+     *                ]
+     *             }
+     *          ],
+     *          "strokes":[
+     *             {
+     *                "fromJoint":0,
+     *                "toJoint":0,
+     *                "path":[
+     *                {"x":-1205.5625,"y":1004.15625,"onCurve":true},
+     *                {"x":-1205.5625,"y":-523.625,"onCurve":true},
+     *                {"x":721.515625,"y":-523.625,"onCurve":true},
+     *                {"x":721.515625,"y":1004.15625,"onCurve":true},
+     *                {"x":-1205.5625,"y":1004.15625,"onCurve":true}
+     *                ],
+     *                "numBeziers":4,
+     *                "closed":true,
+     *                "shaderRight":0
+     *             }
+     *          ]
+     *       }
+     *    ],
+     *    "drawing":{
+     *       "drawingId":"11",
+     *       "elementId":1,
+     *       "projectId":"08ec74b9f20ec3c2",
+     *       "isValid":true
+     *    },
+     *    "art":2
+     * };
+     */
+    function getLayerStrokes(args: {
+      /**
+       * Drawing descriptor.
+       */
+      drawing?: Object;
+      /**
+       * Art index.
+       */
+      art?: Object;
+      /**
+       * List of layer indices.
+       */
+      layers?: any[];
+    }): void;
+
+    /**
+     * Returns the number of layers in a drawing
+     * @param {Object} args Dictionary of arguments.
+     * @example
+     *   var settings = Tools.getToolSettings();
+     *   if (!settings.currentDrawing) return;
+     *   var config = {
+     *      drawing  : settings.currentDrawing,
+     *      art : settings.activeArt
+     *   };
+     *   var strokes = Drawing.query.getStrokes(config);
+     *   // Here is an example of the returned value for an unbordered painted rectangle.
+     *   // Refer to the tutorial on the vector model to know how to interpret this data
+     *   strokes =
+     *   {
+     *    "layers":[
+     *       {
+     *          "index":0,
+     *          "shaders":[
+     *             {
+     *                "colorId":"08e9426feb78d771"
+     *             }
+     *          ],
+     *          "joints":[
+     *             {
+     *                "x":-1205.5625, "y":1004.15625,
+     *                "strokes":[
+     *                   {
+     *                      "strokeIndex":0, "vertex":0
+     *                   },
+     *                   {
+     *                      "strokeIndex":0,  "vertex":4
+     *                   }
+     *                ]
+     *             }
+     *          ],
+     *          "strokes":[
+     *             {
+     *                "fromJoint":0,
+     *                "toJoint":0,
+     *                "path":[
+     *                {"x":-1205.5625,"y":1004.15625,"onCurve":true},
+     *                {"x":-1205.5625,"y":-523.625,"onCurve":true},
+     *                {"x":721.515625,"y":-523.625,"onCurve":true},
+     *                {"x":721.515625,"y":1004.15625,"onCurve":true},
+     *                {"x":-1205.5625,"y":1004.15625,"onCurve":true}
+     *                ],
+     *                "numBeziers":4,
+     *                "closed":true,
+     *                "shaderRight":0
+     *             }
+     *          ]
+     *       }
+     *    ],
+     *    "drawing":{
+     *       "drawingId":"11",
+     *       "elementId":1,
+     *       "projectId":"08ec74b9f20ec3c2",
+     *       "isValid":true
+     *    },
+     *    "art":2
+     * };
+     */
+    function getNumberOfLayers(args: {
+      /**
+       * Drawing descriptor.
+       */
+      drawing?: Object;
+      /**
+       * Art index.
+       */
+      art?: Object;
+    }): void;
+
+    /**
+     * This function returns all the strokes of the drawing.
+     * @param {DrawingQueryBasicArguments} args Dictionary of arguments
+     * @returns {Object}
+     * @example
+     *   var settings = Tools.getToolSettings();
+     *   if (!settings.currentDrawing) return;
+     *   var config = {
+     *      drawing  : settings.currentDrawing,
+     *      art : settings.activeArt
+     *   };
+     *   var strokes = Drawing.query.getStrokes(config);
+     *   // Here is an example of the returned value for an unbordered painted rectangle.
+     *   // Refer to the tutorial on the vector model to know how to interpret this data
+     *   strokes =
+     *   {
+     *    "layers":[
+     *       {
+     *          "index":0,
+     *          "shaders":[
+     *             {
+     *                "colorId":"08e9426feb78d771"
+     *             }
+     *          ],
+     *          "joints":[
+     *             {
+     *                "x":-1205.5625, "y":1004.15625,
+     *                "strokes":[
+     *                   {
+     *                      "strokeIndex":0, "vertex":0
+     *                   },
+     *                   {
+     *                      "strokeIndex":0,  "vertex":4
+     *                   }
+     *                ]
+     *             }
+     *          ],
+     *          "strokes":[
+     *             {
+     *                "fromJoint":0,
+     *                "toJoint":0,
+     *                "path":[
+     *                {"x":-1205.5625,"y":1004.15625,"onCurve":true},
+     *                {"x":-1205.5625,"y":-523.625,"onCurve":true},
+     *                {"x":721.515625,"y":-523.625,"onCurve":true},
+     *                {"x":721.515625,"y":1004.15625,"onCurve":true},
+     *                {"x":-1205.5625,"y":1004.15625,"onCurve":true}
+     *                ],
+     *                "numBeziers":4,
+     *                "closed":true,
+     *                "shaderRight":0
+     *             }
+     *          ]
+     *       }
+     *    ],
+     *    "drawing":{
+     *       "drawingId":"11",
+     *       "elementId":1,
+     *       "projectId":"08ec74b9f20ec3c2",
+     *       "isValid":true
+     *    },
+     *    "art":2
+     * };
+     */
+    function getStrokes(args: {
+      /**
+       * Drawing descriptor
+       */
+      drawing?: Object;
+      /**
+       * The art number
+       */
+      art?: int;
+    }): Object;
+  }
+}
+
+declare namespace Drawing {
+  /**
+   * This module provides functions to manipulate the drawing selection.
+   * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-Drawing_selection.html}
+   */
+  namespace selection {
+    /**
+     * Clears all the selected strokes and contours for all drawings and arts.
+     */
+    function clear(): void;
+
+    /**
+     * Returns the list of selected strokes in a drawing.
+     * @param {Object} args Dictionary of arguments
+     */
+    function get(args: {
+      /**
+       * Drawing descriptor
+       */
+      drawing?: Object;
+      /**
+       * art index
+       */
+      art?: Object;
+    }): void;
+
+    /**
+     *
+     * @param {Object} args Dictionary of arguments
+     */
+    function set(args: {
+      /**
+       * Drawing descriptor
+       */
+      drawing?: Object;
+      /**
+       * art index
+       */
+      art?: Object;
+      /**
+       * List of selected strokes descriptor
+       */
+      selectedStrokes?: Object[];
+    }): void;
+  }
+}
+
+/**
+ * This module provides functions to manipulate the layers of a Drawing. All the operations are
+ * executed
+ *  upon call. When calling any of the methods, the indices of the layers and the strokes in a layer
+ * might end up
+ *  modified.
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-DrawingTools.html}
+ */
+declare namespace DrawingTools {
+  /**
+   * This function is used to create a layer in a specified drawing
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var n = selection.selectedNode(0); // First selected node
+   *  DrawingTools.createLayers( {
+   *    label : "My Modify layer Example",
+   *    drawing : {node: n, frame: frame.current()},
+   *    art: 2, // Line art
+   *    masks : [
+   *       {
+   *          polygon: true,
+   *          path: [ {x: 60, y: 60},
+   *                   {x: 70, y: 60},
+   *                   {x: 70, y: 70},
+   *                   {x: 60, y: 70},
+   *                   {x: 60, y: 60}],
+   *          holes : [
+   *             [ {x: 65, y: 65},
+   *             {x: 65, y: 68},
+   *             {x: 68, y: 68},
+   *             {x: 68, y: 65},
+   *             {x: 65, y: 65}]
+   *          ]
+   *       }
+   *    ],
+   *    layers : [
+   *       {
+   *          shaders : [
+   *             { colorId : "0000000000000003" }  // This is the default vectorization color
+   *          ],
+   *          under : false,
+   *          referenceLayer: 0,
+   *          strokes : [
+   *          {
+   *             shaderLeft: 0,
+   *          stroke : true,
+   *          pencilColorId : "0000000000000003", // This is the default vectorization color
+   *          thickness: 1,
+   *          polygon: true,
+   *          path: [ {x: 0, y: 0},
+   *                   {x: 2500/12, y: 0},
+   *                   {x: 2500/12, y: 1875/12},
+   *                   {x: 0, y: 1875/12},
+   *                   {x: 0, y: 0}]
+   *          }
+   *       ] }
+   *    ]
+   *    });
+   */
+  function createLayers(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * A list of layers definitions
+     */
+    layers?: Object[];
+    /**
+     * A list of masks that to be applied to the newly created layers.
+     */
+    masks?: BezierContour[];
+  }): void;
+
+  /**
+   * This function is used to delete layers in a specified drawing
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var config = {
+   *     label : "Delete bottom layer",
+   *     drawing  : { node : selection.selectedNode(), frame : frame.current() },
+   *     art : 2, // 0 = underlay, 1 = color art, 2 = line art, 3 = overlay
+   *     layers : [ 0 ] // bottom layer
+   *  };
+   *  DrawingTools.deleteLayers(config);
+   */
+  function deleteLayers(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * A list of layer indices.
+     */
+    layers?: int[];
+  }): void;
+
+  /**
+   * This function is used to delete strokes in a layer of a specified drawing. If a
+   * stroke is part of a painted contour, this will have the effect of unpainting the contour.
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var config = {
+   *     label : "Modify one stroke",
+   *     drawing  : { node : "Top/Drawing", frame : 1 },
+   *     art : 2, // 0 = underlay, 1 = color art, 2 = line art, 3 = overlay
+   *     strokes : [ {
+   *        layer: 0, strokeIndex: 0, insertPoints : [ 0.5, 1.5 ] // Will insert 2 points in the bezier path
+   *     } ]
+   *  };
+   *  DrawingTools.modifyStrokes(config);
+   *
+   *
+   */
+  function deleteStrokes(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * The list of strokes to delete.
+     */
+    strokes?: Object[];
+  }): void;
+
+  /**
+   * This function is used to insert eraser contours in layers of a specified drawing. Please note, that
+   * this is not the same as deleteLayers.
+   * The deleteLayers function completely erases layers whereas eraseLayers is like using the Eraser Tool
+   * on a list of layers.
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var config = {
+   *     label : "Modify one stroke",
+   *     drawing  : { node : "Top/Drawing", frame : 1 },
+   *     art : 2, // 0 = underlay, 1 = color art, 2 = line art, 3 = overlay
+   *     strokes : [ {
+   *        layer: 0, strokeIndex: 0, insertPoints : [ 0.5, 1.5 ] // Will insert 2 points in the bezier path
+   *     } ]
+   *  };
+   *  DrawingTools.modifyStrokes(config);
+   *
+   *
+   */
+  function eraseLayers(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * The list of layer indices to be modified. If empty or unspecified, all the layers of the drawing are erased.
+     */
+    layers?: int[];
+    /**
+     * A list of masks that to be applied to the newly created layers.
+     */
+    masks?: BezierContour[];
+  }): void;
+
+  /**
+   * This function is used to modify a layer in a specified drawing by replacing all of its strokes by
+   * other strokes. This method works exaclty
+   * as the createLayers method with the exception that a layer index must be specified by each object.
+   * One could replace the call to modifyLayers
+   * by a call to deleteLayers followed by a call to createLayers. The only problem with this approach is
+   * the index computation because the layer
+   * indices of the drawing change after the deletion.  The use of modifyLayers prevent the user from
+   * having to compute the new indices of the layer
+   * for the createLayers.
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var config = {
+   *     label : "Modify one stroke",
+   *     drawing  : { node : "Top/Drawing", frame : 1 },
+   *     art : 2, // 0 = underlay, 1 = color art, 2 = line art, 3 = overlay
+   *     strokes : [ {
+   *        layer: 0, strokeIndex: 0, insertPoints : [ 0.5, 1.5 ] // Will insert 2 points in the bezier path
+   *     } ]
+   *  };
+   *  DrawingTools.modifyStrokes(config);
+   *
+   *
+   */
+  function modifyLayers(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * A list of layers definitions
+     */
+    layers?: Object[];
+    /**
+     * A list of masks that to be applied to the newly created layers.
+     */
+    masks?: BezierContour[];
+  }): void;
+
+  /**
+   * This function is used to modify strokes in a layer of a specified drawing
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var config = {
+   *     label : "Modify one stroke",
+   *     drawing  : { node : "Top/Drawing", frame : 1 },
+   *     art : 2, // 0 = underlay, 1 = color art, 2 = line art, 3 = overlay
+   *     strokes : [ {
+   *        layer: 0, strokeIndex: 0, insertPoints : [ 0.5, 1.5 ] // Will insert 2 points in the bezier path
+   *     } ]
+   *  };
+   *  DrawingTools.modifyStrokes(config);
+   *
+   *
+   */
+  function modifyStrokes(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * The list of strokes to modify.
+     */
+    strokes?: Object[];
+  }): void;
+
+  /**
+   * This function is used to paint at a specific point in a drawing like using the paint tool.
+   * @param {Object} arg A dictionary of options
+   * @example
+   *  var n = selection.selectedNode(0);
+   *  var f = frame.current();
+   *  DrawingTools.paintAt(
+   *     {
+   *        label : "Paint at (0,0)",
+   *        drawing : {node: n, frame: f},
+   *            art: 2,
+   *        points :
+   *           [
+   *              {
+   *                 x: 0, y: 0, colorId : "0000000000000003"
+   *              }
+   *           ]
+   *     }
+   *
+   *  );
+   */
+  function paintAt(arg: {
+    /**
+     * Drawing descriptor
+     */
+    drawing?: Object;
+    /**
+     * The drawing's art index. Must be 0, 1, 2 or 3.
+     */
+    art?: Object;
+    /**
+     * The undo command label.
+     */
+    label?: string;
+    /**
+     * The list of points and colors to using when painting.
+     */
+    points?: Object[];
+  }): void;
+}
+
+/**
+ * This module is used to manage the Python interpreter and to create a Python object in JavaScript.
+ *  For documentation on how to call Python function, check the PyObjectWrapper class.
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-PythonManager.html}
+ */
+declare namespace PythonManager {
+  /**
+   * Add a path to the Python sys.path, allowing the user to import a Python library located in that
+   * path.
+   *  Its also possible to edit the environment variable "PYTHONPATH" instead of using this function.
+   * Note: Once a library is imported, Python will cache a copy of that library. So even if you remove
+   * the line calling "addSysPath", Python will still be able to import that library in every other
+   * script execution.
+   *  The only way to remove a libray from the cache is to restart the application.
+   * @param {string} path path where some Python module are located.
+   * @example
+   *  # Python file
+   *  def testJsFunction(f):
+   *    tuple = (5, 2, 8)
+   *    result = f.call(tuple)
+   *    print result # print 15
+   */
+  function addSysPath(path: string): void;
+
+  /**
+   * Create or return existing Python object created with the specified Python script and associated with
+   * Python 'moduleName' module.
+   *  The returned object will have a 'py' property having the functions declared in the Python script as
+   * properties, allowing the user to call those Python functions.
+   *  See the documentation on the PyObjectWrapper class for information on how to call Python function.
+   * Note: Python module will be reloaded if the Python script has been changed. In this case the module
+   * functions will be updated, but the removed Python functions will remain in memory.
+   * @param {string} path The path where a Python script is located.
+   * @param {string} moduleName The name of the Python module associated with loaded script. If not specified or empty, the script file base name is used.
+   * @returns {PyObjectWrapper}
+   * @example
+   *  # Python file
+   *  def testJsFunction(f):
+   *    tuple = (5, 2, 8)
+   *    result = f.call(tuple)
+   *    print result # print 15
+   */
+  function createPyObject(path: string, moduleName: string): PyObjectWrapper;
+
+  /**
+   * Return a collection of created Python objects (see createPyObject) by name of the Python module
+   * associated with loaded scripts.
+   * @returns {{[key: string] : ObjectWrapper}}
+   * @example
+   *  # Python file
+   *  def testJsFunction(f):
+   *    tuple = (5, 2, 8)
+   *    result = f.call(tuple)
+   *    print result # print 15
+   */
+  function getPyObjects(): { [key: string]: ObjectWrapper };
+
+  /**
+   * Wrap a JavaScript function.
+   *  The returned object can then be send as a parameter to a Python function
+   * @param {QObject} jsFunction a JavaScript function
+   * @returns {QObject}
+   * @example
+   *  # Python file
+   *  def testJsFunction(f):
+   *    tuple = (5, 2, 8)
+   *    result = f.call(tuple)
+   *    print result # print 15
+   */
+  function wrapFunction(jsFunction: QObject): QObject;
+}
+
+/**
+ * This module provides many functions to integrate scripted functionalities in the UI of Harmony.
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-ScriptManager.html}
+ */
+declare namespace ScriptManager {
+  /**
+   * This method defines an action that can be called by a menu, a shortcut or a toolbar button. Please
+   * note that callback functions must be quick if defined because they might have a performance impact
+   * on the whole application.
+   * @param {Object} action The definition of the action.
+   * @example
+   *  // Defining the action
+   *  var toggleCoordinatesAction = {
+   *   id: "com.toonboom.toggleMouseCoordinateDisplay",
+   *   text: "Toggle Mouse Coordinates Display Settings",
+   *   icon: "earth.png",
+   *   checkable: true,
+   *   isEnabled: true,
+   *   isChecked: preferences.getBool("DRAWING_VIEW_SHOW_RAW_MOUSE_COORDINATES", false),
+   *   onPreferenceChanged: function () {
+   *     this.isChecked = preferences.getBool("DRAWING_VIEW_SHOW_RAW_MOUSE_COORDINATES", false);
+   *   },
+   *   onTrigger: function () {
+   *     this.isChecked = !this.isChecked;
+   *     preferences.setBool("DRAWING_VIEW_SHOW_RAW_MOUSE_COORDINATES", this.isChecked);
+   *   }
+   * };
+   * // Adding the action to the system
+   * ScriptManager.addAction(toggleCoordinatesAction);
+   *
+   * // Adding the action in a menu of Harmony
+   * ScriptManager.addMenuItem({
+   *     targetMenuId: "View",
+   *     id: toggleCoordinatesAction.id,
+   *     text: toggleCoordinatesAction.text,
+   *     action: toggleCoordinatesAction.id
+   *  });
+   *
+   *  // Here is how to call the action from the Action object
+   *  Action.perform("onTriggerScriptAction(QString)", "ScriptManagerResponder", toggleCoordinatesAction.id);
+   */
+  function addAction(action: {
+    /**
+     * The action uniqueId. Is is recommended to use reverse DNS notation.
+     */
+    id?: string;
+    /**
+     * The action label.
+     */
+    text?: string;
+    /**
+     * The icon for the action
+     */
+    icon?: string;
+    /**
+     * If true, the action is checkable
+     */
+    checkable?: boolean;
+    /**
+     * If true, the action is enabled. If a function is provided, the action must return true or false.
+     */
+    isEnabled?: boolean | ((...args: any[]) => boolean);
+    /**
+     * If true, the action is checked. If a function is provided, the action must return true or false.
+     */
+    isChecked?: boolean | ((...args: any[]) => boolean);
+    /**
+     * The function to call if the action is triggered in any way (ActionManager, menu item, toolbar).
+     */
+    onTrigger?: (...args: any[]) => any;
+    /**
+     * Callback function called when the selection changes.
+     */
+    onSelectionChanged?: (...args: any[]) => any;
+    /**
+     * Callback called when the current frame of the scene changes.
+     */
+    onCurrentFrameChanged?: (...args: any[]) => any;
+    /**
+     * Callback called when connections have been changed in the network view or if new modules have been created.
+     */
+    onNetworkChanged?: (...args: any[]) => any;
+    /**
+     * Callback called when a preference has changed.
+     */
+    onPreferenceChanged?: (...args: any[]) => any;
+  }): void;
+
+  /**
+   * This method adds a shortcut to the list of Harmony shortcuts.
+   * @param {void} action
+   */
+  function addShortcut(action: {
+    /**
+     * The action uniqueId. Is is recommended to use reverse DNS notation.
+     */
+    id?: string;
+    /**
+     * The action label.
+     */
+    text?: string;
+    action?: string;
+    longDesc?: string;
+    order?: string;
+    categoryId?: string;
+    categoryText?: string;
+  }): void;
+
+  /**
+   * This method adds a toolbar to Harmony.
+   * @param {ScriptToolbarDef} toolbar The toolbar to add
+   */
+  function addToolbar(toolbar: ScriptToolbarDef): void;
+}
+
+/**
+ * This module provides functions to create interactive javascript tools. These tools allow
+ *  the developer to handle mouse interaction with the objective to create or modify any drawing or
+ * node in the scene.
+ * {@link https://docs.toonboom.com/help/harmony-21/scripting/extended/module-Tools.html}
+ */
+declare namespace Tools {
+  /**
+   * Creates a drawing for the current selected element.
+   * @example
+   *  var settings = Tools.getToolSettings();
+   *     if (settings.currentDrawing) {
+   *       return;
+   *     }
+   *     scene.beginUndoRedoAccum("Create Drawing example");
+   *     settings = Tools.createDrawing();
+   *     scene.endUndoRedoAccum();
+   */
+  function createDrawing(): void;
+
+  /**
+   * This function is used to retrieve tool settings informations.
+   * @example
+   *  var tid = Tools.registerTool({
+   *      name : "com.toonboom.regularPolygonTool",
+   *      displayName : "Regular Polygon Tool",
+   *      icon : "MyTool.png",
+   *      toolType : "drawing",
+   *      canBeOverridenBySelectOrTransformTool : false,
+   *      options : {
+   *       numSides: 6,
+   *       createStar : false,
+   *       ratio : 0.5
+   *      },
+   *      resourceFolder : "resources",
+   *      preferenceName : function() {
+   *       return this.name + ".settings";
+   *      },
+   *      defaultOptions : {
+   *         numSides: 6,
+   *         createStar : false,
+   *         ratio : 0.5
+   *      },
+   *      loadFromPreferences : function() {
+   *       try {
+   *         var v = preferences.getString(this.preferenceName(), JSON.stringify(this.defaultOptions));
+   *         this.options = JSON.parse(v);
+   *       }
+   *       catch (e)
+   *       {
+   *         this.options = this.defaultOptions;
+   *       }
+   *      },
+   *      storeToPreferences : function() {
+   *       preferences.setString(this.preferenceName(), JSON.stringify(this.options));
+   *      },
+   *      onRegister : function()
+   *      {
+   *        // This is called once when registering the tool
+   *        // Here the developer can, for example, initialize the tool options
+   *        // from the preferences
+   *        System.println("Registered tool : " + this.resourceFolder);
+   *        this.loadFromPreferences();
+   *      },
+   *      onCreate : function(ctx) {
+   *        // This is called once for each instance in a view
+   *        // The context could be populated with instance data
+   *      },
+   *      onMouseDown : function(ctx) {
+   *         MessageLog.trace("On mouse down");
+   *         var settings = Tools.getToolSettings();
+   *         if (!settings.currentDrawing)
+   *           return false;
+   *
+   *         ctx.origin = ctx.currentPoint;
+   *         System.println("ctx: " + JSON.stringify(ctx));
+   *         return true;
+   *      },
+   *      onMouseMove : function(ctx) {
+   *         // Here, we build the current overlay based on the current mouse move
+   *         // This overlay will be drawn by the system
+   *         this.buildPolygon(ctx, ctx.currentPoint);
+   *         return true;
+   *      },
+   *      onMouseUp : function(ctx) {
+   *       MessageLog.trace("On mouse up");
+   *       var settings = Tools.getToolSettings();
+   *       var cid = PaletteManager.getCurrentColorId();
+   *
+   *       // Here, we get a chance to capture the current overlay
+   *       // data and build a new drawing layer painted using the
+   *       // current selected color.
+   *       DrawingTools.createLayers( {
+   *         label : "Regular polygon tool",
+   *         drawing : settings.currentDrawing,
+   *             art: 2,
+   *             layers : [
+   *                {
+   *                   contours : [
+   *                   {
+   *                    stroke : true,
+   *                    colorId : cid,
+   *                    polygon: true,
+   *                    path: ctx.overlay.paths[0].path
+   *                   }
+   *                ] }
+   *             ]
+   *       });
+   *       ctx.overlay = {};
+   *       return true;
+   *    },
+   *    onResetTool : function(ctx)
+   *    {
+   *     // Make sure there are no left over
+   *     // from the last tool usage
+   *     ctx.overlay = {};
+   *    },
+   *    loadPanel : function(dialog, responder) {
+   *       // This method loads the ui file or creates it.
+   *       // It must load the ui in the dialog passed in parameter.
+   *       var uiFile = this.resourceFolder + "/regularPolygonTool.ui";
+   *       System.println("UIfilename:" + uiFile);
+   *       try
+   *       {
+   *         var ui = UiLoader.load( { uiFile : uiFile, parent : dialog, folder : this.resourceFolder } );
+   *
+   *         this.ui = ui;
+   *
+   *         ui.options.numSides.setValue(this.options.numSides);
+   *         ui.options.numSides['valueChanged(int)'].connect(this, function(v) {
+   *           this.options.numSides = v;
+   *           this.storeToPreferences();
+   *         });
+   *         ui.options.createStar.setChecked(this.options.createStar);
+   *         ui.options.createStar.toggled.connect(this, function(checked) {
+   *           this.options.createStar = checked;
+   *           ui.options.ratio.setEnabled(this.options.createStar);
+   *           this.storeToPreferences();
+   *         });
+   *         ui.options.ratio.setEnabled(this.options.createStar);
+   *         ui.options.ratio.setValue(Math.round(this.options.ratio * 1000));
+   *         ui.options.ratio['valueChanged(int)'].connect(this, function(v) {
+   *           this.options.ratio = v / 1000.0;
+   *           this.storeToPreferences();
+   *         });
+   *       }
+   *       catch (e)
+   *       {
+   *         System.println("Exception: " + e);
+   *       }
+   *      },
+   *      refreshPanel : function(dialog, responder)
+   *      {
+   *        // In here, the panel could react to changes in the selection or other external sources
+   *        System.println("Refresh panel");
+   *      },
+   *      buildPolygon : function(ctx, pt)
+   *      {
+   *        var dx = pt.x - ctx.origin.x;
+   *        var dy = pt.y - ctx.origin.y;
+   *        var l = Math.sqrt(dx*dx+dy*dy);
+   *        var angle = Math.atan2(dy, dx);
+   *        var poly = [];
+   *        var numSides = this.options.numSides;
+   *        var createStar = this.options.createStar;
+   *        var r1 = 1;
+   *        if (createStar)
+   *        {
+   *          r1 = this.options.ratio;
+   *         numSides *= 2;
+   *        }
+   *        var d =  Math.PI*2/numSides;
+   *        for(var i=0 ; i< numSides; i++)
+   *        {
+   *          var r = 1;
+   *          if (i%2)
+   *            r = r1;
+   *          poly.push({ x : ctx.origin.x + r * l * Math.cos(angle + i*d), y : ctx.origin.y + r * l * Math.sin(angle + i*d)} );
+   *        }
+   *        poly.push(poly[0]);
+   *        ctx.overlay = { paths : [ { path: poly, color: { r: 0, g: 0, b: 255, a: 255} } ]}
+   *      }
+   * });
+   * }
+   */
+  function getToolSettings(): void;
+
+  /**
+   * This function is used to create a layer in a specified drawing. The function takes a tool definition
+   * object in parameter. This
+   * definition object must contain methods that will be called during the tool lifecycle.
+   * @param {Object} toolDefinition The definition of the tool.
+   * @returns {number}
+   * @example
+   *  var tid = Tools.registerTool({
+   *      name : "com.toonboom.regularPolygonTool",
+   *      displayName : "Regular Polygon Tool",
+   *      icon : "MyTool.png",
+   *      toolType : "drawing",
+   *      canBeOverridenBySelectOrTransformTool : false,
+   *      options : {
+   *       numSides: 6,
+   *       createStar : false,
+   *       ratio : 0.5
+   *      },
+   *      resourceFolder : "resources",
+   *      preferenceName : function() {
+   *       return this.name + ".settings";
+   *      },
+   *      defaultOptions : {
+   *         numSides: 6,
+   *         createStar : false,
+   *         ratio : 0.5
+   *      },
+   *      loadFromPreferences : function() {
+   *       try {
+   *         var v = preferences.getString(this.preferenceName(), JSON.stringify(this.defaultOptions));
+   *         this.options = JSON.parse(v);
+   *       }
+   *       catch (e)
+   *       {
+   *         this.options = this.defaultOptions;
+   *       }
+   *      },
+   *      storeToPreferences : function() {
+   *       preferences.setString(this.preferenceName(), JSON.stringify(this.options));
+   *      },
+   *      onRegister : function()
+   *      {
+   *        // This is called once when registering the tool
+   *        // Here the developer can, for example, initialize the tool options
+   *        // from the preferences
+   *        System.println("Registered tool : " + this.resourceFolder);
+   *        this.loadFromPreferences();
+   *      },
+   *      onCreate : function(ctx) {
+   *        // This is called once for each instance in a view
+   *        // The context could be populated with instance data
+   *      },
+   *      onMouseDown : function(ctx) {
+   *         MessageLog.trace("On mouse down");
+   *         var settings = Tools.getToolSettings();
+   *         if (!settings.currentDrawing)
+   *           return false;
+   *
+   *         ctx.origin = ctx.currentPoint;
+   *         System.println("ctx: " + JSON.stringify(ctx));
+   *         return true;
+   *      },
+   *      onMouseMove : function(ctx) {
+   *         // Here, we build the current overlay based on the current mouse move
+   *         // This overlay will be drawn by the system
+   *         this.buildPolygon(ctx, ctx.currentPoint);
+   *         return true;
+   *      },
+   *      onMouseUp : function(ctx) {
+   *       MessageLog.trace("On mouse up");
+   *       var settings = Tools.getToolSettings();
+   *       var cid = PaletteManager.getCurrentColorId();
+   *
+   *       // Here, we get a chance to capture the current overlay
+   *       // data and build a new drawing layer painted using the
+   *       // current selected color.
+   *       DrawingTools.createLayers( {
+   *         label : "Regular polygon tool",
+   *         drawing : settings.currentDrawing,
+   *             art: 2,
+   *             layers : [
+   *                {
+   *                   contours : [
+   *                   {
+   *                    stroke : true,
+   *                    colorId : cid,
+   *                    polygon: true,
+   *                    path: ctx.overlay.paths[0].path
+   *                   }
+   *                ] }
+   *             ]
+   *       });
+   *       ctx.overlay = {};
+   *       return true;
+   *    },
+   *    onResetTool : function(ctx)
+   *    {
+   *     // Make sure there are no left over
+   *     // from the last tool usage
+   *     ctx.overlay = {};
+   *    },
+   *    loadPanel : function(dialog, responder) {
+   *       // This method loads the ui file or creates it.
+   *       // It must load the ui in the dialog passed in parameter.
+   *       var uiFile = this.resourceFolder + "/regularPolygonTool.ui";
+   *       System.println("UIfilename:" + uiFile);
+   *       try
+   *       {
+   *         var ui = UiLoader.load( { uiFile : uiFile, parent : dialog, folder : this.resourceFolder } );
+   *
+   *         this.ui = ui;
+   *
+   *         ui.options.numSides.setValue(this.options.numSides);
+   *         ui.options.numSides['valueChanged(int)'].connect(this, function(v) {
+   *           this.options.numSides = v;
+   *           this.storeToPreferences();
+   *         });
+   *         ui.options.createStar.setChecked(this.options.createStar);
+   *         ui.options.createStar.toggled.connect(this, function(checked) {
+   *           this.options.createStar = checked;
+   *           ui.options.ratio.setEnabled(this.options.createStar);
+   *           this.storeToPreferences();
+   *         });
+   *         ui.options.ratio.setEnabled(this.options.createStar);
+   *         ui.options.ratio.setValue(Math.round(this.options.ratio * 1000));
+   *         ui.options.ratio['valueChanged(int)'].connect(this, function(v) {
+   *           this.options.ratio = v / 1000.0;
+   *           this.storeToPreferences();
+   *         });
+   *       }
+   *       catch (e)
+   *       {
+   *         System.println("Exception: " + e);
+   *       }
+   *      },
+   *      refreshPanel : function(dialog, responder)
+   *      {
+   *        // In here, the panel could react to changes in the selection or other external sources
+   *        System.println("Refresh panel");
+   *      },
+   *      buildPolygon : function(ctx, pt)
+   *      {
+   *        var dx = pt.x - ctx.origin.x;
+   *        var dy = pt.y - ctx.origin.y;
+   *        var l = Math.sqrt(dx*dx+dy*dy);
+   *        var angle = Math.atan2(dy, dx);
+   *        var poly = [];
+   *        var numSides = this.options.numSides;
+   *        var createStar = this.options.createStar;
+   *        var r1 = 1;
+   *        if (createStar)
+   *        {
+   *          r1 = this.options.ratio;
+   *         numSides *= 2;
+   *        }
+   *        var d =  Math.PI*2/numSides;
+   *        for(var i=0 ; i< numSides; i++)
+   *        {
+   *          var r = 1;
+   *          if (i%2)
+   *            r = r1;
+   *          poly.push({ x : ctx.origin.x + r * l * Math.cos(angle + i*d), y : ctx.origin.y + r * l * Math.sin(angle + i*d)} );
+   *        }
+   *        poly.push(poly[0]);
+   *        ctx.overlay = { paths : [ { path: poly, color: { r: 0, g: 0, b: 255, a: 255} } ]}
+   *      }
+   * });
+   * }
+   */
+  function registerTool(toolDefinition: {
+    /**
+     * The internal name of the tool. We recommand using a reverse DNS notation (e.g. com.toonboom.myTool) to avoid creating conflicts with other organizations. The function will return false if this value is empty or not provided.
+     */
+    name?: string;
+    /**
+     * The name that will be shown to the user in menus or tooltips.  The function will return false if this value is empty or not provided.
+     */
+    displayName?: string;
+    /**
+     * The icon file name for the tool if that tool should need to be associated with an icon.
+     */
+    icon?: string;
+    /**
+     * The tool type. It can be either "drawing" or "scenePlanning".
+     */
+    toolType?: string;
+    /**
+     * The resource folder for this tool. A relative folder can be passed. If it is the case, during registration, the full path value will be computed by the system and be replaced.
+     */
+    resourceFolder?: string;
+    /**
+     * If false, your tool will not be overriden by the select/transform tool when pressing the CTRL key.
+     */
+    canBeOverridenBySelectOrTransformTool?: boolean;
+    /**
+     * A method that is called once during the registration of the tool.
+     */
+    onRegister?: (...args: any[]) => any;
+    /**
+     * A method that is called once for each instance of the tool. There are one instance per view.
+     */
+    onCreate?: (...args: any[]) => any;
+    /**
+     * This method is called when the user clicks on the camera or drawing view. If the tool can operate and process the mouse move and up events, it must return true.
+     */
+    onMouseDown?: (...args: any[]) => any;
+    /**
+     * Called at each mouse move if the tool returned true in the onMouseDown method.
+     */
+    onMouseMove?: (...args: any[]) => any;
+    /**
+     * Called when the mouse is released if the tool returned true in the onMouseDown method. This is typically in this method that the operation should be done.
+     */
+    onMouseUp?: (...args: any[]) => any;
+    /**
+     * Called when tool must be reset for external reason like selection change, frame change etc. This is the oportunity for the tool to clear its overlay or reset its manipulator.
+     */
+    onResetTool?: (...args: any[]) => any;
+    /**
+     * This class method is called shortly after registration for the tool to create its property panel. The panel will be shared among all the instance of the tool.
+     */
+    loadPanel?: (...args: any[]) => any;
+  }): number;
+
+  /**
+* This function is used to change tool settings informations. Note : you cannot change the
+* currentDrawing with this function.
+* @param {string
+|
+
+number} tool The tool's internal name or its unique id.
+* @returns {boolean}
+* @example
+*   Tools.setCurrentTool("com.toonboom.regularPolygonTool");
+*/
+  function setCurrentTool(tool: string | number): boolean;
+
+  /**
+   * This function is used to change tool settings informations. Note : you cannot change the
+   * currentDrawing with this function.
+   * @param {Object} arg A dictionary of options
+   * @returns {Object}
+   */
+  function setToolSettings(arg: {
+    /**
+     * The index of the art to activate. Must be in [0-3] range.
+     */
+    activeArt?: Object;
+    /**
+     * The current tool descriptor
+     */
+    currentTool?: Object;
+    /**
+     * The animation mode descriptor
+     */
+    animationMode?: Object;
+  }): Object;
+}
+
+/**
+ * Definition of a Bezier contour with potential holes in it.
+ */
+declare interface BezierContour {
+  /**
+   * Use true if the path and holes are polygons. This makes the data much smaller than using onCurve for each vertex.
+   */
+  polygon: Boolean;
+  /**
+   * A list of vertices
+   */
+  path: BezierPoint[];
+  /**
+   * A list of list of vertices
+   */
+  holes: BezierPoint[][];
+}
+/**
+ * Definition of a Bezier path.
+ */
+declare interface BezierPath {
+  /**
+   * A list of vertices
+   */
+  path: BezierPoint[];
+}
+/**
+ * A vertex of a Bezier curve.
+ */
+declare interface BezierPoint {
+  /**
+   * x coordinate
+   */
+  x: double;
+  /**
+   * y coordinate
+   */
+  y: double;
+  /**
+   * Use true is the vertex is on the curve. This means it is not a bezier handle.
+   */
+  onCurve: Boolean;
+}
+/**
+ * A 2d box.
+ */
+declare interface Box2d {
+  /**
+   * The min x coordinate
+   */
+  x0: double;
+  /**
+   * The max x coordinate
+   */
+  x1: double;
+  /**
+   * The min y coordinate
+   */
+  y0: double;
+  /**
+   * The max y coordinate
+   */
+  y1: double;
+}
+/**
+ * Basic argument definitions to DrawingTools functions
+ */
+declare interface DrawingQueryBasicArguments {
+  /**
+   * The drawing descriptor
+   */
+  drawing: Object;
+  /**
+   * The art index // 0 = underlay, 1 = color art, 2 = line art, 3 = overlay
+   */
+  art: int;
+}
+/**
+ * The argument to the evaluateStrokes method
+ */
+declare interface EvaluateStrokesArgument {
+  strokes: StrokeDescriptorAndParams[];
+}
+/**
+ * Constants used in the geometry computations
+ */
+declare interface GeometryConstants {
+  /**
+   * Equals 4.
+   */
+  splitPerimeter: double;
+  /**
+   * Equals 1.0 / 64.0.
+   */
+  roundingQuantum: double;
+}
+/**
+ * A 2d vertex
+ */
+declare interface GetIntersectionArgument {
+  /**
+   * The first Bezier path
+   */
+  path0: BezierPoint[];
+  /**
+   * The second Bezier path
+   */
+  path1: BezierPoint[];
+}
+/**
+ * A 2d vertex
+ */
+declare interface Point2d {
+  /**
+   * x coordinate
+   */
+  x: double;
+  /**
+   * y coordinate
+   */
+  y: double;
+}
+/**
+ * The argument to the evaluateStrokes method
+ */
+declare interface StrokeDescriptorAndParams {
+  /**
+   * The layer index of the stroke
+   */
+  layer: int;
+  /**
+   * The stroke index within this layer
+   */
+  strokeIndex: int;
+  /**
+   * The list of params to evaluate the stroke at
+   */
+  params: double[];
+}
+
+declare type PermanentFile = FileWrapper;
+declare type TemporaryFile = FileWrapper;
 
 /**
  * scripting object to a sound column... Allow object oriented object interaction with sound sequence.
@@ -16903,3 +19154,4 @@ declare type AttrValueType =
   | "SIMPLE_BEZIER"
   | "STRING"
   | "TIMING";
+declare type ObjectWrapper = PyObjectWrapper;
