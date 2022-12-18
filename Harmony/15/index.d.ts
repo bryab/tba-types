@@ -1083,9 +1083,9 @@ Velocity = 4
    * (BEZIER), Ease Curve (EASE), Expression (EXPR), Timing (TIMING) for timing columns, Quaternion path
    * (QUATERNIONPATH) for 3D rotation and Annotation (ANNOTATION) for annotation columns.
    * @param {string} columnName The name of the column.
-   * @returns {string}
+   * @returns {ColumnType}
    */
-  function type(columnName: string): string;
+  function type(columnName: string): ColumnType;
 
   /**
    * This function returns the column type of nested velocity.
@@ -4467,7 +4467,7 @@ port  - The port number on which this node is connected to.
    * Other example uses of type can be found in getTextAttr(), setTextAttr(),
    * explodeElementSymbolsInGroups().
    * @param {string} node The path of the node.
-   * @returns {string}
+   * @returns {ColumnType}
    * @example
    * function groupInfo(exNode) {
    *     var i = 0;
@@ -4480,7 +4480,7 @@ port  - The port number on which this node is connected to.
    *     }
    * }
    */
-  function type(node: string): string;
+  function type(node: string): ColumnType;
 
   /**
    * Unlink a port on one node from the port on another node.
@@ -6578,9 +6578,9 @@ declare namespace view {
   /**
    * Returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
-   * @returns {string}
+   * @returns {ColumnType}
    */
-  function type(viewName: string): string;
+  function type(viewName: string): ColumnType;
 }
 
 /**
