@@ -18366,7 +18366,7 @@ declare namespace ScriptManager {
 
   /**
    * This method adds a shortcut to the list of Harmony shortcuts.
-   * @param {void} action
+   * @param {Object} action
    */
   function addShortcut(action: {
     /**
@@ -18377,6 +18377,9 @@ declare namespace ScriptManager {
      * The action label.
      */
     text?: string;
+    /**
+     * The action id if the action was added using ScriptManager.addAction or the name of a function in the current file or using the syntax: functionName in file.js.
+     */
     action?: string;
     longDesc?: string;
     order?: string;
@@ -18389,6 +18392,33 @@ declare namespace ScriptManager {
    * @param {ScriptToolbarDef} toolbar The toolbar to add
    */
   function addToolbar(toolbar: ScriptToolbarDef): void;
+
+  /**
+   * @param {Object} arg
+   */
+  function addMenuItem(arg: {
+    /**
+     * The action uniqueId. Is is recommended to use reverse DNS notation.
+     */
+    id?: string;
+    /**
+     * The action label.
+     */
+    text?: string;
+    /**
+     * The action id if the action was added using ScriptManager.addAction or the name of a function in the current file or using the syntax: functionName in file.js.
+     */
+    action?: string;
+    /**
+     * The icon for the action
+     */
+    icon?: string;
+    targetMenuId?: string;
+    /**
+     * The shortcut id that can trigger this action.
+     */
+    shortcut?: string;
+  }): void;
 }
 
 /**
@@ -18977,8 +19007,8 @@ declare interface StrokeDescriptorAndParams {
   params: double[];
 }
 
-declare type PermanentFile = FileWrapper;
-declare type TemporaryFile = FileWrapper;
+declare class PermanentFile extends FileWrapper {}
+declare class TemporaryFile extends FileWrapper {}
 
 /**
  * scripting object to a sound column... Allow object oriented object interaction with sound sequence.
