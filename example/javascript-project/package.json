@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+        "tba-types": "github:bryab/tba-types"
+      }
+}

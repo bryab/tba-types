@@ -12,7 +12,7 @@ Please see the "example" folder in this repository for some files to get you sta
 
 ## Usage
 
-To use these types, you must specify a reference type in your Typescript document.
+To use these types, you must specify a reference type in your Typescript or Javascript document.
 
 ```typescript
 /// <reference types="tba-types/Harmony/15"/>
@@ -32,6 +32,16 @@ For example:
     "target": "es5",
     "lib": ["es5"],
     ...
+  }
+}
+```
+
+If you are using Javascript and want Intellisense based on these types, add `checkJs` to `compilerOptions`
+
+```json
+{
+  "compilerOptions": {
+    "checkJs": true
   }
 }
 ```
