@@ -18,7 +18,6 @@ declare class UI_DialogController {}
 
 /**
  * The path to the current .js file being run.
- * {@link https://discord.com/channels/559907235510222859/560516493780189195/1018886847017001031}
  * @example
  * var currentFilePath = __file__; Result: /path/to/file.js
  */
@@ -26,7 +25,6 @@ declare var __file__: string;
 
 /**
  * The name of the current .js file being run.
- * {@link https://discord.com/channels/559907235510222859/560516493780189195/1018886847017001031}
  * @example
  * var currentFileName = __FILE__; Result: file.js
  */
