@@ -17,6 +17,20 @@ declare type DD_DragObject = any;
 declare class UI_DialogController {}
 
 /**
+ * The path to the current .js file being run.
+ * @example
+ * var currentFilePath = __file__; Result: /path/to/file.js
+ */
+declare var __file__: string;
+
+/**
+ * The name of the current .js file being run.
+ * @example
+ * var currentFileName = __FILE__; Result: file.js
+ */
+declare var __FILE__: string;
+
+/**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
  * By using the SpecialFolders functions, you can retrieve information about the different folders
  * (directories) used by the application. All of the functions are read-only. They return strings that
@@ -12229,6 +12243,11 @@ declare class DrawingToolParams extends QObject {
    */
   // /* Invalid - Duplicate property name */ wasCanceled: boolean;
 }
+
+/**
+ * Include contents of a Javascript file.
+ */
+declare function include(jsPath: string);
 
 /**
  * The File JavaScript class. Open, close, read, write, get information about files.
