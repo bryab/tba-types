@@ -16,140 +16,21 @@ declare type QScriptValue = any;
 declare type DD_DragObject = any;
 declare class UI_DialogController {}
 
-declare class SCR_BaseInterface {}
+/**
+ * The path to the current .js file being run.
+ * @example
+ * var currentFilePath = __file__; Result: /path/to/file.js
+ */
+declare var __file__: string;
 
 /**
- * The specialFolders JavaScript global object. Provide the path to application specific paths.
- * By using the SpecialFolders functions, you can retrieve information about the different folders
- * (directories) used by the application. All of the functions are read-only. They return strings that
- * represent folders in use by the various applications. Depending on the application (e.g. Toon Boom
- * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
- * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classspecialFolders.html}
+ * The name of the current .js file being run.
  * @example
- * var scriptFolder = specialFolders.resource + "/scripts";
+ * var currentFileName = __FILE__; Result: file.js
  */
-declare namespace specialFolders {
-  /**
-   * A read-only property containing the folder where the platforms specific applications are stored.
-   * Application and Binary folders are different on OS X, but are identical on all other platforms.
-   * @returns {string}
-   */
-  var app: string;
+declare var __FILE__: string;
 
-  /**
-   * This is a read-only property that contains the folder where the platforms specific binaries are
-   * stored. Application and Binary folders are different on OS X. They are identical on all other
-   * platforms.
-   * @returns {string}
-   */
-  var bin: string;
-
-  /**
-   * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
-   * are stored.
-   * @returns {string}
-   */
-  var bin32: string;
-
-  /**
-   * read-only property that contains the folder where application configuration files are stored.
-   * Normally, this is the /etc folder.
-   * @returns {string}
-   */
-  var config: string;
-
-  /**
-   * This is a read-only property that contains the database folder.
-   * @returns {string}
-   */
-  var database: string;
-
-  /**
-   * read-only property that indicates where the [install]/etc folder is.
-   * @returns {string}
-   */
-  var etc: string;
-
-  /**
-   * This is a read-only property that contains the folder where the html help folder is.
-   * @returns {string}
-   */
-  var htmlHelp: string;
-
-  /**
-   * read-only property that contains the folder where the language files are stored.
-   * @returns {string}
-   */
-  var lang: string;
-
-  /**
-   * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
-   * property.
-   * @returns {string}
-   */
-  var legacyPlugins: string;
-
-  /**
-   * This is a read-only property that contains the folder where the platforms specific libraries are
-   * stored.
-   * @returns {string}
-   */
-  var library: string;
-
-  /**
-   * read-only property that contains the platform specific folder.
-   * @returns {string}
-   */
-  var platform: string;
-
-  /**
-   * Location where the plugins that comply with the current SDK are stored.
-   * @returns {string}
-   */
-  var plugins: string;
-
-  /**
-   * read-only property that contains where the resources files are stored.
-   * @returns {string}
-   */
-  var resource: string;
-
-  /**
-   * read-only property for the root installation folder
-   * @returns {string}
-   */
-  var root: string;
-
-  /**
-   * This is a read-only property that contains where the application will create its temporary files.
-   * @returns {string}
-   */
-  var temp: string;
-
-  /**
-   * This is a read-only property that contains the folder where templates are stored.
-   * @returns {string}
-   */
-  var templateLibrary: string;
-
-  /**
-   * This is a read-only property that contains the folder where the user configuration is stored.
-   * @returns {string}
-   */
-  var userConfig: string;
-
-  /**
-   * This is a read-only property that contains the folder where the user layouts are stored.
-   * @returns {string}
-   */
-  var userLayouts: string;
-
-  /**
-   * This is a read-only property that contains the folder where the user scripts are stored.
-   * @returns {string}
-   */
-  var userScripts: string;
-}
+declare class SCR_BaseInterface {}
 
 /**
  * The ComboBox JavaScript class. A simplified version of the ComboBox Qt widget.
@@ -167,7 +48,7 @@ declare namespace specialFolders {
  * myDialog.add(userInput);
  *
  * if (myDialog.exec())
- *     MessageLog.trace("The user’s favourite colour is " + userInput.currentItem + ".");
+ *     MessageLog.trace("The user�s favourite colour is " + userInput.currentItem + ".");
  */
 declare class ComboBox extends Labeled {
   /**
@@ -495,12 +376,6 @@ declare class TimeEdit extends Labeled {
    */
   time: QTime;
 }
-
-/**
- *
- * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classQDoubleValidator.html}
- */
-declare class QDoubleValidator {}
 
 /**
  * The about JavaScript global object. Provides information about the main application and the platform
@@ -949,6 +824,43 @@ declare class about extends QObject {
 }
 
 /**
+ * Base class for color and texture pots stored in palettes.
+ * Also see Palette.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classBaseColor.html}
+ */
+declare class BaseColor extends QObject {
+  /**
+   * @param {string} n
+   * @returns {void}
+   */
+  public setName(n: string): void;
+
+  /**
+   * Unique ID of the color.
+   * @returns {string}
+   */
+  id: string;
+
+  /**
+   * If true, the color pot is a texture.
+   * @returns {boolean}
+   */
+  isTexture: boolean;
+
+  /**
+   * Returns true if the color is valid.
+   * @returns {boolean}
+   */
+  isValid: boolean;
+
+  /**
+   * The color pot name.
+   * @returns {string}
+   */
+  name: string;
+}
+
+/**
  * The CaptionManager JavaScript class. Access the caption properties of a panel.
  * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classCaptionManager.html}
  * @example
@@ -1108,6 +1020,168 @@ declare class CaptionManager extends QObject {
    * @returns {string}
    */
   public textOfProjectCaption(name: string): string;
+}
+
+/**
+ * The ColorManager JavaScript class. This interface is used to control the current palette active
+ * color.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classColorManager.html}
+ * @example
+ * // Active the color at index 6 of the current color
+ * var cm = new ColorManager();
+ * var id = cm.getColorIdFromPosition(6);
+ * MessageLog.trace("ColorID: " + id)
+ * cm.setActiveColor(id);
+ */
+declare class ColorManager extends QObject {
+  /**
+   * Add a new color to the palette with the current RGBA value.
+   * @returns {void}
+   */
+  public addCurrentColorToPalette(): void;
+
+  /**
+   * Export the color palette to a .plt file.
+   * @param {string} path - full path for the output file (Note: if the file already exists, it will be overwritten)
+   * @returns {void}
+   */
+  public exportColors(path: string): void;
+
+  /**
+   * Get the color data of a color from the palette.
+   * @param {string} id - id of the color in the palette
+   * @returns {BaseColor}
+   * @example
+   * var cm = new ColorManager();
+   * var id = getColorIdFromPosition(5)
+   * var color = cm.getColorDataWithId(id);
+   *
+   * MessageLog.trace("r : " + color.colorData.r);
+   * MessageLog.trace("g : " + color.colorData.g);
+   * MessageLog.trace("b : " + color.colorData.b);
+   * MessageLog.trace("a : " + color.colorData.a);
+   */
+  public getColorDataWithId(id: string): BaseColor;
+
+  /**
+   * Get the color data of a color from the palette.
+   * @param {int} index - position of the color in the palette
+   * @returns {BaseColor}
+   * @example
+   * var cm = new ColorManager();
+   * var color = cm.getColorDataWithIndex(2);
+   *
+   * MessageLog.trace("r : " + color.colorData.r);
+   * MessageLog.trace("g : " + color.colorData.g);
+   * MessageLog.trace("b : " + color.colorData.b);
+   * MessageLog.trace("a : " + color.colorData.a);
+   */
+  public getColorDataWithIndex(index: int): BaseColor;
+
+  /**
+   * Gets the Id of a color from the palette.
+   * @param {int} index - the position of the color in the palette
+   * @returns {string}
+   */
+  public getColorIdFromPosition(index: int): string;
+
+  /**
+   * Get the color data of the currently active color.
+   * @returns {ColorRGBA}
+   * @example
+   * var cm = new ColorManager();
+   * var color = cm.getCurrentColorData();
+   *
+   * MessageLog.trace("r : " + color.r);
+   * MessageLog.trace("g : " + color.g);
+   * MessageLog.trace("b : " + color.b);
+   * MessageLog.trace("a : " + color.a);
+   */
+  public getCurrentColorData(): ColorRGBA;
+
+  /**
+   * Gets the Hue of the currently active color.
+   * @returns {int}
+   */
+  public getCurrentColorH(): int;
+
+  /**
+   * Get the opacity of the currently active color.
+   * @returns {int}
+   */
+  public getCurrentColorOpacity(): int;
+
+  /**
+   * Gets the Saturation of the currently active color.
+   * @returns {int}
+   */
+  public getCurrentColorS(): int;
+
+  /**
+   * Gets the Value of the currently active color.
+   * @returns {int}
+   */
+  public getCurrentColorV(): int;
+
+  /**
+   * Import colors from a .plt file.
+   * @param {string} path - path to the .plt file
+   * @param {boolean} importDuplicate - whether or not duplicate colors will be imported
+   * @returns {void}
+   */
+  public importColors(path: string, importDuplicate: boolean): void;
+
+  /**
+   * Import a texture.
+   * @param {string} path - path to the texture file
+   * @returns {void}
+   */
+  public importTexture(path: string): void;
+
+  /**
+   * Remove the currently selected color from the palette.
+   * @returns {void}
+   */
+  public removeCurrentColor(): void;
+
+  /**
+   * @returns {void}
+   */
+  public saveAsDefaultPalette(): void;
+
+  /**
+   * Select a color from the palette to be the active one.
+   * @param {string} id - Id of the color
+   * @returns {void}
+   */
+  public setActiveColor(id: string): void;
+
+  /**
+   * Set a HSV value to the currently active color.
+   * @param {int} h - Hue (between 0 and 255)
+   * @param {int} s - Saturation (between 0 and 100)
+   * @param {int} v - Value (between 0 and 100)
+   * @param {int} a - Alpha (between 0 and 255)
+   * @returns {void}
+   */
+  public setCurrentColorHSVA(h: int, s: int, v: int, a: int): void;
+
+  /**
+   * Set the opacity of the currently active color.
+   * @param {int} a - alpha (opacity) (between 0 and 255)
+   * @returns {void}
+   */
+  public setCurrentColorOpacity(a: int): void;
+
+  /**
+   * Set a RGB value to the currently active color.
+   * @param {int} r - Red channel value (between 0 and 255)
+   * @param {int} g - Green channel value (between 0 and 255)
+   * @param {int} b - Blue channel value (between 0 and 255)
+   * @param {int} a - Alpha value (between 0 and 255)
+   * @returns {void}
+   */
+  public setCurrentColorRGBA(r: int, g: int, b: int, a: int): void;
 }
 
 /**
@@ -1979,6 +2053,14 @@ declare class ExportManager extends QObject {
    * @returns {void}
    */
   public setRenderedAnimatic(flag: boolean): void;
+
+  /**
+   * Export Panel and video clips when exporting.
+   * By default, this is true.
+   * @param {boolean} flag true or false
+   * @returns {void}
+   */
+  public setRenderImageAndVideo(flag: boolean): void;
 
   /**
    * Sets a selection of panels to be exported.
@@ -3064,6 +3146,53 @@ declare class FunctionManager extends QObject {
 }
 
 /**
+ * The ImportManager JavaScript class. Import animatics in Storyboard project.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classImportManager.html}
+ * @example
+ * // Conform from the xml file
+ * var fileName = "/Users/user/Conform/abc.xml";
+ * var resources = ["/Users/user/Conform/Conform XML"];
+ *
+ * var param = {};
+ * param.doPanel = true;
+ * param.doVideoTrack = true;
+ * param.doCaptions = true;
+ * param.doMarkers = true;
+ *
+ * param.doAudio = true;
+ *
+ * var im = new ImportManager();
+ * var result = im.importAnimatic(fileName, param, resources);
+ *
+ * // Display conformation result and log messages
+ * var finalMessage = "Result is " + result.result + " and log contain " + result.log.length + " messages\n";
+ * for (var i = 0; i < result.log.length; ++i)
+ *     finalMessage += "\n" + result.log[i];
+ * MessageBox.information(finalMessage);
+ *
+ * // Import audio track from a xml file
+ * fileName = "/Users/user/AudioProject/Audio.xml";
+ * im.importAnimatic(fileName, {
+ *     doAudio: true
+ * });
+ */
+declare class ImportManager extends QObject {
+  /**
+   * Import animatic.
+   * doAudio: Boolean true if you want to import audio track
+   * @param {string} filename - full path name of the xml of aaf document
+   * @param {QScriptValue} inProperties
+   * @param {QScriptValue} [inResourcesPaths={}] - array of path where we look for ressources
+   * @returns {QScriptValue}
+   */
+  public importAnimatic(
+    filename: string,
+    inProperties: QScriptValue,
+    inResourcesPaths?: QScriptValue
+  ): QScriptValue;
+}
+
+/**
  * The LayerManager JavaScript class. Access the layers of a given panel.
  * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classLayerManager.html}
  * @example
@@ -3077,7 +3206,7 @@ declare class FunctionManager extends QObject {
  * lm.addVectorLayer(panelId, 0, false, "V-A");
  * lm.addVectorLayer(panelId, 1, false, "V-B");
  * lm.addBitmapLayer(panelId, 2, false, "B-A");
- * lm.setLayerVisible(panelId, 2, false);
+ * lm.setLayerVisible(panelId, "B-A", false);
  *
  * // prepend a new layer by importing an image.
  * lm.importImageAsLayer(panelId, "/fullPath/Image.tga");
@@ -3086,14 +3215,29 @@ declare class LayerManager extends QObject {
   /**
    * Add a bitmap layer.
    * @param {string} panelId - unique id of the panel
-   * @param {int} targetLayerIdx - index of sibling layer
+   * @param {QVariant} siblingLayerId - id (index or name) of sibling layer
    * @param {boolean} before - whether new layer is before or after sibling layer
    * @param {string} suggestedName - suggested Name
    * @returns {boolean}
    */
   public addBitmapLayer(
     panelId: string,
-    targetLayerIdx: int,
+    siblingLayerId: QVariant,
+    before: boolean,
+    suggestedName: string
+  ): boolean;
+
+  /**
+   * Add a group layer.
+   * @param {string} panelId - unique id of the panel
+   * @param {QVariant} siblingLayerId - id (index or name) of sibling layer
+   * @param {boolean} before - whether new layer is before or after sibling layer
+   * @param {string} suggestedName - suggested Name
+   * @returns {boolean}
+   */
+  public addGroupLayer(
+    panelId: string,
+    siblingLayerId: QVariant,
     before: boolean,
     suggestedName: string
   ): boolean;
@@ -3101,14 +3245,14 @@ declare class LayerManager extends QObject {
   /**
    * Add a vector layer.
    * @param {string} panelId - unique id of the panel
-   * @param {int} targetLayerIdx - index of sibling layer
+   * @param {QVariant} siblingLayerId - id (index or name) of sibling layer
    * @param {boolean} before - whether new layer is before or after sibling layer
    * @param {string} suggestedName - suggested Name
    * @returns {boolean}
    */
   public addVectorLayer(
     panelId: string,
-    targetLayerIdx: int,
+    siblingLayerId: QVariant,
     before: boolean,
     suggestedName: string
   ): boolean;
@@ -3116,54 +3260,54 @@ declare class LayerManager extends QObject {
   /**
    * Apply a blur effect to the given bitmap layer.
    * @param {string} panelId - The unique id of the panel
-   * @param {int} index - The index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {boolean} [skipDialog=false] - Skip the blur dialog and use the previously used blur settings. By default this is false
    * @returns {void}
    */
   public applyBlurToBitmap(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     skipDialog?: boolean
   ): void;
 
   /**
    * Apply a directional blur effect to the given bitmap layer.
    * @param {string} panelId - The unique id of the panel
-   * @param {int} index - The index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {boolean} [skipDialog=false] - Skip the blur dialog and use the previously used blur settings. By default this is false
    * @returns {void}
    */
   public applyDirectionalBlurToBitmap(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     skipDialog?: boolean
   ): void;
 
   /**
    * Apply a radial zoom blur effect to the given bitmap layer.
    * @param {string} panelId - The unique id of the panel
-   * @param {int} index - The index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {boolean} [skipDialog=false] - Skip the blur dialog and use the previously used blur settings. By default this is false
    * @returns {void}
    */
   public applyRadialZoomBlurToBitmap(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     skipDialog?: boolean
   ): void;
 
   /**
    * Delete a given layer.
    * @param {string} panelId - uniqueId of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {boolean}
    */
-  public deleteLayer(panelId: string, index: int): boolean;
+  public deleteLayer(panelId: string, layerId: QVariant): boolean;
 
   /**
 * Generate matte from a given layer to a new drawing layer or directly on the source layer.
 * @param {string} panelId - The unique id of the panel
-* @param {int} index - The index of the layer
+* @param {QVariant} layerId - id (index or name) of layer
 * @param {QScriptValue} options - Options used to generate the matte. The option object has the following properties:
 Property  Type  Description
 onNewLayer  bool  When true, the matte is created on a new layer.
@@ -3175,7 +3319,7 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
 */
   public generateMatte(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     options: {
       /**
        * When true, the matte is created on a new layer.
@@ -3204,7 +3348,7 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    * Generate a new drawing layer making a matte from the given layer. The matte will be of the current
    * selected color.
    * @param {string} panelId - The unique id of the panel
-   * @param {int} index - The index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {double} radius - The matte radius
    * @param {boolean} copyStrokes - Set to true to copy the strokes
    * @param {boolean} replaceLayer - Set to true to replace the existing layer by one with the same name, false to keep both
@@ -3212,7 +3356,7 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    */
   public generateMatteLayer(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     radius: double,
     copyStrokes: boolean,
     replaceLayer: boolean
@@ -3222,7 +3366,7 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    * Generate a new drawing layer making a matte from the given layer. The matte will be of the given
    * color.
    * @param {string} panelId - The unique id of the panel
-   * @param {int} index - The index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {double} radius - The matte radius
    * @param {boolean} copyStrokes - Set to true to copy the strokes
    * @param {boolean} replaceLayer - Set to true to replace the existing layer by one with the same name, false to keep both
@@ -3233,7 +3377,7 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    */
   public generateMatteLayer(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     radius: double,
     copyStrokes: boolean,
     replaceLayer: boolean,
@@ -3245,39 +3389,52 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
   /**
    * Get the path to a layer's drawing.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {boolean} fullPath - boolean to determine if the returned path is the full path or the file name
    * @returns {string}
    */
   public getLayerDrawingName(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     fullPath: boolean
   ): string;
 
   /**
    * Return the element id of the layer. May be useful when using the element and Drawing global objects.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {int}
    */
-  public getLayerElementId(panelId: string, index: int): int;
+  public getLayerElementId(panelId: string, layerId: QVariant): int;
 
   /**
    * Get the lock flag of the layers of a panel.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {boolean}
    */
-  public getLayerLock(panelId: string, index: int): boolean;
+  public getLayerLock(panelId: string, layerId: QVariant): boolean;
 
   /**
-   * Import image and creates a new layer at index 0, returns if successful.
+   * Return the group index of a layer.
    * @param {string} panelId - unique id of the panel
-   * @param {string} fullPathAndFileName - absolute path to image file
-   * @param {string} [multiLayerOption="UseDefault"] - how to handle multi layer image one of these 4 values: "UseDefault" - Use value from preferences "AskUser" - Ask user "Composite" - Import as one image "Separate" - Import an image for each layer
-   * @returns {boolean}
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @returns {int}
    */
+  public groupOfLayer(panelId: string, layerId: QVariant): int;
+
+  /**
+* Import image and creates a new layer at index 0, returns if successful.
+* 1 of these 3 values:
+* @param {string} panelId - unique id of the panel
+* @param {string} fullPathAndFileName - absolute path to image file
+* @param {string} [multiLayerOption="AskUser"] - how to handle multi layer image
+1 of these 3 values:
+"AskUser" - Ask user
+"Composite" - Import as one image
+"Separate" - Import an image for each layer
+* @returns {boolean}
+*/
   public importImageAsLayer(
     panelId: string,
     fullPathAndFileName: string,
@@ -3287,18 +3444,26 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
   /**
    * Return true if a layer is a 3D layer.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {boolean}
    */
-  public is3DLayer(panelId: string, index: int): boolean;
+  public is3DLayer(panelId: string, layerId: QVariant): boolean;
 
   /**
    * Return true if a layer is a bitmap.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {boolean}
    */
-  public isBitmapLayer(panelId: string, index: int): boolean;
+  public isBitmapLayer(panelId: string, layerId: QVariant): boolean;
+
+  /**
+   * Look at the given layer and return if it is empty or not. A layer is empty if it has no drawing.
+   * @param {string} panelId - The unique id of the panel
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @returns {boolean}
+   */
+  public isEmpty(panelId: string, layerId: QVariant): boolean;
 
   /**
    * Look at the given layer and return if it is empty or not. A layer is empty if it has no drawing.
@@ -3306,6 +3471,22 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    * @returns {boolean}
    */
   public isEmpty(layer: QScriptValue): boolean;
+
+  /**
+   * Return true if a layer is a group layer.
+   * @param {string} panelId - unique id of the panel
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @returns {boolean}
+   */
+  public isGroupLayer(panelId: string, layerId: QVariant): boolean;
+
+  /**
+   * Look at the the given Layer and return if it is shared.
+   * @param {string} panelId - The unique id of the panel
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @returns {boolean}
+   */
+  public isShared(panelId: string, layerId: QVariant): boolean;
 
   /**
    * Look at the the given Layer and return if it is shared.
@@ -3317,18 +3498,26 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
   /**
    * Return true if a layer is a vector layer.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {boolean}
    */
-  public isVectorLayer(panelId: string, index: int): boolean;
+  public isVectorLayer(panelId: string, layerId: QVariant): boolean;
 
   /**
    * Get a layer's alignment value.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {string}
    */
-  public layerAlignment(panelId: string, index: int): string;
+  public layerAlignment(panelId: string, layerId: QVariant): string;
+
+  /**
+   * Return the index of layer named layerName.
+   * @param {string} panelId - unique id of the panel
+   * @param {string} layerName - name of the layer
+   * @returns {int}
+   */
+  public layerIndexFromName(panelId: string, layerName: string): int;
 
   /**
    * Return the name of a layer.
@@ -3341,18 +3530,32 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
   /**
    * Get layers opacity value.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @param {int} [frame=-1] - specify frame (-1 will use current frame)
    * @returns {double}
    */
-  public layerOpacity(panelId: string, index: int): double;
+  public layerOpacity(panelId: string, layerId: QVariant, frame?: int): double;
 
   /**
    * Get the visibility flag of the layers of a panel.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @returns {boolean}
    */
-  public layerVisibility(panelId: string, index: int): boolean;
+  public layerVisibility(panelId: string, layerId: QVariant): boolean;
+
+  /**
+   * Merge the given Layers into a single panel.
+   * @param {string} panelId - The unique id of the panel
+   * @param {QScriptValue} layers - an array of layer's id (index or name)
+   * @param {string} newLayerName - new name of the layer created from the merge.
+   * @returns {int}
+   */
+  public mergeLayers(
+    panelId: string,
+    layers: QScriptValue,
+    newLayerName: string
+  ): int;
 
   /**
    * Merge the given Layers into a single panel.
@@ -3361,6 +3564,32 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
    * @returns {QScriptValue}
    */
   public mergeLayers(layers: QScriptValue, newLayerName: string): QScriptValue;
+
+  /**
+   * Move layer before the sibbling layer (in the same group)
+   * @param {string} panelId - unique id of the panel
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @param {QVariant} siblingLayerId - id (index or name) of sibling layer
+   * @returns {boolean}
+   */
+  public moveLayerBeforeLayer(
+    panelId: string,
+    layerId: QVariant,
+    siblingLayerId: QVariant
+  ): boolean;
+
+  /**
+   * Move a layer at the end of a group layer.
+   * @param {string} panelId - unique id of the panel
+   * @param {QVariant} layerId - id (index or name) of layer
+   * @param {QVariant} [groupId=QVariant()] - id (index or name) of group layer
+   * @returns {boolean}
+   */
+  public moveLayerInGroup(
+    panelId: string,
+    layerId: QVariant,
+    groupId?: QVariant
+  ): boolean;
 
   /**
    * Return the number of layers in a panel.
@@ -3372,57 +3601,67 @@ color  int or String  (Optional) Colour used to create the matte. Can be an hex 
   /**
    * Rename a given layer.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {string} suggestedName - suggested name
    * @returns {boolean}
    */
   public renameLayer(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     suggestedName: string
   ): boolean;
 
   /**
    * Set a layer's alignment value.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {string} alignment - The alignment options are: "No Alignment", "Face Camera" and "Pin to Camera".
    * @returns {boolean}
    */
   public setLayerAlignment(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     alignment: string
   ): boolean;
 
   /**
    * Set the lock flag of the layers of a panel.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {boolean} lock - boolean flag
    * @returns {boolean}
    */
-  public setLayerLock(panelId: string, index: int, lock: boolean): boolean;
+  public setLayerLock(
+    panelId: string,
+    layerId: QVariant,
+    lock: boolean
+  ): boolean;
 
   /**
    * Set a layer's opacity.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {double} opacity - value between 0 and 100
+   * @param {int} [frame=-1] - specify frame (-1 will use current frame)
    * @returns {boolean}
    */
-  public setLayerOpacity(panelId: string, index: int, opacity: double): boolean;
+  public setLayerOpacity(
+    panelId: string,
+    layerId: QVariant,
+    opacity: double,
+    frame?: int
+  ): boolean;
 
   /**
    * Set the visibility flag of the layers of a panel.
    * @param {string} panelId - unique id of the panel
-   * @param {int} index - index of the layer
+   * @param {QVariant} layerId - id (index or name) of layer
    * @param {boolean} visible - boolean flag
    * @returns {boolean}
    */
   public setLayerVisible(
     panelId: string,
-    index: int,
+    layerId: QVariant,
     visible: boolean
   ): boolean;
 }
@@ -4422,7 +4661,8 @@ declare class SelectionManager extends QObject {
 }
 
 /**
- * scripting object to a sound column... Allow object oriented object interaction with sound sequence.
+ * The soundColumnInterface JavaScript object to a sound column...
+ * Allow object oriented object interaction with sound sequence.
  * In Harmony, this object is created by the global scripting interface column.getSoundColumn(
  * columnName );
  * In Storyboard, this object is created by the scripting interface SoundTrackManager.getSoundColumn(
@@ -4485,7 +4725,7 @@ declare class soundColumnInterface extends QObject {
 }
 
 /**
- *
+ * The soundSequenceInterface JavaScript object to a sound sequence...
  * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classsoundSequenceInterface.html}
  */
 declare class soundSequenceInterface extends QObject {
@@ -6719,9 +6959,9 @@ declare class view extends SCR_BaseInterface {
   /**
    * returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
-   * @returns {string}
+   * @returns {ColumnType}
    */
-  public type(viewName: string): string;
+  public type(viewName: string): ColumnType;
 
   /**
    * Returns a list of available views of the given type.
@@ -7024,3 +7264,142 @@ declare class TextEdit extends SCRIPT_QSWidget {
    */
   text: string;
 }
+
+/**
+ * The specialFolders JavaScript global object. Provide the path to application specific paths.
+ * By using the SpecialFolders functions, you can retrieve information about the different folders
+ * (directories) used by the application. All of the functions are read-only. They return strings that
+ * represent folders in use by the various applications. Depending on the application (e.g. Toon Boom
+ * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classspecialFolders.html}
+ * @example
+ * var scriptFolder = specialFolders.resource + "/scripts";
+ */
+declare class specialFolders {
+  /**
+   * A read-only property containing the folder where the platforms specific applications are stored.
+   * Application and Binary folders are different on OS X, but are identical on all other platforms.
+   * @returns {string}
+   */
+  app: string;
+
+  /**
+   * This is a read-only property that contains the folder where the platforms specific binaries are
+   * stored. Application and Binary folders are different on OS X. They are identical on all other
+   * platforms.
+   * @returns {string}
+   */
+  bin: string;
+
+  /**
+   * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
+   * are stored.
+   * @returns {string}
+   */
+  bin32: string;
+
+  /**
+   * read-only property that contains the folder where application configuration files are stored.
+   * Normally, this is the /etc folder.
+   * @returns {string}
+   */
+  config: string;
+
+  /**
+   * This is a read-only property that contains the database folder.
+   * @returns {string}
+   */
+  database: string;
+
+  /**
+   * read-only property that indicates where the [install]/etc folder is.
+   * @returns {string}
+   */
+  etc: string;
+
+  /**
+   * This is a read-only property that contains the folder where the html help folder is.
+   * @returns {string}
+   */
+  htmlHelp: string;
+
+  /**
+   * read-only property that contains the folder where the language files are stored.
+   * @returns {string}
+   */
+  lang: string;
+
+  /**
+   * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
+   * property.
+   * @returns {string}
+   */
+  legacyPlugins: string;
+
+  /**
+   * This is a read-only property that contains the folder where the platforms specific libraries are
+   * stored.
+   * @returns {string}
+   */
+  library: string;
+
+  /**
+   * read-only property that contains the platform specific folder.
+   * @returns {string}
+   */
+  platform: string;
+
+  /**
+   * Location where the plugins that comply with the current SDK are stored.
+   * @returns {string}
+   */
+  plugins: string;
+
+  /**
+   * read-only property that contains where the resources files are stored.
+   * @returns {string}
+   */
+  resource: string;
+
+  /**
+   * read-only property for the root installation folder
+   * @returns {string}
+   */
+  root: string;
+
+  /**
+   * This is a read-only property that contains where the application will create its temporary files.
+   * @returns {string}
+   */
+  temp: string;
+
+  /**
+   * This is a read-only property that contains the folder where templates are stored.
+   * @returns {string}
+   */
+  templateLibrary: string;
+
+  /**
+   * This is a read-only property that contains the folder where the user configuration is stored.
+   * @returns {string}
+   */
+  userConfig: string;
+
+  /**
+   * This is a read-only property that contains the folder where the user layouts are stored.
+   * @returns {string}
+   */
+  userLayouts: string;
+
+  /**
+   * This is a read-only property that contains the folder where the user scripts are stored.
+   * @returns {string}
+   */
+  userScripts: string;
+}
+
+/**
+ *
+ * {@link https://docs.toonboom.com/help/storyboard-pro-22/storyboard/scripting/reference/classWID__StandardLocaleDoubleValidator.html}
+ */
+declare class WID_StandardLocaleDoubleValidator {}
