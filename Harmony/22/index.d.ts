@@ -31,139 +31,6 @@ declare var __file__: string;
 declare var __FILE__: string;
 
 /**
- * The specialFolders JavaScript global object. Provide the path to application specific paths.
- * By using the SpecialFolders functions, you can retrieve information about the different folders
- * (directories) used by the application. All of the functions are read-only. They return strings that
- * represent folders in use by the various applications. Depending on the application (e.g. Toon Boom
- * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
- * {@link https://docs.toonboom.com/help/harmony-22/scripting/script/classspecialFolders.html}
- * @example
- * var scriptFolder = specialFolders.resource + "/scripts";
- */
-declare namespace specialFolders {
-  /**
-   * A read-only property containing the folder where the platforms specific applications are stored.
-   * Application and Binary folders are different on OS X, but are identical on all other platforms.
-   * @returns {string}
-   */
-  var app: string;
-
-  /**
-   * This is a read-only property that contains the folder where the platforms specific binaries are
-   * stored. Application and Binary folders are different on OS X. They are identical on all other
-   * platforms.
-   * @returns {string}
-   */
-  var bin: string;
-
-  /**
-   * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
-   * are stored.
-   * @returns {string}
-   */
-  var bin32: string;
-
-  /**
-   * read-only property that contains the folder where application configuration files are stored.
-   * Normally, this is the /etc folder.
-   * @returns {string}
-   */
-  var config: string;
-
-  /**
-   * This is a read-only property that contains the database folder.
-   * @returns {string}
-   */
-  var database: string;
-
-  /**
-   * read-only property that indicates where the [install]/etc folder is.
-   * @returns {string}
-   */
-  var etc: string;
-
-  /**
-   * This is a read-only property that contains the folder where the html help folder is.
-   * @returns {string}
-   */
-  var htmlHelp: string;
-
-  /**
-   * read-only property that contains the folder where the language files are stored.
-   * @returns {string}
-   */
-  var lang: string;
-
-  /**
-   * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
-   * property.
-   * @returns {string}
-   */
-  var legacyPlugins: string;
-
-  /**
-   * This is a read-only property that contains the folder where the platforms specific libraries are
-   * stored.
-   * @returns {string}
-   */
-  var library: string;
-
-  /**
-   * read-only property that contains the platform specific folder.
-   * @returns {string}
-   */
-  var platform: string;
-
-  /**
-   * Location where the plugins that comply with the current SDK are stored.
-   * @returns {string}
-   */
-  var plugins: string;
-
-  /**
-   * read-only property that contains where the resources files are stored.
-   * @returns {string}
-   */
-  var resource: string;
-
-  /**
-   * read-only property for the root installation folder
-   * @returns {string}
-   */
-  var root: string;
-
-  /**
-   * This is a read-only property that contains where the application will create its temporary files.
-   * @returns {string}
-   */
-  var temp: string;
-
-  /**
-   * This is a read-only property that contains the folder where templates are stored.
-   * @returns {string}
-   */
-  var templateLibrary: string;
-
-  /**
-   * This is a read-only property that contains the folder where the user configuration is stored.
-   * @returns {string}
-   */
-  var userConfig: string;
-
-  /**
-   * This is a read-only property that contains the folder where the user layouts are stored.
-   * @returns {string}
-   */
-  var userLayouts: string;
-
-  /**
-   * This is a read-only property that contains the folder where the user scripts are stored.
-   * @returns {string}
-   */
-  var userScripts: string;
-}
-
-/**
  * The CELIO JavaScript global object. Provide information about image file.
  * {@link https://docs.toonboom.com/help/harmony-22/scripting/script/classCELIO.html}
  */
@@ -2618,7 +2485,7 @@ loop  bool  (Optional) Set the animation to loop. true by default.
 
   /**
    * Returns true if a scene was exported to a QuickTime in the specified directory.
-   * @param {string} displayName The display name.
+   * @param {string} codecName The codec to use. If the value is "openH264", the openH264 codec will be used. Any other value will use the Quicktime format.
    * @param {int} startFrame The start range of playback, default to playback toolbar start if -1.
    * @param {int} lastFrame The end range of playback, default to playback toolbar stop if -1.
    * @param {boolean} withSound Whether or not the movie will have sound.
@@ -2631,7 +2498,7 @@ loop  bool  (Optional) Set the animation to loop. true by default.
    * @returns {boolean}
    */
   function exportToQuicktime(
-    displayName: string,
+    codecName: string,
     startFrame?: int,
     lastFrame?: int,
     withSound?: boolean,
@@ -2869,6 +2736,13 @@ ripple_markers  false  Trim and/or delete the scene markers when removing frames
    * @returns {void}
    */
   function setCurrent(frame: int): void;
+
+  /**
+   * Allows you to change the number of frames in the scene.
+   * @param {int} nbFrames The number of frames in the scene
+   * @returns {void}
+   */
+  function setNumberOf(nbFrames: int): void;
 
   /**
    * Returns markers length.
@@ -4177,9 +4051,11 @@ declare namespace node {
    * The example below gets the attribute with the corresponding name and returns it's type.
    * This is just a simple helper function, see createDynamicAttr() or removeDynamicAttr() for a more
    * complex example using getAttr().
+   * Here is another example that gets the Transformation Names attribute from the first Transformation
+   * Switch node in the scene, then lists its sub-attributes.
    * @param {string} node The path of the node.
    * @param {double} atFrame The frame number at which the attribute value is extracted. This parameter isn't used if the value isn't animated (a local value).
-   * @param {string} attrName The name of the attribute. Access a child attribute by concatenating the parent attribute name with the child name separated by a dot ('.').
+   * @param {string} attrName The name of the attribute. Access a child attribute by concatenating the parent attribute name with the child name separated by a dot ('.'). The name is case sensitive.
    * @returns {Attribute}
    * @example
    * function attrType(nodeName, attrName) {
@@ -4465,6 +4341,30 @@ declare namespace node {
    * }
    */
   function getNodes(types: StringList): StringList;
+
+  /**
+   * Gets the list of all available node types loaded in the current session.
+   * Provides the list of loaded nodes in the form:
+   * Only available in an interactive interface.
+   * @returns {QScriptValue}
+   * @example
+   * [{
+   *     "category": "Move",
+   *     "description": "Applies transformations ",
+   *     "displayName": "Peg",
+   *     "icon": "modulelibrary/peg.png",
+   *     "keyword": "PEG",
+   *     "name": "Peg"
+   * }, {
+   *     "category": "Generator",
+   *     "description": "Contains the drawing layer ",
+   *     "displayName": "Element",
+   *     "icon": "modulelibrary/element.png",
+   *     "keyword": "READ",
+   *     "name": "Element"
+   * }, ]
+   */
+  function getNodeTypeList(): QScriptValue;
 
   /**
    * Returns the pivot of the node.
@@ -4930,11 +4830,16 @@ declare namespace node {
    * The following example renames a node with the path "Top/myNode".
    * @param {string} node The name of the node.
    * @param {string} newName The new name for the node.
+   * @param {boolean} [renameElement=false] A boolean that indicates if element should also be renamed (if node is an element node)
    * @returns {boolean}
    * @example
    * node.rename("Top/myNode", "myNodeWithANewName");
    */
-  function rename(node: string, newName: string): boolean;
+  function rename(
+    node: string,
+    newName: string,
+    renameElement?: boolean
+  ): boolean;
 
   /**
    * Reset the node colour.
@@ -6172,14 +6077,16 @@ declare namespace scene {
    * @param {string} envName The environment name.
    * @param {string} jobName The job name.
    * @param {string} sceneName The scene name.
-   * @param {string} versionName The version name.
+   * @param {string} [versionName="0"] The version name.
+   * @param {boolean} [isReadOnly=false] If the scene should be opened in readonly mode
    * @returns {boolean}
    */
   function closeSceneAndOpen(
     envName: string,
     jobName: string,
     sceneName: string,
-    versionName: string
+    versionName?: string,
+    isReadOnly?: boolean
   ): boolean;
 
   /**
@@ -6312,6 +6219,12 @@ declare namespace scene {
    * @returns {int}
    */
   function defaultResolutionY(): int;
+
+  /**
+   * Get the description that will be set for the imported scene version.
+   * @returns {string}
+   */
+  function description(): string;
 
   /**
    * This function ends the accumulation all of the functions between it and the beginUndoRedoAccum
@@ -6577,6 +6490,13 @@ declare namespace scene {
   ): void;
 
   /**
+   * Set the description that will be set for the imported scene version.
+   * @param {string} description The description
+   * @returns {void}
+   */
+  function setDescription(description: string): void;
+
+  /**
    * This function set the default frame rate of the project. The frame rate is expressed as frames per
    * second. Typical value is 12, 24 or 30.
    * @param {double} frameRate The new frame rate.
@@ -6697,6 +6617,19 @@ declare namespace scene {
    * @returns {double}
    */
   function unitsAspectRatioY(): double;
+}
+
+/**
+ * The SceneOffline JavaScript global object. Provides utilities for offline scene updates.
+ * {@link https://docs.toonboom.com/help/harmony-22/scripting/script/classSceneOffline.html}
+ */
+declare namespace SceneOffline {
+  /**
+   * Create partial package to update database scene.
+   * @param {string} package Full path name of the compressed package to be created.
+   * @returns {boolean}
+   */
+  function createDatabasePartialUpdatePackage(package: string): boolean;
 }
 
 /**
@@ -7103,6 +7036,36 @@ declare namespace sound {
    * @returns {void}
    */
   const soundReady: QSignal<() => void>;
+}
+
+/**
+ * The Synclayer JavaScript global object. Provides utilities for sync and unsync drawing layers.
+ * {@link https://docs.toonboom.com/help/harmony-22/scripting/script/classSyncLayer.html}
+ */
+declare namespace SyncLayer {
+  /**
+   * Sync the specified layer with the specified parent drawing layer.
+   * Convert the specified layer to the synced drawing layer and sync it with the specified parent
+   * drawing layer. The specified sync drawing must not be already synced drawing layer, neither parent
+   * drawing layer. Moreover the specified sync and parent drawings must be different.
+   * @param {string} drawingToSync The name of the layer to be converted to synced drawing layer
+   * @param {string} parentDrawing The name of the parent drawing layer
+   * @returns {boolean}
+   * @example
+   * var ret = SyncLayer.syncLayers("Top/Drawing", "Top/Drawing_1");
+   * System.println("Sync operation return : " + ret);
+   */
+  function syncLayers(drawingToSync: string, parentDrawing: string): boolean;
+
+  /**
+   * Unsync the specified synced drawing layer.
+   * @param {string} syncedDrawing The name of the synced drawing layer to unsync
+   * @returns {boolean}
+   * @example
+   * var ret = SyncLayer.unsyncLayer("Top/Drawing");
+   * System.println("Unsync operation return : " + ret);
+   */
+  function unsyncLayer(syncedDrawing: string): boolean;
 }
 
 /**
@@ -9489,7 +9452,7 @@ declare namespace xsheet {
  * myDialog.add(userInput);
  *
  * if (myDialog.exec())
- *     MessageLog.trace("The user’s favourite colour is " + userInput.currentItem + ".");
+ *     MessageLog.trace("The user�s favourite colour is " + userInput.currentItem + ".");
  */
 declare class ComboBox extends Labeled {
   /**
@@ -11470,6 +11433,33 @@ declare class Cel extends QObject {
  */
 declare class ColorOverride extends QObject {
   /**
+   * Add an Individual Color Override with a specific mode, colour and texture filename.
+   * Valid types include the following: RGB,
+   *  ALPHA,
+   *  RGBA,
+   *  TEXTURE, TEX_GLOBAL_BBOX, TEX_GLOBAL_BBOX_CENTRE, TEX_LOCAL_BBOX, TEX_SCREEN, TEX_PENCIL_RGBA,
+   * TEX_PENCIL_RGBA_COMBINE_MATRIX, TEX_PENCIL_MATRIX, TEX_PENCIL_COMBINE_MATRIX,
+   * TEXTURE_DYNAMIC_CENTERING, TEXTURE_REPLACE_MATRIX, TEXTURE_COMBINE_MATRIX, TEX_PEG, TEX_DYNAMIC
+   * An example of creating and extending a Colour-Override node.
+   * @param {string} palettePath The palette path for the color to override.
+   * @param {string} colorId
+   * @param {QObject} newValue The new colour value to which the id is overridden � defined as a ColorRGBA object.
+   * @param {string} mode The string that defines the color override mode.
+   * @param {string} [texture=""] The file path for the texture.
+   * @returns {int}
+   * @example
+   * var myColorOverride = node.getColorOverride("Top/MyColorOverrideNode");
+   * myColorOverride.addColorOverride("palette-library/ScenePalette.plt", "0b5482a850701084", new ColorRGBA(255, 255, 255, 255), "RGBA", "");
+   */
+  public addColorOverride(
+    palettePath: string,
+    colorId: string,
+    newValue: QObject,
+    mode: string,
+    texture?: string
+  ): int;
+
+  /**
    * Add a full palette path at the bottom of the list of whole palette overrides.
    * @param {string} path Path of this new palette override.
    * @returns {void}
@@ -11477,10 +11467,25 @@ declare class ColorOverride extends QObject {
   public addPalette(path: string): void;
 
   /**
+   * Creates a new Selected Colours Entry. Adds the entry to the back of the list of selected colors.
+   * @param {string} path The color id of the color to override.
+   * @param {string} colorId
+   * @returns {boolean}
+   */
+  public addSelectedColor(path: string, colorId: string): boolean;
+
+  /**
    * Clear the list of whole palette overrides.
    * @returns {void}
    */
   public clearPalettes(): void;
+
+  /**
+   * Sets the XML for the Color Override attribute.
+   * @param {string} xml A string containing the XML for the attribute values of the node.
+   * @returns {boolean}
+   */
+  public fromXML(xml: string): boolean;
 
   /**
    * Returns the number of individual colour overrides.
@@ -11501,6 +11506,41 @@ declare class ColorOverride extends QObject {
   public getNumSelectedColors(): int;
 
   /**
+   * Get the override color of a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @returns {ColorRGBA}
+   */
+  public getOverrideColor(index: int): ColorRGBA;
+
+  /**
+   * Get the color id of a color to override in a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @returns {string}
+   */
+  public getOverrideColorId(index: int): string;
+
+  /**
+   * Get the color name of a color to override in a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @returns {string}
+   */
+  public getOverrideColorName(index: int): string;
+
+  /**
+   * Get the override mode of a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @returns {string}
+   */
+  public getOverrideMode(index: int): string;
+
+  /**
+   * Get the paletteId of a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @returns {string}
+   */
+  public getOverridePaletteId(index: int): string;
+
+  /**
    * Returns the full path (including name and extension) of the palette to which the override colour
    * belongs.
    * @param {int} index Index in the list of individual colour overrides.
@@ -11516,12 +11556,40 @@ declare class ColorOverride extends QObject {
   public getOverrideTexturePath(index: int): string;
 
   /**
+   * Gets the ID of a selected colour at a given index.
+   * @param {int} index Index in the list of selected colours.
+   * @returns {string}
+   */
+  public getSelectedColorId(index: int): string;
+
+  /**
+   * Gets the selected colour mode of the colour override node.
+   * The accepted colour behavior are as follows: -RenderAll -RenderSelectedColors
+   * -RenderSelectedColorsAndBitmaps
+   * @returns {string}
+   */
+  public getSelectedColorMode(): string;
+
+  /**
+   * Gets the name of a selected colour at a given index.
+   * @param {int} index Index in the list of selected colours.
+   * @returns {string}
+   */
+  public getSelectedColorName(index: int): string;
+
+  /**
    * Returns the full path (including name and extension) of the palette to which the selected colour
    * belongs.
    * @param {int} index Index in the list of selected colours.
    * @returns {string}
    */
   public getSelectedPalettePath(index: int): string;
+
+  /**
+   * Gets the matte traversal behaviour of the node.
+   * @returns {boolean}
+   */
+  public getTraverseMatte(): boolean;
 
   /**
    * Returns the full path (including name and extension) of the palette override at postion 'index'.
@@ -11531,11 +11599,79 @@ declare class ColorOverride extends QObject {
   public palettePath(index: int): string;
 
   /**
+   * Removes a specific color override at the given index.
+   * @param {int} idx
+   * @returns {boolean}
+   */
+  public removeColorOverride(idx: int): boolean;
+
+  /**
    * Remove a palette with the supplied path from the list of whole palette overrides.
    * @param {string} path Path of this palette to remove.
    * @returns {void}
    */
   public removePalette(path: string): void;
+
+  /**
+   * Removes a Selected Colours Entry at the given index.
+   * @param {int} index Index in the list of selected colours.
+   * @returns {boolean}
+   */
+  public removeSelectedColor(index: int): boolean;
+
+  /**
+   * Change the override color of a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @param {QObject} newValue
+   * @returns {boolean}
+   * @example
+   * var myColorOverride = node.getColorOverride("Top/MyColorOverrideNode");
+   * myColorOverride.setOverrideColor(0, new ColorRGBA(255, 0, 0, 255));
+   */
+  public setOverrideColor(index: int, newValue: QObject): boolean;
+
+  /**
+* Change the color id of a color to override in a color override entry on a node.
+* @param {int} index The index of the color override in the node's color override list.
+* @param {string} colorId The color id of the color to override.
+var myColorOverride = node.getColorOverride("Top/MyColorOverrideNode");myColorOverride.setOverrideColorId( 0, "0b5482a850701084" );
+* @returns {boolean}
+* @example
+* var myColorOverride = node.getColorOverride("Top/MyColorOverrideNode");
+* myColorOverride.setOverrideColorId(0, "0b5482a850701084");
+*/
+  public setOverrideColorId(index: int, colorId: string): boolean;
+
+  /**
+   * Set the color name of a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @param {string} name
+   * @returns {boolean}
+   */
+  public setOverrideColorName(index: int, name: string): boolean;
+
+  /**
+   * Change the override mode of a color override entry on a node.
+   * Valid types include the following: RGB, ALPHA, RGBA, TEXTURE, TEX_GLOBAL_BBOX,
+   * TEX_GLOBAL_BBOX_CENTRE, TEX_LOCAL_BBOX, TEX_SCREEN, TEX_PENCIL_RGBA, TEX_PENCIL_RGBA_COMBINE_MATRIX,
+   * TEX_PENCIL_MATRIX, TEX_PENCIL_COMBINE_MATRIX, TEXTURE_DYNAMIC_CENTERING, TEXTURE_REPLACE_MATRIX,
+   * TEXTURE_COMBINE_MATRIX, TEX_PEG, TEX_DYNAMIC
+   * @param {int} index The index of the color override in the node's color override list.
+   * @param {string} mode The mode for the color override type.
+   * @returns {boolean}
+   * @example
+   * var myColorOverride = node.getColorOverride("Top/MyColorOverrideNode");
+   * myColorOverride.setOverrideMode(0, "RGBA");
+   */
+  public setOverrideMode(index: int, mode: string): boolean;
+
+  /**
+   * Change the paletteId of a color override entry on a node.
+   * @param {int} index The index of the color override in the node's color override list.
+   * @param {string} paletteId The palette ID of the color to override.
+   * @returns {boolean}
+   */
+  public setOverridePaletteId(index: int, paletteId: string): boolean;
 
   /**
    * Sets the full path (including name and extension) of the palette to which the override colour
@@ -11564,13 +11700,49 @@ declare class ColorOverride extends QObject {
   public setPalettePath(index: int, path: string): void;
 
   /**
+   * Sets the ID of a selected colour at a given index.
+   * @param {int} index Index in the list of selected colours.
+   * @param {string} id The new palette colour ID to assign to the selected colour.
+   * @returns {boolean}
+   */
+  public setSelectedColorId(index: int, id: string): boolean;
+
+  /**
+   * Sets the selected colour behaviour of the colour override node.
+   * @param {string} selectedMode
+   * @returns {boolean}
+   */
+  public setSelectedColorMode(selectedMode: string): boolean;
+
+  /**
+   * Sets the name of a selected colour at a given index.
+   * @param {int} index Index in the list of selected colours.
+   * @param {string} name The new palette colour name to assign to the selected colour.
+   * @returns {boolean}
+   */
+  public setSelectedColorName(index: int, name: string): boolean;
+
+  /**
    * Sets the full path (including name and extension) of the palette to which the selected colour
    * belongs.
    * @param {int} index Index in the list of selected colours.
    * @param {string} path New path for the palette.
+   * @returns {boolean}
+   */
+  public setSelectedPalettePath(index: int, path: string): boolean;
+
+  /**
+   * Sets the matte traversal behaviour of the node.
+   * @param {boolean} traverseMatte Whether the Colour Override should traverse the matte ports.
    * @returns {void}
    */
-  public setSelectedPalettePath(index: int, path: string): void;
+  public setTraverseMatte(traverseMatte: boolean): void;
+
+  /**
+   * Gets the XML for the Color Override attribute.
+   * @returns {string}
+   */
+  public toXML(): string;
 }
 
 /**
@@ -12154,11 +12326,6 @@ declare class DragObject extends QObject {
    * @returns {void}
    */
   constructor(dragObject: DD_DragObject);
-
-  /**
-   * @returns {DD_DragObject}
-   */
-  public dragObject(): DD_DragObject;
 }
 
 /**
@@ -12243,11 +12410,6 @@ declare class DrawingToolParams extends QObject {
    */
   // /* Invalid - Duplicate property name */ wasCanceled: boolean;
 }
-
-/**
- * Include contents of a Javascript file.
- */
-declare function include(jsPath: string);
 
 /**
  * The File JavaScript class. Open, close, read, write, get information about files.
@@ -12615,6 +12777,14 @@ declare class LayoutExport extends QObject {
   public addRender(params: LayoutExportParams): boolean;
 
   /**
+   * Sets the render area to render from a common area, and appends the current param settings to that
+   * area.
+   * @param {LayoutExportParams} params The layout export parameters of the dialog when the dialog is closed. Passed as a reference.
+   * @returns {void}
+   */
+  public calculateCommonScenebox(params: LayoutExportParams): void;
+
+  /**
    * Show the Layout Export dialog.
    * @param {LayoutExportParams} params The layout export parameters of the dialog when the dialog is closed. Passed as a reference.
    * @param {boolean} showExportMultiple Display the export multiple files checkbox.
@@ -12651,6 +12821,12 @@ declare class LayoutExport extends QObject {
    * @returns {boolean}
    */
   public progressCanceled(): boolean;
+
+  /**
+   * @param {LayoutExportParams} params
+   * @returns {void}
+   */
+  public resetCommonSceneBox(params: LayoutExportParams): void;
 
   /**
    * @param {LayoutExportParams} params
@@ -12724,6 +12900,11 @@ declare class LayoutExportParams extends QObject {
   /**
    * @returns {boolean}
    */
+  public expandRenderAreaToDrawing(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
   public exportAllCameraFrame(): boolean;
 
   /**
@@ -12735,6 +12916,31 @@ declare class LayoutExportParams extends QObject {
    * @returns {boolean}
    */
   public exportCameraFrameLabel(): boolean;
+
+  /**
+   * @returns {double}
+   */
+  public exportedBoxX1(): double;
+
+  /**
+   * @returns {double}
+   */
+  public exportedBoxX2(): double;
+
+  /**
+   * @returns {double}
+   */
+  public exportedBoxY1(): double;
+
+  /**
+   * @returns {double}
+   */
+  public exportedBoxY2(): double;
+
+  /**
+   * @returns {string}
+   */
+  public exportedFrames(): string;
 
   /**
    * @returns {boolean}
@@ -12760,6 +12966,21 @@ declare class LayoutExportParams extends QObject {
    * @returns {int}
    */
   public frame(): int;
+
+  /**
+   * @returns {boolean}
+   */
+  public keepColorCardVisible(): boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  public keepLockedElementsVisible(): boolean;
+
+  /**
+   * @returns {string}
+   */
+  public keepVisible(): string;
 
   /**
    * @returns {string}
@@ -12821,6 +13042,12 @@ declare class LayoutExportParams extends QObject {
   public setCustomScopeLast(i: int): void;
 
   /**
+   * @param {boolean} value
+   * @returns {void}
+   */
+  public setExpandRenderAreaToDrawing(value: boolean): void;
+
+  /**
    * @param {boolean} b
    * @returns {void}
    */
@@ -12837,6 +13064,36 @@ declare class LayoutExportParams extends QObject {
    * @returns {void}
    */
   public setExportCameraFrameLabel(b: boolean): void;
+
+  /**
+   * @param {double} value
+   * @returns {void}
+   */
+  public setExportedBoxX1(value: double): void;
+
+  /**
+   * @param {double} value
+   * @returns {void}
+   */
+  public setExportedBoxX2(value: double): void;
+
+  /**
+   * @param {double} value
+   * @returns {void}
+   */
+  public setExportedBoxY1(value: double): void;
+
+  /**
+   * @param {double} value
+   * @returns {void}
+   */
+  public setExportedBoxY2(value: double): void;
+
+  /**
+   * @param {string} e
+   * @returns {void}
+   */
+  public setExportedFrames(e: string): void;
 
   /**
    * @param {boolean} b
@@ -12867,6 +13124,24 @@ declare class LayoutExportParams extends QObject {
    * @returns {void}
    */
   public setFrame(i: int): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setKeepColorCardVisible(b: boolean): void;
+
+  /**
+   * @param {boolean} b
+   * @returns {void}
+   */
+  public setKeepLockedElementsVisible(b: boolean): void;
+
+  /**
+   * @param {string} k
+   * @returns {void}
+   */
+  public setKeepVisible(k: string): void;
 
   /**
    * @param {string} layoutname
@@ -12911,6 +13186,12 @@ declare class LayoutExportParams extends QObject {
   public setRenderStaticCameraAtSceneRes(b: boolean): void;
 
   /**
+   * @param {boolean} commonSceneBox
+   * @returns {void}
+   */
+  public setUseCommonSceneBox(commonSceneBox: boolean): void;
+
+  /**
    * @param {boolean} b
    * @returns {void}
    */
@@ -12921,6 +13202,11 @@ declare class LayoutExportParams extends QObject {
    * @returns {void}
    */
   public setZoomScale(zoomScale: double): void;
+
+  /**
+   * @returns {boolean}
+   */
+  public useCommonSceneBox(): boolean;
 
   /**
    * @returns {boolean}
@@ -12955,6 +13241,11 @@ declare class LayoutExportParams extends QObject {
   /**
    * @returns {boolean}
    */
+  // /* Invalid - Duplicate property name */ expandRenderAreaToDrawing: boolean;
+
+  /**
+   * @returns {boolean}
+   */
   // /* Invalid - Duplicate property name */ exportAllCameraFrame: boolean;
 
   /**
@@ -12966,6 +13257,11 @@ declare class LayoutExportParams extends QObject {
    * @returns {boolean}
    */
   // /* Invalid - Duplicate property name */ exportCameraFrameLabel: boolean;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ exportedFrames: string;
 
   /**
    * @returns {boolean}
@@ -12991,6 +13287,21 @@ declare class LayoutExportParams extends QObject {
    * @returns {int}
    */
   // /* Invalid - Duplicate property name */ frame: int;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ keepColorCardVisible: boolean;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ keepLockedElementsVisible: boolean;
+
+  /**
+   * @returns {string}
+   */
+  // /* Invalid - Duplicate property name */ keepVisible: string;
 
   /**
    * @returns {string}
@@ -13026,6 +13337,31 @@ declare class LayoutExportParams extends QObject {
    * @returns {boolean}
    */
   // /* Invalid - Duplicate property name */ renderStaticCameraAtSceneRes: boolean;
+
+  /**
+   * @returns {double}
+   */
+  sceneBox_x1: double;
+
+  /**
+   * @returns {double}
+   */
+  sceneBox_x2: double;
+
+  /**
+   * @returns {double}
+   */
+  sceneBox_y1: double;
+
+  /**
+   * @returns {double}
+   */
+  sceneBox_y2: double;
+
+  /**
+   * @returns {boolean}
+   */
+  // /* Invalid - Duplicate property name */ useCommonSceneBox: boolean;
 
   /**
    * @returns {boolean}
@@ -15929,64 +16265,6 @@ declare class Vector3d extends QObject {
  * The WriteNode JavaScript object. Provide information about rendered images and the movie to
  * generate.
  * {@link https://docs.toonboom.com/help/harmony-22/scripting/script/classWriteNode.html}
- * @example
- * try {
- *     var images = WriteNode.imageFiles();
- *     for (var i = 0; i < images.length; i++) {
- *         MessageLog.trace("generated image : " + images[i]);
- *     }
- *
- *     var outputFile = WriteNode.movieDir() + "/" + WriteNode.movieName() + ".mov";
- *
- *     var soundFile;
- *     if (WriteNode.hasSound()) {
- *         soundFile = WriteNode.exportSound(16, 2, 22050);
- *     }
- *
- *     // Use ffmpeg to generate movie from rendered images.
- *     var args = [
- *         "ffmpeg",
- *         "-y",
- *         "-start_number",
- *         WriteNode.startFrame(),
- *         "-i",
- *         WriteNode.imageFilesPattern()
- *     ];
- *
- *     if (soundFile) {
- *         args = args.concat([
- *             "-i",
- *             soundFile,
- *             "-c:a",
- *             "copy"
- *         ]);
- *     }
- *
- *     args = args.concat([
- *         "-vframes",
- *         WriteNode.stopFrame() - WriteNode.startFrame() + 1,
- *         "-r",
- *         WriteNode.frameRate(),
- *         "-c:v",
- *         "mpeg4",
- *         "-pix_fmt",
- *         "yuv420p",
- *         outputFile
- *     ]);
- *
- *     MessageLog.trace("execute : " + args.join(" "));
- *     var process = new Process2(args.join(" "));
- *     var retCode = process.launch();
- *     if (retCode != 0) {
- *         MessageLog.trace("Process return code: " + retCode);
- *         if (process.errorMessage()) {
- *             MessageLog.trace("Error: " + process.errorMessage());
- *         }
- *         MessageLog.error("Movie generation script error");
- *     }
- * } catch (err) {
- *     MessageLog.error("Movie generation script error: " + err);
- * }
  */
 declare class WriteNode extends QObject {
   /**
@@ -16502,6 +16780,139 @@ declare class TextEdit extends SCRIPT_QSWidget {
    * @returns {string}
    */
   text: string;
+}
+
+/**
+ * The specialFolders JavaScript global object. Provide the path to application specific paths.
+ * By using the SpecialFolders functions, you can retrieve information about the different folders
+ * (directories) used by the application. All of the functions are read-only. They return strings that
+ * represent folders in use by the various applications. Depending on the application (e.g. Toon Boom
+ * Harmony versus Toon Boom AnimatePro), the same content is stored in a different location.
+ * {@link https://docs.toonboom.com/help/harmony-22/scripting/script/classspecialFolders.html}
+ * @example
+ * var scriptFolder = specialFolders.resource + "/scripts";
+ */
+declare class specialFolders {
+  /**
+   * A read-only property containing the folder where the platforms specific applications are stored.
+   * Application and Binary folders are different on OS X, but are identical on all other platforms.
+   * @returns {string}
+   */
+  app: string;
+
+  /**
+   * This is a read-only property that contains the folder where the platforms specific binaries are
+   * stored. Application and Binary folders are different on OS X. They are identical on all other
+   * platforms.
+   * @returns {string}
+   */
+  bin: string;
+
+  /**
+   * This is a read-only property that contains the folder where the platforms specific 32-bit binaries
+   * are stored.
+   * @returns {string}
+   */
+  bin32: string;
+
+  /**
+   * read-only property that contains the folder where application configuration files are stored.
+   * Normally, this is the /etc folder.
+   * @returns {string}
+   */
+  config: string;
+
+  /**
+   * This is a read-only property that contains the database folder.
+   * @returns {string}
+   */
+  database: string;
+
+  /**
+   * read-only property that indicates where the [install]/etc folder is.
+   * @returns {string}
+   */
+  etc: string;
+
+  /**
+   * This is a read-only property that contains the folder where the html help folder is.
+   * @returns {string}
+   */
+  htmlHelp: string;
+
+  /**
+   * read-only property that contains the folder where the language files are stored.
+   * @returns {string}
+   */
+  lang: string;
+
+  /**
+   * Location where the plugins that were designed for the previous SDK are stored. Replaces the plugins
+   * property.
+   * @returns {string}
+   */
+  legacyPlugins: string;
+
+  /**
+   * This is a read-only property that contains the folder where the platforms specific libraries are
+   * stored.
+   * @returns {string}
+   */
+  library: string;
+
+  /**
+   * read-only property that contains the platform specific folder.
+   * @returns {string}
+   */
+  platform: string;
+
+  /**
+   * Location where the plugins that comply with the current SDK are stored.
+   * @returns {string}
+   */
+  plugins: string;
+
+  /**
+   * read-only property that contains where the resources files are stored.
+   * @returns {string}
+   */
+  resource: string;
+
+  /**
+   * read-only property for the root installation folder
+   * @returns {string}
+   */
+  root: string;
+
+  /**
+   * This is a read-only property that contains where the application will create its temporary files.
+   * @returns {string}
+   */
+  temp: string;
+
+  /**
+   * This is a read-only property that contains the folder where templates are stored.
+   * @returns {string}
+   */
+  templateLibrary: string;
+
+  /**
+   * This is a read-only property that contains the folder where the user configuration is stored.
+   * @returns {string}
+   */
+  userConfig: string;
+
+  /**
+   * This is a read-only property that contains the folder where the user layouts are stored.
+   * @returns {string}
+   */
+  userLayouts: string;
+
+  /**
+   * This is a read-only property that contains the folder where the user scripts are stored.
+   * @returns {string}
+   */
+  userScripts: string;
 }
 
 /**
