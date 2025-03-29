@@ -4,7 +4,7 @@ declare namespace QTextDocument {
    */
   enum FindFlag {
     FindCaseSensitively,
-    FindWholeWords
+    FindWholeWords,
   }
 
   type FindFlags = FindFlag;
@@ -13,7 +13,7 @@ declare namespace QTextDocument {
    * This enum describes the different types of meta information that can be added to a document.
    */
   enum MetaInformation {
-    DocumentUrl
+    DocumentUrl,
   }
 
   /**
@@ -22,14 +22,16 @@ declare namespace QTextDocument {
   enum ResourceType {
     ImageResource,
     StyleSheetResource,
-    UserResource
+    UserResource,
   }
 
   enum Stacks {
     RedoStack,
-    UndoAndRedoStacks
+    UndoAndRedoStacks,
   }
 }
+
+type QAbstractUndoItem = any;
 
 declare class QTextDocument {
   /**
@@ -57,7 +59,9 @@ declare class QTextDocument {
   /**
    * This signal is emitted whenever the document's content changes; for example, when text is inserted or deleted, or when formatting is applied.
    */
-  contentsChange: QSignal<(from: int, charsRemoves: int, charsAdded: int) => void>;
+  contentsChange: QSignal<
+    (from: int, charsRemoves: int, charsAdded: int) => void
+  >;
 
   /**
    * This signal is emitted whenever the document's content changes; for example, when text is inserted or deleted, or when formatting is applied.
@@ -187,7 +191,11 @@ declare class QTextDocument {
   /**
    * Finds the next occurrence of the string, subString, in the document.
    */
-  public find(subString: QString, from: QTextCursor, options: FindFlags): QTextCursor;
+  public find(
+    subString: QString,
+    from: QTextCursor,
+    options: FindFlags
+  ): QTextCursor;
 
   /**
    * Finds the next occurrence, matching the regular expression, expr, in the document.
@@ -197,7 +205,11 @@ declare class QTextDocument {
   /**
    * Finds the next occurrence, matching the regular expression, expr, in the document.
    */
-  public find(expr: QRegExp, from: QTextCursor, options: FindFlags): QTextCursor;
+  public find(
+    expr: QRegExp,
+    from: QTextCursor,
+    options: FindFlags
+  ): QTextCursor;
 
   /**
    * Returns the text block that contains the {pos}-th character.
@@ -357,7 +369,10 @@ declare class QTextDocument {
   /**
    * Sets the document's meta information of the type specified by info to the given string.
    */
-  public setMetaInformation(info: QTextDocument.MetaInformation, unknown_2: QString): void;
+  public setMetaInformation(
+    info: QTextDocument.MetaInformation,
+    unknown_2: QString
+  ): void;
 
   public setPageSize(size: QSizeF): void;
 

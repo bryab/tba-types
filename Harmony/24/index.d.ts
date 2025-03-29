@@ -14,6 +14,7 @@ declare type QScriptContext = any;
 declare type QScriptEngine = any;
 declare type QScriptValue = any;
 declare type DD_DragObject = any;
+
 declare class UI_DialogController {}
 
 /**
@@ -29,6 +30,40 @@ declare var __file__: string;
  * var currentFileName = __FILE__; Result: file.js
  */
 declare var __FILE__: string;
+
+/**
+ * DrawingKey
+ * Using in the 'Drawing' class, but all of its properties are unknown to me (FIXME)
+ */
+declare interface DrawingKey {
+  [key: string]: any;
+  isValid?: boolean;
+}
+
+/**
+ *  The properties of this interface are not documented in full (FIXME)
+ * {@link https://docs.toonboom.com/help/harmony-24/scripting/extended/module-Drawing_Text_.html}
+ */
+declare interface TextLayer {
+  id?: number;
+  text?: string;
+  fontsize?: number;
+  x?: number;
+  y?: number;
+  colorId?: number;
+  fontId?: string;
+  alignment: string;
+  colorMatrix?: object;
+  width?: number;
+  underLayer?: number;
+}
+
+//Unknown types in Harmony 24
+type TUSceneChangeManager = any;
+
+// A few Qt6 types referenced in the documentation - Qt defs are currently based on Qt4
+
+type QProcessEnvironment = any;
 
 /**
  * The CELIO JavaScript global object. Provide information about image file.
@@ -10725,22 +10760,6 @@ declare class TranslationZWidget extends WidgetBase {
    * @returns {void}
    */
   public valueChanged: QSignal<(z: float) => void>;
-}
-
-/**
- *
- * {@link https://docs.toonboom.com/help/harmony-24/scripting/script/structModel3d__ScriptGraphMap.html}
- */
-declare class Model3d_ScriptGraphMap {
-  /**
-   * @param {string} name
-   * @param {Model3d_ScriptGraphMap} parent
-   * @returns {void}
-   */
-  public Model3d_ScriptGraphMap(
-    name: string,
-    parent: Model3d_ScriptGraphMap
-  ): void;
 }
 
 /**

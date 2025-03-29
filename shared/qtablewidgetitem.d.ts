@@ -3,7 +3,7 @@ declare namespace QTableWidgetItem {
    * This enum describes the types that are used to describe table widget items.
    */
   enum ItemType {
-    UserType
+    UserType,
   }
 }
 
@@ -233,3 +233,5 @@ declare class QTableWidgetItem {
 
   view: QTableWidget;
 }
+
+type QWidgetItemData = any;

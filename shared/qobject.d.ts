@@ -17,9 +17,14 @@ declare class QObject {
   /**
    * Returns a list of child objects.
    */
-  public children(): QObjectList;
+  public children(...args): QObjectList;
 
-  public connect(sender: QObject, signal: char, member: char, type: Qt.ConnectionType): boolean;
+  public connect(
+    sender: QObject,
+    signal: char,
+    member: char,
+    type: Qt.ConnectionType
+  ): boolean;
 
   public disconnect(signal: char, receiver: QObject, member: char): boolean;
 
@@ -134,17 +139,39 @@ declare class QObject {
   /**
    * Creates a connection of the given type from the signal in the sender object to the method in the receiver object.
    */
-  public static connect(sender: QObject, signal: char, receiver: QObject, member: char, unknown_5: Qt.ConnectionType): boolean;
+  public static connect(
+    sender: QObject,
+    signal: char,
+    receiver: QObject,
+    member: char,
+    unknown_5: Qt.ConnectionType
+  ): boolean;
 
-  public static connect(sender: QObject, signal: QMetaMethod, receiver: QObject, method: QMetaMethod, type: Qt.ConnectionType): boolean;
+  public static connect(
+    sender: QObject,
+    signal: QMetaMethod,
+    receiver: QObject,
+    method: QMetaMethod,
+    type: Qt.ConnectionType
+  ): boolean;
 
   /**
    * Disconnects signal in object sender from method in object receiver.
    */
 
-  public static disconnect(sender: QObject, signal: char, receiver: QObject, member: char): boolean;
+  public static disconnect(
+    sender: QObject,
+    signal: char,
+    receiver: QObject,
+    member: char
+  ): boolean;
 
-  public static disconnect(sender: QObject, signal: QMetaMethod, receiver: QObject, member: QMetaMethod): boolean;
+  public static disconnect(
+    sender: QObject,
+    signal: QMetaMethod,
+    receiver: QObject,
+    member: QMetaMethod
+  ): boolean;
 
   public static registerUserData(): uint;
 
