@@ -14,7 +14,31 @@ declare type QScriptContext = any;
 declare type QScriptEngine = any;
 declare type QScriptValue = any;
 declare type DD_DragObject = any;
+
 declare class UI_DialogController {}
+
+/**
+ * The path to the current .js file being run.
+ * @example
+ * var currentFilePath = __file__; Result: /path/to/file.js
+ */
+declare var __file__: string;
+
+/**
+ * The name of the current .js file being run.
+ * @example
+ * var currentFileName = __FILE__; Result: file.js
+ */
+declare var __FILE__: string;
+
+/**
+ * DrawingKey
+ * Using in the 'Drawing' class, but all of its properties are unknown to me (FIXME)
+ */
+declare interface DrawingKey {
+  [key: string]: any;
+  isValid?: boolean;
+}
 
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
@@ -772,7 +796,7 @@ declare namespace Backdrop {
    * Adds a single backdrop. The new backdrop is displayed on top of all the others.
    * @param {string} groupPath The full qualified group node path.
    * @param {QScriptValue} backdrop A backdrop JavaScript object, as described in the Backdrop class description.
-   * @returns {boolean}
+   * @returns {QScriptValue}
    * @example
    * var myBackdrop = {
    *     "position": {
@@ -798,7 +822,7 @@ declare namespace Backdrop {
    *
    * Backdrop.addBackdrop("Top/MyGroup", myBackdrop);
    */
-  function addBackdrop(groupPath: string, backdrop: QScriptValue): boolean;
+  function addBackdrop(groupPath: string, backdrop: QScriptValue): QScriptValue;
 
   /**
    * Returns the backdrops of a group.
@@ -809,6 +833,36 @@ declare namespace Backdrop {
    * @returns {QScriptValue}
    */
   function backdrops(groupPath: string): QScriptValue;
+
+  /**
+   * Returns true if a node is contained in the backdrop.
+   * @param {QScriptValue} backdrop The backdrop object, provided from Backdrop.backdrops( groupPath ).
+   * @param {QScriptValue} node The node or nodes to search for within the backdrop.
+   * @returns {boolean}
+   */
+  function contains(backdrop: QScriptValue, node: QScriptValue): boolean;
+
+  /**
+   * Provides a list of all nodes contained within a backdrop.
+   * @param {QScriptValue} backdrop The backdrop object, provided from Backdrop.backdrops( groupPath ).
+   * @returns {QScriptValue}
+   */
+  function nodes(backdrop: QScriptValue): QScriptValue;
+
+  /**
+   * Removes a single backdrop.
+   * @param {QScriptValue} backdrop A backdrop JavaScript object, as described in the Backdrop class description.
+   * @returns {boolean}
+   */
+  function removeBackdrop(backdrop: QScriptValue): boolean;
+
+  /**
+   * Removes a single backdrop.
+   * @param {string} groupPath
+   * @param {uint} idx Remove the backdrop at the given index in the group's backdrop list.
+   * @returns {boolean}
+   */
+  function removeBackdrop(groupPath: string, idx: uint): boolean;
 
   /**
    * Sets the backdrops for the specified group.
@@ -5284,7 +5338,7 @@ declare namespace node {
    * Other example uses of type can be found in getTextAttr(), setTextAttr(),
    * explodeElementSymbolsInGroups().
    * @param {string} node The path of the node.
-   * @returns {ColumnType}
+   * @returns {string}
    * @example
    * function groupInfo(exNode) {
    *     var i = 0;
@@ -5297,7 +5351,7 @@ declare namespace node {
    *     }
    * }
    */
-  function type(node: string): ColumnType;
+  function type(node: string): string;
 
   /**
    * Unlink a port on one node from the port on another node.
@@ -6128,14 +6182,16 @@ declare namespace scene {
    * @param {string} envName The environment name.
    * @param {string} jobName The job name.
    * @param {string} sceneName The scene name.
-   * @param {string} versionName The version name.
+   * @param {string} [versionName="0"] The version name.
+   * @param {boolean} [isReadOnly=false] If the scene should be opened in readonly mode
    * @returns {boolean}
    */
   function closeSceneAndOpen(
     envName: string,
     jobName: string,
     sceneName: string,
-    versionName: string
+    versionName?: string,
+    isReadOnly?: boolean
   ): boolean;
 
   /**
@@ -6268,6 +6324,12 @@ declare namespace scene {
    * @returns {int}
    */
   function defaultResolutionY(): int;
+
+  /**
+   * Get the description that will be set for the imported scene version.
+   * @returns {string}
+   */
+  function description(): string;
 
   /**
    * This function ends the accumulation all of the functions between it and the beginUndoRedoAccum
@@ -6533,6 +6595,13 @@ declare namespace scene {
   ): void;
 
   /**
+   * Set the description that will be set for the imported scene version.
+   * @param {string} description The description
+   * @returns {void}
+   */
+  function setDescription(description: string): void;
+
+  /**
    * This function set the default frame rate of the project. The frame rate is expressed as frames per
    * second. Typical value is 12, 24 or 30.
    * @param {double} frameRate The new frame rate.
@@ -6684,6 +6753,25 @@ declare namespace scene {
  */
 declare namespace selection {
   /**
+   * Adds a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be added to the
+   * selection.
+   * @param {QScriptValue} backdrop The backdrop object provided from Backdrop.backdrops( groupPath )
+   * @returns {boolean}
+   */
+  function addBackdropToSelection(backdrop: QScriptValue): boolean;
+
+  /**
+   * Adds a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be added to the
+   * selection.
+   * @param {string} groupPath
+   * @param {uint} idx The index of the backdrop in the group.
+   * @returns {boolean}
+   */
+  function addBackdropToSelection(groupPath: string, idx: uint): boolean;
+
+  /**
    * Add a column to the selection.
    * returns whether columns was located and successfully added to the selection
    * @param {string} column name of column
@@ -6792,6 +6880,25 @@ declare namespace selection {
   function numberOfNodesSelected(): int;
 
   /**
+   * Removes a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be removed from the
+   * selection.
+   * @param {QScriptValue} backdrop The backdrop object provided from Backdrop.backdrops( groupPath )
+   * @returns {boolean}
+   */
+  function removeBackdropFromSelection(backdrop: QScriptValue): boolean;
+
+  /**
+   * Removes a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be removed from the
+   * selection.
+   * @param {string} groupPath
+   * @param {uint} idx The index of the backdrop in the group.
+   * @returns {boolean}
+   */
+  function removeBackdropFromSelection(groupPath: string, idx: uint): boolean;
+
+  /**
    * Removes a node from the selection.
    * @param {string} node The name of node to be removed from the selection.
    * @returns {boolean}
@@ -6811,6 +6918,12 @@ declare namespace selection {
    * @returns {void}
    */
   function selectAll(): void;
+
+  /**
+   * Returns an Array of all selected backdrops.
+   * @returns {QScriptValue}
+   */
+  function selectedBackdrops(): QScriptValue;
 
   /**
    * Returns the ith column selected in the xsheet.
@@ -8948,9 +9061,9 @@ declare namespace view {
   /**
    * Returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
-   * @returns {ColumnType}
+   * @returns {string}
    */
-  function type(viewName: string): ColumnType;
+  function type(viewName: string): string;
 
   /**
    * Returns a list of available views of the given type.
@@ -9346,7 +9459,7 @@ declare namespace xsheet {
  * myDialog.add(userInput);
  *
  * if (myDialog.exec())
- *     MessageLog.trace("The user’s favourite colour is " + userInput.currentItem + ".");
+ *     MessageLog.trace("The user�s favourite colour is " + userInput.currentItem + ".");
  */
 declare class ComboBox extends Labeled {
   /**
@@ -16011,7 +16124,7 @@ declare class WebCCExporter extends SCR_AbstractInterface {
    * @param {int} [firstFrame=1] the initial start frame of the movie - used when extracting soundtrack - default : 1
    * @param {int} [lastFrame=-1] the last frame rendered - default: -1 (all frames)
    * @param {boolean} [withSound=true] include soundtrack or not - default: true
-   * @param {int} [maxQp=36] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 36
+   * @param {int} [maxQp=33] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 33
    * @param {int} [iFramePeriod=1] duration between i-frames - default: 1
    * @returns {void}
    */
@@ -16036,7 +16149,7 @@ declare class WebCCExporter extends SCR_AbstractInterface {
    * @param {int} [lastFrame=-1] the last frame rendered - default: -1 (all frames)
    * @param {boolean} [withSound=true] include soundtrack or not - default: true
    * @param {string} [movieFile=""] the name of the movie file generated - default: empty - so, it uses the filename specified in the WRITE node.
-   * @param {int} [maxQp=36] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 36
+   * @param {int} [maxQp=33] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 33
    * @param {int} [iFramePeriod=1] duration between i-frames - default: 1
    * @returns {void}
    */
@@ -16058,7 +16171,7 @@ declare class WebCCExporter extends SCR_AbstractInterface {
    * The user can control the start frame and end frame.
    * @param {int} [fromFrame=1] the initial start frame of each movies - default : 1
    * @param {int} [toFrame=-1] the last frame rendered - default: -1 (all frames)
-   * @param {int} [maxQp=36] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 36
+   * @param {int} [maxQp=33] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 33
    * @param {int} [iFramePeriod=1] duration between i-frames - default: 1
    * @returns {void}
    */

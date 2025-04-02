@@ -14,7 +14,31 @@ declare type QScriptContext = any;
 declare type QScriptEngine = any;
 declare type QScriptValue = any;
 declare type DD_DragObject = any;
+
 declare class UI_DialogController {}
+
+/**
+ * The path to the current .js file being run.
+ * @example
+ * var currentFilePath = __file__; Result: /path/to/file.js
+ */
+declare var __file__: string;
+
+/**
+ * The name of the current .js file being run.
+ * @example
+ * var currentFileName = __FILE__; Result: file.js
+ */
+declare var __FILE__: string;
+
+/**
+ * DrawingKey
+ * Using in the 'Drawing' class, but all of its properties are unknown to me (FIXME)
+ */
+declare interface DrawingKey {
+  [key: string]: any;
+  isValid?: boolean;
+}
 
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
@@ -5205,7 +5229,7 @@ declare namespace node {
    * Other example uses of type can be found in getTextAttr(), setTextAttr(),
    * explodeElementSymbolsInGroups().
    * @param {string} node The path of the node.
-   * @returns {ColumnType}
+   * @returns {string}
    * @example
    * function groupInfo(exNode) {
    *     var i = 0;
@@ -5218,7 +5242,7 @@ declare namespace node {
    *     }
    * }
    */
-  function type(node: string): ColumnType;
+  function type(node: string): string;
 
   /**
    * Unlink a port on one node from the port on another node.
@@ -8699,9 +8723,9 @@ declare namespace view {
   /**
    * Returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
-   * @returns {ColumnType}
+   * @returns {string}
    */
-  function type(viewName: string): ColumnType;
+  function type(viewName: string): string;
 
   /**
    * Returns the position of the top left corner of the given view.
@@ -9090,7 +9114,7 @@ declare namespace xsheet {
  * myDialog.add(userInput);
  *
  * if (myDialog.exec())
- *     MessageLog.trace("The user’s favourite colour is " + userInput.currentItem + ".");
+ *     MessageLog.trace("The user�s favourite colour is " + userInput.currentItem + ".");
  */
 declare class ComboBox extends Labeled {
   /**

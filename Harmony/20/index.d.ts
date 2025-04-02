@@ -14,7 +14,31 @@ declare type QScriptContext = any;
 declare type QScriptEngine = any;
 declare type QScriptValue = any;
 declare type DD_DragObject = any;
+
 declare class UI_DialogController {}
+
+/**
+ * The path to the current .js file being run.
+ * @example
+ * var currentFilePath = __file__; Result: /path/to/file.js
+ */
+declare var __file__: string;
+
+/**
+ * The name of the current .js file being run.
+ * @example
+ * var currentFileName = __FILE__; Result: file.js
+ */
+declare var __FILE__: string;
+
+/**
+ * DrawingKey
+ * Using in the 'Drawing' class, but all of its properties are unknown to me (FIXME)
+ */
+declare interface DrawingKey {
+  [key: string]: any;
+  isValid?: boolean;
+}
 
 /**
  * The specialFolders JavaScript global object. Provide the path to application specific paths.
@@ -770,9 +794,9 @@ declare namespace Action {
 declare namespace Backdrop {
   /**
    * Adds a single backdrop. The new backdrop is displayed on top of all the others.
-   * @param {string} group The name of the parent group node.
+   * @param {string} groupPath
    * @param {QScriptValue} backdrop A backdrop JavaScript object, as described in the Backdrop class description.
-   * @returns {boolean}
+   * @returns {QScriptValue}
    * @example
    * var myBackdrop = {
    *     "position": {
@@ -798,7 +822,7 @@ declare namespace Backdrop {
    *
    * Backdrop.addBackdrop("Top/MyGroup", myBackdrop);
    */
-  function addBackdrop(group: string, backdrop: QScriptValue): boolean;
+  function addBackdrop(groupPath: string, backdrop: QScriptValue): QScriptValue;
 
   /**
    * Returns the backdrops of a group.
@@ -809,6 +833,36 @@ declare namespace Backdrop {
    * @returns {QScriptValue}
    */
   function backdrops(group: string): QScriptValue;
+
+  /**
+   * Returns true if a node is contained in the backdrop.
+   * @param {QScriptValue} backdrop The backdrop object, provided from Backdrop.backdrops( groupPath ).
+   * @param {QScriptValue} node The node or nodes to search for within the backdrop.
+   * @returns {boolean}
+   */
+  function contains(backdrop: QScriptValue, node: QScriptValue): boolean;
+
+  /**
+   * Provides a list of all nodes contained within a backdrop.
+   * @param {QScriptValue} backdrop The backdrop object, provided from Backdrop.backdrops( groupPath ).
+   * @returns {QScriptValue}
+   */
+  function nodes(backdrop: QScriptValue): QScriptValue;
+
+  /**
+   * Removes a single backdrop.
+   * @param {QScriptValue} backdrop A backdrop JavaScript object, as described in the Backdrop class description.
+   * @returns {boolean}
+   */
+  function removeBackdrop(backdrop: QScriptValue): boolean;
+
+  /**
+   * Removes a single backdrop.
+   * @param {string} groupPath
+   * @param {uint} idx Remove the backdrop at the given index in the group's backdrop list.
+   * @returns {boolean}
+   */
+  function removeBackdrop(groupPath: string, idx: uint): boolean;
 
   /**
    * Sets the backdrops for the specified group.
@@ -1582,12 +1636,14 @@ declare namespace copyPaste {
    * @param {string} srcPath The path of the template.
    * @param {string} nodeName The name of the existing node in which we will insert template.
    * @param {int} insertFrame The frame at which insert commences.
+   * @param {QScriptValue} [compositionOptions={}] Defines how to handle the selection of nodes onto which to paste. Separately controls to paste of groups, effects and composite nodes when building the selection. Default value: { "groups": true, "effects": true, "composites": false }
    * @returns {boolean}
    */
   function pasteActionTemplateIntoNode(
     srcPath: string,
     nodeName: string,
-    insertFrame: int
+    insertFrame: int,
+    compositionOptions?: QScriptValue
   ): boolean;
 
   /**
@@ -4811,13 +4867,18 @@ declare namespace node {
    * @param {string} node The path of the node.
    * @returns {int}
    * @example
-   * function destinationNodes(exampleNode) {
-   *     var numOutput = node.numberOfOutputPorts(exampleNode);
+   * function getAllDstNodes(startingNode) {
    *     var listOfDestinationNodes = [];
-   *
-   *     for (var i = 0; i < numOutput; i++)
-   *         listOfDestinationNodes.push(node.dstNode(exampleNode, i, 0));
-   *
+   *     var numOutputPorts = node.numberOfOutputPorts(startingNode);
+   *     for (var i = 0; i < numOutputPorts; i++) {
+   *         var portIdx = i;
+   *         var numLinks = node.numberOfOutputLinks(startingNode, portIdx);
+   *         for (var j = 0; j < numLinks; j++) {
+   *             var linkIdx = j;
+   *             var dstNode = node.dstNode(startingNode, portIdx, linkIdx)
+   *             listOfDestinationNodes.push(dstNode);
+   *         }
+   *     }
    *     return listOfDestinationNodes;
    * }
    */
@@ -5277,7 +5338,7 @@ declare namespace node {
    * Other example uses of type can be found in getTextAttr(), setTextAttr(),
    * explodeElementSymbolsInGroups().
    * @param {string} node The path of the node.
-   * @returns {ColumnType}
+   * @returns {string}
    * @example
    * function groupInfo(exNode) {
    *     var i = 0;
@@ -5290,7 +5351,7 @@ declare namespace node {
    *     }
    * }
    */
-  function type(node: string): ColumnType;
+  function type(node: string): string;
 
   /**
    * Unlink a port on one node from the port on another node.
@@ -6256,9 +6317,9 @@ declare namespace scene {
   /**
    * Converts an OGL coordinate into a field coordinate.
    * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
-   * @returns {QObject}
+   * @returns {QScriptValue}
    */
-  function fromOGL(pointOrVector: QObject): QObject;
+  function fromOGL(pointOrVector: QObject): QScriptValue;
 
   /**
    * Converts the X-value of an OpenGL coordinate to the X-value of a field coordinate.
@@ -6586,9 +6647,9 @@ declare namespace scene {
   /**
    * Converts a field coordinate into an OGL coordinate.
    * @param {QObject} pointOrVector can be either a 2D point or a 3D point or a vector object.
-   * @returns {QObject}
+   * @returns {QScriptValue}
    */
-  function toOGL(pointOrVector: QObject): QObject;
+  function toOGL(pointOrVector: QObject): QScriptValue;
 
   /**
    * Converts the X-value of a field coordinate to the X-value of an OpenGL coordinate.
@@ -6659,6 +6720,25 @@ declare namespace scene {
  * }
  */
 declare namespace selection {
+  /**
+   * Adds a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be added to the
+   * selection.
+   * @param {QScriptValue} backdrop The backdrop object provided from Backdrop.backdrops( groupPath )
+   * @returns {boolean}
+   */
+  function addBackdropToSelection(backdrop: QScriptValue): boolean;
+
+  /**
+   * Adds a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be added to the
+   * selection.
+   * @param {string} groupPath
+   * @param {uint} idx The index of the backdrop in the group.
+   * @returns {boolean}
+   */
+  function addBackdropToSelection(groupPath: string, idx: uint): boolean;
+
   /**
    * Add a column to the selection.
    * returns whether columns was located and successfully added to the selection
@@ -6768,6 +6848,25 @@ declare namespace selection {
   function numberOfNodesSelected(): int;
 
   /**
+   * Removes a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be removed from the
+   * selection.
+   * @param {QScriptValue} backdrop The backdrop object provided from Backdrop.backdrops( groupPath )
+   * @returns {boolean}
+   */
+  function removeBackdropFromSelection(backdrop: QScriptValue): boolean;
+
+  /**
+   * Removes a backdrop to the selection.
+   * If multiple backdrops of a given group share the same title, all of them will be removed from the
+   * selection.
+   * @param {string} groupPath
+   * @param {uint} idx The index of the backdrop in the group.
+   * @returns {boolean}
+   */
+  function removeBackdropFromSelection(groupPath: string, idx: uint): boolean;
+
+  /**
    * Removes a node from the selection.
    * @param {string} node The name of node to be removed from the selection.
    * @returns {boolean}
@@ -6787,6 +6886,12 @@ declare namespace selection {
    * @returns {void}
    */
   function selectAll(): void;
+
+  /**
+   * Returns an Array of all selected backdrops.
+   * @returns {QScriptValue}
+   */
+  function selectedBackdrops(): QScriptValue;
 
   /**
    * Returns the ith column selected in the xsheet.
@@ -8917,9 +9022,9 @@ declare namespace view {
   /**
    * Returns a string that indicates what type of View the currentView is.
    * @param {string} viewName The current view value, as returned by the currentView function.
-   * @returns {ColumnType}
+   * @returns {string}
    */
-  function type(viewName: string): ColumnType;
+  function type(viewName: string): string;
 
   /**
    * Returns a list of available views of the given type.
@@ -9315,7 +9420,7 @@ declare namespace xsheet {
  * myDialog.add(userInput);
  *
  * if (myDialog.exec())
- *     MessageLog.trace("The user’s favourite colour is " + userInput.currentItem + ".");
+ *     MessageLog.trace("The user�s favourite colour is " + userInput.currentItem + ".");
  */
 declare class ComboBox extends Labeled {
   /**
@@ -15155,6 +15260,36 @@ declare class SceneChangeNotifier extends QObject {
   public currentFrameChanged: QSignal<() => void>;
 
   /**
+   * Signal emitted when a deformation is reset.
+   * @param {StringList} list The list of reset deformation groups
+   * @returns {void}
+   * @example
+   * myNotifier.networkChanged.connect(function(nodeList) {
+   *     //Code your callback logic here...
+   *     MessageLog.trace("deformerReset Callback!");
+   *     for (var i = 0; i < nodeList.length; ++i) {
+   *         MessageLog.trace("    affected node: " + nodeList[i]);
+   *     }
+   * });
+   */
+  public deformerReset: QSignal<(list: StringList) => void>;
+
+  /**
+   * Signal emitted when a deformation current frame is reset.
+   * @param {StringList} list The list of reset deformation groups
+   * @returns {void}
+   * @example
+   * myNotifier.networkChanged.connect(function(nodeList) {
+   *     //Code your callback logic here...
+   *     MessageLog.trace("deformerResetCurrentFrame Callback!");
+   *     for (var i = 0; i < nodeList.length; ++i) {
+   *         MessageLog.trace("    affected node: " + nodeList[i]);
+   *     }
+   * });
+   */
+  public deformerResetCurrentFrame: QSignal<(list: StringList) => void>;
+
+  /**
    * Signal emitted upon change of the node network links.
    * @param {StringList} list The list of nodes which are concerned by the current network changes.
    * @returns {void}
@@ -15881,6 +16016,8 @@ declare class WebCCExporter extends SCR_AbstractInterface {
    * @param {int} [firstFrame=1] the initial start frame of the movie - used when extracting soundtrack - default : 1
    * @param {int} [lastFrame=-1] the last frame rendered - default: -1 (all frames)
    * @param {boolean} [withSound=true] include soundtrack or not - default: true
+   * @param {int} [maxQp=36] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 36
+   * @param {int} [iFramePeriod=1] duration between i-frames - default: 1
    * @returns {void}
    */
   public exportMovieFromFiles(
@@ -15888,7 +16025,9 @@ declare class WebCCExporter extends SCR_AbstractInterface {
     framesFilenames: StringList,
     firstFrame?: int,
     lastFrame?: int,
-    withSound?: boolean
+    withSound?: boolean,
+    maxQp?: int,
+    iFramePeriod?: int
   ): void;
 
   /**
@@ -15902,6 +16041,8 @@ declare class WebCCExporter extends SCR_AbstractInterface {
    * @param {int} [lastFrame=-1] the last frame rendered - default: -1 (all frames)
    * @param {boolean} [withSound=true] include soundtrack or not - default: true
    * @param {string} [movieFile=""] the name of the movie file generated - default: empty - so, it uses the filename specified in the WRITE node.
+   * @param {int} [maxQp=36] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 36
+   * @param {int} [iFramePeriod=1] duration between i-frames - default: 1
    * @returns {void}
    */
   public exportMovieFromWriteModule(
@@ -15909,7 +16050,9 @@ declare class WebCCExporter extends SCR_AbstractInterface {
     firstFrame?: int,
     lastFrame?: int,
     withSound?: boolean,
-    movieFile?: string
+    movieFile?: string,
+    maxQp?: int,
+    iFramePeriod?: int
   ): void;
 
   /**
@@ -15920,9 +16063,16 @@ declare class WebCCExporter extends SCR_AbstractInterface {
    * The user can control the start frame and end frame.
    * @param {int} [fromFrame=1] the initial start frame of each movies - default : 1
    * @param {int} [toFrame=-1] the last frame rendered - default: -1 (all frames)
+   * @param {int} [maxQp=36] max Quantization Parameter in range 18...51. Large values for more compression (and lower quality) - default: 36
+   * @param {int} [iFramePeriod=1] duration between i-frames - default: 1
    * @returns {void}
    */
-  public exportMovieFromWriteModules(fromFrame?: int, toFrame?: int): void;
+  public exportMovieFromWriteModules(
+    fromFrame?: int,
+    toFrame?: int,
+    maxQp?: int,
+    iFramePeriod?: int
+  ): void;
 }
 
 /**
@@ -16554,17 +16704,30 @@ declare class PyObjectWrapper {
   constructor();
 
   /**
-   * Add the global scope of the JavaScript environment as an object to Python interpreter
-   * @param {string} name Name of the object in Python
-   */
-  public addGlobalJsObject(name: string): void;
-
-  /**
-   * Add a variable, object, function or script interface to the Python interpreter
+   * Add an abject, variable, function or script interface to the Python object.
+   * Skip adding to avoid object reloading if an object with this name already exists.
    * @param {string} name Name of the object in Python
    * @param {Object} value Value of the object
+   * @returns {boolean}
    */
-  public addObjectToPython(name: string, value: Object): void;
+  public addObject(name: string, value: Object): boolean;
+
+  /**
+   * Validate if the Python object contains a variable, object, function or script interface with the
+   * specified name.
+   * @param {string} name Name of the object in Python
+   * @returns {boolean}
+   */
+  public hasObject(name: string): boolean;
+
+  /**
+   * Set an object, variable, function or script interface in the Python object.
+   * Add a new object with the specified name if not yet existed, else override existing one.
+   * @param {string} name Name of the object in Python
+   * @param {Object} value Value of the object
+   * @returns {boolean}
+   */
+  public setObject(name: string, value: Object): boolean;
 }
 
 /**
@@ -18060,15 +18223,25 @@ declare namespace PythonManager {
    * script execution.
    *  The only way to remove a libray from the cache is to restart the application.
    * @param {string} path path where some Python module are located.
+   * @example
+   *  # Python file
+   *  def testJsFunction(f):
+   *    tuple = (5, 2, 8)
+   *    result = f.call(tuple)
+   *    print result # print 15
    */
   function addSysPath(path: string): void;
 
   /**
-   * When created, if the path is a valid Python script, the returned object will have a 'py' property
-   * having the functions declared in the Python script as properties, allowing the user to call those
-   * Python functions.
+   * Create or return existing Python object created with the specified Python script and associated with
+   * Python 'moduleName' module.
+   *  The returned object will have a 'py' property having the functions declared in the Python script as
+   * properties, allowing the user to call those Python functions.
    *  See the documentation on the PyObjectWrapper class for information on how to call Python function.
-   * @param {string} path The path where a Python script is located
+   * Note: Python module will be reloaded if the Python script has been changed. In this case the module
+   * functions will be updated, but the removed Python functions will remain in memory.
+   * @param {string} path The path where a Python script is located.
+   * @param {string} moduleName The name of the Python module associated with loaded script. If not specified or empty, the script file base name is used.
    * @returns {PyObjectWrapper}
    * @example
    *  # Python file
@@ -18077,7 +18250,20 @@ declare namespace PythonManager {
    *    result = f.call(tuple)
    *    print result # print 15
    */
-  function createPyObject(path: string): PyObjectWrapper;
+  function createPyObject(path: string, moduleName: string): PyObjectWrapper;
+
+  /**
+   * Return a collection of created Python objects (see createPyObject) by name of the Python module
+   * associated with loaded scripts.
+   * @returns {{[key: string] : ObjectWrapper}}
+   * @example
+   *  # Python file
+   *  def testJsFunction(f):
+   *    tuple = (5, 2, 8)
+   *    result = f.call(tuple)
+   *    print result # print 15
+   */
+  function getPyObjects(): { [key: string]: ObjectWrapper };
 
   /**
    * Wrap a JavaScript function.
@@ -18240,8 +18426,9 @@ declare namespace ScriptManager {
 }
 
 /**
- * This module provides functions to create interactive javascript tools. These toolls allows
- *  the developer to handle mouse interaction to create or modify any drawing or node in the scene.
+ * This module provides functions to create interactive javascript tools. These tools allow
+ *  the developer to handle mouse interaction with the objective to create or modify any drawing or
+ * node in the scene.
  * {@link https://docs.toonboom.com/help/harmony-20/scripting/extended/module-Tools.html}
  */
 declare namespace Tools {
@@ -18596,7 +18783,7 @@ declare namespace Tools {
    */
   function registerTool(toolDefinition: {
     /**
-     * The internal name of the tool. We recomment using a reverse DNS notation (e.g. com.toonboom.myTool) to avoid creating conflicts with other organizations. The function will return false if this value is empty or not provided.
+     * The internal name of the tool. We recommand using a reverse DNS notation (e.g. com.toonboom.myTool) to avoid creating conflicts with other organizations. The function will return false if this value is empty or not provided.
      */
     name?: string;
     /**
