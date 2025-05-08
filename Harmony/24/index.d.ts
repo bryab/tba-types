@@ -32,6 +32,15 @@ declare var __file__: string;
 declare var __FILE__: string;
 
 /**
+ * Undocumented File access modes for `File.open()`
+ */
+declare const enum FileAccessMode {
+  READ = 1,
+  WRITE = 2,
+  APPEND = 4,
+}
+
+/**
  * DrawingKey
  * Using in the 'Drawing' class, but all of its properties are unknown to me (FIXME)
  */
@@ -4492,7 +4501,7 @@ declare namespace node {
    * Returns the model matrix of a node.
    * @param {string} node The name of the node.
    * @param {int} frame Is the int that specifies the frame number.
-   * @returns {QObject}
+   * @returns {Matrix4x4}
    * @example
    * var myNodeModelMatrix = node.getMatrix("Top/MyNode", frame.current());
    * var myNodeWorldPosition = myNodeModelMatrix.multiply(new Point3d);
@@ -4502,7 +4511,7 @@ declare namespace node {
    * if (myNodeWorldPosition.z > myOtherNodeWorldPosition.z)
    *     MessageLog.trace("My node is in front of the other node");
    */
-  function getMatrix(node: string, frame: int): QObject;
+  function getMatrix(node: string, frame: int): Matrix4x4;
 
   /**
    * Returns the number of versions of the node available.
