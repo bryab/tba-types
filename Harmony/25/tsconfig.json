@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "lib": ["es5"],
+    "target": "es5"
+  },
+  "exclude": ["node_modules"]
+}
